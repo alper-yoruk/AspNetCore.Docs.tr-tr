@@ -5,17 +5,17 @@ description: ASP.NET MVC projesini ASP.NET Core MVC 'ye geçirmeye nasıl başla
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/mvc
 ms.openlocfilehash: 226ac6da508378c7b3c81779d38dd2e0840f1fed
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -37,7 +37,7 @@ ms.locfileid: "93051519"
 * <span data-ttu-id="873af-110">Statik içerik.</span><span class="sxs-lookup"><span data-stu-id="873af-110">Static content.</span></span>
 * <span data-ttu-id="873af-111">İstemci tarafı bağımlılıkları.</span><span class="sxs-lookup"><span data-stu-id="873af-111">Client-side dependencies.</span></span>
 
-<span data-ttu-id="873af-112">Yapılandırma ve kodu geçirmek için :::no-loc(Identity)::: bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve :::no-loc(Identity)::: ASP.NET Core geçirme](xref:migration/identity).</span><span class="sxs-lookup"><span data-stu-id="873af-112">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="873af-112">Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).</span><span class="sxs-lookup"><span data-stu-id="873af-112">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="873af-113">Önkoşullar</span><span class="sxs-lookup"><span data-stu-id="873af-113">Prerequisites</span></span>
 
@@ -101,7 +101,7 @@ ms.locfileid: "93051519"
 1. <span data-ttu-id="873af-158">`HomeController`Yeni ASP.NET Core yöntemlerini değiştirmek için ASP.NET MVC içindeki yöntemleri kopyalayın `HomeController` .</span><span class="sxs-lookup"><span data-stu-id="873af-158">Copy the methods from the ASP.NET MVC `HomeController` to replace the new ASP.NET Core `HomeController` methods.</span></span> <span data-ttu-id="873af-159">Eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.</span><span class="sxs-lookup"><span data-stu-id="873af-159">There's no need to change the return type of the action methods.</span></span> <span data-ttu-id="873af-160">ASP.NET MVC yerleşik şablonunun denetleyici eylem yöntemi dönüş türü <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC içinde eylem yöntemleri döndürülür `IActionResult` .</span><span class="sxs-lookup"><span data-stu-id="873af-160">The ASP.NET MVC built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="873af-161">`ActionResult` uygular `IActionResult` .</span><span class="sxs-lookup"><span data-stu-id="873af-161">`ActionResult` implements `IActionResult`.</span></span>
 1. <span data-ttu-id="873af-162">ASP.NET Core projesinde, *Görünümler/giriş* dizinine sağ tıklayın, **Add** > **Varolan öğe** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="873af-162">In the ASP.NET Core project, right-click the *Views/Home* directory, select **Add** > **Existing Item** .</span></span>
 1. <span data-ttu-id="873af-163">**Varolan öğe Ekle** iletişim kutusunda ASP.NET MVC *WebApp1* projesinin *Görünümler/giriş* dizinine gidin.</span><span class="sxs-lookup"><span data-stu-id="873af-163">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views/Home* directory.</span></span>
-1. <span data-ttu-id="873af-164">*Hakkında. cshtml* , *Contact. cshtml* ve *Index. cshtml* :::no-loc(Razor)::: Görünüm dosyalarını seçin ve ardından **Ekle** ' yi seçerek var olan dosyaları değiştirin.</span><span class="sxs-lookup"><span data-stu-id="873af-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files, then select **Add** , replacing the existing files.</span></span>
+1. <span data-ttu-id="873af-164">*Hakkında. cshtml* , *Contact. cshtml* ve *Index. cshtml* Razor Görünüm dosyalarını seçin ve ardından **Ekle** ' yi seçerek var olan dosyaları değiştirin.</span><span class="sxs-lookup"><span data-stu-id="873af-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files, then select **Add** , replacing the existing files.</span></span>
 
 <span data-ttu-id="873af-165">Daha fazla bilgi için <xref:mvc/controllers/actions> ve <xref:mvc/views/overview> bölümlerine bakın.</span><span class="sxs-lookup"><span data-stu-id="873af-165">For more information, see <xref:mvc/controllers/actions> and <xref:mvc/views/overview>.</span></span>
 
@@ -203,7 +203,7 @@ ms.locfileid: "93051519"
 * <span data-ttu-id="873af-222">Statik içerik</span><span class="sxs-lookup"><span data-stu-id="873af-222">Static content</span></span>
 * <span data-ttu-id="873af-223">İstemci tarafı bağımlılıkları.</span><span class="sxs-lookup"><span data-stu-id="873af-223">Client-side dependencies.</span></span>
 
-<span data-ttu-id="873af-224">Yapılandırma ve kodu geçirmek için :::no-loc(Identity)::: bkz <xref:migration/configuration> . ve <xref:migration/identity> .</span><span class="sxs-lookup"><span data-stu-id="873af-224">For migrating configuration and :::no-loc(Identity)::: code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
+<span data-ttu-id="873af-224">Yapılandırma ve kodu geçirmek için Identity bkz <xref:migration/configuration> . ve <xref:migration/identity> .</span><span class="sxs-lookup"><span data-stu-id="873af-224">For migrating configuration and Identity code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="873af-225">Örneklerdeki sürüm numaraları güncel olmayabilir, projeleri uygun şekilde güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="873af-225">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -254,7 +254,7 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-261">Bir *Görünüm/giriş* dizini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-261">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="873af-262">*Görünümler/giriş* dizinine *Index. cshtml* adlı bir **:::no-loc(Razor)::: Görünüm** ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-262">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="873af-262">*Görünümler/giriş* dizinine *Index. cshtml* adlı bir **Razor Görünüm** ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-262">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![Yeni öğe Ekle iletişim kutusu](mvc/_static/view.png)
 
@@ -288,13 +288,13 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-276">filtreler</span><span class="sxs-lookup"><span data-stu-id="873af-276">filters</span></span>
 
-* <span data-ttu-id="873af-277">Oturum açma/kapatma :::no-loc(Identity)::: (Bu, sonraki öğreticide yapılır.)</span><span class="sxs-lookup"><span data-stu-id="873af-277">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="873af-277">Oturum açma/kapatma Identity (Bu, sonraki öğreticide yapılır.)</span><span class="sxs-lookup"><span data-stu-id="873af-277">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="873af-278">Denetleyiciler ve görünümler</span><span class="sxs-lookup"><span data-stu-id="873af-278">Controllers and views</span></span>
 
 * <span data-ttu-id="873af-279">Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` .</span><span class="sxs-lookup"><span data-stu-id="873af-279">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="873af-280">ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü ' dir <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC 'de, eylem yöntemleri `IActionResult` bunun yerine döndürülür.</span><span class="sxs-lookup"><span data-stu-id="873af-280">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="873af-281">`ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.</span><span class="sxs-lookup"><span data-stu-id="873af-281">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="873af-282">ASP.NET MVC projesindeki *. cshtml* , *Contact. cshtml* ve *Index. cshtml* :::no-loc(Razor)::: Görünüm dosyalarını ASP.NET Core projesine kopyalayın.</span><span class="sxs-lookup"><span data-stu-id="873af-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="873af-282">ASP.NET MVC projesindeki *. cshtml* , *Contact. cshtml* ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.</span><span class="sxs-lookup"><span data-stu-id="873af-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="873af-283">Her yöntemi test et</span><span class="sxs-lookup"><span data-stu-id="873af-283">Test each method</span></span>
 
@@ -330,7 +330,7 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-313">Kaldırın `@Scripts.Render("~/bundles/modernizr")` .</span><span class="sxs-lookup"><span data-stu-id="873af-313">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="873af-314">`@Html.Partial("_LoginPartial")`Çizgiyi açıklama (çizgi ile çevreleyin `@*...*@` ).</span><span class="sxs-lookup"><span data-stu-id="873af-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="873af-315">Daha fazla bilgi için bkz. [kimlik doğrulamasını geçirme ve :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="873af-315">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="873af-314">`@Html.Partial("_LoginPartial")`Çizgiyi açıklama (çizgi ile çevreleyin `@*...*@` ).</span><span class="sxs-lookup"><span data-stu-id="873af-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="873af-315">Daha fazla bilgi için bkz. [kimlik doğrulamasını geçirme ve Identity ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="873af-315">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="873af-316">`@Scripts.Render("~/bundles/jquery")`Bir öğesiyle değiştirin `<script>` (aşağıya bakın).</span><span class="sxs-lookup"><span data-stu-id="873af-316">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 
@@ -389,7 +389,7 @@ ms.locfileid: "93051519"
 * <span data-ttu-id="873af-343">Statik içerik</span><span class="sxs-lookup"><span data-stu-id="873af-343">Static content</span></span>
 * <span data-ttu-id="873af-344">İstemci tarafı bağımlılıkları.</span><span class="sxs-lookup"><span data-stu-id="873af-344">Client-side dependencies.</span></span>
 
-<span data-ttu-id="873af-345">Yapılandırma ve kodu geçirmek için :::no-loc(Identity)::: bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve :::no-loc(Identity)::: ASP.NET Core geçirme](xref:migration/identity).</span><span class="sxs-lookup"><span data-stu-id="873af-345">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="873af-345">Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).</span><span class="sxs-lookup"><span data-stu-id="873af-345">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="873af-346">Örneklerdeki sürüm numaraları güncel olmayabilir, projeleri uygun şekilde güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="873af-346">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -440,7 +440,7 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-383">Bir *Görünüm/giriş* dizini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-383">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="873af-384">*Görünümler/giriş* dizinine *Index. cshtml* adlı bir **:::no-loc(Razor)::: Görünüm** ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-384">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="873af-384">*Görünümler/giriş* dizinine *Index. cshtml* adlı bir **Razor Görünüm** ekleyin.</span><span class="sxs-lookup"><span data-stu-id="873af-384">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![Yeni öğe Ekle iletişim kutusu](mvc/_static/view.png)
 
@@ -474,13 +474,13 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-398">filtreler</span><span class="sxs-lookup"><span data-stu-id="873af-398">filters</span></span>
 
-* <span data-ttu-id="873af-399">Oturum açma/kapatma :::no-loc(Identity)::: (Bu, sonraki öğreticide yapılır.)</span><span class="sxs-lookup"><span data-stu-id="873af-399">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="873af-399">Oturum açma/kapatma Identity (Bu, sonraki öğreticide yapılır.)</span><span class="sxs-lookup"><span data-stu-id="873af-399">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="873af-400">Denetleyiciler ve görünümler</span><span class="sxs-lookup"><span data-stu-id="873af-400">Controllers and views</span></span>
 
 * <span data-ttu-id="873af-401">Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` .</span><span class="sxs-lookup"><span data-stu-id="873af-401">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="873af-402">ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü ' dir <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC 'de, eylem yöntemleri `IActionResult` bunun yerine döndürülür.</span><span class="sxs-lookup"><span data-stu-id="873af-402">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="873af-403">`ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.</span><span class="sxs-lookup"><span data-stu-id="873af-403">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="873af-404">ASP.NET MVC projesindeki *. cshtml* , *Contact. cshtml* ve *Index. cshtml* :::no-loc(Razor)::: Görünüm dosyalarını ASP.NET Core projesine kopyalayın.</span><span class="sxs-lookup"><span data-stu-id="873af-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="873af-404">ASP.NET MVC projesindeki *. cshtml* , *Contact. cshtml* ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.</span><span class="sxs-lookup"><span data-stu-id="873af-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="873af-405">Her yöntemi test et</span><span class="sxs-lookup"><span data-stu-id="873af-405">Test each method</span></span>
 
@@ -516,7 +516,7 @@ ms.locfileid: "93051519"
 
 * <span data-ttu-id="873af-435">Kaldırın `@Scripts.Render("~/bundles/modernizr")` .</span><span class="sxs-lookup"><span data-stu-id="873af-435">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="873af-436">`@Html.Partial("_LoginPartial")`Çizgiyi açıklama (çizgi ile çevreleyin `@*...*@` ).</span><span class="sxs-lookup"><span data-stu-id="873af-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="873af-437">Daha fazla bilgi için bkz. [kimlik doğrulamasını geçirme ve :::no-loc(Identity)::: ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="873af-437">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="873af-436">`@Html.Partial("_LoginPartial")`Çizgiyi açıklama (çizgi ile çevreleyin `@*...*@` ).</span><span class="sxs-lookup"><span data-stu-id="873af-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="873af-437">Daha fazla bilgi için bkz. [kimlik doğrulamasını geçirme ve Identity ASP.NET Core](xref:migration/identity)</span><span class="sxs-lookup"><span data-stu-id="873af-437">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="873af-438">`@Scripts.Render("~/bundles/jquery")`Bir öğesiyle değiştirin `<script>` (aşağıya bakın).</span><span class="sxs-lookup"><span data-stu-id="873af-438">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 

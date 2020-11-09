@@ -5,17 +5,17 @@ description: Alanların ilgili işlevleri bir grup içinde ayrı bir ad alanı (
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/controllers/areas
 ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -33,11 +33,11 @@ ms.locfileid: "93053533"
 <span data-ttu-id="13752-105">Bölgeler, ilgili işlevselliği ayrı olarak bir grup içinde düzenlemek için kullanılan bir ASP.NET özelliğidir:</span><span class="sxs-lookup"><span data-stu-id="13752-105">Areas are an ASP.NET feature used to organize related functionality into a group as a separate:</span></span>
 
 * <span data-ttu-id="13752-106">Yönlendirme için ad alanı.</span><span class="sxs-lookup"><span data-stu-id="13752-106">Namespace for routing.</span></span>
-* <span data-ttu-id="13752-107">Görünümler ve sayfalar için klasör yapısı :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="13752-107">Folder structure for views and :::no-loc(Razor)::: Pages.</span></span>
+* <span data-ttu-id="13752-107">Görünümler ve sayfalar için klasör yapısı Razor .</span><span class="sxs-lookup"><span data-stu-id="13752-107">Folder structure for views and Razor Pages.</span></span>
 
-<span data-ttu-id="13752-108">Alanların kullanılması, başka bir rota parametresi, `area` , `controller` ve `action` veya bir :::no-loc(Razor)::: sayfa ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur `page` .</span><span class="sxs-lookup"><span data-stu-id="13752-108">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a :::no-loc(Razor)::: Page `page`.</span></span>
+<span data-ttu-id="13752-108">Alanların kullanılması, başka bir rota parametresi, `area` , `controller` ve `action` veya bir Razor sayfa ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur `page` .</span><span class="sxs-lookup"><span data-stu-id="13752-108">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a Razor Page `page`.</span></span>
 
-<span data-ttu-id="13752-109">Alanları, her biri kendi :::no-loc(Razor)::: sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-109">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of :::no-loc(Razor)::: Pages, controllers, views, and models.</span></span> <span data-ttu-id="13752-110">Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde.</span><span class="sxs-lookup"><span data-stu-id="13752-110">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="13752-111">Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur.</span><span class="sxs-lookup"><span data-stu-id="13752-111">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="13752-112">ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır.</span><span class="sxs-lookup"><span data-stu-id="13752-112">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="13752-113">Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir.</span><span class="sxs-lookup"><span data-stu-id="13752-113">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="13752-114">Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması.</span><span class="sxs-lookup"><span data-stu-id="13752-114">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="13752-115">Bu birimlerin her birinin görünümleri, denetleyicileri, sayfaları ve modelleri içermesi için kendi alanı vardır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="13752-115">Each of these units have their own area to contain views, controllers, :::no-loc(Razor)::: Pages, and models.</span></span>
+<span data-ttu-id="13752-109">Alanları, her biri kendi Razor sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-109">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of Razor Pages, controllers, views, and models.</span></span> <span data-ttu-id="13752-110">Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde.</span><span class="sxs-lookup"><span data-stu-id="13752-110">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="13752-111">Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur.</span><span class="sxs-lookup"><span data-stu-id="13752-111">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="13752-112">ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır.</span><span class="sxs-lookup"><span data-stu-id="13752-112">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="13752-113">Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir.</span><span class="sxs-lookup"><span data-stu-id="13752-113">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="13752-114">Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması.</span><span class="sxs-lookup"><span data-stu-id="13752-114">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="13752-115">Bu birimlerin her birinin görünümleri, denetleyicileri, sayfaları ve modelleri içermesi için kendi alanı vardır Razor .</span><span class="sxs-lookup"><span data-stu-id="13752-115">Each of these units have their own area to contain views, controllers, Razor Pages, and models.</span></span>
 
 <span data-ttu-id="13752-116">Şu durumlarda bir projedeki alanı kullanmayı göz önünde bulundurun:</span><span class="sxs-lookup"><span data-stu-id="13752-116">Consider using Areas in a project when:</span></span>
 
@@ -46,7 +46,7 @@ ms.locfileid: "93053533"
 
 <span data-ttu-id="13752-119">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="13752-119">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span> <span data-ttu-id="13752-120">İndirme örneği, test bölgeleri için temel bir uygulama sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-120">The download sample provides a basic app for testing areas.</span></span>
 
-<span data-ttu-id="13752-121">:::no-loc(Razor):::Sayfalar kullanıyorsanız, bkz. bu belgede [ :::no-loc(Razor)::: sayfaları bulunan bölgeler](#areas-with-razor-pages) .</span><span class="sxs-lookup"><span data-stu-id="13752-121">If you're using :::no-loc(Razor)::: Pages, see [Areas with :::no-loc(Razor)::: Pages](#areas-with-razor-pages) in this document.</span></span>
+<span data-ttu-id="13752-121">RazorSayfalar kullanıyorsanız, bkz. bu belgede [ Razor sayfaları bulunan bölgeler](#areas-with-razor-pages) .</span><span class="sxs-lookup"><span data-stu-id="13752-121">If you're using Razor Pages, see [Areas with Razor Pages](#areas-with-razor-pages) in this document.</span></span>
 
 ## <a name="areas-for-controllers-with-views"></a><span data-ttu-id="13752-122">Görünümlere sahip denetleyiciler için bölgeler</span><span class="sxs-lookup"><span data-stu-id="13752-122">Areas for controllers with views</span></span>
 
@@ -149,7 +149,7 @@ ms.locfileid: "93053533"
 
 ### <a name="_viewimportscshtml"></a><span data-ttu-id="13752-179">_ViewImports. cshtml</span><span class="sxs-lookup"><span data-stu-id="13752-179">_ViewImports.cshtml</span></span>
 
- <span data-ttu-id="13752-180">*/Views/_ViewImports. cshtml* , MVC için */pages/_ViewImports. cshtml* for Pages, :::no-loc(Razor)::: alanlardaki görünümlere aktarılmaz.</span><span class="sxs-lookup"><span data-stu-id="13752-180">*/Views/_ViewImports.cshtml* , for MVC, and */Pages/_ViewImports.cshtml* for :::no-loc(Razor)::: Pages, is not imported to views in areas.</span></span> <span data-ttu-id="13752-181">Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:</span><span class="sxs-lookup"><span data-stu-id="13752-181">Use one of the following approaches to provide view imports to all views:</span></span>
+ <span data-ttu-id="13752-180">*/Views/_ViewImports. cshtml* , MVC için */pages/_ViewImports. cshtml* for Pages, Razor alanlardaki görünümlere aktarılmaz.</span><span class="sxs-lookup"><span data-stu-id="13752-180">*/Views/_ViewImports.cshtml* , for MVC, and */Pages/_ViewImports.cshtml* for Razor Pages, is not imported to views in areas.</span></span> <span data-ttu-id="13752-181">Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:</span><span class="sxs-lookup"><span data-stu-id="13752-181">Use one of the following approaches to provide view imports to all views:</span></span>
 
 * <span data-ttu-id="13752-182">[Uygulama kök klasörüne](#arf) *_ViewImports. cshtml* ekleyin.</span><span class="sxs-lookup"><span data-stu-id="13752-182">Add *_ViewImports.cshtml* to the [application root folder](#arf).</span></span> <span data-ttu-id="13752-183">Uygulama kök klasöründeki bir *_ViewImports. cshtml* uygulamadaki tüm görünümlere uygulanır.</span><span class="sxs-lookup"><span data-stu-id="13752-183">A *_ViewImports.cshtml* in the application root folder will apply to all views in the app.</span></span>
 * <span data-ttu-id="13752-184">*_ViewImports. cshtml* dosyasını, alanlarda uygun görünüm klasörüne kopyalayın.</span><span class="sxs-lookup"><span data-stu-id="13752-184">Copy the *_ViewImports.cshtml* file to the appropriate view folder under areas.</span></span>
@@ -166,9 +166,9 @@ ms.locfileid: "93053533"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="13752-189">Sayfaları olan bölgeler :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="13752-189">Areas with :::no-loc(Razor)::: Pages</span></span>
+## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="13752-189">Sayfaları olan bölgeler Razor</span><span class="sxs-lookup"><span data-stu-id="13752-189">Areas with Razor Pages</span></span>
 
-<span data-ttu-id="13752-190">Sayfaları olan alanlarda, :::no-loc(Razor)::: `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir.</span><span class="sxs-lookup"><span data-stu-id="13752-190">Areas with :::no-loc(Razor)::: Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="13752-191">Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)birlikte kullanılır:</span><span class="sxs-lookup"><span data-stu-id="13752-191">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):</span></span>
+<span data-ttu-id="13752-190">Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir.</span><span class="sxs-lookup"><span data-stu-id="13752-190">Areas with Razor Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="13752-191">Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)birlikte kullanılır:</span><span class="sxs-lookup"><span data-stu-id="13752-191">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):</span></span>
 
 * <span data-ttu-id="13752-192">Proje adı</span><span class="sxs-lookup"><span data-stu-id="13752-192">Project name</span></span>
   * <span data-ttu-id="13752-193">Alanlar</span><span class="sxs-lookup"><span data-stu-id="13752-193">Areas</span></span>
@@ -183,7 +183,7 @@ ms.locfileid: "93053533"
           * <span data-ttu-id="13752-202">Hakkında</span><span class="sxs-lookup"><span data-stu-id="13752-202">About</span></span>
           * <span data-ttu-id="13752-203">Dizin oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-203">Index</span></span>
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="13752-204">:::no-loc(Razor):::Sayfalar ve alanlarla bağlantı oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-204">Link generation with :::no-loc(Razor)::: Pages and areas</span></span>
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="13752-204">RazorSayfalar ve alanlarla bağlantı oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-204">Link generation with Razor Pages and areas</span></span>
 
 <span data-ttu-id="13752-205">[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"` ):</span><span class="sxs-lookup"><span data-stu-id="13752-205">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) shows link generation with the area specified (for example, `asp-area="Products"`):</span></span>
 
@@ -203,9 +203,9 @@ ms.locfileid: "93053533"
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a><span data-ttu-id="13752-218">Ad alanı ve etiket yardımcıları _ViewImports dosya ile içeri aktarma</span><span class="sxs-lookup"><span data-stu-id="13752-218">Import namespace and Tag Helpers with _ViewImports file</span></span>
 
-<span data-ttu-id="13752-219">Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her bir :::no-loc(Razor)::: sayfaya alınır.</span><span class="sxs-lookup"><span data-stu-id="13752-219">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each :::no-loc(Razor)::: Page in the folder.</span></span>
+<span data-ttu-id="13752-219">Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her bir Razor sayfaya alınır.</span><span class="sxs-lookup"><span data-stu-id="13752-219">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each Razor Page in the folder.</span></span>
 
-<span data-ttu-id="13752-220">Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="13752-220">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="13752-221">Aşağıdaki biçimlendirme */Services/Manage/about* :::no-loc(Razor)::: sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-221">The following markup shows the */Services/Manage/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="13752-220">Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="13752-220">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="13752-221">Aşağıdaki biçimlendirme */Services/Manage/about* Razor sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-221">The following markup shows the */Services/Manage/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
@@ -218,7 +218,7 @@ ms.locfileid: "93053533"
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-<span data-ttu-id="13752-226">Aşağıdaki biçimlendirme */Products/about* :::no-loc(Razor)::: sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-226">The following markup shows the */Products/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="13752-226">Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-226">The following markup shows the */Products/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
@@ -226,7 +226,7 @@ ms.locfileid: "93053533"
 
 <span data-ttu-id="13752-228">Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).</span><span class="sxs-lookup"><span data-stu-id="13752-228">For more information, see [Managing Tag Helper scope](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) and [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives).</span></span>
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="13752-229">Sayfalar için paylaşılan Düzen :::no-loc(Razor)::: alanı</span><span class="sxs-lookup"><span data-stu-id="13752-229">Shared layout for :::no-loc(Razor)::: Pages Areas</span></span>
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="13752-229">Sayfalar için paylaşılan Düzen Razor alanı</span><span class="sxs-lookup"><span data-stu-id="13752-229">Shared layout for Razor Pages Areas</span></span>
 
 <span data-ttu-id="13752-230">Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.</span><span class="sxs-lookup"><span data-stu-id="13752-230">To share a common layout for the entire app, move the *_ViewStart.cshtml* to the application root folder.</span></span>
 
@@ -237,9 +237,9 @@ ms.locfileid: "93053533"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="13752-233">Bölgeler, ilgili işlevselliği ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak bir grup içinde düzenlemek için kullanılan bir ASP.NET özelliğidir.</span><span class="sxs-lookup"><span data-stu-id="13752-233">Areas are an ASP.NET feature used to organize related functionality into a group as a separate namespace (for routing) and folder structure (for views).</span></span> <span data-ttu-id="13752-234">Alanların kullanılması, başka bir rota parametresi, `area` , `controller` ve `action` veya bir :::no-loc(Razor)::: sayfa ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur `page` .</span><span class="sxs-lookup"><span data-stu-id="13752-234">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a :::no-loc(Razor)::: Page `page`.</span></span>
+<span data-ttu-id="13752-233">Bölgeler, ilgili işlevselliği ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak bir grup içinde düzenlemek için kullanılan bir ASP.NET özelliğidir.</span><span class="sxs-lookup"><span data-stu-id="13752-233">Areas are an ASP.NET feature used to organize related functionality into a group as a separate namespace (for routing) and folder structure (for views).</span></span> <span data-ttu-id="13752-234">Alanların kullanılması, başka bir rota parametresi, `area` , `controller` ve `action` veya bir Razor sayfa ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur `page` .</span><span class="sxs-lookup"><span data-stu-id="13752-234">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a Razor Page `page`.</span></span>
 
-<span data-ttu-id="13752-235">Alanları, her biri kendi :::no-loc(Razor)::: sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-235">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of :::no-loc(Razor)::: Pages, controllers, views, and models.</span></span> <span data-ttu-id="13752-236">Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde.</span><span class="sxs-lookup"><span data-stu-id="13752-236">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="13752-237">Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur.</span><span class="sxs-lookup"><span data-stu-id="13752-237">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="13752-238">ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır.</span><span class="sxs-lookup"><span data-stu-id="13752-238">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="13752-239">Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir.</span><span class="sxs-lookup"><span data-stu-id="13752-239">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="13752-240">Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması.</span><span class="sxs-lookup"><span data-stu-id="13752-240">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="13752-241">Bu birimlerin her birinin görünümleri, denetleyicileri, sayfaları ve modelleri içermesi için kendi alanı vardır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="13752-241">Each of these units have their own area to contain views, controllers, :::no-loc(Razor)::: Pages, and models.</span></span>
+<span data-ttu-id="13752-235">Alanları, her biri kendi Razor sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-235">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of Razor Pages, controllers, views, and models.</span></span> <span data-ttu-id="13752-236">Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde.</span><span class="sxs-lookup"><span data-stu-id="13752-236">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="13752-237">Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur.</span><span class="sxs-lookup"><span data-stu-id="13752-237">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="13752-238">ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır.</span><span class="sxs-lookup"><span data-stu-id="13752-238">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="13752-239">Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir.</span><span class="sxs-lookup"><span data-stu-id="13752-239">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="13752-240">Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması.</span><span class="sxs-lookup"><span data-stu-id="13752-240">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="13752-241">Bu birimlerin her birinin görünümleri, denetleyicileri, sayfaları ve modelleri içermesi için kendi alanı vardır Razor .</span><span class="sxs-lookup"><span data-stu-id="13752-241">Each of these units have their own area to contain views, controllers, Razor Pages, and models.</span></span>
 
 <span data-ttu-id="13752-242">Şu durumlarda bir projedeki alanı kullanmayı göz önünde bulundurun:</span><span class="sxs-lookup"><span data-stu-id="13752-242">Consider using Areas in a project when:</span></span>
 
@@ -248,7 +248,7 @@ ms.locfileid: "93053533"
 
 <span data-ttu-id="13752-245">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="13752-245">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span> <span data-ttu-id="13752-246">İndirme örneği, test bölgeleri için temel bir uygulama sağlar.</span><span class="sxs-lookup"><span data-stu-id="13752-246">The download sample provides a basic app for testing areas.</span></span>
 
-<span data-ttu-id="13752-247">:::no-loc(Razor):::Sayfalar kullanıyorsanız, bkz. bu belgede [ :::no-loc(Razor)::: sayfaları bulunan bölgeler](#areas-with-razor-pages) .</span><span class="sxs-lookup"><span data-stu-id="13752-247">If you're using :::no-loc(Razor)::: Pages, see [Areas with :::no-loc(Razor)::: Pages](#areas-with-razor-pages) in this document.</span></span>
+<span data-ttu-id="13752-247">RazorSayfalar kullanıyorsanız, bkz. bu belgede [ Razor sayfaları bulunan bölgeler](#areas-with-razor-pages) .</span><span class="sxs-lookup"><span data-stu-id="13752-247">If you're using Razor Pages, see [Areas with Razor Pages](#areas-with-razor-pages) in this document.</span></span>
 
 ## <a name="areas-for-controllers-with-views"></a><span data-ttu-id="13752-248">Görünümlere sahip denetleyiciler için bölgeler</span><span class="sxs-lookup"><span data-stu-id="13752-248">Areas for controllers with views</span></span>
 
@@ -353,9 +353,9 @@ ms.locfileid: "93053533"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="13752-306">Sayfaları olan bölgeler :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="13752-306">Areas with :::no-loc(Razor)::: Pages</span></span>
+## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="13752-306">Sayfaları olan bölgeler Razor</span><span class="sxs-lookup"><span data-stu-id="13752-306">Areas with Razor Pages</span></span>
 
-<span data-ttu-id="13752-307">Sayfaları olan alanlarda, :::no-loc(Razor)::: `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir.</span><span class="sxs-lookup"><span data-stu-id="13752-307">Areas with :::no-loc(Razor)::: Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="13752-308">Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)birlikte kullanılır:</span><span class="sxs-lookup"><span data-stu-id="13752-308">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):</span></span>
+<span data-ttu-id="13752-307">Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir.</span><span class="sxs-lookup"><span data-stu-id="13752-307">Areas with Razor Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="13752-308">Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)birlikte kullanılır:</span><span class="sxs-lookup"><span data-stu-id="13752-308">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):</span></span>
 
 * <span data-ttu-id="13752-309">Proje adı</span><span class="sxs-lookup"><span data-stu-id="13752-309">Project name</span></span>
   * <span data-ttu-id="13752-310">Alanlar</span><span class="sxs-lookup"><span data-stu-id="13752-310">Areas</span></span>
@@ -370,7 +370,7 @@ ms.locfileid: "93053533"
           * <span data-ttu-id="13752-319">Hakkında</span><span class="sxs-lookup"><span data-stu-id="13752-319">About</span></span>
           * <span data-ttu-id="13752-320">Dizin oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-320">Index</span></span>
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="13752-321">:::no-loc(Razor):::Sayfalar ve alanlarla bağlantı oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-321">Link generation with :::no-loc(Razor)::: Pages and areas</span></span>
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="13752-321">RazorSayfalar ve alanlarla bağlantı oluşturma</span><span class="sxs-lookup"><span data-stu-id="13752-321">Link generation with Razor Pages and areas</span></span>
 
 <span data-ttu-id="13752-322">[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"` ):</span><span class="sxs-lookup"><span data-stu-id="13752-322">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) shows link generation with the area specified (for example, `asp-area="Products"`):</span></span>
 
@@ -392,9 +392,9 @@ ms.locfileid: "93053533"
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a><span data-ttu-id="13752-336">Ad alanı ve etiket yardımcıları _ViewImports dosya ile içeri aktarma</span><span class="sxs-lookup"><span data-stu-id="13752-336">Import namespace and Tag Helpers with _ViewImports file</span></span>
 
-<span data-ttu-id="13752-337">Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her bir :::no-loc(Razor)::: sayfaya alınır.</span><span class="sxs-lookup"><span data-stu-id="13752-337">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each :::no-loc(Razor)::: Page in the folder.</span></span>
+<span data-ttu-id="13752-337">Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her bir Razor sayfaya alınır.</span><span class="sxs-lookup"><span data-stu-id="13752-337">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each Razor Page in the folder.</span></span>
 
-<span data-ttu-id="13752-338">Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="13752-338">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="13752-339">Aşağıdaki biçimlendirme */Services/Manage/about* :::no-loc(Razor)::: sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-339">The following markup shows the */Services/Manage/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="13752-338">Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="13752-338">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="13752-339">Aşağıdaki biçimlendirme */Services/Manage/about* Razor sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-339">The following markup shows the */Services/Manage/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
@@ -407,7 +407,7 @@ ms.locfileid: "93053533"
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-<span data-ttu-id="13752-344">Aşağıdaki biçimlendirme */Products/about* :::no-loc(Razor)::: sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-344">The following markup shows the */Products/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="13752-344">Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:</span><span class="sxs-lookup"><span data-stu-id="13752-344">The following markup shows the */Products/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
@@ -415,7 +415,7 @@ ms.locfileid: "93053533"
 
 <span data-ttu-id="13752-346">Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).</span><span class="sxs-lookup"><span data-stu-id="13752-346">For more information, see [Managing Tag Helper scope](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) and [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives).</span></span>
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="13752-347">Sayfalar için paylaşılan Düzen :::no-loc(Razor)::: alanı</span><span class="sxs-lookup"><span data-stu-id="13752-347">Shared layout for :::no-loc(Razor)::: Pages Areas</span></span>
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="13752-347">Sayfalar için paylaşılan Düzen Razor alanı</span><span class="sxs-lookup"><span data-stu-id="13752-347">Shared layout for Razor Pages Areas</span></span>
 
 <span data-ttu-id="13752-348">Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.</span><span class="sxs-lookup"><span data-stu-id="13752-348">To share a common layout for the entire app, move the *_ViewStart.cshtml* to the application root folder.</span></span>
 

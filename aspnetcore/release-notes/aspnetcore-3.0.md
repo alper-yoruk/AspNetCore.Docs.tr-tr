@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-3.0
 ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -29,39 +29,39 @@ ms.locfileid: "93051245"
 
 <span data-ttu-id="44aa8-104">Bu makalede, ASP.NET Core 3,0 ' deki en önemli değişiklikler ilgili belgelerin bağlantılarıyla vurgulanır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-104">This article highlights the most significant changes in ASP.NET Core 3.0 with links to relevant documentation.</span></span>
 
-## :::no-loc(Blazor):::
+## Blazor
 
-<span data-ttu-id="44aa8-105">:::no-loc(Blazor)::: , .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için ASP.NET Core yeni bir çerçevedir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-105">:::no-loc(Blazor)::: is a new framework in ASP.NET Core for building interactive client-side web UI with .NET:</span></span>
+<span data-ttu-id="44aa8-105">Blazor , .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için ASP.NET Core yeni bir çerçevedir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-105">Blazor is a new framework in ASP.NET Core for building interactive client-side web UI with .NET:</span></span>
 
 * <span data-ttu-id="44aa8-106">JavaScript yerine C# kullanarak zengin etkileşimli uo 'lar oluşturun.</span><span class="sxs-lookup"><span data-stu-id="44aa8-106">Create rich interactive UIs using C# instead of JavaScript.</span></span>
 * <span data-ttu-id="44aa8-107">.NET ' te yazılmış sunucu tarafı ve istemci tarafı uygulama mantığını paylaşabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="44aa8-107">Share server-side and client-side app logic written in .NET.</span></span>
 * <span data-ttu-id="44aa8-108">Mobil tarayıcılar dahil olmak üzere geniş tarayıcı desteği için Kullanıcı arabirimini HTML ve CSS olarak işleme.</span><span class="sxs-lookup"><span data-stu-id="44aa8-108">Render the UI as HTML and CSS for wide browser support, including mobile browsers.</span></span>
 
-<span data-ttu-id="44aa8-109">:::no-loc(Blazor)::: çerçeve tarafından desteklenen senaryolar:</span><span class="sxs-lookup"><span data-stu-id="44aa8-109">:::no-loc(Blazor)::: framework supported scenarios:</span></span>
+<span data-ttu-id="44aa8-109">Blazor çerçeve tarafından desteklenen senaryolar:</span><span class="sxs-lookup"><span data-stu-id="44aa8-109">Blazor framework supported scenarios:</span></span>
 
-* <span data-ttu-id="44aa8-110">Yeniden kullanılabilir kullanıcı arabirimi bileşenleri ( :::no-loc(Razor)::: bileşenler)</span><span class="sxs-lookup"><span data-stu-id="44aa8-110">Reusable UI components (:::no-loc(Razor)::: components)</span></span>
+* <span data-ttu-id="44aa8-110">Yeniden kullanılabilir kullanıcı arabirimi bileşenleri ( Razor bileşenler)</span><span class="sxs-lookup"><span data-stu-id="44aa8-110">Reusable UI components (Razor components)</span></span>
 * <span data-ttu-id="44aa8-111">İstemci tarafı yönlendirme</span><span class="sxs-lookup"><span data-stu-id="44aa8-111">Client-side routing</span></span>
 * <span data-ttu-id="44aa8-112">Bileşen düzenleri</span><span class="sxs-lookup"><span data-stu-id="44aa8-112">Component layouts</span></span>
 * <span data-ttu-id="44aa8-113">Bağımlılık ekleme desteği</span><span class="sxs-lookup"><span data-stu-id="44aa8-113">Support for dependency injection</span></span>
 * <span data-ttu-id="44aa8-114">Formlar ve doğrulama</span><span class="sxs-lookup"><span data-stu-id="44aa8-114">Forms and validation</span></span>
-* <span data-ttu-id="44aa8-115">Sınıf kitaplıklarıyla bileşen kitaplıkları derleme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="44aa8-115">Build component libraries with :::no-loc(Razor)::: class libraries</span></span>
+* <span data-ttu-id="44aa8-115">Sınıf kitaplıklarıyla bileşen kitaplıkları derleme Razor</span><span class="sxs-lookup"><span data-stu-id="44aa8-115">Build component libraries with Razor class libraries</span></span>
 * <span data-ttu-id="44aa8-116">JavaScript ile birlikte çalışma</span><span class="sxs-lookup"><span data-stu-id="44aa8-116">JavaScript interop</span></span>
 
 <span data-ttu-id="44aa8-117">Daha fazla bilgi için bkz. <xref:blazor/index>.</span><span class="sxs-lookup"><span data-stu-id="44aa8-117">For more information, see <xref:blazor/index>.</span></span>
 
-### :::no-loc(Blazor Server):::
+### Blazor Server
 
-<span data-ttu-id="44aa8-118">:::no-loc(Blazor)::: Kullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-118">:::no-loc(Blazor)::: decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="44aa8-119">:::no-loc(Blazor Server)::: ASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="44aa8-119">:::no-loc(Blazor Server)::: provides support for hosting :::no-loc(Razor)::: components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="44aa8-120">Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="44aa8-120">UI updates are handled over a :::no-loc(SignalR)::: connection.</span></span> <span data-ttu-id="44aa8-121">:::no-loc(Blazor Server)::: ASP.NET Core 3,0 ' de desteklenir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-121">:::no-loc(Blazor Server)::: is supported in ASP.NET Core 3.0.</span></span>
+<span data-ttu-id="44aa8-118">Blazor Kullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-118">Blazor decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="44aa8-119">Blazor Server ASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor .</span><span class="sxs-lookup"><span data-stu-id="44aa8-119">Blazor Server provides support for hosting Razor components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="44aa8-120">Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR .</span><span class="sxs-lookup"><span data-stu-id="44aa8-120">UI updates are handled over a SignalR connection.</span></span> <span data-ttu-id="44aa8-121">Blazor Server ASP.NET Core 3,0 ' de desteklenir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-121">Blazor Server is supported in ASP.NET Core 3.0.</span></span>
 
-### <a name="no-locblazor-webassembly-preview"></a><span data-ttu-id="44aa8-122">:::no-loc(Blazor WebAssembly)::: Önizle</span><span class="sxs-lookup"><span data-stu-id="44aa8-122">:::no-loc(Blazor WebAssembly)::: (Preview)</span></span>
+### <a name="no-locblazor-webassembly-preview"></a><span data-ttu-id="44aa8-122">Blazor WebAssembly Önizle</span><span class="sxs-lookup"><span data-stu-id="44aa8-122">Blazor WebAssembly (Preview)</span></span>
 
-<span data-ttu-id="44aa8-123">:::no-loc(Blazor)::: uygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-123">:::no-loc(Blazor)::: apps can also be run directly in the browser using a WebAssembly-based .NET runtime.</span></span> <span data-ttu-id="44aa8-124">:::no-loc(Blazor WebAssembly)::: önizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="44aa8-124">:::no-loc(Blazor WebAssembly)::: is in preview and *not* supported in ASP.NET Core 3.0.</span></span> <span data-ttu-id="44aa8-125">:::no-loc(Blazor WebAssembly)::: ASP.NET Core gelecek bir sürümünde desteklenecektir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-125">:::no-loc(Blazor WebAssembly)::: will be supported in a future release of ASP.NET Core.</span></span>
+<span data-ttu-id="44aa8-123">Blazor uygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-123">Blazor apps can also be run directly in the browser using a WebAssembly-based .NET runtime.</span></span> <span data-ttu-id="44aa8-124">Blazor WebAssembly önizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="44aa8-124">Blazor WebAssembly is in preview and *not* supported in ASP.NET Core 3.0.</span></span> <span data-ttu-id="44aa8-125">Blazor WebAssembly ASP.NET Core gelecek bir sürümünde desteklenecektir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-125">Blazor WebAssembly will be supported in a future release of ASP.NET Core.</span></span>
 
-### <a name="no-locrazor-components"></a><span data-ttu-id="44aa8-126">:::no-loc(Razor)::: bileşenleri</span><span class="sxs-lookup"><span data-stu-id="44aa8-126">:::no-loc(Razor)::: components</span></span>
+### <a name="no-locrazor-components"></a><span data-ttu-id="44aa8-126">Razor bileşenleri</span><span class="sxs-lookup"><span data-stu-id="44aa8-126">Razor components</span></span>
 
-<span data-ttu-id="44aa8-127">:::no-loc(Blazor)::: uygulamalar bileşenlerden oluşturulmuştur.</span><span class="sxs-lookup"><span data-stu-id="44aa8-127">:::no-loc(Blazor)::: apps are built from components.</span></span> <span data-ttu-id="44aa8-128">Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-128">Components are self-contained chunks of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="44aa8-129">Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-129">Components are normal .NET classes that define UI rendering logic and client-side event handlers.</span></span> <span data-ttu-id="44aa8-130">JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="44aa8-130">You can create rich interactive web apps without JavaScript.</span></span>
+<span data-ttu-id="44aa8-127">Blazor uygulamalar bileşenlerden oluşturulmuştur.</span><span class="sxs-lookup"><span data-stu-id="44aa8-127">Blazor apps are built from components.</span></span> <span data-ttu-id="44aa8-128">Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-128">Components are self-contained chunks of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="44aa8-129">Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-129">Components are normal .NET classes that define UI rendering logic and client-side event handlers.</span></span> <span data-ttu-id="44aa8-130">JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="44aa8-130">You can create rich interactive web apps without JavaScript.</span></span>
 
-<span data-ttu-id="44aa8-131">İçindeki bileşenler :::no-loc(Blazor)::: genellıkle :::no-loc(Razor)::: HTML ve C# ' nin doğal bir karışımı olan sözdizimi kullanılarak yazılır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-131">Components in :::no-loc(Blazor)::: are typically authored using :::no-loc(Razor)::: syntax, a natural blend of HTML and C#.</span></span> <span data-ttu-id="44aa8-132">:::no-loc(Razor)::: bileşenler, :::no-loc(Razor)::: her ikisi de kullandıkları sayfalara ve MVC görünümlerine benzerdir :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="44aa8-132">:::no-loc(Razor)::: components are similar to :::no-loc(Razor)::: Pages and MVC views in that they both use :::no-loc(Razor):::.</span></span> <span data-ttu-id="44aa8-133">Bir istek-yanıt modelini temel alan sayfaların ve görünümlerin aksine, bileşenler Kullanıcı arabirimi oluşturmayı işlemek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-133">Unlike pages and views, which are based on a request-response model, components are used specifically for handling UI composition.</span></span>
+<span data-ttu-id="44aa8-131">İçindeki bileşenler Blazor genellıkle Razor HTML ve C# ' nin doğal bir karışımı olan sözdizimi kullanılarak yazılır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-131">Components in Blazor are typically authored using Razor syntax, a natural blend of HTML and C#.</span></span> <span data-ttu-id="44aa8-132">Razor bileşenler, Razor her ikisi de kullandıkları sayfalara ve MVC görünümlerine benzerdir Razor .</span><span class="sxs-lookup"><span data-stu-id="44aa8-132">Razor components are similar to Razor Pages and MVC views in that they both use Razor.</span></span> <span data-ttu-id="44aa8-133">Bir istek-yanıt modelini temel alan sayfaların ve görünümlerin aksine, bileşenler Kullanıcı arabirimi oluşturmayı işlemek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-133">Unlike pages and views, which are based on a request-response model, components are used specifically for handling UI composition.</span></span>
 
 ## <a name="grpc"></a><span data-ttu-id="44aa8-134">gRPC</span><span class="sxs-lookup"><span data-stu-id="44aa8-134">gRPC</span></span>
 
@@ -88,11 +88,11 @@ ms.locfileid: "93051245"
 
 <span data-ttu-id="44aa8-151">Daha fazla bilgi için bkz. <xref:grpc/index>.</span><span class="sxs-lookup"><span data-stu-id="44aa8-151">For more information, see <xref:grpc/index>.</span></span>
 
-## :::no-loc(SignalR):::
+## SignalR
 
-<span data-ttu-id="44aa8-152">Bkz. geçiş yönergeleri için [ :::no-loc(SignalR)::: kodu güncelleştirme](xref:migration/22-to-30#signalr) .</span><span class="sxs-lookup"><span data-stu-id="44aa8-152">See [Update :::no-loc(SignalR)::: code](xref:migration/22-to-30#signalr) for migration instructions.</span></span> <span data-ttu-id="44aa8-153">:::no-loc(SignalR)::: Artık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-153">:::no-loc(SignalR)::: now uses `System.Text.Json` to serialize/deserialize JSON messages.</span></span> <span data-ttu-id="44aa8-154">Tabanlı seri hale getirici 'yi geri yükleme yönergeleri için bkz. [Newtonsoft.Js'ye geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-154">See [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) for instructions to restore the `Newtonsoft.Json`-based serializer.</span></span>
+<span data-ttu-id="44aa8-152">Bkz. geçiş yönergeleri için [ SignalR kodu güncelleştirme](xref:migration/22-to-30#signalr) .</span><span class="sxs-lookup"><span data-stu-id="44aa8-152">See [Update SignalR code](xref:migration/22-to-30#signalr) for migration instructions.</span></span> <span data-ttu-id="44aa8-153">SignalR Artık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-153">SignalR now uses `System.Text.Json` to serialize/deserialize JSON messages.</span></span> <span data-ttu-id="44aa8-154">Tabanlı seri hale getirici 'yi geri yükleme yönergeleri için bkz. [Newtonsoft.Js'ye geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-154">See [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) for instructions to restore the `Newtonsoft.Json`-based serializer.</span></span>
 
-<span data-ttu-id="44aa8-155">İçin JavaScript ve .NET Istemcilerinde :::no-loc(SignalR)::: , otomatik yeniden bağlanma için destek eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-155">In the JavaScript and .NET Clients for :::no-loc(SignalR):::, support was added for automatic reconnection.</span></span> <span data-ttu-id="44aa8-156">Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden dener.</span><span class="sxs-lookup"><span data-stu-id="44aa8-156">By default, the client tries to reconnect immediately and retry after 2, 10, and 30 seconds if necessary.</span></span> <span data-ttu-id="44aa8-157">İstemci başarıyla yeniden bağlanırsa, yeni bir bağlantı KIMLIĞI alır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-157">If the client successfully reconnects, it receives a new connection ID.</span></span> <span data-ttu-id="44aa8-158">Otomatik yeniden bağlanma kabul etme:</span><span class="sxs-lookup"><span data-stu-id="44aa8-158">Automatic reconnect is opt-in:</span></span>
+<span data-ttu-id="44aa8-155">İçin JavaScript ve .NET Istemcilerinde SignalR , otomatik yeniden bağlanma için destek eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-155">In the JavaScript and .NET Clients for SignalR, support was added for automatic reconnection.</span></span> <span data-ttu-id="44aa8-156">Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden dener.</span><span class="sxs-lookup"><span data-stu-id="44aa8-156">By default, the client tries to reconnect immediately and retry after 2, 10, and 30 seconds if necessary.</span></span> <span data-ttu-id="44aa8-157">İstemci başarıyla yeniden bağlanırsa, yeni bir bağlantı KIMLIĞI alır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-157">If the client successfully reconnects, it receives a new connection ID.</span></span> <span data-ttu-id="44aa8-158">Otomatik yeniden bağlanma kabul etme:</span><span class="sxs-lookup"><span data-stu-id="44aa8-158">Automatic reconnect is opt-in:</span></span>
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -117,7 +117,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 <span data-ttu-id="44aa8-164">Yeniden bağlanma denemeleri sırasında, kullanıcıya yeniden bağlantı denenmekte olduğunu bildirmek için uygulama kullanıcı arabirimini güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="44aa8-164">During reconnection attempts, update the app UI to notify the user that the reconnection is being attempted.</span></span>
 
-<span data-ttu-id="44aa8-165">Bağlantı kesildiğinde UI geri bildirimi sağlamak için, :::no-loc(SignalR)::: istemci API 'si aşağıdaki olay işleyicilerini içerecek şekilde genişletilir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-165">To provide UI feedback when the connection is interrupted, the :::no-loc(SignalR)::: client API has been expanded to include the following event handlers:</span></span>
+<span data-ttu-id="44aa8-165">Bağlantı kesildiğinde UI geri bildirimi sağlamak için, SignalR istemci API 'si aşağıdaki olay işleyicilerini içerecek şekilde genişletilir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-165">To provide UI feedback when the connection is interrupted, the SignalR client API has been expanded to include the following event handlers:</span></span>
 
 * <span data-ttu-id="44aa8-166">`onreconnecting`: Geliştiricilere Kullanıcı arabirimini devre dışı bırakma veya uygulamanın çevrimdışı olduğunu bilmesini sağlayan bir fırsat sağlar.</span><span class="sxs-lookup"><span data-stu-id="44aa8-166">`onreconnecting`:  Gives developers an opportunity to disable UI or to let users know the app is offline.</span></span>
 * <span data-ttu-id="44aa8-167">`onreconnected`: Bağlantı kurulduktan sonra geliştiricilere Kullanıcı arabirimini güncelleştirme fırsatı verir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-167">`onreconnected`: Gives developers an opportunity to update the UI once the connection is reestablished.</span></span>
@@ -144,7 +144,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-<span data-ttu-id="44aa8-170">:::no-loc(SignalR)::: 3,0 ve üzeri, bir hub yöntemi yetkilendirme gerektirdiğinde, yetkilendirme işleyicilerine özel bir kaynak sağlar.</span><span class="sxs-lookup"><span data-stu-id="44aa8-170">:::no-loc(SignalR)::: 3.0 and later provides a custom resource to authorization handlers when a hub method requires authorization.</span></span> <span data-ttu-id="44aa8-171">Kaynak bir örneğidir `HubInvocationContext` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-171">The resource is an instance of `HubInvocationContext`.</span></span> <span data-ttu-id="44aa8-172">`HubInvocationContext`Şunları içerir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-172">The `HubInvocationContext` includes the:</span></span>
+<span data-ttu-id="44aa8-170">SignalR 3,0 ve üzeri, bir hub yöntemi yetkilendirme gerektirdiğinde, yetkilendirme işleyicilerine özel bir kaynak sağlar.</span><span class="sxs-lookup"><span data-stu-id="44aa8-170">SignalR 3.0 and later provides a custom resource to authorization handlers when a hub method requires authorization.</span></span> <span data-ttu-id="44aa8-171">Kaynak bir örneğidir `HubInvocationContext` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-171">The resource is an instance of `HubInvocationContext`.</span></span> <span data-ttu-id="44aa8-172">`HubInvocationContext`Şunları içerir:</span><span class="sxs-lookup"><span data-stu-id="44aa8-172">The `HubInvocationContext` includes the:</span></span>
 
 * `HubCallerContext`
 * <span data-ttu-id="44aa8-173">Çağrılan hub yönteminin adı.</span><span class="sxs-lookup"><span data-stu-id="44aa8-173">Name of the hub method being invoked.</span></span>
@@ -161,12 +161,12 @@ public class DomainRestrictedRequirement :
         DomainRestrictedRequirement requirement,
         HubInvocationContext resource)
     {
-        if (context.User?.:::no-loc(Identity):::?.Name == null)
+        if (context.User?.Identity?.Name == null)
         {
             return Task.CompletedTask;
         }
 
-        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.:::no-loc(Identity):::.Name))
+        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.Identity.Name))
         {
             context.Succeed(requirement);
         }
@@ -234,40 +234,40 @@ services
     });
 ```
 
-<span data-ttu-id="44aa8-192">:::no-loc(SignalR)::: Hub [uç nokta yönlendirme](xref:fundamentals/routing)kullanır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-192">:::no-loc(SignalR)::: hubs use [Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="44aa8-193">:::no-loc(SignalR)::: Hub bağlantısı daha önce açık olarak yapıldı:</span><span class="sxs-lookup"><span data-stu-id="44aa8-193">:::no-loc(SignalR)::: hub connection was previously done explicitly:</span></span>
+<span data-ttu-id="44aa8-192">SignalR Hub [uç nokta yönlendirme](xref:fundamentals/routing)kullanır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-192">SignalR hubs use [Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="44aa8-193">SignalR Hub bağlantısı daha önce açık olarak yapıldı:</span><span class="sxs-lookup"><span data-stu-id="44aa8-193">SignalR hub connection was previously done explicitly:</span></span>
 
 ```csharp
-app.Use:::no-loc(SignalR):::(routes =>
+app.UseSignalR(routes =>
 {
     routes.MapHub<ChatHub>("hubs/chat");
 });
 ```
 
-<span data-ttu-id="44aa8-194">Önceki sürümde, geliştiriciler, :::no-loc(Razor)::: Sayfalar ve hub 'ları çeşitli yerlerde bağlamak için gereklidir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-194">In the previous version, developers needed to wire up controllers, :::no-loc(Razor)::: pages, and hubs in a variety of places.</span></span> <span data-ttu-id="44aa8-195">Açık bağlantı, neredeyse aynı bir dizi yönlendirme segmentine neden olur:</span><span class="sxs-lookup"><span data-stu-id="44aa8-195">Explicit connection results in a series of nearly-identical routing segments:</span></span>
+<span data-ttu-id="44aa8-194">Önceki sürümde, geliştiriciler, Razor Sayfalar ve hub 'ları çeşitli yerlerde bağlamak için gereklidir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-194">In the previous version, developers needed to wire up controllers, Razor pages, and hubs in a variety of places.</span></span> <span data-ttu-id="44aa8-195">Açık bağlantı, neredeyse aynı bir dizi yönlendirme segmentine neden olur:</span><span class="sxs-lookup"><span data-stu-id="44aa8-195">Explicit connection results in a series of nearly-identical routing segments:</span></span>
 
 ```csharp
-app.Use:::no-loc(SignalR):::(routes =>
+app.UseSignalR(routes =>
 {
     routes.MapHub<ChatHub>("hubs/chat");
 });
 
 app.UseRouting(routes =>
 {
-    routes.Map:::no-loc(Razor):::Pages();
+    routes.MapRazorPages();
 });
 ```
 
-<span data-ttu-id="44aa8-196">:::no-loc(SignalR)::: 3,0 hub 'ları, uç nokta yönlendirme aracılığıyla yönlendirilebilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-196">:::no-loc(SignalR)::: 3.0 hubs can be routed via endpoint routing.</span></span> <span data-ttu-id="44aa8-197">Uç nokta yönlendirme ile, genellikle tüm yönlendirme ' de yapılandırılabilir `UseRouting` :</span><span class="sxs-lookup"><span data-stu-id="44aa8-197">With endpoint routing, typically all routing can be configured in `UseRouting`:</span></span>
+<span data-ttu-id="44aa8-196">SignalR 3,0 hub 'ları, uç nokta yönlendirme aracılığıyla yönlendirilebilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-196">SignalR 3.0 hubs can be routed via endpoint routing.</span></span> <span data-ttu-id="44aa8-197">Uç nokta yönlendirme ile, genellikle tüm yönlendirme ' de yapılandırılabilir `UseRouting` :</span><span class="sxs-lookup"><span data-stu-id="44aa8-197">With endpoint routing, typically all routing can be configured in `UseRouting`:</span></span>
 
 ```csharp
 app.UseRouting(routes =>
 {
-    routes.Map:::no-loc(Razor):::Pages();
+    routes.MapRazorPages();
     routes.MapHub<ChatHub>("hubs/chat");
 });
 ```
 
-<span data-ttu-id="44aa8-198">ASP.NET Core 3,0 :::no-loc(SignalR)::: eklendi:</span><span class="sxs-lookup"><span data-stu-id="44aa8-198">ASP.NET Core 3.0 :::no-loc(SignalR)::: added:</span></span>
+<span data-ttu-id="44aa8-198">ASP.NET Core 3,0 SignalR eklendi:</span><span class="sxs-lookup"><span data-stu-id="44aa8-198">ASP.NET Core 3.0 SignalR added:</span></span>
 
 <span data-ttu-id="44aa8-199">İstemciden sunucuya akış.</span><span class="sxs-lookup"><span data-stu-id="44aa8-199">Client-to-server streaming.</span></span> <span data-ttu-id="44aa8-200">İstemciden sunucuya akışla, sunucu tarafı yöntemleri veya örneklerinden birini alabilir `IAsyncEnumerable<T>` `ChannelReader<T>` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-200">With client-to-server streaming, server-side methods can take instances of either an `IAsyncEnumerable<T>` or `ChannelReader<T>`.</span></span> <span data-ttu-id="44aa8-201">Aşağıdaki C# örneğinde, `UploadStream` hub 'daki Yöntem istemciden dizelerin akışını alacaktır:</span><span class="sxs-lookup"><span data-stu-id="44aa8-201">In the following C# sample, the `UploadStream` method on the Hub will receive a stream of strings from the client:</span></span>
 
@@ -298,7 +298,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-<span data-ttu-id="44aa8-204">JavaScript istemci uygulamaları, :::no-loc(SignalR)::: `Subject` Yukarıdaki hub yönteminin bağımsız değişkeni olarak (veya bir [Rxjs konusu](https://rxjs.dev/api/index/class/Subject)) kullanır `stream` `UploadStream` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-204">JavaScript client apps use the :::no-loc(SignalR)::: `Subject` (or an [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) for the `stream` argument of the `UploadStream` Hub method above.</span></span>
+<span data-ttu-id="44aa8-204">JavaScript istemci uygulamaları, SignalR `Subject` Yukarıdaki hub yönteminin bağımsız değişkeni olarak (veya bir [Rxjs konusu](https://rxjs.dev/api/index/class/Subject)) kullanır `stream` `UploadStream` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-204">JavaScript client apps use the SignalR `Subject` (or an [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) for the `stream` argument of the `UploadStream` Hub method above.</span></span>
 
 ```javascript
 let subject = new signalR.Subject();
@@ -324,25 +324,25 @@ subject.complete();
 
 <span data-ttu-id="44aa8-212">ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft.Jstabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).</span><span class="sxs-lookup"><span data-stu-id="44aa8-212">To add Json.NET to ASP.NET Core 3.0, see [Add Newtonsoft.Json-based JSON format support](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).</span></span>
 
-## <a name="new-no-locrazor-directives"></a><span data-ttu-id="44aa8-213">Yeni :::no-loc(Razor)::: yönergeler</span><span class="sxs-lookup"><span data-stu-id="44aa8-213">New :::no-loc(Razor)::: directives</span></span>
+## <a name="new-no-locrazor-directives"></a><span data-ttu-id="44aa8-213">Yeni Razor yönergeler</span><span class="sxs-lookup"><span data-stu-id="44aa8-213">New Razor directives</span></span>
 
-<span data-ttu-id="44aa8-214">Aşağıdaki listede yeni yönergeler yer almaktadır :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="44aa8-214">The following list contains new :::no-loc(Razor)::: directives:</span></span>
+<span data-ttu-id="44aa8-214">Aşağıdaki listede yeni yönergeler yer almaktadır Razor :</span><span class="sxs-lookup"><span data-stu-id="44aa8-214">The following list contains new Razor directives:</span></span>
 
 * <span data-ttu-id="44aa8-215">[`@attribute`](xref:mvc/views/razor#attribute): `@attribute` Yönergesi verilen özniteliği oluşturulan sayfanın veya görünümün sınıfına uygular.</span><span class="sxs-lookup"><span data-stu-id="44aa8-215">[`@attribute`](xref:mvc/views/razor#attribute): The `@attribute` directive applies the given attribute to the class of the generated page or view.</span></span> <span data-ttu-id="44aa8-216">Örneğin, `@attribute [Authorize]`.</span><span class="sxs-lookup"><span data-stu-id="44aa8-216">For example, `@attribute [Authorize]`.</span></span>
 * <span data-ttu-id="44aa8-217">[`@implements`](xref:mvc/views/razor#implements): `@implements` Yönerge, oluşturulan sınıf için bir arabirim uygular.</span><span class="sxs-lookup"><span data-stu-id="44aa8-217">[`@implements`](xref:mvc/views/razor#implements): The `@implements` directive implements an interface for the generated class.</span></span> <span data-ttu-id="44aa8-218">Örneğin, `@implements IDisposable`.</span><span class="sxs-lookup"><span data-stu-id="44aa8-218">For example, `@implements IDisposable`.</span></span>
 
-## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a><span data-ttu-id="44aa8-219">:::no-loc(Identity):::Server4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler</span><span class="sxs-lookup"><span data-stu-id="44aa8-219">:::no-loc(Identity):::Server4 supports authentication and authorization for web APIs and SPAs</span></span>
+## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a><span data-ttu-id="44aa8-219">IdentityServer4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler</span><span class="sxs-lookup"><span data-stu-id="44aa8-219">IdentityServer4 supports authentication and authorization for web APIs and SPAs</span></span>
 
-<span data-ttu-id="44aa8-220">ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-220">ASP.NET Core 3.0 offers authentication in Single Page Apps (SPAs) using the support for web API authorization.</span></span> <span data-ttu-id="44aa8-221">:::no-loc(ASP.NET Core Identity):::kimlik doğrulama ve depolama kullanıcıları için OpenID Connect 'i uygulamak üzere [ :::no-loc(Identity)::: Server4](https://identityserver.io/) ile birleştirilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-221">:::no-loc(ASP.NET Core Identity)::: for authenticating and storing users is combined with [:::no-loc(Identity):::Server4](https://identityserver.io/) for implementing OpenID Connect.</span></span>
+<span data-ttu-id="44aa8-220">ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır.</span><span class="sxs-lookup"><span data-stu-id="44aa8-220">ASP.NET Core 3.0 offers authentication in Single Page Apps (SPAs) using the support for web API authorization.</span></span> <span data-ttu-id="44aa8-221">ASP.NET Core Identitykimlik doğrulama ve depolama kullanıcıları için OpenID Connect 'i uygulamak üzere [ Identity Server4](https://identityserver.io/) ile birleştirilir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-221">ASP.NET Core Identity for authenticating and storing users is combined with [IdentityServer4](https://identityserver.io/) for implementing OpenID Connect.</span></span>
 
-<span data-ttu-id="44aa8-222">:::no-loc(Identity):::Server4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-222">:::no-loc(Identity):::Server4 is an OpenID Connect and OAuth 2.0 framework for ASP.NET Core 3.0.</span></span> <span data-ttu-id="44aa8-223">Aşağıdaki güvenlik özelliklerini sunar:</span><span class="sxs-lookup"><span data-stu-id="44aa8-223">It enables the following security features:</span></span>
+<span data-ttu-id="44aa8-222">IdentityServer4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-222">IdentityServer4 is an OpenID Connect and OAuth 2.0 framework for ASP.NET Core 3.0.</span></span> <span data-ttu-id="44aa8-223">Aşağıdaki güvenlik özelliklerini sunar:</span><span class="sxs-lookup"><span data-stu-id="44aa8-223">It enables the following security features:</span></span>
 
 * <span data-ttu-id="44aa8-224">Hizmet olarak kimlik doğrulaması (AaaS)</span><span class="sxs-lookup"><span data-stu-id="44aa8-224">Authentication as a Service (AaaS)</span></span>
 * <span data-ttu-id="44aa8-225">Birden çok uygulama türü üzerinde çoklu oturum açma/kapatma (SSO)</span><span class="sxs-lookup"><span data-stu-id="44aa8-225">Single sign-on/off (SSO) over multiple application types</span></span>
 * <span data-ttu-id="44aa8-226">API 'Ler için erişim denetimi</span><span class="sxs-lookup"><span data-stu-id="44aa8-226">Access control for APIs</span></span>
 * <span data-ttu-id="44aa8-227">Federasyon ağ geçidi</span><span class="sxs-lookup"><span data-stu-id="44aa8-227">Federation Gateway</span></span>
 
-<span data-ttu-id="44aa8-228">Daha fazla bilgi için bkz [. :::no-loc(Identity)::: Server4 belgeleri](http://docs.identityserver.io/en/latest/index.html) veya [kimlik doğrulaması ve kimlik doğrulama ve yetkilendirme](xref:security/authentication/identity/spa).</span><span class="sxs-lookup"><span data-stu-id="44aa8-228">For more information, see [the :::no-loc(Identity):::Server4 documentation](http://docs.identityserver.io/en/latest/index.html) or [Authentication and authorization for SPAs](xref:security/authentication/identity/spa).</span></span>
+<span data-ttu-id="44aa8-228">Daha fazla bilgi için bkz [. Identity Server4 belgeleri](http://docs.identityserver.io/en/latest/index.html) veya [kimlik doğrulaması ve kimlik doğrulama ve yetkilendirme](xref:security/authentication/identity/spa).</span><span class="sxs-lookup"><span data-stu-id="44aa8-228">For more information, see [the IdentityServer4 documentation](http://docs.identityserver.io/en/latest/index.html) or [Authentication and authorization for SPAs](xref:security/authentication/identity/spa).</span></span>
 
 ## <a name="certificate-and-kerberos-authentication"></a><span data-ttu-id="44aa8-229">Sertifika ve Kerberos kimlik doğrulaması</span><span class="sxs-lookup"><span data-stu-id="44aa8-229">Certificate and Kerberos authentication</span></span>
 
@@ -404,14 +404,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="template-changes"></a><span data-ttu-id="44aa8-252">Şablon değişiklikleri</span><span class="sxs-lookup"><span data-stu-id="44aa8-252">Template changes</span></span>
 
-<span data-ttu-id="44aa8-253">Web UI şablonları ( :::no-loc(Razor)::: Sayfalar, denetleyici ve GÖRÜNÜMLERLE Mvc) aşağıdaki gibi kaldırılmıştır:</span><span class="sxs-lookup"><span data-stu-id="44aa8-253">The web UI templates (:::no-loc(Razor)::: Pages, MVC with controller and views) have the following removed:</span></span>
+<span data-ttu-id="44aa8-253">Web UI şablonları ( Razor Sayfalar, denetleyici ve GÖRÜNÜMLERLE Mvc) aşağıdaki gibi kaldırılmıştır:</span><span class="sxs-lookup"><span data-stu-id="44aa8-253">The web UI templates (Razor Pages, MVC with controller and views) have the following removed:</span></span>
 
-* <span data-ttu-id="44aa8-254">:::no-loc(cookie):::Onay Kullanıcı arabirimi artık dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-254">The :::no-loc(cookie)::: consent UI is no longer included.</span></span> <span data-ttu-id="44aa8-255">:::no-loc(cookie):::ASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada izin özelliğini etkinleştirmek için, bkz <xref:security/gdpr> ..</span><span class="sxs-lookup"><span data-stu-id="44aa8-255">To enable the :::no-loc(cookie)::: consent feature in an ASP.NET Core 3.0 template-generated app, see <xref:security/gdpr>.</span></span>
+* <span data-ttu-id="44aa8-254">cookieOnay Kullanıcı arabirimi artık dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="44aa8-254">The cookie consent UI is no longer included.</span></span> <span data-ttu-id="44aa8-255">cookieASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada izin özelliğini etkinleştirmek için, bkz <xref:security/gdpr> ..</span><span class="sxs-lookup"><span data-stu-id="44aa8-255">To enable the cookie consent feature in an ASP.NET Core 3.0 template-generated app, see <xref:security/gdpr>.</span></span>
 * <span data-ttu-id="44aa8-256">Betiklerin ve ilgili statik varlıkların artık CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor.</span><span class="sxs-lookup"><span data-stu-id="44aa8-256">Scripts and related static assets are now referenced as local files instead of using CDNs.</span></span> <span data-ttu-id="44aa8-257">Daha fazla bilgi için, bkz. [betikler ve ilgili statik varlıklar artık geçerli ortama (ASPNET/AspNetCore.Docs #14350) göre CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor](https://github.com/dotnet/AspNetCore.Docs/issues/14350).</span><span class="sxs-lookup"><span data-stu-id="44aa8-257">For more information, see [Scripts and related static assets are now referenced as local files instead of using CDNs based on the current environment (aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).</span></span>
 
 <span data-ttu-id="44aa8-258">Angular şablonu, angular 8 ' i kullanacak şekilde güncelleştirildi.</span><span class="sxs-lookup"><span data-stu-id="44aa8-258">The Angular template updated to use Angular 8.</span></span>
 
-<span data-ttu-id="44aa8-259">:::no-loc(Razor):::Sınıf kitaplığı (RCL) şablonu :::no-loc(Razor)::: Varsayılan olarak varsayılan olarak bileşen geliştirme olur.</span><span class="sxs-lookup"><span data-stu-id="44aa8-259">The :::no-loc(Razor)::: class library (RCL) template defaults to :::no-loc(Razor)::: component development by default.</span></span> <span data-ttu-id="44aa8-260">Visual Studio 'da yeni bir şablon seçeneği, sayfalar ve görünümler için şablon desteği sağlar.</span><span class="sxs-lookup"><span data-stu-id="44aa8-260">A new template option in Visual Studio provides template support for pages and views.</span></span> <span data-ttu-id="44aa8-261">Bir komut kabuğunda şablondan RCL oluştururken, `--support-pages-and-views` () seçeneğini geçirin `dotnet new razorclasslib --support-pages-and-views` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-261">When creating an RCL from the template in a command shell, pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`).</span></span>
+<span data-ttu-id="44aa8-259">RazorSınıf kitaplığı (RCL) şablonu Razor Varsayılan olarak varsayılan olarak bileşen geliştirme olur.</span><span class="sxs-lookup"><span data-stu-id="44aa8-259">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="44aa8-260">Visual Studio 'da yeni bir şablon seçeneği, sayfalar ve görünümler için şablon desteği sağlar.</span><span class="sxs-lookup"><span data-stu-id="44aa8-260">A new template option in Visual Studio provides template support for pages and views.</span></span> <span data-ttu-id="44aa8-261">Bir komut kabuğunda şablondan RCL oluştururken, `--support-pages-and-views` () seçeneğini geçirin `dotnet new razorclasslib --support-pages-and-views` .</span><span class="sxs-lookup"><span data-stu-id="44aa8-261">When creating an RCL from the template in a command shell, pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`).</span></span>
 
 ## <a name="generic-host"></a><span data-ttu-id="44aa8-262">Genel Konak</span><span class="sxs-lookup"><span data-stu-id="44aa8-262">Generic Host</span></span>
 

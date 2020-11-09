@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/working-with-forms
 ms.openlocfilehash: a568ad481eb09587e2ddce8e84d0ac3eff01e990
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -90,8 +90,8 @@ ms.locfileid: "93060904"
 |[<span data-ttu-id="8d473-137">ASP-Controller</span><span class="sxs-lookup"><span data-stu-id="8d473-137">asp-controller</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|<span data-ttu-id="8d473-138">Denetleyicinin adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-138">The name of the controller.</span></span>|
 |[<span data-ttu-id="8d473-139">ASP-eylem</span><span class="sxs-lookup"><span data-stu-id="8d473-139">asp-action</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|<span data-ttu-id="8d473-140">Eylem yönteminin adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-140">The name of the action method.</span></span>|
 |[<span data-ttu-id="8d473-141">ASP-alanı</span><span class="sxs-lookup"><span data-stu-id="8d473-141">asp-area</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|<span data-ttu-id="8d473-142">Alanın adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-142">The name of the area.</span></span>|
-|[<span data-ttu-id="8d473-143">asp-sayfa</span><span class="sxs-lookup"><span data-stu-id="8d473-143">asp-page</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|<span data-ttu-id="8d473-144">:::no-loc(Razor):::Sayfanın adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-144">The name of the :::no-loc(Razor)::: page.</span></span>|
-|[<span data-ttu-id="8d473-145">ASP-Page-Handler</span><span class="sxs-lookup"><span data-stu-id="8d473-145">asp-page-handler</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|<span data-ttu-id="8d473-146">:::no-loc(Razor):::Sayfa işleyicisinin adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-146">The name of the :::no-loc(Razor)::: page handler.</span></span>|
+|[<span data-ttu-id="8d473-143">asp-sayfa</span><span class="sxs-lookup"><span data-stu-id="8d473-143">asp-page</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|<span data-ttu-id="8d473-144">RazorSayfanın adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-144">The name of the Razor page.</span></span>|
+|[<span data-ttu-id="8d473-145">ASP-Page-Handler</span><span class="sxs-lookup"><span data-stu-id="8d473-145">asp-page-handler</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|<span data-ttu-id="8d473-146">RazorSayfa işleyicisinin adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-146">The name of the Razor page handler.</span></span>|
 |[<span data-ttu-id="8d473-147">ASP-Route</span><span class="sxs-lookup"><span data-stu-id="8d473-147">asp-route</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|<span data-ttu-id="8d473-148">Yolun adı.</span><span class="sxs-lookup"><span data-stu-id="8d473-148">The name of the route.</span></span>|
 |[<span data-ttu-id="8d473-149">ASP-Route-{Value}</span><span class="sxs-lookup"><span data-stu-id="8d473-149">asp-route-{value}</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|<span data-ttu-id="8d473-150">Tek bir URL yol değeri.</span><span class="sxs-lookup"><span data-stu-id="8d473-150">A single URL route value.</span></span> <span data-ttu-id="8d473-151">Örneğin, `asp-route-id="1234"`.</span><span class="sxs-lookup"><span data-stu-id="8d473-151">For example, `asp-route-id="1234"`.</span></span>|
 |[<span data-ttu-id="8d473-152">ASP-All-Route-Data</span><span class="sxs-lookup"><span data-stu-id="8d473-152">asp-all-route-data</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|<span data-ttu-id="8d473-153">Tüm rota değerleri.</span><span class="sxs-lookup"><span data-stu-id="8d473-153">All route values.</span></span>|
@@ -120,7 +120,7 @@ ms.locfileid: "93060904"
 
 ### <a name="submit-to-page-example"></a><span data-ttu-id="8d473-159">Sayfa örneğine gönder</span><span class="sxs-lookup"><span data-stu-id="8d473-159">Submit to page example</span></span>
 
-<span data-ttu-id="8d473-160">Aşağıdaki biçimlendirme formu `About` :::no-loc(Razor)::: sayfasına gönderir:</span><span class="sxs-lookup"><span data-stu-id="8d473-160">The following markup submits the form to the `About` :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="8d473-160">Aşağıdaki biçimlendirme formu `About` Razor sayfasına gönderir:</span><span class="sxs-lookup"><span data-stu-id="8d473-160">The following markup submits the form to the `About` Razor Page:</span></span>
 
 ```cshtml
 <form method="post">
@@ -327,7 +327,7 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-<span data-ttu-id="8d473-251">Aşağıda :::no-loc(Razor)::: belirli bir öğeye nasıl erişebileceğiniz gösterilmektedir `Color` :</span><span class="sxs-lookup"><span data-stu-id="8d473-251">The following :::no-loc(Razor)::: shows how you access a specific `Color` element:</span></span>
+<span data-ttu-id="8d473-251">Aşağıda Razor belirli bir öğeye nasıl erişebileceğiniz gösterilmektedir `Color` :</span><span class="sxs-lookup"><span data-stu-id="8d473-251">The following Razor shows how you access a specific `Color` element:</span></span>
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
@@ -339,7 +339,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
 
-<span data-ttu-id="8d473-254">Aşağıda :::no-loc(Razor)::: bir koleksiyonun üzerinde nasıl yinelemi yapılacağı gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="8d473-254">The following :::no-loc(Razor)::: shows how to iterate over a collection:</span></span>
+<span data-ttu-id="8d473-254">Aşağıda Razor bir koleksiyonun üzerinde nasıl yinelemi yapılacağı gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="8d473-254">The following Razor shows how to iterate over a collection:</span></span>
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 

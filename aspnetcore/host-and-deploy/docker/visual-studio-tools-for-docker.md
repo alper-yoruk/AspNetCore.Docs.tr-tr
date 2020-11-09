@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
 ms.openlocfilehash: 2cfd200c44290a0931cdeb2f68e99b90c11aa612
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -201,7 +201,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a><span data-ttu-id="23d00-217">Düzenle ve devam et</span><span class="sxs-lookup"><span data-stu-id="23d00-217">Edit and continue</span></span>
 
-<span data-ttu-id="23d00-218">Statik dosya ve görünümlerde yapılan değişiklikler :::no-loc(Razor)::: , derleme adımına gerek kalmadan otomatik olarak güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="23d00-218">Changes to static files and :::no-loc(Razor)::: views are automatically updated without the need for a compilation step.</span></span> <span data-ttu-id="23d00-219">Güncelleştirmeyi görüntülemek için değişikliği yapıp tarayıcıyı kaydedin ve yenileyin.</span><span class="sxs-lookup"><span data-stu-id="23d00-219">Make the change, save, and refresh the browser to view the update.</span></span>
+<span data-ttu-id="23d00-218">Statik dosya ve görünümlerde yapılan değişiklikler Razor , derleme adımına gerek kalmadan otomatik olarak güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="23d00-218">Changes to static files and Razor views are automatically updated without the need for a compilation step.</span></span> <span data-ttu-id="23d00-219">Güncelleştirmeyi görüntülemek için değişikliği yapıp tarayıcıyı kaydedin ve yenileyin.</span><span class="sxs-lookup"><span data-stu-id="23d00-219">Make the change, save, and refresh the browser to view the update.</span></span>
 
 <span data-ttu-id="23d00-220">Kod dosyası değişiklikleri derleme gerektirir ve kapsayıcı içinde Kestrel yeniden başlatılır.</span><span class="sxs-lookup"><span data-stu-id="23d00-220">Code file modifications require compilation and a restart of Kestrel within the container.</span></span> <span data-ttu-id="23d00-221">Değişikliği yaptıktan sonra, `CTRL+F5` işlemi gerçekleştirmek ve uygulamayı kapsayıcı içinde başlatmak için öğesini kullanın.</span><span class="sxs-lookup"><span data-stu-id="23d00-221">After making the change, use `CTRL+F5` to perform the process and start the app within the container.</span></span> <span data-ttu-id="23d00-222">Docker kapsayıcısı yeniden derlenmez veya durdurulmaz.</span><span class="sxs-lookup"><span data-stu-id="23d00-222">The Docker container isn't rebuilt or stopped.</span></span> <span data-ttu-id="23d00-223">`docker ps`Komutu PMC 'de çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="23d00-223">Run the `docker ps` command in PMC.</span></span> <span data-ttu-id="23d00-224">Özgün kapsayıcının 10 dakikadan önce çalışmaya devam ettiğini fark edin:</span><span class="sxs-lookup"><span data-stu-id="23d00-224">Notice the original container is still running as of 10 minutes ago:</span></span>
 

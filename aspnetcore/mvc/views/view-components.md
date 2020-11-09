@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/view-components
 ms.openlocfilehash: e0ff97b53d12fbf6c6a89e94704de1aee9d7f9e6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -33,7 +33,7 @@ ms.locfileid: "93060592"
 
 ## <a name="view-components"></a><span data-ttu-id="77497-106">Görünüm bileşenleri</span><span class="sxs-lookup"><span data-stu-id="77497-106">View components</span></span>
 
-<span data-ttu-id="77497-107">Görünüm bileşenleri kısmi görünümlere benzerdir, ancak çok daha güçlüdür.</span><span class="sxs-lookup"><span data-stu-id="77497-107">View components are similar to partial views, but they're much more powerful.</span></span> <span data-ttu-id="77497-108">Görüntüleme bileşenleri model bağlama kullanmaz ve yalnızca içine çağrılırken belirtilen verilere bağımlıdır.</span><span class="sxs-lookup"><span data-stu-id="77497-108">View components don't use model binding, and only depend on the data provided when calling into it.</span></span> <span data-ttu-id="77497-109">Bu makale, denetleyiciler ve görünümler kullanılarak yazılmıştır, ancak bileşenleri görüntüleme, sayfalarla de çalışır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="77497-109">This article was written using controllers and views, but view components also work with :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="77497-107">Görünüm bileşenleri kısmi görünümlere benzerdir, ancak çok daha güçlüdür.</span><span class="sxs-lookup"><span data-stu-id="77497-107">View components are similar to partial views, but they're much more powerful.</span></span> <span data-ttu-id="77497-108">Görüntüleme bileşenleri model bağlama kullanmaz ve yalnızca içine çağrılırken belirtilen verilere bağımlıdır.</span><span class="sxs-lookup"><span data-stu-id="77497-108">View components don't use model binding, and only depend on the data provided when calling into it.</span></span> <span data-ttu-id="77497-109">Bu makale, denetleyiciler ve görünümler kullanılarak yazılmıştır, ancak bileşenleri görüntüleme, sayfalarla de çalışır Razor .</span><span class="sxs-lookup"><span data-stu-id="77497-109">This article was written using controllers and views, but view components also work with Razor Pages.</span></span>
 
 <span data-ttu-id="77497-110">Bir görünüm bileşeni:</span><span class="sxs-lookup"><span data-stu-id="77497-110">A view component:</span></span>
 
@@ -54,7 +54,7 @@ ms.locfileid: "93060592"
 
 <span data-ttu-id="77497-123">Bir görünüm bileşeni iki bölümden oluşur: Sınıf (genellikle [Viewcomponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)öğesinden türetilir) ve döndürdüğü sonuç (genellikle bir görünüm).</span><span class="sxs-lookup"><span data-stu-id="77497-123">A view component consists of two parts: the class (typically derived from [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) and the result it returns (typically a view).</span></span> <span data-ttu-id="77497-124">Denetleyiciler gibi bir görünüm bileşeni de bir POCO olabilir, ancak çoğu geliştirici, ' den türeterek kullanılabilir yöntemler ve özelliklerden faydalanmak ister `ViewComponent` .</span><span class="sxs-lookup"><span data-stu-id="77497-124">Like controllers, a view component can be a POCO, but most developers will want to take advantage of the methods and properties available by deriving from `ViewComponent`.</span></span>
 
-<span data-ttu-id="77497-125">Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, :::no-loc(Razor)::: bunun yerine bileşenleri kullanmayı düşünün.</span><span class="sxs-lookup"><span data-stu-id="77497-125">When considering if view components meet an app's specifications, consider using :::no-loc(Razor)::: Components instead.</span></span> <span data-ttu-id="77497-126">:::no-loc(Razor)::: Bileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir.</span><span class="sxs-lookup"><span data-stu-id="77497-126">:::no-loc(Razor)::: Components also combine markup with C# code to produce reusable UI units.</span></span> <span data-ttu-id="77497-127">:::no-loc(Razor)::: Bileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır.</span><span class="sxs-lookup"><span data-stu-id="77497-127">:::no-loc(Razor)::: Components are designed for developer productivity when providing client-side UI logic and composition.</span></span> <span data-ttu-id="77497-128">Daha fazla bilgi için bkz. <xref:blazor/components/index>.</span><span class="sxs-lookup"><span data-stu-id="77497-128">For more information, see <xref:blazor/components/index>.</span></span>
+<span data-ttu-id="77497-125">Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, Razor bunun yerine bileşenleri kullanmayı düşünün.</span><span class="sxs-lookup"><span data-stu-id="77497-125">When considering if view components meet an app's specifications, consider using Razor Components instead.</span></span> <span data-ttu-id="77497-126">Razor Bileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir.</span><span class="sxs-lookup"><span data-stu-id="77497-126">Razor Components also combine markup with C# code to produce reusable UI units.</span></span> <span data-ttu-id="77497-127">Razor Bileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır.</span><span class="sxs-lookup"><span data-stu-id="77497-127">Razor Components are designed for developer productivity when providing client-side UI logic and composition.</span></span> <span data-ttu-id="77497-128">Daha fazla bilgi için bkz. <xref:blazor/components/index>.</span><span class="sxs-lookup"><span data-stu-id="77497-128">For more information, see <xref:blazor/components/index>.</span></span>
 
 ## <a name="creating-a-view-component"></a><span data-ttu-id="77497-129">Görünüm bileşeni oluşturma</span><span class="sxs-lookup"><span data-stu-id="77497-129">Creating a view component</span></span>
 
@@ -94,7 +94,7 @@ ms.locfileid: "93060592"
 * <span data-ttu-id="77497-160">/Views/Shared/Components/{View bileşen adı}/{View Name}</span><span class="sxs-lookup"><span data-stu-id="77497-160">/Views/Shared/Components/{View Component Name}/{View Name}</span></span>
 * <span data-ttu-id="77497-161">/Pages/Shared/Components/{View bileşen adı}/{View Name}</span><span class="sxs-lookup"><span data-stu-id="77497-161">/Pages/Shared/Components/{View Component Name}/{View Name}</span></span>
 
-<span data-ttu-id="77497-162">Arama yolu, denetleyiciler + görünümler ve sayfalar kullanan projeler için geçerlidir :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="77497-162">The search path applies to projects using controllers + views and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="77497-162">Arama yolu, denetleyiciler + görünümler ve sayfalar kullanan projeler için geçerlidir Razor .</span><span class="sxs-lookup"><span data-stu-id="77497-162">The search path applies to projects using controllers + views and Razor Pages.</span></span>
 
 <span data-ttu-id="77497-163">Bir görünüm bileşeni için varsayılan görünüm adı *varsayılandır* , yani görünüm dosyanız genellikle *default. cshtml* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="77497-163">The default view name for a view component is *Default* , which means your view file will typically be named *Default.cshtml* .</span></span> <span data-ttu-id="77497-164">Görünüm bileşeni sonucunu oluştururken veya yöntemini çağırırken farklı bir görünüm adı belirtebilirsiniz `View` .</span><span class="sxs-lookup"><span data-stu-id="77497-164">You can specify a different view name when creating the view component result or when calling the `View` method.</span></span>
 
@@ -102,7 +102,7 @@ ms.locfileid: "93060592"
 
 ### <a name="customize-the-view-search-path"></a><span data-ttu-id="77497-167">Arama yolunu görüntüle</span><span class="sxs-lookup"><span data-stu-id="77497-167">Customize the view search path</span></span>
 
-<span data-ttu-id="77497-168">Arama yolunu görüntüle ' yi özelleştirmek için, :::no-loc(Razor)::: <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.:::no-loc(Razor):::ViewEngineOptions.ViewLocationFormats> koleksiyonunu değiştirin.</span><span class="sxs-lookup"><span data-stu-id="77497-168">To customize the view search path, modify :::no-loc(Razor):::'s <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.:::no-loc(Razor):::ViewEngineOptions.ViewLocationFormats> collection.</span></span> <span data-ttu-id="77497-169">Örneğin, "/Components/{View bileşen adı}/{View Name}" yolu içinde görünümleri aramak için, koleksiyona yeni bir öğe ekleyin:</span><span class="sxs-lookup"><span data-stu-id="77497-169">For example, to search for views within the path "/Components/{View Component Name}/{View Name}", add a new item to the collection:</span></span>
+<span data-ttu-id="77497-168">Arama yolunu görüntüle ' yi özelleştirmek için, Razor <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> koleksiyonunu değiştirin.</span><span class="sxs-lookup"><span data-stu-id="77497-168">To customize the view search path, modify Razor's <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> collection.</span></span> <span data-ttu-id="77497-169">Örneğin, "/Components/{View bileşen adı}/{View Name}" yolu içinde görünümleri aramak için, koleksiyona yeni bir öğe ekleyin:</span><span class="sxs-lookup"><span data-stu-id="77497-169">For example, to search for views within the path "/Components/{View Component Name}/{View Name}", add a new item to the collection:</span></span>
 
 [!code-csharp[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
@@ -193,18 +193,18 @@ ms.locfileid: "93060592"
 * <span data-ttu-id="77497-208">`InvokeAsync` bir görünümden çağrılabilen bir yöntemi gösterir ve rastgele sayıda bağımsız değişken alabilir.</span><span class="sxs-lookup"><span data-stu-id="77497-208">`InvokeAsync` exposes a method which can be called from a view, and it can take an arbitrary number of arguments.</span></span>
 * <span data-ttu-id="77497-209">`InvokeAsync`Yöntemi `ToDo` ve parametrelerini karşılayan öğe kümesini döndürür `isDone` `maxPriority` .</span><span class="sxs-lookup"><span data-stu-id="77497-209">The `InvokeAsync` method returns the set of `ToDo` items that satisfy the `isDone` and `maxPriority` parameters.</span></span>
 
-### <a name="create-the-view-component-no-locrazor-view"></a><span data-ttu-id="77497-210">Görünüm bileşeni görünümünü oluşturma :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="77497-210">Create the view component :::no-loc(Razor)::: view</span></span>
+### <a name="create-the-view-component-no-locrazor-view"></a><span data-ttu-id="77497-210">Görünüm bileşeni görünümünü oluşturma Razor</span><span class="sxs-lookup"><span data-stu-id="77497-210">Create the view component Razor view</span></span>
 
 * <span data-ttu-id="77497-211">*Görünümler/paylaşılan/bileşenler* klasörünü oluşturun.</span><span class="sxs-lookup"><span data-stu-id="77497-211">Create the *Views/Shared/Components* folder.</span></span> <span data-ttu-id="77497-212">Bu klasör, adlandırılmış *Bileşenler* **olmalıdır** .</span><span class="sxs-lookup"><span data-stu-id="77497-212">This folder **must** be named *Components* .</span></span>
 
 * <span data-ttu-id="77497-213">*Görünümler/paylaşılan/bileşenler/PriorityList* klasörünü oluşturun.</span><span class="sxs-lookup"><span data-stu-id="77497-213">Create the *Views/Shared/Components/PriorityList* folder.</span></span> <span data-ttu-id="77497-214">Bu klasör adı, görünüm bileşen sınıfının adıyla ya da sınıfın adı eksi sonek ile eşleşmelidir (Bu kural izleniyorsa ve sınıf adında *Viewcomponent* sonekini kullandıysanız).</span><span class="sxs-lookup"><span data-stu-id="77497-214">This folder name must match the name of the view component class, or the name of the class minus the suffix (if we followed convention and used the *ViewComponent* suffix in the class name).</span></span> <span data-ttu-id="77497-215">`ViewComponent`Özniteliğini kullandıysanız, sınıf adının öznitelik atamasını eşleşmesi gerekir.</span><span class="sxs-lookup"><span data-stu-id="77497-215">If you used the `ViewComponent` attribute, the class name would need to match the attribute designation.</span></span>
 
-* <span data-ttu-id="77497-216">Bir *Görünümler/paylaşılan/bileşenler/PriorityList/default. cshtml* :::no-loc(Razor)::: görünümü oluşturun:</span><span class="sxs-lookup"><span data-stu-id="77497-216">Create a *Views/Shared/Components/PriorityList/Default.cshtml* :::no-loc(Razor)::: view:</span></span>
+* <span data-ttu-id="77497-216">Bir *Görünümler/paylaşılan/bileşenler/PriorityList/default. cshtml* Razor görünümü oluşturun:</span><span class="sxs-lookup"><span data-stu-id="77497-216">Create a *Views/Shared/Components/PriorityList/Default.cshtml* Razor view:</span></span>
 
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   <span data-ttu-id="77497-217">:::no-loc(Razor):::Görünüm bir listesini alır `TodoItem` ve görüntüler.</span><span class="sxs-lookup"><span data-stu-id="77497-217">The :::no-loc(Razor)::: view takes a list of `TodoItem` and displays them.</span></span> <span data-ttu-id="77497-218">Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="77497-218">If the view component `InvokeAsync` method doesn't pass the name of the view (as in our sample), *Default* is used for the view name by convention.</span></span> <span data-ttu-id="77497-219">Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz.</span><span class="sxs-lookup"><span data-stu-id="77497-219">Later in the tutorial, I'll show you how to pass the name of the view.</span></span> <span data-ttu-id="77497-220">Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)* .</span><span class="sxs-lookup"><span data-stu-id="77497-220">To override the default styling for a specific controller, add a view to the controller-specific view folder (for example *Views/ToDo/Components/PriorityList/Default.cshtml)* .</span></span>
+   <span data-ttu-id="77497-217">RazorGörünüm bir listesini alır `TodoItem` ve görüntüler.</span><span class="sxs-lookup"><span data-stu-id="77497-217">The Razor view takes a list of `TodoItem` and displays them.</span></span> <span data-ttu-id="77497-218">Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="77497-218">If the view component `InvokeAsync` method doesn't pass the name of the view (as in our sample), *Default* is used for the view name by convention.</span></span> <span data-ttu-id="77497-219">Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz.</span><span class="sxs-lookup"><span data-stu-id="77497-219">Later in the tutorial, I'll show you how to pass the name of the view.</span></span> <span data-ttu-id="77497-220">Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)* .</span><span class="sxs-lookup"><span data-stu-id="77497-220">To override the default styling for a specific controller, add a view to the controller-specific view folder (for example *Views/ToDo/Components/PriorityList/Default.cshtml)* .</span></span>
 
     <span data-ttu-id="77497-221">Görünüm bileşeni denetleyiciye özgü ise, denetleyiciyi denetleyiciye özgü klasöre ekleyebilirsiniz ( *Görünümler/Todo/bileşenler/PriorityList/default. cshtml* ).</span><span class="sxs-lookup"><span data-stu-id="77497-221">If the view component is controller-specific, you can add it to the controller-specific folder ( *Views/ToDo/Components/PriorityList/Default.cshtml* ).</span></span>
 
@@ -272,7 +272,7 @@ ms.locfileid: "93060592"
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityList.cs?highlight=10&range=5-35)]
 
-<span data-ttu-id="77497-253">`using`Görünüm dosyanıza bir ifade ekleyin :::no-loc(Razor)::: ve `nameof` işlecini kullanın:</span><span class="sxs-lookup"><span data-stu-id="77497-253">Add a `using` statement to your :::no-loc(Razor)::: view file, and use the `nameof` operator:</span></span>
+<span data-ttu-id="77497-253">`using`Görünüm dosyanıza bir ifade ekleyin Razor ve `nameof` işlecini kullanın:</span><span class="sxs-lookup"><span data-stu-id="77497-253">Add a `using` statement to your Razor view file, and use the `nameof` operator:</span></span>
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexNameof.cshtml?range=1-6,35-)]
 
@@ -291,7 +291,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-<span data-ttu-id="77497-257">Görünüm bileşeni :::no-loc(Razor)::: dosyası yöntemine geçirilen dizeleri listeler `Invoke` ( *Görünümler/Home/Components/Prioritylist/default. cshtml* ):</span><span class="sxs-lookup"><span data-stu-id="77497-257">The view component's :::no-loc(Razor)::: file lists the strings passed to the `Invoke` method ( *Views/Home/Components/PriorityList/Default.cshtml* ):</span></span>
+<span data-ttu-id="77497-257">Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Invoke` ( *Görünümler/Home/Components/Prioritylist/default. cshtml* ):</span><span class="sxs-lookup"><span data-stu-id="77497-257">The view component's Razor file lists the strings passed to the `Invoke` method ( *Views/Home/Components/PriorityList/Default.cshtml* ):</span></span>
 
 ```cshtml
 @model List<string>
@@ -307,7 +307,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker range=">= aspnetcore-1.1"
 
-<span data-ttu-id="77497-258">Görünüm bileşeni, :::no-loc(Razor)::: aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır:</span><span class="sxs-lookup"><span data-stu-id="77497-258">The view component is invoked in a :::no-loc(Razor)::: file (for example, *Views/Home/Index.cshtml* ) using one of the following approaches:</span></span>
+<span data-ttu-id="77497-258">Görünüm bileşeni, Razor aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır:</span><span class="sxs-lookup"><span data-stu-id="77497-258">The view component is invoked in a Razor file (for example, *Views/Home/Index.cshtml* ) using one of the following approaches:</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [<span data-ttu-id="77497-259">Etiket Yardımcısı</span><span class="sxs-lookup"><span data-stu-id="77497-259">Tag Helper</span></span>](xref:mvc/views/tag-helpers/intro)
@@ -318,7 +318,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker range="< aspnetcore-1.1"
 
-<span data-ttu-id="77497-261">Görünüm bileşeni :::no-loc(Razor)::: ile bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .</span><span class="sxs-lookup"><span data-stu-id="77497-261">The view component is invoked in a :::no-loc(Razor)::: file (for example, *Views/Home/Index.cshtml* ) with <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>.</span></span>
+<span data-ttu-id="77497-261">Görünüm bileşeni Razor ile bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .</span><span class="sxs-lookup"><span data-stu-id="77497-261">The view component is invoked in a Razor file (for example, *Views/Home/Index.cshtml* ) with <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>.</span></span>
 
 <span data-ttu-id="77497-262">Çağrı `Component.InvokeAsync` :</span><span class="sxs-lookup"><span data-stu-id="77497-262">Call `Component.InvokeAsync`:</span></span>
 
@@ -336,7 +336,7 @@ public class PriorityList : ViewComponent
 @addTagHelper *, MyWebApp
 ```
 
-<span data-ttu-id="77497-264">Biçimlendirme dosyasında bileşen etiketini görüntüle yardımcısını kullanın :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="77497-264">Use the view component Tag Helper in the :::no-loc(Razor)::: markup file:</span></span>
+<span data-ttu-id="77497-264">Biçimlendirme dosyasında bileşen etiketini görüntüle yardımcısını kullanın Razor :</span><span class="sxs-lookup"><span data-stu-id="77497-264">Use the view component Tag Helper in the Razor markup file:</span></span>
 
 ```cshtml
 <vc:priority-list max-priority="999" is-done="false">
@@ -345,7 +345,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker-end
 
-<span data-ttu-id="77497-265">Yöntemi imzası `PriorityList.Invoke` zaman uyumludur, ancak :::no-loc(Razor)::: biçimlendirme dosyasında metodunu bulur ve çağırır `Component.InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="77497-265">The method signature of `PriorityList.Invoke` is synchronous, but :::no-loc(Razor)::: finds and calls the method with `Component.InvokeAsync` in the markup file.</span></span>
+<span data-ttu-id="77497-265">Yöntemi imzası `PriorityList.Invoke` zaman uyumludur, ancak Razor biçimlendirme dosyasında metodunu bulur ve çağırır `Component.InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="77497-265">The method signature of `PriorityList.Invoke` is synchronous, but Razor finds and calls the method with `Component.InvokeAsync` in the markup file.</span></span>
 
 ## <a name="all-view-component-parameters-are-required"></a><span data-ttu-id="77497-266">Tüm görünüm bileşeni parametreleri gereklidir</span><span class="sxs-lookup"><span data-stu-id="77497-266">All view component parameters are required</span></span>
 

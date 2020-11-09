@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/aspnetcore
 ms.openlocfilehash: b120aa4ab6922445f2c53f3b1cb3bd5c159d8a84
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -94,9 +94,9 @@ ms.locfileid: "93057836"
 
 <span data-ttu-id="e4b38-133">GRPC için kullanılan Kestrel uç noktaları TLS ile güvenli hale gelmelidir.</span><span class="sxs-lookup"><span data-stu-id="e4b38-133">Kestrel endpoints used for gRPC should be secured with TLS.</span></span> <span data-ttu-id="e4b38-134">Geliştirme aşamasında, `https://localhost:5001` ASP.NET Core geliştirme sertifikası mevcut olduğunda, TLS ile güvenli bir uç nokta otomatik olarak oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="e4b38-134">In development, an endpoint secured with TLS is automatically created at `https://localhost:5001` when the ASP.NET Core development certificate is present.</span></span> <span data-ttu-id="e4b38-135">Yapılandırma gerekmez.</span><span class="sxs-lookup"><span data-stu-id="e4b38-135">No configuration is required.</span></span> <span data-ttu-id="e4b38-136">`https`Ön ek, Kestrel uç NOKTASıNıN TLS kullandığını doğrular.</span><span class="sxs-lookup"><span data-stu-id="e4b38-136">An `https` prefix verifies the Kestrel endpoint is using TLS.</span></span>
 
-<span data-ttu-id="e4b38-137">Üretimde, TLS açıkça yapılandırılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="e4b38-137">In production, TLS must be explicitly configured.</span></span> <span data-ttu-id="e4b38-138">Aşağıdaki *:::no-loc(appsettings.json):::* örnekte, TLS ile güvenliği sağlanmış BIR http/2 uç noktası verilmiştir:</span><span class="sxs-lookup"><span data-stu-id="e4b38-138">In the following *:::no-loc(appsettings.json):::* example, an HTTP/2 endpoint secured with TLS is provided:</span></span>
+<span data-ttu-id="e4b38-137">Üretimde, TLS açıkça yapılandırılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="e4b38-137">In production, TLS must be explicitly configured.</span></span> <span data-ttu-id="e4b38-138">Aşağıdaki *appsettings.json* örnekte, TLS ile güvenliği sağlanmış BIR http/2 uç noktası verilmiştir:</span><span class="sxs-lookup"><span data-stu-id="e4b38-138">In the following *appsettings.json* example, an HTTP/2 endpoint secured with TLS is provided:</span></span>
 
-[!code-json[](~/grpc/aspnetcore/sample/:::no-loc(appsettings.json):::?highlight=4)]
+[!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
 <span data-ttu-id="e4b38-139">Alternatif olarak, Kestrel uç noktaları *program.cs* içinde yapılandırılabilir:</span><span class="sxs-lookup"><span data-stu-id="e4b38-139">Alternatively, Kestrel endpoints can be configured in *Program.cs* :</span></span>
 

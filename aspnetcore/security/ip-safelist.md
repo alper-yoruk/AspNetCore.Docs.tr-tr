@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/ip-safelist
 ms.openlocfilehash: dfc134b97bb0976bc682a53d536cd27785550c7d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,7 +34,7 @@ ms.locfileid: "93059669"
 
 * <span data-ttu-id="f5a3b-108">Her isteğin uzak IP adresini denetlemek için ara yazılım.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-108">Middleware to check the remote IP address of every request.</span></span>
 * <span data-ttu-id="f5a3b-109">MVC eylemi belirli denetleyiciler veya eylem yöntemlerine yönelik isteklerin uzak IP adresini denetlemek için filtreler.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-109">MVC action filters to check the remote IP address of requests for specific controllers or action methods.</span></span>
-* <span data-ttu-id="f5a3b-110">:::no-loc(Razor)::: Sayfa isteklerinin uzak IP adresini denetlemek için sayfalar filtreler :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="f5a3b-110">:::no-loc(Razor)::: Pages filters to check the remote IP address of requests for :::no-loc(Razor)::: pages.</span></span>
+* <span data-ttu-id="f5a3b-110">Razor Sayfa isteklerinin uzak IP adresini denetlemek için sayfalar filtreler Razor .</span><span class="sxs-lookup"><span data-stu-id="f5a3b-110">Razor Pages filters to check the remote IP address of requests for Razor pages.</span></span>
 
 <span data-ttu-id="f5a3b-111">Her durumda, onaylanan istemci IP adreslerini içeren bir dize bir uygulama ayarında saklanır.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-111">In each case, a string containing approved client IP addresses is stored in an app setting.</span></span> <span data-ttu-id="f5a3b-112">Ara yazılım veya filtre:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-112">The middleware or filter:</span></span>
 
@@ -49,10 +49,10 @@ ms.locfileid: "93059669"
 
 <span data-ttu-id="f5a3b-119">Örnek uygulamada, IP adresi SafeList şu şekilde olur:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-119">In the sample app, the IP address safelist is:</span></span>
 
-* <span data-ttu-id="f5a3b-120">`AdminSafeList`Dosyadaki özelliği tarafından tanımlanır *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="f5a3b-120">Defined by the `AdminSafeList` property in the *:::no-loc(appsettings.json):::* file.</span></span>
+* <span data-ttu-id="f5a3b-120">`AdminSafeList`Dosyadaki özelliği tarafından tanımlanır *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="f5a3b-120">Defined by the `AdminSafeList` property in the *appsettings.json* file.</span></span>
 * <span data-ttu-id="f5a3b-121">Hem [Internet Protokolü sürüm 4 (IPv4)](https://wikipedia.org/wiki/IPv4) hem de [İnternet Protokolü sürüm 6 (IPv6)](https://wikipedia.org/wiki/IPv6) adresleri içerebilen, noktalı virgülle ayrılmış bir dize.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-121">A semicolon-delimited string that may contain both [Internet Protocol version 4 (IPv4)](https://wikipedia.org/wiki/IPv4) and [Internet Protocol version 6 (IPv6)](https://wikipedia.org/wiki/IPv6) addresses.</span></span>
 
-[!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/:::no-loc(appsettings.json):::?range=1-3&highlight=2)]
+[!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
 <span data-ttu-id="f5a3b-122">Yukarıdaki örnekte, ve ' nin IPv4 adreslerine ve `127.0.0.1` `192.168.1.5` IPv6 Geridöngü adresine `::1` (için sıkıştırılmış biçim `0:0:0:0:0:0:0:1` ) izin verilir.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-122">In the preceding example, the IPv4 addresses of `127.0.0.1` and `192.168.1.5` and the IPv6 loopback address of `::1` (compressed format for `0:0:0:0:0:0:0:1`) are allowed.</span></span>
 
@@ -103,13 +103,13 @@ ms.locfileid: "93059669"
 
 * <span data-ttu-id="f5a3b-140">GET dışında bir HTTP istek fiili, `AdminSafeListMiddleware` Ara yazılım ISTEMCI IP adresini doğrular.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-140">An HTTP request verb other than GET, the `AdminSafeListMiddleware` middleware validates the client IP address.</span></span>
 
-## <a name="no-locrazor-pages-filter"></a><span data-ttu-id="f5a3b-141">:::no-loc(Razor)::: Sayfa filtresi</span><span class="sxs-lookup"><span data-stu-id="f5a3b-141">:::no-loc(Razor)::: Pages filter</span></span>
+## <a name="no-locrazor-pages-filter"></a><span data-ttu-id="f5a3b-141">Razor Sayfa filtresi</span><span class="sxs-lookup"><span data-stu-id="f5a3b-141">Razor Pages filter</span></span>
 
-<span data-ttu-id="f5a3b-142">Bir sayfalar uygulaması için güvenli liste temelli erişim denetimi istiyorsanız :::no-loc(Razor)::: , bir :::no-loc(Razor)::: sayfa filtresi kullanın.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-142">If you want safelist-driven access control for a :::no-loc(Razor)::: Pages app, use a :::no-loc(Razor)::: Pages filter.</span></span> <span data-ttu-id="f5a3b-143">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-143">For example:</span></span>
+<span data-ttu-id="f5a3b-142">Bir sayfalar uygulaması için güvenli liste temelli erişim denetimi istiyorsanız Razor , bir Razor sayfa filtresi kullanın.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-142">If you want safelist-driven access control for a Razor Pages app, use a Razor Pages filter.</span></span> <span data-ttu-id="f5a3b-143">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-143">For example:</span></span>
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
-<span data-ttu-id="f5a3b-144">İçinde `Startup.ConfigureServices` , :::no-loc(Razor)::: MVC filtreleri koleksiyonuna ekleyerek sayfa filtresini etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-144">In `Startup.ConfigureServices`, enable the :::no-loc(Razor)::: Pages filter by adding it to the MVC filters collection.</span></span> <span data-ttu-id="f5a3b-145">Aşağıdaki örnekte, bir `ClientIpCheckPageFilter` :::no-loc(Razor)::: sayfa filtresi eklenir.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-145">In the following example, a `ClientIpCheckPageFilter` :::no-loc(Razor)::: Pages filter is added.</span></span> <span data-ttu-id="f5a3b-146">Bir SafeList ve konsol günlükçü örneği, Oluşturucu parametreleri olarak geçirilir.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-146">A safelist and a console logger instance are passed as constructor parameters.</span></span>
+<span data-ttu-id="f5a3b-144">İçinde `Startup.ConfigureServices` , Razor MVC filtreleri koleksiyonuna ekleyerek sayfa filtresini etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-144">In `Startup.ConfigureServices`, enable the Razor Pages filter by adding it to the MVC filters collection.</span></span> <span data-ttu-id="f5a3b-145">Aşağıdaki örnekte, bir `ClientIpCheckPageFilter` Razor sayfa filtresi eklenir.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-145">In the following example, a `ClientIpCheckPageFilter` Razor Pages filter is added.</span></span> <span data-ttu-id="f5a3b-146">Bir SafeList ve konsol günlükçü örneği, Oluşturucu parametreleri olarak geçirilir.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-146">A safelist and a console logger instance are passed as constructor parameters.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -123,7 +123,7 @@ ms.locfileid: "93059669"
 
 ::: moniker-end
 
-<span data-ttu-id="f5a3b-147">Örnek uygulamanın *Dizin* :::no-loc(Razor)::: sayfası istendiğinde, :::no-loc(Razor)::: sayfa filtresi istemci IP adresini doğrular.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-147">When the sample app's *Index* :::no-loc(Razor)::: page is requested, the :::no-loc(Razor)::: Pages filter validates the client IP address.</span></span> <span data-ttu-id="f5a3b-148">Filtre, aşağıdaki konsol çıkışının bir çeşidini üretir:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-148">The filter produces a variation of the following console output:</span></span>
+<span data-ttu-id="f5a3b-147">Örnek uygulamanın *Dizin* Razor sayfası istendiğinde, Razor sayfa filtresi istemci IP adresini doğrular.</span><span class="sxs-lookup"><span data-stu-id="f5a3b-147">When the sample app's *Index* Razor page is requested, the Razor Pages filter validates the client IP address.</span></span> <span data-ttu-id="f5a3b-148">Filtre, aşağıdaki konsol çıkışının bir çeşidini üretir:</span><span class="sxs-lookup"><span data-stu-id="f5a3b-148">The filter produces a variation of the following console output:</span></span>
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]

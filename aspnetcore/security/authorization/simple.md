@@ -5,17 +5,17 @@ description: ASP.NET Core denetleyicilerine ve eylemlerine erişimi kısıtlamak
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/simple
 ms.openlocfilehash: ae8fb47e58924d559f1c2c4ed7c9545c37141209
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,7 +28,7 @@ ms.locfileid: "93061346"
 
 <a name="security-authorization-simple"></a>
 
-<span data-ttu-id="5f01e-104">ASP.NET Core yetkilendirme, <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ve çeşitli parametreleriyle denetlenir.</span><span class="sxs-lookup"><span data-stu-id="5f01e-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="5f01e-105">En basit biçiminde, `[Authorize]` özniteliği bir denetleyiciye, eyleme veya :::no-loc(Razor)::: sayfaya uygulayarak, bu bileşene erişimi kimliği doğrulanmış herhangi bir kullanıcıyla sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="5f01e-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or :::no-loc(Razor)::: Page, limits access to that component to any authenticated user.</span></span>
+<span data-ttu-id="5f01e-104">ASP.NET Core yetkilendirme, <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ve çeşitli parametreleriyle denetlenir.</span><span class="sxs-lookup"><span data-stu-id="5f01e-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="5f01e-105">En basit biçiminde, `[Authorize]` özniteliği bir denetleyiciye, eyleme veya Razor sayfaya uygulayarak, bu bileşene erişimi kimliği doğrulanmış herhangi bir kullanıcıyla sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="5f01e-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to any authenticated user.</span></span>
 
 <span data-ttu-id="5f01e-106">Örneğin, aşağıdaki kod `AccountController` kimliği doğrulanmış herhangi bir kullanıcıya erişimi kısıtlar.</span><span class="sxs-lookup"><span data-stu-id="5f01e-106">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
 
@@ -90,11 +90,11 @@ public class AccountController : Controller
 
 <a name="aarp"></a>
 
-## <a name="authorize-attribute-and-no-locrazor-pages"></a><span data-ttu-id="5f01e-115">Özniteliği ve :::no-loc(Razor)::: sayfaları yetkilendir</span><span class="sxs-lookup"><span data-stu-id="5f01e-115">Authorize attribute and :::no-loc(Razor)::: Pages</span></span>
+## <a name="authorize-attribute-and-no-locrazor-pages"></a><span data-ttu-id="5f01e-115">Özniteliği ve Razor sayfaları yetkilendir</span><span class="sxs-lookup"><span data-stu-id="5f01e-115">Authorize attribute and Razor Pages</span></span>
 
-<span data-ttu-id="5f01e-116"><xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Sayfa işleyicilerine \* **Not** \ ' a uygulanamaz :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="5f01e-116">The <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> can \* **not** _ be applied to :::no-loc(Razor)::: Page handlers.</span></span> <span data-ttu-id="5f01e-117">Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz.</span><span class="sxs-lookup"><span data-stu-id="5f01e-117">For example, `[Authorize]` can't be applied to `OnGet`, `OnPost`, or any other page handler.</span></span> <span data-ttu-id="5f01e-118">Farklı işleyiciler için farklı yetkilendirme gereksinimlerine sahip sayfalar için ASP.NET Core MVC denetleyicisi kullanmayı göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="5f01e-118">Consider using an ASP.NET Core MVC controller for pages with different authorization requirements for different handlers.</span></span>
+<span data-ttu-id="5f01e-116"><xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Sayfa işleyicilerine \* **Not** \ ' a uygulanamaz Razor .</span><span class="sxs-lookup"><span data-stu-id="5f01e-116">The <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> can \* **not** _ be applied to Razor Page handlers.</span></span> <span data-ttu-id="5f01e-117">Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz.</span><span class="sxs-lookup"><span data-stu-id="5f01e-117">For example, `[Authorize]` can't be applied to `OnGet`, `OnPost`, or any other page handler.</span></span> <span data-ttu-id="5f01e-118">Farklı işleyiciler için farklı yetkilendirme gereksinimlerine sahip sayfalar için ASP.NET Core MVC denetleyicisi kullanmayı göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="5f01e-118">Consider using an ASP.NET Core MVC controller for pages with different authorization requirements for different handlers.</span></span>
 
-<span data-ttu-id="5f01e-119">Aşağıdaki iki yaklaşım, sayfa işleyici yöntemlerine yetkilendirme uygulamak için kullanılabilir :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="5f01e-119">The following two approaches can be used to apply authorization to :::no-loc(Razor)::: Page handler methods:</span></span>
+<span data-ttu-id="5f01e-119">Aşağıdaki iki yaklaşım, sayfa işleyici yöntemlerine yetkilendirme uygulamak için kullanılabilir Razor :</span><span class="sxs-lookup"><span data-stu-id="5f01e-119">The following two approaches can be used to apply authorization to Razor Page handler methods:</span></span>
 
 <span data-ttu-id="5f01e-120">_ Farklı yetkilendirme gerektiren sayfa işleyicileri için ayrı sayfalar kullanın.</span><span class="sxs-lookup"><span data-stu-id="5f01e-120">_ Use separate pages for page handlers requiring different authorization.</span></span> <span data-ttu-id="5f01e-121">Paylaşılan içeriği bir veya daha fazla [kısmi görünüme](xref:mvc/views/partial)taşıdı.</span><span class="sxs-lookup"><span data-stu-id="5f01e-121">Moved shared content into one or more [partial views](xref:mvc/views/partial).</span></span> <span data-ttu-id="5f01e-122">Mümkün olduğunda önerilen yaklaşım budur.</span><span class="sxs-lookup"><span data-stu-id="5f01e-122">When possible, this is the recommended approach.</span></span>
 * <span data-ttu-id="5f01e-123">Ortak bir sayfa paylaşması gereken içerikler için, [ıasyncpagefilter. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)öğesinin bir parçası olarak yetkilendirme gerçekleştiren bir filtre yazın.</span><span class="sxs-lookup"><span data-stu-id="5f01e-123">For content that must share a common page, write a filter that performs authorization as part of [IAsyncPageFilter.OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A).</span></span> <span data-ttu-id="5f01e-124">[Pagehandlerauth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub projesinde bu yaklaşım gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="5f01e-124">The [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub project demonstrates this approach:</span></span>
@@ -106,4 +106,4 @@ public class AccountController : Controller
 > <span data-ttu-id="5f01e-127">[Pagehandlerauth](https://github.com/pranavkm/PageHandlerAuth) örnek yaklaşımı, sayfa, sayfa modeli veya küresel olarak bir yetkilendirme özniteliği uygulanmış \* **değil** _: _ Compose.</span><span class="sxs-lookup"><span data-stu-id="5f01e-127">The [PageHandlerAuth](https://github.com/pranavkm/PageHandlerAuth) sample approach does \* **not** _: _ Compose with authorization attributes applied to the page, page model, or globally.</span></span> <span data-ttu-id="5f01e-128">Bir sayfada daha fazla veya örnek varsa, yetkilendirme özniteliklerinin oluşturulması, kimlik doğrulama ve yetkilendirme ile birden çok kez yürütülen sonuçlara neden olur `AuthorizeAttribute` `AuthorizeFilter` .</span><span class="sxs-lookup"><span data-stu-id="5f01e-128">Composing authorization attributes results in authentication and authorization executing multiple times when you have one more `AuthorizeAttribute` or `AuthorizeFilter` instances also applied to the page.</span></span>
 > * <span data-ttu-id="5f01e-129">ASP.NET Core kimlik doğrulaması ve yetkilendirme sisteminin geri kalanı ile birlikte çalışın.</span><span class="sxs-lookup"><span data-stu-id="5f01e-129">Work in conjunction with the rest of ASP.NET Core authentication and authorization system.</span></span> <span data-ttu-id="5f01e-130">Uygulamanız için bu yaklaşımı kullanarak doğru şekilde çalıştığını doğrulamanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="5f01e-130">You must verify using this approach works correctly for your application.</span></span>
 
-<span data-ttu-id="5f01e-131">`AuthorizeAttribute`On sayfa işleyicilerini desteklemeye yönelik bir plan yoktur :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="5f01e-131">There are no plans to support the `AuthorizeAttribute` on :::no-loc(Razor)::: Page handlers.</span></span> 
+<span data-ttu-id="5f01e-131">`AuthorizeAttribute`On sayfa işleyicilerini desteklemeye yönelik bir plan yoktur Razor .</span><span class="sxs-lookup"><span data-stu-id="5f01e-131">There are no plans to support the `AuthorizeAttribute` on Razor Page handlers.</span></span> 

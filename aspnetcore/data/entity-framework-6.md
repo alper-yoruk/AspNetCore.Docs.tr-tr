@@ -6,15 +6,15 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/entity-framework-6
 ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -107,7 +107,7 @@ ms.locfileid: "93059461"
 
 * <span data-ttu-id="0ff77-154">Çekirdek projede, *Startup.cs* IÇINDE, dı için bağlamını kaydedin.</span><span class="sxs-lookup"><span data-stu-id="0ff77-154">In the Core project, in *Startup.cs* , register the context for DI.</span></span>    
 
-* <span data-ttu-id="0ff77-155">Temel projede, içinde *:::no-loc(appsettings.json):::* bağlantı dizesini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="0ff77-155">In the Core project, in *:::no-loc(appsettings.json):::* , add the connection string.</span></span>  
+* <span data-ttu-id="0ff77-155">Temel projede, içinde *appsettings.json* bağlantı dizesini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="0ff77-155">In the Core project, in *appsettings.json* , add the connection string.</span></span>  
 
 * <span data-ttu-id="0ff77-156">Temel projede, verileri okuyabildiğinizi ve yazabildiğinizi doğrulamak için bir denetleyici ve görünüm ekleyin.</span><span class="sxs-lookup"><span data-stu-id="0ff77-156">In the Core project, add a controller and view(s) to verify that you can read and write data.</span></span> <span data-ttu-id="0ff77-157">(ASP.NET Core MVC yapı iskelesi, sınıf kitaplığından başvurulan EF6 bağlamıyla çalışmaz.)</span><span class="sxs-lookup"><span data-stu-id="0ff77-157">(Note that ASP.NET Core MVC scaffolding won't work with the EF6 context referenced from the class library.)</span></span>
 

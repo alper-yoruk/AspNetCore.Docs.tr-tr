@@ -1,22 +1,22 @@
 ---
-title: 'Bölüm 3, :::no-loc(Razor)::: ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar'
+title: 'Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar'
 author: rick-anderson
-description: :::no-loc(Razor):::Sayfaların 3. bölümü ve Entity Framework öğretici serisi.
+description: RazorSayfaların 3. bölümü ve Entity Framework öğretici serisi.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/sort-filter-page
 ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061047"
 ---
-# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a><span data-ttu-id="49a0b-103">Bölüm 3, :::no-loc(Razor)::: ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar</span><span class="sxs-lookup"><span data-stu-id="49a0b-103">Part 3, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Sort, Filter, Paging</span></span>
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a><span data-ttu-id="49a0b-103">Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar</span><span class="sxs-lookup"><span data-stu-id="49a0b-103">Part 3, Razor Pages with EF Core in ASP.NET Core - Sort, Filter, Paging</span></span>
 
 <span data-ttu-id="49a0b-104">By [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Jon P Smith](https://twitter.com/thereformedprog)</span><span class="sxs-lookup"><span data-stu-id="49a0b-104">By [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT), and [Jon P Smith](https://twitter.com/thereformedprog)</span></span>
 
@@ -58,7 +58,7 @@ ms.locfileid: "93061047"
 
 <span data-ttu-id="49a0b-122">**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur.</span><span class="sxs-lookup"><span data-stu-id="49a0b-122">When the Index page is requested from the **Students** link, there's no query string.</span></span> <span data-ttu-id="49a0b-123">Öğrenciler, son ada göre artan sırada görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-123">The students are displayed in ascending order by last name.</span></span> <span data-ttu-id="49a0b-124">Son ada göre artan sıralama, `default` `switch` deyimdir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-124">Ascending order by last name is the `default` in the `switch` statement.</span></span> <span data-ttu-id="49a0b-125">Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.</span><span class="sxs-lookup"><span data-stu-id="49a0b-125">When the user clicks a column heading link, the appropriate `sortOrder` value is provided in the query string value.</span></span>
 
-<span data-ttu-id="49a0b-126">`NameSort` ve `DateSort` :::no-loc(Razor)::: sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-126">`NameSort` and `DateSort` are used by the :::no-loc(Razor)::: Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
+<span data-ttu-id="49a0b-126">`NameSort` ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-126">`NameSort` and `DateSort` are used by the Razor Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -105,7 +105,7 @@ ms.locfileid: "93061047"
 
 <span data-ttu-id="49a0b-167">Öğrenciler dizin sayfasına filtre eklemek için:</span><span class="sxs-lookup"><span data-stu-id="49a0b-167">To add filtering to the Students Index page:</span></span>
 
-* <span data-ttu-id="49a0b-168">Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="49a0b-168">A text box and a submit button is added to the :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="49a0b-169">Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-169">The text box supplies a search string on the first or last name.</span></span>
+* <span data-ttu-id="49a0b-168">Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir Razor .</span><span class="sxs-lookup"><span data-stu-id="49a0b-168">A text box and a submit button is added to the Razor Page.</span></span> <span data-ttu-id="49a0b-169">Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-169">The text box supplies a search string on the first or last name.</span></span>
 * <span data-ttu-id="49a0b-170">Sayfa modeli metin kutusu değerini kullanacak şekilde güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-170">The page model is updated to use the text box value.</span></span>
 
 ### <a name="update-the-ongetasync-method"></a><span data-ttu-id="49a0b-171">OnGetAsync yöntemini güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="49a0b-171">Update the OnGetAsync method</span></span>
@@ -139,7 +139,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 <span data-ttu-id="49a0b-199">Daha fazla bilgi için bkz. [SQLite sağlayıcı ile büyük/küçük harfe duyarsız sorgu kullanma](https://github.com/aspnet/EntityFrameworkCore/issues/11414).</span><span class="sxs-lookup"><span data-stu-id="49a0b-199">For more information, see [How to use case-insensitive query with Sqlite provider](https://github.com/aspnet/EntityFrameworkCore/issues/11414).</span></span>
 
-### <a name="update-the-no-locrazor-page"></a><span data-ttu-id="49a0b-200">Sayfayı Güncelleştir :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="49a0b-200">Update the :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-no-locrazor-page"></a><span data-ttu-id="49a0b-200">Sayfayı Güncelleştir Razor</span><span class="sxs-lookup"><span data-stu-id="49a0b-200">Update the Razor page</span></span>
 
 <span data-ttu-id="49a0b-201">*Sayfalar/öğrenciler/Index. cshtml* içindeki kodu, bir **arama** düğmesi eklemek için değiştirin.</span><span class="sxs-lookup"><span data-stu-id="49a0b-201">Replace the code in *Pages/Students/Index.cshtml* to add a **Search** button.</span></span>
 
@@ -201,9 +201,9 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="49a0b-243">Bir sayfalama bağlantısına tıklandığında, sayfa dizin değişkeni görüntülenecek sayfa numarasını içerir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-243">When a paging link is clicked, the page index variable contains the page number to display.</span></span>
 
-<span data-ttu-id="49a0b-244">`CurrentSort`Özelliği, sayfa için :::no-loc(Razor)::: geçerli sıralama düzenini sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-244">The `CurrentSort` property provides the :::no-loc(Razor)::: Page with the current sort order.</span></span> <span data-ttu-id="49a0b-245">Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-245">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
+<span data-ttu-id="49a0b-244">`CurrentSort`Özelliği, sayfa için Razor geçerli sıralama düzenini sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-244">The `CurrentSort` property provides the Razor Page with the current sort order.</span></span> <span data-ttu-id="49a0b-245">Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-245">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
 
-<span data-ttu-id="49a0b-246">`CurrentFilter`Özelliği, :::no-loc(Razor)::: sayfayı geçerli filtre dizesiyle birlikte sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-246">The `CurrentFilter` property provides the :::no-loc(Razor)::: Page with the current filter string.</span></span> <span data-ttu-id="49a0b-247">`CurrentFilter`Değer:</span><span class="sxs-lookup"><span data-stu-id="49a0b-247">The `CurrentFilter` value:</span></span>
+<span data-ttu-id="49a0b-246">`CurrentFilter`Özelliği, Razor sayfayı geçerli filtre dizesiyle birlikte sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-246">The `CurrentFilter` property provides the Razor Page with the current filter string.</span></span> <span data-ttu-id="49a0b-247">`CurrentFilter`Değer:</span><span class="sxs-lookup"><span data-stu-id="49a0b-247">The `CurrentFilter` value:</span></span>
 
 * <span data-ttu-id="49a0b-248">Disk belleği sırasında filtre ayarlarını korumak için disk belleği bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-248">Must be included in the paging links in order to maintain the filter settings during paging.</span></span>
 * <span data-ttu-id="49a0b-249">Sayfa yeniden görüntülendiğinde metin kutusuna geri yüklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-249">Must be restored to the text box when the page is redisplayed.</span></span>
@@ -213,11 +213,11 @@ https://localhost:5001/Students?SearchString=an
   * <span data-ttu-id="49a0b-253">Arama dizesi değiştirildi.</span><span class="sxs-lookup"><span data-stu-id="49a0b-253">The search string is changed.</span></span>
   * <span data-ttu-id="49a0b-254">`searchString`Parametre null değil.</span><span class="sxs-lookup"><span data-stu-id="49a0b-254">The `searchString` parameter isn't null.</span></span>
 
-  <span data-ttu-id="49a0b-255">`PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür.</span><span class="sxs-lookup"><span data-stu-id="49a0b-255">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="49a0b-256">Bu tek öğrenci sayfası :::no-loc(Razor)::: sayfaya geçirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-256">That single page of students is passed to the :::no-loc(Razor)::: Page.</span></span>
+  <span data-ttu-id="49a0b-255">`PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür.</span><span class="sxs-lookup"><span data-stu-id="49a0b-255">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="49a0b-256">Bu tek öğrenci sayfası Razor sayfaya geçirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-256">That single page of students is passed to the Razor Page.</span></span>
 
   <span data-ttu-id="49a0b-257">Çağrıdan sonraki iki soru işareti, `pageIndex` `PaginatedList.CreateAsync` [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder.</span><span class="sxs-lookup"><span data-stu-id="49a0b-257">The two question marks after `pageIndex` in the `PaginatedList.CreateAsync` call represent the [null-coalescing operator](/dotnet/csharp/language-reference/operators/null-conditional-operator).</span></span> <span data-ttu-id="49a0b-258">Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-258">The null-coalescing operator defines a default value for a nullable type.</span></span> <span data-ttu-id="49a0b-259">İfadesi değeri `pageIndex ?? 1` varsa değeri döndürür `pageIndex` , aksi takdirde 1 döndürür.</span><span class="sxs-lookup"><span data-stu-id="49a0b-259">The expression `pageIndex ?? 1` returns the value of `pageIndex` if it has a value, otherwise, it returns 1.</span></span>
 
-### <a name="add-paging-links-to-the-no-locrazor-page"></a><span data-ttu-id="49a0b-260">Sayfaya sayfalama bağlantıları ekleyin :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="49a0b-260">Add paging links to the :::no-loc(Razor)::: Page</span></span>
+### <a name="add-paging-links-to-the-no-locrazor-page"></a><span data-ttu-id="49a0b-260">Sayfaya sayfalama bağlantıları ekleyin Razor</span><span class="sxs-lookup"><span data-stu-id="49a0b-260">Add paging links to the Razor Page</span></span>
 
 <span data-ttu-id="49a0b-261">*Öğrenciler/Index. cshtml* içindeki kodu aşağıdaki kodla değiştirin.</span><span class="sxs-lookup"><span data-stu-id="49a0b-261">Replace the code in *Students/Index.cshtml* with the following code.</span></span> <span data-ttu-id="49a0b-262">Değişiklikler vurgulanır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-262">The changes are highlighted:</span></span>
 
@@ -253,7 +253,7 @@ https://localhost:5001/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-no-locrazor-page"></a><span data-ttu-id="49a0b-277">Sayfayı oluşturun :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="49a0b-277">Create the :::no-loc(Razor)::: Page</span></span>
+### <a name="create-the-no-locrazor-page"></a><span data-ttu-id="49a0b-277">Sayfayı oluşturun Razor</span><span class="sxs-lookup"><span data-stu-id="49a0b-277">Create the Razor Page</span></span>
 
 <span data-ttu-id="49a0b-278">Aşağıdaki kodla bir *Pages/about. cshtml* dosyası oluşturun:</span><span class="sxs-lookup"><span data-stu-id="49a0b-278">Create a *Pages/About.cshtml* file with the following code:</span></span>
 
@@ -310,7 +310,7 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="49a0b-302">**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur.</span><span class="sxs-lookup"><span data-stu-id="49a0b-302">When the Index page is requested from the **Students** link, there's no query string.</span></span> <span data-ttu-id="49a0b-303">Öğrenciler, son ada göre artan sırada görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-303">The students are displayed in ascending order by last name.</span></span> <span data-ttu-id="49a0b-304">Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` .</span><span class="sxs-lookup"><span data-stu-id="49a0b-304">Ascending order by last name is the default (fall-through case) in the `switch` statement.</span></span> <span data-ttu-id="49a0b-305">Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.</span><span class="sxs-lookup"><span data-stu-id="49a0b-305">When the user clicks a column heading link, the appropriate `sortOrder` value is provided in the query string value.</span></span>
 
-<span data-ttu-id="49a0b-306">`NameSort` ve `DateSort` :::no-loc(Razor)::: sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-306">`NameSort` and `DateSort` are used by the :::no-loc(Razor)::: Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
+<span data-ttu-id="49a0b-306">`NameSort` ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-306">`NameSort` and `DateSort` are used by the Razor Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -370,7 +370,7 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="49a0b-349">Öğrenciler dizin sayfasına filtre eklemek için:</span><span class="sxs-lookup"><span data-stu-id="49a0b-349">To add filtering to the Students Index page:</span></span>
 
-* <span data-ttu-id="49a0b-350">Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="49a0b-350">A text box and a submit button is added to the :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="49a0b-351">Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-351">The text box supplies a search string on the first or last name.</span></span>
+* <span data-ttu-id="49a0b-350">Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir Razor .</span><span class="sxs-lookup"><span data-stu-id="49a0b-350">A text box and a submit button is added to the Razor Page.</span></span> <span data-ttu-id="49a0b-351">Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-351">The text box supplies a search string on the first or last name.</span></span>
 * <span data-ttu-id="49a0b-352">Sayfa modeli metin kutusu değerini kullanacak şekilde güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-352">The page model is updated to use the text box value.</span></span>
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a><span data-ttu-id="49a0b-353">Dizin yöntemine filtreleme işlevi ekleme</span><span class="sxs-lookup"><span data-stu-id="49a0b-353">Add filtering functionality to the Index method</span></span>
@@ -455,9 +455,9 @@ http://localhost:5000/Students?SearchString=an
 
 <span data-ttu-id="49a0b-413">Bir sayfalama bağlantısına tıklandığında, sayfa dizin değişkeni görüntülenecek sayfa numarasını içerir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-413">When a paging link is clicked, the page index variable contains the page number to display.</span></span>
 
-<span data-ttu-id="49a0b-414">`CurrentSort`:::no-loc(Razor):::geçerli sıralama düzeninde sayfa sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-414">`CurrentSort` provides the :::no-loc(Razor)::: Page with the current sort order.</span></span> <span data-ttu-id="49a0b-415">Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-415">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
+<span data-ttu-id="49a0b-414">`CurrentSort`Razorgeçerli sıralama düzeninde sayfa sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-414">`CurrentSort` provides the Razor Page with the current sort order.</span></span> <span data-ttu-id="49a0b-415">Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-415">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
 
-<span data-ttu-id="49a0b-416">`CurrentFilter`:::no-loc(Razor):::geçerli Filtre dizesinin bulunduğu sayfayı sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-416">`CurrentFilter` provides the :::no-loc(Razor)::: Page with the current filter string.</span></span> <span data-ttu-id="49a0b-417">`CurrentFilter`Değer:</span><span class="sxs-lookup"><span data-stu-id="49a0b-417">The `CurrentFilter` value:</span></span>
+<span data-ttu-id="49a0b-416">`CurrentFilter`Razorgeçerli Filtre dizesinin bulunduğu sayfayı sağlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-416">`CurrentFilter` provides the Razor Page with the current filter string.</span></span> <span data-ttu-id="49a0b-417">`CurrentFilter`Değer:</span><span class="sxs-lookup"><span data-stu-id="49a0b-417">The `CurrentFilter` value:</span></span>
 
 * <span data-ttu-id="49a0b-418">Disk belleği sırasında filtre ayarlarını korumak için disk belleği bağlantılarına eklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-418">Must be included in the paging links in order to maintain the filter settings during paging.</span></span>
 * <span data-ttu-id="49a0b-419">Sayfa yeniden görüntülendiğinde metin kutusuna geri yüklenmelidir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-419">Must be restored to the text box when the page is redisplayed.</span></span>
@@ -469,13 +469,13 @@ http://localhost:5000/Students?SearchString=an
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage3)]
 
-<span data-ttu-id="49a0b-425">`PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür.</span><span class="sxs-lookup"><span data-stu-id="49a0b-425">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="49a0b-426">Bu tek öğrenci sayfası :::no-loc(Razor)::: sayfaya geçirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-426">That single page of students is passed to the :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="49a0b-425">`PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür.</span><span class="sxs-lookup"><span data-stu-id="49a0b-425">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="49a0b-426">Bu tek öğrenci sayfası Razor sayfaya geçirilir.</span><span class="sxs-lookup"><span data-stu-id="49a0b-426">That single page of students is passed to the Razor Page.</span></span>
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage4)]
 
 <span data-ttu-id="49a0b-427">İçindeki iki soru işareti `PaginatedList.CreateAsync` , [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder.</span><span class="sxs-lookup"><span data-stu-id="49a0b-427">The two question marks in `PaginatedList.CreateAsync` represent the [null-coalescing operator](/dotnet/csharp/language-reference/operators/null-conditional-operator).</span></span> <span data-ttu-id="49a0b-428">Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-428">The null-coalescing operator defines a default value for a nullable type.</span></span> <span data-ttu-id="49a0b-429">İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` .</span><span class="sxs-lookup"><span data-stu-id="49a0b-429">The expression `(pageIndex ?? 1)` means return the value of `pageIndex` if it has a value.</span></span> <span data-ttu-id="49a0b-430">`pageIndex`Değer yoksa 1 döndürün.</span><span class="sxs-lookup"><span data-stu-id="49a0b-430">If `pageIndex` doesn't have a value, return 1.</span></span>
 
-## <a name="add-paging-links-to-the-student-no-locrazor-page"></a><span data-ttu-id="49a0b-431">Öğrenci sayfasına sayfalama bağlantıları ekleme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="49a0b-431">Add paging links to the student :::no-loc(Razor)::: Page</span></span>
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a><span data-ttu-id="49a0b-431">Öğrenci sayfasına sayfalama bağlantıları ekleme Razor</span><span class="sxs-lookup"><span data-stu-id="49a0b-431">Add paging links to the student Razor Page</span></span>
 
 <span data-ttu-id="49a0b-432">*Öğrenciler/Index. cshtml* 'de biçimlendirmeyi güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="49a0b-432">Update the markup in *Students/Index.cshtml* .</span></span> <span data-ttu-id="49a0b-433">Değişiklikler vurgulanır:</span><span class="sxs-lookup"><span data-stu-id="49a0b-433">The changes are highlighted:</span></span>
 
@@ -521,7 +521,7 @@ http://localhost:5000/Students?SearchString=an
 
 ### <a name="update-the-about-page-model"></a><span data-ttu-id="49a0b-453">Hakkında sayfa modelini Güncelleştir</span><span class="sxs-lookup"><span data-stu-id="49a0b-453">Update the About page model</span></span>
 
-<span data-ttu-id="49a0b-454">ASP.NET Core 2,2 ' deki Web şablonları hakkında sayfasını içermez.</span><span class="sxs-lookup"><span data-stu-id="49a0b-454">The web templates in ASP.NET Core 2.2 do not include the About page.</span></span> <span data-ttu-id="49a0b-455">ASP.NET Core 2,2 kullanıyorsanız hakkında :::no-loc(Razor)::: sayfasını oluşturun.</span><span class="sxs-lookup"><span data-stu-id="49a0b-455">If you are using ASP.NET Core 2.2, create the About :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="49a0b-454">ASP.NET Core 2,2 ' deki Web şablonları hakkında sayfasını içermez.</span><span class="sxs-lookup"><span data-stu-id="49a0b-454">The web templates in ASP.NET Core 2.2 do not include the About page.</span></span> <span data-ttu-id="49a0b-455">ASP.NET Core 2,2 kullanıyorsanız hakkında Razor sayfasını oluşturun.</span><span class="sxs-lookup"><span data-stu-id="49a0b-455">If you are using ASP.NET Core 2.2, create the About Razor Page.</span></span>
 
 <span data-ttu-id="49a0b-456">*Pages/about. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="49a0b-456">Update the *Pages/About.cshtml.cs* file with the following code:</span></span>
 
@@ -529,7 +529,7 @@ http://localhost:5000/Students?SearchString=an
 
 <span data-ttu-id="49a0b-457">LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, her bir gruptaki varlıkların sayısını hesaplar ve sonuçları bir `EnrollmentDateGroup` görünüm modeli nesneleri koleksiyonunda depolar.</span><span class="sxs-lookup"><span data-stu-id="49a0b-457">The LINQ statement groups the student entities by enrollment date, calculates the number of entities in each group, and stores the results in a collection of `EnrollmentDateGroup` view model objects.</span></span>
 
-### <a name="modify-the-about-no-locrazor-page"></a><span data-ttu-id="49a0b-458">Hakkında sayfasını değiştirme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="49a0b-458">Modify the About :::no-loc(Razor)::: Page</span></span>
+### <a name="modify-the-about-no-locrazor-page"></a><span data-ttu-id="49a0b-458">Hakkında sayfasını değiştirme Razor</span><span class="sxs-lookup"><span data-stu-id="49a0b-458">Modify the About Razor Page</span></span>
 
 <span data-ttu-id="49a0b-459">*Pages/about. cshtml* dosyasındaki kodu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="49a0b-459">Replace the code in the *Pages/About.cshtml* file with the following code:</span></span>
 

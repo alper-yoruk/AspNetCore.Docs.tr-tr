@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/social/index
 ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -69,7 +69,7 @@ ms.locfileid: "93053312"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * <span data-ttu-id="e577d-128">`dotnet new`Komut WebApp1 klasöründe yeni bir :::no-loc(Razor)::: Sayfalar projesi oluşturur. *WebApp1*</span><span class="sxs-lookup"><span data-stu-id="e577d-128">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *WebApp1* folder.</span></span>
+  * <span data-ttu-id="e577d-128">`dotnet new`Komut WebApp1 klasöründe yeni bir Razor Sayfalar projesi oluşturur. *WebApp1*</span><span class="sxs-lookup"><span data-stu-id="e577d-128">The `dotnet new` command creates a new Razor Pages project in the *WebApp1* folder.</span></span>
   * <span data-ttu-id="e577d-129">`-au Individual` Tek kimlik doğrulaması için kodu oluşturur.</span><span class="sxs-lookup"><span data-stu-id="e577d-129">`-au Individual` creates the code for Individual authentication.</span></span>
   * <span data-ttu-id="e577d-130">`-uld` Windows için SQL Server Express basit bir sürümü olan LocalDB 'yi kullanır.</span><span class="sxs-lookup"><span data-stu-id="e577d-130">`-uld` uses LocalDB, a lightweight version of SQL Server Express for Windows.</span></span> <span data-ttu-id="e577d-131">`-uld`SQLite kullanmak için atlayın.</span><span class="sxs-lookup"><span data-stu-id="e577d-131">Omit `-uld` to use SQLite.</span></span>
   * <span data-ttu-id="e577d-132">`code`Komutu, Visual Studio Code yeni bir örneğinde *WebApp1* klasörünü açar.</span><span class="sxs-lookup"><span data-stu-id="e577d-132">The `code` command opens the *WebApp1* folder in a new instance of Visual Studio Code.</span></span>
@@ -86,7 +86,7 @@ ms.locfileid: "93053312"
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a><span data-ttu-id="e577d-137">Oturum açma sağlayıcıları tarafından atanan belirteçleri depolamak için SecretManager kullanın</span><span class="sxs-lookup"><span data-stu-id="e577d-137">Use SecretManager to store tokens assigned by login providers</span></span>
 
-<span data-ttu-id="e577d-138">Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar.</span><span class="sxs-lookup"><span data-stu-id="e577d-138">Social login providers assign **Application Id** and **Application Secret** tokens during the registration process.</span></span> <span data-ttu-id="e577d-139">Tam belirteç adları sağlayıcıya göre farklılık gösterir.</span><span class="sxs-lookup"><span data-stu-id="e577d-139">The exact token names vary by provider.</span></span> <span data-ttu-id="e577d-140">Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder.</span><span class="sxs-lookup"><span data-stu-id="e577d-140">These tokens represent the credentials your app uses to access their API.</span></span> <span data-ttu-id="e577d-141">Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur.</span><span class="sxs-lookup"><span data-stu-id="e577d-141">The tokens constitute the "secrets" that can be linked to your app configuration with the help of [Secret Manager](xref:security/app-secrets#secret-manager).</span></span> <span data-ttu-id="e577d-142">Gizli dizi, belirteçleri bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="e577d-142">Secret Manager is a more secure alternative to storing the tokens in a configuration file, such as *:::no-loc(appsettings.json):::* .</span></span>
+<span data-ttu-id="e577d-138">Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar.</span><span class="sxs-lookup"><span data-stu-id="e577d-138">Social login providers assign **Application Id** and **Application Secret** tokens during the registration process.</span></span> <span data-ttu-id="e577d-139">Tam belirteç adları sağlayıcıya göre farklılık gösterir.</span><span class="sxs-lookup"><span data-stu-id="e577d-139">The exact token names vary by provider.</span></span> <span data-ttu-id="e577d-140">Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder.</span><span class="sxs-lookup"><span data-stu-id="e577d-140">These tokens represent the credentials your app uses to access their API.</span></span> <span data-ttu-id="e577d-141">Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur.</span><span class="sxs-lookup"><span data-stu-id="e577d-141">The tokens constitute the "secrets" that can be linked to your app configuration with the help of [Secret Manager](xref:security/app-secrets#secret-manager).</span></span> <span data-ttu-id="e577d-142">Gizli dizi, belirteçleri bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="e577d-142">Secret Manager is a more secure alternative to storing the tokens in a configuration file, such as *appsettings.json* .</span></span>
 
 > [!IMPORTANT]
 > <span data-ttu-id="e577d-143">Gizli yönetici yalnızca geliştirme amaçlıdır.</span><span class="sxs-lookup"><span data-stu-id="e577d-143">Secret Manager is for development purposes only.</span></span> <span data-ttu-id="e577d-144">[Azure Key Vault yapılandırma sağlayıcısıyla](xref:security/key-vault-configuration)Azure test ve üretim gizli dizilerini saklayabilir ve koruyabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="e577d-144">You can store and protect Azure test and production secrets with the [Azure Key Vault configuration provider](xref:security/key-vault-configuration).</span></span>

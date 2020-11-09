@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla :::no-loc(Blazor):::'
+title: 'ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla Blazor'
 author: guardrex
-description: :::no-loc(Blazor):::Siteler arası komut dosyası (XSS) saldırılarına karşı korumaya yardımcı olmak için ASP.NET Core uygulamalarla bir Içerik güvenlik ilkesi (CSP) kullanmayı öğrenin.
+description: BlazorSiteler arası komut dosyası (XSS) saldırılarına karşı korumaya yardımcı olmak için ASP.NET Core uygulamalarla bir Içerik güvenlik ilkesi (CSP) kullanmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/content-security-policy
 ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,7 +26,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055600"
 ---
-# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a><span data-ttu-id="658a4-103">ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="658a4-103">Enforce a Content Security Policy for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a><span data-ttu-id="658a4-103">ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla Blazor</span><span class="sxs-lookup"><span data-stu-id="658a4-103">Enforce a Content Security Policy for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="658a4-104">, [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre</span><span class="sxs-lookup"><span data-stu-id="658a4-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
@@ -40,11 +40,11 @@ ms.locfileid: "93055600"
 
 <span data-ttu-id="658a4-111">İlkeler, bir sayfa yüklenirken tarayıcı tarafından değerlendirilir.</span><span class="sxs-lookup"><span data-stu-id="658a4-111">Policies are evaluated by the browser while a page is loading.</span></span> <span data-ttu-id="658a4-112">Tarayıcı, sayfanın kaynaklarını inceler ve içerik güvenliği yönergelerinin gereksinimlerini karşılayıp karşılamadığını belirler.</span><span class="sxs-lookup"><span data-stu-id="658a4-112">The browser inspects the page's sources and determines if they meet the requirements of the content security directives.</span></span> <span data-ttu-id="658a4-113">Bir kaynak için ilke yönergeleri karşılanmazsa, tarayıcı kaynağı yüklemez.</span><span class="sxs-lookup"><span data-stu-id="658a4-113">When policy directives aren't met for a resource, the browser doesn't load the resource.</span></span> <span data-ttu-id="658a4-114">Örneğin, üçüncü taraf betiklerine izin veren bir ilkeyi göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="658a4-114">For example, consider a policy that doesn't allow third-party scripts.</span></span> <span data-ttu-id="658a4-115">Bir sayfa, `<script>` özniteliğinde üçüncü taraf kaynağına sahip bir etiket içerdiğinde `src` , tarayıcı betiğin yüklenmesini engeller.</span><span class="sxs-lookup"><span data-stu-id="658a4-115">When a page contains a `<script>` tag with a third-party origin in the `src` attribute, the browser prevents the script from loading.</span></span>
 
-<span data-ttu-id="658a4-116">CSP, Chrome, Edge, Firefox, Opera ve Safari dahil olmak üzere çoğu modern masaüstü ve mobil tarayıcılarda desteklenir.</span><span class="sxs-lookup"><span data-stu-id="658a4-116">CSP is supported in most modern desktop and mobile browsers, including Chrome, Edge, Firefox, Opera, and Safari.</span></span> <span data-ttu-id="658a4-117">CSP, uygulamalar için önerilir :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="658a4-117">CSP is recommended for :::no-loc(Blazor)::: apps.</span></span>
+<span data-ttu-id="658a4-116">CSP, Chrome, Edge, Firefox, Opera ve Safari dahil olmak üzere çoğu modern masaüstü ve mobil tarayıcılarda desteklenir.</span><span class="sxs-lookup"><span data-stu-id="658a4-116">CSP is supported in most modern desktop and mobile browsers, including Chrome, Edge, Firefox, Opera, and Safari.</span></span> <span data-ttu-id="658a4-117">CSP, uygulamalar için önerilir Blazor .</span><span class="sxs-lookup"><span data-stu-id="658a4-117">CSP is recommended for Blazor apps.</span></span>
 
 ## <a name="policy-directives"></a><span data-ttu-id="658a4-118">İlke yönergeleri</span><span class="sxs-lookup"><span data-stu-id="658a4-118">Policy directives</span></span>
 
-<span data-ttu-id="658a4-119">En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları belirtin :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="658a4-119">Minimally, specify the following directives and sources for :::no-loc(Blazor)::: apps.</span></span> <span data-ttu-id="658a4-120">Gerektiğinde ek yönergeler ve kaynaklar ekleyin.</span><span class="sxs-lookup"><span data-stu-id="658a4-120">Add additional directives and sources as needed.</span></span> <span data-ttu-id="658a4-121">Aşağıdaki yönergeler, ve için güvenlik ilkelerinin sağlandığı Bu makalenin [Ilkeyi Uygula](#apply-the-policy) bölümünde kullanılır :::no-loc(Blazor WebAssembly)::: :::no-loc(Blazor Server)::: :</span><span class="sxs-lookup"><span data-stu-id="658a4-121">The following directives are used in the [Apply the policy](#apply-the-policy) section of this article, where example security policies for :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server)::: are provided:</span></span>
+<span data-ttu-id="658a4-119">En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları belirtin Blazor .</span><span class="sxs-lookup"><span data-stu-id="658a4-119">Minimally, specify the following directives and sources for Blazor apps.</span></span> <span data-ttu-id="658a4-120">Gerektiğinde ek yönergeler ve kaynaklar ekleyin.</span><span class="sxs-lookup"><span data-stu-id="658a4-120">Add additional directives and sources as needed.</span></span> <span data-ttu-id="658a4-121">Aşağıdaki yönergeler, ve için güvenlik ilkelerinin sağlandığı Bu makalenin [Ilkeyi Uygula](#apply-the-policy) bölümünde kullanılır Blazor WebAssembly Blazor Server :</span><span class="sxs-lookup"><span data-stu-id="658a4-121">The following directives are used in the [Apply the policy](#apply-the-policy) section of this article, where example security policies for Blazor WebAssembly and Blazor Server are provided:</span></span>
 
 * <span data-ttu-id="658a4-122">[Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): bir sayfanın etiketinin URL 'lerini kısıtlar `<base>` .</span><span class="sxs-lookup"><span data-stu-id="658a4-122">[base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): Restricts the URLs for a page's `<base>` tag.</span></span> <span data-ttu-id="658a4-123">`self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-123">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
 * <span data-ttu-id="658a4-124">[Engelle-tümü-karışık-içerik](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): karışık http ve HTTPS içeriğini yüklemeyi engeller.</span><span class="sxs-lookup"><span data-stu-id="658a4-124">[block-all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): Prevents loading mixed HTTP and HTTPS content.</span></span>
@@ -56,17 +56,17 @@ ms.locfileid: "93055600"
 * <span data-ttu-id="658a4-132">[Script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): betikler için geçerli kaynakları gösterir.</span><span class="sxs-lookup"><span data-stu-id="658a4-132">[script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): Indicates valid sources for scripts.</span></span>
   * <span data-ttu-id="658a4-133">`https://stackpath.bootstrapcdn.com/`Önyükleme betikleri için konak kaynağını belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-133">Specify the `https://stackpath.bootstrapcdn.com/` host source for Bootstrap scripts.</span></span>
   * <span data-ttu-id="658a4-134">`self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-134">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
-  * <span data-ttu-id="658a4-135">Bir :::no-loc(Blazor WebAssembly)::: uygulamada:</span><span class="sxs-lookup"><span data-stu-id="658a4-135">In a :::no-loc(Blazor WebAssembly)::: app:</span></span>
-    * <span data-ttu-id="658a4-136">Gerekli satır içi betiklerin yüklenmesine izin vermek için aşağıdaki karmaları belirtin :::no-loc(Blazor WebAssembly)::: :</span><span class="sxs-lookup"><span data-stu-id="658a4-136">Specify the following hashes to permit the required :::no-loc(Blazor WebAssembly)::: inline scripts to load:</span></span>
+  * <span data-ttu-id="658a4-135">Bir Blazor WebAssembly uygulamada:</span><span class="sxs-lookup"><span data-stu-id="658a4-135">In a Blazor WebAssembly app:</span></span>
+    * <span data-ttu-id="658a4-136">Gerekli satır içi betiklerin yüklenmesine izin vermek için aşağıdaki karmaları belirtin Blazor WebAssembly :</span><span class="sxs-lookup"><span data-stu-id="658a4-136">Specify the following hashes to permit the required Blazor WebAssembly inline scripts to load:</span></span>
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * <span data-ttu-id="658a4-137">`unsafe-eval`' In kullanılacağını `eval()` ve dizelerden kod oluşturma yöntemlerini belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-137">Specify `unsafe-eval` to use `eval()` and methods for creating code from strings.</span></span>
-  * <span data-ttu-id="658a4-138">Bir :::no-loc(Blazor Server)::: uygulamada, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-138">In a :::no-loc(Blazor Server)::: app, specify the `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` hash for the inline script that performs fallback detection for stylesheets.</span></span>
+  * <span data-ttu-id="658a4-138">Bir Blazor Server uygulamada, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-138">In a Blazor Server app, specify the `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` hash for the inline script that performs fallback detection for stylesheets.</span></span>
 * <span data-ttu-id="658a4-139">[Style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): stil sayfaları için geçerli kaynakları gösterir.</span><span class="sxs-lookup"><span data-stu-id="658a4-139">[style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): Indicates valid sources for stylesheets.</span></span>
   * <span data-ttu-id="658a4-140">`https://stackpath.bootstrapcdn.com/`Önyükleme stil sayfaları için konak kaynağını belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-140">Specify the `https://stackpath.bootstrapcdn.com/` host source for Bootstrap stylesheets.</span></span>
   * <span data-ttu-id="658a4-141">`self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-141">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
-  * <span data-ttu-id="658a4-142">`unsafe-inline`Satır içi stillerin kullanılmasına izin vermek için belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-142">Specify `unsafe-inline` to allow the use of inline styles.</span></span> <span data-ttu-id="658a4-143">:::no-loc(Blazor Server):::İlk istekten sonra istemciyi ve sunucuyu yeniden bağlamaya yönelik uygulamalardaki kullanıcı arabirimi için satır içi bildirimi gerekir.</span><span class="sxs-lookup"><span data-stu-id="658a4-143">The inline declaration is required for the UI in :::no-loc(Blazor Server)::: apps for reconnecting the client and server after the initial request.</span></span> <span data-ttu-id="658a4-144">Gelecekteki bir sürümde, artık gerekli olmaması için satır içi stillendirme kaldırılmış olabilir `unsafe-inline` .</span><span class="sxs-lookup"><span data-stu-id="658a4-144">In a future release, inline styling might be removed so that `unsafe-inline` is no longer required.</span></span>
+  * <span data-ttu-id="658a4-142">`unsafe-inline`Satır içi stillerin kullanılmasına izin vermek için belirtin.</span><span class="sxs-lookup"><span data-stu-id="658a4-142">Specify `unsafe-inline` to allow the use of inline styles.</span></span> <span data-ttu-id="658a4-143">Blazor Serverİlk istekten sonra istemciyi ve sunucuyu yeniden bağlamaya yönelik uygulamalardaki kullanıcı arabirimi için satır içi bildirimi gerekir.</span><span class="sxs-lookup"><span data-stu-id="658a4-143">The inline declaration is required for the UI in Blazor Server apps for reconnecting the client and server after the initial request.</span></span> <span data-ttu-id="658a4-144">Gelecekteki bir sürümde, artık gerekli olmaması için satır içi stillendirme kaldırılmış olabilir `unsafe-inline` .</span><span class="sxs-lookup"><span data-stu-id="658a4-144">In a future release, inline styling might be removed so that `unsafe-inline` is no longer required.</span></span>
 * <span data-ttu-id="658a4-145">[yükseltme-güvenli olmayan-istekler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): güvenli olmayan (http) kaynaklardaki Içerik URL 'lerinin https üzerinden güvenli bir şekilde alınması gerektiğini gösterir.</span><span class="sxs-lookup"><span data-stu-id="658a4-145">[upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): Indicates that content URLs from insecure (HTTP) sources should be acquired securely over HTTPS.</span></span>
 
 <span data-ttu-id="658a4-146">Yukarıdaki yönergeler, Microsoft Internet Explorer hariç tüm tarayıcılar tarafından desteklenir.</span><span class="sxs-lookup"><span data-stu-id="658a4-146">The preceding directives are supported by all browsers except Microsoft Internet Explorer.</span></span>
@@ -87,9 +87,9 @@ ms.locfileid: "93055600"
 * <span data-ttu-id="658a4-157">Yönergeleri `content` öznitelik değerine yerleştirin.</span><span class="sxs-lookup"><span data-stu-id="658a4-157">Place the directives in the `content` attribute value.</span></span> <span data-ttu-id="658a4-158">Yönergeleri noktalı virgül () ile ayırın `;` .</span><span class="sxs-lookup"><span data-stu-id="658a4-158">Separate directives with a semicolon (`;`).</span></span>
 * <span data-ttu-id="658a4-159">Etiketi her zaman `meta` `<head>` içeriğe yerleştirin.</span><span class="sxs-lookup"><span data-stu-id="658a4-159">Always place the `meta` tag in the `<head>` content.</span></span>
 
-<span data-ttu-id="658a4-160">Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir :::no-loc(Blazor WebAssembly)::: :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="658a4-160">The following sections show example policies for :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server):::.</span></span> <span data-ttu-id="658a4-161">Bu örnekler, uygulamasının her sürümü için bu makalede sürümü oluşturulur :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="658a4-161">These examples are versioned with this article for each release of :::no-loc(Blazor):::.</span></span> <span data-ttu-id="658a4-162">Sürümünüze uygun bir sürümü kullanmak için bu Web sayfasında **Sürüm** açılan Seçicisi seçiciyle birlikte belge sürümü ' nü seçin.</span><span class="sxs-lookup"><span data-stu-id="658a4-162">To use a version appropriate for your release, select the document version with the **Version** drop down selector on this webpage.</span></span>
+<span data-ttu-id="658a4-160">Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir Blazor WebAssembly Blazor Server .</span><span class="sxs-lookup"><span data-stu-id="658a4-160">The following sections show example policies for Blazor WebAssembly and Blazor Server.</span></span> <span data-ttu-id="658a4-161">Bu örnekler, uygulamasının her sürümü için bu makalede sürümü oluşturulur Blazor .</span><span class="sxs-lookup"><span data-stu-id="658a4-161">These examples are versioned with this article for each release of Blazor.</span></span> <span data-ttu-id="658a4-162">Sürümünüze uygun bir sürümü kullanmak için bu Web sayfasında **Sürüm** açılan Seçicisi seçiciyle birlikte belge sürümü ' nü seçin.</span><span class="sxs-lookup"><span data-stu-id="658a4-162">To use a version appropriate for your release, select the document version with the **Version** drop down selector on this webpage.</span></span>
 
-### :::no-loc(Blazor WebAssembly):::
+### Blazor WebAssembly
 
 <span data-ttu-id="658a4-163">`<head>` `wwwroot/index.html` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:</span><span class="sxs-lookup"><span data-stu-id="658a4-163">In the `<head>` content of the `wwwroot/index.html` host page, apply the directives described in the [Policy directives](#policy-directives) section:</span></span>
 
@@ -112,7 +112,7 @@ ms.locfileid: "93055600"
                upgrade-insecure-requests;">
 ```
 
-### :::no-loc(Blazor Server):::
+### Blazor Server
 
 <span data-ttu-id="658a4-164">`<head>` `Pages/_Host.cshtml` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:</span><span class="sxs-lookup"><span data-stu-id="658a4-164">In the `<head>` content of the `Pages/_Host.cshtml` host page, apply the directives described in the [Policy directives](#policy-directives) section:</span></span>
 

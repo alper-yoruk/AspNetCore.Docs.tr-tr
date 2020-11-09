@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/diagnostics
 ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ ms.locfileid: "93060449"
 
 <span data-ttu-id="38005-119">GRPC Hizmetleri ASP.NET Core üzerinde barındırıldığından, bu, ASP.NET Core günlük sistemini kullanır.</span><span class="sxs-lookup"><span data-stu-id="38005-119">Since gRPC services are hosted on ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="38005-120">Varsayılan yapılandırmada, gRPC çok az bilgiyi günlüğe kaydeder, ancak bu yapılandırılabilir.</span><span class="sxs-lookup"><span data-stu-id="38005-120">In the default configuration, gRPC logs very little information, but this can configured.</span></span> <span data-ttu-id="38005-121">ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.</span><span class="sxs-lookup"><span data-stu-id="38005-121">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-<span data-ttu-id="38005-122">gRPC, kategori altına Günlükler ekler `Grpc` .</span><span class="sxs-lookup"><span data-stu-id="38005-122">gRPC adds logs under the `Grpc` category.</span></span> <span data-ttu-id="38005-123">GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` *:::no-loc(appsettings.json):::* aşağıdaki öğeleri içindeki alt bölümüne ekleyerek ön ekleri dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :</span><span class="sxs-lookup"><span data-stu-id="38005-123">To enable detailed logs from gRPC, configure the `Grpc` prefixes to the `Debug` level in your *:::no-loc(appsettings.json):::* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="38005-122">gRPC, kategori altına Günlükler ekler `Grpc` .</span><span class="sxs-lookup"><span data-stu-id="38005-122">gRPC adds logs under the `Grpc` category.</span></span> <span data-ttu-id="38005-123">GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` *appsettings.json* aşağıdaki öğeleri içindeki alt bölümüne ekleyerek ön ekleri dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :</span><span class="sxs-lookup"><span data-stu-id="38005-123">To enable detailed logs from gRPC, configure the `Grpc` prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 

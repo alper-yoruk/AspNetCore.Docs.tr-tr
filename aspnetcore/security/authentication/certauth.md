@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/certauth
 ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -175,7 +175,7 @@ services.AddAuthentication(
                 };
 
                 context.Principal = new ClaimsPrincipal(
-                    new Claims:::no-loc(Identity):::(claims, context.Scheme.Name));
+                    new ClaimsIdentity(claims, context.Scheme.Name));
                 context.Success();
 
                 return Task.CompletedTask;
@@ -219,7 +219,7 @@ services.AddAuthentication(
                     };
 
                     context.Principal = new ClaimsPrincipal(
-                        new Claims:::no-loc(Identity):::(claims, context.Scheme.Name));
+                        new ClaimsIdentity(claims, context.Scheme.Name));
                     context.Success();
                 }                     
 
@@ -624,7 +624,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="optional-client-certificates"></a><span data-ttu-id="7ea1b-244">İsteğe bağlı istemci sertifikaları</span><span class="sxs-lookup"><span data-stu-id="7ea1b-244">Optional client certificates</span></span>
 
-<span data-ttu-id="7ea1b-245">Bu bölüm, bir sertifika ile uygulamanın bir alt kümesini koruması gereken uygulamalar için bilgiler sağlar.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-245">This section provides information for apps that must protect a subset of the app with a certificate.</span></span> <span data-ttu-id="7ea1b-246">Örneğin, uygulamadaki bir :::no-loc(Razor)::: sayfa veya denetleyici istemci sertifikaları gerektirebilir.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-246">For example, a :::no-loc(Razor)::: Page or controller in the app might require client certificates.</span></span> <span data-ttu-id="7ea1b-247">Bu, zorlukları istemci sertifikaları olarak gösterir:</span><span class="sxs-lookup"><span data-stu-id="7ea1b-247">This presents challenges as client certificates:</span></span>
+<span data-ttu-id="7ea1b-245">Bu bölüm, bir sertifika ile uygulamanın bir alt kümesini koruması gereken uygulamalar için bilgiler sağlar.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-245">This section provides information for apps that must protect a subset of the app with a certificate.</span></span> <span data-ttu-id="7ea1b-246">Örneğin, uygulamadaki bir Razor sayfa veya denetleyici istemci sertifikaları gerektirebilir.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-246">For example, a Razor Page or controller in the app might require client certificates.</span></span> <span data-ttu-id="7ea1b-247">Bu, zorlukları istemci sertifikaları olarak gösterir:</span><span class="sxs-lookup"><span data-stu-id="7ea1b-247">This presents challenges as client certificates:</span></span>
   
 * <span data-ttu-id="7ea1b-248">, HTTP özelliği değil, bir TLS özelliğidir.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-248">Are a TLS feature, not an HTTP feature.</span></span>
 * <span data-ttu-id="7ea1b-249">, Bağlantı başına anlaşma yapılır ve herhangi bir HTTP verisi kullanılabilir olmadan önce bağlantının başlangıcında anlaşılıp verilmelidir.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-249">Are negotiated per-connection and must be be negotiated at the start of the connection before any HTTP data is available.</span></span> <span data-ttu-id="7ea1b-250">Bağlantının başlangıcında yalnızca Sunucu Adı Belirtme (SNı) &dagger; bilinirdi.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-250">At the start of the connection, only the Server Name Indication (SNI)&dagger; is known.</span></span> <span data-ttu-id="7ea1b-251">İstemci ve sunucu sertifikaları, bir bağlantı üzerindeki ilk istekten önce görüşülür ve istekler genellikle yeniden anlaşma yapamaz.</span><span class="sxs-lookup"><span data-stu-id="7ea1b-251">The client and server certificates are negotiated prior to the first request on a connection and requests generally aren't able to renegotiate.</span></span>

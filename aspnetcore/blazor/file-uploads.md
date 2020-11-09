@@ -1,22 +1,22 @@
 ---
-title: :::no-loc(Blazor):::Karşıya dosya yükleme ASP.NET Core
+title: BlazorKarşıya dosya yükleme ASP.NET Core
 author: guardrex
-description: "' De dosyaları :::no-loc(Blazor)::: , InputFile bileşeniyle karşıya yüklemeyi öğrenin."
+description: "' De dosyaları Blazor , InputFile bileşeniyle karşıya yüklemeyi öğrenin."
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 ms.date: 10/27/2020
 uid: blazor/file-uploads
 ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
@@ -26,7 +26,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056133"
 ---
-# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="70177-103">:::no-loc(Blazor):::Karşıya dosya yükleme ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="70177-103">ASP.NET Core :::no-loc(Blazor)::: file uploads</span></span>
+# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="70177-103">BlazorKarşıya dosya yükleme ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="70177-103">ASP.NET Core Blazor file uploads</span></span>
 
 <span data-ttu-id="70177-104">[Daniel Roth](https://github.com/danroth27) ve [Pranav Krishnamoorthy](https://github.com/pranavkm) tarafından</span><span class="sxs-lookup"><span data-stu-id="70177-104">By [Daniel Roth](https://github.com/danroth27) and [Pranav Krishnamoorthy](https://github.com/pranavkm)</span></span>
 
@@ -47,7 +47,7 @@ ms.locfileid: "93056133"
 
 * <span data-ttu-id="70177-115">Dosyada çağrı yapın `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` ve döndürülen akıştan okuyun.</span><span class="sxs-lookup"><span data-stu-id="70177-115">Call `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` on the file and read from the returned stream.</span></span> <span data-ttu-id="70177-116">Daha fazla bilgi için [dosya akışları](#file-streams) bölümüne bakın.</span><span class="sxs-lookup"><span data-stu-id="70177-116">For more information, see the [File streams](#file-streams) section.</span></span>
 * <span data-ttu-id="70177-117"><xref:System.IO.Stream>Tarafından döndürülen, `OpenReadStream` okunan bayt cinsinden en büyük boyutu zorlar `Stream` .</span><span class="sxs-lookup"><span data-stu-id="70177-117">The <xref:System.IO.Stream> returned by `OpenReadStream` enforces a maximum size in bytes of the `Stream` being read.</span></span> <span data-ttu-id="70177-118">Varsayılan olarak, yalnızca boyut olarak 524.288 KB 'tan (512 KB) daha küçük dosyalara daha fazla okuma için izin verilir.</span><span class="sxs-lookup"><span data-stu-id="70177-118">By default, only files smaller than 524,288 KB (512 KB) in size are allowed to be read before any further reads would result in an exception.</span></span> <span data-ttu-id="70177-119">Bu sınır, geliştiricilerin yanlışlıkla bellekteki büyük dosyaları yanlışlıkla okumasını engellemek için vardır.</span><span class="sxs-lookup"><span data-stu-id="70177-119">This limit is present to prevent developers from accidentally reading large files in to memory.</span></span> <span data-ttu-id="70177-120">`maxAllowedSize`Üzerinde parametresi, `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` gerekirse daha büyük bir boyut belirtmek için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="70177-120">The `maxAllowedSize` parameter on `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` can be used to specify a larger size if required.</span></span>
-* <span data-ttu-id="70177-121">Gelen dosya akışını doğrudan belleğe okumaktan kaçının.</span><span class="sxs-lookup"><span data-stu-id="70177-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="70177-122">Örneğin, dosya baytlarını bir <xref:System.IO.MemoryStream> bayt dizisi olarak bir veya Read öğesine kopyalamayın.</span><span class="sxs-lookup"><span data-stu-id="70177-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="70177-123">Bu yaklaşımlar, özellikle içinde, performans ve güvenlik sorunlarına neden olabilir :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="70177-123">These approaches can result in performance and security problems, especially in :::no-loc(Blazor Server):::.</span></span> <span data-ttu-id="70177-124">Bunun yerine, dosya baytlarını bir blob veya diskteki bir dosya gibi bir dış depoya kopyalamayı göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="70177-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
+* <span data-ttu-id="70177-121">Gelen dosya akışını doğrudan belleğe okumaktan kaçının.</span><span class="sxs-lookup"><span data-stu-id="70177-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="70177-122">Örneğin, dosya baytlarını bir <xref:System.IO.MemoryStream> bayt dizisi olarak bir veya Read öğesine kopyalamayın.</span><span class="sxs-lookup"><span data-stu-id="70177-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="70177-123">Bu yaklaşımlar, özellikle içinde, performans ve güvenlik sorunlarına neden olabilir Blazor Server .</span><span class="sxs-lookup"><span data-stu-id="70177-123">These approaches can result in performance and security problems, especially in Blazor Server.</span></span> <span data-ttu-id="70177-124">Bunun yerine, dosya baytlarını bir blob veya diskteki bir dosya gibi bir dış depoya kopyalamayı göz önünde bulundurun.</span><span class="sxs-lookup"><span data-stu-id="70177-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
 
 <span data-ttu-id="70177-125">Görüntü dosyası alan bir bileşen, `RequestImageFileAsync` görüntünün uygulamaya akışı tamamlanmadan önce tarayıcının JavaScript çalışma zamanı içindeki görüntü verilerini yeniden boyutlandırmak için dosyanın kullanışlı yöntemini çağırabilir.</span><span class="sxs-lookup"><span data-stu-id="70177-125">A component that receives an image file can call the `RequestImageFileAsync` convenience method on the file to resize the image data within the browser's JavaScript runtime before the image is streamed into the app.</span></span>
 
@@ -100,9 +100,9 @@ ms.locfileid: "93056133"
 
 ## <a name="file-streams"></a><span data-ttu-id="70177-133">Dosya akışları</span><span class="sxs-lookup"><span data-stu-id="70177-133">File streams</span></span>
 
-<span data-ttu-id="70177-134">Bir :::no-loc(Blazor WebAssembly)::: uygulamada, veriler doğrudan tarayıcı içindeki .net koduna akışla kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="70177-134">In a :::no-loc(Blazor WebAssembly)::: app, the data is streamed directly into the .NET code within the browser.</span></span>
+<span data-ttu-id="70177-134">Bir Blazor WebAssembly uygulamada, veriler doğrudan tarayıcı içindeki .net koduna akışla kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="70177-134">In a Blazor WebAssembly app, the data is streamed directly into the .NET code within the browser.</span></span>
 
-<span data-ttu-id="70177-135">Bir :::no-loc(Blazor Server)::: uygulamada, dosya :::no-loc(SignalR)::: akışından okunan dosya verileri sunucuda .net koduna bağlantı üzerinden akışa kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="70177-135">In a :::no-loc(Blazor Server)::: app, the file data is streamed over the :::no-loc(SignalR)::: connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="70177-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) için dosya yükleme özelliklerinin yapılandırılmasını sağlar :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="70177-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for :::no-loc(Blazor Server):::.</span></span>
+<span data-ttu-id="70177-135">Bir Blazor Server uygulamada, dosya SignalR akışından okunan dosya verileri sunucuda .net koduna bağlantı üzerinden akışa kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="70177-135">In a Blazor Server app, the file data is streamed over the SignalR connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="70177-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) için dosya yükleme özelliklerinin yapılandırılmasını sağlar Blazor Server .</span><span class="sxs-lookup"><span data-stu-id="70177-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for Blazor Server.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="70177-137">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="70177-137">Additional resources</span></span>
 

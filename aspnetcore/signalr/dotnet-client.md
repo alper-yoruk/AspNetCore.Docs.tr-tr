@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: .NET istemcisi'
+title: 'ASP.NET Core SignalR .NET istemcisi'
 author: bradygaster
-description: 'ASP.NET Core :::no-loc(SignalR)::: .net istemcisiyle ilgili bilgiler'
+description: 'ASP.NET Core SignalR .net istemcisiyle ilgili bilgiler'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/dotnet-client
 ms.openlocfilehash: 7849322e50aeceda0850d94f9c9bcda79a6051c8
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,24 +26,24 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061229"
 ---
-# <a name="aspnet-core-no-locsignalr-net-client"></a><span data-ttu-id="61ba4-103">ASP.NET Core :::no-loc(SignalR)::: .NET istemcisi</span><span class="sxs-lookup"><span data-stu-id="61ba4-103">ASP.NET Core :::no-loc(SignalR)::: .NET Client</span></span>
+# <a name="aspnet-core-no-locsignalr-net-client"></a><span data-ttu-id="61ba4-103">ASP.NET Core SignalR .NET istemcisi</span><span class="sxs-lookup"><span data-stu-id="61ba4-103">ASP.NET Core SignalR .NET Client</span></span>
 
-<span data-ttu-id="61ba4-104">ASP.NET Core :::no-loc(SignalR)::: .NET istemci kitaplığı, .net uygulamalarından hub 'larla iletişim kurmanızı sağlar :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="61ba4-104">The ASP.NET Core :::no-loc(SignalR)::: .NET client library lets you communicate with :::no-loc(SignalR)::: hubs from .NET apps.</span></span>
+<span data-ttu-id="61ba4-104">ASP.NET Core SignalR .NET istemci kitaplığı, .net uygulamalarından hub 'larla iletişim kurmanızı sağlar SignalR .</span><span class="sxs-lookup"><span data-stu-id="61ba4-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
 
 <span data-ttu-id="61ba4-105">[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="61ba4-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="61ba4-106">Bu makaledeki kod örneği, ASP.NET Core .net istemcisini kullanan bir WPF uygulamasıdır :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="61ba4-106">The code sample in this article is a WPF app that uses the ASP.NET Core :::no-loc(SignalR)::: .NET client.</span></span>
+<span data-ttu-id="61ba4-106">Bu makaledeki kod örneği, ASP.NET Core .net istemcisini kullanan bir WPF uygulamasıdır SignalR .</span><span class="sxs-lookup"><span data-stu-id="61ba4-106">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
 
-## <a name="install-the-no-locsignalr-net-client-package"></a><span data-ttu-id="61ba4-107">:::no-loc(SignalR):::.NET istemci paketini yükler</span><span class="sxs-lookup"><span data-stu-id="61ba4-107">Install the :::no-loc(SignalR)::: .NET client package</span></span>
+## <a name="install-the-no-locsignalr-net-client-package"></a><span data-ttu-id="61ba4-107">SignalR.NET istemci paketini yükler</span><span class="sxs-lookup"><span data-stu-id="61ba4-107">Install the SignalR .NET client package</span></span>
 
-<span data-ttu-id="61ba4-108">[Microsoft. AspNetCore. :::no-loc(SignalR)::: . ](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client).Net istemcilerinin hub 'lara bağlanması için istemci paketi gereklidir :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="61ba4-108">The [Microsoft.AspNetCore.:::no-loc(SignalR):::.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) package is required for .NET clients to connect to :::no-loc(SignalR)::: hubs.</span></span>
+<span data-ttu-id="61ba4-108">[Microsoft. AspNetCore. SignalR . ](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client).Net istemcilerinin hub 'lara bağlanması için istemci paketi gereklidir SignalR .</span><span class="sxs-lookup"><span data-stu-id="61ba4-108">The [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package is required for .NET clients to connect to SignalR hubs.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="61ba4-109">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="61ba4-109">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="61ba4-110">İstemci kitaplığını yüklemek için, **Paket Yöneticisi konsolu** penceresinde aşağıdaki komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="61ba4-110">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
 
 ```powershell
-Install-Package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
+Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
 # <a name="net-core-cli"></a>[<span data-ttu-id="61ba4-111">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="61ba4-111">.NET Core CLI</span></span>](#tab/netcore-cli)
@@ -51,7 +51,7 @@ Install-Package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 <span data-ttu-id="61ba4-112">İstemci kitaplığını yüklemek için komut kabuğu 'nda aşağıdaki komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="61ba4-112">To install the client library, run the following command in a command shell:</span></span>
 
 ```dotnetcli
-dotnet add package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
+dotnet add package Microsoft.AspNetCore.SignalR.Client
 ```
 
 ---
@@ -68,7 +68,7 @@ dotnet add package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 
 ### <a name="automatically-reconnect"></a><span data-ttu-id="61ba4-119">Otomatik olarak yeniden bağlan</span><span class="sxs-lookup"><span data-stu-id="61ba4-119">Automatically reconnect</span></span>
 
-<span data-ttu-id="61ba4-120">, <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection> Üzerinde yöntemi kullanılarak otomatik olarak yeniden bağlanacak şekilde yapılandırılabilir `WithAutomaticReconnect` <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="61ba4-120">The <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="61ba4-121">Varsayılan olarak otomatik olarak yeniden bağlanmaz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-121">It won't automatically reconnect by default.</span></span>
+<span data-ttu-id="61ba4-120">, <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> Üzerinde yöntemi kullanılarak otomatik olarak yeniden bağlanacak şekilde yapılandırılabilir `WithAutomaticReconnect` <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="61ba4-120">The <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="61ba4-121">Varsayılan olarak otomatik olarak yeniden bağlanmaz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-121">It won't automatically reconnect by default.</span></span>
 
 ```csharp
 HubConnection connection= new HubConnectionBuilder()
@@ -140,7 +140,7 @@ public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, C
 }
 ```
 
-<span data-ttu-id="61ba4-131">İstemci ilk dört denemeden sonra başarıyla yeniden bağlanmazsa, `HubConnection` `Disconnected` durumuna geçer ve olayı harekete geçirebilir <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> .</span><span class="sxs-lookup"><span data-stu-id="61ba4-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="61ba4-132">Bu, bağlantıyı el ile yeniden başlatmayı denemek veya bağlantıyı kalıcı olarak kaybettiğini bildirmek için bir fırsat sağlar.</span><span class="sxs-lookup"><span data-stu-id="61ba4-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
+<span data-ttu-id="61ba4-131">İstemci ilk dört denemeden sonra başarıyla yeniden bağlanmazsa, `HubConnection` `Disconnected` durumuna geçer ve olayı harekete geçirebilir <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> .</span><span class="sxs-lookup"><span data-stu-id="61ba4-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="61ba4-132">Bu, bağlantıyı el ile yeniden başlatmayı denemek veya bağlantıyı kalıcı olarak kaybettiğini bildirmek için bir fırsat sağlar.</span><span class="sxs-lookup"><span data-stu-id="61ba4-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
 
 ```csharp
 connection.Closed += error =>
@@ -216,11 +216,11 @@ HubConnection connection = new HubConnectionBuilder()
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> <span data-ttu-id="61ba4-148">3,0 ' den önce, için .NET istemcisi :::no-loc(SignalR)::: otomatik olarak yeniden bağlanmaz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-148">Prior to 3.0, the .NET client for :::no-loc(SignalR)::: doesn't automatically reconnect.</span></span> <span data-ttu-id="61ba4-149">İstemcinizi el ile yeniden bağlayacaksınız kodu yazmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="61ba4-149">You must write code that will reconnect your client manually.</span></span>
+> <span data-ttu-id="61ba4-148">3,0 ' den önce, için .NET istemcisi SignalR otomatik olarak yeniden bağlanmaz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-148">Prior to 3.0, the .NET client for SignalR doesn't automatically reconnect.</span></span> <span data-ttu-id="61ba4-149">İstemcinizi el ile yeniden bağlayacaksınız kodu yazmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="61ba4-149">You must write code that will reconnect your client manually.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="61ba4-150"><xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed>Kayıp bir bağlantıya yanıt vermek için olayını kullanın.</span><span class="sxs-lookup"><span data-stu-id="61ba4-150">Use the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="61ba4-151">Örneğin, yeniden bağlanmayı otomatik hale getirmek isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-151">For example, you might want to automate reconnection.</span></span>
+<span data-ttu-id="61ba4-150"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed>Kayıp bir bağlantıya yanıt vermek için olayını kullanın.</span><span class="sxs-lookup"><span data-stu-id="61ba4-150">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="61ba4-151">Örneğin, yeniden bağlanmayı otomatik hale getirmek isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-151">For example, you might want to automate reconnection.</span></span>
 
 <span data-ttu-id="61ba4-152">`Closed`Olay, `Task` zaman uyumsuz kodun kullanılmadan çalışmasına izin veren, döndüren bir temsilci gerektirir `async void` .</span><span class="sxs-lookup"><span data-stu-id="61ba4-152">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="61ba4-153">Zaman uyumlu olarak çalışan bir olay işleyicisinde temsilci imzasını karşılamak için `Closed` şunu döndürün `Task.CompletedTask` :</span><span class="sxs-lookup"><span data-stu-id="61ba4-153">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
 
@@ -239,7 +239,7 @@ connection.Closed += (error) => {
 
 ## <a name="call-hub-methods-from-client"></a><span data-ttu-id="61ba4-157">İstemciden çağrı merkezi yöntemleri</span><span class="sxs-lookup"><span data-stu-id="61ba4-157">Call hub methods from client</span></span>
 
-<span data-ttu-id="61ba4-158">`InvokeAsync` Hub 'daki yöntemleri çağırır.</span><span class="sxs-lookup"><span data-stu-id="61ba4-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="61ba4-159">Hub yöntemi adını ve hub metodunda tanımlanan tüm bağımsız değişkenleri öğesine geçirin `InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="61ba4-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="61ba4-160">:::no-loc(SignalR)::: zaman uyumsuzdur, bu nedenle `async` `await` çağrıları yaparken ve kullanın.</span><span class="sxs-lookup"><span data-stu-id="61ba4-160">:::no-loc(SignalR)::: is asynchronous, so use `async` and `await` when making the calls.</span></span>
+<span data-ttu-id="61ba4-158">`InvokeAsync` Hub 'daki yöntemleri çağırır.</span><span class="sxs-lookup"><span data-stu-id="61ba4-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="61ba4-159">Hub yöntemi adını ve hub metodunda tanımlanan tüm bağımsız değişkenleri öğesine geçirin `InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="61ba4-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="61ba4-160">SignalR zaman uyumsuzdur, bu nedenle `async` `await` çağrıları yaparken ve kullanın.</span><span class="sxs-lookup"><span data-stu-id="61ba4-160">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
@@ -248,7 +248,7 @@ connection.Closed += (error) => {
 <span data-ttu-id="61ba4-165">`SendAsync`Yöntemi, `Task` ileti sunucuya gönderildiğinde tamamlanmış bir döndürür.</span><span class="sxs-lookup"><span data-stu-id="61ba4-165">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="61ba4-166">Bu `Task` , sunucu yöntemi tamamlanana kadar beklemediğinden hiçbir dönüş değeri sağlanmaz.</span><span class="sxs-lookup"><span data-stu-id="61ba4-166">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="61ba4-167">İletiyi gönderirken istemcide oluşturulan özel durumlar hatalı bir şekilde oluşur `Task` .</span><span class="sxs-lookup"><span data-stu-id="61ba4-167">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="61ba4-168">`await` `try...catch` Gönderme hatalarını işlemek için ve sözdizimini kullanın.</span><span class="sxs-lookup"><span data-stu-id="61ba4-168">Use `await` and `try...catch` syntax to handle send errors.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="61ba4-169">Hub yöntemlerinin bir istemciden çağrılması yalnızca Azure :::no-loc(SignalR)::: hizmeti *varsayılan* modda kullanılırken desteklenir.</span><span class="sxs-lookup"><span data-stu-id="61ba4-169">Calling hub methods from a client is only supported when using the Azure :::no-loc(SignalR)::: Service in *Default* mode.</span></span> <span data-ttu-id="61ba4-170">Daha fazla bilgi için bkz. [sık sorulan sorular (Azure-SignalR GitHub deposu)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span><span class="sxs-lookup"><span data-stu-id="61ba4-170">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
+> <span data-ttu-id="61ba4-169">Hub yöntemlerinin bir istemciden çağrılması yalnızca Azure SignalR hizmeti *varsayılan* modda kullanılırken desteklenir.</span><span class="sxs-lookup"><span data-stu-id="61ba4-169">Calling hub methods from a client is only supported when using the Azure SignalR Service in *Default* mode.</span></span> <span data-ttu-id="61ba4-170">Daha fazla bilgi için bkz. [sık sorulan sorular (Azure-SignalR GitHub deposu)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span><span class="sxs-lookup"><span data-stu-id="61ba4-170">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
 
 ## <a name="call-client-methods-from-hub"></a><span data-ttu-id="61ba4-171">Hub 'dan istemci yöntemlerini çağır</span><span class="sxs-lookup"><span data-stu-id="61ba4-171">Call client methods from hub</span></span>
 
@@ -271,4 +271,4 @@ connection.Closed += (error) => {
 * [<span data-ttu-id="61ba4-178">Merkezler</span><span class="sxs-lookup"><span data-stu-id="61ba4-178">Hubs</span></span>](xref:signalr/hubs)
 * [<span data-ttu-id="61ba4-179">JavaScript istemcisi</span><span class="sxs-lookup"><span data-stu-id="61ba4-179">JavaScript client</span></span>](xref:signalr/javascript-client)
 * [<span data-ttu-id="61ba4-180">Azure 'da yayımlama</span><span class="sxs-lookup"><span data-stu-id="61ba4-180">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
-* [<span data-ttu-id="61ba4-181">Azure :::no-loc(SignalR)::: hizmeti sunucusuz belgeler</span><span class="sxs-lookup"><span data-stu-id="61ba4-181">Azure :::no-loc(SignalR)::: Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="61ba4-181">Azure SignalR hizmeti sunucusuz belgeler</span><span class="sxs-lookup"><span data-stu-id="61ba4-181">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)

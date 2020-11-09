@@ -5,17 +5,17 @@ description: ASP.NET Core veri koruma anahtarı yönetimi ve ömrü hakkında bi
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/configuration/default-settings
 ms.openlocfilehash: 1303c5c2c993f1d20383457666aebfa2a583e938
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93053013"
 1. <span data-ttu-id="cd90c-107">Uygulama [Azure uygulamalarında](https://azure.microsoft.com/services/app-service/)barındırılıyorsa, anahtarlar *%Home%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir.</span><span class="sxs-lookup"><span data-stu-id="cd90c-107">If the app is hosted in [Azure Apps](https://azure.microsoft.com/services/app-service/), keys are persisted to the *%HOME%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="cd90c-108">Bu klasör, ağ depolama tarafından desteklenir ve uygulamayı barındıran tüm makinelerde eşitlenir.</span><span class="sxs-lookup"><span data-stu-id="cd90c-108">This folder is backed by network storage and is synchronized across all machines hosting the app.</span></span>
    * <span data-ttu-id="cd90c-109">Anahtarlar bekleyen bir şekilde korunmuyor.</span><span class="sxs-lookup"><span data-stu-id="cd90c-109">Keys aren't protected at rest.</span></span>
    * <span data-ttu-id="cd90c-110">*DataProtection-Keys* klasörü, bir uygulamanın tüm örneklerine tek bir dağıtım yuvasında anahtar halkasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="cd90c-110">The *DataProtection-Keys* folder supplies the key ring to all instances of an app in a single deployment slot.</span></span>
-   * <span data-ttu-id="cd90c-111">Hazırlama ve üretim gibi ayrı dağıtım yuvaları, anahtar halkasını paylaşmaz.</span><span class="sxs-lookup"><span data-stu-id="cd90c-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="cd90c-112">Dağıtım yuvaları arasında takas yaptığınızda (örneğin, hazırlama üretimini üretime değiştirme veya A/B testi kullanma), veri koruma kullanan tüm uygulamalar, önceki yuvanın içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemez.</span><span class="sxs-lookup"><span data-stu-id="cd90c-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="cd90c-113">Bu :::no-loc(cookie)::: , kullanıcıların, s 'yi korumak Için veri koruma kullandığından, standart ASP.NET Core kimlik doğrulamasını kullanan bir uygulamadan oturum açmış kullanıcılara yol açar :::no-loc(cookie)::: .</span><span class="sxs-lookup"><span data-stu-id="cd90c-113">This leads to users being logged out of an app that uses the standard ASP.NET Core :::no-loc(cookie)::: authentication, as it uses Data Protection to protect its :::no-loc(cookie):::s.</span></span> <span data-ttu-id="cd90c-114">Yuvada bağımsız anahtar halkaları istiyorsanız, Azure Blob depolama, Azure Key Vault, bir SQL Mağazası veya Redsıs önbelleği gibi bir dış anahtar halka sağlayıcısı kullanın.</span><span class="sxs-lookup"><span data-stu-id="cd90c-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
+   * <span data-ttu-id="cd90c-111">Hazırlama ve üretim gibi ayrı dağıtım yuvaları, anahtar halkasını paylaşmaz.</span><span class="sxs-lookup"><span data-stu-id="cd90c-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="cd90c-112">Dağıtım yuvaları arasında takas yaptığınızda (örneğin, hazırlama üretimini üretime değiştirme veya A/B testi kullanma), veri koruma kullanan tüm uygulamalar, önceki yuvanın içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemez.</span><span class="sxs-lookup"><span data-stu-id="cd90c-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="cd90c-113">Bu cookie , kullanıcıların, s 'yi korumak Için veri koruma kullandığından, standart ASP.NET Core kimlik doğrulamasını kullanan bir uygulamadan oturum açmış kullanıcılara yol açar cookie .</span><span class="sxs-lookup"><span data-stu-id="cd90c-113">This leads to users being logged out of an app that uses the standard ASP.NET Core cookie authentication, as it uses Data Protection to protect its cookies.</span></span> <span data-ttu-id="cd90c-114">Yuvada bağımsız anahtar halkaları istiyorsanız, Azure Blob depolama, Azure Key Vault, bir SQL Mağazası veya Redsıs önbelleği gibi bir dış anahtar halka sağlayıcısı kullanın.</span><span class="sxs-lookup"><span data-stu-id="cd90c-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
 
 1. <span data-ttu-id="cd90c-115">Kullanıcı profili varsa, anahtarlar *%LocalAppData%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir.</span><span class="sxs-lookup"><span data-stu-id="cd90c-115">If the user profile is available, keys are persisted to the *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="cd90c-116">İşletim sistemi Windows ise, anahtarlar DPAPI kullanılarak geri kalanıyla şifrelenir.</span><span class="sxs-lookup"><span data-stu-id="cd90c-116">If the operating system is Windows, the keys are encrypted at rest using DPAPI.</span></span>
 

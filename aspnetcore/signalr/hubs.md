@@ -1,23 +1,23 @@
 ---
-title: "ASP.NET Core hub 'ları kullanma :::no-loc(SignalR):::"
+title: "ASP.NET Core hub 'ları kullanma SignalR"
 author: bradygaster
-description: "ASP.NET Core ' de hub 'ları kullanmayı öğrenin :::no-loc(SignalR)::: ."
+description: "ASP.NET Core ' de hub 'ları kullanmayı öğrenin SignalR ."
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/hubs
 ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050946"
 ---
-# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="435de-103">ASP.NET Core için hub 'ları kullanın :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="435de-103">Use hubs in :::no-loc(SignalR)::: for ASP.NET Core</span></span>
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="435de-103">ASP.NET Core için hub 'ları kullanın SignalR</span><span class="sxs-lookup"><span data-stu-id="435de-103">Use hubs in SignalR for ASP.NET Core</span></span>
 
 <span data-ttu-id="435de-104">, [Rachel Appel](https://twitter.com/rachelappel) ve [Kevin Griffin](https://twitter.com/1kevgriff) tarafından</span><span class="sxs-lookup"><span data-stu-id="435de-104">By [Rachel Appel](https://twitter.com/rachelappel) and [Kevin Griffin](https://twitter.com/1kevgriff)</span></span>
 
 <span data-ttu-id="435de-105">[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)</span><span class="sxs-lookup"><span data-stu-id="435de-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
 
-## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="435de-106">Hub nedir? :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="435de-106">What is a :::no-loc(SignalR)::: hub</span></span>
+## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="435de-106">Hub nedir? SignalR</span><span class="sxs-lookup"><span data-stu-id="435de-106">What is a SignalR hub</span></span>
 
-<span data-ttu-id="435de-107">:::no-loc(SignalR):::Hub 'lar API 'si, bağlı istemcilerdeki yöntemleri sunucudan çağırmanızı sağlar.</span><span class="sxs-lookup"><span data-stu-id="435de-107">The :::no-loc(SignalR)::: Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="435de-108">Sunucu kodunda, istemci tarafından çağrılan yöntemleri tanımlarsınız.</span><span class="sxs-lookup"><span data-stu-id="435de-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="435de-109">İstemci kodunda, sunucudan çağrılan yöntemleri tanımlarsınız.</span><span class="sxs-lookup"><span data-stu-id="435de-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="435de-110">:::no-loc(SignalR)::: gerçek zamanlı istemciden sunucuya ve sunucudan istemciye iletişimleri mümkün kılan arka planda her şeyi ele alır.</span><span class="sxs-lookup"><span data-stu-id="435de-110">:::no-loc(SignalR)::: takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
+<span data-ttu-id="435de-107">SignalRHub 'lar API 'si, bağlı istemcilerdeki yöntemleri sunucudan çağırmanızı sağlar.</span><span class="sxs-lookup"><span data-stu-id="435de-107">The SignalR Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="435de-108">Sunucu kodunda, istemci tarafından çağrılan yöntemleri tanımlarsınız.</span><span class="sxs-lookup"><span data-stu-id="435de-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="435de-109">İstemci kodunda, sunucudan çağrılan yöntemleri tanımlarsınız.</span><span class="sxs-lookup"><span data-stu-id="435de-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="435de-110">SignalR gerçek zamanlı istemciden sunucuya ve sunucudan istemciye iletişimleri mümkün kılan arka planda her şeyi ele alır.</span><span class="sxs-lookup"><span data-stu-id="435de-110">SignalR takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
 
-## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="435de-111">:::no-loc(SignalR):::Hub 'ları yapılandırma</span><span class="sxs-lookup"><span data-stu-id="435de-111">Configure :::no-loc(SignalR)::: hubs</span></span>
+## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="435de-111">SignalRHub 'ları yapılandırma</span><span class="sxs-lookup"><span data-stu-id="435de-111">Configure SignalR hubs</span></span>
 
-<span data-ttu-id="435de-112">:::no-loc(SignalR):::Ara yazılım, çağırarak yapılandırılan bazı hizmetler gerektirir `services.Add:::no-loc(SignalR):::` .</span><span class="sxs-lookup"><span data-stu-id="435de-112">The :::no-loc(SignalR)::: middleware requires some services, which are configured by calling `services.Add:::no-loc(SignalR):::`.</span></span>
+<span data-ttu-id="435de-112">SignalRAra yazılım, çağırarak yapılandırılan bazı hizmetler gerektirir `services.AddSignalR` .</span><span class="sxs-lookup"><span data-stu-id="435de-112">The SignalR middleware requires some services, which are configured by calling `services.AddSignalR`.</span></span>
 
 [!code-csharp[Configure service](hubs/sample/startup.cs?range=38)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="435de-113">:::no-loc(SignalR):::Bir ASP.NET Core uygulamasına işlevsellik eklenirken, yöntem geri çağırmada :::no-loc(SignalR)::: çağırarak yollar ayarlayın `endpoint.MapHub` `Startup.Configure` `app.UseEndpoints` .</span><span class="sxs-lookup"><span data-stu-id="435de-113">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
+<span data-ttu-id="435de-113">SignalRBir ASP.NET Core uygulamasına işlevsellik eklenirken, yöntem geri çağırmada SignalR çağırarak yollar ayarlayın `endpoint.MapHub` `Startup.Configure` `app.UseEndpoints` .</span><span class="sxs-lookup"><span data-stu-id="435de-113">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
 
 ```csharp
 app.UseRouting();
@@ -58,7 +58,7 @@ app.UseEndpoints(endpoints =>
 
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="435de-114">:::no-loc(SignalR):::Bir ASP.NET Core uygulamasına işlevsellik eklenirken, :::no-loc(SignalR)::: yöntemini çağırarak yollar ayarlayın `app.Use:::no-loc(SignalR):::` `Startup.Configure` .</span><span class="sxs-lookup"><span data-stu-id="435de-114">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `app.Use:::no-loc(SignalR):::` in the `Startup.Configure` method.</span></span>
+<span data-ttu-id="435de-114">SignalRBir ASP.NET Core uygulamasına işlevsellik eklenirken, SignalR yöntemini çağırarak yollar ayarlayın `app.UseSignalR` `Startup.Configure` .</span><span class="sxs-lookup"><span data-stu-id="435de-114">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `app.UseSignalR` in the `Startup.Configure` method.</span></span>
 
 [!code-csharp[Configure routes to hubs](hubs/sample/startup.cs?range=57-60)]
 
@@ -78,7 +78,7 @@ public class ChatHub : Hub
 }
 ```
 
-<span data-ttu-id="435de-118">Herhangi bir C# yönteminde olduğu gibi, karmaşık türler ve diziler dahil olmak üzere bir dönüş türü ve parametreleri belirtebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="435de-119">:::no-loc(SignalR)::: parametrelerinizin ve dönüş değerlerindeki karmaşık nesne ve dizilerin serileştirilmesi ve serisini kaldırma işlemi uygular.</span><span class="sxs-lookup"><span data-stu-id="435de-119">:::no-loc(SignalR)::: handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
+<span data-ttu-id="435de-118">Herhangi bir C# yönteminde olduğu gibi, karmaşık türler ve diziler dahil olmak üzere bir dönüş türü ve parametreleri belirtebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="435de-119">SignalR parametrelerinizin ve dönüş değerlerindeki karmaşık nesne ve dizilerin serileştirilmesi ve serisini kaldırma işlemi uygular.</span><span class="sxs-lookup"><span data-stu-id="435de-119">SignalR handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="435de-120">Hub 'lar geçicidir:</span><span class="sxs-lookup"><span data-stu-id="435de-120">Hubs are transient:</span></span>
@@ -92,8 +92,8 @@ public class ChatHub : Hub
 
 | <span data-ttu-id="435de-127">Özellik</span><span class="sxs-lookup"><span data-stu-id="435de-127">Property</span></span> | <span data-ttu-id="435de-128">Açıklama</span><span class="sxs-lookup"><span data-stu-id="435de-128">Description</span></span> |
 | ------ | ----------- |
-| `ConnectionId` | <span data-ttu-id="435de-129">Tarafından atanan bağlantının benzersiz KIMLIĞINI alır :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="435de-129">Gets the unique ID for the connection, assigned by :::no-loc(SignalR):::.</span></span> <span data-ttu-id="435de-130">Her bağlantı için bir bağlantı KIMLIĞI vardır.</span><span class="sxs-lookup"><span data-stu-id="435de-130">There is one connection ID for each connection.</span></span>|
-| `UserIdentifier` | <span data-ttu-id="435de-131">[Kullanıcı tanımlayıcısını](xref:signalr/groups)alır.</span><span class="sxs-lookup"><span data-stu-id="435de-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="435de-132">Varsayılan olarak, :::no-loc(SignalR)::: `ClaimTypes.NameIdentifier` `ClaimsPrincipal` Kullanıcı tanımlayıcısı olarak bağlantıyla ilişkili öğesinden öğesini kullanır.</span><span class="sxs-lookup"><span data-stu-id="435de-132">By default, :::no-loc(SignalR)::: uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
+| `ConnectionId` | <span data-ttu-id="435de-129">Tarafından atanan bağlantının benzersiz KIMLIĞINI alır SignalR .</span><span class="sxs-lookup"><span data-stu-id="435de-129">Gets the unique ID for the connection, assigned by SignalR.</span></span> <span data-ttu-id="435de-130">Her bağlantı için bir bağlantı KIMLIĞI vardır.</span><span class="sxs-lookup"><span data-stu-id="435de-130">There is one connection ID for each connection.</span></span>|
+| `UserIdentifier` | <span data-ttu-id="435de-131">[Kullanıcı tanımlayıcısını](xref:signalr/groups)alır.</span><span class="sxs-lookup"><span data-stu-id="435de-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="435de-132">Varsayılan olarak, SignalR `ClaimTypes.NameIdentifier` `ClaimsPrincipal` Kullanıcı tanımlayıcısı olarak bağlantıyla ilişkili öğesinden öğesini kullanır.</span><span class="sxs-lookup"><span data-stu-id="435de-132">By default, SignalR uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
 | `User` | <span data-ttu-id="435de-133">`ClaimsPrincipal`Geçerli kullanıcıyla ilişkili öğesini alır.</span><span class="sxs-lookup"><span data-stu-id="435de-133">Gets the `ClaimsPrincipal` associated with the current user.</span></span> |
 | `Items` | <span data-ttu-id="435de-134">Bu bağlantının kapsamındaki verileri paylaşmak için kullanılabilecek bir anahtar/değer koleksiyonu alır.</span><span class="sxs-lookup"><span data-stu-id="435de-134">Gets a key/value collection that can be used to share data within the scope of this connection.</span></span> <span data-ttu-id="435de-135">Veriler bu koleksiyonda depolanabilir ve farklı hub yöntemi etkinleştirmeleri arasında bağlantı için kalıcı hale gelir.</span><span class="sxs-lookup"><span data-stu-id="435de-135">Data can be stored in this collection and it will persist for the connection across different hub method invocations.</span></span> |
 | `Features` | <span data-ttu-id="435de-136">Bağlantıda kullanılabilen özelliklerin koleksiyonunu alır.</span><span class="sxs-lookup"><span data-stu-id="435de-136">Gets the collection of features available on the connection.</span></span> <span data-ttu-id="435de-137">Şimdilik bu koleksiyon Çoğu senaryoda gerekli değildir, bu nedenle henüz ayrıntılı olarak açıklanmamıştır.</span><span class="sxs-lookup"><span data-stu-id="435de-137">For now, this collection isn't needed in most scenarios, so it isn't documented in detail yet.</span></span> |
@@ -138,7 +138,7 @@ public class ChatHub : Hub
 
 * <span data-ttu-id="435de-169">`SendMessage` kullanarak tüm bağlı istemcilere bir ileti gönderir `Clients.All` .</span><span class="sxs-lookup"><span data-stu-id="435de-169">`SendMessage` sends a message to all connected clients, using `Clients.All`.</span></span>
 * <span data-ttu-id="435de-170">`SendMessageToCaller` kullanarak, çağırana geri bir ileti gönderir `Clients.Caller` .</span><span class="sxs-lookup"><span data-stu-id="435de-170">`SendMessageToCaller` sends a message back to the caller, using `Clients.Caller`.</span></span>
-* <span data-ttu-id="435de-171">`SendMessageToGroups` gruptaki tüm istemcilere bir ileti gönderir `:::no-loc(SignalR)::: Users` .</span><span class="sxs-lookup"><span data-stu-id="435de-171">`SendMessageToGroups` sends a message to all clients in the `:::no-loc(SignalR)::: Users` group.</span></span>
+* <span data-ttu-id="435de-171">`SendMessageToGroups` gruptaki tüm istemcilere bir ileti gönderir `SignalR Users` .</span><span class="sxs-lookup"><span data-stu-id="435de-171">`SendMessageToGroups` sends a message to all clients in the `SignalR Users` group.</span></span>
 
 [!code-csharp[Send messages](hubs/sample/hubs/chathub.cs?name=HubMethods)]
 
@@ -146,7 +146,7 @@ public class ChatHub : Hub
 
 <span data-ttu-id="435de-173">Kullanmanın bir dezavantajı, `SendAsync` çağrılacak istemci yöntemini belirtmek için bir sihirli dize kullanır.</span><span class="sxs-lookup"><span data-stu-id="435de-173">A drawback of using `SendAsync` is that it relies on a magic string to specify the client method to be called.</span></span> <span data-ttu-id="435de-174">Bu, yöntem adı yanlış yazıldığında veya istemcide eksikse kodu, çalışma zamanı hatalarına açık bırakır.</span><span class="sxs-lookup"><span data-stu-id="435de-174">This leaves code open to runtime errors if the method name is misspelled or missing from the client.</span></span>
 
-<span data-ttu-id="435de-175">Kullanmanın alternatifi `SendAsync` , ile kesin bir şekilde yazmak için `Hub` kullanılır <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601> .</span><span class="sxs-lookup"><span data-stu-id="435de-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601>.</span></span> <span data-ttu-id="435de-176">Aşağıdaki örnekte, `ChatHub` istemci yöntemleri adlı bir arabirimde çıkarılmıştır `IChatClient` .</span><span class="sxs-lookup"><span data-stu-id="435de-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
+<span data-ttu-id="435de-175">Kullanmanın alternatifi `SendAsync` , ile kesin bir şekilde yazmak için `Hub` kullanılır <xref:Microsoft.AspNetCore.SignalR.Hub%601> .</span><span class="sxs-lookup"><span data-stu-id="435de-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.SignalR.Hub%601>.</span></span> <span data-ttu-id="435de-176">Aşağıdaki örnekte, `ChatHub` istemci yöntemleri adlı bir arabirimde çıkarılmıştır `IChatClient` .</span><span class="sxs-lookup"><span data-stu-id="435de-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
 
 [!code-csharp[Interface for IChatClient](hubs/sample/hubs/ichatclient.cs?name=snippet_IChatClient)]
 
@@ -170,13 +170,13 @@ public interface IClient
 
 ## <a name="change-the-name-of-a-hub-method"></a><span data-ttu-id="435de-187">Bir hub yönteminin adını değiştirme</span><span class="sxs-lookup"><span data-stu-id="435de-187">Change the name of a hub method</span></span>
 
-<span data-ttu-id="435de-188">Varsayılan olarak, bir sunucu hub 'ı Yöntem adı .NET yönteminin adıdır.</span><span class="sxs-lookup"><span data-stu-id="435de-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="435de-189">Ancak, bu Varsayılanı değiştirmek ve yöntemi için el ile bir ad belirtmek için [Hubmethodname](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) özniteliğini kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="435de-190">İstemci, yöntemi çağırırken .NET Yöntem adı yerine bu adı kullanmalıdır.</span><span class="sxs-lookup"><span data-stu-id="435de-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
+<span data-ttu-id="435de-188">Varsayılan olarak, bir sunucu hub 'ı Yöntem adı .NET yönteminin adıdır.</span><span class="sxs-lookup"><span data-stu-id="435de-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="435de-189">Ancak, bu Varsayılanı değiştirmek ve yöntemi için el ile bir ad belirtmek için [Hubmethodname](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) özniteliğini kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="435de-190">İstemci, yöntemi çağırırken .NET Yöntem adı yerine bu adı kullanmalıdır.</span><span class="sxs-lookup"><span data-stu-id="435de-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
 
 [!code-csharp[HubMethodName attribute](hubs/sample/hubs/chathub.cs?name=HubMethodName&highlight=1)]
 
 ## <a name="handle-events-for-a-connection"></a><span data-ttu-id="435de-191">Bir bağlantı için olayları işleyin</span><span class="sxs-lookup"><span data-stu-id="435de-191">Handle events for a connection</span></span>
 
-<span data-ttu-id="435de-192">:::no-loc(SignalR):::Hub 'lar API 'si, `OnConnectedAsync` `OnDisconnectedAsync` bağlantıları yönetmek ve izlemek için ve sanal yöntemler sağlar.</span><span class="sxs-lookup"><span data-stu-id="435de-192">The :::no-loc(SignalR)::: Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="435de-193">`OnConnectedAsync`Bir Istemci hub 'a bağlanırken bir gruba ekleme gibi işlemleri gerçekleştirmek için sanal yöntemi geçersiz kılın.</span><span class="sxs-lookup"><span data-stu-id="435de-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
+<span data-ttu-id="435de-192">SignalRHub 'lar API 'si, `OnConnectedAsync` `OnDisconnectedAsync` bağlantıları yönetmek ve izlemek için ve sanal yöntemler sağlar.</span><span class="sxs-lookup"><span data-stu-id="435de-192">The SignalR Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="435de-193">`OnConnectedAsync`Bir Istemci hub 'a bağlanırken bir gruba ekleme gibi işlemleri gerçekleştirmek için sanal yöntemi geçersiz kılın.</span><span class="sxs-lookup"><span data-stu-id="435de-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
 
 [!code-csharp[Handle connection](hubs/sample/hubs/chathub.cs?name=OnConnectedAsync)]
 
@@ -192,23 +192,23 @@ public interface IClient
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-<span data-ttu-id="435de-201">Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır.</span><span class="sxs-lookup"><span data-stu-id="435de-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="435de-202">Varsayılan olarak, :::no-loc(SignalR)::: istemciye genel bir hata iletisi döndürür.</span><span class="sxs-lookup"><span data-stu-id="435de-202">By default, :::no-loc(SignalR)::: returns a generic error message to the client.</span></span> <span data-ttu-id="435de-203">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="435de-203">For example:</span></span>
+<span data-ttu-id="435de-201">Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır.</span><span class="sxs-lookup"><span data-stu-id="435de-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="435de-202">Varsayılan olarak, SignalR istemciye genel bir hata iletisi döndürür.</span><span class="sxs-lookup"><span data-stu-id="435de-202">By default, SignalR returns a generic error message to the client.</span></span> <span data-ttu-id="435de-203">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="435de-203">For example:</span></span>
 
 ```
-Microsoft.AspNetCore.:::no-loc(SignalR):::.HubException: An unexpected error occurred invoking 'MethodName' on the server.
+Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
 ```
 
-<span data-ttu-id="435de-204">Beklenmeyen özel durumlar genellikle veritabanı bağlantısı başarısız olduğunda tetiklenen bir özel durumda veritabanı sunucusunun adı gibi hassas bilgiler içerir.</span><span class="sxs-lookup"><span data-stu-id="435de-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="435de-205">:::no-loc(SignalR)::: Bu ayrıntılı hata iletilerini varsayılan olarak bir güvenlik ölçüsü olarak kullanıma sunmaz.</span><span class="sxs-lookup"><span data-stu-id="435de-205">:::no-loc(SignalR)::: doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="435de-206">Özel durum ayrıntılarının neden bastırıldığına ilişkin daha fazla bilgi için [güvenlik konuları makalesine](xref:signalr/security#exceptions) bakın.</span><span class="sxs-lookup"><span data-stu-id="435de-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
+<span data-ttu-id="435de-204">Beklenmeyen özel durumlar genellikle veritabanı bağlantısı başarısız olduğunda tetiklenen bir özel durumda veritabanı sunucusunun adı gibi hassas bilgiler içerir.</span><span class="sxs-lookup"><span data-stu-id="435de-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="435de-205">SignalR Bu ayrıntılı hata iletilerini varsayılan olarak bir güvenlik ölçüsü olarak kullanıma sunmaz.</span><span class="sxs-lookup"><span data-stu-id="435de-205">SignalR doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="435de-206">Özel durum ayrıntılarının neden bastırıldığına ilişkin daha fazla bilgi için [güvenlik konuları makalesine](xref:signalr/security#exceptions) bakın.</span><span class="sxs-lookup"><span data-stu-id="435de-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
 
-<span data-ttu-id="435de-207">İstemciye *yaymak istediğiniz olağanüstü* bir koşulunuz varsa, `HubException` sınıfını kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="435de-208">`HubException`Hub yönteinizden bir oluşturduysanız, :::no-loc(SignalR)::: **will** tüm iletiyi değiştirilmemiş olarak istemciye gönderir.</span><span class="sxs-lookup"><span data-stu-id="435de-208">If you throw a `HubException` from your hub method, :::no-loc(SignalR)::: **will** send the entire message to the client, unmodified.</span></span>
+<span data-ttu-id="435de-207">İstemciye *yaymak istediğiniz olağanüstü* bir koşulunuz varsa, `HubException` sınıfını kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="435de-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="435de-208">`HubException`Hub yönteinizden bir oluşturduysanız, SignalR **will** tüm iletiyi değiştirilmemiş olarak istemciye gönderir.</span><span class="sxs-lookup"><span data-stu-id="435de-208">If you throw a `HubException` from your hub method, SignalR **will** send the entire message to the client, unmodified.</span></span>
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 
 > [!NOTE]
-> <span data-ttu-id="435de-209">:::no-loc(SignalR)::: yalnızca `Message` özel durumun özelliğini istemciye gönderir.</span><span class="sxs-lookup"><span data-stu-id="435de-209">:::no-loc(SignalR)::: only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="435de-210">Özel durumun yığın izlemesi ve diğer özellikleri istemci tarafından kullanılamaz.</span><span class="sxs-lookup"><span data-stu-id="435de-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
+> <span data-ttu-id="435de-209">SignalR yalnızca `Message` özel durumun özelliğini istemciye gönderir.</span><span class="sxs-lookup"><span data-stu-id="435de-209">SignalR only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="435de-210">Özel durumun yığın izlemesi ve diğer özellikleri istemci tarafından kullanılamaz.</span><span class="sxs-lookup"><span data-stu-id="435de-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
 
 ## <a name="related-resources"></a><span data-ttu-id="435de-211">İlgili kaynaklar</span><span class="sxs-lookup"><span data-stu-id="435de-211">Related resources</span></span>
 
-* [<span data-ttu-id="435de-212">ASP.NET Core giriş :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="435de-212">Intro to ASP.NET Core :::no-loc(SignalR):::</span></span>](xref:signalr/introduction)
+* [<span data-ttu-id="435de-212">ASP.NET Core giriş SignalR</span><span class="sxs-lookup"><span data-stu-id="435de-212">Intro to ASP.NET Core SignalR</span></span>](xref:signalr/introduction)
 * [<span data-ttu-id="435de-213">JavaScript istemcisi</span><span class="sxs-lookup"><span data-stu-id="435de-213">JavaScript client</span></span>](xref:signalr/javascript-client)
 * [<span data-ttu-id="435de-214">Azure 'da yayımlama</span><span class="sxs-lookup"><span data-stu-id="435de-214">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)

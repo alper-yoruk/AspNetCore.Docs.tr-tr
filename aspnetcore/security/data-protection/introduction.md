@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/introduction
 ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93051700"
 
 <span data-ttu-id="52066-110">Genel sorun açıklaması tek bir tümcede succinctly belirtilebilir: daha sonra alımı sağlamak için güvenilir bilgileri kalıcı hale getirmeniz gerekiyor, ancak Kalıcılık mekanizmasına güvenmiyor.</span><span class="sxs-lookup"><span data-stu-id="52066-110">The overall problem statement can be succinctly stated in a single sentence: I need to persist trusted information for later retrieval, but I don't trust the persistence mechanism.</span></span> <span data-ttu-id="52066-111">Web koşullarında bu, "güvenilmeyen bir istemci aracılığıyla güvenilir duruma gidiş dönüş olması gerekir." şeklinde yazılmış olabilir.</span><span class="sxs-lookup"><span data-stu-id="52066-111">In web terms, this might be written as "I need to round-trip trusted state via an untrusted client."</span></span>
 
-<span data-ttu-id="52066-112">Bunun kurallı örneği, bir kimlik doğrulama :::no-loc(cookie)::: veya taşıyıcı belirteçtir.</span><span class="sxs-lookup"><span data-stu-id="52066-112">The canonical example of this is an authentication :::no-loc(cookie)::: or bearer token.</span></span> <span data-ttu-id="52066-113">Sunucu bir "I ÖÖ ve XYZ izinleri var" belirtecini oluşturur ve istemciye ister.</span><span class="sxs-lookup"><span data-stu-id="52066-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="52066-114">Daha sonraki bir tarihte, istemci bu belirteci sunucuya geri sunacaktır, ancak sunucunun belirteci sahte olmadığı bir tür güvence ihtiyacı vardır.</span><span class="sxs-lookup"><span data-stu-id="52066-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="52066-115">Bu nedenle, ilk gereksinim: özgünlük (deyişle</span><span class="sxs-lookup"><span data-stu-id="52066-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="52066-116">bütünlük, yetkisiz sağlama).</span><span class="sxs-lookup"><span data-stu-id="52066-116">integrity, tamper-proofing).</span></span>
+<span data-ttu-id="52066-112">Bunun kurallı örneği, bir kimlik doğrulama cookie veya taşıyıcı belirteçtir.</span><span class="sxs-lookup"><span data-stu-id="52066-112">The canonical example of this is an authentication cookie or bearer token.</span></span> <span data-ttu-id="52066-113">Sunucu bir "I ÖÖ ve XYZ izinleri var" belirtecini oluşturur ve istemciye ister.</span><span class="sxs-lookup"><span data-stu-id="52066-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="52066-114">Daha sonraki bir tarihte, istemci bu belirteci sunucuya geri sunacaktır, ancak sunucunun belirteci sahte olmadığı bir tür güvence ihtiyacı vardır.</span><span class="sxs-lookup"><span data-stu-id="52066-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="52066-115">Bu nedenle, ilk gereksinim: özgünlük (deyişle</span><span class="sxs-lookup"><span data-stu-id="52066-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="52066-116">bütünlük, yetkisiz sağlama).</span><span class="sxs-lookup"><span data-stu-id="52066-116">integrity, tamper-proofing).</span></span>
 
 <span data-ttu-id="52066-117">Kalıcı duruma sunucu tarafından güvenildiğinden, bu durumun işletim ortamına özgü bilgiler içerebileceğini tahmin ederiz.</span><span class="sxs-lookup"><span data-stu-id="52066-117">Since the persisted state is trusted by the server, we anticipate that this state might contain information that's specific to the operating environment.</span></span> <span data-ttu-id="52066-118">Bu, bir dosya yolu, izin, bir tanıtıcı veya başka bir dolaylı başvuru biçiminde veya sunucuya özgü başka bir veri parçası olabilir.</span><span class="sxs-lookup"><span data-stu-id="52066-118">This could be in the form of a file path, a permission, a handle or other indirect reference, or some other piece of server-specific data.</span></span> <span data-ttu-id="52066-119">Bu tür bilgiler genellikle güvenilmeyen bir istemciye açıklanmamalıdır.</span><span class="sxs-lookup"><span data-stu-id="52066-119">Such information should generally not be disclosed to an untrusted client.</span></span> <span data-ttu-id="52066-120">Bu nedenle, ikinci gereksinim: Gizlilik.</span><span class="sxs-lookup"><span data-stu-id="52066-120">Thus the second requirement: confidentiality.</span></span>
 

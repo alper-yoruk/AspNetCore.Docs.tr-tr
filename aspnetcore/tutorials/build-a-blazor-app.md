@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(Blazor):::Yapılacaklar listesi uygulaması oluşturma
+title: BlazorYapılacaklar listesi uygulaması oluşturma
 author: guardrex
-description: 'Bir :::no-loc(Blazor)::: uygulamayı adım adım oluşturun.'
+description: 'Bir Blazor uygulamayı adım adım oluşturun.'
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/build-a-blazor-app
 ms.openlocfilehash: 68a38b82f5a89365e4f345a60f1f34b697c027ed
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,17 +26,17 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060098"
 ---
-# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="f0d2a-103">:::no-loc(Blazor):::Yapılacaklar listesi uygulaması oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-103">Build a :::no-loc(Blazor)::: todo list app</span></span>
+# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="f0d2a-103">BlazorYapılacaklar listesi uygulaması oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-103">Build a Blazor todo list app</span></span>
 
 <span data-ttu-id="f0d2a-104">[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından</span><span class="sxs-lookup"><span data-stu-id="f0d2a-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="f0d2a-105">Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğiniz gösterilmektedir :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-105">This tutorial shows you how to build and modify a :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="f0d2a-106">Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:</span><span class="sxs-lookup"><span data-stu-id="f0d2a-106">You learn how to:</span></span>
+<span data-ttu-id="f0d2a-105">Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğiniz gösterilmektedir Blazor .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-105">This tutorial shows you how to build and modify a Blazor app.</span></span> <span data-ttu-id="f0d2a-106">Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:</span><span class="sxs-lookup"><span data-stu-id="f0d2a-106">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="f0d2a-107">Yapılacaklar listesi :::no-loc(Blazor)::: uygulama projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-107">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="f0d2a-108">:::no-loc(Razor):::Bileşenleri Değiştir</span><span class="sxs-lookup"><span data-stu-id="f0d2a-108">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="f0d2a-107">Yapılacaklar listesi Blazor uygulama projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-107">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="f0d2a-108">RazorBileşenleri Değiştir</span><span class="sxs-lookup"><span data-stu-id="f0d2a-108">Modify Razor components</span></span>
 > * <span data-ttu-id="f0d2a-109">Bileşenlerde olay işleme ve veri bağlamayı kullanma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-109">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="f0d2a-110">Bir uygulamada yönlendirmeyi kullanma :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="f0d2a-110">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="f0d2a-110">Bir uygulamada yönlendirmeyi kullanma Blazor</span><span class="sxs-lookup"><span data-stu-id="f0d2a-110">Use routing in a Blazor app</span></span>
 
 <span data-ttu-id="f0d2a-111">Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olacak.</span><span class="sxs-lookup"><span data-stu-id="f0d2a-111">At the end of this tutorial, you'll have a working todo list app.</span></span>
 
@@ -44,9 +44,9 @@ ms.locfileid: "93060098"
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="f0d2a-113">Yapılacaklar listesi uygulaması oluşturma :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="f0d2a-113">Create a todo list :::no-loc(Blazor)::: app</span></span>
+## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="f0d2a-113">Yapılacaklar listesi uygulaması oluşturma Blazor</span><span class="sxs-lookup"><span data-stu-id="f0d2a-113">Create a todo list Blazor app</span></span>
 
-1. <span data-ttu-id="f0d2a-114">:::no-loc(Blazor):::Komut kabuğunda adlı yeni bir uygulama oluşturun `TodoList` :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-114">Create a new :::no-loc(Blazor)::: app named `TodoList` in a command shell:</span></span>
+1. <span data-ttu-id="f0d2a-114">BlazorKomut kabuğunda adlı yeni bir uygulama oluşturun `TodoList` :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-114">Create a new Blazor app named `TodoList` in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o TodoList
@@ -58,14 +58,14 @@ ms.locfileid: "93060098"
    cd TodoList
    ```
 
-1. <span data-ttu-id="f0d2a-118">`Todo` :::no-loc(Razor)::: Aşağıdaki komutu kullanarak klasördeki uygulamaya yeni bir bileşen ekleyin `Pages` :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-118">Add a new `Todo` :::no-loc(Razor)::: component to the app in the `Pages` folder using the following command:</span></span>
+1. <span data-ttu-id="f0d2a-118">`Todo` Razor Aşağıdaki komutu kullanarak klasördeki uygulamaya yeni bir bileşen ekleyin `Pages` :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-118">Add a new `Todo` Razor component to the app in the `Pages` folder using the following command:</span></span>
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
    > [!IMPORTANT]
-   > <span data-ttu-id="f0d2a-119">:::no-loc(Razor)::: bileşen dosyası adları, büyük harfle bir ilk harf gerektirir.</span><span class="sxs-lookup"><span data-stu-id="f0d2a-119">:::no-loc(Razor)::: component file names require a capitalized first letter.</span></span> <span data-ttu-id="f0d2a-120">Klasörünü açın `Pages` ve `Todo` bileşen dosyası adının büyük harfle başlatıldığını onaylayın `T` .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="f0d2a-121">Dosya adı olmalıdır `Todo.razor` .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-121">The file name should be `Todo.razor`.</span></span>
+   > <span data-ttu-id="f0d2a-119">Razor bileşen dosyası adları, büyük harfle bir ilk harf gerektirir.</span><span class="sxs-lookup"><span data-stu-id="f0d2a-119">Razor component file names require a capitalized first letter.</span></span> <span data-ttu-id="f0d2a-120">Klasörünü açın `Pages` ve `Todo` bileşen dosyası adının büyük harfle başlatıldığını onaylayın `T` .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="f0d2a-121">Dosya adı olmalıdır `Todo.razor` .</span><span class="sxs-lookup"><span data-stu-id="f0d2a-121">The file name should be `Todo.razor`.</span></span>
 
 1. <span data-ttu-id="f0d2a-122">İçinde `Pages/Todo.razor` bileşen için ilk biçimlendirmeyi belirtin:</span><span class="sxs-lookup"><span data-stu-id="f0d2a-122">In `Pages/Todo.razor` provide the initial markup for the component:</span></span>
 
@@ -147,12 +147,12 @@ ms.locfileid: "93060098"
 <span data-ttu-id="f0d2a-158">Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:</span><span class="sxs-lookup"><span data-stu-id="f0d2a-158">In this tutorial, you learned how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="f0d2a-159">Yapılacaklar listesi :::no-loc(Blazor)::: uygulama projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-159">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="f0d2a-160">:::no-loc(Razor):::Bileşenleri Değiştir</span><span class="sxs-lookup"><span data-stu-id="f0d2a-160">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="f0d2a-159">Yapılacaklar listesi Blazor uygulama projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-159">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="f0d2a-160">RazorBileşenleri Değiştir</span><span class="sxs-lookup"><span data-stu-id="f0d2a-160">Modify Razor components</span></span>
 > * <span data-ttu-id="f0d2a-161">Bileşenlerde olay işleme ve veri bağlamayı kullanma</span><span class="sxs-lookup"><span data-stu-id="f0d2a-161">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="f0d2a-162">Bir uygulamada yönlendirmeyi kullanma :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="f0d2a-162">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="f0d2a-162">Bir uygulamada yönlendirmeyi kullanma Blazor</span><span class="sxs-lookup"><span data-stu-id="f0d2a-162">Use routing in a Blazor app</span></span>
 
-<span data-ttu-id="f0d2a-163">ASP.NET Core araçları hakkında bilgi edinin :::no-loc(Blazor)::: :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-163">Learn about tooling for ASP.NET Core :::no-loc(Blazor)::::</span></span>
+<span data-ttu-id="f0d2a-163">ASP.NET Core araçları hakkında bilgi edinin Blazor :</span><span class="sxs-lookup"><span data-stu-id="f0d2a-163">Learn about tooling for ASP.NET Core Blazor:</span></span>
 
 > [!div class="nextstepaction"]
 > <xref:blazor/tooling>

@@ -5,17 +5,17 @@ description: ASP.NET Core iki öğeli kimlik doğrulamasıyla çalışan TOTP Au
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/identity-enable-qrcodes
 ms.openlocfilehash: b778e7238911ec9966edf7f0f7becd113b1e197a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -50,14 +50,14 @@ ms.locfileid: "93060839"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* <span data-ttu-id="f9865-120">*/Areas/ :::no-loc(Identity)::: /Pages/Account/Manage/enabledoğru* [ :::no-loc(Identity):::](xref:security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="f9865-120">Follow the instructions in [Scaffold :::no-loc(Identity):::](xref:security/authentication/scaffold-identity) to generate */Areas/:::no-loc(Identity):::/Pages/Account/Manage/EnableAuthenticator.cshtml* .</span></span>
-* <span data-ttu-id="f9865-121">*/Areas/ :::no-loc(Identity)::: /Pages/Account/Manage/enabledoğrulayıcısı Tor.exe* içinde, `Scripts` dosyanın sonundaki bölümü bulun:</span><span class="sxs-lookup"><span data-stu-id="f9865-121">In */Areas/:::no-loc(Identity):::/Pages/Account/Manage/EnableAuthenticator.cshtml* , locate the `Scripts` section at the end of the file:</span></span>
+* <span data-ttu-id="f9865-120">*/Areas/ Identity /Pages/Account/Manage/enabledoğru* [ Identity](xref:security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="f9865-120">Follow the instructions in [Scaffold Identity](xref:security/authentication/scaffold-identity) to generate */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml* .</span></span>
+* <span data-ttu-id="f9865-121">*/Areas/ Identity /Pages/Account/Manage/enabledoğrulayıcısı Tor.exe* içinde, `Scripts` dosyanın sonundaki bölümü bulun:</span><span class="sxs-lookup"><span data-stu-id="f9865-121">In */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml* , locate the `Scripts` section at the end of the file:</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-* <span data-ttu-id="f9865-122">*Sayfalar/hesap/Yönet/EnableAuthenticator. cshtml* ( :::no-loc(Razor)::: Sayfalar) veya *Görünümler/Yönet/enableauthenticator. cshtml* (MVC) içinde, `Scripts` dosyanın sonundaki bölümü bulun:</span><span class="sxs-lookup"><span data-stu-id="f9865-122">In *Pages/Account/Manage/EnableAuthenticator.cshtml* (:::no-loc(Razor)::: Pages) or *Views/Manage/EnableAuthenticator.cshtml* (MVC), locate the `Scripts` section at the end of the file:</span></span>
+* <span data-ttu-id="f9865-122">*Sayfalar/hesap/Yönet/EnableAuthenticator. cshtml* ( Razor Sayfalar) veya *Görünümler/Yönet/enableauthenticator. cshtml* (MVC) içinde, `Scripts` dosyanın sonundaki bölümü bulun:</span><span class="sxs-lookup"><span data-stu-id="f9865-122">In *Pages/Account/Manage/EnableAuthenticator.cshtml* (Razor Pages) or *Views/Manage/EnableAuthenticator.cshtml* (MVC), locate the `Scripts` section at the end of the file:</span></span>
 
 ::: moniker-end
 
@@ -97,13 +97,13 @@ ms.locfileid: "93060839"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-<span data-ttu-id="f9865-128">QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır.</span><span class="sxs-lookup"><span data-stu-id="f9865-128">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="f9865-129">`GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ :::no-loc(Identity)::: /Pages/Account/Manage/EnableAuthenticator.cshtml.cs* içindeki yöntemi arayarak bunu değiştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="f9865-129">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the */Areas/:::no-loc(Identity):::/Pages/Account/Manage/EnableAuthenticator.cshtml.cs* .</span></span>
+<span data-ttu-id="f9865-128">QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır.</span><span class="sxs-lookup"><span data-stu-id="f9865-128">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="f9865-129">`GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs* içindeki yöntemi arayarak bunu değiştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="f9865-129">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs* .</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-<span data-ttu-id="f9865-130">QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır.</span><span class="sxs-lookup"><span data-stu-id="f9865-130">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="f9865-131">Bunu, `GenerateQrCodeUri(string email, string unformattedKey)` *Pages/Account/Manage/enableauthenticator. cshtml. cs* ( :::no-loc(Razor)::: Pages) dosyasında ya da *Controllers/managecontroller. cs* (MVC) dosyasındaki yöntemine bakarak değiştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="f9865-131">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the *Pages/Account/Manage/EnableAuthenticator.cshtml.cs* (:::no-loc(Razor)::: Pages) file or the *Controllers/ManageController.cs* (MVC) file.</span></span>
+<span data-ttu-id="f9865-130">QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır.</span><span class="sxs-lookup"><span data-stu-id="f9865-130">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="f9865-131">Bunu, `GenerateQrCodeUri(string email, string unformattedKey)` *Pages/Account/Manage/enableauthenticator. cshtml. cs* ( Razor Pages) dosyasında ya da *Controllers/managecontroller. cs* (MVC) dosyasındaki yöntemine bakarak değiştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="f9865-131">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the *Pages/Account/Manage/EnableAuthenticator.cshtml.cs* (Razor Pages) file or the *Controllers/ManageController.cs* (MVC) file.</span></span>
 
 ::: moniker-end
 
@@ -116,7 +116,7 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 {
     return string.Format(
         AuthenticatorUriFormat,
-        _urlEncoder.Encode(":::no-loc(Razor)::: Pages"),
+        _urlEncoder.Encode("Razor Pages"),
         _urlEncoder.Encode(email),
         unformattedKey);
 }

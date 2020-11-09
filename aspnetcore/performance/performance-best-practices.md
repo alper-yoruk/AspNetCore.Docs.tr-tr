@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/performance-best-practices
 ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -55,7 +55,7 @@ ms.locfileid: "93061008"
 
 * <span data-ttu-id="7fe4f-126">[Etkin kod yollarını](#understand-hot-code-paths) zaman uyumsuz yapın.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-126">Make [hot code paths](#understand-hot-code-paths) asynchronous.</span></span>
 * <span data-ttu-id="7fe4f-127">Zaman uyumsuz bir API kullanılabiliyorsa veri erişimi, g/ç ve uzun süre çalışan işlem API 'Lerini çağrı zaman uyumsuz olarak çağırın.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-127">Call data access, I/O, and long-running operations APIs asynchronously if an asynchronous API is available.</span></span> <span data-ttu-id="7fe4f-128">Zaman uyumlu bir API zaman **uyumsuz yapmak Için** [Task. Run](/dotnet/api/system.threading.tasks.task.run) kullanmayın.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-128">Do **not** use [Task.Run](/dotnet/api/system.threading.tasks.task.run) to make a synchronous API asynchronous.</span></span>
-* <span data-ttu-id="7fe4f-129">Denetleyici/ :::no-loc(Razor)::: sayfa eylemlerini zaman uyumsuz yapın.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-129">Make controller/:::no-loc(Razor)::: Page actions asynchronous.</span></span> <span data-ttu-id="7fe4f-130">[Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-130">The entire call stack is asynchronous in order to benefit from [async/await](/dotnet/csharp/programming-guide/concepts/async/) patterns.</span></span>
+* <span data-ttu-id="7fe4f-129">Denetleyici/ Razor sayfa eylemlerini zaman uyumsuz yapın.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-129">Make controller/Razor Page actions asynchronous.</span></span> <span data-ttu-id="7fe4f-130">[Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-130">The entire call stack is asynchronous in order to benefit from [async/await](/dotnet/csharp/programming-guide/concepts/async/) patterns.</span></span>
 
 <span data-ttu-id="7fe4f-131">[Iş parçacığı havuzuna](/windows/desktop/procthread/thread-pools)sık sık eklenen iş parçacıklarını bulmak Için [PerfView](https://github.com/Microsoft/perfview)gibi bir profil oluşturucu kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-131">A profiler, such as [PerfView](https://github.com/Microsoft/perfview), can be used to find threads frequently added to the [Thread Pool](/windows/desktop/procthread/thread-pools).</span></span> <span data-ttu-id="7fe4f-132">`Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Olay, iş parçacığı havuzuna eklenen bir iş parçacığını gösterir.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-132">The `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` event indicates a thread added to the thread pool.</span></span> <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
@@ -136,7 +136,7 @@ ms.locfileid: "93061008"
 
 * <span data-ttu-id="7fe4f-208">Olağan HTTP istek işlemenin bir parçası olarak uzun süre çalışan görevlerin **tamamlanmasını beklememe** .</span><span class="sxs-lookup"><span data-stu-id="7fe4f-208">**Do not** wait for long-running tasks to complete as part of ordinary HTTP request processing.</span></span>
 * <span data-ttu-id="7fe4f-209">[Arka plan hizmetleri](xref:fundamentals/host/hosted-services) ile uzun süreli istekleri işlemeyi veya bir [Azure işlevi](/azure/azure-functions/)ile işlem dışı **bırakmayı düşünün.**</span><span class="sxs-lookup"><span data-stu-id="7fe4f-209">**Do** consider handling long-running requests with [background services](xref:fundamentals/host/hosted-services) or out of process with an [Azure Function](/azure/azure-functions/).</span></span> <span data-ttu-id="7fe4f-210">İşlem dışı iş tamamlama, özellikle CPU yoğun görevler için faydalıdır.</span><span class="sxs-lookup"><span data-stu-id="7fe4f-210">Completing work out-of-process is especially beneficial for CPU-intensive tasks.</span></span>
-* <span data-ttu-id="7fe4f-211">İstemcilerle zaman uyumsuz iletişim kurmak için gibi gerçek zamanlı iletişim **seçenekleri kullanın** [:::no-loc(SignalR):::](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="7fe4f-211">**Do** use real-time communication options, such as [:::no-loc(SignalR):::](xref:signalr/introduction), to communicate with clients asynchronously.</span></span>
+* <span data-ttu-id="7fe4f-211">İstemcilerle zaman uyumsuz iletişim kurmak için gibi gerçek zamanlı iletişim **seçenekleri kullanın** [SignalR](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="7fe4f-211">**Do** use real-time communication options, such as [SignalR](xref:signalr/introduction), to communicate with clients asynchronously.</span></span>
 
 ## <a name="minify-client-assets"></a><span data-ttu-id="7fe4f-212">İstemci varlıklarını küçültmeye yönelik</span><span class="sxs-lookup"><span data-stu-id="7fe4f-212">Minify client assets</span></span>
 

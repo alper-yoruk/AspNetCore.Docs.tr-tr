@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/caching/memory
 ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -190,7 +190,7 @@ ms.locfileid: "93061450"
 * <span data-ttu-id="70aa2-230">Diğeri oluşturmak için bir önbellek girdisi kullanıldığında, alt öğe üst girdinin süre sonu belirteçlerini ve zaman tabanlı süre sonu ayarlarını kopyalar.</span><span class="sxs-lookup"><span data-stu-id="70aa2-230">When one cache entry is used to create another, the child copies the parent entry's expiration tokens and time-based expiration settings.</span></span> <span data-ttu-id="70aa2-231">Üst girdinin el ile kaldırılması veya güncelleştirilmesi için alt öğenin kullanım dışı olmaması.</span><span class="sxs-lookup"><span data-stu-id="70aa2-231">The child isn't expired by manual removal or updating of the parent entry.</span></span>
 
 * <span data-ttu-id="70aa2-232"><xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks>Önbellek girdisi önbellekten çıkarıldıktan sonra uygulanacak geri çağırmaları ayarlamak için kullanın.</span><span class="sxs-lookup"><span data-stu-id="70aa2-232">Use <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks> to set the callbacks that will be fired after the cache entry is evicted from the cache.</span></span>
-* <span data-ttu-id="70aa2-233">Çoğu uygulama için `IMemoryCache` etkindir.</span><span class="sxs-lookup"><span data-stu-id="70aa2-233">For most apps, `IMemoryCache` is enabled.</span></span> <span data-ttu-id="70aa2-234">Örneğin,,, `AddMvc` , `AddControllersWithViews` `Add:::no-loc(Razor):::Pages` `AddMvcCore().Add:::no-loc(Razor):::ViewEngine` ve diğer birçok yöntemi ' de `Add{Service}` `ConfigureServices` `IMemoryCache` çağırarak, ' ı etkinleştirilir.</span><span class="sxs-lookup"><span data-stu-id="70aa2-234">For example, calling `AddMvc`, `AddControllersWithViews`, `Add:::no-loc(Razor):::Pages`, `AddMvcCore().Add:::no-loc(Razor):::ViewEngine`, and many other `Add{Service}` methods in `ConfigureServices`, enables `IMemoryCache`.</span></span> <span data-ttu-id="70aa2-235">Önceki yöntemlerden birini çağırmayan uygulamalarda ' `Add{Service}` de çağrılması gerekebilir <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> `ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="70aa2-235">For apps that are not calling one of the preceding `Add{Service}` methods, it may be necessary to call <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> in `ConfigureServices`.</span></span>
+* <span data-ttu-id="70aa2-233">Çoğu uygulama için `IMemoryCache` etkindir.</span><span class="sxs-lookup"><span data-stu-id="70aa2-233">For most apps, `IMemoryCache` is enabled.</span></span> <span data-ttu-id="70aa2-234">Örneğin,,, `AddMvc` , `AddControllersWithViews` `AddRazorPages` `AddMvcCore().AddRazorViewEngine` ve diğer birçok yöntemi ' de `Add{Service}` `ConfigureServices` `IMemoryCache` çağırarak, ' ı etkinleştirilir.</span><span class="sxs-lookup"><span data-stu-id="70aa2-234">For example, calling `AddMvc`, `AddControllersWithViews`, `AddRazorPages`, `AddMvcCore().AddRazorViewEngine`, and many other `Add{Service}` methods in `ConfigureServices`, enables `IMemoryCache`.</span></span> <span data-ttu-id="70aa2-235">Önceki yöntemlerden birini çağırmayan uygulamalarda ' `Add{Service}` de çağrılması gerekebilir <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> `ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="70aa2-235">For apps that are not calling one of the preceding `Add{Service}` methods, it may be necessary to call <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> in `ConfigureServices`.</span></span>
 
 ## <a name="background-cache-update"></a><span data-ttu-id="70aa2-236">Arka plan önbelleği güncelleştirmesi</span><span class="sxs-lookup"><span data-stu-id="70aa2-236">Background cache update</span></span>
 

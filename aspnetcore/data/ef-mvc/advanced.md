@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -105,7 +105,7 @@ ms.locfileid: "93054391"
 
 <span data-ttu-id="3a8e1-160">**Çözüm Gezgini** , *Görünümler/kurslar* klasörüne sağ tıklayın ve ardından **> yeni öğe Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-160">In **Solution Explorer** , right-click the *Views/Courses* folder, and then click **Add > New Item** .</span></span>
 
-<span data-ttu-id="3a8e1-161">**Yeni öğe Ekle** iletişim kutusunda sol bölmede yüklü **ASP.NET Core** ' **Installed** a tıklayın, **:::no-loc(Razor)::: görüntüle** ' ye tıklayın ve yeni görünüm *UpdateCourseCredits. cshtml* olarak adlandırın.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **:::no-loc(Razor)::: View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
+<span data-ttu-id="3a8e1-161">**Yeni öğe Ekle** iletişim kutusunda sol bölmede yüklü **ASP.NET Core** ' **Installed** a tıklayın, **Razor görüntüle** ' ye tıklayın ve yeni görünüm *UpdateCourseCredits. cshtml* olarak adlandırın.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **Razor View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
 
 <span data-ttu-id="3a8e1-162">*Views/kurslar/UpdateCourseCredits. cshtml* içinde, şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="3a8e1-162">In *Views/Courses/UpdateCourseCredits.cshtml* , replace the template code with the following code:</span></span>
 
@@ -241,7 +241,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 <span data-ttu-id="3a8e1-241">Varolan verileri içeren bir veritabanında şema değişiklikleri yaparken başka hatalar almak mümkündür.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-241">It's possible to get other errors when making schema changes in a database that has existing data.</span></span> <span data-ttu-id="3a8e1-242">Çözümleyemez geçiş hataları alırsanız, bağlantı dizesindeki veritabanı adını değiştirebilir veya veritabanını silebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-242">If you get migration errors you can't resolve, you can either change the database name in the connection string or delete the database.</span></span> <span data-ttu-id="3a8e1-243">Yeni bir veritabanı ile geçirilecek veri yoktur ve Update-Database komutunun hatasız tamamlanabilmesi çok daha yüksektir.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-243">With a new database, there's no data to migrate, and the update-database command is much more likely to complete without errors.</span></span>
 
-<span data-ttu-id="3a8e1-244">En basit yaklaşım, içindeki veritabanını yeniden adlandırmalıdır *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="3a8e1-244">The simplest approach is to rename the database in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="3a8e1-245">Bir sonraki sefer çalıştırdığınızda `database update` Yeni bir veritabanı oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-245">The next time you run `database update`, a new database will be created.</span></span>
+<span data-ttu-id="3a8e1-244">En basit yaklaşım, içindeki veritabanını yeniden adlandırmalıdır *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="3a8e1-244">The simplest approach is to rename the database in *appsettings.json* .</span></span> <span data-ttu-id="3a8e1-245">Bir sonraki sefer çalıştırdığınızda `database update` Yeni bir veritabanı oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-245">The next time you run `database update`, a new database will be created.</span></span>
 
 <span data-ttu-id="3a8e1-246">SSOX 'te bir veritabanını silmek için veritabanına sağ tıklayın, **Sil** ' e tıklayın ve ardından **veritabanını sil** Iletişim kutusunda **varolan bağlantıları kapat** ' ı seçin ve **Tamam** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="3a8e1-246">To delete a database in SSOX, right-click the database, click **Delete** , and then in the **Delete Database** dialog box select **Close existing connections** and click **OK** .</span></span>
 

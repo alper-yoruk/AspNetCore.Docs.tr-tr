@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/host/generic-host
 ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -114,7 +114,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * <span data-ttu-id="177e8-132">Ön eki olan ortam değişkenleri `DOTNET_` .</span><span class="sxs-lookup"><span data-stu-id="177e8-132">Environment variables prefixed with `DOTNET_`.</span></span>
   * <span data-ttu-id="177e8-133">Komut satırı bağımsız değişkenleri.</span><span class="sxs-lookup"><span data-stu-id="177e8-133">Command-line arguments.</span></span>
 * <span data-ttu-id="177e8-134">Uygulama yapılandırmasını şuradan yükler:</span><span class="sxs-lookup"><span data-stu-id="177e8-134">Loads app configuration from:</span></span>
-  * <span data-ttu-id="177e8-135">*:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="177e8-135">*:::no-loc(appsettings.json):::* .</span></span>
+  * <span data-ttu-id="177e8-135">*appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="177e8-135">*appsettings.json* .</span></span>
   * <span data-ttu-id="177e8-136">*appSettings. {Environment}. JSON* .</span><span class="sxs-lookup"><span data-stu-id="177e8-136">*appsettings.{Environment}.json* .</span></span>
   * <span data-ttu-id="177e8-137">Uygulama ortamda çalıştığında [gizli dizi Yöneticisi](xref:security/app-secrets) `Development` .</span><span class="sxs-lookup"><span data-stu-id="177e8-137">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
   * <span data-ttu-id="177e8-138">Ortam değişkenleri.</span><span class="sxs-lookup"><span data-stu-id="177e8-138">Environment variables.</span></span>
@@ -271,7 +271,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="disable-app-configuration-reload-on-change"></a><span data-ttu-id="177e8-244">Değişiklik sırasında uygulama yapılandırması yeniden yüklemeyi devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="177e8-244">Disable app configuration reload on change</span></span>
 
-<span data-ttu-id="177e8-245">[Varsayılan](xref:fundamentals/configuration/index#default)olarak *:::no-loc(appsettings.json):::* ve *appSettings. { Ortam}. JSON* , dosya değiştiğinde yeniden yüklenir.</span><span class="sxs-lookup"><span data-stu-id="177e8-245">By [default](xref:fundamentals/configuration/index#default), *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* are reloaded when the file changes.</span></span> <span data-ttu-id="177e8-246">ASP.NET Core 5,0 veya sonraki bir sürümde yeniden yükleme davranışını devre dışı bırakmak için `hostBuilder:reloadConfigOnChange` anahtarı olarak ayarlayın `false` .</span><span class="sxs-lookup"><span data-stu-id="177e8-246">To disable this reload behavior in ASP.NET Core 5.0 or later, set the `hostBuilder:reloadConfigOnChange` key to `false`.</span></span>
+<span data-ttu-id="177e8-245">[Varsayılan](xref:fundamentals/configuration/index#default)olarak *appsettings.json* ve *appSettings. { Ortam}. JSON* , dosya değiştiğinde yeniden yüklenir.</span><span class="sxs-lookup"><span data-stu-id="177e8-245">By [default](xref:fundamentals/configuration/index#default), *appsettings.json* and *appsettings.{Environment}.json* are reloaded when the file changes.</span></span> <span data-ttu-id="177e8-246">ASP.NET Core 5,0 veya sonraki bir sürümde yeniden yükleme davranışını devre dışı bırakmak için `hostBuilder:reloadConfigOnChange` anahtarı olarak ayarlayın `false` .</span><span class="sxs-lookup"><span data-stu-id="177e8-246">To disable this reload behavior in ASP.NET Core 5.0 or later, set the `hostBuilder:reloadConfigOnChange` key to `false`.</span></span>
 
 <span data-ttu-id="177e8-247">**Anahtar** : `hostBuilder:reloadConfigOnChange`</span><span class="sxs-lookup"><span data-stu-id="177e8-247">**Key** : `hostBuilder:reloadConfigOnChange`</span></span>  
 <span data-ttu-id="177e8-248">**Tür** : `bool` ( `true` veya `1` )</span><span class="sxs-lookup"><span data-stu-id="177e8-248">**Type** : `bool` (`true` or `1`)</span></span>  
@@ -617,7 +617,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * <span data-ttu-id="177e8-399">Ön eki olan ortam değişkenleri `DOTNET_` .</span><span class="sxs-lookup"><span data-stu-id="177e8-399">Environment variables prefixed with `DOTNET_`.</span></span>
   * <span data-ttu-id="177e8-400">Komut satırı bağımsız değişkenleri.</span><span class="sxs-lookup"><span data-stu-id="177e8-400">Command-line arguments.</span></span>
 * <span data-ttu-id="177e8-401">Uygulama yapılandırmasını şuradan yükler:</span><span class="sxs-lookup"><span data-stu-id="177e8-401">Loads app configuration from:</span></span>
-  * <span data-ttu-id="177e8-402">*:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="177e8-402">*:::no-loc(appsettings.json):::* .</span></span>
+  * <span data-ttu-id="177e8-402">*appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="177e8-402">*appsettings.json* .</span></span>
   * <span data-ttu-id="177e8-403">*appSettings. {Environment}. JSON* .</span><span class="sxs-lookup"><span data-stu-id="177e8-403">*appsettings.{Environment}.json* .</span></span>
   * <span data-ttu-id="177e8-404">Uygulama ortamda çalıştığında [gizli dizi Yöneticisi](xref:security/app-secrets) `Development` .</span><span class="sxs-lookup"><span data-stu-id="177e8-404">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
   * <span data-ttu-id="177e8-405">Ortam değişkenleri.</span><span class="sxs-lookup"><span data-stu-id="177e8-405">Environment variables.</span></span>
@@ -1175,9 +1175,9 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureAppConfiguration)]
 
-<span data-ttu-id="177e8-729">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="177e8-729">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="177e8-729">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="177e8-729">*appsettings.json* :</span></span>
 
-[!code-json[](generic-host/samples/2.x/GenericHostSample/:::no-loc(appsettings.json):::)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
 <span data-ttu-id="177e8-730">*appsettings.Development.js* :</span><span class="sxs-lookup"><span data-stu-id="177e8-730">*appsettings.Development.json* :</span></span>
 

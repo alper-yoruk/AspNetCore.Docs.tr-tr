@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: istemcileri'
+title: 'ASP.NET Core SignalR istemcileri'
 author: bradygaster
-description: 'Çeşitli ASP.NET Core istemcileri tarafından desteklenen özellikleri öğrenin :::no-loc(SignalR)::: .'
+description: 'Çeşitli ASP.NET Core istemcileri tarafından desteklenen özellikleri öğrenin SignalR .'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/client-features
 ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,21 +25,21 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050985"
 ---
-# <a name="aspnet-core-no-locsignalr-clients"></a><span data-ttu-id="6db36-103">ASP.NET Core :::no-loc(SignalR)::: istemcileri</span><span class="sxs-lookup"><span data-stu-id="6db36-103">ASP.NET Core :::no-loc(SignalR)::: clients</span></span>
+# <a name="aspnet-core-no-locsignalr-clients"></a><span data-ttu-id="6db36-103">ASP.NET Core SignalR istemcileri</span><span class="sxs-lookup"><span data-stu-id="6db36-103">ASP.NET Core SignalR clients</span></span>
 
 ## <a name="versioning-support-and-compatibility"></a><span data-ttu-id="6db36-104">Sürüm oluşturma, destek ve uyumluluk</span><span class="sxs-lookup"><span data-stu-id="6db36-104">Versioning, support, and compatibility</span></span>
 
-<span data-ttu-id="6db36-105">:::no-loc(SignalR):::İstemciler, sunucu bileşenleriyle birlikte dağıtılır ve eşleşmek üzere sürümlüdür.</span><span class="sxs-lookup"><span data-stu-id="6db36-105">The :::no-loc(SignalR)::: clients ship alongside the server components and are versioned to match.</span></span> <span data-ttu-id="6db36-106">Desteklenen her türlü istemci, desteklenen herhangi bir sunucuya güvenli bir şekilde bağlanabilir ve tüm uyumluluk sorunları düzeltilme hataları olarak kabul edilebilir.</span><span class="sxs-lookup"><span data-stu-id="6db36-106">Any supported client can safely connect to any supported server, and any compatibility issues would be considered bugs to be fixed.</span></span> <span data-ttu-id="6db36-107">:::no-loc(SignalR)::: istemciler, .NET Core 'un geri kalanı ile aynı destek yaşam döngüsü içinde desteklenir.</span><span class="sxs-lookup"><span data-stu-id="6db36-107">:::no-loc(SignalR)::: clients are supported in the same support lifecycle as the rest of .NET Core.</span></span> <span data-ttu-id="6db36-108">Ayrıntılar için bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .</span><span class="sxs-lookup"><span data-stu-id="6db36-108">See [the .NET Core Support Policy](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) for details.</span></span>
+<span data-ttu-id="6db36-105">SignalRİstemciler, sunucu bileşenleriyle birlikte dağıtılır ve eşleşmek üzere sürümlüdür.</span><span class="sxs-lookup"><span data-stu-id="6db36-105">The SignalR clients ship alongside the server components and are versioned to match.</span></span> <span data-ttu-id="6db36-106">Desteklenen her türlü istemci, desteklenen herhangi bir sunucuya güvenli bir şekilde bağlanabilir ve tüm uyumluluk sorunları düzeltilme hataları olarak kabul edilebilir.</span><span class="sxs-lookup"><span data-stu-id="6db36-106">Any supported client can safely connect to any supported server, and any compatibility issues would be considered bugs to be fixed.</span></span> <span data-ttu-id="6db36-107">SignalR istemciler, .NET Core 'un geri kalanı ile aynı destek yaşam döngüsü içinde desteklenir.</span><span class="sxs-lookup"><span data-stu-id="6db36-107">SignalR clients are supported in the same support lifecycle as the rest of .NET Core.</span></span> <span data-ttu-id="6db36-108">Ayrıntılar için bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .</span><span class="sxs-lookup"><span data-stu-id="6db36-108">See [the .NET Core Support Policy](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) for details.</span></span>
 
 <span data-ttu-id="6db36-109">Birçok özellik uyumlu bir istemci **ve** sunucu gerektirir.</span><span class="sxs-lookup"><span data-stu-id="6db36-109">Many features require a compatible client **and** server.</span></span> <span data-ttu-id="6db36-110">Çeşitli özelliklerin en düşük sürümlerinin gösterildiği tablo için aşağıya bakın.</span><span class="sxs-lookup"><span data-stu-id="6db36-110">See below for a table showing the minimum versions for various features.</span></span>
 
-<span data-ttu-id="6db36-111">:::no-loc(SignalR):::2,1 ve 2,2 .NET Core yayınlarına eşlenecek ve aynı yaşam süresine sahip 1. x sürümleri.</span><span class="sxs-lookup"><span data-stu-id="6db36-111">The 1.x versions of :::no-loc(SignalR)::: map to the 2.1 and 2.2 .NET Core releases and have the same lifetime.</span></span> <span data-ttu-id="6db36-112">Sürüm 3. x ve üzeri için sürüm, :::no-loc(SignalR)::: .net 'in geri kalanıyla tamamen eşleşir ve aynı destek yaşam döngüsüne sahiptir.</span><span class="sxs-lookup"><span data-stu-id="6db36-112">For version 3.x and above, the :::no-loc(SignalR)::: version exactly matches the rest of .NET and has the same support lifecycle.</span></span>
+<span data-ttu-id="6db36-111">SignalR2,1 ve 2,2 .NET Core yayınlarına eşlenecek ve aynı yaşam süresine sahip 1. x sürümleri.</span><span class="sxs-lookup"><span data-stu-id="6db36-111">The 1.x versions of SignalR map to the 2.1 and 2.2 .NET Core releases and have the same lifetime.</span></span> <span data-ttu-id="6db36-112">Sürüm 3. x ve üzeri için sürüm, SignalR .net 'in geri kalanıyla tamamen eşleşir ve aynı destek yaşam döngüsüne sahiptir.</span><span class="sxs-lookup"><span data-stu-id="6db36-112">For version 3.x and above, the SignalR version exactly matches the rest of .NET and has the same support lifecycle.</span></span>
 
-| <span data-ttu-id="6db36-113">:::no-loc(SignalR)::: sürümü</span><span class="sxs-lookup"><span data-stu-id="6db36-113">:::no-loc(SignalR)::: version</span></span> | <span data-ttu-id="6db36-114">.NET Core sürümü</span><span class="sxs-lookup"><span data-stu-id="6db36-114">.NET Core version</span></span> | <span data-ttu-id="6db36-115">Destek düzeyi</span><span class="sxs-lookup"><span data-stu-id="6db36-115">Support level</span></span> | <span data-ttu-id="6db36-116">Destek sonu</span><span class="sxs-lookup"><span data-stu-id="6db36-116">End of support</span></span> |
+| <span data-ttu-id="6db36-113">SignalR sürümü</span><span class="sxs-lookup"><span data-stu-id="6db36-113">SignalR version</span></span> | <span data-ttu-id="6db36-114">.NET Core sürümü</span><span class="sxs-lookup"><span data-stu-id="6db36-114">.NET Core version</span></span> | <span data-ttu-id="6db36-115">Destek düzeyi</span><span class="sxs-lookup"><span data-stu-id="6db36-115">Support level</span></span> | <span data-ttu-id="6db36-116">Destek sonu</span><span class="sxs-lookup"><span data-stu-id="6db36-116">End of support</span></span> |
 | - | - | - | - |
 | <span data-ttu-id="6db36-117">1.0. x</span><span class="sxs-lookup"><span data-stu-id="6db36-117">1.0.x</span></span> | <span data-ttu-id="6db36-118">2.1. x</span><span class="sxs-lookup"><span data-stu-id="6db36-118">2.1.x</span></span> | <span data-ttu-id="6db36-119">Uzun süreli destek</span><span class="sxs-lookup"><span data-stu-id="6db36-119">Long Term Support</span></span> | <span data-ttu-id="6db36-120">21 Ağustos 2021</span><span class="sxs-lookup"><span data-stu-id="6db36-120">August 21, 2021</span></span> |
 | <span data-ttu-id="6db36-121">1.1. x</span><span class="sxs-lookup"><span data-stu-id="6db36-121">1.1.x</span></span> | <span data-ttu-id="6db36-122">2.2. x</span><span class="sxs-lookup"><span data-stu-id="6db36-122">2.2.x</span></span> | <span data-ttu-id="6db36-123">Yaşam sonu</span><span class="sxs-lookup"><span data-stu-id="6db36-123">End Of Life</span></span> | <span data-ttu-id="6db36-124">23 Aralık 2019</span><span class="sxs-lookup"><span data-stu-id="6db36-124">December 23, 2019</span></span> |
-| <span data-ttu-id="6db36-125">3. x veya üzeri</span><span class="sxs-lookup"><span data-stu-id="6db36-125">3.x or higher</span></span> | <span data-ttu-id="6db36-126">*sürümle aynı :::no-loc(SignalR):::*</span><span class="sxs-lookup"><span data-stu-id="6db36-126">*same as :::no-loc(SignalR)::: version*</span></span> | <span data-ttu-id="6db36-127">Bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)</span><span class="sxs-lookup"><span data-stu-id="6db36-127">See the [the .NET Core Support Policy](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)</span></span> |
+| <span data-ttu-id="6db36-125">3. x veya üzeri</span><span class="sxs-lookup"><span data-stu-id="6db36-125">3.x or higher</span></span> | <span data-ttu-id="6db36-126">*sürümle aynı SignalR*</span><span class="sxs-lookup"><span data-stu-id="6db36-126">*same as SignalR version*</span></span> | <span data-ttu-id="6db36-127">Bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)</span><span class="sxs-lookup"><span data-stu-id="6db36-127">See the [the .NET Core Support Policy](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)</span></span> |
 
 <span data-ttu-id="6db36-128">**Note:** ASP.NET Core 3,0 ' de, JavaScript istemcisi *moved* `@microsoft/signalr` NPM paketine taşınır.</span><span class="sxs-lookup"><span data-stu-id="6db36-128">**NOTE:** In ASP.NET Core 3.0, the JavaScript client *moved* to the `@microsoft/signalr` npm package.</span></span>
 
@@ -49,7 +49,7 @@ ms.locfileid: "93050985"
 
 | <span data-ttu-id="6db36-133">Özellik</span><span class="sxs-lookup"><span data-stu-id="6db36-133">Feature</span></span> | <span data-ttu-id="6db36-134">Sunucu</span><span class="sxs-lookup"><span data-stu-id="6db36-134">Server</span></span> | <span data-ttu-id="6db36-135">.NET istemcisi</span><span class="sxs-lookup"><span data-stu-id="6db36-135">.NET client</span></span> | <span data-ttu-id="6db36-136">JavaScript istemcisi</span><span class="sxs-lookup"><span data-stu-id="6db36-136">JavaScript client</span></span> | <span data-ttu-id="6db36-137">Java istemcisi</span><span class="sxs-lookup"><span data-stu-id="6db36-137">Java client</span></span> |
 | ---- | :-: | :-: | :-: | :-: |
-| <span data-ttu-id="6db36-138">Azure :::no-loc(SignalR)::: hizmeti desteği</span><span class="sxs-lookup"><span data-stu-id="6db36-138">Azure :::no-loc(SignalR)::: Service Support</span></span> |<span data-ttu-id="6db36-139">2.1.0</span><span class="sxs-lookup"><span data-stu-id="6db36-139">2.1.0</span></span>|<span data-ttu-id="6db36-140">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-140">1.0.0</span></span>|<span data-ttu-id="6db36-141">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-141">1.0.0</span></span>|<span data-ttu-id="6db36-142">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-142">1.0.0</span></span>|
+| <span data-ttu-id="6db36-138">Azure SignalR hizmeti desteği</span><span class="sxs-lookup"><span data-stu-id="6db36-138">Azure SignalR Service Support</span></span> |<span data-ttu-id="6db36-139">2.1.0</span><span class="sxs-lookup"><span data-stu-id="6db36-139">2.1.0</span></span>|<span data-ttu-id="6db36-140">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-140">1.0.0</span></span>|<span data-ttu-id="6db36-141">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-141">1.0.0</span></span>|<span data-ttu-id="6db36-142">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-142">1.0.0</span></span>|
 | [<span data-ttu-id="6db36-143">Sunucudan istemciye akış</span><span class="sxs-lookup"><span data-stu-id="6db36-143">Server-to-client Streaming</span></span>](xref:signalr/streaming)          |<span data-ttu-id="6db36-144">2.1.0</span><span class="sxs-lookup"><span data-stu-id="6db36-144">2.1.0</span></span>|<span data-ttu-id="6db36-145">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-145">1.0.0</span></span>|<span data-ttu-id="6db36-146">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-146">1.0.0</span></span>|<span data-ttu-id="6db36-147">1.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-147">1.0.0</span></span>|
 | [<span data-ttu-id="6db36-148">İstemciden sunucuya akış</span><span class="sxs-lookup"><span data-stu-id="6db36-148">Client-to-server Streaming</span></span>](xref:signalr/streaming)          |<span data-ttu-id="6db36-149">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-149">3.0.0</span></span>|<span data-ttu-id="6db36-150">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-150">3.0.0</span></span>|<span data-ttu-id="6db36-151">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-151">3.0.0</span></span>|<span data-ttu-id="6db36-152">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-152">3.0.0</span></span>|
 | <span data-ttu-id="6db36-153">Otomatik yeniden bağlanma ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))</span><span class="sxs-lookup"><span data-stu-id="6db36-153">Automatic Reconnection ([.NET](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))</span></span>          |<span data-ttu-id="6db36-154">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-154">3.0.0</span></span>|<span data-ttu-id="6db36-155">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-155">3.0.0</span></span>|<span data-ttu-id="6db36-156">3.0.0</span><span class="sxs-lookup"><span data-stu-id="6db36-156">3.0.0</span></span>|❌|
@@ -63,7 +63,7 @@ ms.locfileid: "93050985"
 
 ## <a name="additional-resources"></a><span data-ttu-id="6db36-181">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="6db36-181">Additional resources</span></span>
 
-* [<span data-ttu-id="6db36-182">:::no-loc(SignalR):::ASP.NET Core için kullanmaya başlama</span><span class="sxs-lookup"><span data-stu-id="6db36-182">Get started with :::no-loc(SignalR)::: for ASP.NET Core</span></span>](xref:tutorials/signalr)
+* [<span data-ttu-id="6db36-182">SignalRASP.NET Core için kullanmaya başlama</span><span class="sxs-lookup"><span data-stu-id="6db36-182">Get started with SignalR for ASP.NET Core</span></span>](xref:tutorials/signalr)
 * [<span data-ttu-id="6db36-183">Desteklenen platformlar</span><span class="sxs-lookup"><span data-stu-id="6db36-183">Supported platforms</span></span>](xref:signalr/supported-platforms)
 * [<span data-ttu-id="6db36-184">Merkezler</span><span class="sxs-lookup"><span data-stu-id="6db36-184">Hubs</span></span>](xref:signalr/hubs)
 * [<span data-ttu-id="6db36-185">JavaScript istemcisi</span><span class="sxs-lookup"><span data-stu-id="6db36-185">JavaScript client</span></span>](xref:signalr/javascript-client)

@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: getting-started
 ms.openlocfilehash: fef5ae525a7c01d0ea7733e990233f413aac61a7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93057797"
 > * <span data-ttu-id="d0123-106">Bir Web uygulaması projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="d0123-106">Create a web app project.</span></span>
 > * <span data-ttu-id="d0123-107">Geliştirme sertifikasına güvenin.</span><span class="sxs-lookup"><span data-stu-id="d0123-107">Trust the development certificate.</span></span>
 > * <span data-ttu-id="d0123-108">Uygulamayı çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="d0123-108">Run the app.</span></span>
-> * <span data-ttu-id="d0123-109">Bir :::no-loc(Razor)::: sayfayı düzenleyin.</span><span class="sxs-lookup"><span data-stu-id="d0123-109">Edit a :::no-loc(Razor)::: page.</span></span>
+> * <span data-ttu-id="d0123-109">Bir Razor sayfayı düzenleyin.</span><span class="sxs-lookup"><span data-stu-id="d0123-109">Edit a Razor page.</span></span>
 
 <span data-ttu-id="d0123-110">Sonunda, yerel makinenizde çalışan bir çalışan Web uygulamanız olacaktır.</span><span class="sxs-lookup"><span data-stu-id="d0123-110">At the end, you'll have a working web app running on your local machine.</span></span>
 
@@ -105,7 +105,7 @@ dotnet watch run
 
 <span data-ttu-id="d0123-134">Komut kabuğu, uygulamanın başlatıldığını gösteriyorsa, öğesine gidin `https://localhost:5001` .</span><span class="sxs-lookup"><span data-stu-id="d0123-134">After the command shell indicates that the app has started, browse to `https://localhost:5001`.</span></span>
 
-## <a name="edit-a-no-locrazor-page"></a><span data-ttu-id="d0123-135">Sayfa düzenleme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="d0123-135">Edit a :::no-loc(Razor)::: page</span></span>
+## <a name="edit-a-no-locrazor-page"></a><span data-ttu-id="d0123-135">Sayfa düzenleme Razor</span><span class="sxs-lookup"><span data-stu-id="d0123-135">Edit a Razor page</span></span>
 
 <span data-ttu-id="d0123-136">*Pages/Index. cshtml* dosyasını açın ve sayfayı aşağıdaki vurgulanmış işaretlerle değiştirin ve kaydedin:</span><span class="sxs-lookup"><span data-stu-id="d0123-136">Open *Pages/Index.cshtml* and modify and save the page with the following highlighted markup:</span></span>
 

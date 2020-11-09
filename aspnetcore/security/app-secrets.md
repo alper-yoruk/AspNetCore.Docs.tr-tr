@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/app-secrets
 ms.openlocfilehash: 174f831583c2ef6cb7f122a22fe855acc8fe3047
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -39,7 +39,7 @@ ms.locfileid: "93056874"
 
 <span data-ttu-id="2e92e-112">Ortam değişkenleri, kodda veya yerel yapılandırma dosyalarında uygulama gizli dizileri depolanmasını önlemek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="2e92e-112">Environment variables are used to avoid storage of app secrets in code or in local configuration files.</span></span> <span data-ttu-id="2e92e-113">Ortam değişkenleri, daha önce belirtilen tüm yapılandırma kaynakları için yapılandırma değerlerini geçersiz kılar.</span><span class="sxs-lookup"><span data-stu-id="2e92e-113">Environment variables override configuration values for all previously specified configuration sources.</span></span>
 
-<span data-ttu-id="2e92e-114">**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün.</span><span class="sxs-lookup"><span data-stu-id="2e92e-114">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="2e92e-115">Varsayılan bir veritabanı bağlantı dizesi, *:::no-loc(appsettings.json):::* anahtar ile projenin dosyasına dahildir `DefaultConnection` .</span><span class="sxs-lookup"><span data-stu-id="2e92e-115">A default database connection string is included in the project's *:::no-loc(appsettings.json):::* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="2e92e-116">Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-116">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="2e92e-117">Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-117">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="2e92e-118">Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-118">The environment variable may store the complete connection string with sensitive credentials.</span></span>
+<span data-ttu-id="2e92e-114">**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün.</span><span class="sxs-lookup"><span data-stu-id="2e92e-114">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="2e92e-115">Varsayılan bir veritabanı bağlantı dizesi, *appsettings.json* anahtar ile projenin dosyasına dahildir `DefaultConnection` .</span><span class="sxs-lookup"><span data-stu-id="2e92e-115">A default database connection string is included in the project's *appsettings.json* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="2e92e-116">Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-116">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="2e92e-117">Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-117">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="2e92e-118">Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-118">The environment variable may store the complete connection string with sensitive credentials.</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="2e92e-119">Ortam değişkenleri genellikle düz, şifresiz metin olarak depolanır.</span><span class="sxs-lookup"><span data-stu-id="2e92e-119">Environment variables are generally stored in plain, unencrypted text.</span></span> <span data-ttu-id="2e92e-120">Makinenin veya işlemin güvenliği tehlikeye atılırsa, ortam değişkenlerine güvenilmeyen taraflar tarafından erişilebilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-120">If the machine or process is compromised, environment variables can be accessed by untrusted parties.</span></span> <span data-ttu-id="2e92e-121">Kullanıcı gizliliklerinin açıklanmasını önlemeye yönelik ek ölçüler gerekebilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-121">Additional measures to prevent disclosure of user secrets may be required.</span></span>
@@ -182,7 +182,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ## <a name="string-replacement-with-secrets"></a><span data-ttu-id="2e92e-186">Gizli dizileri olan dize değiştirme</span><span class="sxs-lookup"><span data-stu-id="2e92e-186">String replacement with secrets</span></span>
 
-<span data-ttu-id="2e92e-187">Parolaların düz metin olarak depolanması güvenli değildir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-187">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="2e92e-188">Örneğin, içinde depolanan bir veritabanı bağlantı dizesi, *:::no-loc(appsettings.json):::* belirtilen kullanıcı için bir parola içerebilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-188">For example, a database connection string stored in *:::no-loc(appsettings.json):::* may include a password for the specified user:</span></span>
+<span data-ttu-id="2e92e-187">Parolaların düz metin olarak depolanması güvenli değildir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-187">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="2e92e-188">Örneğin, içinde depolanan bir veritabanı bağlantı dizesi, *appsettings.json* belirtilen kullanıcı için bir parola içerebilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-188">For example, a database connection string stored in *appsettings.json* may include a password for the specified user:</span></span>
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -192,9 +192,9 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-<span data-ttu-id="2e92e-191">`Password`Anahtar-değer çiftini içindeki bağlantı dizesinden kaldırın *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="2e92e-191">Remove the `Password` key-value pair from the connection string in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="2e92e-192">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="2e92e-192">For example:</span></span>
+<span data-ttu-id="2e92e-191">`Password`Anahtar-değer çiftini içindeki bağlantı dizesinden kaldırın *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="2e92e-191">Remove the `Password` key-value pair from the connection string in *appsettings.json* .</span></span> <span data-ttu-id="2e92e-192">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="2e92e-192">For example:</span></span>
 
-[!code-json[](app-secrets/samples/3.x/UserSecrets/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 <span data-ttu-id="2e92e-193">Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> bağlantı dizesinin tamamlanabilmesi için bir nesnenin özelliğinde ayarlanabilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-193">The secret's value can be set on a <xref:System.Data.SqlClient.SqlConnectionStringBuilder> object's <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> property to complete the connection string:</span></span>
 
@@ -287,7 +287,7 @@ No secrets configured for this application.
 
 <span data-ttu-id="2e92e-216">Ortam değişkenleri, kodda veya yerel yapılandırma dosyalarında uygulama gizli dizileri depolanmasını önlemek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="2e92e-216">Environment variables are used to avoid storage of app secrets in code or in local configuration files.</span></span> <span data-ttu-id="2e92e-217">Ortam değişkenleri, daha önce belirtilen tüm yapılandırma kaynakları için yapılandırma değerlerini geçersiz kılar.</span><span class="sxs-lookup"><span data-stu-id="2e92e-217">Environment variables override configuration values for all previously specified configuration sources.</span></span>
 
-<span data-ttu-id="2e92e-218">**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün.</span><span class="sxs-lookup"><span data-stu-id="2e92e-218">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="2e92e-219">Varsayılan bir veritabanı bağlantı dizesi, *:::no-loc(appsettings.json):::* anahtar ile projenin dosyasına dahildir `DefaultConnection` .</span><span class="sxs-lookup"><span data-stu-id="2e92e-219">A default database connection string is included in the project's *:::no-loc(appsettings.json):::* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="2e92e-220">Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-220">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="2e92e-221">Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-221">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="2e92e-222">Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-222">The environment variable may store the complete connection string with sensitive credentials.</span></span>
+<span data-ttu-id="2e92e-218">**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün.</span><span class="sxs-lookup"><span data-stu-id="2e92e-218">Consider an ASP.NET Core web app in which **Individual User Accounts** security is enabled.</span></span> <span data-ttu-id="2e92e-219">Varsayılan bir veritabanı bağlantı dizesi, *appsettings.json* anahtar ile projenin dosyasına dahildir `DefaultConnection` .</span><span class="sxs-lookup"><span data-stu-id="2e92e-219">A default database connection string is included in the project's *appsettings.json* file with the key `DefaultConnection`.</span></span> <span data-ttu-id="2e92e-220">Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-220">The default connection string is for LocalDB, which runs in user mode and doesn't require a password.</span></span> <span data-ttu-id="2e92e-221">Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-221">During app deployment, the `DefaultConnection` key value can be overridden with an environment variable's value.</span></span> <span data-ttu-id="2e92e-222">Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-222">The environment variable may store the complete connection string with sensitive credentials.</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="2e92e-223">Ortam değişkenleri genellikle düz, şifresiz metin olarak depolanır.</span><span class="sxs-lookup"><span data-stu-id="2e92e-223">Environment variables are generally stored in plain, unencrypted text.</span></span> <span data-ttu-id="2e92e-224">Makinenin veya işlemin güvenliği tehlikeye atılırsa, ortam değişkenlerine güvenilmeyen taraflar tarafından erişilebilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-224">If the machine or process is compromised, environment variables can be accessed by untrusted parties.</span></span> <span data-ttu-id="2e92e-225">Kullanıcı gizliliklerinin açıklanmasını önlemeye yönelik ek ölçüler gerekebilir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-225">Additional measures to prevent disclosure of user secrets may be required.</span></span>
@@ -427,7 +427,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ## <a name="string-replacement-with-secrets"></a><span data-ttu-id="2e92e-289">Gizli dizileri olan dize değiştirme</span><span class="sxs-lookup"><span data-stu-id="2e92e-289">String replacement with secrets</span></span>
 
-<span data-ttu-id="2e92e-290">Parolaların düz metin olarak depolanması güvenli değildir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-290">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="2e92e-291">Örneğin, içinde depolanan bir veritabanı bağlantı dizesi, *:::no-loc(appsettings.json):::* belirtilen kullanıcı için bir parola içerebilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-291">For example, a database connection string stored in *:::no-loc(appsettings.json):::* may include a password for the specified user:</span></span>
+<span data-ttu-id="2e92e-290">Parolaların düz metin olarak depolanması güvenli değildir.</span><span class="sxs-lookup"><span data-stu-id="2e92e-290">Storing passwords in plain text is insecure.</span></span> <span data-ttu-id="2e92e-291">Örneğin, içinde depolanan bir veritabanı bağlantı dizesi, *appsettings.json* belirtilen kullanıcı için bir parola içerebilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-291">For example, a database connection string stored in *appsettings.json* may include a password for the specified user:</span></span>
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -437,9 +437,9 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-<span data-ttu-id="2e92e-294">`Password`Anahtar-değer çiftini içindeki bağlantı dizesinden kaldırın *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="2e92e-294">Remove the `Password` key-value pair from the connection string in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="2e92e-295">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="2e92e-295">For example:</span></span>
+<span data-ttu-id="2e92e-294">`Password`Anahtar-değer çiftini içindeki bağlantı dizesinden kaldırın *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="2e92e-294">Remove the `Password` key-value pair from the connection string in *appsettings.json* .</span></span> <span data-ttu-id="2e92e-295">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="2e92e-295">For example:</span></span>
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
 <span data-ttu-id="2e92e-296">Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> bağlantı dizesinin tamamlanabilmesi için bir nesnenin özelliğinde ayarlanabilir:</span><span class="sxs-lookup"><span data-stu-id="2e92e-296">The secret's value can be set on a <xref:System.Data.SqlClient.SqlConnectionStringBuilder> object's <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> property to complete the connection string:</span></span>
 

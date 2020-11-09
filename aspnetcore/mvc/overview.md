@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 'nin, Model-View-Controller tasarım modelini kull
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/overview
 ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -49,7 +49,7 @@ ms.locfileid: "93059318"
 
 ### <a name="view-responsibilities"></a><span data-ttu-id="a5abf-127">Sorumlulukları görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-127">View Responsibilities</span></span>
 
-<span data-ttu-id="a5abf-128">Görünümler, kullanıcı arabiriminden içerik sunmadan sorumludur.</span><span class="sxs-lookup"><span data-stu-id="a5abf-128">Views are responsible for presenting content through the user interface.</span></span> <span data-ttu-id="a5abf-129">HTML biçimlendirmesinde .NET kodu eklemek için [ :::no-loc(Razor)::: Görünüm altyapısını](#razor-view-engine) kullanır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-129">They use the [:::no-loc(Razor)::: view engine](#razor-view-engine) to embed .NET code in HTML markup.</span></span> <span data-ttu-id="a5abf-130">Görünümler içinde en az mantık olmalıdır ve içerdikleri tüm mantığın içerik sunumu ile ilişkilendirilmesi gerekir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-130">There should be minimal logic within views, and any logic in them should relate to presenting content.</span></span> <span data-ttu-id="a5abf-131">Karmaşık bir modelden veri görüntülemek için dosyaları görüntüle bölümünde harika bir mantık kullanımı gereksinimini fark ederseniz, görünümü basitleştirmek için bir [Görünüm bileşeni](views/view-components.md), ViewModel veya görünüm şablonu kullanmayı düşünün.</span><span class="sxs-lookup"><span data-stu-id="a5abf-131">If you find the need to perform a great deal of logic in view files in order to display data from a complex model, consider using a [View Component](views/view-components.md), ViewModel, or view template to simplify the view.</span></span>
+<span data-ttu-id="a5abf-128">Görünümler, kullanıcı arabiriminden içerik sunmadan sorumludur.</span><span class="sxs-lookup"><span data-stu-id="a5abf-128">Views are responsible for presenting content through the user interface.</span></span> <span data-ttu-id="a5abf-129">HTML biçimlendirmesinde .NET kodu eklemek için [ Razor Görünüm altyapısını](#razor-view-engine) kullanır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-129">They use the [Razor view engine](#razor-view-engine) to embed .NET code in HTML markup.</span></span> <span data-ttu-id="a5abf-130">Görünümler içinde en az mantık olmalıdır ve içerdikleri tüm mantığın içerik sunumu ile ilişkilendirilmesi gerekir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-130">There should be minimal logic within views, and any logic in them should relate to presenting content.</span></span> <span data-ttu-id="a5abf-131">Karmaşık bir modelden veri görüntülemek için dosyaları görüntüle bölümünde harika bir mantık kullanımı gereksinimini fark ederseniz, görünümü basitleştirmek için bir [Görünüm bileşeni](views/view-components.md), ViewModel veya görünüm şablonu kullanmayı düşünün.</span><span class="sxs-lookup"><span data-stu-id="a5abf-131">If you find the need to perform a great deal of logic in view files in order to display data from a complex model, consider using a [View Component](views/view-components.md), ViewModel, or view template to simplify the view.</span></span>
 
 ### <a name="controller-responsibilities"></a><span data-ttu-id="a5abf-132">Denetleyici sorumlulukları</span><span class="sxs-lookup"><span data-stu-id="a5abf-132">Controller Responsibilities</span></span>
 
@@ -79,7 +79,7 @@ ms.locfileid: "93059318"
 * [<span data-ttu-id="a5abf-150">Alanlar</span><span class="sxs-lookup"><span data-stu-id="a5abf-150">Areas</span></span>](#areas)
 * [<span data-ttu-id="a5abf-151">Web API'leri</span><span class="sxs-lookup"><span data-stu-id="a5abf-151">Web APIs</span></span>](#web-apis)
 * [<span data-ttu-id="a5abf-152">Test edilebilirlik</span><span class="sxs-lookup"><span data-stu-id="a5abf-152">Testability</span></span>](#testability)
-* [<span data-ttu-id="a5abf-153">:::no-loc(Razor)::: altyapıyı görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-153">:::no-loc(Razor)::: view engine</span></span>](#razor-view-engine)
+* [<span data-ttu-id="a5abf-153">Razor altyapıyı görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-153">Razor view engine</span></span>](#razor-view-engine)
 * [<span data-ttu-id="a5abf-154">Türü kesin belirlenmiş görünümler</span><span class="sxs-lookup"><span data-stu-id="a5abf-154">Strongly typed views</span></span>](#strongly-typed-views)
 * [<span data-ttu-id="a5abf-155">Etiket Yardımcıları</span><span class="sxs-lookup"><span data-stu-id="a5abf-155">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="a5abf-156">Bileşenleri görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-156">View Components</span></span>](#view-components)
@@ -198,9 +198,9 @@ public class AccountController : Controller
 
 <span data-ttu-id="a5abf-198">Çerçevenin arabirimlerin ve bağımlılık ekleme özelliğinin kullanımı, birim testine uygun hale getirir ve Framework, [tümleştirme testlerini](xref:test/integration-tests) hızlı ve kolay hale getirmek için özellikler (Entity Framework Için bir testhost ve InMemory sağlayıcısı gibi) içerir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-198">The framework's use of interfaces and dependency injection make it well-suited to unit testing, and the framework includes features (like a TestHost and InMemory provider for Entity Framework) that make [integration tests](xref:test/integration-tests) quick and easy as well.</span></span> <span data-ttu-id="a5abf-199">[Denetleyici mantığını test etme](controllers/testing.md)hakkında daha fazla bilgi edinin.</span><span class="sxs-lookup"><span data-stu-id="a5abf-199">Learn more about [how to test controller logic](controllers/testing.md).</span></span>
 
-### <a name="no-locrazor-view-engine"></a><span data-ttu-id="a5abf-200">:::no-loc(Razor)::: altyapıyı görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-200">:::no-loc(Razor)::: view engine</span></span>
+### <a name="no-locrazor-view-engine"></a><span data-ttu-id="a5abf-200">Razor altyapıyı görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-200">Razor view engine</span></span>
 
-<span data-ttu-id="a5abf-201">[MVC görünümlerini ASP.NET Core](views/overview.md) görünümleri oluşturmak için [ :::no-loc(Razor)::: Görünüm altyapısını](views/razor.md) kullanın.</span><span class="sxs-lookup"><span data-stu-id="a5abf-201">[ASP.NET Core MVC views](views/overview.md) use the [:::no-loc(Razor)::: view engine](views/razor.md) to render views.</span></span> <span data-ttu-id="a5abf-202">:::no-loc(Razor)::: , katıştırılmış C# kodu kullanarak görünümleri tanımlamaya yönelik kompakt, ifade ve akışkan şablonu biçimlendirme dilidir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-202">:::no-loc(Razor)::: is a compact, expressive and fluid template markup language for defining views using embedded C# code.</span></span> <span data-ttu-id="a5abf-203">:::no-loc(Razor)::: , sunucusunda dinamik olarak Web içeriği oluşturmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-203">:::no-loc(Razor)::: is used to dynamically generate web content on the server.</span></span> <span data-ttu-id="a5abf-204">Sunucu kodunu istemci tarafı içeriğiyle ve kodla düzgün bir şekilde karıştırabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="a5abf-204">You can cleanly mix server code with client side content and code.</span></span>
+<span data-ttu-id="a5abf-201">[MVC görünümlerini ASP.NET Core](views/overview.md) görünümleri oluşturmak için [ Razor Görünüm altyapısını](views/razor.md) kullanın.</span><span class="sxs-lookup"><span data-stu-id="a5abf-201">[ASP.NET Core MVC views](views/overview.md) use the [Razor view engine](views/razor.md) to render views.</span></span> <span data-ttu-id="a5abf-202">Razor , katıştırılmış C# kodu kullanarak görünümleri tanımlamaya yönelik kompakt, ifade ve akışkan şablonu biçimlendirme dilidir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-202">Razor is a compact, expressive and fluid template markup language for defining views using embedded C# code.</span></span> <span data-ttu-id="a5abf-203">Razor , sunucusunda dinamik olarak Web içeriği oluşturmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-203">Razor is used to dynamically generate web content on the server.</span></span> <span data-ttu-id="a5abf-204">Sunucu kodunu istemci tarafı içeriğiyle ve kodla düzgün bir şekilde karıştırabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="a5abf-204">You can cleanly mix server code with client side content and code.</span></span>
 
 ```cshtml
 <ul>
@@ -210,11 +210,11 @@ public class AccountController : Controller
 </ul>
 ```
 
-<span data-ttu-id="a5abf-205">:::no-loc(Razor):::Görünüm altyapısını kullanarak [düzenler](views/layout.md), [kısmi görünümler](views/partial.md) ve değiştirilebilir bölümler tanımlayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="a5abf-205">Using the :::no-loc(Razor)::: view engine you can define [layouts](views/layout.md), [partial views](views/partial.md) and replaceable sections.</span></span>
+<span data-ttu-id="a5abf-205">RazorGörünüm altyapısını kullanarak [düzenler](views/layout.md), [kısmi görünümler](views/partial.md) ve değiştirilebilir bölümler tanımlayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="a5abf-205">Using the Razor view engine you can define [layouts](views/layout.md), [partial views](views/partial.md) and replaceable sections.</span></span>
 
 ### <a name="strongly-typed-views"></a><span data-ttu-id="a5abf-206">Türü kesin belirlenmiş görünümler</span><span class="sxs-lookup"><span data-stu-id="a5abf-206">Strongly typed views</span></span>
 
-<span data-ttu-id="a5abf-207">:::no-loc(Razor)::: MVC 'deki görünümler modelinize göre kesin bir şekilde yazılabilir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-207">:::no-loc(Razor)::: views in MVC can be strongly typed based on your model.</span></span> <span data-ttu-id="a5abf-208">Denetleyiciler, görünümlerinizin tür denetlemesi ve IntelliSense desteği olmasını sağlayan görünümlere kesin olarak belirlenmiş bir model geçirebilir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-208">Controllers can pass a strongly typed model to views enabling your views to have type checking and IntelliSense support.</span></span>
+<span data-ttu-id="a5abf-207">Razor MVC 'deki görünümler modelinize göre kesin bir şekilde yazılabilir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-207">Razor views in MVC can be strongly typed based on your model.</span></span> <span data-ttu-id="a5abf-208">Denetleyiciler, görünümlerinizin tür denetlemesi ve IntelliSense desteği olmasını sağlayan görünümlere kesin olarak belirlenmiş bir model geçirebilir.</span><span class="sxs-lookup"><span data-stu-id="a5abf-208">Controllers can pass a strongly typed model to views enabling your views to have type checking and IntelliSense support.</span></span>
 
 <span data-ttu-id="a5abf-209">Örneğin, aşağıdaki görünüm türünde bir model işler `IEnumerable<Product>` :</span><span class="sxs-lookup"><span data-stu-id="a5abf-209">For example, the following view renders a model of type `IEnumerable<Product>`:</span></span>
 
@@ -230,7 +230,7 @@ public class AccountController : Controller
 
 ### <a name="tag-helpers"></a><span data-ttu-id="a5abf-210">Etiket Yardımcıları</span><span class="sxs-lookup"><span data-stu-id="a5abf-210">Tag Helpers</span></span>
 
-<span data-ttu-id="a5abf-211">[Etiket Yardımcıları](views/tag-helpers/intro.md) , sunucu tarafı kodunun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="a5abf-211">[Tag Helpers](views/tag-helpers/intro.md) enable server side code to participate in creating and rendering HTML elements in :::no-loc(Razor)::: files.</span></span> <span data-ttu-id="a5abf-212">Etiket Yardımcıları kullanarak özel Etiketler tanımlayabilir (örneğin, `<environment>` ) veya varolan etiketlerin davranışını değiştirebilirsiniz (örneğin, `<label>` ).</span><span class="sxs-lookup"><span data-stu-id="a5abf-212">You can use tag helpers to define custom tags (for example, `<environment>`) or to modify the behavior of existing tags (for example, `<label>`).</span></span> <span data-ttu-id="a5abf-213">Etiket Yardımcıları, öğe adı ve öznitelikleri temelinde belirli öğelere bağlanır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-213">Tag Helpers bind to specific elements based on the element name and its attributes.</span></span> <span data-ttu-id="a5abf-214">Bunlar, hala HTML düzenlemesi deneyimini korurken sunucu tarafı işlemenin avantajlarını sağlar.</span><span class="sxs-lookup"><span data-stu-id="a5abf-214">They provide the benefits of server-side rendering while still preserving an HTML editing experience.</span></span>
+<span data-ttu-id="a5abf-211">[Etiket Yardımcıları](views/tag-helpers/intro.md) , sunucu tarafı kodunun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor .</span><span class="sxs-lookup"><span data-stu-id="a5abf-211">[Tag Helpers](views/tag-helpers/intro.md) enable server side code to participate in creating and rendering HTML elements in Razor files.</span></span> <span data-ttu-id="a5abf-212">Etiket Yardımcıları kullanarak özel Etiketler tanımlayabilir (örneğin, `<environment>` ) veya varolan etiketlerin davranışını değiştirebilirsiniz (örneğin, `<label>` ).</span><span class="sxs-lookup"><span data-stu-id="a5abf-212">You can use tag helpers to define custom tags (for example, `<environment>`) or to modify the behavior of existing tags (for example, `<label>`).</span></span> <span data-ttu-id="a5abf-213">Etiket Yardımcıları, öğe adı ve öznitelikleri temelinde belirli öğelere bağlanır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-213">Tag Helpers bind to specific elements based on the element name and its attributes.</span></span> <span data-ttu-id="a5abf-214">Bunlar, hala HTML düzenlemesi deneyimini korurken sunucu tarafı işlemenin avantajlarını sağlar.</span><span class="sxs-lookup"><span data-stu-id="a5abf-214">They provide the benefits of server-side rendering while still preserving an HTML editing experience.</span></span>
 
 <span data-ttu-id="a5abf-215">Yaygın görevler için, genel GitHub depolarında ve NuGet paketleri olarak formlar, bağlantılar, yükleme varlıkları ve daha fazlasını ve daha fazlasını oluşturma gibi birçok yerleşik etiket yardımcıları vardır.</span><span class="sxs-lookup"><span data-stu-id="a5abf-215">There are many built-in Tag Helpers for common tasks - such as creating forms, links, loading assets and more - and even more available in public GitHub repositories and as NuGet packages.</span></span> <span data-ttu-id="a5abf-216">Etiket Yardımcıları C# dilinde yazılır ve öğe adı, öznitelik adı veya üst etikete göre HTML öğelerini hedefler.</span><span class="sxs-lookup"><span data-stu-id="a5abf-216">Tag Helpers are authored in C#, and they target HTML elements based on element name, attribute name, or parent tag.</span></span> <span data-ttu-id="a5abf-217">Örneğin, yerleşik Linakghelper, eyleminin bir bağlantısını oluşturmak için kullanılabilir `Login` `AccountsController` :</span><span class="sxs-lookup"><span data-stu-id="a5abf-217">For example, the built-in LinkTagHelper can be used to create a link to the `Login` action of the `AccountsController`:</span></span>
 
@@ -255,7 +255,7 @@ public class AccountController : Controller
 </environment>
 ```
 
-<span data-ttu-id="a5abf-219">Etiket Yardımcıları, HTML ve biçimlendirme oluşturmaya yönelik zengin bir IntelliSense ortamı ve HTML kullanımı kolay bir geliştirme deneyimi sağlar :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="a5abf-219">Tag Helpers provide an HTML-friendly development experience and a rich IntelliSense environment for creating HTML and :::no-loc(Razor)::: markup.</span></span> <span data-ttu-id="a5abf-220">Yerleşik etiket yardımcıların çoğu, var olan HTML öğelerini hedefleyin ve öğesi için sunucu tarafı öznitelikleri sağlar.</span><span class="sxs-lookup"><span data-stu-id="a5abf-220">Most of the built-in Tag Helpers target existing HTML elements and provide server-side attributes for the element.</span></span>
+<span data-ttu-id="a5abf-219">Etiket Yardımcıları, HTML ve biçimlendirme oluşturmaya yönelik zengin bir IntelliSense ortamı ve HTML kullanımı kolay bir geliştirme deneyimi sağlar Razor .</span><span class="sxs-lookup"><span data-stu-id="a5abf-219">Tag Helpers provide an HTML-friendly development experience and a rich IntelliSense environment for creating HTML and Razor markup.</span></span> <span data-ttu-id="a5abf-220">Yerleşik etiket yardımcıların çoğu, var olan HTML öğelerini hedefleyin ve öğesi için sunucu tarafı öznitelikleri sağlar.</span><span class="sxs-lookup"><span data-stu-id="a5abf-220">Most of the built-in Tag Helpers target existing HTML elements and provide server-side attributes for the element.</span></span>
 
 ### <a name="view-components"></a><span data-ttu-id="a5abf-221">Bileşenleri görüntüle</span><span class="sxs-lookup"><span data-stu-id="a5abf-221">View Components</span></span>
 

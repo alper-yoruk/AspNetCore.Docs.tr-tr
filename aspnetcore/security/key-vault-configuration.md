@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc, devx-track-azurecli
 ms.date: 02/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/key-vault-configuration
 ms.openlocfilehash: 10a949831c180f51bc6bb9b8294150a558f9343c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -135,7 +135,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. <span data-ttu-id="02dc4-167">Azure AD 'de uygulamayı seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-167">Select the app in Azure AD.</span></span>
    1. <span data-ttu-id="02dc4-168">**Sertifikalar & gizli** dizi sayfasına gidin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-168">Navigate to **Certificates & secrets** .</span></span>
    1. <span data-ttu-id="02dc4-169">Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-169">Select **Upload certificate** to upload the certificate, which contains the public key.</span></span> <span data-ttu-id="02dc4-170">*. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-170">A *.cer* , *.pem* , or *.crt* certificate is acceptable.</span></span>
-1. <span data-ttu-id="02dc4-171">Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *:::no-loc(appsettings.json):::* dosyasına depolayın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-171">Store the key vault name, Application ID, and certificate thumbprint in the app's *:::no-loc(appsettings.json):::* file.</span></span>
+1. <span data-ttu-id="02dc4-171">Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-171">Store the key vault name, Application ID, and certificate thumbprint in the app's *appsettings.json* file.</span></span>
 1. <span data-ttu-id="02dc4-172">Azure portal **ana** kasaları ' ne gidin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-172">Navigate to **Key vaults** in the Azure portal.</span></span>
 1. <span data-ttu-id="02dc4-173">Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-173">Select the key vault that you created in the [Secret storage in the Production environment with Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) section.</span></span>
 1. <span data-ttu-id="02dc4-174">**Erişim ilkeleri** ' ni seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-174">Select **Access policies** .</span></span>
@@ -153,7 +153,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-<span data-ttu-id="02dc4-186">X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor.</span><span class="sxs-lookup"><span data-stu-id="02dc4-186">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="02dc4-187">Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-187">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="02dc4-186">X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor.</span><span class="sxs-lookup"><span data-stu-id="02dc4-186">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="02dc4-187">Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-187">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *appsettings.json* file:</span></span>
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -163,9 +163,9 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 * <span data-ttu-id="02dc4-190">Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`</span><span class="sxs-lookup"><span data-stu-id="02dc4-190">Application ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span></span>
 * <span data-ttu-id="02dc4-191">Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span><span class="sxs-lookup"><span data-stu-id="02dc4-191">Certificate thumbprint: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span></span>
 
-<span data-ttu-id="02dc4-192">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-192">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="02dc4-192">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-192">*appsettings.json* :</span></span>
 
-[!code-json[](key-vault-configuration/samples/3.x/SampleApp/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
 <span data-ttu-id="02dc4-193">Uygulamayı çalıştırdığınızda, bir Web sayfası yüklenen gizli değerleri gösterir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-193">When you run the app, a webpage shows the loaded secret values.</span></span> <span data-ttu-id="02dc4-194">Geliştirme ortamında, gizli anahtar değerleri sonek ile yüklenir `_dev` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-194">In the Development environment, secret values load with the `_dev` suffix.</span></span> <span data-ttu-id="02dc4-195">Üretim ortamında, değerler sonek ile yüklenir `_prod` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-195">In the Production environment, the values load with the `_prod` suffix.</span></span>
 
@@ -175,11 +175,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 <span data-ttu-id="02dc4-198">Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-198">The sample app uses Managed identities for Azure resources when the `#define` statement at the top of the *Program.cs* file is set to `Managed`.</span></span>
 
-<span data-ttu-id="02dc4-199">Kasa adını uygulamanın *:::no-loc(appsettings.json):::* dosyasına girin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-199">Enter the vault name into the app's *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="02dc4-200">Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="02dc4-200">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="02dc4-201">Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="02dc4-201">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="02dc4-199">Kasa adını uygulamanın *appsettings.json* dosyasına girin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-199">Enter the vault name into the app's *appsettings.json* file.</span></span> <span data-ttu-id="02dc4-200">Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="02dc4-200">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="02dc4-201">Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="02dc4-201">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *appsettings.json* file.</span></span>
 
 <span data-ttu-id="02dc4-202">Azure App Service için örnek uygulamayı dağıtın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-202">Deploy the sample app to Azure App Service.</span></span>
 
-<span data-ttu-id="02dc4-203">Azure App Service dağıtılan bir uygulama, hizmet oluşturulduğunda Azure AD 'ye otomatik olarak kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-203">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="02dc4-204">Aşağıdaki komutta kullanılmak üzere dağıtımdan nesne KIMLIĞINI edinin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-204">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="02dc4-205">Nesne KIMLIĞI, **:::no-loc(Identity):::** App Service panelindeki Azure Portal gösterilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-205">The Object ID is shown in the Azure portal on the **:::no-loc(Identity):::** panel of the App Service.</span></span>
+<span data-ttu-id="02dc4-203">Azure App Service dağıtılan bir uygulama, hizmet oluşturulduğunda Azure AD 'ye otomatik olarak kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-203">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="02dc4-204">Aşağıdaki komutta kullanılmak üzere dağıtımdan nesne KIMLIĞINI edinin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-204">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="02dc4-205">Nesne KIMLIĞI, **Identity** App Service panelindeki Azure Portal gösterilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-205">The Object ID is shown in the Azure portal on the **Identity** panel of the App Service.</span></span>
 
 <span data-ttu-id="02dc4-206">Azure CLı ve uygulamanın nesne KIMLIĞINI kullanarak, uygulama `list` ve `get` anahtar kasasına erişim izinleri sağlayın:</span><span class="sxs-lookup"><span data-stu-id="02dc4-206">Using Azure CLI and the app's Object ID, provide the app with `list` and `get` permissions to access the key vault:</span></span>
 
@@ -199,7 +199,7 @@ az keyvault set-policy --name {KEY VAULT NAME} --object-id {OBJECT ID} --secret-
 
 <span data-ttu-id="02dc4-213">Anahtar Kasası adı örnek değeri: `contosovault`</span><span class="sxs-lookup"><span data-stu-id="02dc4-213">Key vault name example value: `contosovault`</span></span>
     
-<span data-ttu-id="02dc4-214">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-214">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="02dc4-214">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-214">*appsettings.json* :</span></span>
 
 ```json
 {
@@ -481,7 +481,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. <span data-ttu-id="02dc4-362">Azure AD 'de uygulamayı seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-362">Select the app in Azure AD.</span></span>
    1. <span data-ttu-id="02dc4-363">**Sertifikalar & gizli** dizi sayfasına gidin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-363">Navigate to **Certificates & secrets** .</span></span>
    1. <span data-ttu-id="02dc4-364">Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-364">Select **Upload certificate** to upload the certificate, which contains the public key.</span></span> <span data-ttu-id="02dc4-365">*. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-365">A *.cer* , *.pem* , or *.crt* certificate is acceptable.</span></span>
-1. <span data-ttu-id="02dc4-366">Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *:::no-loc(appsettings.json):::* dosyasına depolayın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-366">Store the key vault name, Application ID, and certificate thumbprint in the app's *:::no-loc(appsettings.json):::* file.</span></span>
+1. <span data-ttu-id="02dc4-366">Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-366">Store the key vault name, Application ID, and certificate thumbprint in the app's *appsettings.json* file.</span></span>
 1. <span data-ttu-id="02dc4-367">Azure portal **ana** kasaları ' ne gidin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-367">Navigate to **Key vaults** in the Azure portal.</span></span>
 1. <span data-ttu-id="02dc4-368">Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-368">Select the key vault that you created in the [Secret storage in the Production environment with Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) section.</span></span>
 1. <span data-ttu-id="02dc4-369">**Erişim ilkeleri** ' ni seçin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-369">Select **Access policies** .</span></span>
@@ -499,7 +499,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-<span data-ttu-id="02dc4-381">X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor.</span><span class="sxs-lookup"><span data-stu-id="02dc4-381">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="02dc4-382">Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-382">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="02dc4-381">X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor.</span><span class="sxs-lookup"><span data-stu-id="02dc4-381">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="02dc4-382">Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-382">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *appsettings.json* file:</span></span>
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -509,9 +509,9 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 * <span data-ttu-id="02dc4-385">Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`</span><span class="sxs-lookup"><span data-stu-id="02dc4-385">Application ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span></span>
 * <span data-ttu-id="02dc4-386">Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span><span class="sxs-lookup"><span data-stu-id="02dc4-386">Certificate thumbprint: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span></span>
 
-<span data-ttu-id="02dc4-387">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-387">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="02dc4-387">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-387">*appsettings.json* :</span></span>
 
-[!code-json[](key-vault-configuration/samples/2.x/SampleApp/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
 <span data-ttu-id="02dc4-388">Uygulamayı çalıştırdığınızda, bir Web sayfası yüklenen gizli değerleri gösterir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-388">When you run the app, a webpage shows the loaded secret values.</span></span> <span data-ttu-id="02dc4-389">Geliştirme ortamında, gizli anahtar değerleri sonek ile yüklenir `_dev` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-389">In the Development environment, secret values load with the `_dev` suffix.</span></span> <span data-ttu-id="02dc4-390">Üretim ortamında, değerler sonek ile yüklenir `_prod` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-390">In the Production environment, the values load with the `_prod` suffix.</span></span>
 
@@ -521,11 +521,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 <span data-ttu-id="02dc4-393">Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .</span><span class="sxs-lookup"><span data-stu-id="02dc4-393">The sample app uses Managed identities for Azure resources when the `#define` statement at the top of the *Program.cs* file is set to `Managed`.</span></span>
 
-<span data-ttu-id="02dc4-394">Kasa adını uygulamanın *:::no-loc(appsettings.json):::* dosyasına girin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-394">Enter the vault name into the app's *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="02dc4-395">Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="02dc4-395">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="02dc4-396">Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="02dc4-396">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="02dc4-394">Kasa adını uygulamanın *appsettings.json* dosyasına girin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-394">Enter the vault name into the app's *appsettings.json* file.</span></span> <span data-ttu-id="02dc4-395">Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="02dc4-395">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="02dc4-396">Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="02dc4-396">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *appsettings.json* file.</span></span>
 
 <span data-ttu-id="02dc4-397">Azure App Service için örnek uygulamayı dağıtın.</span><span class="sxs-lookup"><span data-stu-id="02dc4-397">Deploy the sample app to Azure App Service.</span></span>
 
-<span data-ttu-id="02dc4-398">Azure App Service dağıtılan bir uygulama, hizmet oluşturulduğunda Azure AD 'ye otomatik olarak kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-398">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="02dc4-399">Aşağıdaki komutta kullanılmak üzere dağıtımdan nesne KIMLIĞINI edinin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-399">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="02dc4-400">Nesne KIMLIĞI, **:::no-loc(Identity):::** App Service panelindeki Azure Portal gösterilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-400">The Object ID is shown in the Azure portal on the **:::no-loc(Identity):::** panel of the App Service.</span></span>
+<span data-ttu-id="02dc4-398">Azure App Service dağıtılan bir uygulama, hizmet oluşturulduğunda Azure AD 'ye otomatik olarak kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-398">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="02dc4-399">Aşağıdaki komutta kullanılmak üzere dağıtımdan nesne KIMLIĞINI edinin.</span><span class="sxs-lookup"><span data-stu-id="02dc4-399">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="02dc4-400">Nesne KIMLIĞI, **Identity** App Service panelindeki Azure Portal gösterilir.</span><span class="sxs-lookup"><span data-stu-id="02dc4-400">The Object ID is shown in the Azure portal on the **Identity** panel of the App Service.</span></span>
 
 <span data-ttu-id="02dc4-401">Azure CLı ve uygulamanın nesne KIMLIĞINI kullanarak, uygulama `list` ve `get` anahtar kasasına erişim izinleri sağlayın:</span><span class="sxs-lookup"><span data-stu-id="02dc4-401">Using Azure CLI and the app's Object ID, provide the app with `list` and `get` permissions to access the key vault:</span></span>
 
@@ -545,7 +545,7 @@ az keyvault set-policy --name {KEY VAULT NAME} --object-id {OBJECT ID} --secret-
 
 <span data-ttu-id="02dc4-408">Anahtar Kasası adı örnek değeri: `contosovault`</span><span class="sxs-lookup"><span data-stu-id="02dc4-408">Key vault name example value: `contosovault`</span></span>
     
-<span data-ttu-id="02dc4-409">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-409">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="02dc4-409">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="02dc4-409">*appsettings.json* :</span></span>
 
 ```json
 {

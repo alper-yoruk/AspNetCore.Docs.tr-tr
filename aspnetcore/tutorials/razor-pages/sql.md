@@ -1,24 +1,24 @@
 ---
 title: 4. bölüm, bir veritabanıyla çalışma
 author: rick-anderson
-description: 'Sayfalardaki eğitim serisinin 4. bölümü :::no-loc(Razor)::: .'
+description: 'Sayfalardaki eğitim serisinin 4. bölümü Razor .'
 ms.author: riande
 ms.date: 09/26/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/sql
 ms.openlocfilehash: 3e78b5b6dab7145413ae8612bfeb352f328ec86a
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -33,31 +33,31 @@ ms.locfileid: "94360733"
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="18f21-105">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="18f21-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="18f21-105">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="18f21-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-<span data-ttu-id="18f21-106">`:::no-loc(Razor):::PagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-106">The `:::no-loc(Razor):::PagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-107">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-107">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
+<span data-ttu-id="18f21-106">`RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-106">The `RazorPagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-107">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-107">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-108">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-108">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-109">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-109">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
 ---
 
-<span data-ttu-id="18f21-110">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-110">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-111">Yerel geliştirme için, yapılandırma bağlantı dizesini *:::no-loc(appsettings.json):::* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-111">For local development, configuration gets the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="18f21-110">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-110">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-111">Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-111">For local development, configuration gets the connection string from the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-112">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-112">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="18f21-113">Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:</span><span class="sxs-lookup"><span data-stu-id="18f21-113">The generated connection string will be similar to the following:</span></span>
 
-[!code-json[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-114">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-114">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/appsettings_SQLite.json?highlight=8-10)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
 ---
 
@@ -118,9 +118,9 @@ ms.locfileid: "94360733"
 
 ## <a name="seed-the-database"></a><span data-ttu-id="18f21-158">Veritabanını çekirdek</span><span class="sxs-lookup"><span data-stu-id="18f21-158">Seed the database</span></span>
 
-<span data-ttu-id="18f21-159">:::no-loc(Create):::`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-159">:::no-loc(Create)::: a new class named `SeedData` in the *Models* folder with the following code:</span></span>
+<span data-ttu-id="18f21-159">Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-159">Create a new class named `SeedData` in the *Models* folder with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedData.cs?name=snippet_1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
 <span data-ttu-id="18f21-160">Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.</span><span class="sxs-lookup"><span data-stu-id="18f21-160">If there are any movies in the database, the seed initializer returns and no movies are added.</span></span>
 
@@ -137,7 +137,7 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-162">*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="18f21-162">Replace the contents of the *Program.cs* with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Program.cs)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Program.cs)]
 
 <span data-ttu-id="18f21-163">Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:</span><span class="sxs-lookup"><span data-stu-id="18f21-163">In the previous code, the `Main` method has been modified to do the following:</span></span>
 
@@ -147,14 +147,14 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-168">Çalıştırılmayan aşağıdaki özel durum oluşur `Update-Database` :</span><span class="sxs-lookup"><span data-stu-id="18f21-168">The following exception occurs when `Update-Database` has not been run:</span></span>
 
-> `SqlException: Cannot open database ":::no-loc(Razor):::PagesMovieContext-" requested by the login. The login failed.`
+> `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
 
 ### <a name="test-the-app"></a><span data-ttu-id="18f21-169">Uygulamayı test etme</span><span class="sxs-lookup"><span data-stu-id="18f21-169">Test the app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-170">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-170">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="18f21-171">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-171">:::no-loc(Delete)::: all the records in the database.</span></span> <span data-ttu-id="18f21-172">Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarını kullanma</span><span class="sxs-lookup"><span data-stu-id="18f21-172">Use the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox)</span></span>
+1. <span data-ttu-id="18f21-171">Delete veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-171">Delete all the records in the database.</span></span> <span data-ttu-id="18f21-172">Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarını kullanma</span><span class="sxs-lookup"><span data-stu-id="18f21-172">Use the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox)</span></span>
 
 1. <span data-ttu-id="18f21-173">Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır.</span><span class="sxs-lookup"><span data-stu-id="18f21-173">Force the app to initialize by calling the methods in the `Startup` class, so the seed method runs.</span></span> <span data-ttu-id="18f21-174">Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir.</span><span class="sxs-lookup"><span data-stu-id="18f21-174">To force initialization, IIS Express must be stopped and restarted.</span></span> <span data-ttu-id="18f21-175">Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:</span><span class="sxs-lookup"><span data-stu-id="18f21-175">Stop and restart IIS with any of the following approaches:</span></span>
 
@@ -169,7 +169,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-181">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-181">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="18f21-182">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-182">:::no-loc(Delete)::: all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-183">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-183">Stop and start the app to seed the database.</span></span>
+<span data-ttu-id="18f21-182">Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-182">Delete all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-183">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-183">Stop and start the app to seed the database.</span></span>
 
 ---
 
@@ -180,39 +180,39 @@ if (context.Movie.Any())
 ## <a name="additional-resources"></a><span data-ttu-id="18f21-186">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="18f21-186">Additional resources</span></span>
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="18f21-187">[Önceki: Scafkatlanmış :::no-loc(Razor)::: ](xref:tutorials/razor-pages/page) 
->  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-187">[Previous: Scaffolded :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/page)
+> <span data-ttu-id="18f21-187">[Önceki: Scafkatlanmış Razor ](xref:tutorials/razor-pages/page) 
+>  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-187">[Previous: Scaffolded Razor Pages](xref:tutorials/razor-pages/page)
 [Next: Update the pages](xref:tutorials/razor-pages/da1)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-<span data-ttu-id="18f21-188">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="18f21-188">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="18f21-188">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="18f21-188">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-<span data-ttu-id="18f21-189">`:::no-loc(Razor):::PagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-189">The `:::no-loc(Razor):::PagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-190">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-190">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
+<span data-ttu-id="18f21-189">`RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-189">The `RazorPagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-190">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-190">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-191">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-191">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-192">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-192">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
 ---
 
-<span data-ttu-id="18f21-193">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-193">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-194">Yerel geliştirme için, yapılandırma bağlantı dizesini *:::no-loc(appsettings.json):::* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-194">For local development, configuration gets the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="18f21-193">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-193">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-194">Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-194">For local development, configuration gets the connection string from the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-195">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-195">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="18f21-196">Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:</span><span class="sxs-lookup"><span data-stu-id="18f21-196">The generated connection string will be similar to the following:</span></span>
 
-[!code-json[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-197">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-197">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/appsettings_SQLite.json?highlight=8-10)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
 ---
 
@@ -273,9 +273,9 @@ if (context.Movie.Any())
 
 ## <a name="seed-the-database"></a><span data-ttu-id="18f21-241">Veritabanını çekirdek</span><span class="sxs-lookup"><span data-stu-id="18f21-241">Seed the database</span></span>
 
-<span data-ttu-id="18f21-242">:::no-loc(Create):::`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-242">:::no-loc(Create)::: a new class named `SeedData` in the *Models* folder with the following code:</span></span>
+<span data-ttu-id="18f21-242">Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-242">Create a new class named `SeedData` in the *Models* folder with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedData.cs?name=snippet_1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
 <span data-ttu-id="18f21-243">Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.</span><span class="sxs-lookup"><span data-stu-id="18f21-243">If there are any movies in the database, the seed initializer returns and no movies are added.</span></span>
 
@@ -292,7 +292,7 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-245">*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="18f21-245">Replace the contents of the *Program.cs* with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Program.cs)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
 <span data-ttu-id="18f21-246">Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:</span><span class="sxs-lookup"><span data-stu-id="18f21-246">In the previous code, the `Main` method has been modified to do the following:</span></span>
 
@@ -302,14 +302,14 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-251">Çalıştırılmayan aşağıdaki özel durum oluşur `Update-Database` :</span><span class="sxs-lookup"><span data-stu-id="18f21-251">The following exception occurs when `Update-Database` has not been run:</span></span>
 
-> `SqlException: Cannot open database ":::no-loc(Razor):::PagesMovieContext-" requested by the login. The login failed.`
+> `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
 
 ### <a name="test-the-app"></a><span data-ttu-id="18f21-252">Uygulamayı test etme</span><span class="sxs-lookup"><span data-stu-id="18f21-252">Test the app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-253">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-253">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="18f21-254">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-254">:::no-loc(Delete)::: all the records in the database.</span></span> <span data-ttu-id="18f21-255">Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox)'ten silme bağlantılarını kullanın.</span><span class="sxs-lookup"><span data-stu-id="18f21-255">Use the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox).</span></span>
+* <span data-ttu-id="18f21-254">Delete veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-254">Delete all the records in the database.</span></span> <span data-ttu-id="18f21-255">Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox)'ten silme bağlantılarını kullanın.</span><span class="sxs-lookup"><span data-stu-id="18f21-255">Use the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox).</span></span>
 * <span data-ttu-id="18f21-256">Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır.</span><span class="sxs-lookup"><span data-stu-id="18f21-256">Force the app to initialize by calling the methods in the `Startup` class, so the seed method runs.</span></span> <span data-ttu-id="18f21-257">Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir.</span><span class="sxs-lookup"><span data-stu-id="18f21-257">To force initialization, IIS Express must be stopped and restarted.</span></span> <span data-ttu-id="18f21-258">Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:</span><span class="sxs-lookup"><span data-stu-id="18f21-258">Stop and restart IIS with any of the following approaches:</span></span>
 
   * <span data-ttu-id="18f21-259">Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:</span><span class="sxs-lookup"><span data-stu-id="18f21-259">Right-click the IIS Express system tray icon in the notification area and tap **Exit** or **Stop Site** :</span></span>
@@ -323,7 +323,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-264">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-264">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="18f21-265">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-265">:::no-loc(Delete)::: all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-266">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-266">Stop and start the app to seed the database.</span></span>
+<span data-ttu-id="18f21-265">Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-265">Delete all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-266">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-266">Stop and start the app to seed the database.</span></span>
 
 ---
 
@@ -334,8 +334,8 @@ if (context.Movie.Any())
 ## <a name="additional-resources"></a><span data-ttu-id="18f21-269">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="18f21-269">Additional resources</span></span>
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="18f21-270">[Önceki: Scafkatlanmış :::no-loc(Razor)::: ](xref:tutorials/razor-pages/page) 
->  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-270">[Previous: Scaffolded :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/page)
+> <span data-ttu-id="18f21-270">[Önceki: Scafkatlanmış Razor ](xref:tutorials/razor-pages/page) 
+>  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-270">[Previous: Scaffolded Razor Pages](xref:tutorials/razor-pages/page)
 [Next: Update the pages](xref:tutorials/razor-pages/da1)</span></span>
 
 ::: moniker-end
@@ -344,38 +344,38 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-271">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="18f21-271">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-<span data-ttu-id="18f21-272">`:::no-loc(Razor):::PagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-272">The `:::no-loc(Razor):::PagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-273">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-273">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
+<span data-ttu-id="18f21-272">`RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler.</span><span class="sxs-lookup"><span data-stu-id="18f21-272">The `RazorPagesMovieContext` object handles the task of connecting to the database and mapping `Movie` objects to database records.</span></span> <span data-ttu-id="18f21-273">Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="18f21-273">The database context is registered with the [Dependency Injection](xref:fundamentals/dependency-injection) container in the `ConfigureServices` method in *Startup.cs* :</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-274">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-274">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="18f21-275">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-275">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
 ---
 
 <span data-ttu-id="18f21-276">İçinde kullanılan yöntemler hakkında daha fazla bilgi için `ConfigureServices` bkz.:</span><span class="sxs-lookup"><span data-stu-id="18f21-276">For more information on the methods used in `ConfigureServices`, see:</span></span>
 
-* <span data-ttu-id="18f21-277">[ASP.NET Core Için ab genel veri koruma yönetmeliği (GDPR) desteği](xref:security/gdpr) `:::no-loc(Cookie):::PolicyOptions` .</span><span class="sxs-lookup"><span data-stu-id="18f21-277">[EU General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr) for `:::no-loc(Cookie):::PolicyOptions`.</span></span>
+* <span data-ttu-id="18f21-277">[ASP.NET Core Için ab genel veri koruma yönetmeliği (GDPR) desteği](xref:security/gdpr) `CookiePolicyOptions` .</span><span class="sxs-lookup"><span data-stu-id="18f21-277">[EU General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr) for `CookiePolicyOptions`.</span></span>
 * [<span data-ttu-id="18f21-278">SetCompatibilityVersion</span><span class="sxs-lookup"><span data-stu-id="18f21-278">SetCompatibilityVersion</span></span>](xref:mvc/compatibility-version)
 
-<span data-ttu-id="18f21-279">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-279">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-280">Yerel geliştirme için, yapılandırma bağlantı dizesini *:::no-loc(appsettings.json):::* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-280">For local development, configuration gets the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="18f21-279">ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur.</span><span class="sxs-lookup"><span data-stu-id="18f21-279">The ASP.NET Core [Configuration](xref:fundamentals/configuration/index) system reads the `ConnectionString` key.</span></span> <span data-ttu-id="18f21-280">Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.</span><span class="sxs-lookup"><span data-stu-id="18f21-280">For local development, configuration gets the connection string from the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-281">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-281">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="18f21-282">Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:</span><span class="sxs-lookup"><span data-stu-id="18f21-282">The generated connection string will be similar to the following:</span></span>
 
-[!code-json[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/:::no-loc(appsettings.json):::)]
+[!code-json[](razor-pages-start/sample/RazorPagesMovie22/appsettings.json)]
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="18f21-283">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="18f21-283">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/appsettings_SQLite.json?highlight=8-10)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="18f21-284">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-284">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/appsettings_SQLite.json?highlight=8-10)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
 ---
 
@@ -418,9 +418,9 @@ if (context.Movie.Any())
 
 ## <a name="seed-the-database"></a><span data-ttu-id="18f21-303">Veritabanını çekirdek</span><span class="sxs-lookup"><span data-stu-id="18f21-303">Seed the database</span></span>
 
-<span data-ttu-id="18f21-304">:::no-loc(Create):::`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-304">:::no-loc(Create)::: a new class named `SeedData` in the *Models* folder with the following code:</span></span>
+<span data-ttu-id="18f21-304">Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:</span><span class="sxs-lookup"><span data-stu-id="18f21-304">Create a new class named `SeedData` in the *Models* folder with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedData.cs?name=snippet_1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
 <span data-ttu-id="18f21-305">Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.</span><span class="sxs-lookup"><span data-stu-id="18f21-305">If there are any movies in the database, the seed initializer returns and no movies are added.</span></span>
 
@@ -437,7 +437,7 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-307">*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="18f21-307">Replace the contents of the *Program.cs* with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Program.cs)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Program.cs)]
 
 <span data-ttu-id="18f21-308">Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:</span><span class="sxs-lookup"><span data-stu-id="18f21-308">In the previous code, the `Main` method has been modified to do the following:</span></span>
 
@@ -447,14 +447,14 @@ if (context.Movie.Any())
 
 <span data-ttu-id="18f21-313">Bir üretim uygulaması çağırmaz `Database.Migrate` .</span><span class="sxs-lookup"><span data-stu-id="18f21-313">A production app would not call `Database.Migrate`.</span></span> <span data-ttu-id="18f21-314">Çalıştırılmayan aşağıdaki özel durumu engellemek için önceki koda eklenir `Update-Database` :</span><span class="sxs-lookup"><span data-stu-id="18f21-314">It's added to the preceding code to prevent the following exception when `Update-Database` has not been run:</span></span>
 
-<span data-ttu-id="18f21-315">SqlException: :::no-loc(Razor)::: oturum açma tarafından istenen "pagesmoviecontext-21" veritabanı açılamıyor.</span><span class="sxs-lookup"><span data-stu-id="18f21-315">SqlException: Cannot open database ":::no-loc(Razor):::PagesMovieContext-21" requested by the login.</span></span> <span data-ttu-id="18f21-316">Oturum açılamadı.</span><span class="sxs-lookup"><span data-stu-id="18f21-316">The login failed.</span></span>
+<span data-ttu-id="18f21-315">SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veritabanı açılamıyor.</span><span class="sxs-lookup"><span data-stu-id="18f21-315">SqlException: Cannot open database "RazorPagesMovieContext-21" requested by the login.</span></span> <span data-ttu-id="18f21-316">Oturum açılamadı.</span><span class="sxs-lookup"><span data-stu-id="18f21-316">The login failed.</span></span>
 <span data-ttu-id="18f21-317">' Kullanıcı adı ' kullanıcısı için oturum açma başarısız.</span><span class="sxs-lookup"><span data-stu-id="18f21-317">Login failed for user 'user name'.</span></span>
 
 ### <a name="test-the-app"></a><span data-ttu-id="18f21-318">Uygulamayı test etme</span><span class="sxs-lookup"><span data-stu-id="18f21-318">Test the app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="18f21-319">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-319">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="18f21-320">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-320">:::no-loc(Delete)::: all the records in the database.</span></span> <span data-ttu-id="18f21-321">Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz</span><span class="sxs-lookup"><span data-stu-id="18f21-321">You can do this with the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox)</span></span>
+* <span data-ttu-id="18f21-320">Delete veritabanındaki tüm kayıtlar.</span><span class="sxs-lookup"><span data-stu-id="18f21-320">Delete all the records in the database.</span></span> <span data-ttu-id="18f21-321">Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz</span><span class="sxs-lookup"><span data-stu-id="18f21-321">You can do this with the delete links in the browser or from [SSOX](xref:tutorials/razor-pages/new-field#ssox)</span></span>
 * <span data-ttu-id="18f21-322">Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır.</span><span class="sxs-lookup"><span data-stu-id="18f21-322">Force the app to initialize by calling the methods in the `Startup` class, so the seed method runs.</span></span> <span data-ttu-id="18f21-323">Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir.</span><span class="sxs-lookup"><span data-stu-id="18f21-323">To force initialization, IIS Express must be stopped and restarted.</span></span> <span data-ttu-id="18f21-324">Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="18f21-324">You can do this with any of the following approaches:</span></span>
 
   * <span data-ttu-id="18f21-325">Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:</span><span class="sxs-lookup"><span data-stu-id="18f21-325">Right-click the IIS Express system tray icon in the notification area and tap **Exit** or **Stop Site** :</span></span>
@@ -468,11 +468,11 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="18f21-330">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="18f21-330">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="18f21-331">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-331">:::no-loc(Delete)::: all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-332">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-332">Stop and start the app to seed the database.</span></span>
+<span data-ttu-id="18f21-331">Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-331">Delete all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-332">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-332">Stop and start the app to seed the database.</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="18f21-333">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="18f21-333">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="18f21-334">:::no-loc(Delete)::: veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-334">:::no-loc(Delete)::: all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-335">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-335">Stop and start the app to seed the database.</span></span>
+<span data-ttu-id="18f21-334">Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır.</span><span class="sxs-lookup"><span data-stu-id="18f21-334">Delete all the records in the database, so the seed method will run.</span></span> <span data-ttu-id="18f21-335">Veritabanını temel alarak uygulamayı durdurup başlatın.</span><span class="sxs-lookup"><span data-stu-id="18f21-335">Stop and start the app to seed the database.</span></span>
 
 ---
 
@@ -487,8 +487,8 @@ if (context.Movie.Any())
 * [<span data-ttu-id="18f21-340">Bu öğreticinin YouTube sürümü</span><span class="sxs-lookup"><span data-stu-id="18f21-340">YouTube version of this tutorial</span></span>](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="18f21-341">[Önceki: Scafkatlanmış :::no-loc(Razor)::: ](xref:tutorials/razor-pages/page) 
->  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-341">[Previous: Scaffolded :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/page)
+> <span data-ttu-id="18f21-341">[Önceki: Scafkatlanmış Razor ](xref:tutorials/razor-pages/page) 
+>  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)</span><span class="sxs-lookup"><span data-stu-id="18f21-341">[Previous: Scaffolded Razor Pages](xref:tutorials/razor-pages/page)
 [Next: Update the pages](xref:tutorials/razor-pages/da1)</span></span>
 
 ::: moniker-end

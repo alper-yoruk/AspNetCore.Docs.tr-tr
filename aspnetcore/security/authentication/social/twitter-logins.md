@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/twitter-logins
 ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93053286"
 
 * <span data-ttu-id="04500-112">**Twitter Ile oturum açmayı etkinleştir** seçeneğinin yanındaki kutuyu işaretleyin</span><span class="sxs-lookup"><span data-stu-id="04500-112">Check the box next to **Enable Sign in with Twitter**</span></span>
 
-* <span data-ttu-id="04500-113">Microsoft. AspNetCore.:::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="04500-113">Microsoft.AspNetCore.:::no-loc(Identity):::</span></span> <span data-ttu-id="04500-114">Kullanıcıların varsayılan olarak bir e-posta adresi olmasını gerektirir.</span><span class="sxs-lookup"><span data-stu-id="04500-114">requires users to have an email address by default.</span></span> <span data-ttu-id="04500-115">**İzinler** sekmesine gidin, **Düzenle** düğmesine tıklayın ve **kullanıcılardan e-posta adresi iste** ' nin yanındaki kutuyu işaretleyin.</span><span class="sxs-lookup"><span data-stu-id="04500-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
+* <span data-ttu-id="04500-113">Microsoft. AspNetCore.Identity</span><span class="sxs-lookup"><span data-stu-id="04500-113">Microsoft.AspNetCore.Identity</span></span> <span data-ttu-id="04500-114">Kullanıcıların varsayılan olarak bir e-posta adresi olmasını gerektirir.</span><span class="sxs-lookup"><span data-stu-id="04500-114">requires users to have an email address by default.</span></span> <span data-ttu-id="04500-115">**İzinler** sekmesine gidin, **Düzenle** düğmesine tıklayın ve **kullanıcılardan e-posta adresi iste** ' nin yanındaki kutuyu işaretleyin.</span><span class="sxs-lookup"><span data-stu-id="04500-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
 
 * <span data-ttu-id="04500-116">`/signin-twitter` **Geri arama URL 'leri** ALANıNA eklenen geliştirme URI 'nizi girin (örneğin: `https://webapp128.azurewebsites.net/signin-twitter` ).</span><span class="sxs-lookup"><span data-stu-id="04500-116">Enter your development URI with `/signin-twitter` appended into the **Callback URLs** field (for example: `https://webapp128.azurewebsites.net/signin-twitter`).</span></span> <span data-ttu-id="04500-117">Bu örnekte daha sonra yapılandırılan Twitter kimlik doğrulama şeması, `/signin-twitter` OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işler.</span><span class="sxs-lookup"><span data-stu-id="04500-117">The Twitter authentication scheme configured later in this sample will automatically handle requests at `/signin-twitter` route to implement the OAuth flow.</span></span>
 
@@ -99,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a><span data-ttu-id="04500-138">Sorun giderme</span><span class="sxs-lookup"><span data-stu-id="04500-138">Troubleshooting</span></span>
 
-* <span data-ttu-id="04500-139">**Yalnızca 2. x ASP.NET Core:** :::no-loc(Identity)::: `services.Add:::no-loc(Identity):::` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır* .</span><span class="sxs-lookup"><span data-stu-id="04500-139">**ASP.NET Core 2.x only:** If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="04500-140">Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="04500-140">The project template used in this sample ensures that this is done.</span></span>
+* <span data-ttu-id="04500-139">**Yalnızca 2. x ASP.NET Core:** Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır* .</span><span class="sxs-lookup"><span data-stu-id="04500-139">**ASP.NET Core 2.x only:** If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="04500-140">Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="04500-140">The project template used in this sample ensures that this is done.</span></span>
 * <span data-ttu-id="04500-141">Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız* olur.</span><span class="sxs-lookup"><span data-stu-id="04500-141">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="04500-142">Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.</span><span class="sxs-lookup"><span data-stu-id="04500-142">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="04500-143">Sonraki adımlar</span><span class="sxs-lookup"><span data-stu-id="04500-143">Next steps</span></span>

@@ -1,23 +1,23 @@
 ---
-title: "ASP.NET Core 'de geç yük derlemeleri :::no-loc(Blazor WebAssembly):::"
+title: "ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly"
 author: guardrex
-description: 'ASP.NET Core uygulamalarında derlemelerin nasıl yavaş yükleneceğini öğrenin :::no-loc(Blazor WebAssembly)::: .'
+description: 'ASP.NET Core uygulamalarında derlemelerin nasıl yavaş yükleneceğini öğrenin Blazor WebAssembly .'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/webassembly-lazy-load-assemblies
 ms.openlocfilehash: 6a1feffb5341d432d6d1949a9e26b9537b85ba03
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,30 +26,30 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054794"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="abe22-103">ASP.NET Core 'de geç yük derlemeleri :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="abe22-103">Lazy load assemblies in ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="abe22-103">ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="abe22-103">Lazy load assemblies in ASP.NET Core Blazor WebAssembly</span></span>
 
 <span data-ttu-id="abe22-104">By [Safia Abdalla](https://safia.rocks) ve [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="abe22-104">By [Safia Abdalla](https://safia.rocks) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="abe22-105">:::no-loc(Blazor WebAssembly)::: Uygulama başlatma performansı, bazı uygulama derlemelerinin yüklenmesi gerekene kadar artırılabilir ve bu da *yavaş yükleme* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-105">:::no-loc(Blazor WebAssembly)::: app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading* .</span></span> <span data-ttu-id="abe22-106">Örneğin, yalnızca tek bir bileşeni işlemek için kullanılan derlemeler yalnızca Kullanıcı o bileşene gittiğinde yüklenecek şekilde ayarlanabilir.</span><span class="sxs-lookup"><span data-stu-id="abe22-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="abe22-107">Yüklendikten sonra derlemeler istemci tarafında önbelleğe alınır ve gelecekteki tüm gezinmeler için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="abe22-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
+<span data-ttu-id="abe22-105">Blazor WebAssembly Uygulama başlatma performansı, bazı uygulama derlemelerinin yüklenmesi gerekene kadar artırılabilir ve bu da *yavaş yükleme* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-105">Blazor WebAssembly app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading* .</span></span> <span data-ttu-id="abe22-106">Örneğin, yalnızca tek bir bileşeni işlemek için kullanılan derlemeler yalnızca Kullanıcı o bileşene gittiğinde yüklenecek şekilde ayarlanabilir.</span><span class="sxs-lookup"><span data-stu-id="abe22-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="abe22-107">Yüklendikten sonra derlemeler istemci tarafında önbelleğe alınır ve gelecekteki tüm gezinmeler için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="abe22-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
 
-<span data-ttu-id="abe22-108">:::no-loc(Blazor):::yavaş yükleme özelliği, Kullanıcı belirli bir rotaya geçtiğinde çalışma zamanı sırasında derlemeleri yükleyen yavaş yükleme için uygulama derlemelerini işaretlemenizi sağlar.</span><span class="sxs-lookup"><span data-stu-id="abe22-108">:::no-loc(Blazor):::'s lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="abe22-109">Özelliği proje dosyasındaki değişikliklerden ve uygulamanın yönlendiricisinde yapılan değişikliklerle oluşur.</span><span class="sxs-lookup"><span data-stu-id="abe22-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
+<span data-ttu-id="abe22-108">Blazoryavaş yükleme özelliği, Kullanıcı belirli bir rotaya geçtiğinde çalışma zamanı sırasında derlemeleri yükleyen yavaş yükleme için uygulama derlemelerini işaretlemenizi sağlar.</span><span class="sxs-lookup"><span data-stu-id="abe22-108">Blazor's lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="abe22-109">Özelliği proje dosyasındaki değişikliklerden ve uygulamanın yönlendiricisinde yapılan değişikliklerle oluşur.</span><span class="sxs-lookup"><span data-stu-id="abe22-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="abe22-110">:::no-loc(Blazor Server):::Derlemeler bir uygulamadaki istemciye indirilmediğinden derleme yavaş yüklemesi uygulama avantajına sahip değildir :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="abe22-110">Assembly lazy loading doesn't benefit :::no-loc(Blazor Server)::: apps because assemblies aren't downloaded to the client in a :::no-loc(Blazor Server)::: app.</span></span>
+> <span data-ttu-id="abe22-110">Blazor ServerDerlemeler bir uygulamadaki istemciye indirilmediğinden derleme yavaş yüklemesi uygulama avantajına sahip değildir Blazor Server .</span><span class="sxs-lookup"><span data-stu-id="abe22-110">Assembly lazy loading doesn't benefit Blazor Server apps because assemblies aren't downloaded to the client in a Blazor Server app.</span></span>
 
 ## <a name="project-file"></a><span data-ttu-id="abe22-111">Proje dosyası</span><span class="sxs-lookup"><span data-stu-id="abe22-111">Project file</span></span>
 
-<span data-ttu-id="abe22-112">Öğeyi kullanarak uygulamanın proje dosyasında () yavaş yükleme için derlemeleri işaretleyin `.csproj` `:::no-loc(Blazor):::WebAssemblyLazyLoad` .</span><span class="sxs-lookup"><span data-stu-id="abe22-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `:::no-loc(Blazor):::WebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="abe22-113">Uzantı ile derleme adını kullanın `.dll` .</span><span class="sxs-lookup"><span data-stu-id="abe22-113">Use the assembly name with the `.dll` extension.</span></span> <span data-ttu-id="abe22-114">:::no-loc(Blazor):::Framework, bu öğe grubu tarafından belirtilen derlemelerin uygulama başlatma sırasında yüklenmesine engel olur.</span><span class="sxs-lookup"><span data-stu-id="abe22-114">The :::no-loc(Blazor)::: framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="abe22-115">Aşağıdaki örnek, yavaş yükleme için büyük bir özel derlemeyi ( `GrantImaharaRobotControls.dll` ) işaretler.</span><span class="sxs-lookup"><span data-stu-id="abe22-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="abe22-116">Yavaş yükleme için işaretlenen bir derlemenin bağımlılıkları varsa, proje dosyasında da yavaş yükleme için işaretlenmelidir.</span><span class="sxs-lookup"><span data-stu-id="abe22-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
+<span data-ttu-id="abe22-112">Öğeyi kullanarak uygulamanın proje dosyasında () yavaş yükleme için derlemeleri işaretleyin `.csproj` `BlazorWebAssemblyLazyLoad` .</span><span class="sxs-lookup"><span data-stu-id="abe22-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `BlazorWebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="abe22-113">Uzantı ile derleme adını kullanın `.dll` .</span><span class="sxs-lookup"><span data-stu-id="abe22-113">Use the assembly name with the `.dll` extension.</span></span> <span data-ttu-id="abe22-114">BlazorFramework, bu öğe grubu tarafından belirtilen derlemelerin uygulama başlatma sırasında yüklenmesine engel olur.</span><span class="sxs-lookup"><span data-stu-id="abe22-114">The Blazor framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="abe22-115">Aşağıdaki örnek, yavaş yükleme için büyük bir özel derlemeyi ( `GrantImaharaRobotControls.dll` ) işaretler.</span><span class="sxs-lookup"><span data-stu-id="abe22-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="abe22-116">Yavaş yükleme için işaretlenen bir derlemenin bağımlılıkları varsa, proje dosyasında da yavaş yükleme için işaretlenmelidir.</span><span class="sxs-lookup"><span data-stu-id="abe22-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
 
 ```xml
 <ItemGroup>
-  <:::no-loc(Blazor):::WebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
 
 ## <a name="router-component"></a><span data-ttu-id="abe22-117">`Router` bileşeni</span><span class="sxs-lookup"><span data-stu-id="abe22-117">`Router` component</span></span>
 
-<span data-ttu-id="abe22-118">:::no-loc(Blazor):::`Router`bileşeni, hangi derlemelerin :::no-loc(Blazor)::: yönlendirilebilir bileşenleri arayacağını belirler.</span><span class="sxs-lookup"><span data-stu-id="abe22-118">:::no-loc(Blazor):::'s `Router` component designates which assemblies :::no-loc(Blazor)::: searches for routable components.</span></span> <span data-ttu-id="abe22-119">`Router`Bileşen ayrıca, kullanıcının gittiği yol için bileşenin işlenmesinden de sorumludur.</span><span class="sxs-lookup"><span data-stu-id="abe22-119">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="abe22-120">`Router`Bileşeni, `OnNavigateAsync` yavaş yükleme ile birlikte kullanılabilecek bir özelliği destekler.</span><span class="sxs-lookup"><span data-stu-id="abe22-120">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
+<span data-ttu-id="abe22-118">Blazor`Router`bileşeni, hangi derlemelerin Blazor yönlendirilebilir bileşenleri arayacağını belirler.</span><span class="sxs-lookup"><span data-stu-id="abe22-118">Blazor's `Router` component designates which assemblies Blazor searches for routable components.</span></span> <span data-ttu-id="abe22-119">`Router`Bileşen ayrıca, kullanıcının gittiği yol için bileşenin işlenmesinden de sorumludur.</span><span class="sxs-lookup"><span data-stu-id="abe22-119">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="abe22-120">`Router`Bileşeni, `OnNavigateAsync` yavaş yükleme ile birlikte kullanılabilecek bir özelliği destekler.</span><span class="sxs-lookup"><span data-stu-id="abe22-120">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
 
 <span data-ttu-id="abe22-121">Uygulamanın `Router` bileşeninde ( `App.razor` ):</span><span class="sxs-lookup"><span data-stu-id="abe22-121">In the app's `Router` component (`App.razor`):</span></span>
 
@@ -75,7 +75,7 @@ ms.locfileid: "93054794"
 }
 ```
 
-<span data-ttu-id="abe22-129">`OnNavigateAsync`Geri çağırma işlenmeyen bir özel durum oluşturursa, [ :::no-loc(Blazor)::: hata Kullanıcı arabirimi](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) çağrılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-129">If the `OnNavigateAsync` callback throws an unhandled exception, the [:::no-loc(Blazor)::: error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
+<span data-ttu-id="abe22-129">`OnNavigateAsync`Geri çağırma işlenmeyen bir özel durum oluşturursa, [ Blazor hata Kullanıcı arabirimi](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) çağrılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-129">If the `OnNavigateAsync` callback throws an unhandled exception, the [Blazor error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
 
 ### <a name="assembly-load-logic-in-onnavigateasync"></a><span data-ttu-id="abe22-130">İçindeki derleme yükleme mantığı `OnNavigateAsync`</span><span class="sxs-lookup"><span data-stu-id="abe22-130">Assembly load logic in `OnNavigateAsync`</span></span>
 
@@ -104,7 +104,7 @@ ms.locfileid: "93054794"
 * <span data-ttu-id="abe22-142">Bir ağ çağrısı aracılığıyla derlemeleri getirmek için JS birlikte çalışabilirliği kullanır.</span><span class="sxs-lookup"><span data-stu-id="abe22-142">Uses JS interop to fetch assemblies via a network call.</span></span>
 * <span data-ttu-id="abe22-143">Derlemeleri tarayıcıda WebAssembly üzerinde yürüten çalışma zamanına yükler.</span><span class="sxs-lookup"><span data-stu-id="abe22-143">Loads assemblies into the runtime executing on WebAssembly in the browser.</span></span>
 
-<span data-ttu-id="abe22-144">Framework 'ün yavaş yükleme uygulamasıyla, barındırılan bir çözümde prerendering ile geç yükleme desteklenir :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="abe22-144">The framework's lazy loading implementation supports lazy loading with prerendering in a hosted :::no-loc(Blazor)::: solution.</span></span> <span data-ttu-id="abe22-145">Prerendering sırasında, yavaş yükleme için işaretlenenler de dahil olmak üzere tüm derlemelerin yüklendiği varsayılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-145">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span> <span data-ttu-id="abe22-146">`LazyAssemblyLoader` *Sunucu* projesinin `Startup.ConfigureServices` yöntemine () el ile kaydolun `Startup.cs` :</span><span class="sxs-lookup"><span data-stu-id="abe22-146">Manually register `LazyAssemblyLoader` in the *Server* project's `Startup.ConfigureServices` method (`Startup.cs`):</span></span>
+<span data-ttu-id="abe22-144">Framework 'ün yavaş yükleme uygulamasıyla, barındırılan bir çözümde prerendering ile geç yükleme desteklenir Blazor .</span><span class="sxs-lookup"><span data-stu-id="abe22-144">The framework's lazy loading implementation supports lazy loading with prerendering in a hosted Blazor solution.</span></span> <span data-ttu-id="abe22-145">Prerendering sırasında, yavaş yükleme için işaretlenenler de dahil olmak üzere tüm derlemelerin yüklendiği varsayılır.</span><span class="sxs-lookup"><span data-stu-id="abe22-145">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span> <span data-ttu-id="abe22-146">`LazyAssemblyLoader` *Sunucu* projesinin `Startup.ConfigureServices` yöntemine () el ile kaydolun `Startup.cs` :</span><span class="sxs-lookup"><span data-stu-id="abe22-146">Manually register `LazyAssemblyLoader` in the *Server* project's `Startup.ConfigureServices` method (`Startup.cs`):</span></span>
 
 ```csharp
 services.AddScoped<LazyAssemblyLoader>();

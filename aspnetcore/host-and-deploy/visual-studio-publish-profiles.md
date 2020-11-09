@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/visual-studio-publish-profiles
 ms.openlocfilehash: 98dfd539171807cbf94d4ac8746458152c809495
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93057576"
 
 <span data-ttu-id="a7eba-109">Önceki `<Project>` öğenin özniteliği, `Sdk` sırasıyla *$ (msbuildsdkspath) \Microsoft.net.SDK.Web\Sdk\Sdk.props* ve *$ (msbuildsdkspath) \Microsoft.net.SDK.Web\Sdk\Sdk.targets* öğesinden MSBuild [özelliklerini](/visualstudio/msbuild/msbuild-properties) ve [hedeflerini](/visualstudio/msbuild/msbuild-targets) içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-109">The preceding `<Project>` element's `Sdk` attribute imports the MSBuild [properties](/visualstudio/msbuild/msbuild-properties) and [targets](/visualstudio/msbuild/msbuild-targets) from *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* and *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* , respectively.</span></span> <span data-ttu-id="a7eba-110">İçin varsayılan konum `$(MSBuildSDKsPath)` (Visual Studio 2019 Enterprise ile) *% ProgramFiles (x86)% \ Microsoft Visual Studio\2019\enterprise\msbuild\sdk* klasörüdür.</span><span class="sxs-lookup"><span data-stu-id="a7eba-110">The default location for `$(MSBuildSDKsPath)` (with Visual Studio 2019 Enterprise) is the *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* folder.</span></span>
 
-<span data-ttu-id="a7eba-111">`Microsoft.NET.Sdk.Web`([Web SDK](xref:razor-pages/web-sdk)) `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) ve `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([ :::no-loc(Razor)::: SDK](xref:razor-pages/sdk)) dahil diğer SDK 'lara bağlıdır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([:::no-loc(Razor)::: SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="a7eba-112">Her bağımlı SDK ile ilişkili MSBuild özellikleri ve hedefleri içeri aktarılır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="a7eba-113">Yayımlama hedefleri, kullanılan Yayımla yöntemine göre uygun hedef kümesini içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
+<span data-ttu-id="a7eba-111">`Microsoft.NET.Sdk.Web`([Web SDK](xref:razor-pages/web-sdk)) `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) ve `Microsoft.NET.Sdk.Razor` ([ Razor SDK](xref:razor-pages/sdk)) dahil diğer SDK 'lara bağlıdır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="a7eba-112">Her bağımlı SDK ile ilişkili MSBuild özellikleri ve hedefleri içeri aktarılır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="a7eba-113">Yayımlama hedefleri, kullanılan Yayımla yöntemine göre uygun hedef kümesini içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
 
 <span data-ttu-id="a7eba-114">MSBuild veya Visual Studio bir projeyi yüklediğinde, aşağıdaki üst düzey eylemler gerçekleşir:</span><span class="sxs-lookup"><span data-stu-id="a7eba-114">When MSBuild or Visual Studio loads a project, the following high-level actions occur:</span></span>
 
@@ -58,13 +58,13 @@ ms.locfileid: "93057576"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="a7eba-126">[Web SDK](xref:razor-pages/web-sdk) [ :::no-loc(Razor)::: 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="a7eba-127">Sonuç olarak, desenlerle eşleşen dosyalar `**\*.cshtml` ve `**\*.razor` `Content` öğe listesine de dahildir.</span><span class="sxs-lookup"><span data-stu-id="a7eba-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
+<span data-ttu-id="a7eba-126">[Web SDK](xref:razor-pages/web-sdk) [ Razor 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="a7eba-127">Sonuç olarak, desenlerle eşleşen dosyalar `**\*.cshtml` ve `**\*.razor` `Content` öğe listesine de dahildir.</span><span class="sxs-lookup"><span data-stu-id="a7eba-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-<span data-ttu-id="a7eba-128">[Web SDK](xref:razor-pages/web-sdk) [ :::no-loc(Razor)::: 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="a7eba-129">Sonuç olarak, düzeniyle eşleşen dosyalar `**\*.cshtml` da `Content` öğe listesine dahil edilir.</span><span class="sxs-lookup"><span data-stu-id="a7eba-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
+<span data-ttu-id="a7eba-128">[Web SDK](xref:razor-pages/web-sdk) [ Razor 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır.</span><span class="sxs-lookup"><span data-stu-id="a7eba-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="a7eba-129">Sonuç olarak, düzeniyle eşleşen dosyalar `**\*.cshtml` da `Content` öğe listesine dahil edilir.</span><span class="sxs-lookup"><span data-stu-id="a7eba-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
@@ -352,7 +352,7 @@ dotnet msbuild "AzureWebApp.csproj"
 * <span data-ttu-id="a7eba-259">Yapı yapıtları</span><span class="sxs-lookup"><span data-stu-id="a7eba-259">Build artifacts</span></span>
 * <span data-ttu-id="a7eba-260">Aşağıdaki glob desenleriyle eşleşen klasörler ve dosyalar:</span><span class="sxs-lookup"><span data-stu-id="a7eba-260">Folders and files matching the following globbing patterns:</span></span>
   * <span data-ttu-id="a7eba-261">`**\*.config` (örneğin, *web.config* )</span><span class="sxs-lookup"><span data-stu-id="a7eba-261">`**\*.config` (for example, *web.config* )</span></span>
-  * <span data-ttu-id="a7eba-262">`**\*.json` (örneğin, *:::no-loc(appsettings.json):::* )</span><span class="sxs-lookup"><span data-stu-id="a7eba-262">`**\*.json` (for example, *:::no-loc(appsettings.json):::* )</span></span>
+  * <span data-ttu-id="a7eba-262">`**\*.json` (örneğin, *appsettings.json* )</span><span class="sxs-lookup"><span data-stu-id="a7eba-262">`**\*.json` (for example, *appsettings.json* )</span></span>
   * `wwwroot\**`
 
 <span data-ttu-id="a7eba-263">MSBuild, [Glob desenlerini](https://gruntjs.com/configuring-tasks#globbing-patterns)destekler.</span><span class="sxs-lookup"><span data-stu-id="a7eba-263">MSBuild supports [globbing patterns](https://gruntjs.com/configuring-tasks#globbing-patterns).</span></span> <span data-ttu-id="a7eba-264">Örneğin, aşağıdaki öğe, `<Content>` metin ( *. txt* ) dosyalarının *wwwroot\content* klasörü ve alt klasörlerinde kopyalanmasını bastırır:</span><span class="sxs-lookup"><span data-stu-id="a7eba-264">For example, the following `<Content>` element suppresses the copying of text ( *.txt* ) files in the *wwwroot\content* folder and its subfolders:</span></span>

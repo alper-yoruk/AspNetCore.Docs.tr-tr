@@ -7,17 +7,17 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mongo-app
 ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -240,15 +240,15 @@ ms.locfileid: "93060748"
 
 ## <a name="add-a-configuration-model"></a><span data-ttu-id="af9d3-192">Yapılandırma modeli ekleme</span><span class="sxs-lookup"><span data-stu-id="af9d3-192">Add a configuration model</span></span>
 
-1. <span data-ttu-id="af9d3-193">Aşağıdaki veritabanı yapılandırma değerlerini şu şekilde ekleyin *:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="af9d3-193">Add the following database configuration values to *:::no-loc(appsettings.json):::* :</span></span>
+1. <span data-ttu-id="af9d3-193">Aşağıdaki veritabanı yapılandırma değerlerini şu şekilde ekleyin *appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="af9d3-193">Add the following database configuration values to *appsettings.json* :</span></span>
 
-   [!code-json[](first-mongo-app/samples/3.x/SampleApp/:::no-loc(appsettings.json):::?highlight=2-6)]
+   [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
 1. <span data-ttu-id="af9d3-194">*Modeller* dizinine aşağıdaki kodla bir *BookstoreDatabaseSettings.cs* dosyası ekleyin:</span><span class="sxs-lookup"><span data-stu-id="af9d3-194">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   <span data-ttu-id="af9d3-195">Önceki `BookstoreDatabaseSettings` sınıf, *:::no-loc(appsettings.json):::* dosyanın özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-195">The preceding `BookstoreDatabaseSettings` class is used to store the *:::no-loc(appsettings.json):::* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="af9d3-196">JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-196">The JSON and C# property names are named identically to ease the mapping process.</span></span>
+   <span data-ttu-id="af9d3-195">Önceki `BookstoreDatabaseSettings` sınıf, *appsettings.json* dosyanın özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-195">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="af9d3-196">JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-196">The JSON and C# property names are named identically to ease the mapping process.</span></span>
 
 1. <span data-ttu-id="af9d3-197">Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-197">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
@@ -256,7 +256,7 @@ ms.locfileid: "93060748"
 
    <span data-ttu-id="af9d3-198">Yukarıdaki kodda:</span><span class="sxs-lookup"><span data-stu-id="af9d3-198">In the preceding code:</span></span>
 
-   * <span data-ttu-id="af9d3-199">Dosyanın bölüm bağlandığı yapılandırma örneği, *:::no-loc(appsettings.json):::* `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-199">The configuration instance to which the *:::no-loc(appsettings.json):::* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="af9d3-200">Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` içindeki özelliği ile doldurulur *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="af9d3-200">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *:::no-loc(appsettings.json):::* .</span></span>
+   * <span data-ttu-id="af9d3-199">Dosyanın bölüm bağlandığı yapılandırma örneği, *appsettings.json* `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-199">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="af9d3-200">Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` içindeki özelliği ile doldurulur *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="af9d3-200">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json* .</span></span>
    * <span data-ttu-id="af9d3-201">`IBookstoreDatabaseSettings`Arabirim, tek bir [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)ile dı 'ye kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-201">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="af9d3-202">Eklenen arabirim örneği bir nesne olarak çözümlenir `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-202">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
 
 1. <span data-ttu-id="af9d3-203">Ve başvurularını çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-203">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
@@ -270,7 +270,7 @@ ms.locfileid: "93060748"
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   <span data-ttu-id="af9d3-207">Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-207">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="af9d3-208">Bu teknik, *:::no-loc(appsettings.json):::* [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="af9d3-208">This technique provides access to the *:::no-loc(appsettings.json):::* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
+   <span data-ttu-id="af9d3-207">Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-207">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="af9d3-208">Bu teknik, *appsettings.json* [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="af9d3-208">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
 
 1. <span data-ttu-id="af9d3-209">Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-209">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
@@ -590,15 +590,15 @@ ms.locfileid: "93060748"
 
 ## <a name="add-a-configuration-model"></a><span data-ttu-id="af9d3-346">Yapılandırma modeli ekleme</span><span class="sxs-lookup"><span data-stu-id="af9d3-346">Add a configuration model</span></span>
 
-1. <span data-ttu-id="af9d3-347">Aşağıdaki veritabanı yapılandırma değerlerini şu şekilde ekleyin *:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="af9d3-347">Add the following database configuration values to *:::no-loc(appsettings.json):::* :</span></span>
+1. <span data-ttu-id="af9d3-347">Aşağıdaki veritabanı yapılandırma değerlerini şu şekilde ekleyin *appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="af9d3-347">Add the following database configuration values to *appsettings.json* :</span></span>
 
-   [!code-json[](first-mongo-app/samples/2.x/SampleApp/:::no-loc(appsettings.json):::?highlight=2-6)]
+   [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
 1. <span data-ttu-id="af9d3-348">*Modeller* dizinine aşağıdaki kodla bir *BookstoreDatabaseSettings.cs* dosyası ekleyin:</span><span class="sxs-lookup"><span data-stu-id="af9d3-348">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   <span data-ttu-id="af9d3-349">Önceki `BookstoreDatabaseSettings` sınıf, *:::no-loc(appsettings.json):::* dosyanın özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-349">The preceding `BookstoreDatabaseSettings` class is used to store the *:::no-loc(appsettings.json):::* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="af9d3-350">JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-350">The JSON and C# property names are named identically to ease the mapping process.</span></span>
+   <span data-ttu-id="af9d3-349">Önceki `BookstoreDatabaseSettings` sınıf, *appsettings.json* dosyanın özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-349">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="af9d3-350">JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-350">The JSON and C# property names are named identically to ease the mapping process.</span></span>
 
 1. <span data-ttu-id="af9d3-351">Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-351">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
@@ -606,7 +606,7 @@ ms.locfileid: "93060748"
 
    <span data-ttu-id="af9d3-352">Yukarıdaki kodda:</span><span class="sxs-lookup"><span data-stu-id="af9d3-352">In the preceding code:</span></span>
 
-   * <span data-ttu-id="af9d3-353">Dosyanın bölüm bağlandığı yapılandırma örneği, *:::no-loc(appsettings.json):::* `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-353">The configuration instance to which the *:::no-loc(appsettings.json):::* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="af9d3-354">Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` içindeki özelliği ile doldurulur *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="af9d3-354">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *:::no-loc(appsettings.json):::* .</span></span>
+   * <span data-ttu-id="af9d3-353">Dosyanın bölüm bağlandığı yapılandırma örneği, *appsettings.json* `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-353">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="af9d3-354">Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` içindeki özelliği ile doldurulur *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="af9d3-354">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json* .</span></span>
    * <span data-ttu-id="af9d3-355">`IBookstoreDatabaseSettings`Arabirim, tek bir [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)ile dı 'ye kaydedilir.</span><span class="sxs-lookup"><span data-stu-id="af9d3-355">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="af9d3-356">Eklenen arabirim örneği bir nesne olarak çözümlenir `BookstoreDatabaseSettings` .</span><span class="sxs-lookup"><span data-stu-id="af9d3-356">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
 
 1. <span data-ttu-id="af9d3-357">Ve başvurularını çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-357">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
@@ -620,7 +620,7 @@ ms.locfileid: "93060748"
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   <span data-ttu-id="af9d3-361">Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-361">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="af9d3-362">Bu teknik, *:::no-loc(appsettings.json):::* [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="af9d3-362">This technique provides access to the *:::no-loc(appsettings.json):::* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
+   <span data-ttu-id="af9d3-361">Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır.</span><span class="sxs-lookup"><span data-stu-id="af9d3-361">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="af9d3-362">Bu teknik, *appsettings.json* [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="af9d3-362">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
 
 1. <span data-ttu-id="af9d3-363">Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="af9d3-363">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
@@ -730,7 +730,7 @@ ms.locfileid: "93060748"
 
 ## <a name="add-authentication-support-to-a-web-api"></a><span data-ttu-id="af9d3-411">Web API 'sine kimlik doğrulama desteği ekleme</span><span class="sxs-lookup"><span data-stu-id="af9d3-411">Add authentication support to a web API</span></span>
 
-[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="next-steps"></a><span data-ttu-id="af9d3-412">Sonraki adımlar</span><span class="sxs-lookup"><span data-stu-id="af9d3-412">Next steps</span></span>
 

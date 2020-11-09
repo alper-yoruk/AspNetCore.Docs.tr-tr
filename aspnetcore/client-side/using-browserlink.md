@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: client-side/using-browserlink
 ms.openlocfilehash: 80f05acab55af973faf08b5db79ea4cbaf896b14
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93054495"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="68164-109">[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68164-109">Add the [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) package to your project.</span></span> <span data-ttu-id="68164-110">ASP.NET Core :::no-loc(Razor)::: sayfaları veya MVC projeleri için, :::no-loc(Razor)::: ' de açıklandığı gibi ( *. cshtml* ) dosyaları için çalışma zamanı derlemesini de etkinleştirin <xref:mvc/views/view-compilation> .</span><span class="sxs-lookup"><span data-stu-id="68164-110">For ASP.NET Core :::no-loc(Razor)::: Pages or MVC projects, also enable runtime compilation of :::no-loc(Razor)::: ( *.cshtml* ) files as described in <xref:mvc/views/view-compilation>.</span></span> <span data-ttu-id="68164-111">:::no-loc(Razor)::: söz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.</span><span class="sxs-lookup"><span data-stu-id="68164-111">:::no-loc(Razor)::: syntax changes are applied only when runtime compilation has been enabled.</span></span>
+<span data-ttu-id="68164-109">[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68164-109">Add the [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) package to your project.</span></span> <span data-ttu-id="68164-110">ASP.NET Core Razor sayfaları veya MVC projeleri için, Razor ' de açıklandığı gibi ( *. cshtml* ) dosyaları için çalışma zamanı derlemesini de etkinleştirin <xref:mvc/views/view-compilation> .</span><span class="sxs-lookup"><span data-stu-id="68164-110">For ASP.NET Core Razor Pages or MVC projects, also enable runtime compilation of Razor ( *.cshtml* ) files as described in <xref:mvc/views/view-compilation>.</span></span> <span data-ttu-id="68164-111">Razor söz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.</span><span class="sxs-lookup"><span data-stu-id="68164-111">Razor syntax changes are applied only when runtime compilation has been enabled.</span></span>
 
 ::: moniker-end
 
@@ -140,7 +140,7 @@ if (env.IsDevelopment())
 
 ## <a name="how-it-works"></a><span data-ttu-id="68164-157">Nasıl çalışır?</span><span class="sxs-lookup"><span data-stu-id="68164-157">How it works</span></span>
 
-<span data-ttu-id="68164-158">Tarayıcı bağlantısı [:::no-loc(SignalR):::](xref:signalr/introduction) , Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için kullanır.</span><span class="sxs-lookup"><span data-stu-id="68164-158">Browser Link uses [:::no-loc(SignalR):::](xref:signalr/introduction) to create a communication channel between Visual Studio and the browser.</span></span> <span data-ttu-id="68164-159">Tarayıcı bağlantısı etkinleştirildiğinde, Visual Studio :::no-loc(SignalR)::: birden çok istemcinin (tarayıcının) bağlanabileceği bir sunucu gibi davranır.</span><span class="sxs-lookup"><span data-stu-id="68164-159">When Browser Link is enabled, Visual Studio acts as a :::no-loc(SignalR)::: server that multiple clients (browsers) can connect to.</span></span> <span data-ttu-id="68164-160">Tarayıcı bağlantısı ayrıca ASP.NET Core isteği ardışık düzenine bir ara yazılım bileşeni kaydeder.</span><span class="sxs-lookup"><span data-stu-id="68164-160">Browser Link also registers a middleware component in the ASP.NET Core request pipeline.</span></span> <span data-ttu-id="68164-161">Bu bileşen `<script>` , sunucudan her sayfa isteğine özel başvurular çıkarır.</span><span class="sxs-lookup"><span data-stu-id="68164-161">This component injects special `<script>` references into every page request from the server.</span></span> <span data-ttu-id="68164-162">Tarayıcıda **Görünüm kaynağı** ' nı seçerek komut dosyası başvurularını görebilir ve etiket içeriğinin sonuna kadar kaydırma yapabilirsiniz `<body>` :</span><span class="sxs-lookup"><span data-stu-id="68164-162">You can see the script references by selecting **View source** in the browser and scrolling to the end of the `<body>` tag content:</span></span>
+<span data-ttu-id="68164-158">Tarayıcı bağlantısı [SignalR](xref:signalr/introduction) , Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için kullanır.</span><span class="sxs-lookup"><span data-stu-id="68164-158">Browser Link uses [SignalR](xref:signalr/introduction) to create a communication channel between Visual Studio and the browser.</span></span> <span data-ttu-id="68164-159">Tarayıcı bağlantısı etkinleştirildiğinde, Visual Studio SignalR birden çok istemcinin (tarayıcının) bağlanabileceği bir sunucu gibi davranır.</span><span class="sxs-lookup"><span data-stu-id="68164-159">When Browser Link is enabled, Visual Studio acts as a SignalR server that multiple clients (browsers) can connect to.</span></span> <span data-ttu-id="68164-160">Tarayıcı bağlantısı ayrıca ASP.NET Core isteği ardışık düzenine bir ara yazılım bileşeni kaydeder.</span><span class="sxs-lookup"><span data-stu-id="68164-160">Browser Link also registers a middleware component in the ASP.NET Core request pipeline.</span></span> <span data-ttu-id="68164-161">Bu bileşen `<script>` , sunucudan her sayfa isteğine özel başvurular çıkarır.</span><span class="sxs-lookup"><span data-stu-id="68164-161">This component injects special `<script>` references into every page request from the server.</span></span> <span data-ttu-id="68164-162">Tarayıcıda **Görünüm kaynağı** ' nı seçerek komut dosyası başvurularını görebilir ve etiket içeriğinin sonuna kadar kaydırma yapabilirsiniz `<body>` :</span><span class="sxs-lookup"><span data-stu-id="68164-162">You can see the script references by selecting **View source** in the browser and scrolling to the end of the `<body>` tag content:</span></span>
 
 ```html
     <!-- Visual Studio Browser Link -->
@@ -154,4 +154,4 @@ if (env.IsDevelopment())
 
 <span data-ttu-id="68164-163">Kaynak dosyalarınız değiştirilmez.</span><span class="sxs-lookup"><span data-stu-id="68164-163">Your source files aren't modified.</span></span> <span data-ttu-id="68164-164">Ara yazılım bileşeni, betik başvurularını dinamik olarak çıkarır.</span><span class="sxs-lookup"><span data-stu-id="68164-164">The middleware component injects the script references dynamically.</span></span>
 
-<span data-ttu-id="68164-165">Tarayıcı tarafı kodu tüm JavaScript olduğundan, :::no-loc(SignalR)::: tarayıcı eklentisi gerekmeden desteklenen tüm tarayıcılarda çalışıyor olur.</span><span class="sxs-lookup"><span data-stu-id="68164-165">Because the browser-side code is all JavaScript, it works on all browsers that :::no-loc(SignalR)::: supports without requiring a browser plug-in.</span></span>
+<span data-ttu-id="68164-165">Tarayıcı tarafı kodu tüm JavaScript olduğundan, SignalR tarayıcı eklentisi gerekmeden desteklenen tüm tarayıcılarda çalışıyor olur.</span><span class="sxs-lookup"><span data-stu-id="68164-165">Because the browser-side code is all JavaScript, it works on all browsers that SignalR supports without requiring a browser plug-in.</span></span>

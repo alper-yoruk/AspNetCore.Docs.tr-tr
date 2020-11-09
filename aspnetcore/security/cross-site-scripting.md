@@ -5,17 +5,17 @@ description: ASP.NET Core uygulamasında bu güvenlik açığını gidermeye yö
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/cross-site-scripting
 ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,7 +28,7 @@ ms.locfileid: "93053091"
 
 <span data-ttu-id="2bab0-104">Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="2bab0-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="2bab0-105">Siteler arası betik oluşturma (XSS), bir saldırganın istemci tarafı komut dosyalarını (genellikle JavaScript) Web sayfalarına yerleştirmesini sağlayan bir güvenlik açığıdır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-105">Cross-Site Scripting (XSS) is a security vulnerability which enables an attacker to place client side scripts (usually JavaScript) into web pages.</span></span> <span data-ttu-id="2bab0-106">Diğer kullanıcılar etkilenen sayfaları yüklediğine göre, saldırganın betikleri çalışacaktır ve saldırganın, oturum belirteçleri çalıştırmasına, :::no-loc(cookie)::: Web sayfasının IÇERIĞINI Dom düzenlemesi aracılığıyla değiştirmesine veya tarayıcıyı başka bir sayfaya yönlendirmenize olanak tanır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-106">When other users load affected pages the attacker's scripts will run, enabling the attacker to steal :::no-loc(cookie):::s and session tokens, change the contents of the web page through DOM manipulation or redirect the browser to another page.</span></span> <span data-ttu-id="2bab0-107">XSS Güvenlik Açıkları genellikle bir uygulama kullanıcı girişi aldığında ve bunu doğrulamadan, kodlamadan veya çıkarmadan bir sayfaya çıktılarken oluşur.</span><span class="sxs-lookup"><span data-stu-id="2bab0-107">XSS vulnerabilities generally occur when an application takes user input and outputs it to a page without validating, encoding or escaping it.</span></span>
+<span data-ttu-id="2bab0-105">Siteler arası betik oluşturma (XSS), bir saldırganın istemci tarafı komut dosyalarını (genellikle JavaScript) Web sayfalarına yerleştirmesini sağlayan bir güvenlik açığıdır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-105">Cross-Site Scripting (XSS) is a security vulnerability which enables an attacker to place client side scripts (usually JavaScript) into web pages.</span></span> <span data-ttu-id="2bab0-106">Diğer kullanıcılar etkilenen sayfaları yüklediğine göre, saldırganın betikleri çalışacaktır ve saldırganın, oturum belirteçleri çalıştırmasına, cookie Web sayfasının IÇERIĞINI Dom düzenlemesi aracılığıyla değiştirmesine veya tarayıcıyı başka bir sayfaya yönlendirmenize olanak tanır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-106">When other users load affected pages the attacker's scripts will run, enabling the attacker to steal cookies and session tokens, change the contents of the web page through DOM manipulation or redirect the browser to another page.</span></span> <span data-ttu-id="2bab0-107">XSS Güvenlik Açıkları genellikle bir uygulama kullanıcı girişi aldığında ve bunu doğrulamadan, kodlamadan veya çıkarmadan bir sayfaya çıktılarken oluşur.</span><span class="sxs-lookup"><span data-stu-id="2bab0-107">XSS vulnerabilities generally occur when an application takes user input and outputs it to a page without validating, encoding or escaping it.</span></span>
 
 ## <a name="protecting-your-application-against-xss"></a><span data-ttu-id="2bab0-108">Uygulamanızı XSS 'ye karşı koruma</span><span class="sxs-lookup"><span data-stu-id="2bab0-108">Protecting your application against XSS</span></span>
 
@@ -44,11 +44,11 @@ ms.locfileid: "93053091"
 
 5. <span data-ttu-id="2bab0-120">Güvenilmeyen verileri bir URL sorgu dizesine geçirmeden önce URL 'nin kodlandığından emin olun.</span><span class="sxs-lookup"><span data-stu-id="2bab0-120">Before putting untrusted data into a URL query string ensure it's URL encoded.</span></span>
 
-## <a name="html-encoding-using-no-locrazor"></a><span data-ttu-id="2bab0-121">Kullanarak HTML kodlaması :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="2bab0-121">HTML Encoding using :::no-loc(Razor):::</span></span>
+## <a name="html-encoding-using-no-locrazor"></a><span data-ttu-id="2bab0-121">Kullanarak HTML kodlaması Razor</span><span class="sxs-lookup"><span data-stu-id="2bab0-121">HTML Encoding using Razor</span></span>
 
-<span data-ttu-id="2bab0-122">:::no-loc(Razor):::MVC 'de kullanılan motor, bunu yapmamaya gerçekten engel olmadığınız müddetçe, değişkenlerden kaynaklanan tüm çıktıyı otomatik olarak kodlar.</span><span class="sxs-lookup"><span data-stu-id="2bab0-122">The :::no-loc(Razor)::: engine used in MVC automatically encodes all output sourced from variables, unless you work really hard to prevent it doing so.</span></span> <span data-ttu-id="2bab0-123">Yönergesini her kullandığınızda HTML öznitelik kodlama kurallarını kullanır *@* .</span><span class="sxs-lookup"><span data-stu-id="2bab0-123">It uses HTML attribute encoding rules whenever you use the *@* directive.</span></span> <span data-ttu-id="2bab0-124">Html öznitelik kodlaması bir HTML kodlaması üst kümesidir, bu, HTML kodlaması veya HTML öznitelik kodlaması kullanılması gerekip gerekmediği için kendinize sorun olması gerekmediği anlamına gelir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-124">As HTML attribute encoding is a superset of HTML encoding this means you don't have to concern yourself with whether you should use HTML encoding or HTML attribute encoding.</span></span> <span data-ttu-id="2bab0-125">Güvenilmeyen girişi doğrudan JavaScript 'e eklemeye çalışırken değil, yalnızca bir HTML içeriğinde @ kullandığınızdan emin olmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-125">You must ensure that you only use @ in an HTML context, not when attempting to insert untrusted input directly into JavaScript.</span></span> <span data-ttu-id="2bab0-126">Etiket Yardımcıları, etiket parametrelerinde kullandığınız girişi de kodlayacaktır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-126">Tag helpers will also encode input you use in tag parameters.</span></span>
+<span data-ttu-id="2bab0-122">RazorMVC 'de kullanılan motor, bunu yapmamaya gerçekten engel olmadığınız müddetçe, değişkenlerden kaynaklanan tüm çıktıyı otomatik olarak kodlar.</span><span class="sxs-lookup"><span data-stu-id="2bab0-122">The Razor engine used in MVC automatically encodes all output sourced from variables, unless you work really hard to prevent it doing so.</span></span> <span data-ttu-id="2bab0-123">Yönergesini her kullandığınızda HTML öznitelik kodlama kurallarını kullanır *@* .</span><span class="sxs-lookup"><span data-stu-id="2bab0-123">It uses HTML attribute encoding rules whenever you use the *@* directive.</span></span> <span data-ttu-id="2bab0-124">Html öznitelik kodlaması bir HTML kodlaması üst kümesidir, bu, HTML kodlaması veya HTML öznitelik kodlaması kullanılması gerekip gerekmediği için kendinize sorun olması gerekmediği anlamına gelir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-124">As HTML attribute encoding is a superset of HTML encoding this means you don't have to concern yourself with whether you should use HTML encoding or HTML attribute encoding.</span></span> <span data-ttu-id="2bab0-125">Güvenilmeyen girişi doğrudan JavaScript 'e eklemeye çalışırken değil, yalnızca bir HTML içeriğinde @ kullandığınızdan emin olmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-125">You must ensure that you only use @ in an HTML context, not when attempting to insert untrusted input directly into JavaScript.</span></span> <span data-ttu-id="2bab0-126">Etiket Yardımcıları, etiket parametrelerinde kullandığınız girişi de kodlayacaktır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-126">Tag helpers will also encode input you use in tag parameters.</span></span>
 
-<span data-ttu-id="2bab0-127">Aşağıdaki görünümü uygulayın :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="2bab0-127">Take the following :::no-loc(Razor)::: view:</span></span>
+<span data-ttu-id="2bab0-127">Aşağıdaki görünümü uygulayın Razor :</span><span class="sxs-lookup"><span data-stu-id="2bab0-127">Take the following Razor view:</span></span>
 
 ```cshtml
 @{
@@ -67,7 +67,7 @@ ms.locfileid: "93053091"
 >[!WARNING]
 > <span data-ttu-id="2bab0-131">ASP.NET Core MVC, `HtmlString` Çıkış üzerine otomatik olarak kodlanmayan bir sınıf sağlar.</span><span class="sxs-lookup"><span data-stu-id="2bab0-131">ASP.NET Core MVC provides an `HtmlString` class which isn't automatically encoded upon output.</span></span> <span data-ttu-id="2bab0-132">Bu, XSS Güvenlik Açığı sunan güvenilir olmayan girişle birlikte asla kullanılmamalıdır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-132">This should never be used in combination with untrusted input as this will expose an XSS vulnerability.</span></span>
 
-## <a name="javascript-encoding-using-no-locrazor"></a><span data-ttu-id="2bab0-133">Kullanılarak JavaScript kodlaması :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="2bab0-133">JavaScript Encoding using :::no-loc(Razor):::</span></span>
+## <a name="javascript-encoding-using-no-locrazor"></a><span data-ttu-id="2bab0-133">Kullanılarak JavaScript kodlaması Razor</span><span class="sxs-lookup"><span data-stu-id="2bab0-133">JavaScript Encoding using Razor</span></span>
 
 <span data-ttu-id="2bab0-134">Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-134">There may be times you want to insert a value into JavaScript to process in your view.</span></span> <span data-ttu-id="2bab0-135">Bunu yapmanın iki yolu vardır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-135">There are two ways to do this.</span></span> <span data-ttu-id="2bab0-136">Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır.</span><span class="sxs-lookup"><span data-stu-id="2bab0-136">The safest way to insert values is to place the value in a data attribute of a tag and retrieve it in your JavaScript.</span></span> <span data-ttu-id="2bab0-137">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="2bab0-137">For example:</span></span>
 
@@ -211,13 +211,13 @@ var example = "\"Quoted Value with spaces and &\"";
 
 ## <a name="customizing-the-encoders"></a><span data-ttu-id="2bab0-155">Kodlayıcıları özelleştirme</span><span class="sxs-lookup"><span data-stu-id="2bab0-155">Customizing the Encoders</span></span>
 
-<span data-ttu-id="2bab0-156">Varsayılan olarak kodlayıcılar, temel Latin Unicode aralığıyla sınırlı bir güvenli liste kullanır ve karakter kodu eşdeğerleri olarak bu aralığın dışındaki tüm karakterleri kodlayabilir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-156">By default encoders use a safe list limited to the Basic Latin Unicode range and encode all characters outside of that range as their character code equivalents.</span></span> <span data-ttu-id="2bab0-157">Bu davranış :::no-loc(Razor)::: , Dizelerinizin çıktısını almak için kodlayıcıları kullanacağı için taghelper ve HtmlHelper işlemesini da etkiler.</span><span class="sxs-lookup"><span data-stu-id="2bab0-157">This behavior also affects :::no-loc(Razor)::: TagHelper and HtmlHelper rendering as it will use the encoders to output your strings.</span></span>
+<span data-ttu-id="2bab0-156">Varsayılan olarak kodlayıcılar, temel Latin Unicode aralığıyla sınırlı bir güvenli liste kullanır ve karakter kodu eşdeğerleri olarak bu aralığın dışındaki tüm karakterleri kodlayabilir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-156">By default encoders use a safe list limited to the Basic Latin Unicode range and encode all characters outside of that range as their character code equivalents.</span></span> <span data-ttu-id="2bab0-157">Bu davranış Razor , Dizelerinizin çıktısını almak için kodlayıcıları kullanacağı için taghelper ve HtmlHelper işlemesini da etkiler.</span><span class="sxs-lookup"><span data-stu-id="2bab0-157">This behavior also affects Razor TagHelper and HtmlHelper rendering as it will use the encoders to output your strings.</span></span>
 
 <span data-ttu-id="2bab0-158">Bunun arkasındaki nedenler bilinmeyen veya gelecekteki tarayıcı hataları karşısında korunmaktan (önceki tarayıcı hataları Ingilizce olmayan karakterlerin işlenmesine göre ayrıştırılır).</span><span class="sxs-lookup"><span data-stu-id="2bab0-158">The reasoning behind this is to protect against unknown or future browser bugs (previous browser bugs have tripped up parsing based on the processing of non-English characters).</span></span> <span data-ttu-id="2bab0-159">Web siteniz Çince, Kiril veya diğerleri gibi Latin olmayan karakterlerin büyük bir bölümünü kullanıyorsa, bu durum muhtemelen istediğiniz davranış değildir.</span><span class="sxs-lookup"><span data-stu-id="2bab0-159">If your web site makes heavy use of non-Latin characters, such as Chinese, Cyrillic or others this is probably not the behavior you want.</span></span>
 
 <span data-ttu-id="2bab0-160">' De başlangıç sırasında uygulamanıza uygun Unicode aralıklarını dahil etmek için Kodlayıcı güvenli listelerini özelleştirebilirsiniz `ConfigureServices()` .</span><span class="sxs-lookup"><span data-stu-id="2bab0-160">You can customize the encoder safe lists to include Unicode ranges appropriate to your application during startup, in `ConfigureServices()`.</span></span>
 
-<span data-ttu-id="2bab0-161">Örneğin, varsayılan yapılandırmayı kullanarak, :::no-loc(Razor)::: benzer bir HtmlHelper kullanabilirsiniz;</span><span class="sxs-lookup"><span data-stu-id="2bab0-161">For example, using the default configuration you might use a :::no-loc(Razor)::: HtmlHelper like so;</span></span>
+<span data-ttu-id="2bab0-161">Örneğin, varsayılan yapılandırmayı kullanarak, Razor benzer bir HtmlHelper kullanabilirsiniz;</span><span class="sxs-lookup"><span data-stu-id="2bab0-161">For example, using the default configuration you might use a Razor HtmlHelper like so;</span></span>
 
 ```html
 <p>This link text is in Chinese: @Html.ActionLink("汉语/漢語", "Index")</p>

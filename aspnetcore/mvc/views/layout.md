@@ -5,17 +5,17 @@ description: Bir ASP.NET Core uygulamasında görünümler işlemeden önce orta
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/layout
 ms.openlocfilehash: 502df268e7f5f33acfffccd5ec0bd65267fa12da
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,9 +34,9 @@ ms.locfileid: "93060982"
 * <span data-ttu-id="0fec5-108">Komutları paylaşma.</span><span class="sxs-lookup"><span data-stu-id="0fec5-108">Share directives.</span></span>
 * <span data-ttu-id="0fec5-109">Sayfaları veya görünümleri işlemeden önce ortak kodu çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="0fec5-109">Run common code before rendering pages or views.</span></span>
 
-<span data-ttu-id="0fec5-110">Bu belge, ASP.NET Core MVC için iki farklı yaklaşım için düzenleri açıklar: :::no-loc(Razor)::: görünümler içeren sayfalar ve denetleyiciler.</span><span class="sxs-lookup"><span data-stu-id="0fec5-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: :::no-loc(Razor)::: Pages and controllers with views.</span></span> <span data-ttu-id="0fec5-111">Bu konu için, farklar en az:</span><span class="sxs-lookup"><span data-stu-id="0fec5-111">For this topic, the differences are minimal:</span></span>
+<span data-ttu-id="0fec5-110">Bu belge, ASP.NET Core MVC için iki farklı yaklaşım için düzenleri açıklar: Razor görünümler içeren sayfalar ve denetleyiciler.</span><span class="sxs-lookup"><span data-stu-id="0fec5-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: Razor Pages and controllers with views.</span></span> <span data-ttu-id="0fec5-111">Bu konu için, farklar en az:</span><span class="sxs-lookup"><span data-stu-id="0fec5-111">For this topic, the differences are minimal:</span></span>
 
-* <span data-ttu-id="0fec5-112">:::no-loc(Razor)::: Sayfalar, *Sayfalar* klasöründedir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-112">:::no-loc(Razor)::: Pages are in the *Pages* folder.</span></span>
+* <span data-ttu-id="0fec5-112">Razor Sayfalar, *Sayfalar* klasöründedir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-112">Razor Pages are in the *Pages* folder.</span></span>
 * <span data-ttu-id="0fec5-113">Görünümleri olan denetleyiciler görünümler için bir *Görünümler* klasörü kullanır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-113">Controllers with views uses a *Views* folder for views.</span></span>
 
 ## <a name="what-is-a-layout"></a><span data-ttu-id="0fec5-114">Düzen nedir?</span><span class="sxs-lookup"><span data-stu-id="0fec5-114">What is a Layout</span></span>
@@ -49,7 +49,7 @@ ms.locfileid: "93060982"
 
 <span data-ttu-id="0fec5-121">Kurala göre, bir ASP.NET Core uygulamasının varsayılan düzeni *_Layout. cshtml* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-121">By convention, the default layout for an ASP.NET Core app is named *_Layout.cshtml* .</span></span> <span data-ttu-id="0fec5-122">Şablonlarla oluşturulan yeni ASP.NET Core projelerine yönelik düzen dosyaları şunlardır:</span><span class="sxs-lookup"><span data-stu-id="0fec5-122">The layout files for new ASP.NET Core projects created with the templates are:</span></span>
 
-* <span data-ttu-id="0fec5-123">:::no-loc(Razor)::: Sayfalar: *sayfa/paylaşılan/_Layout. cshtml*</span><span class="sxs-lookup"><span data-stu-id="0fec5-123">:::no-loc(Razor)::: Pages: *Pages/Shared/_Layout.cshtml*</span></span>
+* <span data-ttu-id="0fec5-123">Razor Sayfalar: *sayfa/paylaşılan/_Layout. cshtml*</span><span class="sxs-lookup"><span data-stu-id="0fec5-123">Razor Pages: *Pages/Shared/_Layout.cshtml*</span></span>
 
   ![Çözüm Gezgini sayfa klasörü](layout/_static/rp-web-project-views.png)
 
@@ -65,11 +65,11 @@ ms.locfileid: "93060982"
 
 ## <a name="specifying-a-layout"></a><span data-ttu-id="0fec5-131">Düzen belirtme</span><span class="sxs-lookup"><span data-stu-id="0fec5-131">Specifying a Layout</span></span>
 
-<span data-ttu-id="0fec5-132">:::no-loc(Razor)::: Görünümler bir `Layout` özelliğe sahiptir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-132">:::no-loc(Razor)::: views have a `Layout` property.</span></span> <span data-ttu-id="0fec5-133">Bireysel görünümler bu özelliği ayarlayarak bir düzen belirtir:</span><span class="sxs-lookup"><span data-stu-id="0fec5-133">Individual views specify a layout by setting this property:</span></span>
+<span data-ttu-id="0fec5-132">Razor Görünümler bir `Layout` özelliğe sahiptir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-132">Razor views have a `Layout` property.</span></span> <span data-ttu-id="0fec5-133">Bireysel görünümler bu özelliği ayarlayarak bir düzen belirtir:</span><span class="sxs-lookup"><span data-stu-id="0fec5-133">Individual views specify a layout by setting this property:</span></span>
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-<span data-ttu-id="0fec5-134">Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml* ) ya da kısmi bir ad kullanabilir (örnek: `_Layout` ).</span><span class="sxs-lookup"><span data-stu-id="0fec5-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml* ) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="0fec5-135">Kısmi bir ad sağlandığında, :::no-loc(Razor)::: Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar.</span><span class="sxs-lookup"><span data-stu-id="0fec5-135">When a partial name is provided, the :::no-loc(Razor)::: view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="0fec5-136">Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="0fec5-137">Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
+<span data-ttu-id="0fec5-134">Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml* ) ya da kısmi bir ad kullanabilir (örnek: `_Layout` ).</span><span class="sxs-lookup"><span data-stu-id="0fec5-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml* ) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="0fec5-135">Kısmi bir ad sağlandığında, Razor Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar.</span><span class="sxs-lookup"><span data-stu-id="0fec5-135">When a partial name is provided, the Razor view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="0fec5-136">Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="0fec5-137">Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
 
 <span data-ttu-id="0fec5-138">Varsayılan olarak, tüm mizanpajın çağırması gerekir `RenderBody` .</span><span class="sxs-lookup"><span data-stu-id="0fec5-138">By default, every layout must call `RenderBody`.</span></span> <span data-ttu-id="0fec5-139">Çağrısının yerleştirildiği her yerde `RenderBody` , görünümün içerikleri işlenir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-139">Wherever the call to `RenderBody` is placed, the contents of the view will be rendered.</span></span>
 
@@ -85,9 +85,9 @@ ms.locfileid: "93060982"
 @RenderSection("Scripts", required: false)
 ```
 
-<span data-ttu-id="0fec5-144">Gerekli bir bölüm bulunamazsa, bir özel durum oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="0fec5-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="0fec5-145">Tek görünümler, sözdizimini kullanarak bir bölüm içinde işlenecek içeriği belirtir `@section` :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="0fec5-145">Individual views specify the content to be rendered within a section using the `@section` :::no-loc(Razor)::: syntax.</span></span> <span data-ttu-id="0fec5-146">Bir sayfa veya görünüm bir bölümü tanımlıyorsa, oluşturulması gerekir (veya bir hata oluşur).</span><span class="sxs-lookup"><span data-stu-id="0fec5-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
+<span data-ttu-id="0fec5-144">Gerekli bir bölüm bulunamazsa, bir özel durum oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="0fec5-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="0fec5-145">Tek görünümler, sözdizimini kullanarak bir bölüm içinde işlenecek içeriği belirtir `@section` Razor .</span><span class="sxs-lookup"><span data-stu-id="0fec5-145">Individual views specify the content to be rendered within a section using the `@section` Razor syntax.</span></span> <span data-ttu-id="0fec5-146">Bir sayfa veya görünüm bir bölümü tanımlıyorsa, oluşturulması gerekir (veya bir hata oluşur).</span><span class="sxs-lookup"><span data-stu-id="0fec5-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
 
-<span data-ttu-id="0fec5-147">`@section`Sayfalar görünümünde örnek tanım :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="0fec5-147">An example `@section` definition in :::no-loc(Razor)::: Pages view:</span></span>
+<span data-ttu-id="0fec5-147">`@section`Sayfalar görünümünde örnek tanım Razor :</span><span class="sxs-lookup"><span data-stu-id="0fec5-147">An example `@section` definition in Razor Pages view:</span></span>
 
 ```html
 @section Scripts {
@@ -105,23 +105,23 @@ ms.locfileid: "93060982"
 }
 ```
 
-<span data-ttu-id="0fec5-151">Önceki biçimlendirme [Yapı iskelesi :::no-loc(Identity)::: ](xref:security/authentication/scaffold-identity)tarafından oluşturuldu.</span><span class="sxs-lookup"><span data-stu-id="0fec5-151">The preceding markup was generated by [scaffolding :::no-loc(Identity):::](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="0fec5-151">Önceki biçimlendirme [Yapı iskelesi Identity ](xref:security/authentication/scaffold-identity)tarafından oluşturuldu.</span><span class="sxs-lookup"><span data-stu-id="0fec5-151">The preceding markup was generated by [scaffolding Identity](xref:security/authentication/scaffold-identity).</span></span>
 
 <span data-ttu-id="0fec5-152">Bir sayfada veya görünümde tanımlanan bölümler yalnızca kendi düzen sayfasında kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-152">Sections defined in a page or view are available only in its immediate layout page.</span></span> <span data-ttu-id="0fec5-153">Parçalardan başvurulamaz, bileşenleri veya görünüm sisteminin diğer kısımlarını bunlara başvuramaz.</span><span class="sxs-lookup"><span data-stu-id="0fec5-153">They cannot be referenced from partials, view components, or other parts of the view system.</span></span>
 
 ### <a name="ignoring-sections"></a><span data-ttu-id="0fec5-154">Bölümler yoksayılıyor</span><span class="sxs-lookup"><span data-stu-id="0fec5-154">Ignoring sections</span></span>
 
-<span data-ttu-id="0fec5-155">Varsayılan olarak, içerik sayfasındaki gövde ve tüm bölümler Düzen sayfası tarafından işlenmelidir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="0fec5-156">:::no-loc(Razor):::Görünüm altyapısı, gövdenin ve her bölümün işlenip işlenmeyeceğini izleyerek bunu zorlar.</span><span class="sxs-lookup"><span data-stu-id="0fec5-156">The :::no-loc(Razor)::: view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
+<span data-ttu-id="0fec5-155">Varsayılan olarak, içerik sayfasındaki gövde ve tüm bölümler Düzen sayfası tarafından işlenmelidir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="0fec5-156">RazorGörünüm altyapısı, gövdenin ve her bölümün işlenip işlenmeyeceğini izleyerek bunu zorlar.</span><span class="sxs-lookup"><span data-stu-id="0fec5-156">The Razor view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
 
 <span data-ttu-id="0fec5-157">Görünüm altyapısına gövde veya bölümleri yok saymasını bildirmek için `IgnoreBody` ve `IgnoreSection` yöntemlerini çağırın.</span><span class="sxs-lookup"><span data-stu-id="0fec5-157">To instruct the view engine to ignore the body or sections, call the `IgnoreBody` and `IgnoreSection` methods.</span></span>
 
-<span data-ttu-id="0fec5-158">Bir sayfadaki gövde ve her bölüm :::no-loc(Razor)::: işlenen ya da yoksayıldı olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-158">The body and every section in a :::no-loc(Razor)::: page must be either rendered or ignored.</span></span>
+<span data-ttu-id="0fec5-158">Bir sayfadaki gövde ve her bölüm Razor işlenen ya da yoksayıldı olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="0fec5-158">The body and every section in a Razor page must be either rendered or ignored.</span></span>
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a><span data-ttu-id="0fec5-159">Paylaşılan yönergeler içeri aktarılıyor</span><span class="sxs-lookup"><span data-stu-id="0fec5-159">Importing Shared Directives</span></span>
 
-<span data-ttu-id="0fec5-160">Görünümler ve sayfalar, :::no-loc(Razor)::: ad alanlarını içeri aktarmak ve [bağımlılık ekleme](dependency-injection.md)'yi kullanmak için yönergeleri kullanabilir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-160">Views and pages can use :::no-loc(Razor)::: directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="0fec5-161">Birçok görünüm tarafından paylaşılan yönergeler, ortak bir *_ViewImports. cshtml* dosyasında belirtilebilir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="0fec5-162">`_ViewImports`Dosya aşağıdaki yönergeleri destekler:</span><span class="sxs-lookup"><span data-stu-id="0fec5-162">The `_ViewImports` file supports the following directives:</span></span>
+<span data-ttu-id="0fec5-160">Görünümler ve sayfalar, Razor ad alanlarını içeri aktarmak ve [bağımlılık ekleme](dependency-injection.md)'yi kullanmak için yönergeleri kullanabilir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-160">Views and pages can use Razor directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="0fec5-161">Birçok görünüm tarafından paylaşılan yönergeler, ortak bir *_ViewImports. cshtml* dosyasında belirtilebilir.</span><span class="sxs-lookup"><span data-stu-id="0fec5-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="0fec5-162">`_ViewImports`Dosya aşağıdaki yönergeleri destekler:</span><span class="sxs-lookup"><span data-stu-id="0fec5-162">The `_ViewImports` file supports the following directives:</span></span>
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -131,7 +131,7 @@ ms.locfileid: "93060982"
 * `@inherits`
 * `@inject`
 
-<span data-ttu-id="0fec5-163">Dosya :::no-loc(Razor)::: , işlevler ve bölüm tanımları gibi diğer özellikleri desteklemez.</span><span class="sxs-lookup"><span data-stu-id="0fec5-163">The file doesn't support other :::no-loc(Razor)::: features, such as functions and section definitions.</span></span>
+<span data-ttu-id="0fec5-163">Dosya Razor , işlevler ve bölüm tanımları gibi diğer özellikleri desteklemez.</span><span class="sxs-lookup"><span data-stu-id="0fec5-163">The file doesn't support other Razor features, such as functions and section definitions.</span></span>
 
 <span data-ttu-id="0fec5-164">Örnek `_ViewImports.cshtml` Dosya:</span><span class="sxs-lookup"><span data-stu-id="0fec5-164">A sample `_ViewImports.cshtml` file:</span></span>
 

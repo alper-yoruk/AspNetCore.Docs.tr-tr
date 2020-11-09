@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: bağlantı sorunlarını giderme'
+title: 'ASP.NET Core SignalR bağlantı sorunlarını giderme'
 author: bradygaster
-description: 'ASP.NET Core :::no-loc(SignalR)::: bağlantı sorunlarını giderme.'
+description: 'ASP.NET Core SignalR bağlantı sorunlarını giderme.'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/troubleshoot
 ms.openlocfilehash: f1d9761267d7c6af76c0be6abb238742f40fb016
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,7 +28,7 @@ ms.locfileid: "93059617"
 ---
 # <a name="troubleshoot-connection-errors"></a><span data-ttu-id="2693f-103">Bağlantı hatalarını giderme</span><span class="sxs-lookup"><span data-stu-id="2693f-103">Troubleshoot connection errors</span></span>
 
-<span data-ttu-id="2693f-104">Bu bölüm, bir ASP.NET Core hub 'ına bağlantı kurmaya çalışırken oluşabilecek hatalarla ilgili yardım sağlar :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="2693f-104">This section provides help with errors that can occur when trying to establish a connection to a ASP.NET Core :::no-loc(SignalR)::: hub.</span></span>
+<span data-ttu-id="2693f-104">Bu bölüm, bir ASP.NET Core hub 'ına bağlantı kurmaya çalışırken oluşabilecek hatalarla ilgili yardım sağlar SignalR .</span><span class="sxs-lookup"><span data-stu-id="2693f-104">This section provides help with errors that can occur when trying to establish a connection to a ASP.NET Core SignalR hub.</span></span>
 
 ### <a name="response-code-404"></a><span data-ttu-id="2693f-105">Yanıt kodu 404</span><span class="sxs-lookup"><span data-stu-id="2693f-105">Response code 404</span></span>
 
@@ -99,9 +99,9 @@ Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remot
 
 <span data-ttu-id="2693f-134">Bu, genellikle 4k üzerinde olan bir erişim belirtecine sahip olunmasından kaynaklanır.</span><span class="sxs-lookup"><span data-stu-id="2693f-134">This is often caused by having an access token that is over 4k.</span></span>
 
-* <span data-ttu-id="2693f-135">Azure :::no-loc(SignalR)::: hizmetini kullanıyorsanız, hizmetle birlikte gönderilen talepleri özelleştirerek belirteç boyutunu azaltın:</span><span class="sxs-lookup"><span data-stu-id="2693f-135">If using the Azure :::no-loc(SignalR)::: Service, reduce the token size by customizing the claims being sent through the Service with:</span></span>
+* <span data-ttu-id="2693f-135">Azure SignalR hizmetini kullanıyorsanız, hizmetle birlikte gönderilen talepleri özelleştirerek belirteç boyutunu azaltın:</span><span class="sxs-lookup"><span data-stu-id="2693f-135">If using the Azure SignalR Service, reduce the token size by customizing the claims being sent through the Service with:</span></span>
 ```csharp
-.AddAzure:::no-loc(SignalR):::(options =>
+.AddAzureSignalR(options =>
 {
     options.ClaimsProvider = context => context.User.Claims;
 });
@@ -109,4 +109,4 @@ Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remot
 
 ### <a name="transient-network-failures"></a><span data-ttu-id="2693f-136">Geçici ağ sorunları</span><span class="sxs-lookup"><span data-stu-id="2693f-136">Transient network failures</span></span>
 
-<span data-ttu-id="2693f-137">Geçici ağ arızaları :::no-loc(SignalR)::: bağlantıyı kapatabilir.</span><span class="sxs-lookup"><span data-stu-id="2693f-137">Transient network failures may close the :::no-loc(SignalR)::: connection.</span></span> <span data-ttu-id="2693f-138">Sunucu, kapalı bağlantıyı düzgün bir istemci bağlantısı kesilme olarak yorumlayabilir.</span><span class="sxs-lookup"><span data-stu-id="2693f-138">The server may interpret the closed connection as a graceful client disconnect.</span></span> <span data-ttu-id="2693f-139">Bu durumlarda istemcinin bağlantısı kesilmesinin neden olduğu hakkında daha fazla bilgi edinmek için [istemciden ve sunucudan günlükleri toplayın](xref:signalr/diagnostics).</span><span class="sxs-lookup"><span data-stu-id="2693f-139">To get more info on why a client disconnected in those cases [gather logs from the client and server](xref:signalr/diagnostics).</span></span>
+<span data-ttu-id="2693f-137">Geçici ağ arızaları SignalR bağlantıyı kapatabilir.</span><span class="sxs-lookup"><span data-stu-id="2693f-137">Transient network failures may close the SignalR connection.</span></span> <span data-ttu-id="2693f-138">Sunucu, kapalı bağlantıyı düzgün bir istemci bağlantısı kesilme olarak yorumlayabilir.</span><span class="sxs-lookup"><span data-stu-id="2693f-138">The server may interpret the closed connection as a graceful client disconnect.</span></span> <span data-ttu-id="2693f-139">Bu durumlarda istemcinin bağlantısı kesilmesinin neden olduğu hakkında daha fazla bilgi edinmek için [istemciden ve sunucudan günlükleri toplayın](xref:signalr/diagnostics).</span><span class="sxs-lookup"><span data-stu-id="2693f-139">To get more info on why a client disconnected in those cases [gather logs from the client and server](xref:signalr/diagnostics).</span></span>

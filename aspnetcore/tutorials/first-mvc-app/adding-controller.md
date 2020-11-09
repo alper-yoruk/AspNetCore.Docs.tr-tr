@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 'deki öğretici serisinin 2. bölümü.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: 11832efa6715f96856665f174d65b094806d2810
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -135,7 +135,7 @@ ms.locfileid: "93061294"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="4b021-195">Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V** IEW ve **C** ) çalışır.</span><span class="sxs-lookup"><span data-stu-id="4b021-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="4b021-196">Denetleyici HTML 'i doğrudan döndürüyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="4b021-197">Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="4b021-198">Bunun yerine :::no-loc(Razor)::: , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız.</span><span class="sxs-lookup"><span data-stu-id="4b021-198">Instead you typically use a separate :::no-loc(Razor)::: view template file to generate the HTML response.</span></span> <span data-ttu-id="4b021-199">Bunu bir sonraki öğreticide yapabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-199">You do that in the next tutorial.</span></span>
+<span data-ttu-id="4b021-195">Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V** IEW ve **C** ) çalışır.</span><span class="sxs-lookup"><span data-stu-id="4b021-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="4b021-196">Denetleyici HTML 'i doğrudan döndürüyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="4b021-197">Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="4b021-198">Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız.</span><span class="sxs-lookup"><span data-stu-id="4b021-198">Instead you typically use a separate Razor view template file to generate the HTML response.</span></span> <span data-ttu-id="4b021-199">Bunu bir sonraki öğreticide yapabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-199">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="4b021-200">[Önceki](start-mvc.md) 
@@ -256,7 +256,7 @@ Remove link for simplified tutorial.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="4b021-291">Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, görünüm ve denetleyici çalışır) yapıyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="4b021-292">Denetleyici HTML 'i doğrudan döndürüyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="4b021-293">Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="4b021-294">Bunun yerine :::no-loc(Razor)::: , genellıkle HTML yanıtı oluşturmaya yardımcı olması için ayrı bir görünüm şablonu dosyası kullanırsınız.</span><span class="sxs-lookup"><span data-stu-id="4b021-294">Instead you typically use a separate :::no-loc(Razor)::: view template file to help generate the HTML response.</span></span> <span data-ttu-id="4b021-295">Bunu bir sonraki öğreticide yapabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-295">You do that in the next tutorial.</span></span>
+<span data-ttu-id="4b021-291">Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, görünüm ve denetleyici çalışır) yapıyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="4b021-292">Denetleyici HTML 'i doğrudan döndürüyor.</span><span class="sxs-lookup"><span data-stu-id="4b021-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="4b021-293">Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="4b021-294">Bunun yerine Razor , genellıkle HTML yanıtı oluşturmaya yardımcı olması için ayrı bir görünüm şablonu dosyası kullanırsınız.</span><span class="sxs-lookup"><span data-stu-id="4b021-294">Instead you typically use a separate Razor view template file to help generate the HTML response.</span></span> <span data-ttu-id="4b021-295">Bunu bir sonraki öğreticide yapabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="4b021-295">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="4b021-296">[Önceki](start-mvc.md) 

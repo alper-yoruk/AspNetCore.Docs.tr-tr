@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -127,7 +127,7 @@ ms.locfileid: "93059955"
 <span data-ttu-id="36975-212">Aşağıdaki senaryolarda gRPC üzerinden diğer çerçeveler önerilir:</span><span class="sxs-lookup"><span data-stu-id="36975-212">Other frameworks are recommended over gRPC in the following scenarios:</span></span>
 
 * <span data-ttu-id="36975-213">**Tarayıcıda erişilebilen API 'ler** : GRPC tarayıcıda tam olarak desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="36975-213">**Browser accessible APIs** : gRPC isn't fully supported in the browser.</span></span> <span data-ttu-id="36975-214">gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.</span><span class="sxs-lookup"><span data-stu-id="36975-214">gRPC-Web can offer browser support, but it has limitations and introduces a server proxy.</span></span>
-* <span data-ttu-id="36975-215">**Gerçek zamanlı Iletişim yayınlama** : GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir.</span><span class="sxs-lookup"><span data-stu-id="36975-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="36975-216">Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir.</span><span class="sxs-lookup"><span data-stu-id="36975-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="36975-217">[:::no-loc(SignalR):::](xref:signalr/introduction) Bu senaryo için kullanışlı bir çerçevedir.</span><span class="sxs-lookup"><span data-stu-id="36975-217">[:::no-loc(SignalR):::](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="36975-218">:::no-loc(SignalR)::: , sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.</span><span class="sxs-lookup"><span data-stu-id="36975-218">:::no-loc(SignalR)::: has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
+* <span data-ttu-id="36975-215">**Gerçek zamanlı Iletişim yayınlama** : GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir.</span><span class="sxs-lookup"><span data-stu-id="36975-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="36975-216">Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir.</span><span class="sxs-lookup"><span data-stu-id="36975-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="36975-217">[SignalR](xref:signalr/introduction) Bu senaryo için kullanışlı bir çerçevedir.</span><span class="sxs-lookup"><span data-stu-id="36975-217">[SignalR](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="36975-218">SignalR , sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.</span><span class="sxs-lookup"><span data-stu-id="36975-218">SignalR has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="36975-219">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="36975-219">Additional resources</span></span>
 

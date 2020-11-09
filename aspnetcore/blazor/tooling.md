@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core için araç oluşturma :::no-loc(Blazor):::'
+title: 'ASP.NET Core için araç oluşturma Blazor'
 author: guardrex
-description: 'Uygulama derlemek için kullanılabilen araç hakkında bilgi edinin :::no-loc(Blazor)::: .'
+description: 'Uygulama derlemek için kullanılabilen araç hakkında bilgi edinin Blazor .'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
 ms.openlocfilehash: 500342ac979efdee824ac0d4b5757ca9804f3b30
@@ -27,7 +27,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054820"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="c8511-103">ASP.NET Core için araç oluşturma :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="c8511-103">Tooling for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="c8511-103">ASP.NET Core için araç oluşturma Blazor</span><span class="sxs-lookup"><span data-stu-id="c8511-103">Tooling for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="c8511-104">[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından</span><span class="sxs-lookup"><span data-stu-id="c8511-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
@@ -37,13 +37,13 @@ ms.locfileid: "93054820"
 
 1. <span data-ttu-id="c8511-106">Yeni bir proje oluşturma.</span><span class="sxs-lookup"><span data-stu-id="c8511-106">Create a new project.</span></span>
 
-1. <span data-ttu-id="c8511-107">**:::no-loc(Blazor)::: Uygulama** seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-107">Select **:::no-loc(Blazor)::: App** .</span></span> <span data-ttu-id="c8511-108">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-108">Select **Next** .</span></span>
+1. <span data-ttu-id="c8511-107">**Blazor Uygulama** seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-107">Select **Blazor App** .</span></span> <span data-ttu-id="c8511-108">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-108">Select **Next** .</span></span>
 
 1. <span data-ttu-id="c8511-109">**Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin.</span><span class="sxs-lookup"><span data-stu-id="c8511-109">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="c8511-110">**Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin.</span><span class="sxs-lookup"><span data-stu-id="c8511-110">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="c8511-111">**Oluştur** ’u seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-111">Select **Create** .</span></span>
 
-1. <span data-ttu-id="c8511-112">Bir :::no-loc(Blazor WebAssembly)::: deneyim için **:::no-loc(Blazor WebAssembly)::: uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-112">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="c8511-113">Bir :::no-loc(Blazor Server)::: deneyim için **:::no-loc(Blazor Server)::: uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-113">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="c8511-114">**Oluştur** ’u seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-114">Select **Create** .</span></span>
+1. <span data-ttu-id="c8511-112">Bir Blazor WebAssembly deneyim için **Blazor WebAssembly uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-112">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="c8511-113">Bir Blazor Server deneyim için **Blazor Server uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-113">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="c8511-114">**Oluştur** ’u seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-114">Select **Create** .</span></span>
 
-   <span data-ttu-id="c8511-115">İki barındırma modeli hakkında daha fazla bilgi için, :::no-loc(Blazor)::: *:::no-loc(Blazor WebAssembly):::* *:::no-loc(Blazor Server):::* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-115">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="c8511-115">İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-115">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="c8511-116"><kbd>Ctrl</kbd> + Uygulamayı çalıştırmak için CTRL<kbd>F5</kbd> tuşuna basın.</span><span class="sxs-lookup"><span data-stu-id="c8511-116">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
 
@@ -63,19 +63,19 @@ ms.locfileid: "93054820"
 
 1. <span data-ttu-id="c8511-121">[Visual Studio Code uzantısı için](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)en son C# ' i yükler.</span><span class="sxs-lookup"><span data-stu-id="c8511-121">Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span></span>
 
-1. <span data-ttu-id="c8511-122">Bir :::no-loc(Blazor WebAssembly)::: deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:</span><span class="sxs-lookup"><span data-stu-id="c8511-122">For a :::no-loc(Blazor WebAssembly)::: experience, execute the following command in a command shell:</span></span>
+1. <span data-ttu-id="c8511-122">Bir Blazor WebAssembly deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:</span><span class="sxs-lookup"><span data-stu-id="c8511-122">For a Blazor WebAssembly experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   <span data-ttu-id="c8511-123">Bir :::no-loc(Blazor Server)::: deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:</span><span class="sxs-lookup"><span data-stu-id="c8511-123">For a :::no-loc(Blazor Server)::: experience, execute the following command in a command shell:</span></span>
+   <span data-ttu-id="c8511-123">Bir Blazor Server deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:</span><span class="sxs-lookup"><span data-stu-id="c8511-123">For a Blazor Server experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   <span data-ttu-id="c8511-124">İki barındırma modeli hakkında daha fazla bilgi için, :::no-loc(Blazor)::: *:::no-loc(Blazor WebAssembly):::* *:::no-loc(Blazor Server):::* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-124">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="c8511-124">İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-124">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="c8511-125">`WebApplication1`Visual Studio Code klasörü açın.</span><span class="sxs-lookup"><span data-stu-id="c8511-125">Open the `WebApplication1` folder in Visual Studio Code.</span></span>
 
@@ -103,9 +103,9 @@ ms.locfileid: "93054820"
 
 1. <span data-ttu-id="c8511-138">Yan çubukta **Web ve konsol**  >  **uygulaması** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-138">In the sidebar, select **Web and Console** > **App** .</span></span>
 
-   <span data-ttu-id="c8511-139">Bir :::no-loc(Blazor WebAssembly)::: deneyim için **:::no-loc(Blazor WebAssembly)::: uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-139">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="c8511-140">Bir :::no-loc(Blazor Server)::: deneyim için **:::no-loc(Blazor Server)::: uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-140">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="c8511-141">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-141">Select **Next** .</span></span>
+   <span data-ttu-id="c8511-139">Bir Blazor WebAssembly deneyim için **Blazor WebAssembly uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-139">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="c8511-140">Bir Blazor Server deneyim için **Blazor Server uygulama** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-140">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="c8511-141">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-141">Select **Next** .</span></span>
 
-   <span data-ttu-id="c8511-142">İki barındırma modeli hakkında daha fazla bilgi için, :::no-loc(Blazor)::: *:::no-loc(Blazor WebAssembly):::* *:::no-loc(Blazor Server):::* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-142">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="c8511-142">İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..</span><span class="sxs-lookup"><span data-stu-id="c8511-142">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="c8511-143">**Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.</span><span class="sxs-lookup"><span data-stu-id="c8511-143">Confirm that **Authentication** is set to **No Authentication** .</span></span> <span data-ttu-id="c8511-144">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="c8511-144">Select **Next** .</span></span>
 

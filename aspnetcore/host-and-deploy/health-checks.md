@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/22/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/health-checks
 ms.openlocfilehash: 32b7a4c6722ba45ba998f9430f5d6da6ddca53f9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -52,7 +52,7 @@ ms.locfileid: "93058668"
 
 <span data-ttu-id="aa453-123">Örnek uygulama, çeşitli senaryolar için sistem durumu denetimlerini göstermek üzere başlangıç kodu sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-123">The sample app provides startup code to demonstrate health checks for several scenarios.</span></span> <span data-ttu-id="aa453-124">[Veritabanı araştırma](#database-probe) senaryosu, [Aspnetcore. Diagnostics. healthdenetimleri](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)kullanarak bir veritabanı bağlantısının sistem durumunu denetler.</span><span class="sxs-lookup"><span data-stu-id="aa453-124">The [database probe](#database-probe) scenario checks the health of a database connection using [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks).</span></span> <span data-ttu-id="aa453-125">[DbContext araştırma](#entity-framework-core-dbcontext-probe) senaryosu bir EF Core kullanarak bir veritabanını denetler `DbContext` .</span><span class="sxs-lookup"><span data-stu-id="aa453-125">The [DbContext probe](#entity-framework-core-dbcontext-probe) scenario checks a database using an EF Core `DbContext`.</span></span> <span data-ttu-id="aa453-126">Örnek uygulama olan veritabanı senaryolarını araştırmak için:</span><span class="sxs-lookup"><span data-stu-id="aa453-126">To explore the database scenarios, the sample app:</span></span>
 
-* <span data-ttu-id="aa453-127">Bir veritabanı oluşturur ve bunun bağlantı dizesini *:::no-loc(appsettings.json):::* dosyada sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-127">Creates a database and provides its connection string in the *:::no-loc(appsettings.json):::* file.</span></span>
+* <span data-ttu-id="aa453-127">Bir veritabanı oluşturur ve bunun bağlantı dizesini *appsettings.json* dosyada sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-127">Creates a database and provides its connection string in the *appsettings.json* file.</span></span>
 * <span data-ttu-id="aa453-128">, Proje dosyasında aşağıdaki paket başvurularına sahiptir:</span><span class="sxs-lookup"><span data-stu-id="aa453-128">Has the following package references in its project file:</span></span>
   * [<span data-ttu-id="aa453-129">AspNetCore. Healthdenetimleri. SqlServer</span><span class="sxs-lookup"><span data-stu-id="aa453-129">AspNetCore.HealthChecks.SqlServer</span></span>](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [<span data-ttu-id="aa453-130">Microsoft. Extensions. Diagnostics. Healthdenetimleri. EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="aa453-130">Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore</span></span>](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -349,9 +349,9 @@ app.UseEndpoints(endpoints =>
 
 <span data-ttu-id="aa453-225">[Aspnetcore. Healthdenetimlerin. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)öğesine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="aa453-225">Include a package reference to [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/).</span></span>
 
-<span data-ttu-id="aa453-226">Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="aa453-226">Supply a valid database connection string in the *:::no-loc(appsettings.json):::* file of the sample app.</span></span> <span data-ttu-id="aa453-227">Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :</span><span class="sxs-lookup"><span data-stu-id="aa453-227">The app uses a SQL Server database named `HealthCheckSample`:</span></span>
+<span data-ttu-id="aa453-226">Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="aa453-226">Supply a valid database connection string in the *appsettings.json* file of the sample app.</span></span> <span data-ttu-id="aa453-227">Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :</span><span class="sxs-lookup"><span data-stu-id="aa453-227">The app uses a SQL Server database named `HealthCheckSample`:</span></span>
 
-[!code-json[](health-checks/samples/3.x/HealthChecksSample/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](health-checks/samples/3.x/HealthChecksSample/appsettings.json?highlight=3)]
 
 <span data-ttu-id="aa453-228">İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="aa453-228">Register health check services with <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="aa453-229">Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle ( *DbHealthStartup.cs* ) çağırır:</span><span class="sxs-lookup"><span data-stu-id="aa453-229">The sample app calls the `AddSqlServer` method with the database's connection string ( *DbHealthStartup.cs* ):</span></span>
 
@@ -791,7 +791,7 @@ app.MapWhen(
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.Map:::no-loc(Razor):::Pages();
+    endpoints.MapRazorPages();
 });
 ```
 
@@ -821,7 +821,7 @@ app.UseEndpoints(endpoints =>
 
 <span data-ttu-id="aa453-402">Örnek uygulama, çeşitli senaryolar için sistem durumu denetimlerini göstermek üzere başlangıç kodu sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-402">The sample app provides startup code to demonstrate health checks for several scenarios.</span></span> <span data-ttu-id="aa453-403">[Veritabanı araştırma](#database-probe) senaryosu, [Aspnetcore. Diagnostics. healthdenetimleri](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)kullanarak bir veritabanı bağlantısının sistem durumunu denetler.</span><span class="sxs-lookup"><span data-stu-id="aa453-403">The [database probe](#database-probe) scenario checks the health of a database connection using [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks).</span></span> <span data-ttu-id="aa453-404">[DbContext araştırma](#entity-framework-core-dbcontext-probe) senaryosu bir EF Core kullanarak bir veritabanını denetler `DbContext` .</span><span class="sxs-lookup"><span data-stu-id="aa453-404">The [DbContext probe](#entity-framework-core-dbcontext-probe) scenario checks a database using an EF Core `DbContext`.</span></span> <span data-ttu-id="aa453-405">Örnek uygulama olan veritabanı senaryolarını araştırmak için:</span><span class="sxs-lookup"><span data-stu-id="aa453-405">To explore the database scenarios, the sample app:</span></span>
 
-* <span data-ttu-id="aa453-406">Bir veritabanı oluşturur ve bunun bağlantı dizesini *:::no-loc(appsettings.json):::* dosyada sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-406">Creates a database and provides its connection string in the *:::no-loc(appsettings.json):::* file.</span></span>
+* <span data-ttu-id="aa453-406">Bir veritabanı oluşturur ve bunun bağlantı dizesini *appsettings.json* dosyada sağlar.</span><span class="sxs-lookup"><span data-stu-id="aa453-406">Creates a database and provides its connection string in the *appsettings.json* file.</span></span>
 * <span data-ttu-id="aa453-407">, Proje dosyasında aşağıdaki paket başvurularına sahiptir:</span><span class="sxs-lookup"><span data-stu-id="aa453-407">Has the following package references in its project file:</span></span>
   * [<span data-ttu-id="aa453-408">AspNetCore. Healthdenetimleri. SqlServer</span><span class="sxs-lookup"><span data-stu-id="aa453-408">AspNetCore.HealthChecks.SqlServer</span></span>](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [<span data-ttu-id="aa453-409">Microsoft. Extensions. Diagnostics. Healthdenetimleri. EntityFrameworkCore</span><span class="sxs-lookup"><span data-stu-id="aa453-409">Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore</span></span>](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -1068,9 +1068,9 @@ private static Task WriteResponse(HttpContext httpContext, HealthReport result)
 
 <span data-ttu-id="aa453-484">[Aspnetcore. Healthdenetimlerin. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)öğesine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="aa453-484">Include a package reference to [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/).</span></span>
 
-<span data-ttu-id="aa453-485">Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="aa453-485">Supply a valid database connection string in the *:::no-loc(appsettings.json):::* file of the sample app.</span></span> <span data-ttu-id="aa453-486">Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :</span><span class="sxs-lookup"><span data-stu-id="aa453-486">The app uses a SQL Server database named `HealthCheckSample`:</span></span>
+<span data-ttu-id="aa453-485">Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="aa453-485">Supply a valid database connection string in the *appsettings.json* file of the sample app.</span></span> <span data-ttu-id="aa453-486">Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :</span><span class="sxs-lookup"><span data-stu-id="aa453-486">The app uses a SQL Server database named `HealthCheckSample`:</span></span>
 
-[!code-json[](health-checks/samples/2.x/HealthChecksSample/:::no-loc(appsettings.json):::?highlight=3)]
+[!code-json[](health-checks/samples/2.x/HealthChecksSample/appsettings.json?highlight=3)]
 
 <span data-ttu-id="aa453-487">İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="aa453-487">Register health check services with <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="aa453-488">Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle ( *DbHealthStartup.cs* ) çağırır:</span><span class="sxs-lookup"><span data-stu-id="aa453-488">The sample app calls the `AddSqlServer` method with the database's connection string ( *DbHealthStartup.cs* ):</span></span>
 

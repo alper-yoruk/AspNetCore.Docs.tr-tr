@@ -1,23 +1,23 @@
 ---
-title: "ASP.NET Core 'de günlüğe kaydetme ve tanılama :::no-loc(SignalR):::"
+title: "ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR"
 author: anurse
-description: 'ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin :::no-loc(SignalR)::: .'
+description: 'ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR .'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/diagnostics
 ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061320"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="51562-103">ASP.NET Core 'de günlüğe kaydetme ve tanılama :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="51562-103">Logging and diagnostics in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="51562-103">ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR</span><span class="sxs-lookup"><span data-stu-id="51562-103">Logging and diagnostics in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="51562-104">, [Andrew Stanton-nurte](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="51562-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="51562-105">Bu makalede, :::no-loc(SignalR)::: sorunları gidermeye yardımcı olmak için ASP.NET Core uygulamanızdan tanılama toplamaya yönelik rehberlik sunulmaktadır.</span><span class="sxs-lookup"><span data-stu-id="51562-105">This article provides guidance for gathering diagnostics from your ASP.NET Core :::no-loc(SignalR)::: app to help troubleshoot issues.</span></span>
+<span data-ttu-id="51562-105">Bu makalede, SignalR sorunları gidermeye yardımcı olmak için ASP.NET Core uygulamanızdan tanılama toplamaya yönelik rehberlik sunulmaktadır.</span><span class="sxs-lookup"><span data-stu-id="51562-105">This article provides guidance for gathering diagnostics from your ASP.NET Core SignalR app to help troubleshoot issues.</span></span>
 
 ## <a name="server-side-logging"></a><span data-ttu-id="51562-106">Sunucu tarafında günlüğe kaydetme</span><span class="sxs-lookup"><span data-stu-id="51562-106">Server-side logging</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="51562-107">Sunucu tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir.</span><span class="sxs-lookup"><span data-stu-id="51562-107">Server-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="51562-108">Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.</span><span class="sxs-lookup"><span data-stu-id="51562-108">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="51562-109">:::no-loc(SignalR):::ASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini kullanır.</span><span class="sxs-lookup"><span data-stu-id="51562-109">Since :::no-loc(SignalR)::: is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="51562-110">Varsayılan yapılandırmada :::no-loc(SignalR)::: çok az bilgi günlüğe kaydedilir, ancak bu yapılandırılabilir.</span><span class="sxs-lookup"><span data-stu-id="51562-110">In the default configuration, :::no-loc(SignalR)::: logs very little information, but this can configured.</span></span> <span data-ttu-id="51562-111">ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.</span><span class="sxs-lookup"><span data-stu-id="51562-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
+<span data-ttu-id="51562-109">SignalRASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini kullanır.</span><span class="sxs-lookup"><span data-stu-id="51562-109">Since SignalR is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="51562-110">Varsayılan yapılandırmada SignalR çok az bilgi günlüğe kaydedilir, ancak bu yapılandırılabilir.</span><span class="sxs-lookup"><span data-stu-id="51562-110">In the default configuration, SignalR logs very little information, but this can configured.</span></span> <span data-ttu-id="51562-111">ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.</span><span class="sxs-lookup"><span data-stu-id="51562-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-<span data-ttu-id="51562-112">:::no-loc(SignalR)::: İki Günlükçü kategorisi kullanır:</span><span class="sxs-lookup"><span data-stu-id="51562-112">:::no-loc(SignalR)::: uses two logger categories:</span></span>
+<span data-ttu-id="51562-112">SignalR İki Günlükçü kategorisi kullanır:</span><span class="sxs-lookup"><span data-stu-id="51562-112">SignalR uses two logger categories:</span></span>
 
-* <span data-ttu-id="51562-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`: Merkez protokolleriyle ilgili Günlükler için, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.</span><span class="sxs-lookup"><span data-stu-id="51562-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
-* <span data-ttu-id="51562-114">`Microsoft.AspNetCore.Http.Connections`: WebSockets, uzun yoklama, Server-Sent olayları ve alt düzey altyapı gibi aktarımlarıyla ilgili Günlükler için :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="51562-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level :::no-loc(SignalR)::: infrastructure.</span></span>
+* <span data-ttu-id="51562-113">`Microsoft.AspNetCore.SignalR`: Merkez protokolleriyle ilgili Günlükler için, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.</span><span class="sxs-lookup"><span data-stu-id="51562-113">`Microsoft.AspNetCore.SignalR`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
+* <span data-ttu-id="51562-114">`Microsoft.AspNetCore.Http.Connections`: WebSockets, uzun yoklama, Server-Sent olayları ve alt düzey altyapı gibi aktarımlarıyla ilgili Günlükler için SignalR .</span><span class="sxs-lookup"><span data-stu-id="51562-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level SignalR infrastructure.</span></span>
 
-<span data-ttu-id="51562-115">Ayrıntılı günlükleri ' den etkinleştirmek için :::no-loc(SignalR)::: , `Debug` *:::no-loc(appsettings.json):::* aşağıdaki öğeleri `LogLevel` içindeki alt bölümüne ekleyerek önceki ön eklerin her ikisini de dosyanızdaki düzeye yapılandırın `Logging` :</span><span class="sxs-lookup"><span data-stu-id="51562-115">To enable detailed logs from :::no-loc(SignalR):::, configure both of the preceding prefixes to the `Debug` level in your *:::no-loc(appsettings.json):::* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="51562-115">Ayrıntılı günlükleri ' den etkinleştirmek için SignalR , `Debug` *appsettings.json* aşağıdaki öğeleri `LogLevel` içindeki alt bölümüne ekleyerek önceki ön eklerin her ikisini de dosyanızdaki düzeye yapılandırın `Logging` :</span><span class="sxs-lookup"><span data-stu-id="51562-115">To enable detailed logs from SignalR, configure both of the preceding prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -54,10 +54,10 @@ ms.locfileid: "93061320"
 
 <span data-ttu-id="51562-117">JSON tabanlı yapılandırma kullanmıyorsanız, yapılandırma sisteminizde aşağıdaki yapılandırma değerlerini ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="51562-117">If you aren't using JSON-based configuration, set the following configuration values in your configuration system:</span></span>
 
-* `Logging:LogLevel:Microsoft.AspNetCore.:::no-loc(SignalR):::` = `Debug`
+* `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-<span data-ttu-id="51562-118">İç içe yapılandırma değerlerinin nasıl belirleneceğini belirlemek için yapılandırma sisteminizin belgelerini denetleyin.</span><span class="sxs-lookup"><span data-stu-id="51562-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="51562-119">Örneğin, ortam değişkenleri kullanılırken, `_` yerine iki karakter kullanılır `:` (örneğin, `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::` ).</span><span class="sxs-lookup"><span data-stu-id="51562-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::`).</span></span>
+<span data-ttu-id="51562-118">İç içe yapılandırma değerlerinin nasıl belirleneceğini belirlemek için yapılandırma sisteminizin belgelerini denetleyin.</span><span class="sxs-lookup"><span data-stu-id="51562-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="51562-119">Örneğin, ortam değişkenleri kullanılırken, `_` yerine iki karakter kullanılır `:` (örneğin, `Logging__LogLevel__Microsoft.AspNetCore.SignalR` ).</span><span class="sxs-lookup"><span data-stu-id="51562-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).</span></span>
 
 <span data-ttu-id="51562-120">`Debug`Uygulamanız için daha ayrıntılı tanılama toplanırken düzeyin kullanılmasını öneririz.</span><span class="sxs-lookup"><span data-stu-id="51562-120">We recommend using the `Debug` level when gathering more detailed diagnostics for your app.</span></span> <span data-ttu-id="51562-121">`Trace`Düzey, çok düşük düzey Tanılamalar üretir ve uygulamanızdaki sorunları tanılamak için nadiren gereklidir.</span><span class="sxs-lookup"><span data-stu-id="51562-121">The `Trace` level produces very low-level diagnostics and is rarely needed to diagnose issues in your app.</span></span>
 
@@ -67,7 +67,7 @@ ms.locfileid: "93061320"
 
 ### <a name="as-a-console-app-outside-iis"></a><span data-ttu-id="51562-124">IIS dışında bir konsol uygulaması olarak</span><span class="sxs-lookup"><span data-stu-id="51562-124">As a console app outside IIS</span></span>
 
-<span data-ttu-id="51562-125">Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir.</span><span class="sxs-lookup"><span data-stu-id="51562-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="51562-126">:::no-loc(SignalR)::: Günlükler konsolunda görünür.</span><span class="sxs-lookup"><span data-stu-id="51562-126">:::no-loc(SignalR)::: logs will appear in the console.</span></span>
+<span data-ttu-id="51562-125">Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir.</span><span class="sxs-lookup"><span data-stu-id="51562-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="51562-126">SignalR Günlükler konsolunda görünür.</span><span class="sxs-lookup"><span data-stu-id="51562-126">SignalR logs will appear in the console.</span></span>
 
 ### <a name="within-iis-express-from-visual-studio"></a><span data-ttu-id="51562-127">Visual Studio 'dan IIS Express içinde</span><span class="sxs-lookup"><span data-stu-id="51562-127">Within IIS Express from Visual Studio</span></span>
 
@@ -117,7 +117,7 @@ ms.locfileid: "93061320"
 
 <span data-ttu-id="51562-159">.NET istemcisinden günlükleri almak için, `ConfigureLogging` üzerinde yöntemini kullanabilirsiniz `HubConnectionBuilder` .</span><span class="sxs-lookup"><span data-stu-id="51562-159">To get logs from the .NET client, you can use the `ConfigureLogging` method on `HubConnectionBuilder`.</span></span> <span data-ttu-id="51562-160">Bu, `ConfigureLogging` ve üzerindeki yöntemiyle aynı şekilde çalışmaktadır `WebHostBuilder` `HostBuilder` .</span><span class="sxs-lookup"><span data-stu-id="51562-160">This works the same way as the `ConfigureLogging` method on `WebHostBuilder` and `HostBuilder`.</span></span> <span data-ttu-id="51562-161">ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="51562-161">You can configure the same logging providers you use in ASP.NET Core.</span></span> <span data-ttu-id="51562-162">Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.</span><span class="sxs-lookup"><span data-stu-id="51562-162">However, you have to manually install and enable the NuGet packages for the individual logging providers.</span></span>
 
-<span data-ttu-id="51562-163">Bir uygulamaya .NET istemci günlüğü eklemek için :::no-loc(Blazor WebAssembly)::: , bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..</span><span class="sxs-lookup"><span data-stu-id="51562-163">To add .NET client logging to a :::no-loc(Blazor WebAssembly)::: app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
+<span data-ttu-id="51562-163">Bir uygulamaya .NET istemci günlüğü eklemek için Blazor WebAssembly , bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..</span><span class="sxs-lookup"><span data-stu-id="51562-163">To add .NET client logging to a Blazor WebAssembly app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
 
 ### <a name="console-logging"></a><span data-ttu-id="51562-164">Konsol günlüğü</span><span class="sxs-lookup"><span data-stu-id="51562-164">Console logging</span></span>
 
@@ -133,13 +133,13 @@ ms.locfileid: "93061320"
 
 ### <a name="other-logging-providers"></a><span data-ttu-id="51562-170">Diğer günlüğe kaydetme sağlayıcıları</span><span class="sxs-lookup"><span data-stu-id="51562-170">Other logging providers</span></span>
 
-<span data-ttu-id="51562-171">:::no-loc(SignalR)::: Serilog, seq, NLog gibi diğer günlük sağlayıcılarını veya ile tümleştirilen diğer bir günlük sistemini destekler `Microsoft.Extensions.Logging` .</span><span class="sxs-lookup"><span data-stu-id="51562-171">:::no-loc(SignalR)::: supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="51562-172">Günlük sisteminiz bir sağlıyorsa `ILoggerProvider` , şunu kullanarak kaydedebilirsiniz `AddProvider` :</span><span class="sxs-lookup"><span data-stu-id="51562-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
+<span data-ttu-id="51562-171">SignalR Serilog, seq, NLog gibi diğer günlük sağlayıcılarını veya ile tümleştirilen diğer bir günlük sistemini destekler `Microsoft.Extensions.Logging` .</span><span class="sxs-lookup"><span data-stu-id="51562-171">SignalR supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="51562-172">Günlük sisteminiz bir sağlıyorsa `ILoggerProvider` , şunu kullanarak kaydedebilirsiniz `AddProvider` :</span><span class="sxs-lookup"><span data-stu-id="51562-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a><span data-ttu-id="51562-173">Denetim ayrıntı düzeyi</span><span class="sxs-lookup"><span data-stu-id="51562-173">Control verbosity</span></span>
 
-<span data-ttu-id="51562-174">Uygulamanızdaki diğer yerlerden oturum açıyorsanız, varsayılan düzeyin olarak değiştirilmesi `Debug` çok ayrıntılı olabilir.</span><span class="sxs-lookup"><span data-stu-id="51562-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="51562-175">Günlükler için günlüğe kaydetme düzeyini yapılandırmak üzere bir filtre kullanabilirsiniz :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="51562-175">You can use a Filter to configure the logging level for :::no-loc(SignalR)::: logs.</span></span> <span data-ttu-id="51562-176">Bu, sunucuda olduğu şekilde kodda yapılabilir:</span><span class="sxs-lookup"><span data-stu-id="51562-176">This can be done in code, in much the same way as on the server:</span></span>
+<span data-ttu-id="51562-174">Uygulamanızdaki diğer yerlerden oturum açıyorsanız, varsayılan düzeyin olarak değiştirilmesi `Debug` çok ayrıntılı olabilir.</span><span class="sxs-lookup"><span data-stu-id="51562-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="51562-175">Günlükler için günlüğe kaydetme düzeyini yapılandırmak üzere bir filtre kullanabilirsiniz SignalR .</span><span class="sxs-lookup"><span data-stu-id="51562-175">You can use a Filter to configure the logging level for SignalR logs.</span></span> <span data-ttu-id="51562-176">Bu, sunucuda olduğu şekilde kodda yapılabilir:</span><span class="sxs-lookup"><span data-stu-id="51562-176">This can be done in code, in much the same way as on the server:</span></span>
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -222,9 +222,9 @@ tcpdump -i [interface] -w trace.pcap
 
 <span data-ttu-id="51562-228">Ölçümler, zaman aralıklarıyla veri ölçümlerinin bir gösterimidir.</span><span class="sxs-lookup"><span data-stu-id="51562-228">Metrics is a representation of data measures over intervals of time.</span></span> <span data-ttu-id="51562-229">Örneğin, saniye başına istek.</span><span class="sxs-lookup"><span data-stu-id="51562-229">For example, requests per second.</span></span> <span data-ttu-id="51562-230">Ölçüm verileri, yüksek düzeyde bir uygulamanın durumunun gözlemde yapılmasına izin verir.</span><span class="sxs-lookup"><span data-stu-id="51562-230">Metrics data allows observation of the state of an app at a high level.</span></span> <span data-ttu-id="51562-231">.NET gRPC ölçümleri kullanılarak dağıtılır <xref:System.Diagnostics.Tracing.EventCounter> .</span><span class="sxs-lookup"><span data-stu-id="51562-231">.NET gRPC metrics are emitted using <xref:System.Diagnostics.Tracing.EventCounter>.</span></span>
 
-### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="51562-232">:::no-loc(SignalR)::: Sunucu ölçümleri</span><span class="sxs-lookup"><span data-stu-id="51562-232">:::no-loc(SignalR)::: server metrics</span></span>
+### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="51562-232">SignalR Sunucu ölçümleri</span><span class="sxs-lookup"><span data-stu-id="51562-232">SignalR server metrics</span></span>
 
-<span data-ttu-id="51562-233">:::no-loc(SignalR)::: Sunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.</span><span class="sxs-lookup"><span data-stu-id="51562-233">:::no-loc(SignalR)::: server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
+<span data-ttu-id="51562-233">SignalR Sunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.</span><span class="sxs-lookup"><span data-stu-id="51562-233">SignalR server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
 
 | <span data-ttu-id="51562-234">Ad</span><span class="sxs-lookup"><span data-stu-id="51562-234">Name</span></span>                    | <span data-ttu-id="51562-235">Açıklama</span><span class="sxs-lookup"><span data-stu-id="51562-235">Description</span></span>                 |
 |-------------------------|-----------------------------|

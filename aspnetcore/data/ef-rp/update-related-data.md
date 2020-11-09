@@ -1,21 +1,21 @@
 ---
-title: 'Bölüm 7, :::no-loc(Razor)::: ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir'
+title: 'Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir'
 author: rick-anderson
-description: 'Sayfaların Bölüm 7 :::no-loc(Razor)::: ve Entity Framework öğretici serisi.'
+description: 'Sayfaların Bölüm 7 Razor ve Entity Framework öğretici serisi.'
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060540"
 ---
-# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="c86ca-103">Bölüm 7, :::no-loc(Razor)::: ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir</span><span class="sxs-lookup"><span data-stu-id="c86ca-103">Part 7, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a><span data-ttu-id="c86ca-103">Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir</span><span class="sxs-lookup"><span data-stu-id="c86ca-103">Part 7, Razor Pages with EF Core in ASP.NET Core - Update Related Data</span></span>
 
 <span data-ttu-id="c86ca-104">, [Tom Dykstra](https://github.com/tdykstra)ve [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c86ca-104">By [Tom Dykstra](https://github.com/tdykstra), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -68,9 +68,9 @@ ms.locfileid: "93060540"
 
 * <span data-ttu-id="c86ca-125">Türetiliyor `DepartmentNamePageModel` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-125">Derives from `DepartmentNamePageModel`.</span></span>
 * <span data-ttu-id="c86ca-126">`TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.</span><span class="sxs-lookup"><span data-stu-id="c86ca-126">Uses `TryUpdateModelAsync` to prevent [overposting](xref:data/ef-rp/crud#overposting).</span></span>
-* <span data-ttu-id="c86ca-127">Kaldırır `ViewData["DepartmentID"]` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="c86ca-128">`DepartmentNameSL` temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="c86ca-128">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the :::no-loc(Razor)::: page.</span></span> <span data-ttu-id="c86ca-129">Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="c86ca-130">Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).</span><span class="sxs-lookup"><span data-stu-id="c86ca-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
+* <span data-ttu-id="c86ca-127">Kaldırır `ViewData["DepartmentID"]` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-127">Removes `ViewData["DepartmentID"]`.</span></span> <span data-ttu-id="c86ca-128">`DepartmentNameSL` temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır Razor .</span><span class="sxs-lookup"><span data-stu-id="c86ca-128">`DepartmentNameSL` from the base class is a strongly typed model and will be used by the Razor page.</span></span> <span data-ttu-id="c86ca-129">Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-129">Strongly typed models are preferred over weakly typed.</span></span> <span data-ttu-id="c86ca-130">Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).</span><span class="sxs-lookup"><span data-stu-id="c86ca-130">For more information, see [Weakly typed data (ViewData and ViewBag)](xref:mvc/views/overview#VD_VB).</span></span>
 
-### <a name="update-the-course-create-no-locrazor-page"></a><span data-ttu-id="c86ca-131">Kurs oluşturma sayfasını güncelleştirme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c86ca-131">Update the Course Create :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-course-create-no-locrazor-page"></a><span data-ttu-id="c86ca-131">Kurs oluşturma sayfasını güncelleştirme Razor</span><span class="sxs-lookup"><span data-stu-id="c86ca-131">Update the Course Create Razor page</span></span>
 
 <span data-ttu-id="c86ca-132">*Sayfaları/kursları/Create. cshtml* 'yi aşağıdaki kodla güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-132">Update *Pages/Courses/Create.cshtml* with the following code:</span></span>
 
@@ -83,7 +83,7 @@ ms.locfileid: "93060540"
 * <span data-ttu-id="c86ca-136">"Departmanı Seç" seçeneğini ekler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-136">Adds the "Select Department" option.</span></span> <span data-ttu-id="c86ca-137">Bu değişiklik, ilk departman yerine henüz bir departman seçilmedikçe açılan kutuda "departmanı Seç" i işler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-137">This change renders "Select Department" in the drop-down when no department has been selected yet, rather than the first department.</span></span>
 * <span data-ttu-id="c86ca-138">Departman seçili olmadığında bir doğrulama iletisi ekler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-138">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="c86ca-139">:::no-loc(Razor):::Sayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:</span><span class="sxs-lookup"><span data-stu-id="c86ca-139">The :::no-loc(Razor)::: Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="c86ca-139">RazorSayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:</span><span class="sxs-lookup"><span data-stu-id="c86ca-139">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -97,7 +97,7 @@ ms.locfileid: "93060540"
 
 <span data-ttu-id="c86ca-144">Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-144">The changes are similar to those made in the Create page model.</span></span> <span data-ttu-id="c86ca-145">Yukarıdaki kodda, `PopulateDepartmentsDropDownList` Bu departmanı açılan listede seçen departman kimliği ' nde geçirilir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-145">In the preceding code, `PopulateDepartmentsDropDownList` passes in the department ID, which selects that department in the drop-down list.</span></span>
 
-### <a name="update-the-course-edit-no-locrazor-page"></a><span data-ttu-id="c86ca-146">Kurs düzenleme sayfasını güncelleştirme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c86ca-146">Update the Course Edit :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-course-edit-no-locrazor-page"></a><span data-ttu-id="c86ca-146">Kurs düzenleme sayfasını güncelleştirme Razor</span><span class="sxs-lookup"><span data-stu-id="c86ca-146">Update the Course Edit Razor page</span></span>
 
 <span data-ttu-id="c86ca-147">*Pages/kurslar/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-147">Update *Pages/Courses/Edit.cshtml* with the following code:</span></span>
 
@@ -125,7 +125,7 @@ ms.locfileid: "93060540"
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-no-locrazor-pages"></a><span data-ttu-id="c86ca-163">Kurs sayfalarını güncelleştirme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c86ca-163">Update the Course :::no-loc(Razor)::: pages</span></span>
+### <a name="update-the-course-no-locrazor-pages"></a><span data-ttu-id="c86ca-163">Kurs sayfalarını güncelleştirme Razor</span><span class="sxs-lookup"><span data-stu-id="c86ca-163">Update the Course Razor pages</span></span>
 
 <span data-ttu-id="c86ca-164">*Pages/kurslar/delete. cshtml* dosyasını aşağıdaki kodla güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-164">Update *Pages/Courses/Delete.cshtml* with the following code:</span></span>
 
@@ -163,7 +163,7 @@ ms.locfileid: "93060540"
 
 <span data-ttu-id="c86ca-184">, `InstructorCoursesPageModel` Düzenleme ve oluşturma sayfa modelleri için kullanacağınız temel sınıftır.</span><span class="sxs-lookup"><span data-stu-id="c86ca-184">The `InstructorCoursesPageModel` is the base class you will use for the Edit and Create page models.</span></span> <span data-ttu-id="c86ca-185">`PopulateAssignedCourseData``Course`doldurmak için tüm varlıkları okur `AssignedCourseDataList` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-185">`PopulateAssignedCourseData` reads all `Course` entities to populate `AssignedCourseDataList`.</span></span> <span data-ttu-id="c86ca-186">Her kurs için kod, `CourseID` başlığı ve eğitmenin kursa atanıp atanmadığını belirler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-186">For each course, the code sets the `CourseID`, title, and whether or not the instructor is assigned to the course.</span></span> <span data-ttu-id="c86ca-187">Bir [diyez kümesi](/dotnet/api/system.collections.generic.hashset-1) etkili aramalar için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="c86ca-187">A [HashSet](/dotnet/api/system.collections.generic.hashset-1) is used for efficient lookups.</span></span>
 
-<span data-ttu-id="c86ca-188">:::no-loc(Razor):::Sayfada bir kurs varlıkları koleksiyonu olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-188">Since the :::no-loc(Razor)::: page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="c86ca-189">Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-189">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="c86ca-190">Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-190">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="c86ca-191">Bu, çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `TryUpdateModel` , çünkü bu aşırı yüklemeyi, belirtilen özelliklerle birlikte kullanıyor olduğunuzdan ve `CourseAssignments` içerme listesinde yer almadığınızı unutmayın.</span><span class="sxs-lookup"><span data-stu-id="c86ca-191">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
+<span data-ttu-id="c86ca-188">RazorSayfada bir kurs varlıkları koleksiyonu olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-188">Since the Razor page doesn't have a collection of Course entities, the model binder can't automatically update the `CourseAssignments` navigation property.</span></span> <span data-ttu-id="c86ca-189">Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-189">Instead of using the model binder to update the `CourseAssignments` navigation property, you do that in the new `UpdateInstructorCourses` method.</span></span> <span data-ttu-id="c86ca-190">Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-190">Therefore you need to exclude the `CourseAssignments` property from model binding.</span></span> <span data-ttu-id="c86ca-191">Bu, çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `TryUpdateModel` , çünkü bu aşırı yüklemeyi, belirtilen özelliklerle birlikte kullanıyor olduğunuzdan ve `CourseAssignments` içerme listesinde yer almadığınızı unutmayın.</span><span class="sxs-lookup"><span data-stu-id="c86ca-191">This doesn't require any change to the code that calls `TryUpdateModel` because you're using the overload with declared properties and `CourseAssignments` isn't in the include list.</span></span>
 
 <span data-ttu-id="c86ca-192">Hiçbir onay kutusu seçili değilse, içindeki kod `UpdateInstructorCourses` `CourseAssignments` gezinti özelliğini boş bir koleksiyonla başlatır ve döndürür:</span><span class="sxs-lookup"><span data-stu-id="c86ca-192">If no check boxes were selected, the code in `UpdateInstructorCourses` initializes the `CourseAssignments` navigation property with an empty collection and returns:</span></span>
 
@@ -202,7 +202,7 @@ ms.locfileid: "93060540"
 * <span data-ttu-id="c86ca-212">`UpdateInstructorCourses` `OnPostAsync` Onay kutularından düzenlenmekte olan eğitmen varlığına bilgi uygulamak için ' de çağırır.</span><span class="sxs-lookup"><span data-stu-id="c86ca-212">Calls `UpdateInstructorCourses` in `OnPostAsync` to apply information from the checkboxes to the Instructor entity being edited.</span></span>
 * <span data-ttu-id="c86ca-213">Başarısız olursa, `PopulateAssignedCourseData` ve `UpdateInstructorCourses` ' de çağırır `OnPostAsync` `TryUpdateModel` .</span><span class="sxs-lookup"><span data-stu-id="c86ca-213">Calls `PopulateAssignedCourseData` and `UpdateInstructorCourses` in `OnPostAsync` if `TryUpdateModel` fails.</span></span> <span data-ttu-id="c86ca-214">Bu yöntem çağrıları, bir hata iletisiyle yeniden görüntülendiğinde sayfaya girilen atanan kurs verilerini geri yükler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-214">These method calls restore the assigned course data entered on the page when it is redisplayed with an error message.</span></span>
 
-### <a name="update-the-instructor-edit-no-locrazor-page"></a><span data-ttu-id="c86ca-215">Eğitmen düzenleme sayfasını güncelleştirme :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c86ca-215">Update the Instructor Edit :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-instructor-edit-no-locrazor-page"></a><span data-ttu-id="c86ca-215">Eğitmen düzenleme sayfasını güncelleştirme Razor</span><span class="sxs-lookup"><span data-stu-id="c86ca-215">Update the Instructor Edit Razor page</span></span>
 
 <span data-ttu-id="c86ca-216">*Pages/eğitmenler/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-216">Update *Pages/Instructors/Edit.cshtml* with the following code:</span></span>
 
@@ -218,7 +218,7 @@ ms.locfileid: "93060540"
 
 ### <a name="update-the-instructor-create-page"></a><span data-ttu-id="c86ca-229">Eğitmen oluştur sayfasını güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="c86ca-229">Update the Instructor Create page</span></span>
 
-<span data-ttu-id="c86ca-230">, Düzenleme sayfasına benzer şekilde, eğitmen sayfa modeli ve kod oluştur sayfasını güncelleştirin :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="c86ca-230">Update the Instructor Create page model and :::no-loc(Razor)::: page with code similar to the Edit page:</span></span>
+<span data-ttu-id="c86ca-230">, Düzenleme sayfasına benzer şekilde, eğitmen sayfa modeli ve kod oluştur sayfasını güncelleştirin Razor :</span><span class="sxs-lookup"><span data-stu-id="c86ca-230">Update the Instructor Create page model and Razor page with code similar to the Edit page:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
@@ -302,7 +302,7 @@ ms.locfileid: "93060540"
 * <span data-ttu-id="c86ca-277">"Departmanı Seç" seçeneğini ekler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-277">Adds the "Select Department" option.</span></span> <span data-ttu-id="c86ca-278">Bu değişiklik, ilk departman yerine "departmanı Seç" i işler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-278">This change renders "Select Department" rather than the first department.</span></span>
 * <span data-ttu-id="c86ca-279">Departman seçili olmadığında bir doğrulama iletisi ekler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-279">Adds a validation message when the department isn't selected.</span></span>
 
-<span data-ttu-id="c86ca-280">:::no-loc(Razor):::Sayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:</span><span class="sxs-lookup"><span data-stu-id="c86ca-280">The :::no-loc(Razor)::: Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
+<span data-ttu-id="c86ca-280">RazorSayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:</span><span class="sxs-lookup"><span data-stu-id="c86ca-280">The Razor Page uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper):</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -342,7 +342,7 @@ ms.locfileid: "93060540"
 
 ### <a name="modify-the-delete-and-details-pages"></a><span data-ttu-id="c86ca-305">Silme ve Ayrıntılar sayfalarını değiştirme</span><span class="sxs-lookup"><span data-stu-id="c86ca-305">Modify the Delete and Details pages</span></span>
 
-<span data-ttu-id="c86ca-306">Silme :::no-loc(Razor)::: sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-306">Update the Delete :::no-loc(Razor)::: page with the following markup:</span></span>
+<span data-ttu-id="c86ca-306">Silme Razor sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-306">Update the Delete Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
@@ -417,7 +417,7 @@ ms.locfileid: "93060540"
 
 <span data-ttu-id="c86ca-353">Yukarıdaki kod, Office atama değişikliklerini işler.</span><span class="sxs-lookup"><span data-stu-id="c86ca-353">The preceding code handles office assignment changes.</span></span>
 
-<span data-ttu-id="c86ca-354">Eğitmen görünümünü güncelleştirin :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="c86ca-354">Update the instructor :::no-loc(Razor)::: View:</span></span>
+<span data-ttu-id="c86ca-354">Eğitmen görünümünü güncelleştirin Razor :</span><span class="sxs-lookup"><span data-stu-id="c86ca-354">Update the instructor Razor View:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
@@ -441,7 +441,7 @@ ms.locfileid: "93060540"
 
 <span data-ttu-id="c86ca-375">Yukarıdaki kod, *Pages/eğitmenler/Edit. cshtml. cs* koduna benzerdir.</span><span class="sxs-lookup"><span data-stu-id="c86ca-375">The preceding code is similar to the *Pages/Instructors/Edit.cshtml.cs* code.</span></span>
 
-<span data-ttu-id="c86ca-376">Eğitmen oluştur :::no-loc(Razor)::: sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-376">Update the instructor Create :::no-loc(Razor)::: page with the following markup:</span></span>
+<span data-ttu-id="c86ca-376">Eğitmen oluştur Razor sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="c86ca-376">Update the instructor Create Razor page with the following markup:</span></span>
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 

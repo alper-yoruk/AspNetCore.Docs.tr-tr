@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: c012658a6f48247af60c8bfd56a7d987f6aa8a68
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -44,7 +44,7 @@ ms.locfileid: "93061515"
 
 <span data-ttu-id="c3d22-116">.NET Core 3,0 sürümü sayesinde, birçok ASP.NET Core derlemesi artık NuGet 'e paket olarak yayımlanmamıştır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-116">With the release of .NET Core 3.0, many ASP.NET Core assemblies are no longer published to NuGet as packages.</span></span> <span data-ttu-id="c3d22-117">Bunun yerine, derlemeler `Microsoft.AspNetCore.App` .NET Core SDK ve çalışma zamanı yükleyicilerle birlikte yüklenen paylaşılan çerçeveye dahil edilmiştir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-117">Instead, the assemblies are included in the `Microsoft.AspNetCore.App` shared framework, which is installed with the .NET Core SDK and runtime installers.</span></span> <span data-ttu-id="c3d22-118">Artık yayımlanmayan paketlerin listesi için bkz. [artık kullanılmayan paket başvurularını kaldır](xref:migration/22-to-30#remove-obsolete-package-references).</span><span class="sxs-lookup"><span data-stu-id="c3d22-118">For a list of packages no longer being published, see [Remove obsolete package references](xref:migration/22-to-30#remove-obsolete-package-references).</span></span>
 
-<span data-ttu-id="c3d22-119">.NET Core 3,0 itibariyle, `Microsoft.NET.Sdk.Web` MSBuild SDK 'sını kullanan projeler, paylaşılan çerçeveye örtük olarak başvurur.</span><span class="sxs-lookup"><span data-stu-id="c3d22-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="c3d22-120">Veya SDK kullanan projeler, `Microsoft.NET.Sdk` `Microsoft.NET.Sdk.:::no-loc(Razor):::` paylaşılan çerçevede ASP.NET Core API 'leri kullanmak için ASP.NET Core başvurmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.:::no-loc(Razor):::` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
+<span data-ttu-id="c3d22-119">.NET Core 3,0 itibariyle, `Microsoft.NET.Sdk.Web` MSBuild SDK 'sını kullanan projeler, paylaşılan çerçeveye örtük olarak başvurur.</span><span class="sxs-lookup"><span data-stu-id="c3d22-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="c3d22-120">Veya SDK kullanan projeler, `Microsoft.NET.Sdk` `Microsoft.NET.Sdk.Razor` paylaşılan çerçevede ASP.NET Core API 'leri kullanmak için ASP.NET Core başvurmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
 
 <span data-ttu-id="c3d22-121">ASP.NET Core başvurmak için, `<FrameworkReference>` proje dosyanıza aşağıdaki öğeyi ekleyin:</span><span class="sxs-lookup"><span data-stu-id="c3d22-121">To reference ASP.NET Core, add the following `<FrameworkReference>` element to your project file:</span></span>
 
@@ -52,17 +52,17 @@ ms.locfileid: "93061515"
 
 <span data-ttu-id="c3d22-122">ASP.NET Core buna bu şekilde başvurulması yalnızca .NET Core 3. x 'i hedefleyen projeler için desteklenir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-122">Referencing ASP.NET Core in this manner is only supported for projects targeting .NET Core 3.x.</span></span>
 
-## <a name="include-no-locblazor-extensibility"></a><span data-ttu-id="c3d22-123">Genişletilebilirlik dahil et :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="c3d22-123">Include :::no-loc(Blazor)::: extensibility</span></span>
+## <a name="include-no-locblazor-extensibility"></a><span data-ttu-id="c3d22-123">Genişletilebilirlik dahil et Blazor</span><span class="sxs-lookup"><span data-stu-id="c3d22-123">Include Blazor extensibility</span></span>
 
-<span data-ttu-id="c3d22-124">:::no-loc(Blazor)::: WebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler.</span><span class="sxs-lookup"><span data-stu-id="c3d22-124">:::no-loc(Blazor)::: supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="c3d22-125">Belirli bir neden olmadığı müddetçe, bir [ :::no-loc(Razor)::: bileşen](xref:blazor/components/index) Kitaplığı hem barındırma modellerini desteklemelidir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-125">Unless there's a specific reason not to, a [:::no-loc(Razor)::: components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="c3d22-126">Bir :::no-loc(Razor)::: Bileşen kitaplığı [MICROSOFT. net. SDK kullanmalıdır. :::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span><span class="sxs-lookup"><span data-stu-id="c3d22-126">A :::no-loc(Razor)::: components library must use the [Microsoft.NET.Sdk.:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="c3d22-124">Blazor WebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler.</span><span class="sxs-lookup"><span data-stu-id="c3d22-124">Blazor supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="c3d22-125">Belirli bir neden olmadığı müddetçe, bir [ Razor bileşen](xref:blazor/components/index) Kitaplığı hem barındırma modellerini desteklemelidir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-125">Unless there's a specific reason not to, a [Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="c3d22-126">Bir Razor Bileşen kitaplığı [MICROSOFT. net. SDK kullanmalıdır. Razor SDK](xref:razor-pages/sdk).</span><span class="sxs-lookup"><span data-stu-id="c3d22-126">A Razor components library must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
 
 ### <a name="support-both-hosting-models"></a><span data-ttu-id="c3d22-127">Barındırma modellerini destekler</span><span class="sxs-lookup"><span data-stu-id="c3d22-127">Support both hosting models</span></span>
 
-<span data-ttu-id="c3d22-128">Hem hem :::no-loc(Razor)::: de olan projelerden gelen bileşen tüketimini desteklemek için [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) , düzenleyiciniz için aşağıdaki yönergeleri kullanın. [ :::no-loc(Blazor)::: ](xref:blazor/hosting-models#blazor-webassembly)</span><span class="sxs-lookup"><span data-stu-id="c3d22-128">To support :::no-loc(Razor)::: component consumption from both [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) and [:::no-loc(Blazor)::: WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
+<span data-ttu-id="c3d22-128">Hem hem Razor de olan projelerden gelen bileşen tüketimini desteklemek için [Blazor Server](xref:blazor/hosting-models#blazor-server) , düzenleyiciniz için aşağıdaki yönergeleri kullanın. [ Blazor ](xref:blazor/hosting-models#blazor-webassembly)</span><span class="sxs-lookup"><span data-stu-id="c3d22-128">To support Razor component consumption from both [Blazor Server](xref:blazor/hosting-models#blazor-server) and [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="c3d22-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c3d22-129">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="c3d22-130">**:::no-loc(Razor)::: Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-130">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span> <span data-ttu-id="c3d22-131">Şablonun **destek sayfaları ve görünümleri** onay kutusu seçili olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
+<span data-ttu-id="c3d22-130">**Razor Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-130">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="c3d22-131">Şablonun **destek sayfaları ve görünümleri** onay kutusu seçili olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="c3d22-132">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c3d22-132">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -74,14 +74,14 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="c3d22-134">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c3d22-134">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="c3d22-135">**:::no-loc(Razor)::: Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-135">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span>
+<span data-ttu-id="c3d22-135">**Razor Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-135">Use the **Razor Class Library** project template.</span></span>
 
 ---
 
 <span data-ttu-id="c3d22-136">Şablondan oluşturulan proje aşağıdaki işlemleri yapar:</span><span class="sxs-lookup"><span data-stu-id="c3d22-136">The project generated from the template does the following things:</span></span>
 
 * <span data-ttu-id="c3d22-137">2,0 .NET Standard hedefler.</span><span class="sxs-lookup"><span data-stu-id="c3d22-137">Targets .NET Standard 2.0.</span></span>
-* <span data-ttu-id="c3d22-138">`:::no-loc(Razor):::LangVersion`Özelliğini olarak ayarlar `3.0` .</span><span class="sxs-lookup"><span data-stu-id="c3d22-138">Sets the `:::no-loc(Razor):::LangVersion` property to `3.0`.</span></span> <span data-ttu-id="c3d22-139">`3.0` , .NET Core 3. x için varsayılan değerdir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-139">`3.0` is the default value for .NET Core 3.x.</span></span>
+* <span data-ttu-id="c3d22-138">`RazorLangVersion`Özelliğini olarak ayarlar `3.0` .</span><span class="sxs-lookup"><span data-stu-id="c3d22-138">Sets the `RazorLangVersion` property to `3.0`.</span></span> <span data-ttu-id="c3d22-139">`3.0` , .NET Core 3. x için varsayılan değerdir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-139">`3.0` is the default value for .NET Core 3.x.</span></span>
 * <span data-ttu-id="c3d22-140">Aşağıdaki paket başvurularını ekler:</span><span class="sxs-lookup"><span data-stu-id="c3d22-140">Adds the following package references:</span></span>
   * [<span data-ttu-id="c3d22-141">Microsoft. AspNetCore. Components</span><span class="sxs-lookup"><span data-stu-id="c3d22-141">Microsoft.AspNetCore.Components</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [<span data-ttu-id="c3d22-142">Microsoft. AspNetCore. components. Web</span><span class="sxs-lookup"><span data-stu-id="c3d22-142">Microsoft.AspNetCore.Components.Web</span></span>](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
@@ -92,7 +92,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a><span data-ttu-id="c3d22-144">Belirli bir barındırma modelini destekleme</span><span class="sxs-lookup"><span data-stu-id="c3d22-144">Support a specific hosting model</span></span>
 
-<span data-ttu-id="c3d22-145">Tek bir barındırma modelini desteklemek çok daha az yaygındır :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="c3d22-145">It's far less common to support a single :::no-loc(Blazor)::: hosting model.</span></span> <span data-ttu-id="c3d22-146">Örnek olarak, :::no-loc(Razor)::: yalnızca projeden bileşen kullanımını desteklemek için [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) :</span><span class="sxs-lookup"><span data-stu-id="c3d22-146">As an example, to support :::no-loc(Razor)::: component consumption from [:::no-loc(Blazor Server):::](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
+<span data-ttu-id="c3d22-145">Tek bir barındırma modelini desteklemek çok daha az yaygındır Blazor .</span><span class="sxs-lookup"><span data-stu-id="c3d22-145">It's far less common to support a single Blazor hosting model.</span></span> <span data-ttu-id="c3d22-146">Örnek olarak, Razor yalnızca projeden bileşen kullanımını desteklemek için [Blazor Server](xref:blazor/hosting-models#blazor-server) :</span><span class="sxs-lookup"><span data-stu-id="c3d22-146">As an example, to support Razor component consumption from [Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
 
 * <span data-ttu-id="c3d22-147">Hedef .NET Core 3. x.</span><span class="sxs-lookup"><span data-stu-id="c3d22-147">Target .NET Core 3.x.</span></span>
 * <span data-ttu-id="c3d22-148">`<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c3d22-148">Add a `<FrameworkReference>` element for the shared framework.</span></span>
@@ -101,32 +101,32 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-<span data-ttu-id="c3d22-150">Bileşenleri içeren kitaplıklar hakkında daha fazla bilgi için :::no-loc(Razor)::: bkz. [ASP.NET Core :::no-loc(Razor)::: Components sınıf kitaplıkları](xref:blazor/components/class-libraries).</span><span class="sxs-lookup"><span data-stu-id="c3d22-150">For more information on libraries containing :::no-loc(Razor)::: components, see [ASP.NET Core :::no-loc(Razor)::: components class libraries](xref:blazor/components/class-libraries).</span></span>
+<span data-ttu-id="c3d22-150">Bileşenleri içeren kitaplıklar hakkında daha fazla bilgi için Razor bkz. [ASP.NET Core Razor Components sınıf kitaplıkları](xref:blazor/components/class-libraries).</span><span class="sxs-lookup"><span data-stu-id="c3d22-150">For more information on libraries containing Razor components, see [ASP.NET Core Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
 
 ## <a name="include-mvc-extensibility"></a><span data-ttu-id="c3d22-151">MVC genişletilebilirliği Ekle</span><span class="sxs-lookup"><span data-stu-id="c3d22-151">Include MVC extensibility</span></span>
 
 <span data-ttu-id="c3d22-152">Bu bölümde şunları içeren kitaplıklara ilişkin öneriler özetlenmektedir:</span><span class="sxs-lookup"><span data-stu-id="c3d22-152">This section outlines recommendations for libraries that include:</span></span>
 
-* [<span data-ttu-id="c3d22-153">:::no-loc(Razor)::: görünümler veya :::no-loc(Razor)::: Sayfalar</span><span class="sxs-lookup"><span data-stu-id="c3d22-153">:::no-loc(Razor)::: views or :::no-loc(Razor)::: Pages</span></span>](#razor-views-or-razor-pages)
+* [<span data-ttu-id="c3d22-153">Razor görünümler veya Razor Sayfalar</span><span class="sxs-lookup"><span data-stu-id="c3d22-153">Razor views or Razor Pages</span></span>](#razor-views-or-razor-pages)
 * [<span data-ttu-id="c3d22-154">Etiket Yardımcıları</span><span class="sxs-lookup"><span data-stu-id="c3d22-154">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="c3d22-155">Görünüm bileşenleri</span><span class="sxs-lookup"><span data-stu-id="c3d22-155">View components</span></span>](#view-components)
 
 <span data-ttu-id="c3d22-156">Bu bölüm, MVC 'nin birden çok sürümünü desteklemek için Çoklu hedefleme ile açıklanmamaktadır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-156">This section doesn't discuss multi-targeting to support multiple versions of MVC.</span></span> <span data-ttu-id="c3d22-157">Birden çok ASP.NET Core sürümünün desteklenmesi hakkında rehberlik için bkz. [çoklu ASP.NET Core sürümlerini](#support-multiple-aspnet-core-versions)destekleme.</span><span class="sxs-lookup"><span data-stu-id="c3d22-157">For guidance on supporting multiple ASP.NET Core versions, see [Support multiple ASP.NET Core versions](#support-multiple-aspnet-core-versions).</span></span>
 
-### <a name="no-locrazor-views-or-no-locrazor-pages"></a><span data-ttu-id="c3d22-158">:::no-loc(Razor)::: görünümler veya :::no-loc(Razor)::: Sayfalar</span><span class="sxs-lookup"><span data-stu-id="c3d22-158">:::no-loc(Razor)::: views or :::no-loc(Razor)::: Pages</span></span>
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a><span data-ttu-id="c3d22-158">Razor görünümler veya Razor Sayfalar</span><span class="sxs-lookup"><span data-stu-id="c3d22-158">Razor views or Razor Pages</span></span>
 
-<span data-ttu-id="c3d22-159">[ :::no-loc(Razor)::: Görünümler](xref:mvc/views/overview) veya [ :::no-loc(Razor)::: Sayfalar](xref:razor-pages/index) içeren bir projenin [Microsoft. net. SDK kullanması gerekir. :::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span><span class="sxs-lookup"><span data-stu-id="c3d22-159">A project that includes [:::no-loc(Razor)::: views](xref:mvc/views/overview) or [:::no-loc(Razor)::: Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="c3d22-159">[ Razor Görünümler](xref:mvc/views/overview) veya [ Razor Sayfalar](xref:razor-pages/index) içeren bir projenin [Microsoft. net. SDK kullanması gerekir. Razor SDK](xref:razor-pages/sdk).</span><span class="sxs-lookup"><span data-stu-id="c3d22-159">A project that includes [Razor views](xref:mvc/views/overview) or [Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
 
 <span data-ttu-id="c3d22-160">Proje .NET Core 3. x 'i hedefliyorsa şunları gerektirir:</span><span class="sxs-lookup"><span data-stu-id="c3d22-160">If the project targets .NET Core 3.x, it requires:</span></span>
 
-* <span data-ttu-id="c3d22-161">`Add:::no-loc(Razor):::SupportForMvc`Olarak ayarlanan MSBuild özelliği `true` .</span><span class="sxs-lookup"><span data-stu-id="c3d22-161">An `Add:::no-loc(Razor):::SupportForMvc` MSBuild property set to `true`.</span></span>
+* <span data-ttu-id="c3d22-161">`AddRazorSupportForMvc`Olarak ayarlanan MSBuild özelliği `true` .</span><span class="sxs-lookup"><span data-stu-id="c3d22-161">An `AddRazorSupportForMvc` MSBuild property set to `true`.</span></span>
 * <span data-ttu-id="c3d22-162">`<FrameworkReference>`Paylaşılan çerçeve için bir öğe.</span><span class="sxs-lookup"><span data-stu-id="c3d22-162">A `<FrameworkReference>` element for the shared framework.</span></span>
 
-<span data-ttu-id="c3d22-163">**:::no-loc(Razor)::: Sınıf kitaplığı** proje şablonu, .NET Core 3. x 'i hedefleyen projeler için önceki gereksinimleri karşılar.</span><span class="sxs-lookup"><span data-stu-id="c3d22-163">The **:::no-loc(Razor)::: Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="c3d22-164">Düzenleyiciniz için aşağıdaki yönergeleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-164">Use the following instructions for your editor.</span></span>
+<span data-ttu-id="c3d22-163">**Razor Sınıf kitaplığı** proje şablonu, .NET Core 3. x 'i hedefleyen projeler için önceki gereksinimleri karşılar.</span><span class="sxs-lookup"><span data-stu-id="c3d22-163">The **Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="c3d22-164">Düzenleyiciniz için aşağıdaki yönergeleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-164">Use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="c3d22-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c3d22-165">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="c3d22-166">**:::no-loc(Razor)::: Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-166">Use the **:::no-loc(Razor)::: Class Library** project template.</span></span> <span data-ttu-id="c3d22-167">Şablonun **destek sayfaları ve görünümleri** onay kutusu seçilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-167">The template's **Support pages and views** checkbox should be selected.</span></span>
+<span data-ttu-id="c3d22-166">**Razor Sınıf kitaplığı** proje şablonunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="c3d22-166">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="c3d22-167">Şablonun **destek sayfaları ve görünümleri** onay kutusu seçilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-167">The template's **Support pages and views** checkbox should be selected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="c3d22-168">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c3d22-168">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -156,7 +156,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-<span data-ttu-id="c3d22-180">.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. Mvc :::no-loc(Razor)::: ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::)öğesine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c3d22-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::).</span></span> <span data-ttu-id="c3d22-181">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı.</span><span class="sxs-lookup"><span data-stu-id="c3d22-181">The `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="c3d22-182">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="c3d22-182">For example:</span></span>
+<span data-ttu-id="c3d22-180">.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. Mvc Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)öğesine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c3d22-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor).</span></span> <span data-ttu-id="c3d22-181">`Microsoft.AspNetCore.Mvc.Razor`Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı.</span><span class="sxs-lookup"><span data-stu-id="c3d22-181">The `Microsoft.AspNetCore.Mvc.Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="c3d22-182">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="c3d22-182">For example:</span></span>
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -185,8 +185,8 @@ dotnet new razorclasslib -s
 <span data-ttu-id="c3d22-197">Önceki proje dosyası ile:</span><span class="sxs-lookup"><span data-stu-id="c3d22-197">With the preceding project file:</span></span>
 
 * <span data-ttu-id="c3d22-198">`Markdig`Paket tüm tüketiciler için eklenir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-198">The `Markdig` package is added for all consumers.</span></span>
-* <span data-ttu-id="c3d22-199">[Microsoft. AspNetCore. Mvc :::no-loc(Razor)::: ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::) öğesine bir başvuru.</span><span class="sxs-lookup"><span data-stu-id="c3d22-199">A reference to [Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::)</span></span> <span data-ttu-id="c3d22-200">.NET Framework 4.6.1 veya üzeri ya da .NET Core 2. x ' i hedefleyen tüketiciler için eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="c3d22-201">Paketin 2.1.0 sürümü, geriye dönük uyumluluk nedeniyle ASP.NET Core 2,2 ile birlikte çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
-* <span data-ttu-id="c3d22-202">Paylaşılan çerçeveye .NET Core 3. x 'i hedefleyen tüketiciler için başvurulur.</span><span class="sxs-lookup"><span data-stu-id="c3d22-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="c3d22-203">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`Paket, paylaşılan çerçeveye dahildir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-203">The `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::` package is included in the shared framework.</span></span>
+* <span data-ttu-id="c3d22-199">[Microsoft. AspNetCore. Mvc Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) öğesine bir başvuru.</span><span class="sxs-lookup"><span data-stu-id="c3d22-199">A reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)</span></span> <span data-ttu-id="c3d22-200">.NET Framework 4.6.1 veya üzeri ya da .NET Core 2. x ' i hedefleyen tüketiciler için eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="c3d22-201">Paketin 2.1.0 sürümü, geriye dönük uyumluluk nedeniyle ASP.NET Core 2,2 ile birlikte çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="c3d22-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
+* <span data-ttu-id="c3d22-202">Paylaşılan çerçeveye .NET Core 3. x 'i hedefleyen tüketiciler için başvurulur.</span><span class="sxs-lookup"><span data-stu-id="c3d22-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="c3d22-203">`Microsoft.AspNetCore.Mvc.Razor`Paket, paylaşılan çerçeveye dahildir.</span><span class="sxs-lookup"><span data-stu-id="c3d22-203">The `Microsoft.AspNetCore.Mvc.Razor` package is included in the shared framework.</span></span>
 
 <span data-ttu-id="c3d22-204">Alternatif olarak, .NET Standard 2,0 hem .NET Core 2,1 hem de .NET Framework 4.6.1 hedeflemek yerine hedeflenebilir:</span><span class="sxs-lookup"><span data-stu-id="c3d22-204">Alternatively, .NET Standard 2.0 could be targeted instead of targeting both .NET Core 2.1 and .NET Framework 4.6.1:</span></span>
 

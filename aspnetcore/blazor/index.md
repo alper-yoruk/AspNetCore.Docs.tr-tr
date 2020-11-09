@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core giriş :::no-loc(Blazor):::'
+title: 'ASP.NET Core giriş Blazor'
 author: guardrex
-description: 'ASP.NET Core uygulamasında :::no-loc(Blazor)::: .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için bir yol ASP.NET Core keşfedelim.'
+description: 'ASP.NET Core uygulamasında Blazor .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için bir yol ASP.NET Core keşfedelim.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019, devx-track-js
 ms.date: 09/25/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/index
 ms.openlocfilehash: ecdf4f59aca0fe71bbfcfe61a99109127c8b92df
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,13 +26,13 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055718"
 ---
-# <a name="introduction-to-aspnet-core-no-locblazor"></a><span data-ttu-id="28554-103">ASP.NET Core giriş :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="28554-103">Introduction to ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="introduction-to-aspnet-core-no-locblazor"></a><span data-ttu-id="28554-103">ASP.NET Core giriş Blazor</span><span class="sxs-lookup"><span data-stu-id="28554-103">Introduction to ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="28554-104">[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından</span><span class="sxs-lookup"><span data-stu-id="28554-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="28554-105">*Hoş geldiniz :::no-loc(Blazor)::: !*</span><span class="sxs-lookup"><span data-stu-id="28554-105">*Welcome to :::no-loc(Blazor):::!*</span></span>
+<span data-ttu-id="28554-105">*Hoş geldiniz Blazor !*</span><span class="sxs-lookup"><span data-stu-id="28554-105">*Welcome to Blazor!*</span></span>
 
-<span data-ttu-id="28554-106">:::no-loc(Blazor)::: , [.net](/dotnet/standard/tour)ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmaya yönelik bir çerçevedir:</span><span class="sxs-lookup"><span data-stu-id="28554-106">:::no-loc(Blazor)::: is a framework for building interactive client-side web UI with [.NET](/dotnet/standard/tour):</span></span>
+<span data-ttu-id="28554-106">Blazor , [.net](/dotnet/standard/tour)ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmaya yönelik bir çerçevedir:</span><span class="sxs-lookup"><span data-stu-id="28554-106">Blazor is a framework for building interactive client-side web UI with [.NET](/dotnet/standard/tour):</span></span>
 
 * <span data-ttu-id="28554-107">[JavaScript](https://www.javascript.com)yerine [C#](/dotnet/csharp/) kullanarak zengin etkileşimli uo 'lar oluşturun.</span><span class="sxs-lookup"><span data-stu-id="28554-107">Create rich interactive UIs using [C#](/dotnet/csharp/) instead of [JavaScript](https://www.javascript.com).</span></span>
 * <span data-ttu-id="28554-108">.NET ' te yazılmış sunucu tarafı ve istemci tarafı uygulama mantığını paylaşabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="28554-108">Share server-side and client-side app logic written in .NET.</span></span>
@@ -50,18 +50,18 @@ ms.locfileid: "93055718"
 
 ## <a name="components"></a><span data-ttu-id="28554-118">Bileşenler</span><span class="sxs-lookup"><span data-stu-id="28554-118">Components</span></span>
 
-<span data-ttu-id="28554-119">:::no-loc(Blazor)::: uygulamalar *bileşenleri* temel alır.</span><span class="sxs-lookup"><span data-stu-id="28554-119">:::no-loc(Blazor)::: apps are based on *components* .</span></span> <span data-ttu-id="28554-120">İçindeki bir bileşeni :::no-loc(Blazor)::: , bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.</span><span class="sxs-lookup"><span data-stu-id="28554-120">A component in :::no-loc(Blazor)::: is an element of UI, such as a page, dialog, or data entry form.</span></span>
+<span data-ttu-id="28554-119">Blazor uygulamalar *bileşenleri* temel alır.</span><span class="sxs-lookup"><span data-stu-id="28554-119">Blazor apps are based on *components* .</span></span> <span data-ttu-id="28554-120">İçindeki bir bileşeni Blazor , bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.</span><span class="sxs-lookup"><span data-stu-id="28554-120">A component in Blazor is an element of UI, such as a page, dialog, or data entry form.</span></span>
 
 <span data-ttu-id="28554-121">Bileşenler, [.NET derlemeleri](/dotnet/standard/assembly/) yerleşik olarak bulunan .NET C# sınıflarıdır:</span><span class="sxs-lookup"><span data-stu-id="28554-121">Components are .NET C# classes built into [.NET assemblies](/dotnet/standard/assembly/) that:</span></span>
 
 * <span data-ttu-id="28554-122">Esnek kullanıcı arabirimi işleme mantığını tanımlayın.</span><span class="sxs-lookup"><span data-stu-id="28554-122">Define flexible UI rendering logic.</span></span>
 * <span data-ttu-id="28554-123">Kullanıcı olaylarını işleyin.</span><span class="sxs-lookup"><span data-stu-id="28554-123">Handle user events.</span></span>
 * <span data-ttu-id="28554-124">İç içe ve yeniden kullanılabilir olabilir.</span><span class="sxs-lookup"><span data-stu-id="28554-124">Can be nested and reused.</span></span>
-* <span data-ttu-id="28554-125">, [ :::no-loc(Razor)::: Sınıf kitaplıkları](xref:razor-pages/ui-class) veya [NuGet paketleri](/nuget/what-is-nuget)olarak paylaşılabilir ve dağıtılabilir.</span><span class="sxs-lookup"><span data-stu-id="28554-125">Can be shared and distributed as [:::no-loc(Razor)::: class libraries](xref:razor-pages/ui-class) or [NuGet packages](/nuget/what-is-nuget).</span></span>
+* <span data-ttu-id="28554-125">, [ Razor Sınıf kitaplıkları](xref:razor-pages/ui-class) veya [NuGet paketleri](/nuget/what-is-nuget)olarak paylaşılabilir ve dağıtılabilir.</span><span class="sxs-lookup"><span data-stu-id="28554-125">Can be shared and distributed as [Razor class libraries](xref:razor-pages/ui-class) or [NuGet packages](/nuget/what-is-nuget).</span></span>
 
-<span data-ttu-id="28554-126">Bileşen sınıfı, genellikle [:::no-loc(Razor):::](xref:mvc/views/razor) bir dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır `.razor` .</span><span class="sxs-lookup"><span data-stu-id="28554-126">The component class is usually written in the form of a [:::no-loc(Razor):::](xref:mvc/views/razor) markup page with a `.razor` file extension.</span></span> <span data-ttu-id="28554-127">İçindeki bileşenler :::no-loc(Blazor)::: , resmi olarak *:::no-loc(Razor)::: bileşen* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="28554-127">Components in :::no-loc(Blazor)::: are formally referred to as *:::no-loc(Razor)::: components* .</span></span> <span data-ttu-id="28554-128">:::no-loc(Razor)::: , HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir.</span><span class="sxs-lookup"><span data-stu-id="28554-128">:::no-loc(Razor)::: is a syntax for combining HTML markup with C# code designed for developer productivity.</span></span> <span data-ttu-id="28554-129">:::no-loc(Razor)::: Visual Studio 'da [IntelliSense](/visualstudio/ide/using-intellisense) programlama desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar.</span><span class="sxs-lookup"><span data-stu-id="28554-129">:::no-loc(Razor)::: allows you to switch between HTML markup and C# in the same file with [IntelliSense](/visualstudio/ide/using-intellisense) programming support in Visual Studio.</span></span> <span data-ttu-id="28554-130">:::no-loc(Razor)::: Sayfalar ve MVC de kullanır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="28554-130">:::no-loc(Razor)::: Pages and MVC also use :::no-loc(Razor):::.</span></span> <span data-ttu-id="28554-131">:::no-loc(Razor):::Bir istek/yanıt modeli etrafında oluşturulan sayfaların ve MVC 'nin aksine, bileşenler özellikle istemci tarafı UI mantığı ve bileşimi için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="28554-131">Unlike :::no-loc(Razor)::: Pages and MVC, which are built around a request/response model, components are used specifically for client-side UI logic and composition.</span></span>
+<span data-ttu-id="28554-126">Bileşen sınıfı, genellikle [Razor](xref:mvc/views/razor) bir dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır `.razor` .</span><span class="sxs-lookup"><span data-stu-id="28554-126">The component class is usually written in the form of a [Razor](xref:mvc/views/razor) markup page with a `.razor` file extension.</span></span> <span data-ttu-id="28554-127">İçindeki bileşenler Blazor , resmi olarak *Razor bileşen* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="28554-127">Components in Blazor are formally referred to as *Razor components* .</span></span> <span data-ttu-id="28554-128">Razor , HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir.</span><span class="sxs-lookup"><span data-stu-id="28554-128">Razor is a syntax for combining HTML markup with C# code designed for developer productivity.</span></span> <span data-ttu-id="28554-129">Razor Visual Studio 'da [IntelliSense](/visualstudio/ide/using-intellisense) programlama desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar.</span><span class="sxs-lookup"><span data-stu-id="28554-129">Razor allows you to switch between HTML markup and C# in the same file with [IntelliSense](/visualstudio/ide/using-intellisense) programming support in Visual Studio.</span></span> <span data-ttu-id="28554-130">Razor Sayfalar ve MVC de kullanır Razor .</span><span class="sxs-lookup"><span data-stu-id="28554-130">Razor Pages and MVC also use Razor.</span></span> <span data-ttu-id="28554-131">RazorBir istek/yanıt modeli etrafında oluşturulan sayfaların ve MVC 'nin aksine, bileşenler özellikle istemci tarafı UI mantığı ve bileşimi için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="28554-131">Unlike Razor Pages and MVC, which are built around a request/response model, components are used specifically for client-side UI logic and composition.</span></span>
 
-<span data-ttu-id="28554-132">:::no-loc(Blazor)::: UI bileşimi için doğal HTML etiketleri kullanır.</span><span class="sxs-lookup"><span data-stu-id="28554-132">:::no-loc(Blazor)::: uses natural HTML tags for UI composition.</span></span> <span data-ttu-id="28554-133">Aşağıdaki :::no-loc(Razor)::: biçimlendirme `Dialog.razor` bir iletişim kutusu görüntüleyen ve Kullanıcı bir düğme seçtiğinde bir olayı işleyen bir bileşeni () gösterir:</span><span class="sxs-lookup"><span data-stu-id="28554-133">The following :::no-loc(Razor)::: markup demonstrates a component (`Dialog.razor`) that displays a dialog and processes an event when the user selects a button:</span></span>
+<span data-ttu-id="28554-132">Blazor UI bileşimi için doğal HTML etiketleri kullanır.</span><span class="sxs-lookup"><span data-stu-id="28554-132">Blazor uses natural HTML tags for UI composition.</span></span> <span data-ttu-id="28554-133">Aşağıdaki Razor biçimlendirme `Dialog.razor` bir iletişim kutusu görüntüleyen ve Kullanıcı bir düğme seçtiğinde bir olayı işleyen bir bileşeni () gösterir:</span><span class="sxs-lookup"><span data-stu-id="28554-133">The following Razor markup demonstrates a component (`Dialog.razor`) that displays a dialog and processes an event when the user selects a button:</span></span>
 
 ```razor
 <div class="card" style="width:22rem">
@@ -100,7 +100,7 @@ ms.locfileid: "93055718"
 </p>
 
 <Dialog Title="Learn More">
-    Do you want to <i>learn more</i> about :::no-loc(Blazor):::?
+    Do you want to <i>learn more</i> about Blazor?
 </Dialog>
 ```
 
@@ -110,9 +110,9 @@ ms.locfileid: "93055718"
 
 <span data-ttu-id="28554-146">Bileşenler, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleştirmek için kullanılan bir *işleme ağacı* adlı, tarayıcı [belge nesne modeli (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) ' ın bellek içi gösterimine işlenir.</span><span class="sxs-lookup"><span data-stu-id="28554-146">Components render into an in-memory representation of the browser's [Document Object Model (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) called a *render tree* , which is used to update the UI in a flexible and efficient way.</span></span>
 
-## :::no-loc(Blazor WebAssembly):::
+## Blazor WebAssembly
 
-<span data-ttu-id="28554-147">:::no-loc(Blazor WebAssembly)::: , .NET ile etkileşimli istemci tarafı Web uygulamaları oluşturmaya yönelik [tek sayfalı uygulama (Spa) çerçevesidir](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) .</span><span class="sxs-lookup"><span data-stu-id="28554-147">:::no-loc(Blazor WebAssembly)::: is a [single-page app (SPA) framework](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) for building interactive client-side web apps with .NET.</span></span> <span data-ttu-id="28554-148">:::no-loc(Blazor WebAssembly)::: , eklentiler olmadan açık Web standartları kullanır veya kodu diğer dillere yeniden derler.</span><span class="sxs-lookup"><span data-stu-id="28554-148">:::no-loc(Blazor WebAssembly)::: uses open web standards without plugins or recompiling code into other languages.</span></span> <span data-ttu-id="28554-149">:::no-loc(Blazor WebAssembly)::: mobil tarayıcılar dahil tüm modern web tarayıcılarında çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="28554-149">:::no-loc(Blazor WebAssembly)::: works in all modern web browsers, including mobile browsers.</span></span>
+<span data-ttu-id="28554-147">Blazor WebAssembly , .NET ile etkileşimli istemci tarafı Web uygulamaları oluşturmaya yönelik [tek sayfalı uygulama (Spa) çerçevesidir](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) .</span><span class="sxs-lookup"><span data-stu-id="28554-147">Blazor WebAssembly is a [single-page app (SPA) framework](/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps) for building interactive client-side web apps with .NET.</span></span> <span data-ttu-id="28554-148">Blazor WebAssembly , eklentiler olmadan açık Web standartları kullanır veya kodu diğer dillere yeniden derler.</span><span class="sxs-lookup"><span data-stu-id="28554-148">Blazor WebAssembly uses open web standards without plugins or recompiling code into other languages.</span></span> <span data-ttu-id="28554-149">Blazor WebAssembly mobil tarayıcılar dahil tüm modern web tarayıcılarında çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="28554-149">Blazor WebAssembly works in all modern web browsers, including mobile browsers.</span></span>
 
 <span data-ttu-id="28554-150">Web tarayıcıları içinde .NET kodu çalıştırmak, [Webassembly](https://webassembly.org) (kısaltılmış) tarafından mümkün hale getirilir `wasm` .</span><span class="sxs-lookup"><span data-stu-id="28554-150">Running .NET code inside web browsers is made possible by [WebAssembly](https://webassembly.org) (abbreviated `wasm`).</span></span> <span data-ttu-id="28554-151">WebAssembly hızlı indirme ve en yüksek yürütme hızı için iyileştirilmiş bir sıkıştırma kodu biçimidir.</span><span class="sxs-lookup"><span data-stu-id="28554-151">WebAssembly is a compact bytecode format optimized for fast download and maximum execution speed.</span></span> <span data-ttu-id="28554-152">WebAssembly, açık bir web standardıdır ve eklentileri olmayan Web tarayıcılarında desteklenir.</span><span class="sxs-lookup"><span data-stu-id="28554-152">WebAssembly is an open web standard and supported in web browsers without plugins.</span></span>
 
@@ -120,13 +120,13 @@ ms.locfileid: "93055718"
 
 ![::: No-Loc (Blazor WebAssembly)::: .NET kodunu WebAssembly ile tarayıcıda çalıştırır.](index/_static/blazor-webassembly.png)
 
-<span data-ttu-id="28554-156">Bir :::no-loc(Blazor WebAssembly)::: uygulama bir tarayıcıda oluşturulup çalıştırıldığında:</span><span class="sxs-lookup"><span data-stu-id="28554-156">When a :::no-loc(Blazor WebAssembly)::: app is built and run in a browser:</span></span>
+<span data-ttu-id="28554-156">Bir Blazor WebAssembly uygulama bir tarayıcıda oluşturulup çalıştırıldığında:</span><span class="sxs-lookup"><span data-stu-id="28554-156">When a Blazor WebAssembly app is built and run in a browser:</span></span>
 
-* <span data-ttu-id="28554-157">C# kod dosyaları ve :::no-loc(Razor)::: dosyaları .net Derlemeleriyle derlenir.</span><span class="sxs-lookup"><span data-stu-id="28554-157">C# code files and :::no-loc(Razor)::: files are compiled into .NET assemblies.</span></span>
+* <span data-ttu-id="28554-157">C# kod dosyaları ve Razor dosyaları .net Derlemeleriyle derlenir.</span><span class="sxs-lookup"><span data-stu-id="28554-157">C# code files and Razor files are compiled into .NET assemblies.</span></span>
 * <span data-ttu-id="28554-158">Derlemeler ve [.NET çalışma zamanı](/dotnet/framework/get-started/overview) tarayıcıya indirilir.</span><span class="sxs-lookup"><span data-stu-id="28554-158">The assemblies and the [.NET runtime](/dotnet/framework/get-started/overview) are downloaded to the browser.</span></span>
-* <span data-ttu-id="28554-159">:::no-loc(Blazor WebAssembly)::: .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır.</span><span class="sxs-lookup"><span data-stu-id="28554-159">:::no-loc(Blazor WebAssembly)::: bootstraps the .NET runtime and configures the runtime to load the assemblies for the app.</span></span> <span data-ttu-id="28554-160">:::no-loc(Blazor WebAssembly):::Çalışma zamanı, DOM işleme ve tarayıcı API çağrılarını işlemek Için JavaScript birlikte çalışabilirliği kullanır.</span><span class="sxs-lookup"><span data-stu-id="28554-160">The :::no-loc(Blazor WebAssembly)::: runtime uses JavaScript interop to handle DOM manipulation and browser API calls.</span></span>
+* <span data-ttu-id="28554-159">Blazor WebAssembly .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır.</span><span class="sxs-lookup"><span data-stu-id="28554-159">Blazor WebAssembly bootstraps the .NET runtime and configures the runtime to load the assemblies for the app.</span></span> <span data-ttu-id="28554-160">Blazor WebAssemblyÇalışma zamanı, DOM işleme ve tarayıcı API çağrılarını işlemek Için JavaScript birlikte çalışabilirliği kullanır.</span><span class="sxs-lookup"><span data-stu-id="28554-160">The Blazor WebAssembly runtime uses JavaScript interop to handle DOM manipulation and browser API calls.</span></span>
 
-<span data-ttu-id="28554-161">Yayınlanan uygulamanın boyutu, *Yük boyutu* , uygulamanın useyeteneğinin önemli bir performans etkendir.</span><span class="sxs-lookup"><span data-stu-id="28554-161">The size of the published app, its *payload size* , is a critical performance factor for an app's useability.</span></span> <span data-ttu-id="28554-162">Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek.</span><span class="sxs-lookup"><span data-stu-id="28554-162">A large app takes a relatively long time to download to a browser, which diminishes the user experience.</span></span> <span data-ttu-id="28554-163">:::no-loc(Blazor WebAssembly)::: yükleme sürelerini azaltmak için yük boyutunu iyileştirir:</span><span class="sxs-lookup"><span data-stu-id="28554-163">:::no-loc(Blazor WebAssembly)::: optimizes payload size to reduce download times:</span></span>
+<span data-ttu-id="28554-161">Yayınlanan uygulamanın boyutu, *Yük boyutu* , uygulamanın useyeteneğinin önemli bir performans etkendir.</span><span class="sxs-lookup"><span data-stu-id="28554-161">The size of the published app, its *payload size* , is a critical performance factor for an app's useability.</span></span> <span data-ttu-id="28554-162">Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek.</span><span class="sxs-lookup"><span data-stu-id="28554-162">A large app takes a relatively long time to download to a browser, which diminishes the user experience.</span></span> <span data-ttu-id="28554-163">Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:</span><span class="sxs-lookup"><span data-stu-id="28554-163">Blazor WebAssembly optimizes payload size to reduce download times:</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -144,16 +144,16 @@ ms.locfileid: "93055718"
 
 ::: moniker-end
 
-## :::no-loc(Blazor Server):::
+## Blazor Server
 
-<span data-ttu-id="28554-170">:::no-loc(Blazor)::: Kullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır.</span><span class="sxs-lookup"><span data-stu-id="28554-170">:::no-loc(Blazor)::: decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="28554-171">*:::no-loc(Blazor Server):::* ASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="28554-171">*:::no-loc(Blazor Server):::* provides support for hosting :::no-loc(Razor)::: components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="28554-172">Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir [:::no-loc(SignalR):::](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="28554-172">UI updates are handled over a [:::no-loc(SignalR):::](xref:signalr/introduction) connection.</span></span>
+<span data-ttu-id="28554-170">Blazor Kullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır.</span><span class="sxs-lookup"><span data-stu-id="28554-170">Blazor decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="28554-171">*Blazor Server* ASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor .</span><span class="sxs-lookup"><span data-stu-id="28554-171">*Blazor Server* provides support for hosting Razor components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="28554-172">Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="28554-172">UI updates are handled over a [SignalR](xref:signalr/introduction) connection.</span></span>
 
 <span data-ttu-id="28554-173">Çalışma zamanı tutamaçları:</span><span class="sxs-lookup"><span data-stu-id="28554-173">The runtime handles:</span></span>
 
 * <span data-ttu-id="28554-174">Tarayıcıdan sunucusuna kullanıcı arabirimi olayları gönderiliyor.</span><span class="sxs-lookup"><span data-stu-id="28554-174">Sending UI events from the browser to the server.</span></span>
 * <span data-ttu-id="28554-175">Sunucu tarafından geri gönderilen işlenen bileşene Kullanıcı Arabirimi güncelleştirmeleri uygulanıyor.</span><span class="sxs-lookup"><span data-stu-id="28554-175">Applying UI updates to the rendered component that are sent back by the server.</span></span>
 
-<span data-ttu-id="28554-176">:::no-loc(Blazor Server):::Tarayıcıyla iletişim kurmak için tarafından kullanılan bağlantı, JavaScript birlikte çalışma çağrılarını işlemek için de kullanılır.</span><span class="sxs-lookup"><span data-stu-id="28554-176">The connection used by :::no-loc(Blazor Server)::: to communicate with the browser is also used to handle JavaScript interop calls.</span></span>
+<span data-ttu-id="28554-176">Blazor ServerTarayıcıyla iletişim kurmak için tarafından kullanılan bağlantı, JavaScript birlikte çalışma çağrılarını işlemek için de kullanılır.</span><span class="sxs-lookup"><span data-stu-id="28554-176">The connection used by Blazor Server to communicate with the browser is also used to handle JavaScript interop calls.</span></span>
 
 ![::: No-Loc (Blazor Server)::: sunucuda .NET kodu çalıştırır ve şu şekilde istemcisinde Belge Nesne Modeli:: No-Loc (SignalR)::: Connection](index/_static/blazor-server.png)
 
@@ -163,7 +163,7 @@ ms.locfileid: "93055718"
 
 ## <a name="code-sharing-and-net-standard"></a><span data-ttu-id="28554-182">Kod paylaşımı ve .NET Standard</span><span class="sxs-lookup"><span data-stu-id="28554-182">Code sharing and .NET Standard</span></span>
 
-<span data-ttu-id="28554-183">:::no-loc(Blazor):::[.NET Standard](/dotnet/standard/net-standard) :::no-loc(Blazor)::: projelerin .NET Standard belirtimlerine uygun kitaplıklara başvurmalarını sağlayan .NET Standard uygular.</span><span class="sxs-lookup"><span data-stu-id="28554-183">:::no-loc(Blazor)::: implements the [.NET Standard](/dotnet/standard/net-standard), which enables :::no-loc(Blazor)::: projects to reference libraries that conform to .NET Standard specifications.</span></span> <span data-ttu-id="28554-184">.NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir.</span><span class="sxs-lookup"><span data-stu-id="28554-184">.NET Standard is a formal specification of .NET APIs that are common across .NET implementations.</span></span> <span data-ttu-id="28554-185">.NET Standard sınıf kitaplıkları :::no-loc(Blazor)::: , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="28554-185">.NET Standard class libraries can be shared across different .NET platforms, such as :::no-loc(Blazor):::, .NET Framework, .NET Core, Xamarin, Mono, and Unity.</span></span>
+<span data-ttu-id="28554-183">Blazor[.NET Standard](/dotnet/standard/net-standard) Blazor projelerin .NET Standard belirtimlerine uygun kitaplıklara başvurmalarını sağlayan .NET Standard uygular.</span><span class="sxs-lookup"><span data-stu-id="28554-183">Blazor implements the [.NET Standard](/dotnet/standard/net-standard), which enables Blazor projects to reference libraries that conform to .NET Standard specifications.</span></span> <span data-ttu-id="28554-184">.NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir.</span><span class="sxs-lookup"><span data-stu-id="28554-184">.NET Standard is a formal specification of .NET APIs that are common across .NET implementations.</span></span> <span data-ttu-id="28554-185">.NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="28554-185">.NET Standard class libraries can be shared across different .NET platforms, such as Blazor, .NET Framework, .NET Core, Xamarin, Mono, and Unity.</span></span>
 
 <span data-ttu-id="28554-186">Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistemine erişmek, bir yuva açmak ve iş parçacığı açmak) bir oluşturur <xref:System.PlatformNotSupportedException> .</span><span class="sxs-lookup"><span data-stu-id="28554-186">APIs that aren't applicable inside of a web browser (for example, accessing the file system, opening a socket, and threading) throw a <xref:System.PlatformNotSupportedException>.</span></span>
 
@@ -177,4 +177,4 @@ ms.locfileid: "93055718"
 * [<span data-ttu-id="28554-189">C# Kılavuzu</span><span class="sxs-lookup"><span data-stu-id="28554-189">C# Guide</span></span>](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [<span data-ttu-id="28554-190">HTML</span><span class="sxs-lookup"><span data-stu-id="28554-190">HTML</span></span>](https://www.w3.org/html/)
-* <span data-ttu-id="28554-191">[Başar :::no-loc(Blazor)::: ](https://github.com/AdrienTorris/awesome-blazor) Topluluk bağlantıları</span><span class="sxs-lookup"><span data-stu-id="28554-191">[Awesome :::no-loc(Blazor):::](https://github.com/AdrienTorris/awesome-blazor) community links</span></span>
+* <span data-ttu-id="28554-191">[Başar Blazor ](https://github.com/AdrienTorris/awesome-blazor) Topluluk bağlantıları</span><span class="sxs-lookup"><span data-stu-id="28554-191">[Awesome Blazor](https://github.com/AdrienTorris/awesome-blazor) community links</span></span>

@@ -1,5 +1,5 @@
 ---
-title: "ASP.NET Core 'da akış kullanma :::no-loc(SignalR):::"
+title: "ASP.NET Core 'da akış kullanma SignalR"
 author: bradygaster
 description: İstemci ve sunucu arasında veri akışını öğrenin.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,17 +7,17 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 10/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/streaming
 ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
 ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
@@ -26,19 +26,19 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93062447"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="fc4cd-103">ASP.NET Core 'da akış kullanma :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="fc4cd-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="fc4cd-103">ASP.NET Core 'da akış kullanma SignalR</span><span class="sxs-lookup"><span data-stu-id="fc4cd-103">Use streaming in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="fc4cd-104">[Brennan Conroy](https://github.com/BrennanConroy) tarafından</span><span class="sxs-lookup"><span data-stu-id="fc4cd-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="fc4cd-105">ASP.NET Core :::no-loc(SignalR)::: , istemciden sunucuya ve sunucudan istemciye akışı destekler.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="fc4cd-106">Bu, veri parçalarının zaman içinde nereden ulaştığını senaryolar için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fc4cd-107">Akış sırasında her parça, tüm verilerin kullanılabilir hale gelmesini beklemek yerine istemciye veya sunucuya gönderilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="fc4cd-105">ASP.NET Core SignalR , istemciden sunucuya ve sunucudan istemciye akışı destekler.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="fc4cd-106">Bu, veri parçalarının zaman içinde nereden ulaştığını senaryolar için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fc4cd-107">Akış sırasında her parça, tüm verilerin kullanılabilir hale gelmesini beklemek yerine istemciye veya sunucuya gönderilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="fc4cd-108">ASP.NET Core :::no-loc(SignalR)::: , sunucu yöntemlerinin akış dönüş değerlerini destekler.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="fc4cd-109">Bu, veri parçalarının zaman içinde nereden ulaştığını senaryolar için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fc4cd-110">Bir dönüş değeri istemciye akışa eklendiğinde, her parça, tüm verilerin kullanılabilir hale gelmesini beklemek yerine istemciye gönderilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="fc4cd-108">ASP.NET Core SignalR , sunucu yöntemlerinin akış dönüş değerlerini destekler.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="fc4cd-109">Bu, veri parçalarının zaman içinde nereden ulaştığını senaryolar için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="fc4cd-110">Bir dönüş değeri istemciye akışa eklendiğinde, her parça, tüm verilerin kullanılabilir hale gelmesini beklemek yerine istemciye gönderilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
@@ -305,7 +305,7 @@ channel.Writer.Complete();
 
 ### <a name="server-to-client-streaming"></a><span data-ttu-id="fc4cd-177">Sunucudan istemciye akış</span><span class="sxs-lookup"><span data-stu-id="fc4cd-177">Server-to-client streaming</span></span>
 
-<span data-ttu-id="fc4cd-178">:::no-loc(SignalR):::Java istemcisi, `stream` akış yöntemlerini çağırmak için yöntemini kullanır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="fc4cd-179">`stream` üç veya daha fazla bağımsız değişken kabul eder:</span><span class="sxs-lookup"><span data-stu-id="fc4cd-179">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="fc4cd-178">SignalRJava istemcisi, `stream` akış yöntemlerini çağırmak için yöntemini kullanır.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-178">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="fc4cd-179">`stream` üç veya daha fazla bağımsız değişken kabul eder:</span><span class="sxs-lookup"><span data-stu-id="fc4cd-179">`stream` accepts three or more arguments:</span></span>
 
 * <span data-ttu-id="fc4cd-180">Akış öğelerinin beklenen türü.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-180">The expected type of the stream items.</span></span>
 * <span data-ttu-id="fc4cd-181">Hub yönteminin adı.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-181">The name of the hub method.</span></span>
@@ -323,7 +323,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ### <a name="client-to-server-streaming"></a><span data-ttu-id="fc4cd-185">İstemciden sunucuya akış</span><span class="sxs-lookup"><span data-stu-id="fc4cd-185">Client-to-server streaming</span></span>
 
-<span data-ttu-id="fc4cd-186">:::no-loc(SignalR):::Java istemcisi [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) `send` , `invoke` `stream` çağrılan hub yöntemine bağlı olarak, bir observable 'ı bir bağımsız değişken olarak, veya olarak geçirerek hub 'larda istemciden sunucuya akış yöntemlerini çağırabilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-186">The :::no-loc(SignalR)::: Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="fc4cd-186">SignalRJava istemcisi [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) `send` , `invoke` `stream` çağrılan hub yöntemine bağlı olarak, bir observable 'ı bir bağımsız değişken olarak, veya olarak geçirerek hub 'larda istemciden sunucuya akış yöntemlerini çağırabilir.</span><span class="sxs-lookup"><span data-stu-id="fc4cd-186">The SignalR Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
 
 ```java
 ReplaySubject<String> stream = ReplaySubject.create();

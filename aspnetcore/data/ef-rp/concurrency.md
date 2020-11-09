@@ -1,22 +1,22 @@
 ---
-title: '8. bölüm, :::no-loc(Razor)::: ASP.NET Core EF Core olan sayfalar-eşzamanlılık'
+title: '8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık'
 author: rick-anderson
-description: :::no-loc(Razor):::Sayfaların 8. bölümü ve Entity Framework öğretici serisi.
+description: RazorSayfaların 8. bölümü ve Entity Framework öğretici serisi.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/concurrency
 ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054001"
 ---
-# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a><span data-ttu-id="9da17-103">8. bölüm, :::no-loc(Razor)::: ASP.NET Core EF Core olan sayfalar-eşzamanlılık</span><span class="sxs-lookup"><span data-stu-id="9da17-103">Part 8, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Concurrency</span></span>
+# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a><span data-ttu-id="9da17-103">8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık</span><span class="sxs-lookup"><span data-stu-id="9da17-103">Part 8, Razor Pages with EF Core in ASP.NET Core - Concurrency</span></span>
 
 <span data-ttu-id="9da17-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra)ve [Jon P Smith](https://twitter.com/thereformedprog)</span><span class="sxs-lookup"><span data-stu-id="9da17-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra), and [Jon P Smith](https://twitter.com/thereformedprog)</span></span>
 
@@ -268,7 +268,7 @@ modelBuilder.Entity<Department>()
 
 <span data-ttu-id="9da17-244">Vurgulanan kodda:</span><span class="sxs-lookup"><span data-stu-id="9da17-244">In the preceding highlighted code:</span></span>
 
-* <span data-ttu-id="9da17-245">İçindeki değeri, `Department.RowVersion` ilk olarak düzenleme sayfasına yönelik GET isteğine getirilen varlıkta olduğu şeydir.</span><span class="sxs-lookup"><span data-stu-id="9da17-245">The value in `Department.RowVersion` is what was in the entity when it was originally fetched in the Get request for the Edit page.</span></span> <span data-ttu-id="9da17-246">Değer, `OnPost` :::no-loc(Razor)::: düzenlenecek varlığı görüntüleyen sayfadaki bir gizli alanla yöntemine sağlanır.</span><span class="sxs-lookup"><span data-stu-id="9da17-246">The value is provided to the `OnPost` method by a hidden field in the :::no-loc(Razor)::: page that displays the entity to be edited.</span></span> <span data-ttu-id="9da17-247">Gizli alan değeri `Department.RowVersion` model cildi tarafından öğesine kopyalanır.</span><span class="sxs-lookup"><span data-stu-id="9da17-247">The hidden field value is copied to `Department.RowVersion` by the model binder.</span></span>
+* <span data-ttu-id="9da17-245">İçindeki değeri, `Department.RowVersion` ilk olarak düzenleme sayfasına yönelik GET isteğine getirilen varlıkta olduğu şeydir.</span><span class="sxs-lookup"><span data-stu-id="9da17-245">The value in `Department.RowVersion` is what was in the entity when it was originally fetched in the Get request for the Edit page.</span></span> <span data-ttu-id="9da17-246">Değer, `OnPost` Razor düzenlenecek varlığı görüntüleyen sayfadaki bir gizli alanla yöntemine sağlanır.</span><span class="sxs-lookup"><span data-stu-id="9da17-246">The value is provided to the `OnPost` method by a hidden field in the Razor page that displays the entity to be edited.</span></span> <span data-ttu-id="9da17-247">Gizli alan değeri `Department.RowVersion` model cildi tarafından öğesine kopyalanır.</span><span class="sxs-lookup"><span data-stu-id="9da17-247">The hidden field value is copied to `Department.RowVersion` by the model binder.</span></span>
 * <span data-ttu-id="9da17-248">`OriginalValue` WHERE yan tümcesinde EF Core kullanılacak şeydir.</span><span class="sxs-lookup"><span data-stu-id="9da17-248">`OriginalValue` is what EF Core will use in the Where clause.</span></span> <span data-ttu-id="9da17-249">Vurgulanan kod satırından önce, `OriginalValue` Bu yöntemde çağrıldığında veritabanında bulunan değeri, `FirstOrDefaultAsync` düzenleme sayfasında görüntülendiklerden farklı olabilir.</span><span class="sxs-lookup"><span data-stu-id="9da17-249">Before the highlighted line of code executes, `OriginalValue` has the value that was in the database when `FirstOrDefaultAsync` was called in this method, which might be different from what was displayed on the Edit page.</span></span>
 * <span data-ttu-id="9da17-250">Vurgulanan kod, EF Core `RowVersion` `Department` SQL Update ifadesinin WHERE yan tümcesinde görüntülenen varlıktaki özgün değeri kullandığından emin olur.</span><span class="sxs-lookup"><span data-stu-id="9da17-250">The highlighted code makes sure that EF Core uses the original `RowVersion` value from the displayed `Department` entity in the SQL UPDATE statement's Where clause.</span></span>
 
@@ -284,7 +284,7 @@ modelBuilder.Entity<Department>()
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-<span data-ttu-id="9da17-255">`ModelState.Remove`Eski değere sahip olduğundan deyimin olması gerekir `ModelState` `RowVersion` .</span><span class="sxs-lookup"><span data-stu-id="9da17-255">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="9da17-256">:::no-loc(Razor):::Sayfada, `ModelState` bir alanın değeri, her ikisi de varsa Model Özellik değerlerinden önceliklidir.</span><span class="sxs-lookup"><span data-stu-id="9da17-256">In the :::no-loc(Razor)::: Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
+<span data-ttu-id="9da17-255">`ModelState.Remove`Eski değere sahip olduğundan deyimin olması gerekir `ModelState` `RowVersion` .</span><span class="sxs-lookup"><span data-stu-id="9da17-255">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="9da17-256">RazorSayfada, `ModelState` bir alanın değeri, her ikisi de varsa Model Özellik değerlerinden önceliklidir.</span><span class="sxs-lookup"><span data-stu-id="9da17-256">In the Razor Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
 
 ### <a name="update-the-edit-page"></a><span data-ttu-id="9da17-257">Düzenleme sayfasını Güncelleştir</span><span class="sxs-lookup"><span data-stu-id="9da17-257">Update the Edit page</span></span>
 
@@ -580,7 +580,7 @@ dotnet ef database update
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-<span data-ttu-id="9da17-443">`ModelState.Remove`Eski değere sahip olduğundan deyimin olması gerekir `ModelState` `RowVersion` .</span><span class="sxs-lookup"><span data-stu-id="9da17-443">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="9da17-444">:::no-loc(Razor):::Sayfada, `ModelState` bir alanın değeri, her ikisi de varsa Model Özellik değerlerinden önceliklidir.</span><span class="sxs-lookup"><span data-stu-id="9da17-444">In the :::no-loc(Razor)::: Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
+<span data-ttu-id="9da17-443">`ModelState.Remove`Eski değere sahip olduğundan deyimin olması gerekir `ModelState` `RowVersion` .</span><span class="sxs-lookup"><span data-stu-id="9da17-443">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="9da17-444">RazorSayfada, `ModelState` bir alanın değeri, her ikisi de varsa Model Özellik değerlerinden önceliklidir.</span><span class="sxs-lookup"><span data-stu-id="9da17-444">In the Razor Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
 
 ## <a name="update-the-edit-page"></a><span data-ttu-id="9da17-445">Düzenleme sayfasını Güncelleştir</span><span class="sxs-lookup"><span data-stu-id="9da17-445">Update the Edit page</span></span>
 

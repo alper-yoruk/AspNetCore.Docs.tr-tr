@@ -1,25 +1,25 @@
 ---
 title: 7. bölüm, yeni bir alan ekleyin
 author: rick-anderson
-description: 'Sayfalardaki eğitim serisinin Bölüm 7 :::no-loc(Razor)::: .'
+description: 'Sayfalardaki eğitim serisinin Bölüm 7 Razor .'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: 2dca5a9552dd2800212f8cd78ace0578b3d38cdb
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -28,13 +28,13 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 11/07/2020
 ms.locfileid: "94360885"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="df541-103">Bölüm 7, ASP.NET Core bir sayfaya yeni bir alan ekleyin :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="df541-103">Part 7, add a new field to a :::no-loc(Razor)::: Page in ASP.NET Core</span></span>
+# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="df541-103">Bölüm 7, ASP.NET Core bir sayfaya yeni bir alan ekleyin Razor</span><span class="sxs-lookup"><span data-stu-id="df541-103">Part 7, add a new field to a Razor Page in ASP.NET Core</span></span>
 
 <span data-ttu-id="df541-104">Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="df541-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="df541-105">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="df541-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="df541-105">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="df541-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="df541-106">Bu bölümde [Entity Framework](/ef/core/get-started/aspnetcore/new-db) için Code First Migrations kullanılır:</span><span class="sxs-lookup"><span data-stu-id="df541-106">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
@@ -52,19 +52,19 @@ ms.locfileid: "94360885"
 
 1. <span data-ttu-id="df541-114">*Modeller/film. cs* dosyasını açın ve bir özellik ekleyin `Rating` :</span><span class="sxs-lookup"><span data-stu-id="df541-114">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-   [!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+   [!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 1. <span data-ttu-id="df541-115">Uygulamayı oluşturun.</span><span class="sxs-lookup"><span data-stu-id="df541-115">Build the app.</span></span>
 
-1. <span data-ttu-id="df541-116">*Sayfaları/filmleri/ :::no-loc(Index)::: . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-116">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+1. <span data-ttu-id="df541-116">*Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-116">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
    <a name="addrat"></a>
 
-   [!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/SnapShots/:::no-loc(Index):::Rating.cshtml?highlight=40-42,62-64)]
+   [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie50/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. <span data-ttu-id="df541-117">Aşağıdaki sayfaları güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-117">Update the following pages:</span></span>
-   1. <span data-ttu-id="df541-118">`Rating`Alanını :::no-loc(Delete)::: ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-118">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-   1. <span data-ttu-id="df541-119">[ :::no-loc(Create)::: . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Pages/Movies/:::no-loc(Create):::.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-119">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+   1. <span data-ttu-id="df541-118">`Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-118">Add the `Rating` field to the Delete and Details pages.</span></span>
+   1. <span data-ttu-id="df541-119">[ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-119">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
    1. <span data-ttu-id="df541-120">`Rating`Alanı düzenleme sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-120">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="df541-121">Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="df541-121">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="df541-122">Uygulamayı veritabanına güncelleştirme olmadan çalıştırmak şunu oluşturur `SqlException` :</span><span class="sxs-lookup"><span data-stu-id="df541-122">Running the app without an update to the database throws a `SqlException`:</span></span>
@@ -85,9 +85,9 @@ ms.locfileid: "94360885"
 
 <span data-ttu-id="df541-136">`SeedData`Sınıfını yeni sütun için bir değer sağlayacak şekilde güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-136">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="df541-137">Aşağıda örnek bir değişiklik gösterilmektedir, ancak her bir blok için bu değişikliği yapın `new Movie` .</span><span class="sxs-lookup"><span data-stu-id="df541-137">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="df541-138">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-138">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="df541-138">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-138">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="df541-139">Çözümü derleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-139">Build the solution.</span></span>
 
@@ -108,7 +108,7 @@ ms.locfileid: "94360885"
 <span data-ttu-id="df541-144">`Add-Migration`Komut, çerçeveye şunları belirtir:</span><span class="sxs-lookup"><span data-stu-id="df541-144">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="df541-145">`Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.</span><span class="sxs-lookup"><span data-stu-id="df541-145">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="df541-146">:::no-loc(Create)::: Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-146">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="df541-146">Create Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-146">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="df541-147">"Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df541-147">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="df541-148">Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.</span><span class="sxs-lookup"><span data-stu-id="df541-148">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -121,7 +121,7 @@ ms.locfileid: "94360885"
 <span data-ttu-id="df541-152">Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır.</span><span class="sxs-lookup"><span data-stu-id="df541-152">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="df541-153">SSOX 'te veritabanını silmek için:</span><span class="sxs-lookup"><span data-stu-id="df541-153">To delete the database in SSOX:</span></span>
 
 1. <span data-ttu-id="df541-154">SSOX 'te veritabanını seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-154">Select the database in SSOX.</span></span>
-1. <span data-ttu-id="df541-155">Veritabanına sağ tıklayın ve öğesini seçin **:::no-loc(Delete):::** .</span><span class="sxs-lookup"><span data-stu-id="df541-155">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+1. <span data-ttu-id="df541-155">Veritabanına sağ tıklayın ve öğesini seçin **Delete** .</span><span class="sxs-lookup"><span data-stu-id="df541-155">Right-click on the database, and select **Delete**.</span></span>
 1. <span data-ttu-id="df541-156">**Mevcut bağlantıları kapat** ' a bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-156">Check **Close existing connections**.</span></span>
 1. <span data-ttu-id="df541-157">**Tamam** ’ı seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-157">Select **OK**.</span></span>
 1. <span data-ttu-id="df541-158">[PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-158">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -151,13 +151,13 @@ ms.locfileid: "94360885"
 > * [<span data-ttu-id="df541-177">Veri çekirdeği oluşturma</span><span class="sxs-lookup"><span data-stu-id="df541-177">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * [<span data-ttu-id="df541-178">SQLite ALTER TABLE ifadesi</span><span class="sxs-lookup"><span data-stu-id="df541-178">SQLite ALTER TABLE statement</span></span>](https://sqlite.org/lang_altertable.html)
 
-1. <span data-ttu-id="df541-179">:::no-loc(Delete)::: Geçiş klasörü.</span><span class="sxs-lookup"><span data-stu-id="df541-179">:::no-loc(Delete)::: the migration folder.</span></span>  
+1. <span data-ttu-id="df541-179">Delete Geçiş klasörü.</span><span class="sxs-lookup"><span data-stu-id="df541-179">Delete the migration folder.</span></span>  
 
 1. <span data-ttu-id="df541-180">Veritabanını yeniden oluşturmak için aşağıdaki komutları kullanın.</span><span class="sxs-lookup"><span data-stu-id="df541-180">Use the following commands to recreate the database.</span></span>
 
    ```dotnetcli
    dotnet ef database drop
-   dotnet ef migrations add Initial:::no-loc(Create):::
+   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 
@@ -176,7 +176,7 @@ ms.locfileid: "94360885"
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-<span data-ttu-id="df541-185">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="df541-185">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="df541-185">[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([nasıl indirilir](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="df541-185">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="df541-186">Bu bölümde [Entity Framework](/ef/core/get-started/aspnetcore/new-db) için Code First Migrations kullanılır:</span><span class="sxs-lookup"><span data-stu-id="df541-186">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
@@ -194,19 +194,19 @@ ms.locfileid: "94360885"
 
 1. <span data-ttu-id="df541-194">*Modeller/film. cs* dosyasını açın ve bir özellik ekleyin `Rating` :</span><span class="sxs-lookup"><span data-stu-id="df541-194">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-   [!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+   [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 1. <span data-ttu-id="df541-195">Uygulamayı oluşturun.</span><span class="sxs-lookup"><span data-stu-id="df541-195">Build the app.</span></span>
 
-1. <span data-ttu-id="df541-196">*Sayfaları/filmleri/ :::no-loc(Index)::: . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-196">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+1. <span data-ttu-id="df541-196">*Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-196">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
    <a name="addrat"></a>
 
-   [!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/SnapShots/:::no-loc(Index):::Rating.cshtml?highlight=40-42,62-64)]
+   [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. <span data-ttu-id="df541-197">Aşağıdaki sayfaları güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-197">Update the following pages:</span></span>
-   1. <span data-ttu-id="df541-198">`Rating`Alanını :::no-loc(Delete)::: ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-198">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-   1. <span data-ttu-id="df541-199">[ :::no-loc(Create)::: . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/:::no-loc(Create):::.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-199">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+   1. <span data-ttu-id="df541-198">`Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-198">Add the `Rating` field to the Delete and Details pages.</span></span>
+   1. <span data-ttu-id="df541-199">[ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-199">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
    1. <span data-ttu-id="df541-200">`Rating`Alanı düzenleme sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-200">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="df541-201">Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="df541-201">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="df541-202">Uygulamayı veritabanına güncelleştirme olmadan çalıştırmak şunu oluşturur `SqlException` :</span><span class="sxs-lookup"><span data-stu-id="df541-202">Running the app without an update to the database throws a `SqlException`:</span></span>
@@ -227,9 +227,9 @@ ms.locfileid: "94360885"
 
 <span data-ttu-id="df541-216">`SeedData`Sınıfını yeni sütun için bir değer sağlayacak şekilde güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-216">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="df541-217">Aşağıda örnek bir değişiklik gösterilmektedir, ancak her bir blok için bu değişikliği yapın `new Movie` .</span><span class="sxs-lookup"><span data-stu-id="df541-217">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="df541-218">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-218">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="df541-218">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-218">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="df541-219">Çözümü derleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-219">Build the solution.</span></span>
 
@@ -250,7 +250,7 @@ ms.locfileid: "94360885"
 <span data-ttu-id="df541-224">`Add-Migration`Komut, çerçeveye şunları belirtir:</span><span class="sxs-lookup"><span data-stu-id="df541-224">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="df541-225">`Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.</span><span class="sxs-lookup"><span data-stu-id="df541-225">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="df541-226">:::no-loc(Create)::: Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-226">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="df541-226">Create Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-226">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="df541-227">"Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df541-227">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="df541-228">Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.</span><span class="sxs-lookup"><span data-stu-id="df541-228">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -263,7 +263,7 @@ ms.locfileid: "94360885"
 <span data-ttu-id="df541-232">Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır.</span><span class="sxs-lookup"><span data-stu-id="df541-232">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="df541-233">SSOX 'te veritabanını silmek için:</span><span class="sxs-lookup"><span data-stu-id="df541-233">To delete the database in SSOX:</span></span>
 
 * <span data-ttu-id="df541-234">SSOX 'te veritabanını seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-234">Select the database in SSOX.</span></span>
-* <span data-ttu-id="df541-235">Veritabanına sağ tıklayın ve öğesini seçin **:::no-loc(Delete):::** .</span><span class="sxs-lookup"><span data-stu-id="df541-235">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+* <span data-ttu-id="df541-235">Veritabanına sağ tıklayın ve öğesini seçin **Delete** .</span><span class="sxs-lookup"><span data-stu-id="df541-235">Right-click on the database, and select **Delete**.</span></span>
 * <span data-ttu-id="df541-236">**Mevcut bağlantıları kapat** ' a bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-236">Check **Close existing connections**.</span></span>
 * <span data-ttu-id="df541-237">**Tamam** ’ı seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-237">Select **OK**.</span></span>
 * <span data-ttu-id="df541-238">[PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-238">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -293,13 +293,13 @@ ms.locfileid: "94360885"
 > * [<span data-ttu-id="df541-257">Veri çekirdeği oluşturma</span><span class="sxs-lookup"><span data-stu-id="df541-257">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * [<span data-ttu-id="df541-258">SQLite ALTER TABLE ifadesi</span><span class="sxs-lookup"><span data-stu-id="df541-258">SQLite ALTER TABLE statement</span></span>](https://sqlite.org/lang_altertable.html)
 
-1. <span data-ttu-id="df541-259">:::no-loc(Delete)::: Geçiş klasörü.</span><span class="sxs-lookup"><span data-stu-id="df541-259">:::no-loc(Delete)::: the migration folder.</span></span>  
+1. <span data-ttu-id="df541-259">Delete Geçiş klasörü.</span><span class="sxs-lookup"><span data-stu-id="df541-259">Delete the migration folder.</span></span>  
 
 1. <span data-ttu-id="df541-260">Veritabanını yeniden oluşturmak için aşağıdaki komutları kullanın.</span><span class="sxs-lookup"><span data-stu-id="df541-260">Use the following commands to recreate the database.</span></span>
 
    ```dotnetcli
    dotnet ef database drop
-   dotnet ef migrations add Initial:::no-loc(Create):::
+   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 
@@ -336,18 +336,18 @@ ms.locfileid: "94360885"
 
 <span data-ttu-id="df541-274">*Modeller/film. cs* dosyasını açın ve bir özellik ekleyin `Rating` :</span><span class="sxs-lookup"><span data-stu-id="df541-274">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 <span data-ttu-id="df541-275">Uygulamayı oluşturun.</span><span class="sxs-lookup"><span data-stu-id="df541-275">Build the app.</span></span>
 
-<span data-ttu-id="df541-276">*Sayfaları/filmleri/ :::no-loc(Index)::: . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-276">Edit *Pages/Movies/:::no-loc(Index):::.cshtml* , and add a `Rating` field:</span></span>
+<span data-ttu-id="df541-276">*Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:</span><span class="sxs-lookup"><span data-stu-id="df541-276">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Index):::Rating.cshtml?highlight=40-42,61-63)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
 <span data-ttu-id="df541-277">Aşağıdaki sayfaları güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-277">Update the following pages:</span></span>
 
-* <span data-ttu-id="df541-278">`Rating`Alanını :::no-loc(Delete)::: ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-278">Add the `Rating` field to the :::no-loc(Delete)::: and Details pages.</span></span>
-* <span data-ttu-id="df541-279">[ :::no-loc(Create)::: . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Create):::.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-279">Update [:::no-loc(Create):::.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/:::no-loc(Create):::.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="df541-278">`Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-278">Add the `Rating` field to the Delete and Details pages.</span></span>
+* <span data-ttu-id="df541-279">[ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-279">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
 * <span data-ttu-id="df541-280">`Rating`Alanı düzenleme sayfasına ekleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-280">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="df541-281">Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="df541-281">The app won't work until the database is updated to include the new field.</span></span> <span data-ttu-id="df541-282">Uygulama Şu anda çalıştırıldığında, uygulama şunu oluşturur `SqlException` :</span><span class="sxs-lookup"><span data-stu-id="df541-282">If the app is run now, the app throws a `SqlException`:</span></span>
@@ -368,9 +368,9 @@ ms.locfileid: "94360885"
 
 <span data-ttu-id="df541-296">`SeedData`Sınıfını yeni sütun için bir değer sağlayacak şekilde güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="df541-296">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="df541-297">Aşağıda örnek bir değişiklik gösterilmektedir, ancak her bir blok için bu değişikliği yapın `new Movie` .</span><span class="sxs-lookup"><span data-stu-id="df541-297">A sample change is shown below, but make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="df541-298">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-298">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="df541-298">[Tamamlanan SeedData.cs dosyasına](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs)bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-298">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="df541-299">Çözümü derleyin.</span><span class="sxs-lookup"><span data-stu-id="df541-299">Build the solution.</span></span>
 
@@ -391,7 +391,7 @@ Update-Database
 <span data-ttu-id="df541-304">`Add-Migration`Komut, çerçeveye şunları belirtir:</span><span class="sxs-lookup"><span data-stu-id="df541-304">The `Add-Migration` command tells the framework to:</span></span>
 
 * <span data-ttu-id="df541-305">`Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.</span><span class="sxs-lookup"><span data-stu-id="df541-305">Compare the `Movie` model with the `Movie` database schema.</span></span>
-* <span data-ttu-id="df541-306">:::no-loc(Create)::: Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-306">:::no-loc(Create)::: code to migrate the database schema to the new model.</span></span>
+* <span data-ttu-id="df541-306">Create Veritabanı şemasının yeni modele geçirilmesi için kod.</span><span class="sxs-lookup"><span data-stu-id="df541-306">Create code to migrate the database schema to the new model.</span></span>
 
 <span data-ttu-id="df541-307">"Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df541-307">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="df541-308">Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.</span><span class="sxs-lookup"><span data-stu-id="df541-308">It's helpful to use a meaningful name for the migration file.</span></span>
 
@@ -404,7 +404,7 @@ Update-Database
 <span data-ttu-id="df541-312">Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır.</span><span class="sxs-lookup"><span data-stu-id="df541-312">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="df541-313">SSOX 'te veritabanını silmek için:</span><span class="sxs-lookup"><span data-stu-id="df541-313">To delete the database in SSOX:</span></span>
 
 * <span data-ttu-id="df541-314">SSOX 'te veritabanını seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-314">Select the database in SSOX.</span></span>
-* <span data-ttu-id="df541-315">Veritabanına sağ tıklayın ve öğesini seçin **:::no-loc(Delete):::** .</span><span class="sxs-lookup"><span data-stu-id="df541-315">Right-click on the database, and select **:::no-loc(Delete):::**.</span></span>
+* <span data-ttu-id="df541-315">Veritabanına sağ tıklayın ve öğesini seçin **Delete** .</span><span class="sxs-lookup"><span data-stu-id="df541-315">Right-click on the database, and select **Delete**.</span></span>
 * <span data-ttu-id="df541-316">**Mevcut bağlantıları kapat** ' a bakın.</span><span class="sxs-lookup"><span data-stu-id="df541-316">Check **Close existing connections**.</span></span>
 * <span data-ttu-id="df541-317">**Tamam** ’ı seçin.</span><span class="sxs-lookup"><span data-stu-id="df541-317">Select **OK**.</span></span>
 * <span data-ttu-id="df541-318">[PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="df541-318">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
@@ -434,7 +434,7 @@ Update-Database
 > * [<span data-ttu-id="df541-337">Veri çekirdeği oluşturma</span><span class="sxs-lookup"><span data-stu-id="df541-337">Data seeding</span></span>](/ef/core/modeling/data-seeding)
 > * [<span data-ttu-id="df541-338">SQLite ALTER TABLE ifadesi</span><span class="sxs-lookup"><span data-stu-id="df541-338">SQLite ALTER TABLE statement</span></span>](https://sqlite.org/lang_altertable.html)
 
-<span data-ttu-id="df541-339">:::no-loc(Delete)::: veritabanını yeniden oluşturmak için veritabanı ve geçişleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="df541-339">:::no-loc(Delete)::: the database and use migrations to re-create the database.</span></span> <span data-ttu-id="df541-340">Veritabanını silmek için veritabanı dosyasını ( *Mvcmovie. db* ) silin.</span><span class="sxs-lookup"><span data-stu-id="df541-340">To delete the database, delete the database file ( *MvcMovie.db* ).</span></span> <span data-ttu-id="df541-341">Ardından şu `ef database update` komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df541-341">Then run the `ef database update` command:</span></span>
+<span data-ttu-id="df541-339">Delete veritabanını yeniden oluşturmak için veritabanı ve geçişleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="df541-339">Delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="df541-340">Veritabanını silmek için veritabanı dosyasını ( *Mvcmovie. db* ) silin.</span><span class="sxs-lookup"><span data-stu-id="df541-340">To delete the database, delete the database file ( *MvcMovie.db* ).</span></span> <span data-ttu-id="df541-341">Ardından şu `ef database update` komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df541-341">Then run the `ef database update` command:</span></span>
 
 ```dotnetcli
 dotnet ef database update

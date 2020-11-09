@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-2.1
 ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -29,9 +29,9 @@ ms.locfileid: "93059721"
 
 <span data-ttu-id="cf8af-104">Bu makalede, ASP.NET Core 2,1 ' deki en önemli değişiklikler, ilgili belgelerin bağlantılarıyla vurgulanır.</span><span class="sxs-lookup"><span data-stu-id="cf8af-104">This article highlights the most significant changes in ASP.NET Core 2.1, with links to relevant documentation.</span></span>
 
-## :::no-loc(SignalR):::
+## SignalR
 
-<span data-ttu-id="cf8af-105">:::no-loc(SignalR)::: ASP.NET Core 2,1 için yeniden yazıldı.</span><span class="sxs-lookup"><span data-stu-id="cf8af-105">:::no-loc(SignalR)::: has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="cf8af-106">ASP.NET Core :::no-loc(SignalR)::: birkaç geliştirme içerir:</span><span class="sxs-lookup"><span data-stu-id="cf8af-106">ASP.NET Core :::no-loc(SignalR)::: includes a number of improvements:</span></span>
+<span data-ttu-id="cf8af-105">SignalR ASP.NET Core 2,1 için yeniden yazıldı.</span><span class="sxs-lookup"><span data-stu-id="cf8af-105">SignalR has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="cf8af-106">ASP.NET Core SignalR birkaç geliştirme içerir:</span><span class="sxs-lookup"><span data-stu-id="cf8af-106">ASP.NET Core SignalR includes a number of improvements:</span></span>
 
 * <span data-ttu-id="cf8af-107">Basitleştirilmiş bir genişleme modeli.</span><span class="sxs-lookup"><span data-stu-id="cf8af-107">A simplified scale-out model.</span></span>
 * <span data-ttu-id="cf8af-108">JQuery bağımlılığı olmayan yeni bir JavaScript istemcisi.</span><span class="sxs-lookup"><span data-stu-id="cf8af-108">A new JavaScript client with no jQuery dependency.</span></span>
@@ -40,24 +40,24 @@ ms.locfileid: "93059721"
 * <span data-ttu-id="cf8af-111">Yeni bir akış yanıt modeli.</span><span class="sxs-lookup"><span data-stu-id="cf8af-111">A new streaming response model.</span></span>
 * <span data-ttu-id="cf8af-112">Çıplak WebSockets tabanlı istemciler için destek.</span><span class="sxs-lookup"><span data-stu-id="cf8af-112">Support for clients based on bare WebSockets.</span></span>
 
-<span data-ttu-id="cf8af-113">Daha fazla bilgi için bkz [. :::no-loc(SignalR)::: ASP.NET Core ](xref:signalr/introduction).</span><span class="sxs-lookup"><span data-stu-id="cf8af-113">For more information, see [ASP.NET Core :::no-loc(SignalR):::](xref:signalr/introduction).</span></span>
+<span data-ttu-id="cf8af-113">Daha fazla bilgi için bkz [. SignalR ASP.NET Core ](xref:signalr/introduction).</span><span class="sxs-lookup"><span data-stu-id="cf8af-113">For more information, see [ASP.NET Core SignalR](xref:signalr/introduction).</span></span>
 
-## <a name="no-locrazor-class-libraries"></a><span data-ttu-id="cf8af-114">:::no-loc(Razor)::: sınıf kitaplıkları</span><span class="sxs-lookup"><span data-stu-id="cf8af-114">:::no-loc(Razor)::: class libraries</span></span>
+## <a name="no-locrazor-class-libraries"></a><span data-ttu-id="cf8af-114">Razor sınıf kitaplıkları</span><span class="sxs-lookup"><span data-stu-id="cf8af-114">Razor class libraries</span></span>
 
-<span data-ttu-id="cf8af-115">ASP.NET Core 2,1, bir kitaplıkta derleme ve ekleme temelli Kullanıcı arabirimini daha kolay hale getirir :::no-loc(Razor)::: ve bunu birden fazla proje arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-115">ASP.NET Core 2.1 makes it easier to build and include :::no-loc(Razor):::-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="cf8af-116">Yeni :::no-loc(Razor)::: SDK, :::no-loc(Razor)::: bir NuGet paketine paketlenebilecek bir sınıf kitaplığı projesinde dosya oluşturulmasına izin vermez.</span><span class="sxs-lookup"><span data-stu-id="cf8af-116">The new :::no-loc(Razor)::: SDK enables building :::no-loc(Razor)::: files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="cf8af-117">Kitaplıklardaki görünümler ve sayfalar otomatik olarak keşfedilir ve uygulama tarafından geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="cf8af-118">:::no-loc(Razor):::Derlemeyi derlemeyle tümleştirerek:</span><span class="sxs-lookup"><span data-stu-id="cf8af-118">By integrating :::no-loc(Razor)::: compilation into the build:</span></span>
+<span data-ttu-id="cf8af-115">ASP.NET Core 2,1, bir kitaplıkta derleme ve ekleme temelli Kullanıcı arabirimini daha kolay hale getirir Razor ve bunu birden fazla proje arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-115">ASP.NET Core 2.1 makes it easier to build and include Razor-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="cf8af-116">Yeni Razor SDK, Razor bir NuGet paketine paketlenebilecek bir sınıf kitaplığı projesinde dosya oluşturulmasına izin vermez.</span><span class="sxs-lookup"><span data-stu-id="cf8af-116">The new Razor SDK enables building Razor files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="cf8af-117">Kitaplıklardaki görünümler ve sayfalar otomatik olarak keşfedilir ve uygulama tarafından geçersiz kılınabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="cf8af-118">RazorDerlemeyi derlemeyle tümleştirerek:</span><span class="sxs-lookup"><span data-stu-id="cf8af-118">By integrating Razor compilation into the build:</span></span>
 
 * <span data-ttu-id="cf8af-119">Uygulama başlatma süresi önemli ölçüde daha hızlıdır.</span><span class="sxs-lookup"><span data-stu-id="cf8af-119">The app startup time is significantly faster.</span></span>
-* <span data-ttu-id="cf8af-120">:::no-loc(Razor):::Çalışma zamanında görünümler ve sayfalar için hızlı güncelleştirmeler, yinelemeli bir geliştirme iş akışının bir parçası olarak hala kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-120">Fast updates to :::no-loc(Razor)::: views and pages at runtime are still available as part of an iterative development workflow.</span></span>
+* <span data-ttu-id="cf8af-120">RazorÇalışma zamanında görünümler ve sayfalar için hızlı güncelleştirmeler, yinelemeli bir geliştirme iş akışının bir parçası olarak hala kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-120">Fast updates to Razor views and pages at runtime are still available as part of an iterative development workflow.</span></span>
 
-<span data-ttu-id="cf8af-121">Daha fazla bilgi için bkz. [ :::no-loc(Razor)::: Sınıf Kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma](xref:razor-pages/ui-class).</span><span class="sxs-lookup"><span data-stu-id="cf8af-121">For more information, see [Create reusable UI using the :::no-loc(Razor)::: Class Library project](xref:razor-pages/ui-class).</span></span>
+<span data-ttu-id="cf8af-121">Daha fazla bilgi için bkz. [ Razor Sınıf Kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma](xref:razor-pages/ui-class).</span><span class="sxs-lookup"><span data-stu-id="cf8af-121">For more information, see [Create reusable UI using the Razor Class Library project](xref:razor-pages/ui-class).</span></span>
 
-## <a name="no-locidentity-ui-library--scaffolding"></a><span data-ttu-id="cf8af-122">:::no-loc(Identity)::: UI kitaplığı & yapı iskelesi</span><span class="sxs-lookup"><span data-stu-id="cf8af-122">:::no-loc(Identity)::: UI library & scaffolding</span></span>
+## <a name="no-locidentity-ui-library--scaffolding"></a><span data-ttu-id="cf8af-122">Identity UI kitaplığı & yapı iskelesi</span><span class="sxs-lookup"><span data-stu-id="cf8af-122">Identity UI library & scaffolding</span></span>
 
-<span data-ttu-id="cf8af-123">ASP.NET Core 2,1, [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity) bir [ :::no-loc(Razor)::: sınıf kitaplığı](xref:razor-pages/ui-class)olarak sunulmaktadır.</span><span class="sxs-lookup"><span data-stu-id="cf8af-123">ASP.NET Core 2.1 provides [:::no-loc(ASP.NET Core Identity):::](xref:security/authentication/identity) as a [:::no-loc(Razor)::: Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="cf8af-124">Dahil edilen uygulamalar, :::no-loc(Identity)::: :::no-loc(Identity)::: :::no-loc(Identity)::: :::no-loc(Razor)::: sınıf kitaplığı 'nda (RCL) bulunan kaynak kodunu seçmeli olarak eklemek için yeni desteği uygulayabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-124">Apps that include :::no-loc(Identity)::: can apply the new :::no-loc(Identity)::: scaffolder to selectively add the source code contained in the :::no-loc(Identity)::: :::no-loc(Razor)::: Class Library (RCL).</span></span> <span data-ttu-id="cf8af-125">Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="cf8af-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="cf8af-126">Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="cf8af-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="cf8af-127">Oluşturulan kod RCL 'deki aynı koda göre önceliklidir :::no-loc(Identity)::: .</span><span class="sxs-lookup"><span data-stu-id="cf8af-127">Generated code takes precedence over the same code in the :::no-loc(Identity)::: RCL.</span></span>
+<span data-ttu-id="cf8af-123">ASP.NET Core 2,1, [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sunulmaktadır.</span><span class="sxs-lookup"><span data-stu-id="cf8af-123">ASP.NET Core 2.1 provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="cf8af-124">Dahil edilen uygulamalar, Identity Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodunu seçmeli olarak eklemek için yeni desteği uygulayabilir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-124">Apps that include Identity can apply the new Identity scaffolder to selectively add the source code contained in the Identity Razor Class Library (RCL).</span></span> <span data-ttu-id="cf8af-125">Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="cf8af-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="cf8af-126">Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="cf8af-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="cf8af-127">Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity .</span><span class="sxs-lookup"><span data-stu-id="cf8af-127">Generated code takes precedence over the same code in the Identity RCL.</span></span>
 
-<span data-ttu-id="cf8af-128">Kimlik **doğrulaması içermeyen uygulamalar** , :::no-loc(Identity)::: RCL paketini eklemek için desteği uygulayabilir :::no-loc(Identity)::: .</span><span class="sxs-lookup"><span data-stu-id="cf8af-128">Apps that do **not** include authentication can apply the :::no-loc(Identity)::: scaffolder to add the RCL :::no-loc(Identity)::: package.</span></span> <span data-ttu-id="cf8af-129">Oluşturulacak kodu seçme seçeneğiniz vardır :::no-loc(Identity)::: .</span><span class="sxs-lookup"><span data-stu-id="cf8af-129">You have the option of selecting :::no-loc(Identity)::: code to be generated.</span></span>
+<span data-ttu-id="cf8af-128">Kimlik **doğrulaması içermeyen uygulamalar** , Identity RCL paketini eklemek için desteği uygulayabilir Identity .</span><span class="sxs-lookup"><span data-stu-id="cf8af-128">Apps that do **not** include authentication can apply the Identity scaffolder to add the RCL Identity package.</span></span> <span data-ttu-id="cf8af-129">Oluşturulacak kodu seçme seçeneğiniz vardır Identity .</span><span class="sxs-lookup"><span data-stu-id="cf8af-129">You have the option of selecting Identity code to be generated.</span></span>
 
-<span data-ttu-id="cf8af-130">Daha fazla bilgi için bkz. [ :::no-loc(Identity)::: ASP.NET Core projelerinde Scaffold](xref:security/authentication/scaffold-identity).</span><span class="sxs-lookup"><span data-stu-id="cf8af-130">For more information, see [Scaffold :::no-loc(Identity)::: in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="cf8af-130">Daha fazla bilgi için bkz. [ Identity ASP.NET Core projelerinde Scaffold](xref:security/authentication/scaffold-identity).</span><span class="sxs-lookup"><span data-stu-id="cf8af-130">For more information, see [Scaffold Identity in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
 
 ## <a name="https"></a><span data-ttu-id="cf8af-131">HTTPS</span><span class="sxs-lookup"><span data-stu-id="cf8af-131">HTTPS</span></span>
 
@@ -101,11 +101,11 @@ ms.locfileid: "93059721"
 
 ```csharp
 public class BasicTests
-    : IClassFixture<WebApplicationFactory<:::no-loc(Razor):::PagesProject.Startup>>
+    : IClassFixture<WebApplicationFactory<RazorPagesProject.Startup>>
 {
     private readonly HttpClient _client;
 
-    public BasicTests(WebApplicationFactory<:::no-loc(Razor):::PagesProject.Startup> factory)
+    public BasicTests(WebApplicationFactory<RazorPagesProject.Startup> factory)
     {
         _client = factory.CreateClient();
     }
@@ -163,17 +163,17 @@ public class BasicTests
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a><span data-ttu-id="cf8af-195">:::no-loc(Razor):::Varlıklar için arama sayfaları :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="cf8af-195">:::no-loc(Razor)::: Pages search for :::no-loc(Razor)::: assets</span></span>
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a><span data-ttu-id="cf8af-195">RazorVarlıklar için arama sayfaları Razor</span><span class="sxs-lookup"><span data-stu-id="cf8af-195">Razor Pages search for Razor assets</span></span>
 
-<span data-ttu-id="cf8af-196">2,1 ' de :::no-loc(Razor)::: Sayfalar, :::no-loc(Razor)::: listelenen sırada aşağıdaki dizinlerde bulunan varlıkları (örneğin, düzenler ve partileri) arar:</span><span class="sxs-lookup"><span data-stu-id="cf8af-196">In 2.1, :::no-loc(Razor)::: Pages search for :::no-loc(Razor)::: assets (such as layouts and partials) in the following directories in the listed order:</span></span>
+<span data-ttu-id="cf8af-196">2,1 ' de Razor Sayfalar, Razor listelenen sırada aşağıdaki dizinlerde bulunan varlıkları (örneğin, düzenler ve partileri) arar:</span><span class="sxs-lookup"><span data-stu-id="cf8af-196">In 2.1, Razor Pages search for Razor assets (such as layouts and partials) in the following directories in the listed order:</span></span>
 
 1. <span data-ttu-id="cf8af-197">Geçerli sayfalar klasörü.</span><span class="sxs-lookup"><span data-stu-id="cf8af-197">Current Pages folder.</span></span>
 1. <span data-ttu-id="cf8af-198">*/Pages/Shared/*</span><span class="sxs-lookup"><span data-stu-id="cf8af-198">*/Pages/Shared/*</span></span>
 1. <span data-ttu-id="cf8af-199">*/Views/Shared/*</span><span class="sxs-lookup"><span data-stu-id="cf8af-199">*/Views/Shared/*</span></span>
 
-## <a name="no-locrazor-pages-in-an-area"></a><span data-ttu-id="cf8af-200">:::no-loc(Razor)::: Bir alandaki sayfalar</span><span class="sxs-lookup"><span data-stu-id="cf8af-200">:::no-loc(Razor)::: Pages in an area</span></span>
+## <a name="no-locrazor-pages-in-an-area"></a><span data-ttu-id="cf8af-200">Razor Bir alandaki sayfalar</span><span class="sxs-lookup"><span data-stu-id="cf8af-200">Razor Pages in an area</span></span>
 
-<span data-ttu-id="cf8af-201">:::no-loc(Razor)::: Sayfalar artık [bölgeleri](xref:mvc/controllers/areas)destekliyor.</span><span class="sxs-lookup"><span data-stu-id="cf8af-201">:::no-loc(Razor)::: Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="cf8af-202">Bir alan örneği görmek için :::no-loc(Razor)::: bireysel kullanıcı hesaplarıyla yeni bir sayfa Web uygulaması oluşturun.</span><span class="sxs-lookup"><span data-stu-id="cf8af-202">To see an example of areas, create a new :::no-loc(Razor)::: Pages web app with individual user accounts.</span></span> <span data-ttu-id="cf8af-203">:::no-loc(Razor):::Bireysel kullanıcı hesapları içeren bir sayfa Web uygulaması */Areas/ :::no-loc(Identity)::: /Pages* içerir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-203">A :::no-loc(Razor)::: Pages web app with individual user accounts includes */Areas/:::no-loc(Identity):::/Pages* .</span></span>
+<span data-ttu-id="cf8af-201">Razor Sayfalar artık [bölgeleri](xref:mvc/controllers/areas)destekliyor.</span><span class="sxs-lookup"><span data-stu-id="cf8af-201">Razor Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="cf8af-202">Bir alan örneği görmek için Razor bireysel kullanıcı hesaplarıyla yeni bir sayfa Web uygulaması oluşturun.</span><span class="sxs-lookup"><span data-stu-id="cf8af-202">To see an example of areas, create a new Razor Pages web app with individual user accounts.</span></span> <span data-ttu-id="cf8af-203">RazorBireysel kullanıcı hesapları içeren bir sayfa Web uygulaması */Areas/ Identity /Pages* içerir.</span><span class="sxs-lookup"><span data-stu-id="cf8af-203">A Razor Pages web app with individual user accounts includes */Areas/Identity/Pages* .</span></span>
 
 ## <a name="mvc-compatibility-version"></a><span data-ttu-id="cf8af-204">MVC uyumluluk sürümü</span><span class="sxs-lookup"><span data-stu-id="cf8af-204">MVC compatibility version</span></span>
 

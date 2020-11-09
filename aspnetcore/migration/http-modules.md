@@ -5,17 +5,17 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/http-modules
 ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -195,9 +195,9 @@ ms.locfileid: "93060709"
 
 2. <span data-ttu-id="7ee69-185">Seçenek değerlerini depolama</span><span class="sxs-lookup"><span data-stu-id="7ee69-185">Store the option values</span></span>
 
-   <span data-ttu-id="7ee69-186">Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır.</span><span class="sxs-lookup"><span data-stu-id="7ee69-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="7ee69-187">Ancak, çoğu site *:::no-loc(appsettings.json):::* tarafından kullanılır, bu yaklaşım şu şekilde ele alacağız:</span><span class="sxs-lookup"><span data-stu-id="7ee69-187">However, most sites use *:::no-loc(appsettings.json):::* , so we'll take that approach:</span></span>
+   <span data-ttu-id="7ee69-186">Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır.</span><span class="sxs-lookup"><span data-stu-id="7ee69-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="7ee69-187">Ancak, çoğu site *appsettings.json* tarafından kullanılır, bu yaklaşım şu şekilde ele alacağız:</span><span class="sxs-lookup"><span data-stu-id="7ee69-187">However, most sites use *appsettings.json* , so we'll take that approach:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,14-18)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
    <span data-ttu-id="7ee69-188">Burada *MyMiddlewareOptionsSection* bir bölüm adıdır.</span><span class="sxs-lookup"><span data-stu-id="7ee69-188">*MyMiddlewareOptionsSection* here is a section name.</span></span> <span data-ttu-id="7ee69-189">Seçenek sınıfınızın adıyla aynı olması gerekmez.</span><span class="sxs-lookup"><span data-stu-id="7ee69-189">It doesn't have to be the same as the name of your options class.</span></span>
 
@@ -207,7 +207,7 @@ ms.locfileid: "93060709"
 
     <span data-ttu-id="7ee69-192">Sınıfınızı güncelleştirin `Startup` :</span><span class="sxs-lookup"><span data-stu-id="7ee69-192">Update your `Startup` class:</span></span>
 
-   1. <span data-ttu-id="7ee69-193">Kullanıyorsanız *:::no-loc(appsettings.json):::* , oluşturucunun yapılandırma oluşturucusuna ekleyin `Startup` :</span><span class="sxs-lookup"><span data-stu-id="7ee69-193">If you're using *:::no-loc(appsettings.json):::* , add it to the configuration builder in the `Startup` constructor:</span></span>
+   1. <span data-ttu-id="7ee69-193">Kullanıyorsanız *appsettings.json* , oluşturucunun yapılandırma oluşturucusuna ekleyin `Startup` :</span><span class="sxs-lookup"><span data-stu-id="7ee69-193">If you're using *appsettings.json* , add it to the configuration builder in the `Startup` constructor:</span></span>
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -235,11 +235,11 @@ ms.locfileid: "93060709"
 
 <span data-ttu-id="7ee69-208">Çözüm, seçenek nesnelerini sınıfınıza gerçek seçenek değerleriyle almak `Startup` ve bunları doğrudan ara yazılım örneğine iletmektir.</span><span class="sxs-lookup"><span data-stu-id="7ee69-208">The solution is to get the options objects with the actual options values in your `Startup` class and pass those directly to each instance of your middleware.</span></span>
 
-1. <span data-ttu-id="7ee69-209">İkinci bir anahtar Ekle *:::no-loc(appsettings.json):::*</span><span class="sxs-lookup"><span data-stu-id="7ee69-209">Add a second key to *:::no-loc(appsettings.json):::*</span></span>
+1. <span data-ttu-id="7ee69-209">İkinci bir anahtar Ekle *appsettings.json*</span><span class="sxs-lookup"><span data-stu-id="7ee69-209">Add a second key to *appsettings.json*</span></span>
 
-   <span data-ttu-id="7ee69-210">Dosyaya ikinci bir seçenek kümesi eklemek için *:::no-loc(appsettings.json):::* , benzersiz bir şekilde tanımlamak için yeni bir anahtar kullanın:</span><span class="sxs-lookup"><span data-stu-id="7ee69-210">To add a second set of options to the *:::no-loc(appsettings.json):::* file, use a new key to uniquely identify it:</span></span>
+   <span data-ttu-id="7ee69-210">Dosyaya ikinci bir seçenek kümesi eklemek için *appsettings.json* , benzersiz bir şekilde tanımlamak için yeni bir anahtar kullanın:</span><span class="sxs-lookup"><span data-stu-id="7ee69-210">To add a second set of options to the *appsettings.json* file, use a new key to uniquely identify it:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,10-18&highlight=2-5)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
 2. <span data-ttu-id="7ee69-211">Seçenek değerlerini alın ve bunları ara yazılıma geçirin.</span><span class="sxs-lookup"><span data-stu-id="7ee69-211">Retrieve options values and pass them to middleware.</span></span> <span data-ttu-id="7ee69-212">`Use...`Genişletme yöntemi (ara yazılımını işlem hattına ekleyen), seçenek değerlerinde geçirilecek mantıksal bir yerdir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-212">The `Use...` extension method (which adds your middleware to the pipeline) is a logical place to pass in the option values:</span></span> 
 
@@ -295,9 +295,9 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-<span data-ttu-id="7ee69-233">**HttpContext. Request. :::no-loc(Cookie)::: , şu** şekilde çevirir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-233">**HttpContext.Request.:::no-loc(Cookie):::s** translates to:</span></span>
+<span data-ttu-id="7ee69-233">**HttpContext. Request. Cookie , şu** şekilde çevirir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-233">**HttpContext.Request.Cookies** translates to:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
 <span data-ttu-id="7ee69-234">**HttpContext. Request. RequestContext. RouteData** şu şekilde çevirir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-234">**HttpContext.Request.RequestContext.RouteData** translates to:</span></span>
 
@@ -378,21 +378,21 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-<span data-ttu-id="7ee69-260">**HttpContext. Response. :::no-loc(Cookie)::: malar**</span><span class="sxs-lookup"><span data-stu-id="7ee69-260">**HttpContext.Response.:::no-loc(Cookie):::s**</span></span>
+<span data-ttu-id="7ee69-260">**HttpContext. Response. Cookie malar**</span><span class="sxs-lookup"><span data-stu-id="7ee69-260">**HttpContext.Response.Cookies**</span></span>
 
-<span data-ttu-id="7ee69-261">:::no-loc(Cookie):::s, bir *set- :::no-loc(Cookie):::* Response üst bilgisinde tarayıcıya seyahat ediyor.</span><span class="sxs-lookup"><span data-stu-id="7ee69-261">:::no-loc(Cookie):::s travel to the browser in a *Set-:::no-loc(Cookie):::* response header.</span></span> <span data-ttu-id="7ee69-262">Sonuç olarak, ' :::no-loc(cookie)::: ın gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-262">As a result, sending :::no-loc(cookie):::s requires the same callback as used for sending response headers:</span></span>
+<span data-ttu-id="7ee69-261">Cookies, bir *set- Cookie* Response üst bilgisinde tarayıcıya seyahat ediyor.</span><span class="sxs-lookup"><span data-stu-id="7ee69-261">Cookies travel to the browser in a *Set-Cookie* response header.</span></span> <span data-ttu-id="7ee69-262">Sonuç olarak, ' cookie ın gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:</span><span class="sxs-lookup"><span data-stu-id="7ee69-262">As a result, sending cookies requires the same callback as used for sending response headers:</span></span>
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
 {
     // ...
-    httpContext.Response.OnStarting(Set:::no-loc(Cookie):::s, state: httpContext);
+    httpContext.Response.OnStarting(SetCookies, state: httpContext);
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-<span data-ttu-id="7ee69-263">`Set:::no-loc(Cookie):::s`Geri çağırma yöntemi aşağıdaki gibi görünür:</span><span class="sxs-lookup"><span data-stu-id="7ee69-263">The `Set:::no-loc(Cookie):::s` callback method would look like the following:</span></span>
+<span data-ttu-id="7ee69-263">`SetCookies`Geri çağırma yöntemi aşağıdaki gibi görünür:</span><span class="sxs-lookup"><span data-stu-id="7ee69-263">The `SetCookies` callback method would look like the following:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Set:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
 ## <a name="additional-resources"></a><span data-ttu-id="7ee69-264">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="7ee69-264">Additional resources</span></span>
 
