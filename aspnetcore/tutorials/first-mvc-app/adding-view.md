@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 078329d1e5dfe41a7713b1e53894a9b09886752d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052675"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422723"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 
@@ -46,7 +46,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 * *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
 
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin** .
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin**.
 
 * **Yeni öğe Ekle-Mvcfilmi** iletişim kutusunda
 
@@ -70,7 +70,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
 * *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin** .
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin**.
 * **Yeni dosya** iletişim kutusunda:
 
   * Sol bölmedeki **ASP .NET Core** ' u seçin.
@@ -99,8 +99,20 @@ Menü bağlantılarını ( **Mvcmovie** , **Home** ve **Gizlilik** ) seçin. Her
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Düzen dosyasındaki başlık, altbilgi ve menü bağlantısını değiştirme
 
 *Görünümler/paylaşılan/_Layout. cshtml* dosyasının içeriğini aşağıdaki biçimlendirme ile değiştirin. Değişiklikler vurgulanır:
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yaptı:
 
@@ -203,7 +215,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 * *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
 
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin** .
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin**.
 
 * **Yeni öğe Ekle-Mvcfilmi** iletişim kutusunda
 
@@ -227,7 +239,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
 * *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin** .
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin**.
 * **Yeni dosya** iletişim kutusunda:
 
   * Sol bölmedeki **Web** ' i seçin.

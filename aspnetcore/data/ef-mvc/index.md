@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/index
-ms.openlocfilehash: 791787612c471e17a886ee05b38dddcabdcceff2
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 544ace059e15db0bbe2c77bd453b96872a998f9a
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365342"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422554"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>EF Core öğreticisi serisi ile MVC ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. [ Razor Sayfalar sürümü](xref:data/ef-rp/intro) güncelleştirildi.
+Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. ASP.NET Core 5,0 için güncelleştirilmiştir.
 
 ::: moniker-end
 

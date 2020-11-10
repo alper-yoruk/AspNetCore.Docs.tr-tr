@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 5b07a2839daf190d99b2787db70998373d34cd44
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e134832ad00b10bb01239afa06acc74d86707af1
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060007"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422567"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -97,7 +97,7 @@ Aşağıdaki örnekte, daha karmaşık bir yol şablonuyla yönlendirme gösteri
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/RouteTemplateStartup.cs?name=snippet)]
 
-Dize `/hello/{name:alpha}` bir **yol şablonudur** . Uç noktanın nasıl eşleştirileceği yapılandırmak için kullanılır. Bu durumda, şablon eşleşir:
+Dize `/hello/{name:alpha}` bir **yol şablonudur**. Uç noktanın nasıl eşleştirileceği yapılandırmak için kullanılır. Bu durumda, şablon eşleşir:
 
 * Şunun gibi bir URL `/hello/Ryan`
 * `/hello/`Arkasından bir alfabetik karakter dizisi ile başlayan herhangi BIR URL yolu.  `:alpha` yalnızca alfabetik karakterlerle eşleşen bir rota kısıtlaması uygular. [Yol kısıtlamaları](#route-constraint-reference) bu belgenin ilerleyen kısımlarında açıklanmıştır.
@@ -210,7 +210,7 @@ Yukarıdaki örnekte iki önemli kavram gösterilmektedir:
 
 Yukarıdaki kodda, uç nokta başına ilkeleri destekleyen özel bir ara yazılım örneği gösterilmektedir. Ara yazılım, gizli verilere erişim *denetim günlüğünü* konsola yazar. Ara yazılım, meta verileri olan bir uç noktayı *denetlemek* üzere yapılandırılabilir `AuditPolicyAttribute` . Bu örnek, yalnızca hassas olarak işaretlenen bitiş noktalarının denetlendiği bir *katılım* modelini gösterir. Örneğin, güvenli olarak işaretlenmemiş her şeyi denetlemek için bu mantığı ters olarak tanımlamak mümkündür. Uç nokta meta veri sistemi esnektir. Bu mantık, kullanım örneğine uygun herhangi bir şekilde tasarlanabilir.
 
-Önceki örnek kod, uç noktaların temel kavramlarını göstermek için tasarlanmıştır. **Örnek, üretim kullanımı için tasarlanmamıştır** . *Denetim günlüğü* ara yazılımı 'nın daha kapsamlı bir sürümü şöyle olacaktır:
+Önceki örnek kod, uç noktaların temel kavramlarını göstermek için tasarlanmıştır. **Örnek, üretim kullanımı için tasarlanmamıştır**. *Denetim günlüğü* ara yazılımı 'nın daha kapsamlı bir sürümü şöyle olacaktır:
 
 * Bir dosya veya veritabanında oturum açın.
 * Kullanıcı, IP adresi, hassas bitiş noktasının adı ve daha fazlası gibi ayrıntıları dahil edin.
@@ -230,7 +230,7 @@ Aşağıdaki kod örneği, yönlendirmeyi kullanarak ara yazılım kullanarak ka
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-İle gösterilen ara yazılım stili, `Approach 1:` **Terminal ara yazılımı** . Bu, eşleşen bir işlem yaptığı için Terminal ara yazılımı olarak adlandırılır:
+İle gösterilen ara yazılım stili, `Approach 1:` **Terminal ara yazılımı**. Bu, eşleşen bir işlem yaptığı için Terminal ara yazılımı olarak adlandırılır:
 
 * Yukarıdaki örnekteki eşleştirme işlemi, `Path == "/"` Ara yazılım ve `Path == "/Movie"` yönlendirme içindir.
 * Bir eşleşme başarılı olduğunda, ara yazılımı çağırmak yerine bazı işlevleri yürütür ve döndürür `next` .
@@ -350,7 +350,7 @@ Yönlendirme tarafından sunulan genişletilebilirlik türleri nedeniyle, yönle
 * Ortak durumlarda uç noktaların sırasını ayarlama ihtiyacını önler.
 * Yönlendirme davranışının ortak Sense beklentilerini eşleştirmeye çalışır.
 
-Örneğin, şablonları ve öğesini `/Products/List` düşünün `/Products/{id}` . `/Products/List`URL yolundan daha iyi bir eşleşme olduğunu varsaymak mantıklı olacaktır `/Products/{id}` `/Products/List` . , Değişmez değer segmentinin `/List` parametre segmentinden daha iyi önceliğe sahip olduğu kabul edildiği için geçerlidir `/{id}` .
+Örneğin, şablonları ve öğesini `/Products/List` düşünün `/Products/{id}` . `/Products/List`URL yolundan daha iyi bir eşleşme olduğunu varsaymak mantıklı olacaktır `/Products/{id}` `/Products/List` . Bu, değişmez değer segmentinin `/List` parametre segmentinden daha iyi önceliğe sahip olduğu kabul edildiği için geçerlidir `/{id}` .
 
 Önceliğin nasıl kullanılacağına ilişkin ayrıntılar, yönlendirme şablonlarının nasıl tanımlandığınıza bağlıdır:
 

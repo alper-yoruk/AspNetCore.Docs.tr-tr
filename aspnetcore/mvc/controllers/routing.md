@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 9f64dd8f0ca026cec4b7ee4b5ea02523139eed4f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 59ad373cefaa12370aa7c02a367125c7a94f59a6
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057160"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422606"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -178,7 +178,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 
 <a name="dcr"></a>
 
-`blog`Önceki koddaki yol, **ayrılmış bir geleneksel yoldur** . Ayrılmış bir geleneksel yol olarak adlandırılır çünkü:
+`blog`Önceki koddaki yol, **ayrılmış bir geleneksel yoldur**. Ayrılmış bir geleneksel yol olarak adlandırılır çünkü:
 
 * [Geleneksel yönlendirme](#cr)kullanır.
 * Belirli bir [eyleme](#action)ayrılmıştır.
@@ -432,10 +432,10 @@ Aşağıdaki tabloda `[Route]` önceki koddaki öznitelikler açıklanmaktadır:
 
 | Öznitelik               | İle birleştirir `[Route("Home")]` | Rota şablonunu tanımlar |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | Yes | `"Home"` |
-| `[Route("Index")]` | Yes | `"Home/Index"` |
+| `[Route("")]` | Evet | `"Home"` |
+| `[Route("Index")]` | Evet | `"Home/Index"` |
 | `[Route("/")]` | **Hayır** | `""` |
-| `[Route("About")]` | Yes | `"Home/About"` |
+| `[Route("About")]` | Evet | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -857,7 +857,7 @@ Bir denetleyicide, [Nonactıon](xref:Microsoft.AspNetCore.Mvc.NonActionAttribute
 
 ## <a name="sample-code"></a>Örnek kod
 
- * [Mydisplayrouteınfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) yöntemi [örnek karşıdan yüklemeye](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) dahildir ve yönlendirme bilgilerini görüntülemek için kullanılır.
+* [!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 * [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 [!INCLUDE[](~/includes/dbg-route.md)]

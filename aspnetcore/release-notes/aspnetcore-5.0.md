@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: e9c74f7b45ebcdffc19a0483b4e98ad2f44d5747
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1f377f3be54ed8837d2857aed64c2d055ed9f582
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061779"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422593"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -224,6 +224,8 @@ Daha fazla gRPC bilgisi için bkz <xref:grpc/index> ..
 
 ## SignalR
 
+### <a name="no-locsignalr-hub-filters"></a>SignalR Hub filtreleri
+
 SignalR ASP.NET ' de hub işlem hatları adı verilen Merkez filtreleri, SignalR kodun hub yöntemleri çağrılmadan önce ve sonra çalışmasına izin veren bir özelliktir. Hub yöntemleri çağrılmadan önce ve sonra kodu çalıştırmak, ara yazılımın bir HTTP isteğinden önce ve sonra kodu çalıştırma yeteneğine benzer. Ortak kullanımlar arasında günlük kaydı, hata işleme ve bağımsız değişken doğrulama.
 
 Daha fazla bilgi için bkz. [ASP.NET Core SignalR hub filtrelerini kullanma ](xref:signalr/hub-filters).
@@ -355,7 +357,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 
 .NET 5,0 ' den önce, bir ASP.NET Core uygulaması için bir *Dockerfile* oluşturup yayımlarken, tüm .NET Core SDK ve ASP.NET Core görüntüsünün çekmesini sağlar. Bu sürümle birlikte, SDK görüntüleri baytları çekililerek ASP.NET Core görüntü için çekilen baytlar büyük ölçüde ortadan kalkar. Daha fazla bilgi için bkz. [Bu GitHub sorun açıklaması](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750).
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft ile kimlik doğrulaması Azure Active Directory. Identity . Web
 
@@ -448,7 +450,7 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* Şu komutu çalıştırın: `dotnet watch`.
+* `dotnet watch` komutunu çalıştırın.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
 
 Otomatik yenileme işlevini gelecekte Visual Studio 'ya getirmeyi umuyoruz.
