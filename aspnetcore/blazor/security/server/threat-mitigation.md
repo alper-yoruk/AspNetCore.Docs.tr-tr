@@ -5,7 +5,7 @@ description: Uygulamalara yönelik güvenlik tehditlerini nasıl azaltacağını
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/05/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 5c3a002a8e3df030d53c8625597342a68ca0d4b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0e8b26110a970526b5f6306da236a92f52e64604
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055418"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430961"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core için tehdit azaltma Kılavuzu Blazor Server
 
@@ -101,13 +101,16 @@ Varsayılan olarak, bir uygulama için Kullanıcı başına bağlantı sayısı 
     * Uygulamaya bağlanmak ve Kullanıcı başına etkin oturumları izlemek için kimlik doğrulaması gerektir.
     * Sınıra ulaştıktan sonra yeni oturumları reddedin.
     * İstemcilerden bir uygulamaya bağlantı oluşturan [Azure SignalR hizmeti](/azure/azure-signalr/signalr-overview) gibi bir ara sunucu aracılığıyla uygulamaya yönelik proxy WebSocket bağlantıları. Bu, tek bir istemcinin yapabileceğinden daha fazla bağlantı kapasitesine sahip bir uygulama sağlar ve istemcinin sunucu bağlantılarını tüketmesini önler.
-  * Sunucu düzeyinde: uygulamanın önünde bir proxy/ağ geçidi kullanın. Örneğin, [Azure ön kapısı](/azure/frontdoor/front-door-overview) , Web trafiğinin bir uygulamaya küresel olarak yönlendirilmesini tanımlamanıza, yönetmenize ve izlemenize olanak sağlar.
+  * Sunucu düzeyinde: uygulamanın önünde bir proxy/ağ geçidi kullanın. Örneğin, [Azure ön kapısı](/azure/frontdoor/front-door-overview) , Web trafiğinin bir uygulamaya genel yönlendirilmesini tanımlamanıza, yönetmenize ve izlemenize olanak sağlar ve Blazor Server uygulamalar uzun yoklamayı kullanacak şekilde yapılandırıldığında bu işe yarar.
+  
+    > [!NOTE]
+    > Uygulamalar için uzun yoklama desteklense de Blazor Server , [WebSockets önerilen aktarım protokolüdür](xref:blazor/host-and-deploy/server#azure-signalr-service). [Azure ön kapısının](/azure/frontdoor/front-door-overview) Şu anda WebSockets desteği yoktur, ancak WebSockets desteği, hizmetin gelecek bir sürümü için göz önünde bulundurulmalıdır.
 
 ## <a name="denial-of-service-dos-attacks"></a>Hizmet reddi (DoS) saldırıları
 
 Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir veya daha fazla uygulamayı tüketmesine neden olan bir istemciyi içerir. Blazor Server uygulamalar, bazı varsayılan limitleri içerir ve SignalR açık olan DOS saldırılarına karşı korumak için diğer ASP.NET Core ve limitlere güvenir <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Server uygulama sınırı | Açıklama | Varsayılan |
+| Blazor Server uygulama sınırı | Description | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Belirli bir sunucunun bellekte tek seferde tuttuğu bağlantı kesilen en fazla bağlantı sayısı. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Bağlantısı kesilmiş bir devre dışı bırakılmadan önce bellekte tutulan en fazla süre. | 3 dakika |
@@ -116,7 +119,7 @@ Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir
 
 Tek bir gelen hub iletisinin en büyük ileti boyutunu ile ayarlayın <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalR ve ASP.NET Core sınırı | Açıklama | Varsayılan |
+| SignalR ve ASP.NET Core sınırı | Description | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Tek bir ileti için ileti boyutu. | 32 KB |
 
@@ -158,7 +161,7 @@ JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript '
   * Parametrelerde Kullanıcı tarafından sağlanan verileri JavaScript çağrılarına geçirmekten kaçının. Parametrelerde veri geçirilmesi kesinlikle gerekliyse, JavaScript kodunun, [siteler arası betik oluşturma (XSS)](#cross-site-scripting-xss) güvenlik açıklarına gerek kalmadan verileri geçirmeyi işlediğinden emin olun. Örneğin, bir öğenin özelliğini ayarlayarak Belge Nesne Modeli (DOM) Kullanıcı tarafından sağlanan verileri yazma `innerHTML` . Devre dışı bırakmak için [Içerik güvenlik ilkesi 'ni (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) `eval` ve diğer güvenli olmayan JavaScript temel öğelerini kullanmayı düşünün.
 * Framework 'ün gönderme uygulamasının en üstünde .NET etkinleştirmeleri için özel bir dağıtma uygulamaktan kaçının. .NET yöntemlerini tarayıcıya sunma, genel geliştirme için önerilmeyen gelişmiş bir senaryodur Blazor .
 
-### <a name="events"></a>Olaylar
+### <a name="events"></a>Ekinlikler
 
 Olaylar bir uygulamaya giriş noktası sağlar Blazor Server . Web Apps 'teki uç noktaları koruma için aynı kurallar, uygulamalardaki olay işleme için geçerlidir Blazor Server . Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
 

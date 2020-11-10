@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: e61c76b5d53ad7646961632d00b047ecd2d9e477
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 13b5c9db04cf23377aadc4e4f61f23855c2fd492
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055613"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430945"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -110,7 +110,7 @@ Son olarak, `MasterLayout` içinde `MasterLayout.razor` üstbilgi, ana menü ve 
 
 ## <a name="share-a-no-locrazor-pages-layout-with-integrated-components"></a>RazorTümleşik bileşenlerle bir sayfa düzeni paylaşma
 
-Yönlendirilebilir bileşenler bir sayfalar uygulamasıyla tümleştirildiğinde Razor , uygulamanın paylaşılan düzeni bileşenlerle birlikte kullanılabilir. Daha fazla bilgi için bkz. <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>.
+Yönlendirilebilir bileşenler bir sayfalar uygulamasıyla tümleştirildiğinde Razor , uygulamanın paylaşılan düzeni bileşenlerle birlikte kullanılabilir. Daha fazla bilgi için bkz. <xref:blazor/components/prerendering-and-integration>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

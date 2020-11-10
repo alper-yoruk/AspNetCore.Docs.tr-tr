@@ -5,7 +5,7 @@ description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döng�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f02bc3a92b9f62eb0e3efea0cd780ad6d09bef5
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056276"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431010"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -85,7 +85,7 @@ Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yan
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
-### <a name="namespaces"></a>Ad Alanları
+### <a name="namespaces"></a>Ad alanları
 
 Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
@@ -628,12 +628,26 @@ Bu değerlerin çakışmayın için kullanıldığından emin olun [`@key`][5] .
 
 ## <a name="overwritten-parameters"></a>Üzerine yazılan parametreler
 
-Yeni parametre değerleri, genellikle, üst bileşen yeniden oluşturulduğunda mevcut olanların üzerine yazılır.
+BlazorFramework genellikle güvenli üst-alt parametre ataması uygular:
 
-Aşağıdaki bileşeni göz önünde bulundurun `Expander` :
+* Parametrelerin üzerine yazılması beklenmedik.
+* Yan etkiler en aza indirilir. Örneğin, sonsuz işleme döngüleri oluşturabileceğinden ek işlemeye kaçınılmaz.
+
+Alt bileşen, üst bileşen yeniden oluşturulduğunda varolan değerlerin üzerine yazılacak yeni parametre değerleri alır. Bir alt bileşendeki parametre değerlerinin üzerine yazılması, genellikle bileşeni bir veya daha fazla veriye dayalı parametre ile geliştirilirken ve geliştirici alt öğe içindeki bir parametreye doğrudan yazdığında oluşur:
+
+* Alt bileşen, üst bileşenden bir veya daha fazla parametre değeri ile işlenir.
+* Alt öğe doğrudan bir parametre değerine yazar.
+* Üst bileşen, alt öğenin parametresinin değerini yeniden ekler ve üzerine yazar.
+
+Parametre değerlerinin üzerine yazılması olasılığı, alt bileşenin Özellik ayarlayıcılarına de göre genişletilir.
+
+**Genel kılavuzumuzdan kendi parametrelerine doğrudan yazılan bileşenler oluşturmamalıdır.**
+
+Aşağıdaki hatalı bileşeni göz önünde bulundurun `Expander` :
 
 * Alt içeriği işler.
-* Bileşen parametresiyle alt içeriğin gösterilmesini değiştirir.
+* Bileşen parametresi () ile alt öğe içeriğini gösterir `Expanded` .
+* Bileşen doğrudan `Expanded` parametresine yazar, bu, üzerine yazılan parametrelerle ilgili sorunu gösterir ve kaçınılması gerekir.
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -685,7 +699,7 @@ Aşağıdaki düzeltilen `Expander` bileşen:
 
 * Üst öğeden `Expanded` bileşen parametre değerini kabul eder.
 * *private field* `expanded` [OnInitialized olaydaki](xref:blazor/components/lifecycle#component-initialization-methods)bir özel alana () bileşen parametre değerini atar.
-* İç geçiş durumunu korumak için özel alanını kullanır.
+* Kendi iç geçiş durumunu korumak için özel alanını kullanır, bu da doğrudan bir parametreye yazmayı nasıl önleyeceğinizi gösterir.
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -719,6 +733,8 @@ Aşağıdaki düzeltilen `Expander` bileşen:
     }
 }
 ```
+
+Daha fazla bilgi için bkz. [ Blazor Iki yönlü bağlama hatası (DotNet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599). 
 
 ## <a name="apply-an-attribute"></a>Öznitelik uygulama
 

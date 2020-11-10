@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: ef1d94ce7a0aa853336260b8d73b9d4036c907ac
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: a815502bb8aa97c137ea8940c7e5f1dde79e9999
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94340016"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430893"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -113,8 +113,8 @@ EF SQL Server paketi ve bağımlılıkları `Microsoft.EntityFrameworkCore` ve `
 [Microsoft. AspNetCore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ve [Microsoft. Aspnetcore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ekleyin. Program Yöneticisi konsolunda (PMC), NuGet paketlerini eklemek için aşağıdaki komutları girin:
 
 ```powershell
-Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
-Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 5.0.0-rc.2.20475.6
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 `Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet paketi, EF Core hata sayfaları için ASP.NET Core ara yazılım sağlar. Bu ara yazılım EF Core geçişlerle hataları algılamaya ve tanılamanıza yardımcı olur.

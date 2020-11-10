@@ -4,7 +4,7 @@ author: guardrex
 ms.author: riande
 description: Sayfalardaki ve görünümlerde bileşenleri işlemek için ASP.NET Core bileşen etiketi Yardımcısı 'nı kullanmayı öğrenin Razor .
 ms.custom: mvc
-ms.date: 04/15/2020
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,26 +18,75 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: cddbca7f95e4d2143d4632aaa83133bc6210e251
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8e780de2367f66ad1f5197077d5243e0b85a41dd
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059162"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431049"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core bileşen etiketi Yardımcısı
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi yardımcısını](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)kullanın.
-
 ## <a name="prerequisites"></a>Önkoşullar
 
-Makalenin *Sayfalar ve görünümlerde bileşenleri kullanmak için uygulamayı hazırlama* bölümündeki yönergeleri izleyin <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> .
+*Yapılandırma* bölümündeki yönergeleri izleyerek şunlardan birini yapın:
+
+* [Blazor WebAssembly](xref:blazor/components/prerendering-and-integration?pivots=webassembly)
+* [Blazor Server](xref:blazor/components/prerendering-and-integration?pivots=server)
 
 ## <a name="component-tag-helper"></a>Bileşen etiketi Yardımcısı
 
-Aşağıdaki bileşen etiketi Yardımcısı, `Counter` bileşeni bir sayfada veya görünümde işler:
+Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi yardımcısını](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper) ( `<component>` tag) kullanın.
+
+> [!NOTE]
+> Razor Razor *Barındırılan bir Blazor WebAssembly UYGULAMADAKI* bileşenleri sayfalar ve MVC uygulamalarıyla tümleştirmek, .net 5,0 veya sonraki sürümlerde ASP.NET Core desteklenir.
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> bileşenin şunları yapıp kullanmadığını yapılandırır:
+
+* , Sayfaya ön gönderilir.
+* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
+
+::: moniker range=">= aspnetcore-5.0"
+
+Blazor WebAssembly uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
+
+| Oluşturma modu | Description |
+| ----------- | ----------- |
+| `WebAssembly` | Bir Blazor WebAssembly uygulamanın tarayıcıya yüklendiğinde etkileşimli bir bileşeni içermesi için kullanılacak bir işaret oluşturur. Bileşen ön işlenmiş değildir. Bu seçenek farklı sayfalarda farklı bileşenlerin işlenmesine daha kolay hale gelir Blazor WebAssembly . |
+| `WebAssemblyPrerendered` | Bileşeni statik HTML 'ye ön ekler ve Blazor WebAssembly daha sonra, tarayıcıya yüklendiğinde bileşeni etkileşimli hale getirmek için bir uygulamanın işaretçisini içerir. |
+
+Blazor Server uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
+
+| Oluşturma modu | Description |
+| ----------- | ----------- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML olarak işler. |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Blazor Server uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
+
+| Oluşturma modu | Description |
+| ----------- | ----------- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML olarak işler. |
+
+::: moniker-end
+
+Ek özellikler şunlardır:
+
+* Birden çok bileşeni işlemeye yönelik birden çok bileşen etiketi yardımcıya Razor izin veriliyor.
+* Uygulama başladıktan sonra bileşenler dinamik olarak işlenemiyor.
+* Sayfalar ve görünümler bileşenleri kullanırken, listesiyse doğru değildir. Bileşenler, kısmi görünümler ve bölümler gibi görünüm ve sayfaya özgü özellikleri kullanamaz. Bileşen içindeki kısmi görünümden mantığı kullanmak için kısmi görünüm mantığını bir bileşene ayırın.
+* Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
+
+Aşağıdaki bileşen etiketi Yardımcısı, `Counter` bileşeni bir uygulamada bir sayfada veya görünümünde işler Blazor Server `ServerPrerendered` :
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -48,7 +97,7 @@ Aşağıdaki bileşen etiketi Yardımcısı, `Counter` bileşeni bir sayfada vey
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-Yukarıdaki örnekte, `Counter` bileşenin uygulamanın *Sayfalar* klasöründe olduğu varsayılır. Yer tutucu, `{APP ASSEMBLY}` uygulamanın derleme adıdır (örneğin, `@using BlazorSample.Pages` ).
+Yukarıdaki örnekte, `Counter` bileşenin uygulamanın *Sayfalar* klasöründe olduğu varsayılır. Yer tutucu, `{APP ASSEMBLY}` uygulamanın derleme adıdır (örneğin, `@using BlazorSample.Pages` veya `@using BlazorSample.Client.Pages` barındırılan bir Blazor çözümde).
 
 Bileşen etiketi Yardımcısı, parametreleri bileşenlere de geçirebilir. `ColorfulCheckbox`Onay kutusu etiketinin rengini ve boyutunu ayarlayan aşağıdaki bileşeni göz önünde bulundurun:
 
@@ -102,6 +151,13 @@ Aşağıdaki HTML sayfada veya görünümde işlenir:
 ```
 
 Tırnak içine alınan bir dizeyi geçirmek, yukarıdaki örnekte gösterildiği gibi [açık bir Razor ifade](xref:mvc/views/razor#explicit-razor-expressions)gerektirir `param-Color` . Razor `string` `param-*` Öznitelik bir tür olduğundan, bir tür değeri için ayrıştırma davranışı bir özniteliğe uygulanmaz `object` .
+
+Aşağıdakiler dışında tüm parametre türleri desteklenir:
+
+* Genel parametreler.
+* Seri hale getirilebilir olmayan parametreler.
+* Koleksiyon parametrelerinde devralma.
+* Türü Blazor WebAssembly uygulamanın dışında veya geç tarafından yüklenen bir derlemede tanımlanan parametreler.
 
 Parametre türünün JSON serileştirilebilir olması gerekir, bu, genellikle türün bir varsayılan oluşturucuya ve ayarlanabilir özelliklere sahip olması anlamına gelir. Örneğin, `Size` `Color` ve TÜRLERI, `Size` `Color` `int` `string` JSON seri hale getiricisi tarafından desteklenen temel türler (ve) olduğundan, önceki örnekte ve için bir değer belirtebilirsiniz.
 
@@ -158,21 +214,6 @@ public class MyClass
 ```
 
 Yukarıdaki örnekte, `MyComponent` bileşenin uygulamanın *paylaşılan* klasöründe olduğu varsayılır. Yer tutucu, `{APP ASSEMBLY}` uygulamanın derleme adıdır (örneğin, `@using BlazorSample` ve `@using BlazorSample.Shared` ). `MyClass` , uygulamanın ad alanıdır.
-
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> bileşenin şunları yapıp kullanmadığını yapılandırır:
-
-* , Sayfaya ön gönderilir.
-* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
-
-| Oluşturma modu | Açıklama |
-| ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML olarak işler. |
-
-Sayfalar ve görünümler bileşenleri kullanırken, listesiyse doğru değildir. Bileşenler, kısmi görünümler ve bölümler gibi görünüm ve sayfaya özgü özellikleri kullanamaz. Bileşen içindeki kısmi görünümden mantığı kullanmak için kısmi görünüm mantığını bir bileşene ayırın.
-
-Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

@@ -5,7 +5,7 @@ description: HTTP trafiğini Kestrel üzerinde çalışan bir ASP.NET Core Web u
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 10/30/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 916bb1f761ce99b2296c84e1653e55fffa04f83c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057693"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431073"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>NGINX ile Linux üzerinde ana bilgisayar ASP.NET Core
 
@@ -35,7 +35,7 @@ Bu kılavuzda Ubuntu 16,04 sunucusunda üretime hazır ASP.NET Core ortamı ayar
 ASP.NET Core tarafından desteklenen diğer Linux dağıtımları hakkında daha fazla bilgi için bkz. [Linux üzerinde .NET Core önkoşulları](/dotnet/core/linux-prerequisites).
 
 > [!NOTE]
-> Ubuntu 14,04 için, Kestrel işlemini izlemeye yönelik bir çözüm olarak *supervisof* önerilir. *systemd* , Ubuntu 14,04 ' de kullanılamaz. Ubuntu 14,04 yönergeleri için [Bu konunun önceki sürümüne](https://github.com/dotnet/AspNetCore.Docs/blob/e9c1419175c4dd7e152df3746ba1df5935aaafd5/aspnetcore/publishing/linuxproduction.md)bakın.
+> Ubuntu 14,04 için, `supervisord` Kestrel işlemini izlemeye yönelik bir çözüm olarak önerilir. `systemd` Ubuntu 14,04 ' de kullanılamaz. Ubuntu 14,04 yönergeleri için [Bu konunun önceki sürümüne](https://github.com/dotnet/AspNetCore.Docs/blob/e9c1419175c4dd7e152df3746ba1df5935aaafd5/aspnetcore/publishing/linuxproduction.md)bakın.
 
 Bu kılavuz:
 
@@ -63,9 +63,9 @@ Uygulamayı [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#fram
 Uygulama yerel olarak çalıştırılır ve güvenli bağlantı (HTTPS) yapmak üzere yapılandırılmamışsa aşağıdaki yaklaşımlardan birini benimseyin:
 
 * Uygulamayı güvenli yerel bağlantıları işleyecek şekilde yapılandırın. Daha fazla bilgi için [https yapılandırma](#https-configuration) bölümüne bakın.
-* `https://localhost:5001` `applicationUrl` Dosyadaki *Properties/launchSettings.js* özelliğinden (varsa) kaldırın.
+* `https://localhost:5001`Dosyadaki özelliğinden (varsa) kaldırın `applicationUrl` `Properties/launchSettings.json` .
 
-Bir uygulamayı sunucuda çalışabilecek bir dizine (örneğin, *bin/Release/ &lt; target_framework_moniker &gt; /Publish* ) paketlemek için geliştirme ortamından [DotNet Publish](/dotnet/core/tools/dotnet-publish) çalıştırın:
+Bir uygulamayı bir dizine paketlemek için geliştirme ortamından [DotNet Publish](/dotnet/core/tools/dotnet-publish) çalıştırın (örneğin, `bin/Release/{TARGET FRAMEWORK MONIKER}/publish` yer tutucu `{TARGET FRAMEWORK MONIKER}` hedef Framework bilinen adı/tfd) sunucuda çalıştırılabilir:
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -73,7 +73,7 @@ dotnet publish --configuration Release
 
 Uygulama, sunucuda .NET Core çalışma zamanının bakımını yapmayı tercih ediyorsanız, [kendi kendine içerilen bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) olarak da yayımlanabilir.
 
-ASP.NET Core uygulamasını, kuruluşun iş akışını (örneğin, SCP, SFTP) tümleştiren bir aracı kullanarak sunucuya kopyalayın. *Var* dizini altında Web uygulamalarının (örneğin, *var/www/HelloApp* ) yerini bulmak yaygındır.
+ASP.NET Core uygulamasını, kuruluşun iş akışını (örneğin,) tümleştiren bir aracı kullanarak sunucuya kopyalayın `SCP` `SFTP` . `var`Dizinde (örneğin,) Web uygulamalarının yerini bulmak yaygındır `var/www/helloapp` .
 
 > [!NOTE]
 > Bir üretim dağıtım senaryosunda, sürekli tümleştirme iş akışı, uygulamayı yayımlama ve varlıkları sunucuya kopyalama işini yapar.
@@ -93,15 +93,16 @@ Kestrel, ASP.NET Core ' den dinamik içerik sunmak için harika. Ancak, Web 'e s
 
 Bu kılavuzun amaçları doğrultusunda, tek bir NGINX örneği kullanılmıştır. Bu, HTTP sunucusu ile birlikte aynı sunucuda çalışır. Gereksinimlere bağlı olarak, farklı bir kurulum seçilebilir.
 
-İstekler ters proxy tarafından iletileceği için, [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) paketindeki [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer) kullanın. Ara yazılım, `Request.Scheme` üstbilgiyi kullanarak, `X-Forwarded-Proto` yeniden yönlendirme URI 'leri ve diğer güvenlik ilkelerini doğru çalışacak şekilde güncelleştirir.
-
+İstekler ters proxy tarafından iletileceği için, paketten [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer) kullanın [`Microsoft.AspNetCore.HttpOverrides`](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides) . Ara yazılım, `Request.Scheme` üstbilgiyi kullanarak, `X-Forwarded-Proto` yeniden yönlendirme URI 'leri ve diğer güvenlik ilkelerini doğru çalışacak şekilde güncelleştirir.
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> `Startup.Configure` Diğer ara yazılım çağrılmadan önce yönteminin en üstünde yöntemi çağırın. Ara yazılımı, `X-Forwarded-For` ve üst bilgilerini iletecek şekilde yapılandırın `X-Forwarded-Proto` :
 
 ```csharp
-// using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.HttpOverrides;
+
+...
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
@@ -113,10 +114,12 @@ app.UseAuthentication();
 
 Hayır <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> , ara yazılım için belirtilmemişse, iletmek için varsayılan üstbilgiler şunlardır `None` .
 
-Standart localhost adresi (127.0.0.1) dahil olmak üzere geri döngü adreslerinde çalışan proxy 'ler (127.0.0.0/8, [:: 1]), varsayılan olarak güvenilirdir. Kuruluş içindeki diğer güvenilir proxy 'ler veya ağlar, Internet ve Web sunucusu arasında istekleri ele alıyorsa, bunları <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> veya ile listesine ekleyin <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Aşağıdaki örnek, içindeki Iletilen üstbilgiler ara sunucusuna alana 10.0.0.100 IP adresinde bir güvenilen ara sunucu ekler `KnownProxies` `Startup.ConfigureServices` :
+`127.0.0.0/8` `[::1]` Standart localhost adresi () de dahil olmak üzere geri döngü adreslerinde çalışan proxy 'ler, `127.0.0.1` Varsayılan olarak güvenilirdir. Kuruluş içindeki diğer güvenilir proxy 'ler veya ağlar, Internet ve Web sunucusu arasında istekleri ele alıyorsa, bunları <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> veya ile listesine ekleyin <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Aşağıdaki örnek, içindeki Iletilen üstbilgiler ara sunucusuna alana 10.0.0.100 IP adresinde bir güvenilen ara sunucu ekler `KnownProxies` `Startup.ConfigureServices` :
 
 ```csharp
-// using System.Net;
+using System.Net;
+
+...
 
 services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -128,7 +131,7 @@ Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
 
 ### <a name="install-nginx"></a>NGINX 'i yükler
 
-`apt-get`NGINX yüklemek için kullanın. Yükleyici, sistem başlangıcında arka plan programı olarak NGINX çalıştıran bir *systemd* init betiği oluşturur. [NGINX: resmi deni/Ubuntu paketlerinde](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)Ubuntu yükleme yönergelerini izleyin.
+`apt-get`NGINX yüklemek için kullanın. Yükleyici, `systemd` sistem başlangıcında arka plan programı olarak Nginx çalıştıran bir init betiği oluşturur. [NGINX: resmi deni/Ubuntu paketlerinde](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)Ubuntu yükleme yönergelerini izleyin.
 
 > [!NOTE]
 > İsteğe bağlı NGINX modülleri gerekliyse, kaynaktan NGINX oluşturulması gerekebilir.
@@ -143,7 +146,7 @@ Bir tarayıcının NGINX için varsayılan giriş sayfasını görüntülediğin
 
 ### <a name="configure-nginx"></a>Nginx hizmetini yapılandırma
 
-İstekleri ASP.NET Core uygulamanıza iletmek için NGINX 'i ters proxy olarak yapılandırmak için */etc/nginx/sites-available/default* değiştirin. Bu dosyayı bir metin düzenleyicisinde açın ve içeriği şu şekilde değiştirin:
+HTTP isteklerini ASP.NET Core uygulamanıza iletmek için NGINX 'i ters proxy olarak yapılandırmak için değiştirin `/etc/nginx/sites-available/default` . Bu dosyayı bir metin düzenleyicisinde açın ve içeriği şu şekilde değiştirin:
 
 ```nginx
 server {
@@ -192,7 +195,7 @@ Uygulamayı test etmeyi tamamladıktan sonra komut isteminde uygulamayı ile kap
 
 ## <a name="monitor-the-app"></a>Uygulamayı izleme
 
-Sunucu, üzerinde yapılan istekleri `http://<serveraddress>:80` üzerinde Kestrel üzerinde çalışan ASP.NET Core uygulamasına iletmek üzere ayarlanır `http://127.0.0.1:5000` . Ancak, NGINX Kestrel işlemini yönetmek için ayarlanmadı. *systemd* , temel Web uygulamasını başlatmak ve izlemek üzere bir hizmet dosyası oluşturmak için kullanılabilir. *systemd* , işlem başlatmak, durdurmak ve yönetmek için birçok güçlü özellik sağlayan bir init sistemidir. 
+Sunucu, üzerinde yapılan istekleri `http://<serveraddress>:80` üzerinde Kestrel üzerinde çalışan ASP.NET Core uygulamasına iletmek üzere ayarlanır `http://127.0.0.1:5000` . Ancak, NGINX Kestrel işlemini yönetmek için ayarlanmadı. `systemd` , temel Web uygulamasını başlatmak ve izlemek üzere bir hizmet dosyası oluşturmak için kullanılabilir. `systemd` , işlemlerin başlatılmasına, durdurulmasına ve yönetilmesine yönelik birçok güçlü özellik sağlayan bir init sistemidir. 
 
 ### <a name="create-the-service-file"></a>Hizmet dosyasını oluşturma
 
@@ -226,14 +229,14 @@ WantedBy=multi-user.target
 
 Yukarıdaki örnekte, hizmeti yöneten Kullanıcı `User` seçeneğiyle belirtilir. Kullanıcı ( `www-data` ) var olmalıdır ve uygulamanın dosyalarının doğru sahipliğini içermelidir.
 
-`TimeoutStopSec`Uygulamanın ilk kesme sinyali aldıktan sonra kapanması için bekleyeceği süreyi yapılandırmak için kullanın. Uygulama bu dönemde kapanmazsa, uygulamayı sonlandırmak için SIGKıLL çıkarılır. Değeri unitless saniyeler (örneğin, `150` ), bir zaman aralığı değeri (örneğin, `2min 30s` ) veya `infinity` zaman aşımını devre dışı bırakmak için girin. `TimeoutStopSec` Varsayılan olarak, `DefaultTimeoutStopSec` yönetici yapılandırma dosyasındaki değerini alır ( *systemd-System. conf* , *System. conf. d* , *systemd-User. conf* , *User. conf. d* ). Çoğu dağıtım için varsayılan zaman aşımı 90 saniyedir.
+`TimeoutStopSec`Uygulamanın ilk kesme sinyali aldıktan sonra kapanması için bekleyeceği süreyi yapılandırmak için kullanın. Uygulama bu dönemde kapanmazsa, uygulamayı sonlandırmak için SIGKıLL çıkarılır. Değeri unitless saniyeler (örneğin, `150` ), bir zaman aralığı değeri (örneğin, `2min 30s` ) veya `infinity` zaman aşımını devre dışı bırakmak için girin. `TimeoutStopSec` Varsayılan olarak, `DefaultTimeoutStopSec` yönetici yapılandırma dosyasında ( `systemd-system.conf` ,, `system.conf.d` `systemd-user.conf` , `user.conf.d` ) değerini alır. Çoğu dağıtım için varsayılan zaman aşımı 90 saniyedir.
 
 ```
 # The default value is 90 seconds for most distributions.
 TimeoutStopSec=90
 ```
 
-Linux, büyük/küçük harfe duyarlı bir dosya sistemine sahiptir. ASPNETCORE_ENVIRONMENT "üretim" olarak ayarlamak, üzerinde *appsettings.production.js* değil, *appsettings.Production.js* yapılandırma dosyasını aramaya neden olur.
+Linux, büyük/küçük harfe duyarlı bir dosya sistemine sahiptir. `ASPNETCORE_ENVIRONMENT` `Production` Yapılandırma dosyası aranmasına neden olacak şekilde ayarlanıyor `appsettings.Production.json` `appsettings.production.json` .
 
 Yapılandırma sağlayıcılarının ortam değişkenlerini okuyabilmesi için bazı değerler (örneğin, SQL bağlantı dizeleri) kaçışmalıdır. Yapılandırma dosyasında kullanılmak üzere uygun bir kaçış değeri oluşturmak için aşağıdaki komutu kullanın:
 
@@ -276,7 +279,7 @@ Main PID: 9021 (dotnet)
             └─9021 /usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
 ```
 
-Ters proxy yapılandırılmış ve systemd üzerinden yönetilen Kestrel, Web uygulaması tam olarak yapılandırılır ve adresinden yerel makinedeki bir tarayıcıdan erişilebilir `http://localhost` . Ayrıca, uzak bir makineden de erişilebilir, engelleyici olabilecek tüm güvenlik duvarını açabilir. Yanıt üst bilgilerini inceleyerek `Server` üst bilgi, Kestrel tarafından sunulan ASP.NET Core uygulamasını gösterir.
+Ters proxy yapılandırılmış ve Kestrel ile yönetildiğinde `systemd` , Web uygulaması tam olarak yapılandırılır ve adresinden yerel makinedeki bir tarayıcıdan erişilebilir `http://localhost` . Ayrıca, uzak bir makineden de erişilebilir, engelleyici olabilecek tüm güvenlik duvarını açabilir. Yanıt üst bilgilerini inceleyerek `Server` üst bilgi, Kestrel tarafından sunulan ASP.NET Core uygulamasını gösterir.
 
 ```text
 HTTP/1.1 200 OK
@@ -357,7 +360,7 @@ sudo ufw enable
 
 #### <a name="change-the-nginx-response-name"></a>NGINX yanıt adını değiştirme
 
-*Src/http/ngx_http_header_filter_module. c* 'yi düzenleyin:
+Düzenle `src/http/ngx_http_header_filter_module.c` :
 
 ```
 static char ngx_http_server_string[] = "Server: Web Server" CRLF;
@@ -372,9 +375,9 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 
 **Uygulamayı güvenli (HTTPS) yerel bağlantılar için yapılandırma**
 
-[DotNet Run](/dotnet/core/tools/dotnet-run) komutu, uygulamayı özelliği tarafından belirtilen URL 'lerde dinlemek üzere yapılandıran, uygulamanın *Özellikler/launchSettings.js* kullanır `applicationUrl` (örneğin, `https://localhost:5001;http://localhost:5000` ).
+[DotNet Run](/dotnet/core/tools/dotnet-run) komutu, uygulamayı `Properties/launchSettings.json` özelliği tarafından belirtilen URL 'lerde dinlemek üzere yapılandıran uygulamanın dosyasını kullanır `applicationUrl` (örneğin, `https://localhost:5001;http://localhost:5000` ).
 
-`dotnet run`Aşağıdaki yaklaşımlardan birini kullanarak, uygulamayı komut veya geliştirme ortamı için geliştirme sırasında (F5 veya CTRL + f5 Visual Studio Code) bir sertifikayı kullanacak şekilde yapılandırın:
+Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut veya geliştirme ortamı (<kbd>F5</kbd> veya <kbd>CTRL</kbd> + <kbd>F5</kbd> Visual Studio Code) için geliştirme sürecinde bir sertifika kullanacak şekilde yapılandırın:
 
 * [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel#configuration) ( *önerilir* )
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
@@ -383,20 +386,25 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 
 * `443`Güvenilen bir sertifika yetkilisi (CA) tarafından verilen geçerli bir sertifika belirterek, sunucu bağlantı NOKTASıNDA HTTPS trafiğini dinleyecek şekilde yapılandırın.
 
-* Aşağıdaki */etc/nginx/nginx.conf* dosyasında gösterilen bazı uygulamalardan yararlanarak güvenliği en iyi şekilde yapın. Daha güçlü bir şifre seçme ve HTTP üzerinden tüm trafiği HTTPS 'ye yeniden yönlendirme örnekleri içerir.
+* Aşağıdaki dosyada gösterilen bazı uygulamalardan yararlanarak güvenliği sağlamlaştırın `/etc/nginx/nginx.conf` . Daha güçlü bir şifre seçme ve HTTP üzerinden tüm trafiği HTTPS 'ye yeniden yönlendirme örnekleri içerir.
+
+  > [!NOTE]
+  > Geliştirme ortamları için kalıcı yeniden yönlendirmeler (301) yerine geçici yeniden yönlendirmeleri (302) kullanmanızı öneririz. Bağlantıyı önbelleğe alma, geliştirme ortamlarında kararsız davranışa neden olabilir.
 
 * `HTTP Strict-Transport-Security`(HSTS) üstbilgisi eklemek, istemci tarafından yapılan tüm sonraki ISTEKLERIN https üzerinden yapılmasını sağlar.
+
+  HSTS hakkında önemli yönergeler için bkz <xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts> ..
 
 * Daha sonra HTTPS devre dışı bırakılabiliyorsanız, aşağıdaki yaklaşımlardan birini kullanın:
 
   * HSTS üst bilgisini eklemeyin.
   * Kısa bir `max-age` değer seçin.
 
-*/Etc/nginx/proxy.conf* yapılandırma dosyasını ekleyin:
+`/etc/nginx/proxy.conf`Yapılandırma dosyasını ekleyin:
 
 [!code-nginx[](linux-nginx/proxy.conf)]
 
-*/Etc/nginx/nginx.conf* yapılandırma dosyasını düzenleyin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
+**Replace** `/etc/nginx/nginx.conf` Yapılandırma dosyasının Içeriğini aşağıdaki dosyayla değiştirin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
@@ -409,27 +417,31 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 
 Tıklama saldırılarını azaltmak için:
 
-1. *NGINX. conf* dosyasını düzenleyin:
+1. Dosyayı düzenleyin `nginx.conf` :
 
    ```bash
    sudo nano /etc/nginx/nginx.conf
    ```
 
-   `add_header X-Frame-Options "SAMEORIGIN";` satırını ekleyin.
+   Satırı ekleyin: `add_header X-Frame-Options "SAMEORIGIN";`
+
 1. Dosyayı kaydedin.
 1. NGINX 'i yeniden başlatın.
 
 #### <a name="mime-type-sniffing"></a>MIME türü algılaması
 
-Bu üst bilgi, tarayıcının, yanıt içerik türünü geçersiz kılmamasını bildiren, büyük bir olasılıkla, MIME tarafından yapılan bir yanıtın bir yanıt olarak bildirimde bulunmasını engeller. `nosniff`Seçeneğiyle, sunucu içeriği "metin/html" olarak söyliyorsa, tarayıcı bunu "metin/html" olarak işler.
+Bu üst bilgi, tarayıcının, yanıt içerik türünü geçersiz kılmamasını bildiren, büyük bir olasılıkla, MIME tarafından yapılan bir yanıtın bir yanıt olarak bildirimde bulunmasını engeller. `nosniff`Seçeneğiyle, sunucu içeriği olduğunu `text/html` söyliyorsa, tarayıcı onu olarak işler `text/html` .
 
-*NGINX. conf* dosyasını düzenleyin:
+1. Dosyayı düzenleyin `nginx.conf` :
 
-```bash
-sudo nano /etc/nginx/nginx.conf
-```
+   ```bash
+   sudo nano /etc/nginx/nginx.conf
+   ```
 
-Satırı ekleyin `add_header X-Content-Type-Options "nosniff";` ve dosyayı kaydedin, sonra NGINX 'i yeniden başlatın.
+   Satırı ekleyin: `add_header X-Content-Type-Options "nosniff";`
+
+1. Dosyayı kaydedin.
+1. NGINX 'i yeniden başlatın.
 
 ## <a name="additional-nginx-suggestions"></a>Ek NGINX önerileri
 
