@@ -5,17 +5,17 @@ description: ASP.NET Core MVC 'de öğretici serisinin 3. bölümü.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-view
 ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
 ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
@@ -30,9 +30,9 @@ ms.locfileid: "94422723"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="99664-105">Bu bölümde, `HelloWorldController` [:::no-loc(Razor):::](xref:mvc/views/razor) BIR istemciye HTML yanıtları oluşturma işlemini düzgün bir şekilde kapsüllemek için, sınıfını görünüm dosyalarını kullanacak şekilde değiştirirsiniz.</span><span class="sxs-lookup"><span data-stu-id="99664-105">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="99664-105">Bu bölümde, `HelloWorldController` [Razor](xref:mvc/views/razor) BIR istemciye HTML yanıtları oluşturma işlemini düzgün bir şekilde kapsüllemek için, sınıfını görünüm dosyalarını kullanacak şekilde değiştirirsiniz.</span><span class="sxs-lookup"><span data-stu-id="99664-105">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="99664-106">Kullanarak bir görünüm şablonu dosyası oluşturursunuz :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="99664-106">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="99664-107">:::no-loc(Razor):::tabanlı görünüm şablonlarının *. cshtml* dosya uzantısı vardır.</span><span class="sxs-lookup"><span data-stu-id="99664-107">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="99664-108">C# ile HTML çıktısı oluşturmanın zarif bir yolunu sağlarlar.</span><span class="sxs-lookup"><span data-stu-id="99664-108">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="99664-106">Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor .</span><span class="sxs-lookup"><span data-stu-id="99664-106">You create a view template file using Razor.</span></span> <span data-ttu-id="99664-107">Razortabanlı görünüm şablonlarının *. cshtml* dosya uzantısı vardır.</span><span class="sxs-lookup"><span data-stu-id="99664-107">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="99664-108">C# ile HTML çıktısı oluşturmanın zarif bir yolunu sağlarlar.</span><span class="sxs-lookup"><span data-stu-id="99664-108">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="99664-109">Şu anda `Index` yöntemi, denetleyici sınıfında sabit kodlanmış bir ileti içeren bir dize döndürür.</span><span class="sxs-lookup"><span data-stu-id="99664-109">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="99664-110">Sınıfında, `HelloWorldController` `Index` yöntemini aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-110">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "94422723"
 
   * <span data-ttu-id="99664-119">Sağ üst köşedeki arama kutusuna *Görünüm* girin</span><span class="sxs-lookup"><span data-stu-id="99664-119">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="99664-120">**:::no-loc(Razor)::: Görünüm** Seç</span><span class="sxs-lookup"><span data-stu-id="99664-120">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="99664-120">**Razor Görünüm** Seç</span><span class="sxs-lookup"><span data-stu-id="99664-120">Select **Razor View**</span></span>
 
   * <span data-ttu-id="99664-121">*Index. cshtml* **adlı ad** kutusu değerini saklayın.</span><span class="sxs-lookup"><span data-stu-id="99664-121">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -82,7 +82,7 @@ ms.locfileid: "94422723"
 
 ---
 
-<span data-ttu-id="99664-137">*Views/HelloWorld/Index. cshtml* :::no-loc(Razor)::: Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="99664-137">*Views/HelloWorld/Index. cshtml* Razor Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
@@ -200,9 +200,9 @@ ms.locfileid: "94422723"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="99664-219">Bu bölümde, `HelloWorldController` [:::no-loc(Razor):::](xref:mvc/views/razor) BIR istemciye HTML yanıtları oluşturma işlemini düzgün bir şekilde kapsüllemek için, sınıfını görünüm dosyalarını kullanacak şekilde değiştirirsiniz.</span><span class="sxs-lookup"><span data-stu-id="99664-219">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="99664-219">Bu bölümde, `HelloWorldController` [Razor](xref:mvc/views/razor) BIR istemciye HTML yanıtları oluşturma işlemini düzgün bir şekilde kapsüllemek için, sınıfını görünüm dosyalarını kullanacak şekilde değiştirirsiniz.</span><span class="sxs-lookup"><span data-stu-id="99664-219">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="99664-220">Kullanarak bir görünüm şablonu dosyası oluşturursunuz :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="99664-220">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="99664-221">:::no-loc(Razor):::tabanlı görünüm şablonlarının *. cshtml* dosya uzantısı vardır.</span><span class="sxs-lookup"><span data-stu-id="99664-221">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="99664-222">C# ile HTML çıktısı oluşturmanın zarif bir yolunu sağlarlar.</span><span class="sxs-lookup"><span data-stu-id="99664-222">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="99664-220">Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor .</span><span class="sxs-lookup"><span data-stu-id="99664-220">You create a view template file using Razor.</span></span> <span data-ttu-id="99664-221">Razortabanlı görünüm şablonlarının *. cshtml* dosya uzantısı vardır.</span><span class="sxs-lookup"><span data-stu-id="99664-221">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="99664-222">C# ile HTML çıktısı oluşturmanın zarif bir yolunu sağlarlar.</span><span class="sxs-lookup"><span data-stu-id="99664-222">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="99664-223">Şu anda `Index` yöntemi, denetleyici sınıfında sabit kodlanmış bir ileti içeren bir dize döndürür.</span><span class="sxs-lookup"><span data-stu-id="99664-223">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="99664-224">Sınıfında, `HelloWorldController` `Index` yöntemini aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-224">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -222,7 +222,7 @@ ms.locfileid: "94422723"
 
   * <span data-ttu-id="99664-233">Sağ üst köşedeki arama kutusuna *Görünüm* girin</span><span class="sxs-lookup"><span data-stu-id="99664-233">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="99664-234">**:::no-loc(Razor)::: Görünüm** Seç</span><span class="sxs-lookup"><span data-stu-id="99664-234">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="99664-234">**Razor Görünüm** Seç</span><span class="sxs-lookup"><span data-stu-id="99664-234">Select **Razor View**</span></span>
 
   * <span data-ttu-id="99664-235">*Index. cshtml* **adlı ad** kutusu değerini saklayın.</span><span class="sxs-lookup"><span data-stu-id="99664-235">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -252,7 +252,7 @@ ms.locfileid: "94422723"
 
 ---
 
-<span data-ttu-id="99664-251">*Views/HelloWorld/Index. cshtml* :::no-loc(Razor)::: Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="99664-251">*Views/HelloWorld/Index. cshtml* Razor Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="99664-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
