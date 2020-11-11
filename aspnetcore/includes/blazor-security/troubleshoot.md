@@ -1,5 +1,25 @@
 ## <a name="troubleshoot"></a>Sorun giderme
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="common-errors"></a>Sık karşılaşılan hatalar
+
+* AAD için yetkisiz istemci
+
+  > bilgi: Microsoft. AspNetCore. Authorization. DefaultAuthorizationService [2] yetkilendirmesi başarısız oldu. Bu gereksinimler karşılanmadı: DenyAnonymousAuthorizationRequirement: kimliği doğrulanmış bir kullanıcı gerektirir.
+
+  AAD 'den oturum açma geri çağırma hatası:
+
+  * Hata: `unauthorized_client`
+  * Açıklaması `AADB2C90058: The provided application is not configured to allow public clients.`
+
+  Hatayı gidermek için:
+
+  1. Azure portal, [uygulamanın bildirimine](/azure/active-directory/develop/reference-app-manifest)erişin.
+  1. [`allowPublicClient`](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute)Özniteliğini veya olarak ayarlayın `null` `true` .
+
+::: moniker-end
+
 ### <a name="cookies-and-site-data"></a>Tanımlama bilgileri ve site verileri
 
 Tanımlama bilgileri ve site verileri, uygulama güncelleştirmelerinde kalıcı hale getiriyor ve test ve sorun gidermeye engel olabilir. Uygulama kodu değişiklikleri yaparken, sağlayıcı ile Kullanıcı hesabı değişiklikleri veya sağlayıcı uygulama yapılandırma değişiklikleri yaparken aşağıdakileri temizleyin:

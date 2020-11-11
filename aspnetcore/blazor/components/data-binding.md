@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: f1730ed366fc81444ffe54e88bcd33147efb0aa7
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 004a15bf63c34144049a45f9d5fca8852fa36a3f
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056302"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94463827"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -332,8 +332,8 @@ Hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.EventCall
 
 Herhangi bir sayıda iç içe bileşeni bağlayabilirsiniz, ancak tek yönlü verilerin akışını dikkate almanız gerekir:
 
-* Değişiklik bildirimleri *hiyerarşinin akışını* .
-* Yeni parametre değerleri *hiyerarşinin altına akar* .
+* Değişiklik bildirimleri *hiyerarşinin akışını*.
+* Yeni parametre değerleri *hiyerarşinin altına akar*.
 
 Ortak ve önerilen bir yaklaşım, hangi durumun güncellenmesi gerektiğini öğrenmek için temel alınan verileri yalnızca üst bileşende depomaktır.
 
@@ -344,20 +344,20 @@ Aşağıdaki bileşenler önceki kavramları göstermektedir:
 ```razor
 <h1>Parent Component</h1>
 
-<p>Parent Property: <b>@parentValue</b></p>
+<p>Parent Message: <b>@parentMessage</b></p>
 
 <p>
     <button @onclick="ChangeValue">Change from Parent</button>
 </p>
 
-<ChildComponent @bind-Property="parentValue" />
+<ChildComponent @bind-ChildMessage="parentMessage" />
 
 @code {
-    private string parentValue = "Initial value set in Parent";
+    private string parentMessage = "Initial value set in Parent";
 
     private void ChangeValue()
     {
-        parentValue = $"Set in Parent {DateTime.Now}";
+        parentMessage = $"Set in Parent {DateTime.Now}";
     }
 }
 ```
@@ -368,31 +368,32 @@ Aşağıdaki bileşenler önceki kavramları göstermektedir:
 <div class="border rounded m-1 p-1">
     <h2>Child Component</h2>
 
-    <p>Child Property: <b>@Property</b></p>
+    <p>Child Message: <b>@ChildMessage</b></p>
 
     <p>
         <button @onclick="ChangeValue">Change from Child</button>
     </p>
 
-    <GrandchildComponent @bind-Property="BoundValue" />
+    <GrandchildComponent @bind-GrandchildMessage="BoundValue" />
 </div>
 
 @code {
     [Parameter]
-    public string Property { get; set; }
+    public string ChildMessage { get; set; }
 
     [Parameter]
-    public EventCallback<string> PropertyChanged { get; set; }
+    public EventCallback<string> ChildMessageChanged { get; set; }
 
     private string BoundValue
     {
-        get => Property;
-        set => PropertyChanged.InvokeAsync(value);
+        get => ChildMessage;
+        set => ChildMessageChanged.InvokeAsync(value);
     }
 
     private async Task ChangeValue()
     {
-        await PropertyChanged.InvokeAsync($"Set in Child {DateTime.Now}");
+        await ChildMessageChanged.InvokeAsync(
+            $"Set in Child {DateTime.Now}");
     }
 }
 ```
@@ -403,7 +404,7 @@ Aşağıdaki bileşenler önceki kavramları göstermektedir:
 <div class="border rounded m-1 p-1">
     <h3>Grandchild Component</h3>
 
-    <p>Grandchild Property: <b>@Property</b></p>
+    <p>Grandchild Message: <b>@GrandchildMessage</b></p>
 
     <p>
         <button @onclick="ChangeValue">Change from Grandchild</button>
@@ -412,14 +413,15 @@ Aşağıdaki bileşenler önceki kavramları göstermektedir:
 
 @code {
     [Parameter]
-    public string Property { get; set; }
+    public string GrandchildMessage { get; set; }
 
     [Parameter]
-    public EventCallback<string> PropertyChanged { get; set; }
+    public EventCallback<string> GrandchildMessageChanged { get; set; }
 
     private async Task ChangeValue()
     {
-        await PropertyChanged.InvokeAsync($"Set in Grandchild {DateTime.Now}");
+        await GrandchildMessageChanged.InvokeAsync(
+            $"Set in Grandchild {DateTime.Now}");
     }
 }
 ```
