@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: eef381367d7aa59dcc430c529746088d4488e700
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: fc2e81cf130732d515fb871227031493e297cf9f
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054937"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507778"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor şablonları
 
@@ -48,12 +48,27 @@ dotnet new blazorserver --help
 
 Aşağıdaki dosyalar ve klasörler Blazor bir proje şablonundan oluşturulan bir uygulamayı yapar Blazor :
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `Program.cs`: Uygulamanın şunları ayarlayan giriş noktası:
 
   * ASP.NET Core [Host](xref:fundamentals/host/generic-host) ( Blazor Server )
   * WebAssembly Host ( Blazor WebAssembly ): Bu dosyadaki kod, şablondan oluşturulan uygulamalar için benzersizdir Blazor WebAssembly ( `blazorwasm` ).
-    * `App`Bileşen, uygulamanın kök bileşenidir. `App`Bileşen, `app` `<app>...</app>` kök bileşen koleksiyonuna () DOM öğesi () olarak belirtilir `builder.RootComponents.Add<App>("app")` .
+    * `App`Bileşen, uygulamanın kök bileşenidir. `App`Bileşen, `app` `<div id="app">Loading...</div>` `wwwroot/index.html` kök bileşen koleksiyonunda () DOM öğesi olarak belirtilir `builder.RootComponents.Add<App>("#app")` .
     * [Hizmetler](xref:blazor/fundamentals/dependency-injection) eklenir ve yapılandırılır (örneğin, `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `Program.cs`: Uygulamanın şunları ayarlayan giriş noktası:
+
+  * ASP.NET Core [Host](xref:fundamentals/host/generic-host) ( Blazor Server )
+  * WebAssembly Host ( Blazor WebAssembly ): Bu dosyadaki kod, şablondan oluşturulan uygulamalar için benzersizdir Blazor WebAssembly ( `blazorwasm` ).
+    * `App`Bileşen, uygulamanın kök bileşenidir. `App`Bileşen, `app` `<app>Loading...</app>` `wwwroot/index.html` kök bileşen koleksiyonunda () DOM öğesi olarak belirtilir `builder.RootComponents.Add<App>("app")` .
+    * [Hizmetler](xref:blazor/fundamentals/dependency-injection) eklenir ve yapılandırılır (örneğin, `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
+
+::: moniker-end
 
 * `Startup.cs` ( Blazor Server ): Uygulamanın başlangıç mantığını içerir. `Startup`Sınıfı iki yöntemi tanımlar:
 

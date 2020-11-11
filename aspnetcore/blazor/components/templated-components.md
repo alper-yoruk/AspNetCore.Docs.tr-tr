@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: ee38040a1edc8db43b8d5bf0202fd519b153ea04
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f818a0b7f1ba6d4dd6affeeba785c5e288568dd8
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056250"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507960"
 ---
 # <a name="aspnet-core-no-locblazor-templated-components"></a>BlazorŞablonlu bileşenleri ASP.NET Core
 
@@ -43,7 +43,7 @@ ms.locfileid: "93056250"
 
 `TableTemplate` bileşen ( `TableTemplate.razor` ):
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
 Şablonlu bir bileşen kullanırken, şablon parametreleri parametrelerin adlarıyla ( `TableHeader` ve aşağıdaki örnekte) eşleşen alt öğeler kullanılarak belirtilebilir `RowTemplate` :
 
@@ -122,7 +122,7 @@ Alternatif olarak, `Context` bileşen öğesi üzerinde özniteliğini de belirt
 
 Şablonlu bileşenler çoğunlukla genel olarak türdedir. Örneğin, `ListViewTemplate` değerleri işlemek için genel bir bileşen ( `ListViewTemplate.razor` ) kullanılabilir `IEnumerable<T>` . Genel bir bileşen tanımlamak için, [`@typeparam`](xref:mvc/views/razor#typeparam) tür parametrelerini belirtmek için yönergesini kullanın:
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
 Genel türsüz bileşenleri kullanırken tür parametresi mümkünse algılanır:
 

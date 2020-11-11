@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 1f377f3be54ed8837d2857aed64c2d055ed9f582
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: e25549d557dd971d0f2f4d67a182574f07138acb
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422593"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508129"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -130,7 +130,7 @@ Openapı varsayılan olarak etkinken, Web API geliştiricileri için uygulama ba
 
 ## Blazor
 
-### <a name="performance-improvements"></a>Performans iyileştirmeleri
+### <a name="performance-improvements"></a>Performans geliştirmeleri
 
 .NET 5 için, Blazor WebAssembly karmaşık UI işleme ve JSON serileştirmesi üzerinde belirli bir odak ile çalışma zamanı performansı için önemli geliştirmeler yaptık. Performans testlerimizde, Blazor WebAssembly .NET 5 ' te çoğu senaryo için iki-üç kat daha hızlıdır. Daha fazla bilgi için bkz. [ASP.net Blog: .NET 5 Release Candidate 1 ' de ASP.NET Core Updates](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements).
 
@@ -328,7 +328,7 @@ Aşağıdaki örnek, bir yapılandırma dosyası kullanarak uç noktaya özel be
 
 Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bunun ne kadar etkili olduğu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.
 
-## <a name="performance-improvements"></a>Performans iyileştirmeleri
+## <a name="performance-improvements"></a>Performans geliştirmeleri
 
 ### <a name="http2"></a>HTTP/2
 
@@ -410,13 +410,14 @@ Varsayılan biçimi varsayılan <xref:System.Diagnostics.Activity?displayPropert
 
 ### <a name="frombodyattribute"></a>FromBodyAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute> Ow, bu parametrelerin veya özelliklerin isteğe bağlı olarak kabul edilmesine izin veren bir seçeneğin yapılandırılmasını destekler:
+<xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute> Artık bu parametrelerin veya özelliklerin isteğe bağlı olarak kabul edilmesine izin veren bir seçeneğin yapılandırılmasını destekler:
 
 ```csharp
 public IActionResult Post([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
-                           MyModel model) {
-     ...
-     }
+                          MyModel model)
+{
+    ...
+}
 ```
 
 ## <a name="miscellaneous-improvements"></a>Çeşitli geliştirmeler
@@ -450,7 +451,7 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* `dotnet watch` komutunu çalıştırın.
+* Şu komutu çalıştırın: `dotnet watch`.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
 
 Otomatik yenileme işlevini gelecekte Visual Studio 'ya getirmeyi umuyoruz.
