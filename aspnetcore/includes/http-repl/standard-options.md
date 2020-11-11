@@ -9,10 +9,6 @@
   * `{header}={value}`
   * `{header}:{value}`
 
-* `--response`
-
-  Tüm HTTP yanıtının (üstbilgiler ve gövde dahil) yazılması gereken bir dosyayı belirtir. Örneğin, `--response "C:\response.txt"`. Dosya yoksa oluşturulur.
-
 * `--response:body`
 
   HTTP yanıt gövdesinin yazılması gereken bir dosyayı belirtir. Örneğin, `--response:body "C:\response.json"`. Dosya yoksa oluşturulur.
