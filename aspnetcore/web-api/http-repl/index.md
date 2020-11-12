@@ -1,11 +1,11 @@
 ---
-title: HTTP REPL ile Web API 'Lerini test etme
+title: HttpRepl ile Web API 'Lerini test etme
 author: scottaddie
-description: HTTP REPL .NET Core küresel aracının bir ASP.NET Core Web API 'sini taramak ve test etmek için nasıl kullanılacağını öğrenin.
+description: Bir ASP.NET Core Web API 'sini taramak ve test etmek için HttpRepl .NET Core küresel aracının nasıl kullanılacağını öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 81174b551c5b6d81e6ac80975f7f77ee6664059d
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: df2d4e63a18471b4c5f4f1c9434921303bb1da8a
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502045"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550627"
 ---
-# <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL ile Web API 'Lerini test etme
+# <a name="test-web-apis-with-the-httprepl"></a>HttpRepl ile Web API 'Lerini test etme
 
 [Scott Ade](https://twitter.com/Scott_Addie) tarafından
 
@@ -48,13 +48,13 @@ Aşağıdaki [http fiilleri](https://github.com/microsoft/api-guidelines/blob/vN
 
 Takip etmek için, [örnek ASP.NET Core Web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) 'sini ([indirme](xref:index#how-to-download-a-sample)) görüntüleyin veya indirin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
 ## <a name="installation"></a>Yükleme
 
-HTTP REPL 'u yüklemek için aşağıdaki komutu çalıştırın:
+HttpRepl 'yi yüklemek için şu komutu çalıştırın:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-httprepl
@@ -64,13 +64,13 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 ## <a name="usage"></a>Kullanım
 
-Aracın başarıyla yüklenmesinden sonra, HTTP REPL 'u başlatmak için aşağıdaki komutu çalıştırın:
+Aracın başarıyla yüklenmesinden sonra, HttpRepl 'yi başlatmak için aşağıdaki komutu çalıştırın:
 
 ```console
 httprepl
 ```
 
-Kullanılabilir HTTP REPL komutlarını görüntülemek için aşağıdaki komutlardan birini çalıştırın:
+Kullanılabilir HttpRepl komutlarını görüntülemek için aşağıdaki komutlardan birini çalıştırın:
 
 ```console
 httprepl -h
@@ -135,7 +135,7 @@ Use `help <COMMAND>` for more detail on an individual command. e.g. `help get`.
 For detailed tool info, see https://aka.ms/http-repl-doc.
 ```
 
-HTTP REPL komut tamamlama sağlar. <kbd>Sekme</kbd> tuşuna basıldığında, yazdığınız KARAKTERLERI veya API uç noktasını tamamlayacak komutların listesi üzerinden yinelenir. Aşağıdaki bölümlerde kullanılabilir CLı komutları ana hatlarıyla verilmiştir.
+HttpRepl komut tamamlama sağlar. <kbd>Sekme</kbd> tuşuna basıldığında, yazdığınız KARAKTERLERI veya API uç noktasını tamamlayacak komutların listesi üzerinden yinelenir. Aşağıdaki bölümlerde kullanılabilir CLı komutları ana hatlarıyla verilmiştir.
 
 ## <a name="connect-to-the-web-api"></a>Web API 'sine bağlanma
 
@@ -145,19 +145,19 @@ Aşağıdaki komutu çalıştırarak bir Web API 'sine bağlanın:
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` , Web API 'sinin temel URI 'sidir. Örneğin:
+`<ROOT URI>` , Web API 'sinin temel URI 'sidir. Örnek:
 
 ```console
 httprepl https://localhost:5001
 ```
 
-Alternatif olarak, HTTP REPL çalışırken istediğiniz zaman aşağıdaki komutu çalıştırın:
+Alternatif olarak, HttpRepl çalışırken herhangi bir zamanda aşağıdaki komutu çalıştırın:
 
 ```console
 connect <ROOT URI>
 ```
 
-Örneğin:
+Örnek:
 
 ```console
 (Disconnected)> connect https://localhost:5001
@@ -171,7 +171,7 @@ Yukarıdaki Connect komutu, Openapı açıklamasını otomatik olarak bulmaya ç
 connect <ROOT URI> --openapi <OPENAPI DESCRIPTION ADDRESS>
 ```
 
-Örneğin:
+Örnek:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --openapi /swagger/v1/swagger.json
@@ -185,7 +185,7 @@ connect <ROOT URI> --openapi <OPENAPI DESCRIPTION ADDRESS>
 connect <ROOT URI> --verbose
 ```
 
-Örneğin:
+Örnek:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --verbose
@@ -230,7 +230,7 @@ https://localhost:5001/fruits> ls
 https://localhost:5001/fruits>
 ```
 
-Alternatif olarak, `ui` Web API 'Sinin Swagger Kullanıcı Arabirimi sayfasını bir tarayıcıda açmak için komutunu çalıştırın. Örneğin:
+Alternatif olarak, `ui` Web API 'Sinin Swagger Kullanıcı Arabirimi sayfasını bir tarayıcıda açmak için komutunu çalıştırın. Örnek:
 
 ```console
 https://localhost:5001/> ui
@@ -252,9 +252,9 @@ Komutu izleyen yol `cd` büyük/küçük harfe duyarlıdır. Aşağıdaki çık�
 https://localhost:5001/people>
 ```
 
-## <a name="customize-the-http-repl"></a>HTTP REPL 'ı özelleştirme
+## <a name="customize-the-httprepl"></a>HttpRepl 'yi özelleştirme
 
-HTTP REPL 'un varsayılan [renkleri](#set-color-preferences) özelleştirilebilir. Ayrıca, [varsayılan bir metin Düzenleyicisi](#set-the-default-text-editor) tanımlanabilir. HTTP REPL tercihleri geçerli oturum genelinde kalıcı hale getirilir ve gelecekteki oturumlarda kabul edilir. Değiştirildikten sonra, Tercihler aşağıdaki dosyada depolanır:
+HttpRepl 'nin varsayılan [renkleri](#set-color-preferences) özelleştirilebilir. Ayrıca, [varsayılan bir metin Düzenleyicisi](#set-the-default-text-editor) tanımlanabilir. HttpRepl tercihleri geçerli oturum genelinde kalıcı hale getirilir ve gelecekteki oturumlarla kabul edilir. Değiştirildikten sonra, Tercihler aşağıdaki dosyada depolanır:
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
@@ -274,7 +274,7 @@ HTTP REPL 'un varsayılan [renkleri](#set-color-preferences) özelleştirilebili
 
 ### <a name="view-the-settings"></a>Ayarları görüntüleyin
 
-Kullanılabilir ayarları görüntülemek için `pref get` komutunu çalıştırın. Örneğin:
+Kullanılabilir ayarları görüntülemek için `pref get` komutunu çalıştırın. Örnek:
 
 ```console
 https://localhost:5001/> pref get
@@ -295,7 +295,7 @@ colors.status=BoldYellow
 
 ### <a name="set-color-preferences"></a>Renk tercihlerini ayarla
 
-Yanıt renklendirme Şu anda yalnızca JSON için destekleniyor. Varsayılan HTTP REPL aracı renklendirmesini özelleştirmek için, değiştirilecek renge karşılık gelen anahtarı bulun. Anahtarları bulma hakkında yönergeler için bkz. [ayarları görüntüleme](#view-the-settings) bölümü. Örneğin, `colors.json` anahtar değerini şu şekilde olacak şekilde `Green` değiştirin `White` :
+Yanıt renklendirme Şu anda yalnızca JSON için destekleniyor. Varsayılan HttpRepl araç renklendirmesini özelleştirmek için, değiştirilecek renge karşılık gelen anahtarı bulun. Anahtarları bulma hakkında yönergeler için bkz. [ayarları görüntüleme](#view-the-settings) bölümü. Örneğin, `colors.json` anahtar değerini şu şekilde olacak şekilde `Green` değiştirin `White` :
 
 ```console
 https://localhost:5001/people> pref set colors.json White
@@ -312,7 +312,7 @@ Belirli renk anahtarları ayarlanmamışsa, daha genel anahtarlar kabul edilir. 
 
 ### <a name="set-indentation-size"></a>Girinti boyutunu ayarla
 
-Yanıt girintileme boyut özelleştirmesi Şu anda yalnızca JSON için destekleniyor. Varsayılan boyut iki boşluklardan oluşamaz. Örneğin:
+Yanıt girintileme boyut özelleştirmesi Şu anda yalnızca JSON için destekleniyor. Varsayılan boyut iki boşluklardan oluşamaz. Örnek:
 
 ```json
 [
@@ -358,7 +358,7 @@ Sonraki yanıtlar dört boşluk ayarına uyar:
 
 ### <a name="set-the-default-text-editor"></a>Varsayılan metin düzenleyiciyi ayarlama
 
-Varsayılan olarak, HTTP REPL 'un kullanılmak üzere yapılandırılmış metin Düzenleyicisi yok. HTTP istek gövdesi gerektiren Web API yöntemlerini test etmek için varsayılan metin Düzenleyicisi ayarlanmalıdır. HTTP REPL Aracı, istek gövdesini oluşturma amacıyla yapılandırılmış metin düzenleyicisini başlatır. Tercih ettiğiniz metin düzenleyiciyi varsayılan olarak ayarlamak için aşağıdaki komutu çalıştırın:
+Varsayılan olarak, HttpRepl 'nin kullanılmak üzere yapılandırılmış metin Düzenleyicisi yok. HTTP istek gövdesi gerektiren Web API yöntemlerini test etmek için varsayılan metin Düzenleyicisi ayarlanmalıdır. HttpRepl Aracı, istek gövdesini oluşturma amacıyla yapılandırılmış metin düzenleyicisini başlatır. Tercih ettiğiniz metin düzenleyiciyi varsayılan olarak ayarlamak için aşağıdaki komutu çalıştırın:
 
 ```console
 pref set editor.command.default "<EXECUTABLE>"
@@ -386,7 +386,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-Varsayılan metin düzenleyiciyi belirli CLı bağımsız değişkenleriyle başlatmak için `editor.command.default.arguments` anahtarı ayarlayın. Örneğin, Visual Studio Code varsayılan metin Düzenleyicisi olduğunu ve her zaman HTTP REPL 'un uzantıları devre dışı bırakılmış yeni bir oturumda Visual Studio Code açmasını istediğinizi varsayalım. Şu komutu çalıştırın:
+Varsayılan metin düzenleyiciyi belirli CLı bağımsız değişkenleriyle başlatmak için `editor.command.default.arguments` anahtarı ayarlayın. Örneğin, Visual Studio Code varsayılan metin Düzenleyicisi olduğunu ve her zaman HttpRepl 'nin, uzantılar devre dışı bırakılmış yeni bir oturumda Visual Studio Code açmasını istediğinizi varsayalım. Şu komutu çalıştırın:
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -397,7 +397,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 ### <a name="set-the-openapi-description-search-paths"></a>Openapı açıklaması arama yollarını ayarlama
 
-Varsayılan olarak, HTTP REPL, komutu seçeneği olmadan yürütürken Openapı açıklamasını bulmak için kullandığı bir göreli yollar kümesine sahiptir `connect` `--openapi` . Bu göreli yollar, komutta belirtilen kök ve taban yollarla birleştirilir `connect` . Varsayılan göreli yollar şunlardır:
+Varsayılan olarak, HttpRepl, komutu seçeneği olmadan yürütürken Openapı açıklamasını bulmak için kullandığı bir göreli yollar kümesine sahiptir `connect` `--openapi` . Bu göreli yollar, komutta belirtilen kök ve taban yollarla birleştirilir `connect` . Varsayılan göreli yollar şunlardır:
 
 - *Üzerindeswagger.js*
 - *Swagger/v1/swagger.jsaçık*
@@ -406,7 +406,7 @@ Varsayılan olarak, HTTP REPL, komutu seçeneği olmadan yürütürken Openapı 
 - *Üzerindeopenapi.js*
 - */openapi.js*
 
-Ortamınızda farklı bir arama yolları kümesi kullanmak için `swagger.searchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örneğin:
+Ortamınızda farklı bir arama yolları kümesi kullanmak için `swagger.searchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örnek:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -414,13 +414,13 @@ pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 
 Varsayılan listeyi tamamen değiştirmek yerine, liste yol ekleyerek veya kaldırarak da değiştirilebilir.
 
-Varsayılan listeye bir veya daha fazla arama yolu eklemek için `swagger.addToSearchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örneğin:
+Varsayılan listeye bir veya daha fazla arama yolu eklemek için `swagger.addToSearchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örnek:
 
 ```console
 pref set swagger.addToSearchPaths "openapi/v2/openapi.json|openapi/v3/openapi.json"
 ```
 
-Varsayılan listeden bir veya daha fazla arama yolunu kaldırmak için `swagger.addToSearchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örneğin:
+Varsayılan listeden bir veya daha fazla arama yolunu kaldırmak için `swagger.addToSearchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örnek:
 
 ```console
 pref set swagger.removeFromSearchPaths "swagger.json|/swagger.json"
@@ -540,7 +540,7 @@ HTTP POST isteği vermek için:
     https://localhost:5001/people> post -h Content-Type=application/json
     ```
 
-    Önceki komutta, `Content-Type` http istek üst bilgisi, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örneğin:
+    Önceki komutta, `Content-Type` http istek üst bilgisi, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örnek:
 
     ```json
     {
@@ -636,7 +636,7 @@ HTTP PUT isteği vermek için:
     https://localhost:5001/fruits> put 2 -h Content-Type=application/json
     ```
 
-    Önceki komutta, `Content-Type` http istek üst bilgisi, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örneğin:
+    Önceki komutta, `Content-Type` http istek üst bilgisi, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örnek:
 
     ```json
     {
@@ -842,7 +842,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 Bir HTTP istek üst bilgisi ayarlamak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* HTTP isteğiyle satır içi ayarlayın. Örneğin:
+* HTTP isteğiyle satır içi ayarlayın. Örnek:
 
     ```console
     https://localhost:5001/people> post -h Content-Type=application/json
@@ -850,13 +850,13 @@ Bir HTTP istek üst bilgisi ayarlamak için aşağıdaki yaklaşımlardan birini
     
     Önceki yaklaşımla, her ayrı HTTP istek üst bilgisi kendi seçeneğini gerektirir `-h` .
 
-* HTTP isteğini göndermeden önce ayarlayın. Örneğin:
+* HTTP isteğini göndermeden önce ayarlayın. Örnek:
 
     ```console
     https://localhost:5001/people> set header Content-Type application/json
     ```
     
-    Bir isteği göndermeden önce üst bilgi ayarlanırken üst bilgi, komut kabuğu oturumunun süresi boyunca ayarlanmış olarak kalır. Üstbilgiyi temizlemek için boş bir değer sağlayın. Örneğin:
+    Bir isteği göndermeden önce üst bilgi ayarlanırken üst bilgi, komut kabuğu oturumunun süresi boyunca ayarlanmış olarak kalır. Üstbilgiyi temizlemek için boş bir değer sağlayın. Örnek:
     
     ```console
     https://localhost:5001/people> set header Content-Type
@@ -864,7 +864,7 @@ Bir HTTP istek üst bilgisi ayarlamak için aşağıdaki yaklaşımlardan birini
 
 ## <a name="test-secured-endpoints"></a>Güvenli uç noktaları test et
 
-HTTP REPL, güvenli uç noktaların sınamasını aşağıdaki yollarla destekler:
+HttpRepl, güvenli uç noktaların sınamasını aşağıdaki yollarla destekler:
 
 * Oturum açmış kullanıcının varsayılan kimlik bilgileri aracılığıyla.
 * HTTP istek üst bilgileri kullanılarak.
@@ -907,7 +907,7 @@ Desteklenen kimlik doğrulama ve yetkilendirme şemaları örnekleri şunlardır
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-Azure 'da barındırılan bir uç noktaya erişmek veya [azure REST API](/rest/api/azure/)kullanmak için bir taşıyıcı belirtecine ihtiyacınız vardır. Azure [CLI](/cli/azure/)aracılığıyla Azure Aboneliğinize yönelik bir taşıyıcı belirteci almak için aşağıdaki adımları kullanın. HTTP REPL, bir HTTP istek üstbilgisindeki taşıyıcı belirtecini ayarlar. Azure App Service Web Apps listesi alındı.
+Azure 'da barındırılan bir uç noktaya erişmek veya [azure REST API](/rest/api/azure/)kullanmak için bir taşıyıcı belirtecine ihtiyacınız vardır. Azure [CLI](/cli/azure/)aracılığıyla Azure Aboneliğinize yönelik bir taşıyıcı belirteci almak için aşağıdaki adımları kullanın. HttpRepl, bir HTTP istek üstbilgisindeki taşıyıcı belirtecini ayarlar. Azure App Service Web Apps listesi alındı.
 
 1. Azure 'da oturum açın:
 
@@ -933,7 +933,7 @@ Azure 'da barındırılan bir uç noktaya erişmek veya [azure REST API](/rest/a
     az account get-access-token --query accessToken
     ```
 
-1. HTTP REPL aracılığıyla Azure REST API bağlanma:
+1. HttpRepl aracılığıyla Azure REST API bağlanma:
 
     ```console
     httprepl https://management.azure.com
@@ -987,14 +987,14 @@ Varsayılan olarak, gönderilmekte olan HTTP isteğinin görüntüsü bastırıl
 
 ### <a name="enable-request-display"></a>İstek görüntülemesini etkinleştir
 
-Komutunu çalıştırarak gönderilmekte olan HTTP isteğini görüntüleyin `echo on` . Örneğin:
+Komutunu çalıştırarak gönderilmekte olan HTTP isteğini görüntüleyin `echo on` . Örnek:
 
 ```console
 https://localhost:5001/people> echo on
 Request echoing is on
 ```
 
-Geçerli oturumdaki sonraki HTTP istekleri, istek üst bilgilerini görüntüler. Örneğin:
+Geçerli oturumdaki sonraki HTTP istekleri, istek üst bilgilerini görüntüler. Örnek:
 
 ```console
 https://localhost:5001/people> post
@@ -1032,7 +1032,7 @@ https://localhost:5001/people>
 
 ### <a name="disable-request-display"></a>İstek görüntüsünü devre dışı bırak
 
-Komutunu çalıştırarak gönderilen HTTP isteğinin görüntülenmesini gizleyin `echo off` . Örneğin:
+Komutunu çalıştırarak gönderilen HTTP isteğinin görüntülenmesini gizleyin `echo off` . Örnek:
 
 ```console
 https://localhost:5001/people> echo off
@@ -1041,7 +1041,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Betik çalıştırma
 
-Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir metin dosyasında depolamayı göz önünde bulundurun. Dosyadaki komutlar, komut satırında el ile yürütülen komutlarla aynı formu alır. Komutlar, komutu kullanılarak toplanmış bir biçimde yürütülebilir `run` . Örneğin:
+Aynı HttpRepl komutları kümesini sıklıkla yürütüyorsanız bunları bir metin dosyasında depolamayı düşünün. Dosyadaki komutlar, komut satırında el ile yürütülen komutlarla aynı formu alır. Komutlar, komutu kullanılarak toplanmış bir biçimde yürütülebilir `run` . Örnek:
 
 1. Yeni satır için ayrılmış komutlar kümesini içeren bir metin dosyası oluşturun. Göstermek için aşağıdaki komutları içeren bir *people-script.txt* dosyası göz önünde bulundurun:
 
@@ -1053,7 +1053,7 @@ Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir 
     get 1
     ```
 
-1. `run`Metin dosyasının yolunu geçirerek komutunu yürütün. Örneğin:
+1. `run`Metin dosyasının yolunu geçirerek komutunu yürütün. Örnek:
 
     ```console
     https://localhost:5001/> run C:\http-repl-scripts\people-script.txt
@@ -1096,7 +1096,7 @@ Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir 
 
 ## <a name="clear-the-output"></a>Çıktıyı temizle
 
-HTTP REPL aracı tarafından komut kabuğu 'na yazılan tüm çıktıyı kaldırmak için `clear` veya `cls` komutunu çalıştırın. Göstermek için komut kabuğu 'nun aşağıdaki çıktıyı içerdiğini düşünün:
+Komut kabuğuna yazılan tüm çıktıyı HttpRepl aracı ile kaldırmak için `clear` veya `cls` komutunu çalıştırın. Göstermek için komut kabuğu 'nun aşağıdaki çıktıyı içerdiğini düşünün:
 
 ```console
 httprepl https://localhost:5001
@@ -1126,4 +1126,4 @@ https://localhost:5001/>
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [REST API istekleri](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
-* [HTTP REPL GitHub deposu](https://github.com/dotnet/HttpRepl)
+* [HttpRepl GitHub deposu](https://github.com/dotnet/HttpRepl)

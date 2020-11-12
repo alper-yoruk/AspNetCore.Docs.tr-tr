@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b7e246c20bf12f8ddf07cff54864836cb535aa60
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 990882c03ddc14c664aa8da0518fb36087199aca
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94340003"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550523"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -49,8 +49,9 @@ Kullanılabilir senaryolar şunlardır:
 
 * İşlenmemiş özel durumların üzerine bölün.
 * Hata ayıklama proxy 'si çalışmadan önce uygulama başlatılırken kesme noktaları isabet edin. Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
+* Yerel olmayan senaryolarda hata ayıklama (örneğin, [Linux Için Windows alt sistemi (WSL)](/windows/wsl/) veya [Visual Studio codespaces](/visualstudio/codespaces/overview/what-is-vsonline)).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 

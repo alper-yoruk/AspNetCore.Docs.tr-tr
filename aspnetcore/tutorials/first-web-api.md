@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: fc41dd13e7d027d9630cd596162f9b5fd2ef9e2b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab06f2d347d7f05e9c72a85e0c6e0fbc67fe48a7
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058499"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550718"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -34,7 +34,7 @@ Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretil
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -61,7 +61,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -119,7 +119,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini** seçin. **İleri** ’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 5. x **hedef çerçevesini** seçin. **İleri** ’yi seçin.
 
 * **Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.
 
@@ -231,7 +231,7 @@ Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI 
 
 * **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
 
 * Şablon kodunu aşağıdaki kodla değiştirin:
 
@@ -283,7 +283,7 @@ Arama kutusunda **Entityframeworkcore. SqlServer** .
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -428,7 +428,7 @@ Postman 'da test etmek için:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -560,7 +560,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -587,7 +587,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -727,7 +727,7 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 * **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -775,7 +775,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -915,7 +915,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -1048,7 +1048,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -1170,7 +1170,7 @@ Aşağıdaki JSON döndürülür:
 
 * **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -1206,7 +1206,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class** . Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1273,7 +1273,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`

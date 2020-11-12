@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a815502bb8aa97c137ea8940c7e5f1dde79e9999
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430893"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550653"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -34,11 +34,11 @@ ms.locfileid: "94430893"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
-Contoso Üniversitesi örnek Web AP, Entity Framework (EF) Core ve Visual Studio kullanarak ASP.NET Core MVC web uygulaması oluşturmayı gösterir.
+Contoso Üniversitesi örnek Web uygulaması, Entity Framework (EF) Core ve Visual Studio kullanarak ASP.NET Core MVC web uygulaması oluşturmayı gösterir.
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * ASP.NET Core MVC 'yi yeni kullanmaya başladıysanız, bunu başlatmadan önce [ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc) öğreticisini kullanmaya başlayın.
 
@@ -402,7 +402,7 @@ Bu öğretici ASP.NET Core 3,1 için güncelleştirilmedi. [ASP.NET Core 5,0](xr
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :

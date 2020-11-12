@@ -1,10 +1,10 @@
 ---
-title: HTTP REPL telemetrisi
+title: Httprepın telemetrisi
 author: scottaddie
-description: HTTP REPL tarafından toplanan telemetri hakkında bilgi edinin.
+description: HttpRepl tarafından toplanan telemetri hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl/telemetry
-ms.openlocfilehash: 8590959e43c2dda69090acb358e740b271426a44
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: 5ff22753f566c494e51dae67c8c4f6371211be78
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502044"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550614"
 ---
-# <a name="http-repl-telemetry"></a>HTTP REPL telemetrisi
+# <a name="httprepl-telemetry"></a>Httprepın telemetrisi
 
-[Http okuma-değerlendirme-yazdırma döngüsü (REPL)](xref:web-api/http-repl) , kullanım verilerini toplayan bir telemetri özelliği içerir. HTTP REPL ekibinin, aracın daha iyi bir şekilde nasıl kullanıldığını anladığından emin olmak önemlidir.
+[Httprepl](xref:web-api/http-repl) , kullanım verilerini toplayan bir telemetri özelliği içerir. HttpRepl ekibinin, aracın nasıl kullanıldığını anlayabilmesi önemlidir.
 
 ## <a name="how-to-opt-out"></a>Devre dışı bırakma
 
-HTTP REPL telemetri özelliği varsayılan olarak etkindir. Telemetri özelliğini devre dışı bırakmak için, `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` ortam değişkenini veya olarak ayarlayın `1` `true` .
+Bu varsayılan olarak HttpRepl telemetri özelliği etkinleştirilmiştir. Telemetri özelliğini devre dışı bırakmak için, `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` ortam değişkenini veya olarak ayarlayın `1` `true` .
 
 ## <a name="disclosure"></a>Savunmasız
 
@@ -40,8 +40,10 @@ HttpRepl, aracı ilk kez çalıştırdığınızda aşağıdakine benzer bir met
 ```console
 Telemetry
 ---------
-The .NET Core tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 ```
+
+"İlk çalıştırma" deneyimi metnini bastırmak için, `DOTNET_HTTPREPL_SKIP_FIRST_TIME_EXPERIENCE` ortam değişkenini veya olarak ayarlayın `1` `true` .
 
 ## <a name="data-points"></a>Veri noktaları
 
@@ -68,7 +70,7 @@ Telemetri özelliği aşağıdaki verileri toplar.
 | >= 5,0        | Aracın bir kapsayıcıda çalışıp çalışmadığını belirtir. |
 | >= 5,0        | Karma medya Access Control (MAC) adresi: bir makine için bir şifreleme (SHA256) karma ve benzersiz KIMLIĞI. |
 | >= 5,0        | Çekirdek sürümü. |
-| >= 5,0        | HTTP REPL sürümü. |
+| >= 5,0        | HttpRepl sürümü. |
 | >= 5,0        | Aracın `help` , `run` veya bağımsız değişkenlerle başlatılmış olup olmadığı `connect` . Gerçek bağımsız değişken değerleri toplanmadı. |
 | >= 5,0        | Komut çağrıldı (örneğin, `get` ) ve başarılı olup olmadığı. |
 | >= 5,0        | Komut için,, `connect` `root` `base` veya `openapi` bağımsız değişkenlerin sağlanmış olup olmadığı. Gerçek bağımsız değişken değerleri toplanmadı. |
