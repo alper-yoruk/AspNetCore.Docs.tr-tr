@@ -383,8 +383,8 @@
               uid: blazor/components/templated-components
             - name: CSS yalıtımı
               uid: blazor/components/css-isolation
-            - name: Bileşenleri tümleştirme
-              uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
+            - name: Bileşenleri önceden oluşturma ve tümleştirme
+              uid: blazor/components/prerendering-and-integration
             - name: Bileşen kitaplıkları
               uid: blazor/components/class-libraries
         - name: Genelleştirme ve yerelleştirme
@@ -604,8 +604,12 @@
       uid: web-api/advanced/conventions
     - name: Hataları işleme
       uid: web-api/handle-errors
-    - name: HTTP REPL ile Test API'leri
-      uid: web-api/http-repl
+    - name: HTTP REPL
+      items:
+        - name: Test API’leri
+          uid: web-api/http-repl
+        - name: Telemetri
+          uid: web-api/http-repl/telemetry
 - name: Gerçek zamanlı uygulamalar
   displayName: signalr
   items:
