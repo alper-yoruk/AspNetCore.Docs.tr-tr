@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055002"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570152"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -61,19 +61,19 @@ Uygulama, *uygulama durumunu* yalnızca kalıcı hale getirebilirler. Usıs, bil
 
 Kalıcı durum için genel konumlar mevcuttur:
 
-* [Sunucu tarafı depolama](#server-side-storage)
-* [URL](#url)
-* [Tarayıcı depolama](#browser-storage)
-* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service)
+* [Sunucu tarafı depolama](#server-side-storage-wasm)
+* [URL](#url-wasm)
+* [Tarayıcı depolama](#browser-storage-wasm)
+* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service-wasm)
 
-### <a name="server-side-storage"></a>Sunucu tarafı depolama
+<h2 id="server-side-storage-wasm">Sunucu tarafı depolama</h2>
 
 Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama bir Web API 'SI aracılığıyla erişilen bağımsız sunucu tarafı depolama kullanabilir. Seçeneklere şunlar dahildir:
 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Table Storage
+* Tablo depolama
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve herhangi bir yeni tarayıcı oturumunda kullanılabilir.
 
@@ -90,7 +90,7 @@ Azure veri depolama seçenekleri hakkında daha fazla bilgi için aşağıdakile
 * [Azure veritabanları](https://azure.microsoft.com/product-categories/databases/)
 * [Azure depolama belgeleri](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-wasm">URL</h2>
 
 Gezinti durumunu temsil eden geçici veriler için, verileri URL 'nin bir parçası olarak modelleyin. URL 'de modellenen Kullanıcı durumu örnekleri şunları içerir:
 
@@ -101,7 +101,7 @@ Kullanıcı sayfayı el ile yeniden yüklediğinde tarayıcının adres çubuğu
 
 Yönergeyle URL desenleri tanımlama hakkında bilgi için [`@page`](xref:mvc/views/razor#page) bkz <xref:blazor/fundamentals/routing> ..
 
-### <a name="browser-storage"></a>Tarayıcı depolama
+<h2 id="browser-storage-wasm">Tarayıcı depolama</h2>
 
 Kullanıcının etkin şekilde oluşturmakta olduğu geçici veriler için, yaygın olarak kullanılan bir depolama konumu tarayıcının [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) ve [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) koleksiyonlarıdır:
 
@@ -121,7 +121,7 @@ Genellikle, `sessionStorage` kullanmak daha güvenlidir. `sessionStorage` bir ku
 > [!WARNING]
 > Kullanıcılar ve içinde depolanan verileri görüntüleyebilir veya bunlarla karşılaşabilir `localStorage` `sessionStorage` .
 
-## <a name="in-memory-state-container-service"></a>Bellek içi durum kapsayıcısı hizmeti
+<h2 id="in-memory-state-container-service-wasm">Bellek içi durum kapsayıcısı hizmeti</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
@@ -170,19 +170,19 @@ Uygulama, *uygulama durumunu* yalnızca kalıcı hale getirebilirler. Usıs, bil
 
 Kalıcı durum için genel konumlar mevcuttur:
 
-* [Sunucu tarafı depolama](#server-side-storage)
-* [URL](#url)
-* [Tarayıcı depolama](#browser-storage)
-* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service)
+* [Sunucu tarafı depolama](#server-side-storage-server)
+* [URL](#url-server)
+* [Tarayıcı depolama](#browser-storage-server)
+* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service-server)
 
-### <a name="server-side-storage"></a>Sunucu tarafı depolama
+<h2 id="server-side-storage-server">Sunucu tarafı depolama</h2>
 
 Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama sunucu tarafı depolama kullanabilir. Seçeneklere şunlar dahildir:
 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Table Storage
+* Tablo depolama
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve yeni bir devrede kullanılabilir.
 
@@ -191,7 +191,7 @@ Azure veri depolama seçenekleri hakkında daha fazla bilgi için aşağıdakile
 * [Azure veritabanları](https://azure.microsoft.com/product-categories/databases/)
 * [Azure depolama belgeleri](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-server">URL</h2>
 
 Gezinti durumunu temsil eden geçici veriler için, verileri URL 'nin bir parçası olarak modelleyin. URL 'de modellenen Kullanıcı durumu örnekleri şunları içerir:
 
@@ -205,7 +205,7 @@ Tarayıcının adres çubuğunun içeriği korunur:
 
 Yönergeyle URL desenleri tanımlama hakkında bilgi için [`@page`](xref:mvc/views/razor#page) bkz <xref:blazor/fundamentals/routing> ..
 
-### <a name="browser-storage"></a>Tarayıcı depolama
+<h2 id="browser-storage-server">Tarayıcı depolama</h2>
 
 Kullanıcının etkin şekilde oluşturmakta olduğu geçici veriler için, yaygın olarak kullanılan bir depolama konumu tarayıcının [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) ve [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) koleksiyonlarıdır:
 
@@ -700,7 +700,7 @@ Birçok farklı durum nesnesini kalıcı hale getirmek ve farklı yerlerde nesne
 
 ::: moniker-end
 
-## <a name="in-memory-state-container-service"></a>Bellek içi durum kapsayıcısı hizmeti
+<h2 id="in-memory-state-container-service-server">Bellek içi durum kapsayıcısı hizmeti</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 

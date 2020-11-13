@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 628e7dc897912beaae0df792b82958517ac70ca4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4fec0fa750b9209849030d0d6b7de8f4e163d62f
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056328"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570139"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorCSS yalıtımı ASP.NET Core
 
@@ -34,9 +34,9 @@ CSS yalıtımı, genel stillerdeki bağımlılıkları önleyerek uygulamanın C
 
 ## <a name="enable-css-isolation"></a>CSS yalıtımını etkinleştir 
 
-Bileşene özgü stiller tanımlamak için, `razor.css` bileşenin dosya adıyla eşleşen bir dosya oluşturun `.razor` . Bu `razor.css` dosya kapsamlı BIR *CSS dosyasıdır* . 
+Bileşene özgü stiller tanımlamak için, `.razor.css` bileşenin dosya adıyla eşleşen bir dosya oluşturun `.razor` . Bu `.razor.css` dosya kapsamlı BIR *CSS dosyasıdır*. 
 
-`MyComponent`Bir dosya içeren bir bileşen için `MyComponent.razor` , adlı bileşenin yanında bir dosya oluşturun `MyComponent.razor.css` . `MyComponent` `razor.css` Dosya adının değeri büyük/küçük harfe duyarlı **değildir** .
+`MyComponent`Bir dosya içeren bir bileşen için `MyComponent.razor` , adlı bileşenin yanında bir dosya oluşturun `MyComponent.razor.css` . `MyComponent` `.razor.css` Dosya adının değeri büyük/küçük harfe duyarlı **değildir** .
 
 Örneğin, `Counter` varsayılan Proje şablonundaki BILEŞENE CSS yalıtımı eklemek için Blazor , dosyanın yanında adlı yeni bir dosya ekleyin `Counter.razor.css` `Counter.razor` ve ardından aşağıdaki CSS 'yi ekleyin:
 
@@ -86,7 +86,7 @@ NuGet paketleri veya [ Razor sınıf kitaplıkları](xref:blazor/components/clas
 
 ## <a name="child-component-support"></a>Alt bileşen desteği
 
-Varsayılan olarak, CSS yalıtımı yalnızca biçimiyle ilişkilendirdiğiniz bileşen için geçerlidir `{COMPONENT NAME}.razor.css` ; burada yer tutucu `{COMPONENT NAME}` genellikle bileşen adıdır. Bir alt bileşene değişiklikler uygulamak için, `::deep` Combinator üst bileşenin dosyasındaki tüm alt öğeleri kullanın `razor.css` . `::deep`Combinator, bir öğenin oluşturulan kapsam *descendants* tanımlayıcısının alt öğeleri olan öğeleri seçer. 
+Varsayılan olarak, CSS yalıtımı yalnızca biçimiyle ilişkilendirdiğiniz bileşen için geçerlidir `{COMPONENT NAME}.razor.css` ; burada yer tutucu `{COMPONENT NAME}` genellikle bileşen adıdır. Bir alt bileşene değişiklikler uygulamak için, `::deep` Combinator üst bileşenin dosyasındaki tüm alt öğeleri kullanın `.razor.css` . `::deep`Combinator, bir öğenin oluşturulan kapsam *descendants* tanımlayıcısının alt öğeleri olan öğeleri seçer. 
 
 Aşağıdaki örnek, `Parent` adlı bir alt bileşen ile çağrılan bir üst bileşeni gösterir `Child` .
 
@@ -180,3 +180,24 @@ BlazorÇalışma zamanında bulunan kapsamlı dosyaları nasıl yayımlayıp yü
   <DisableScopedCssBundling>true</DisableScopedCssBundling>
 </PropertyGroup>
 ```
+
+## <a name="no-locrazor-class-library-rcl-support"></a>Razor sınıf kitaplığı (RCL) desteği
+
+Bir [ Razor sınıf kitaplığı (RCL)](xref:razor-pages/ui-class) yalıtılmış stiller sağlıyorsa, `<link>` etiketin `href` özniteliği öğesine işaret eder `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` ; burada yer tutucular:
+
+* `{STATIC WEB ASSET BASE PATH}`: Statik Web varlık temel yolu.
+* `{ASSEMBLY NAME}`: Sınıf kitaplığının derleme adı.
+
+Aşağıdaki örnekte:
+
+* Statik Web varlık temel yolu `_content/ClassLib` .
+* Sınıf kitaplığının derleme adı `ClassLib` .
+
+```html
+<link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">
+```
+
+RCLs ve bileşen kitaplıkları hakkında daha fazla bilgi için bkz.:
+
+* <xref:razor-pages/ui-class>
+* <xref:blazor/components/class-libraries>.

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: f8e36cbe905b5ec2e674123c0f2ab6db99683c7c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056419"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570165"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
 
@@ -51,7 +51,7 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
    1. RCL 'nin proje dosyasına gidin.
    1. RCL 'nin proje dosyasını () seçin `.csproj` .
 1. Uygulamadan RCL 'ye bir başvuru ekleyin:
-   1. Uygulama projesine sağ tıklayın. Başvuru **Ekle** ' yi seçin  >  **Reference** .
+   1. Uygulama projesine sağ tıklayın. Başvuru **Ekle** ' yi seçin  >  **Reference**.
    1. RCL projesini seçin. **Tamam** ’ı seçin.
 
 > [!NOTE]
@@ -233,6 +233,7 @@ Komut kabuğunda komutunu kullanarak paketi NuGet 'e yükleyin [`dotnet nuget pu
 
 * <xref:razor-pages/ui-class>
 * [Kitaplığa bir XML ara dili (IL) ayarlayıcısı yapılandırma dosyası ekleme](xref:blazor/host-and-deploy/configure-trimmer)
+* [Sınıf kitaplıkları ile CSS yalıtım desteği Razor](xref:blazor/components/css-isolation#razor-class-library-rcl-support)
 
 ::: moniker-end
 

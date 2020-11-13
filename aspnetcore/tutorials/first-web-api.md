@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: ab06f2d347d7f05e9c72a85e0c6e0fbc67fe48a7
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550718"
+ms.locfileid: "94570256"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -536,7 +536,7 @@ Bir DTO için kullanılabilir:
 
 DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:
 
-[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
+[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=8)]
 
 Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.
 
@@ -1364,7 +1364,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
 
 * Projeyi derleyin.
 * Postman 'da HTTP yöntemini olarak ayarlayın `POST` .
-* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItem` . Örneğin, `https://localhost:5001/api/TodoItem`.
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/Todo` . Örneğin, `https://localhost:5001/api/Todo`.
 * **Gövde** sekmesini seçin.
 * **Ham** radyo düğmesini seçin.
 * Türü **JSON (Application/JSON)** olarak ayarlayın.

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055600"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570126"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla Blazor
 
@@ -57,12 +57,9 @@ En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları
   * `https://stackpath.bootstrapcdn.com/`Önyükleme betikleri için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
   * Bir Blazor WebAssembly uygulamada:
-    * Gerekli satır içi betiklerin yüklenmesine izin vermek için aşağıdaki karmaları belirtin Blazor WebAssembly :
-      * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
-      * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
-      * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
+    * Gerekli betiklerin yüklenmesine izin vermek için karmaları belirtin.
     * `unsafe-eval`' In kullanılacağını `eval()` ve dizelerden kod oluşturma yöntemlerini belirtin.
-  * Bir Blazor Server uygulamada, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.
+  * Bir Blazor Server uygulamada, gerekli betiklerin yüklenmesine izin vermek için karmaları belirtin.
 * [Style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): stil sayfaları için geçerli kaynakları gösterir.
   * `https://stackpath.bootstrapcdn.com/`Önyükleme stil sayfaları için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
@@ -93,6 +90,29 @@ Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir Blazor WebAs
 
 `<head>` `wwwroot/index.html` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
 
+::: moniker range=">= aspnetcore-5.0"
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self' 
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 
+                          'unsafe-eval';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self'
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```html
 <meta http-equiv="Content-Security-Policy" 
       content="base-uri 'self';
@@ -112,9 +132,38 @@ Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir Blazor WebAs
                upgrade-insecure-requests;">
 ```
 
+::: moniker-end
+
+`script-src` `style-src` Uygulamanın gerektirdiği ek ve karmaları ekleyin. Geliştirme sırasında, karmalar sizin için hesaplanabilecek çevrimiçi bir araç veya tarayıcı geliştirici araçları kullanın. Örneğin, aşağıdaki tarayıcı araçları konsol hatası, ilke kapsamında bulunmayan gerekli bir betiğin karmasını bildirir:
+
+> Şu Içerik Güvenlik Ilkesi yönergesini ihlal ettiğinden, satır içi betiği yürütmek için reddedildi: "... ". Satır içi yürütmeyi etkinleştirmek için ' unsafe-inline ' anahtar sözcüğü, karma (' SHA256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA = ') veya bir kerelik anahtar (' nonce-... ') gereklidir.
+
+Hatayla ilişkili özel betik, hatanın yanında konsolunda görüntülenir.
+
 ### Blazor Server
 
 `<head>` `Pages/_Host.cshtml` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
+
+::: moniker range=">= aspnetcore-5.0"
+
+```cshtml
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self' 
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -131,6 +180,14 @@ Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir Blazor WebAs
                          'unsafe-inline';
                upgrade-insecure-requests;">
 ```
+
+::: moniker-end
+
+`script-src` `style-src` Uygulamanın gerektirdiği ek ve karmaları ekleyin. Geliştirme sırasında, karmalar sizin için hesaplanabilecek çevrimiçi bir araç veya tarayıcı geliştirici araçları kullanın. Örneğin, aşağıdaki tarayıcı araçları konsol hatası, ilke kapsamında bulunmayan gerekli bir betiğin karmasını bildirir:
+
+> Şu Içerik Güvenlik Ilkesi yönergesini ihlal ettiğinden, satır içi betiği yürütmek için reddedildi: "... ". Satır içi yürütmeyi etkinleştirmek için ' unsafe-inline ' anahtar sözcüğü, karma (' SHA256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA = ') veya bir kerelik anahtar (' nonce-... ') gereklidir.
+
+Hatayla ilişkili özel betik, hatanın yanında konsolunda görüntülenir.
 
 ## <a name="meta-tag-limitations"></a>Meta etiketi sınırlamaları
 
