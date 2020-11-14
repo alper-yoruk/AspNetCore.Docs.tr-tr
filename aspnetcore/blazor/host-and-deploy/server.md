@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055769"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595447"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Barındırma ve dağıtma Blazor Server
 
@@ -69,18 +69,18 @@ BlazorSignalRdaha düşük gecikme süresi, güvenilirlik ve [güvenlik](xref:si
 Uygulamalar için [Azure SignalR hizmetini](xref:signalr/scale#azure-signalr-service) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur.
 
 > [!IMPORTANT]
-> [WebSockets](https://wikipedia.org/wiki/WebSocket) devre dışı bırakıldığında, Azure App Service http uzun yoklamayla gerçek zamanlı bir bağlantıya benzetir. HTTP uzun yoklama, bir istemci-sunucu bağlantısının benzetimini yapmak için yoklamayı kullanmayan, WebSockets Enabled ile çalıştırmanın önemli ölçüde yavaştır.
+> [WebSockets](https://wikipedia.org/wiki/WebSocket) devre dışı bırakıldığında, Azure App Service http uzun yoklama kullanarak gerçek zamanlı bir bağlantıyı taklit eder. HTTP uzun yoklama, WebSockets etkinken, bir istemci-sunucu bağlantısının benzetimini yapmak için yoklama kullanmayan, önemli ölçüde daha yavaştır.
 >
 > Blazor ServerAzure App Service için dağıtılan uygulamalar Için WebSockets kullanmanızı öneririz. [Azure SignalR hizmeti](xref:signalr/scale#azure-signalr-service) varsayılan olarak WebSockets kullanır. Uygulama Azure SignalR hizmetini kullanmıyorsa, bkz <xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service> ..
 >
-> Daha fazla bilgi için bkz.
+> Daha fazla bilgi için bkz:
 >
 > * [Azure hizmeti nedir SignalR ?](/azure/azure-signalr/signalr-overview)
 > * [Azure hizmeti için performans Kılavuzu SignalR](/azure-signalr/signalr-concept-performance#performance-factors)
 
-Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
+### <a name="configuration"></a>Yapılandırma
 
-1. [Prerendering sırasında istemciler aynı sunucuya geri yönlendirildiği](xref:blazor/hosting-models#connection-to-the-server) *yapışkan oturumları* desteklemek için hizmeti etkinleştirin. `ServerStickyMode`Seçeneğini veya yapılandırma değerini olarak ayarlayın `Required` . Genellikle, bir uygulama aşağıdaki yaklaşımlardan **birini** kullanarak yapılandırmayı oluşturur:
+Azure hizmeti için bir uygulamayı yapılandırmak üzere SignalR , uygulamanın [prerendering sırasında aynı sunucuya geri yönlendirildiği](xref:blazor/hosting-models#connection-to-the-server) *yapışkan oturumları* desteklemesi gerekir. `ServerStickyMode`Seçenek veya yapılandırma değeri olarak ayarlanır `Required` . Genellikle, bir uygulama aşağıdaki yaklaşımlardan **_birini_** kullanarak yapılandırmayı oluşturur:
 
    * `Startup.ConfigureServices`:
   
@@ -92,19 +92,25 @@ Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağl
      });
      ```
 
-   * Yapılandırma (aşağıdaki yaklaşımlardan **birini** kullanın):
+   * Yapılandırma (aşağıdaki yaklaşımlardan **_birini_** kullanın):
   
-     * `appsettings.json`:
+     * `appsettings.json` içinde:
 
        ```json
-       "Azure:SignalR:ServerStickyMode": "Required"
+       "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * App Service 'in **Configuration**  >  Azure Portal ( **ad** :, değer:) yapılandırma **uygulaması ayarları** `Azure:SignalR:ServerStickyMode` **Value** `Required` .
+     * App Service 'in **Configuration**  >  Azure Portal ( **ad** :, değer:) yapılandırma **uygulaması ayarları** `Azure__SignalR__StickyServerMode` **Value** `Required` . Bu yaklaşım, [Azure SignalR hizmetini temin](#provision-the-azure-signalr-service)ediyorsanız uygulama için otomatik olarak benimsenmiştir.
+
+### <a name="provision-the-azure-no-locsignalr-service"></a>Azure hizmetini sağlama SignalR
+
+SignalRVisual Studio 'da bir uygulama Için Azure hizmetini sağlamak için:
 
 1. Uygulama için Visual Studio 'da bir Azure Apps yayımlama profili oluşturun Blazor Server .
 1. **Azure SignalR hizmet** bağımlılığını profile ekleyin. Azure aboneliğinin uygulamaya atanacak önceden mevcut bir Azure SignalR hizmeti örneği yoksa, yeni bir hizmet örneği sağlamak için **Yeni bir Azure SignalR hizmet örneği oluştur** ' u seçin.
 1. Uygulamayı Azure’da yayımlama.
+
+SignalRVisual Studio 'Da Azure hizmeti sağlamak, otomatik [olarak *yapışkan oturumları* sağlar](#configuration) ve SignalR bağlantı dizesini App Service 'in yapılandırmasına ekler.
 
 #### <a name="iis"></a>IIS
 

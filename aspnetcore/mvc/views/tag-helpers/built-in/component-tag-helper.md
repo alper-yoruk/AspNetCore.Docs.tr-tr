@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 8e780de2367f66ad1f5197077d5243e0b85a41dd
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 761c125e3c5f94157cf7bf4524374db2545610b1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431049"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595460"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core bileşen etiketi Yardımcısı
 
@@ -31,10 +31,20 @@ ms.locfileid: "94431049"
 
 ## <a name="prerequisites"></a>Önkoşullar
 
+::: moniker range=">= aspnetcore-5.0"
+
 *Yapılandırma* bölümündeki yönergeleri izleyerek şunlardan birini yapın:
 
 * [Blazor WebAssembly](xref:blazor/components/prerendering-and-integration?pivots=webassembly)
 * [Blazor Server](xref:blazor/components/prerendering-and-integration?pivots=server)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Makalenin *yapılandırma* bölümündeki yönergeleri izleyin <xref:blazor/components/prerendering-and-integration?pivots=server> .
+
+::: moniker-end
 
 ## <a name="component-tag-helper"></a>Bileşen etiketi Yardımcısı
 
@@ -52,14 +62,14 @@ Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi y
 
 Blazor WebAssembly uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
 
-| Oluşturma modu | Description |
+| Oluşturma modu | Açıklama |
 | ----------- | ----------- |
 | `WebAssembly` | Bir Blazor WebAssembly uygulamanın tarayıcıya yüklendiğinde etkileşimli bir bileşeni içermesi için kullanılacak bir işaret oluşturur. Bileşen ön işlenmiş değildir. Bu seçenek farklı sayfalarda farklı bileşenlerin işlenmesine daha kolay hale gelir Blazor WebAssembly . |
 | `WebAssemblyPrerendered` | Bileşeni statik HTML 'ye ön ekler ve Blazor WebAssembly daha sonra, tarayıcıya yüklendiğinde bileşeni etkileşimli hale getirmek için bir uygulamanın işaretçisini içerir. |
 
 Blazor Server uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
 
-| Oluşturma modu | Description |
+| Oluşturma modu | Açıklama |
 | ----------- | ----------- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
@@ -71,7 +81,7 @@ Blazor Server uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
 
 Blazor Server uygulama işleme modları aşağıdaki tabloda gösterilmiştir.
 
-| Oluşturma modu | Description |
+| Oluşturma modu | Açıklama |
 | ----------- | ----------- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
