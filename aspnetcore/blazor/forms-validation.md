@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(Blazor):::Forms ve doğrulama ASP.NET Core
+title: BlazorForms ve doğrulama ASP.NET Core
 author: guardrex
-description: 'İçindeki form ve alan doğrulama senaryolarını nasıl kullanacağınızı öğrenin :::no-loc(Blazor)::: .'
+description: 'İçindeki form ve alan doğrulama senaryolarını nasıl kullanacağınızı öğrenin Blazor .'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/forms-validation
 ms.openlocfilehash: fe232b40a2255732dd375cc266937576d5b2d5d9
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -26,11 +26,11 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 11/11/2020
 ms.locfileid: "94507830"
 ---
-# <a name="aspnet-core-no-locblazor-forms-and-validation"></a><span data-ttu-id="19a3e-103">:::no-loc(Blazor):::Forms ve doğrulama ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="19a3e-103">ASP.NET Core :::no-loc(Blazor)::: forms and validation</span></span>
+# <a name="aspnet-core-no-locblazor-forms-and-validation"></a><span data-ttu-id="19a3e-103">BlazorForms ve doğrulama ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="19a3e-103">ASP.NET Core Blazor forms and validation</span></span>
 
 <span data-ttu-id="19a3e-104">[Daniel Roth](https://github.com/danroth27), [Rémi Bourgarel](https://remibou.github.io/)ve [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="19a3e-104">By [Daniel Roth](https://github.com/danroth27), [Rémi Bourgarel](https://remibou.github.io/), and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="19a3e-105">Formlar ve doğrulama, :::no-loc(Blazor)::: [veri ek açıklamaları](xref:mvc/models/validation)kullanılarak desteklenir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-105">Forms and validation are supported in :::no-loc(Blazor)::: using [data annotations](xref:mvc/models/validation).</span></span>
+<span data-ttu-id="19a3e-105">Formlar ve doğrulama, Blazor [veri ek açıklamaları](xref:mvc/models/validation)kullanılarak desteklenir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-105">Forms and validation are supported in Blazor using [data annotations](xref:mvc/models/validation).</span></span>
 
 <span data-ttu-id="19a3e-106">Aşağıdaki `ExampleModel` tür, veri ek açıklamalarını kullanarak doğrulama mantığını tanımlar:</span><span class="sxs-lookup"><span data-stu-id="19a3e-106">The following `ExampleModel` type defines validation logic using data annotations:</span></span>
 
@@ -45,7 +45,7 @@ public class ExampleModel
 }
 ```
 
-<span data-ttu-id="19a3e-107">Bir form, bileşeni kullanılarak tanımlanır <xref:Microsoft.AspNetCore.Components.Forms.EditForm> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-107">A form is defined using the <xref:Microsoft.AspNetCore.Components.Forms.EditForm> component.</span></span> <span data-ttu-id="19a3e-108">Aşağıdaki form tipik öğeleri, bileşenleri ve :::no-loc(Razor)::: kodu gösterir:</span><span class="sxs-lookup"><span data-stu-id="19a3e-108">The following form demonstrates typical elements, components, and :::no-loc(Razor)::: code:</span></span>
+<span data-ttu-id="19a3e-107">Bir form, bileşeni kullanılarak tanımlanır <xref:Microsoft.AspNetCore.Components.Forms.EditForm> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-107">A form is defined using the <xref:Microsoft.AspNetCore.Components.Forms.EditForm> component.</span></span> <span data-ttu-id="19a3e-108">Aşağıdaki form tipik öğeleri, bileşenleri ve Razor kodu gösterir:</span><span class="sxs-lookup"><span data-stu-id="19a3e-108">The following form demonstrates typical elements, components, and Razor code:</span></span>
 
 ```razor
 <EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
@@ -313,7 +313,7 @@ The birthday must be a date.
 
 <span data-ttu-id="19a3e-160">Doğrulayıcı bileşenleri, form için bir için yöneterek form doğrulamasını destekler <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-160">Validator components support form validation by managing a <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> for a form's <xref:Microsoft.AspNetCore.Components.Forms.EditContext>.</span></span>
 
-<span data-ttu-id="19a3e-161">:::no-loc(Blazor):::Framework, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> [doğrulama özniteliklerine (veri ek açıklamaları)](xref:mvc/models/validation#validation-attributes)göre formlara doğrulama desteği eklemek için bileşeni sağlar.</span><span class="sxs-lookup"><span data-stu-id="19a3e-161">The :::no-loc(Blazor)::: framework provides the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component to attach validation support to forms based on [validation attributes (data annotations)](xref:mvc/models/validation#validation-attributes).</span></span> <span data-ttu-id="19a3e-162">Farklı formlar için doğrulama mesajlarını aynı sayfada veya aynı formda farklı form işleme adımlarında işlemek için özel Doğrulayıcı bileşenleri oluşturun, örneğin, istemci tarafı doğrulama ve ardından sunucu tarafı doğrulama.</span><span class="sxs-lookup"><span data-stu-id="19a3e-162">Create custom validator components to process validation messages for different forms on the same page or the same form at different steps of form processing, for example client-side validation followed by server-side validation.</span></span> <span data-ttu-id="19a3e-163">Bu bölümde gösterilen Doğrulayıcı bileşeni örneği, `CustomValidator` Bu makalenin aşağıdaki bölümlerinde kullanılır:</span><span class="sxs-lookup"><span data-stu-id="19a3e-163">The validator component example shown in this section, `CustomValidator`, is used in the following sections of this article:</span></span>
+<span data-ttu-id="19a3e-161">BlazorFramework, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> [doğrulama özniteliklerine (veri ek açıklamaları)](xref:mvc/models/validation#validation-attributes)göre formlara doğrulama desteği eklemek için bileşeni sağlar.</span><span class="sxs-lookup"><span data-stu-id="19a3e-161">The Blazor framework provides the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component to attach validation support to forms based on [validation attributes (data annotations)](xref:mvc/models/validation#validation-attributes).</span></span> <span data-ttu-id="19a3e-162">Farklı formlar için doğrulama mesajlarını aynı sayfada veya aynı formda farklı form işleme adımlarında işlemek için özel Doğrulayıcı bileşenleri oluşturun, örneğin, istemci tarafı doğrulama ve ardından sunucu tarafı doğrulama.</span><span class="sxs-lookup"><span data-stu-id="19a3e-162">Create custom validator components to process validation messages for different forms on the same page or the same form at different steps of form processing, for example client-side validation followed by server-side validation.</span></span> <span data-ttu-id="19a3e-163">Bu bölümde gösterilen Doğrulayıcı bileşeni örneği, `CustomValidator` Bu makalenin aşağıdaki bölümlerinde kullanılır:</span><span class="sxs-lookup"><span data-stu-id="19a3e-163">The validator component example shown in this section, `CustomValidator`, is used in the following sections of this article:</span></span>
 
 * [<span data-ttu-id="19a3e-164">İş mantığı doğrulaması</span><span class="sxs-lookup"><span data-stu-id="19a3e-164">Business logic validation</span></span>](#business-logic-validation)
 * [<span data-ttu-id="19a3e-165">Sunucu doğrulaması</span><span class="sxs-lookup"><span data-stu-id="19a3e-165">Server validation</span></span>](#server-validation)
@@ -337,7 +337,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace :::no-loc(Blazor):::Sample.Client
+namespace BlazorSample.Client
 {
     public class CustomValidator : ComponentBase
     {
@@ -456,9 +456,9 @@ namespace :::no-loc(Blazor):::Sample.Client
 
 <span data-ttu-id="19a3e-203">Aşağıdaki örnek temel alınarak verilmiştir:</span><span class="sxs-lookup"><span data-stu-id="19a3e-203">The following example is based on:</span></span>
 
-* <span data-ttu-id="19a3e-204">Barındırılan :::no-loc(Blazor)::: [ :::no-loc(Blazor)::: proje şablonu](xref:blazor/hosting-models#blazor-webassembly)tarafından oluşturulan barındırılan bir çözüm.</span><span class="sxs-lookup"><span data-stu-id="19a3e-204">A hosted :::no-loc(Blazor)::: solution created by the [:::no-loc(Blazor)::: Hosted project template](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="19a3e-205">Örnek, :::no-loc(Blazor)::: [güvenlik ve :::no-loc(Identity)::: belgelerde](xref:blazor/security/webassembly/index#implementation-guidance)açıklanan Güvenli barındırılan çözümlerin herhangi biriyle birlikte kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-205">The example can be used with any of the secure hosted :::no-loc(Blazor)::: solutions described in the [Security and :::no-loc(Identity)::: documentation](xref:blazor/security/webassembly/index#implementation-guidance).</span></span>
+* <span data-ttu-id="19a3e-204">Barındırılan Blazor [ Blazor proje şablonu](xref:blazor/hosting-models#blazor-webassembly)tarafından oluşturulan barındırılan bir çözüm.</span><span class="sxs-lookup"><span data-stu-id="19a3e-204">A hosted Blazor solution created by the [Blazor Hosted project template](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="19a3e-205">Örnek, Blazor [güvenlik ve Identity belgelerde](xref:blazor/security/webassembly/index#implementation-guidance)açıklanan Güvenli barındırılan çözümlerin herhangi biriyle birlikte kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-205">The example can be used with any of the secure hosted Blazor solutions described in the [Security and Identity documentation](xref:blazor/security/webassembly/index#implementation-guidance).</span></span>
 * <span data-ttu-id="19a3e-206">Önceki [yerleşik form bileşenleri](#built-in-forms-components) bölümünde *Starfleet Stargeme veritabanı* formu örneği.</span><span class="sxs-lookup"><span data-stu-id="19a3e-206">The *Starfleet Starship Database* form example in the preceding [Built-in forms components](#built-in-forms-components) section.</span></span>
-* <span data-ttu-id="19a3e-207">:::no-loc(Blazor):::Framework <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> bileşeni.</span><span class="sxs-lookup"><span data-stu-id="19a3e-207">The :::no-loc(Blazor)::: framework's <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component.</span></span>
+* <span data-ttu-id="19a3e-207">BlazorFramework <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> bileşeni.</span><span class="sxs-lookup"><span data-stu-id="19a3e-207">The Blazor framework's <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component.</span></span>
 * <span data-ttu-id="19a3e-208">`CustomValidator` [Doğrulayıcı bileşenleri](#validator-components) bölümünde gösterilen bileşen.</span><span class="sxs-lookup"><span data-stu-id="19a3e-208">The `CustomValidator` component shown in the [Validator components](#validator-components) section.</span></span>
 
 <span data-ttu-id="19a3e-209">Aşağıdaki örnekte, sunucu API 'SI, `Description` Kullanıcı `Defense` teslim sınıflandırmasını () seçerse, alıcının açıklaması () için bir değer sağlandığını doğrular `Classification` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-209">In the following example, the server API validates that a value is provided for the ship's description (`Description`) if the user selects the `Defense` ship classification (`Classification`).</span></span>
@@ -481,9 +481,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using :::no-loc(Blazor):::Sample.Shared;
+using BlazorSample.Shared;
 
-namespace :::no-loc(Blazor):::Sample.Server.Controllers
+namespace BlazorSample.Server.Controllers
 {
     [Authorize]
     [ApiController]
@@ -593,7 +593,7 @@ services.AddControllersWithViews()
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.Extensions.Logging
-@using :::no-loc(Blazor):::Sample.Shared
+@using BlazorSample.Shared
 @attribute [Authorize]
 @inject HttpClient Http
 @inject ILogger<FormValidation> Logger
@@ -720,11 +720,11 @@ services.AddControllersWithViews()
 > <span data-ttu-id="19a3e-228">[Doğrulama bileşenlerine](#validator-components)alternatif olarak, veri ek açıklaması doğrulama öznitelikleri de kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-228">As an alternative to [validation components](#validator-components), data annotation validation attributes can be used.</span></span> <span data-ttu-id="19a3e-229">Formun modeline uygulanan özel öznitelikler bileşenin kullanımıyla etkinleştirilir <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-229">Custom attributes applied to the form's model activate with the use of the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component.</span></span> <span data-ttu-id="19a3e-230">Sunucu tarafı doğrulama ile kullanıldığında, özniteliklerin sunucuda çalıştırılabilir olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-230">When used with server-side validation, the attributes must be executable on the server.</span></span> <span data-ttu-id="19a3e-231">Daha fazla bilgi için bkz. <xref:mvc/models/validation#alternatives-to-built-in-attributes>.</span><span class="sxs-lookup"><span data-stu-id="19a3e-231">For more information, see <xref:mvc/models/validation#alternatives-to-built-in-attributes>.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="19a3e-232">Bu bölümdeki sunucu tarafı doğrulama yaklaşımı, :::no-loc(Blazor WebAssembly)::: Bu belge kümesindeki barındırılan her türlü çözüm örneği için uygundur:</span><span class="sxs-lookup"><span data-stu-id="19a3e-232">The server-side validation approach in this section is suitable for any of the :::no-loc(Blazor WebAssembly)::: hosted solution examples in this documentation set:</span></span>
+> <span data-ttu-id="19a3e-232">Bu bölümdeki sunucu tarafı doğrulama yaklaşımı, Blazor WebAssembly Bu belge kümesindeki barındırılan her türlü çözüm örneği için uygundur:</span><span class="sxs-lookup"><span data-stu-id="19a3e-232">The server-side validation approach in this section is suitable for any of the Blazor WebAssembly hosted solution examples in this documentation set:</span></span>
 >
 > * [<span data-ttu-id="19a3e-233">Azure Active Directory (AAD)</span><span class="sxs-lookup"><span data-stu-id="19a3e-233">Azure Active Directory (AAD)</span></span>](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 > * [<span data-ttu-id="19a3e-234">Azure Active Directory (AAD) B2C</span><span class="sxs-lookup"><span data-stu-id="19a3e-234">Azure Active Directory (AAD) B2C</span></span>](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
-> * [<span data-ttu-id="19a3e-235">:::no-loc(Identity)::: Server</span><span class="sxs-lookup"><span data-stu-id="19a3e-235">:::no-loc(Identity)::: Server</span></span>](xref:blazor/security/webassembly/hosted-with-identity-server)
+> * [<span data-ttu-id="19a3e-235">Identity Server</span><span class="sxs-lookup"><span data-stu-id="19a3e-235">Identity Server</span></span>](xref:blazor/security/webassembly/hosted-with-identity-server)
 
 ## <a name="inputtext-based-on-the-input-event"></a><span data-ttu-id="19a3e-236">Giriş olayına göre InputText</span><span class="sxs-lookup"><span data-stu-id="19a3e-236">InputText based on the input event</span></span>
 
@@ -952,20 +952,20 @@ public enum Engine { Ion, Plasma, Fusion, Warp }
 * <span data-ttu-id="19a3e-261">HTML özniteliklerinin değerleri olamaz `null` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-261">HTML attributes can't have `null` values.</span></span> <span data-ttu-id="19a3e-262">HTML olarak en yakın eşdeğeri, `null` ÖĞESINDEN html özniteliğinin yokluğunda olur `value` `<option>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-262">The closest equivalent to `null` in HTML is absence of the HTML `value` attribute from the `<option>` element.</span></span>
 * <span data-ttu-id="19a3e-263">`<option>`Özniteliği olmayan bir seçerken `value` , tarayıcı değeri bu öğenin *metin içeriği* olarak değerlendirir `<option>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-263">When selecting an `<option>` with no `value` attribute, the browser treats the value as the *text content* of that `<option>`'s element.</span></span>
 
-<span data-ttu-id="19a3e-264">:::no-loc(Blazor):::Framework, aşağıdakileri içereceği varsayılan davranışı bastırmak için denenmez:</span><span class="sxs-lookup"><span data-stu-id="19a3e-264">The :::no-loc(Blazor)::: framework doesn't attempt to suppress the default behavior because it would involve:</span></span>
+<span data-ttu-id="19a3e-264">BlazorFramework, aşağıdakileri içereceği varsayılan davranışı bastırmak için denenmez:</span><span class="sxs-lookup"><span data-stu-id="19a3e-264">The Blazor framework doesn't attempt to suppress the default behavior because it would involve:</span></span>
 
 * <span data-ttu-id="19a3e-265">Çerçevede özel durum geçici çözümleri zinciri oluşturma.</span><span class="sxs-lookup"><span data-stu-id="19a3e-265">Creating a chain of special-case workarounds in the framework.</span></span>
 * <span data-ttu-id="19a3e-266">Geçerli çerçeve davranışında son değişiklikler.</span><span class="sxs-lookup"><span data-stu-id="19a3e-266">Breaking changes to current framework behavior.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="19a3e-267">HTML 'deki en büyük plausible `null` eşdeğeri boş bir *dizedir* `value` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-267">The most plausible `null` equivalent in HTML is an *empty string* `value`.</span></span> <span data-ttu-id="19a3e-268">:::no-loc(Blazor):::Çerçeve, `null` bir değerine iki yönlü bağlama yönelik boş dize dönüştürmelerini işler `<select>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-268">The :::no-loc(Blazor)::: framework handles `null` to empty string conversions for two-way binding to a `<select>`'s value.</span></span>
+<span data-ttu-id="19a3e-267">HTML 'deki en büyük plausible `null` eşdeğeri boş bir *dizedir* `value` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-267">The most plausible `null` equivalent in HTML is an *empty string* `value`.</span></span> <span data-ttu-id="19a3e-268">BlazorÇerçeve, `null` bir değerine iki yönlü bağlama yönelik boş dize dönüştürmelerini işler `<select>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-268">The Blazor framework handles `null` to empty string conversions for two-way binding to a `<select>`'s value.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-<span data-ttu-id="19a3e-269">:::no-loc(Blazor):::Çerçeve, `null` iki yönlü bir değere bağlamayı denerken boş dize dönüştürmeleri için otomatik olarak işleme yapmaz `<select>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-269">The :::no-loc(Blazor)::: framework doesn't automatically handle `null` to empty string conversions when attempting two-way binding to a `<select>`'s value.</span></span> <span data-ttu-id="19a3e-270">Daha fazla bilgi için bkz. [ `<select>` null değere bağlamayı çözme (DotNet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).</span><span class="sxs-lookup"><span data-stu-id="19a3e-270">For more information, see [Fix binding `<select>` to a null value (dotnet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).</span></span>
+<span data-ttu-id="19a3e-269">BlazorÇerçeve, `null` iki yönlü bir değere bağlamayı denerken boş dize dönüştürmeleri için otomatik olarak işleme yapmaz `<select>` .</span><span class="sxs-lookup"><span data-stu-id="19a3e-269">The Blazor framework doesn't automatically handle `null` to empty string conversions when attempting two-way binding to a `<select>`'s value.</span></span> <span data-ttu-id="19a3e-270">Daha fazla bilgi için bkz. [ `<select>` null değere bağlamayı çözme (DotNet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).</span><span class="sxs-lookup"><span data-stu-id="19a3e-270">For more information, see [Fix binding `<select>` to a null value (dotnet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).</span></span>
 
 ::: moniker-end
 
@@ -973,7 +973,7 @@ public enum Engine { Ion, Plasma, Fusion, Warp }
 
 <span data-ttu-id="19a3e-272"><xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>Bileşen, Basamaklandırılan veri açıklamalarını kullanarak doğrulama desteğini iliştirir <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-272">The <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component attaches validation support using data annotations to the cascaded <xref:Microsoft.AspNetCore.Components.Forms.EditContext>.</span></span> <span data-ttu-id="19a3e-273">Veri ek açıklamalarını kullanarak doğrulama desteğinin etkinleştirilmesi bu açık hareketi gerektirir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-273">Enabling support for validation using data annotations requires this explicit gesture.</span></span> <span data-ttu-id="19a3e-274">Veri ek açıklamalarıyla farklı bir doğrulama sistemi kullanmak için, öğesini <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> özel bir uygulamayla değiştirin.</span><span class="sxs-lookup"><span data-stu-id="19a3e-274">To use a different validation system than data annotations, replace the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> with a custom implementation.</span></span> <span data-ttu-id="19a3e-275">ASP.NET Core uygulama, başvuru kaynağında İnceleme için kullanılabilir: [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) .</span><span class="sxs-lookup"><span data-stu-id="19a3e-275">The ASP.NET Core implementation is available for inspection in the reference source: [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs).</span></span> <span data-ttu-id="19a3e-276">Başvuru kaynağına yapılan önceki bağlantılar, deponun `master` dalından kod sağlar ve bu, ürün biriminin ASP.NET Core sonraki sürümü için geçerli geliştirmeyi temsil eder.</span><span class="sxs-lookup"><span data-stu-id="19a3e-276">The preceding links to reference source provide code from the repository's `master` branch, which represents the product unit's current development for the next release of ASP.NET Core.</span></span> <span data-ttu-id="19a3e-277">Farklı bir sürümün dalını seçmek için GitHub dal seçicisini (örneğin `release/3.1` ) kullanın.</span><span class="sxs-lookup"><span data-stu-id="19a3e-277">To select the branch for a different release, use the GitHub branch selector (for example `release/3.1`).</span></span>
 
-<span data-ttu-id="19a3e-278">:::no-loc(Blazor)::: iki tür doğrulama gerçekleştirir:</span><span class="sxs-lookup"><span data-stu-id="19a3e-278">:::no-loc(Blazor)::: performs two types of validation:</span></span>
+<span data-ttu-id="19a3e-278">Blazor iki tür doğrulama gerçekleştirir:</span><span class="sxs-lookup"><span data-stu-id="19a3e-278">Blazor performs two types of validation:</span></span>
 
 * <span data-ttu-id="19a3e-279">*Alan doğrulama* , Kullanıcı bir alanın dışına eklendiğinde gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-279">*Field validation* is performed when the user tabs out of a field.</span></span> <span data-ttu-id="19a3e-280">Alan doğrulama sırasında, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> bileşen bildirilen tüm doğrulama sonuçlarını alanla ilişkilendirir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-280">During field validation, the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component associates all reported validation results with the field.</span></span>
 * <span data-ttu-id="19a3e-281">Kullanıcı formu gönderdiğinde *model doğrulaması* gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-281">*Model validation* is performed when the user submits the form.</span></span> <span data-ttu-id="19a3e-282">Model doğrulama sırasında, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> Bileşen, doğrulama sonucunun raporlandığı üye adına göre alanı belirlemeyi dener.</span><span class="sxs-lookup"><span data-stu-id="19a3e-282">During model validation, the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component attempts to determine the field based on the member name that the validation result reports.</span></span> <span data-ttu-id="19a3e-283">Tek bir üyeyle ilişkilendirilmeyen doğrulama sonuçları, bir alan yerine modeliyle ilişkilendirilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-283">Validation results that aren't associated with an individual member are associated with the model rather than a field.</span></span>
@@ -1058,7 +1058,7 @@ private class MyFieldClassProvider : FieldCssClassProvider
 
 ::: moniker-end
 
-### <a name="no-locblazor-data-annotations-validation-package"></a><span data-ttu-id="19a3e-300">:::no-loc(Blazor)::: veri ek açıklamaları doğrulama paketi</span><span class="sxs-lookup"><span data-stu-id="19a3e-300">:::no-loc(Blazor)::: data annotations validation package</span></span>
+### <a name="no-locblazor-data-annotations-validation-package"></a><span data-ttu-id="19a3e-300">Blazor veri ek açıklamaları doğrulama paketi</span><span class="sxs-lookup"><span data-stu-id="19a3e-300">Blazor data annotations validation package</span></span>
 
 <span data-ttu-id="19a3e-301">, [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) Bileşeni kullanarak doğrulama deneyimini boşlukları dolduran bir pakettir <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-301">The [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) is a package that fills validation experience gaps using the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component.</span></span> <span data-ttu-id="19a3e-302">Paket şu anda *deneysel*.</span><span class="sxs-lookup"><span data-stu-id="19a3e-302">The package is currently *experimental*.</span></span>
 
@@ -1067,11 +1067,11 @@ private class MyFieldClassProvider : FieldCssClassProvider
 
 ### <a name="compareproperty-attribute"></a><span data-ttu-id="19a3e-306">[CompareProperty] özniteliği</span><span class="sxs-lookup"><span data-stu-id="19a3e-306">[CompareProperty] attribute</span></span>
 
-<span data-ttu-id="19a3e-307"><xref:System.ComponentModel.DataAnnotations.CompareAttribute> <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> Doğrulama sonucunu belirli bir üyeyle ilişkilendirmediği için bileşen ile iyi çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="19a3e-307">The <xref:System.ComponentModel.DataAnnotations.CompareAttribute> doesn't work well with the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component because it doesn't associate the validation result with a specific member.</span></span> <span data-ttu-id="19a3e-308">Bu, alan düzeyi doğrulama ve tüm modelin bir gönderme sırasında doğrulanması arasındaki tutarsız davranışa neden olabilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-308">This can result in inconsistent behavior between field-level validation and when the entire model is validated on a submit.</span></span> <span data-ttu-id="19a3e-309">[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) *Deneysel* paket, `ComparePropertyAttribute` Bu sınırlamalar etrafında çalışabilen ek bir doğrulama özniteliği sunar.</span><span class="sxs-lookup"><span data-stu-id="19a3e-309">The [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) *experimental* package introduces an additional validation attribute, `ComparePropertyAttribute`, that works around these limitations.</span></span> <span data-ttu-id="19a3e-310">Bir :::no-loc(Blazor)::: uygulamada, `[CompareProperty]` özniteliği için doğrudan değiştirme olur [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) .</span><span class="sxs-lookup"><span data-stu-id="19a3e-310">In a :::no-loc(Blazor)::: app, `[CompareProperty]` is a direct replacement for the [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) attribute.</span></span>
+<span data-ttu-id="19a3e-307"><xref:System.ComponentModel.DataAnnotations.CompareAttribute> <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> Doğrulama sonucunu belirli bir üyeyle ilişkilendirmediği için bileşen ile iyi çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="19a3e-307">The <xref:System.ComponentModel.DataAnnotations.CompareAttribute> doesn't work well with the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> component because it doesn't associate the validation result with a specific member.</span></span> <span data-ttu-id="19a3e-308">Bu, alan düzeyi doğrulama ve tüm modelin bir gönderme sırasında doğrulanması arasındaki tutarsız davranışa neden olabilir.</span><span class="sxs-lookup"><span data-stu-id="19a3e-308">This can result in inconsistent behavior between field-level validation and when the entire model is validated on a submit.</span></span> <span data-ttu-id="19a3e-309">[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) *Deneysel* paket, `ComparePropertyAttribute` Bu sınırlamalar etrafında çalışabilen ek bir doğrulama özniteliği sunar.</span><span class="sxs-lookup"><span data-stu-id="19a3e-309">The [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) *experimental* package introduces an additional validation attribute, `ComparePropertyAttribute`, that works around these limitations.</span></span> <span data-ttu-id="19a3e-310">Bir Blazor uygulamada, `[CompareProperty]` özniteliği için doğrudan değiştirme olur [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) .</span><span class="sxs-lookup"><span data-stu-id="19a3e-310">In a Blazor app, `[CompareProperty]` is a direct replacement for the [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) attribute.</span></span>
 
 ### <a name="nested-models-collection-types-and-complex-types"></a><span data-ttu-id="19a3e-311">İç içe modeller, koleksiyon türleri ve karmaşık türler</span><span class="sxs-lookup"><span data-stu-id="19a3e-311">Nested models, collection types, and complex types</span></span>
 
-<span data-ttu-id="19a3e-312">:::no-loc(Blazor)::: yerleşik olan veri açıklamalarını kullanarak form girişini doğrulama desteği sağlar <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-312">:::no-loc(Blazor)::: provides support for validating form input using data annotations with the built-in <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>.</span></span> <span data-ttu-id="19a3e-313">Ancak, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> yalnızca koleksiyonun üst düzey özelliklerini, koleksiyon veya karmaşık tür özellikleri olmayan forma doğrular.</span><span class="sxs-lookup"><span data-stu-id="19a3e-313">However, the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> only validates top-level properties of the model bound to the form that aren't collection- or complex-type properties.</span></span>
+<span data-ttu-id="19a3e-312">Blazor yerleşik olan veri açıklamalarını kullanarak form girişini doğrulama desteği sağlar <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> .</span><span class="sxs-lookup"><span data-stu-id="19a3e-312">Blazor provides support for validating form input using data annotations with the built-in <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>.</span></span> <span data-ttu-id="19a3e-313">Ancak, <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> yalnızca koleksiyonun üst düzey özelliklerini, koleksiyon veya karmaşık tür özellikleri olmayan forma doğrular.</span><span class="sxs-lookup"><span data-stu-id="19a3e-313">However, the <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> only validates top-level properties of the model bound to the form that aren't collection- or complex-type properties.</span></span>
 
 <span data-ttu-id="19a3e-314">Koleksiyon ve karmaşık tür özellikleri dahil olmak üzere, bağlantılı modelin tüm nesne grafiğini doğrulamak için `ObjectGraphDataAnnotationsValidator` *deneysel* paket tarafından sunulan öğesini kullanın [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) :</span><span class="sxs-lookup"><span data-stu-id="19a3e-314">To validate the bound model's entire object graph, including collection- and complex-type properties, use the `ObjectGraphDataAnnotationsValidator` provided by the *experimental* [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) package:</span></span>
 

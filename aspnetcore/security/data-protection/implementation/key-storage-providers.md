@@ -5,17 +5,17 @@ description: ASP.NET Core 'de anahtar depolama sağlayıcıları ve anahtar depo
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/implementation/key-storage-providers
 ms.openlocfilehash: 6a70183ce4b1a129ef213300473b233a5ef822f9
 ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a><span data-ttu-id="dd419-114">Azure Depolama</span><span class="sxs-lookup"><span data-stu-id="dd419-114">Azure Storage</span></span>
 
-<span data-ttu-id="dd419-115">[Azure. Extensions. AspNetCore. DataProtection. Blobları](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) , Azure Blob depolamada veri koruma anahtarlarının depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-115">The [Azure.Extensions.AspNetCore.DataProtection.Blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="dd419-116">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-117">Uygulamalar, kimlik doğrulama :::no-loc(cookie)::: veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-117">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="dd419-115">[Azure. Extensions. AspNetCore. DataProtection. Blobları](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) , Azure Blob depolamada veri koruma anahtarlarının depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-115">The [Azure.Extensions.AspNetCore.DataProtection.Blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="dd419-116">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-117">Uygulamalar, kimlik doğrulama cookie veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-117">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 <span data-ttu-id="dd419-118">Azure Blob depolama sağlayıcısını yapılandırmak için [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) aşırı yüklemelerinin birini çağırın.</span><span class="sxs-lookup"><span data-stu-id="dd419-118">To configure the Azure Blob Storage provider, call one of the [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) overloads.</span></span>
 
@@ -83,13 +83,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="dd419-122">[Microsoft. AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="dd419-123">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-124">Uygulamalar, kimlik doğrulama :::no-loc(cookie)::: veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-124">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="dd419-122">[Microsoft. AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="dd419-123">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-124">Uygulamalar, kimlik doğrulama cookie veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-124">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-<span data-ttu-id="dd419-125">[Microsoft. AspNetCore. DataProtection. redsıs](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="dd419-126">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-127">Uygulamalar, kimlik doğrulama :::no-loc(cookie)::: veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-127">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="dd419-125">[Microsoft. AspNetCore. DataProtection. redsıs](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar.</span><span class="sxs-lookup"><span data-stu-id="dd419-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="dd419-126">Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="dd419-127">Uygulamalar, kimlik doğrulama cookie veya CSRF korumasını birden çok sunucu arasında paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="dd419-127">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 

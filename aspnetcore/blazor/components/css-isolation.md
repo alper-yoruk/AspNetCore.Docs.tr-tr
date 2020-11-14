@@ -1,5 +1,5 @@
 ---
-title: :::no-loc(Blazor):::CSS yalıtımı ASP.NET Core
+title: BlazorCSS yalıtımı ASP.NET Core
 author: daveabrock
 description: CSS yalıtımının, CSS 'nizi basitleştirecek ve diğer bileşenler veya kitaplıklarla çakışmaları önlemenize olanak sağlayan CSS 'yi bileşenlerinizin kapsamını nasıl sağlayacağınızı öğrenin.
 monikerRange: '>= aspnetcore-5.0'
@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/css-isolation
 ms.openlocfilehash: 4fec0fa750b9209849030d0d6b7de8f4e163d62f
 ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
@@ -26,7 +26,7 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 11/12/2020
 ms.locfileid: "94570139"
 ---
-# <a name="aspnet-core-no-locblazor-css-isolation"></a><span data-ttu-id="987d0-103">:::no-loc(Blazor):::CSS yalıtımı ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="987d0-103">ASP.NET Core :::no-loc(Blazor)::: CSS isolation</span></span>
+# <a name="aspnet-core-no-locblazor-css-isolation"></a><span data-ttu-id="987d0-103">BlazorCSS yalıtımı ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="987d0-103">ASP.NET Core Blazor CSS isolation</span></span>
 
 <span data-ttu-id="987d0-104">By [Davve Brock](https://twitter.com/daveabrock)</span><span class="sxs-lookup"><span data-stu-id="987d0-104">By [Dave Brock](https://twitter.com/daveabrock)</span></span>
 
@@ -38,7 +38,7 @@ ms.locfileid: "94570139"
 
 <span data-ttu-id="987d0-109">`MyComponent`Bir dosya içeren bir bileşen için `MyComponent.razor` , adlı bileşenin yanında bir dosya oluşturun `MyComponent.razor.css` .</span><span class="sxs-lookup"><span data-stu-id="987d0-109">For a `MyComponent` component that has a `MyComponent.razor` file, create a file alongside the component called `MyComponent.razor.css`.</span></span> <span data-ttu-id="987d0-110">`MyComponent` `.razor.css` Dosya adının değeri büyük/küçük harfe duyarlı **değildir** .</span><span class="sxs-lookup"><span data-stu-id="987d0-110">The `MyComponent` value in the `.razor.css` filename is **not** case-sensitive.</span></span>
 
-<span data-ttu-id="987d0-111">Örneğin, `Counter` varsayılan Proje şablonundaki BILEŞENE CSS yalıtımı eklemek için :::no-loc(Blazor)::: , dosyanın yanında adlı yeni bir dosya ekleyin `Counter.razor.css` `Counter.razor` ve ardından aşağıdaki CSS 'yi ekleyin:</span><span class="sxs-lookup"><span data-stu-id="987d0-111">For example to add CSS isolation to the `Counter` component in the default :::no-loc(Blazor)::: project template, add a new file named `Counter.razor.css` alongside the `Counter.razor` file, then add the following CSS:</span></span>
+<span data-ttu-id="987d0-111">Örneğin, `Counter` varsayılan Proje şablonundaki BILEŞENE CSS yalıtımı eklemek için Blazor , dosyanın yanında adlı yeni bir dosya ekleyin `Counter.razor.css` `Counter.razor` ve ardından aşağıdaki CSS 'yi ekleyin:</span><span class="sxs-lookup"><span data-stu-id="987d0-111">For example to add CSS isolation to the `Counter` component in the default Blazor project template, add a new file named `Counter.razor.css` alongside the `Counter.razor` file, then add the following CSS:</span></span>
 
 ```css
 h1 { 
@@ -50,11 +50,11 @@ h1 {
 <span data-ttu-id="987d0-112">İçinde tanımlanan stiller `Counter.razor.css` Yalnızca bileşenin işlenmiş çıktısına uygulanır `Counter` .</span><span class="sxs-lookup"><span data-stu-id="987d0-112">The styles defined in `Counter.razor.css` are only applied to the rendered output of the `Counter` component.</span></span> <span data-ttu-id="987d0-113">`h1`Uygulamanın başka bir yerinde tanımlanan CSS bildirimleri stillerle çakışmaz `Counter` .</span><span class="sxs-lookup"><span data-stu-id="987d0-113">Any `h1` CSS declarations defined elsewhere in the app don't conflict with `Counter` styles.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="987d0-114">Paketleme gerçekleştiğinde stil yalıtımının garanti edilmesi için `@import` :::no-loc(Razor)::: bloklar kapsamlı CSS dosyaları ile desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="987d0-114">In order to guarantee style isolation when bundling occurs, `@import` :::no-loc(Razor)::: blocks aren't supported with scoped CSS files.</span></span>
+> <span data-ttu-id="987d0-114">Paketleme gerçekleştiğinde stil yalıtımının garanti edilmesi için `@import` Razor bloklar kapsamlı CSS dosyaları ile desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="987d0-114">In order to guarantee style isolation when bundling occurs, `@import` Razor blocks aren't supported with scoped CSS files.</span></span>
 
 ## <a name="css-isolation-bundling"></a><span data-ttu-id="987d0-115">CSS yalıtım paketlemeyi oluşturma</span><span class="sxs-lookup"><span data-stu-id="987d0-115">CSS isolation bundling</span></span>
 
-<span data-ttu-id="987d0-116">CSS yalıtımı derleme zamanında oluşur.</span><span class="sxs-lookup"><span data-stu-id="987d0-116">CSS isolation occurs at build time.</span></span> <span data-ttu-id="987d0-117">Bu işlem sırasında, :::no-loc(Blazor)::: CSS seçicileri bileşen tarafından işlenen biçimlendirmeye uyacak şekilde yeniden yazar.</span><span class="sxs-lookup"><span data-stu-id="987d0-117">During this process, :::no-loc(Blazor)::: rewrites CSS selectors to match markup rendered by the component.</span></span> <span data-ttu-id="987d0-118">Bu yeniden yazan CSS stilleri `{PROJECT NAME}.styles.css` , yer tutucunun `{PROJECT NAME}` başvurulan paket veya ürün adı olduğu yerde statik bir varlık olarak paketlenmiştir ve üretilir.</span><span class="sxs-lookup"><span data-stu-id="987d0-118">These rewritten CSS styles are bundled and produced as a static asset at `{PROJECT NAME}.styles.css`, where the placeholder `{PROJECT NAME}` is the referenced package or product name.</span></span>
+<span data-ttu-id="987d0-116">CSS yalıtımı derleme zamanında oluşur.</span><span class="sxs-lookup"><span data-stu-id="987d0-116">CSS isolation occurs at build time.</span></span> <span data-ttu-id="987d0-117">Bu işlem sırasında, Blazor CSS seçicileri bileşen tarafından işlenen biçimlendirmeye uyacak şekilde yeniden yazar.</span><span class="sxs-lookup"><span data-stu-id="987d0-117">During this process, Blazor rewrites CSS selectors to match markup rendered by the component.</span></span> <span data-ttu-id="987d0-118">Bu yeniden yazan CSS stilleri `{PROJECT NAME}.styles.css` , yer tutucunun `{PROJECT NAME}` başvurulan paket veya ürün adı olduğu yerde statik bir varlık olarak paketlenmiştir ve üretilir.</span><span class="sxs-lookup"><span data-stu-id="987d0-118">These rewritten CSS styles are bundled and produced as a static asset at `{PROJECT NAME}.styles.css`, where the placeholder `{PROJECT NAME}` is the referenced package or product name.</span></span>
 
 <span data-ttu-id="987d0-119">Bu statik dosyalara varsayılan olarak uygulamanın kök yolundan başvurulur.</span><span class="sxs-lookup"><span data-stu-id="987d0-119">These static files are referenced from the root path of the app by default.</span></span> <span data-ttu-id="987d0-120">Uygulamada, oluşturulan HTML etiketinin içindeki başvuruyu inceleyerek paketlenmiş dosyaya başvurun `<head>` :</span><span class="sxs-lookup"><span data-stu-id="987d0-120">In the app, reference the bundled file by inspecting the reference inside the `<head>` tag of the generated HTML:</span></span>
 
@@ -62,7 +62,7 @@ h1 {
 <link href="MyProjectName.styles.css" rel="stylesheet">
 ```
 
-<span data-ttu-id="987d0-121">Paketlenmiş dosya içinde her bileşen bir kapsam tanımlayıcısı ile ilişkilendirilir.</span><span class="sxs-lookup"><span data-stu-id="987d0-121">Within the bundled file, each component is associated with a scope identifier.</span></span> <span data-ttu-id="987d0-122">Stil uygulanmış her bileşen için, biçimiyle bir HTML özniteliği eklenir `b-<10-character-string>` .</span><span class="sxs-lookup"><span data-stu-id="987d0-122">For each styled component, an HTML attribute is appended with the format `b-<10-character-string>`.</span></span> <span data-ttu-id="987d0-123">Tanımlayıcı benzersiz ve her uygulama için farklıdır.</span><span class="sxs-lookup"><span data-stu-id="987d0-123">The identifier is unique and different for each app.</span></span> <span data-ttu-id="987d0-124">İşlenmiş `Counter` bileşende, :::no-loc(Blazor)::: öğesine bir kapsam tanımlayıcısı ekler `h1` :</span><span class="sxs-lookup"><span data-stu-id="987d0-124">In the rendered `Counter` component, :::no-loc(Blazor)::: appends a scope identifier to the `h1` element:</span></span>
+<span data-ttu-id="987d0-121">Paketlenmiş dosya içinde her bileşen bir kapsam tanımlayıcısı ile ilişkilendirilir.</span><span class="sxs-lookup"><span data-stu-id="987d0-121">Within the bundled file, each component is associated with a scope identifier.</span></span> <span data-ttu-id="987d0-122">Stil uygulanmış her bileşen için, biçimiyle bir HTML özniteliği eklenir `b-<10-character-string>` .</span><span class="sxs-lookup"><span data-stu-id="987d0-122">For each styled component, an HTML attribute is appended with the format `b-<10-character-string>`.</span></span> <span data-ttu-id="987d0-123">Tanımlayıcı benzersiz ve her uygulama için farklıdır.</span><span class="sxs-lookup"><span data-stu-id="987d0-123">The identifier is unique and different for each app.</span></span> <span data-ttu-id="987d0-124">İşlenmiş `Counter` bileşende, Blazor öğesine bir kapsam tanımlayıcısı ekler `h1` :</span><span class="sxs-lookup"><span data-stu-id="987d0-124">In the rendered `Counter` component, Blazor appends a scope identifier to the `h1` element:</span></span>
 
 ```html
 <h1 b-3xxtam6d07>
@@ -79,7 +79,7 @@ h1[b-3xxtam6d07] {
 
 <span data-ttu-id="987d0-127">Derleme zamanında,, `{STATIC WEB ASSETS BASE PATH}/MyProject.lib.scp.css` yer tutucunun `{STATIC WEB ASSETS BASE PATH}` statik Web varlıkları temel yolu olduğu, kuralıyla birlikte bir proje paketi oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="987d0-127">At build time, a project bundle is created with the convention `{STATIC WEB ASSETS BASE PATH}/MyProject.lib.scp.css`, where the placeholder `{STATIC WEB ASSETS BASE PATH}` is the static web assets base path.</span></span>
 
-<span data-ttu-id="987d0-128">NuGet paketleri veya [ :::no-loc(Razor)::: sınıf kitaplıkları](xref:blazor/components/class-libraries)gibi diğer projeler kullanılıyorsa, paketlenmiş dosya:</span><span class="sxs-lookup"><span data-stu-id="987d0-128">If other projects are utilized, such as NuGet packages or [:::no-loc(Razor)::: class libraries](xref:blazor/components/class-libraries), the bundled file:</span></span>
+<span data-ttu-id="987d0-128">NuGet paketleri veya [ Razor sınıf kitaplıkları](xref:blazor/components/class-libraries)gibi diğer projeler kullanılıyorsa, paketlenmiş dosya:</span><span class="sxs-lookup"><span data-stu-id="987d0-128">If other projects are utilized, such as NuGet packages or [Razor class libraries](xref:blazor/components/class-libraries), the bundled file:</span></span>
 
 * <span data-ttu-id="987d0-129">CSS içeri aktarmaları kullanarak stillere başvurur.</span><span class="sxs-lookup"><span data-stu-id="987d0-129">References the styles using CSS imports.</span></span>
 * <span data-ttu-id="987d0-130">, Stilleri tüketen uygulamanın statik bir web varlığı olarak yayımlanmaz.</span><span class="sxs-lookup"><span data-stu-id="987d0-130">Isn't published as a static web asset of the app that consumes the styles.</span></span>
@@ -141,7 +141,7 @@ h1[b-3xxtam6d07] {
 
 ## <a name="css-preprocessor-support"></a><span data-ttu-id="987d0-144">CSS Önişlemci desteği</span><span class="sxs-lookup"><span data-stu-id="987d0-144">CSS preprocessor support</span></span>
 
-<span data-ttu-id="987d0-145">CSS preiþlemcileri, değişkenler, iç içe geçme, modüller, mixıns ve devralma gibi özelliklerden yararlanarak CSS geliştirmeyi iyileştirmek için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="987d0-145">CSS preprocessors are useful for improving CSS development by utilizing features such as variables, nesting, modules, mixins, and inheritance.</span></span> <span data-ttu-id="987d0-146">CSS yalıtımı, Sass veya daha düşük gibi CSS ön işlemcilerini yerel olarak desteklemeirken, :::no-loc(Blazor)::: derleme işlemi SıRASıNDA CSS seçicileri yeniden yazmadan önce, ön işlemci derlemesi gerçekleştiği sürece CSS ön işlemcilerini tümleştirmek sorunsuz olur.</span><span class="sxs-lookup"><span data-stu-id="987d0-146">While CSS isolation doesn't natively support CSS preprocessors such as Sass or Less, integrating CSS preprocessors is seamless as long as preprocessor compilation occurs before :::no-loc(Blazor)::: rewrites the CSS selectors during the build process.</span></span> <span data-ttu-id="987d0-147">Örneğin, Visual Studio 'yu kullanarak, Visual Studio görev Çalıştırıcısı Gezgininde **derleme** görevi olarak var olan Önişlemci derlemesini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="987d0-147">Using Visual Studio for example, configure existing preprocessor compilation as a **Before Build** task in the Visual Studio Task Runner Explorer.</span></span>
+<span data-ttu-id="987d0-145">CSS preiþlemcileri, değişkenler, iç içe geçme, modüller, mixıns ve devralma gibi özelliklerden yararlanarak CSS geliştirmeyi iyileştirmek için yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="987d0-145">CSS preprocessors are useful for improving CSS development by utilizing features such as variables, nesting, modules, mixins, and inheritance.</span></span> <span data-ttu-id="987d0-146">CSS yalıtımı, Sass veya daha düşük gibi CSS ön işlemcilerini yerel olarak desteklemeirken, Blazor derleme işlemi SıRASıNDA CSS seçicileri yeniden yazmadan önce, ön işlemci derlemesi gerçekleştiği sürece CSS ön işlemcilerini tümleştirmek sorunsuz olur.</span><span class="sxs-lookup"><span data-stu-id="987d0-146">While CSS isolation doesn't natively support CSS preprocessors such as Sass or Less, integrating CSS preprocessors is seamless as long as preprocessor compilation occurs before Blazor rewrites the CSS selectors during the build process.</span></span> <span data-ttu-id="987d0-147">Örneğin, Visual Studio 'yu kullanarak, Visual Studio görev Çalıştırıcısı Gezgininde **derleme** görevi olarak var olan Önişlemci derlemesini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="987d0-147">Using Visual Studio for example, configure existing preprocessor compilation as a **Before Build** task in the Visual Studio Task Runner Explorer.</span></span>
 
 <span data-ttu-id="987d0-148">[Delegate. SassBuilder](https://www.nuget.org/packages/Delegate.SassBuilder)gibi birçok üçüncü taraf NuGet PAKETI, CSS yalıtımı gerçekleşmeden önce derleme işleminin başlangıcında Sass/SCSS dosyalarını derleyebilir ve ek ek yapılandırma gerekmez.</span><span class="sxs-lookup"><span data-stu-id="987d0-148">Many third-party NuGet packages, such as [Delegate.SassBuilder](https://www.nuget.org/packages/Delegate.SassBuilder), can compile SASS/SCSS files at the beginning of the build process before CSS isolation occurs, and no additional additional configuration is required.</span></span>
 
@@ -159,7 +159,7 @@ h1[b-3xxtam6d07] {
 </ItemGroup>
 ```
 
-<span data-ttu-id="987d0-154">Yukarıdaki örnekte, için oluşturulan CSS, `MyComponent.:::no-loc(Razor):::.css` kapsam tanımlayıcısını ' dan ' a değiştirir `b-<10-character-string>` `my-custom-scope-identifier` .</span><span class="sxs-lookup"><span data-stu-id="987d0-154">In the preceding example, the CSS generated for `MyComponent.:::no-loc(Razor):::.css` changes its scope identifier from `b-<10-character-string>` to `my-custom-scope-identifier`.</span></span>
+<span data-ttu-id="987d0-154">Yukarıdaki örnekte, için oluşturulan CSS, `MyComponent.Razor.css` kapsam tanımlayıcısını ' dan ' a değiştirir `b-<10-character-string>` `my-custom-scope-identifier` .</span><span class="sxs-lookup"><span data-stu-id="987d0-154">In the preceding example, the CSS generated for `MyComponent.Razor.css` changes its scope identifier from `b-<10-character-string>` to `my-custom-scope-identifier`.</span></span>
 
 ### <a name="change-base-path-for-static-web-assets"></a><span data-ttu-id="987d0-155">Statik web varlıklarının taban yolunu değiştirme</span><span class="sxs-lookup"><span data-stu-id="987d0-155">Change base path for static web assets</span></span>
 
@@ -173,7 +173,7 @@ h1[b-3xxtam6d07] {
 
 ### <a name="disable-automatic-bundling"></a><span data-ttu-id="987d0-159">Otomatik paketlemeyi devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="987d0-159">Disable automatic bundling</span></span>
 
-<span data-ttu-id="987d0-160">:::no-loc(Blazor):::Çalışma zamanında bulunan kapsamlı dosyaları nasıl yayımlayıp yüklediğini devre dışı bırakmak için özelliğini kullanın `DisableScopedCssBundling` .</span><span class="sxs-lookup"><span data-stu-id="987d0-160">To opt out of how :::no-loc(Blazor)::: publishes and loads scoped files at runtime, use the `DisableScopedCssBundling` property.</span></span> <span data-ttu-id="987d0-161">Bu özelliği kullanırken, diğer araçların veya işlemlerin dizinden yalıtılmış CSS dosyalarını alma `obj` ve çalışma zamanında bunları yayımlama ve yükleme işlemlerinden sorumlu olduğu anlamına gelir:</span><span class="sxs-lookup"><span data-stu-id="987d0-161">When using this property, it means other tools or processes are responsible for taking the isolated CSS files from the `obj` directory and publishing and loading them at runtime:</span></span>
+<span data-ttu-id="987d0-160">BlazorÇalışma zamanında bulunan kapsamlı dosyaları nasıl yayımlayıp yüklediğini devre dışı bırakmak için özelliğini kullanın `DisableScopedCssBundling` .</span><span class="sxs-lookup"><span data-stu-id="987d0-160">To opt out of how Blazor publishes and loads scoped files at runtime, use the `DisableScopedCssBundling` property.</span></span> <span data-ttu-id="987d0-161">Bu özelliği kullanırken, diğer araçların veya işlemlerin dizinden yalıtılmış CSS dosyalarını alma `obj` ve çalışma zamanında bunları yayımlama ve yükleme işlemlerinden sorumlu olduğu anlamına gelir:</span><span class="sxs-lookup"><span data-stu-id="987d0-161">When using this property, it means other tools or processes are responsible for taking the isolated CSS files from the `obj` directory and publishing and loading them at runtime:</span></span>
 
 ```xml
 <PropertyGroup>
@@ -181,9 +181,9 @@ h1[b-3xxtam6d07] {
 </PropertyGroup>
 ```
 
-## <a name="no-locrazor-class-library-rcl-support"></a><span data-ttu-id="987d0-162">:::no-loc(Razor)::: sınıf kitaplığı (RCL) desteği</span><span class="sxs-lookup"><span data-stu-id="987d0-162">:::no-loc(Razor)::: class library (RCL) support</span></span>
+## <a name="no-locrazor-class-library-rcl-support"></a><span data-ttu-id="987d0-162">Razor sınıf kitaplığı (RCL) desteği</span><span class="sxs-lookup"><span data-stu-id="987d0-162">Razor class library (RCL) support</span></span>
 
-<span data-ttu-id="987d0-163">Bir [ :::no-loc(Razor)::: sınıf kitaplığı (RCL)](xref:razor-pages/ui-class) yalıtılmış stiller sağlıyorsa, `<link>` etiketin `href` özniteliği öğesine işaret eder `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` ; burada yer tutucular:</span><span class="sxs-lookup"><span data-stu-id="987d0-163">When a [:::no-loc(Razor)::: class library (RCL)](xref:razor-pages/ui-class) provides isolated styles, the `<link>` tag's `href` attribute points to `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css`, where the placeholders are:</span></span>
+<span data-ttu-id="987d0-163">Bir [ Razor sınıf kitaplığı (RCL)](xref:razor-pages/ui-class) yalıtılmış stiller sağlıyorsa, `<link>` etiketin `href` özniteliği öğesine işaret eder `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` ; burada yer tutucular:</span><span class="sxs-lookup"><span data-stu-id="987d0-163">When a [Razor class library (RCL)](xref:razor-pages/ui-class) provides isolated styles, the `<link>` tag's `href` attribute points to `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css`, where the placeholders are:</span></span>
 
 * <span data-ttu-id="987d0-164">`{STATIC WEB ASSET BASE PATH}`: Statik Web varlık temel yolu.</span><span class="sxs-lookup"><span data-stu-id="987d0-164">`{STATIC WEB ASSET BASE PATH}`: The static web asset base path.</span></span>
 * <span data-ttu-id="987d0-165">`{ASSEMBLY NAME}`: Sınıf kitaplığının derleme adı.</span><span class="sxs-lookup"><span data-stu-id="987d0-165">`{ASSEMBLY NAME}`: The class library's assembly name.</span></span>

@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 08/13/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
-- ':::no-loc(Models):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
+- 'Models'
 uid: tutorials/first-web-api
 ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
 ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
@@ -229,25 +229,25 @@ ms.locfileid: "94570256"
 
 # <a name="visual-studio"></a>[<span data-ttu-id="228fd-205">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-205">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-206">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-206">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-207">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-208">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-208">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-206">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-206">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-207">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-208">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-208">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-209">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-209">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-210">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-210">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="228fd-209">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-209">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-210">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-210">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="228fd-211">Şablon kodunu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-211">Replace the template code with the following:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-212">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-212">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-213">Adlı bir klasör ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-213">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-213">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-213">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-214">`TodoItem` *:::no-loc(Models):::* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-214">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="228fd-214">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-214">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-215">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-215">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-216">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-216">Right-click the project.</span></span> <span data-ttu-id="228fd-217">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-218">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-218">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-216">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-216">Right-click the project.</span></span> <span data-ttu-id="228fd-217">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-218">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-218">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-220">Klasöre sağ tıklayın *:::no-loc(Models):::* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-220">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="228fd-220">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-220">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="228fd-221">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-221">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -255,11 +255,11 @@ ms.locfileid: "94570256"
 
 ---
 
-  [!code-csharp[](first-web-api/samples/5.x/TodoApi/:::no-loc(Models):::/TodoItem.cs?name=snippet)]
+  [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoItem.cs?name=snippet)]
 
 <span data-ttu-id="228fd-223">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-223">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-224">Model sınıfları projede herhangi bir yere gidebilir, ancak *:::no-loc(Models):::* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-224">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="228fd-224">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-224">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context"></a><span data-ttu-id="228fd-225">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-225">Add a database context</span></span>
 
@@ -283,17 +283,17 @@ ms.locfileid: "94570256"
 
 ## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="228fd-238">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-238">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="228fd-239">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-239">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-240">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-240">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="228fd-239">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-239">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-240">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-240">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-241">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-241">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-242">Klasöre bir `TodoContext` sınıf ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-242">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="228fd-242">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-242">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="228fd-243">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-243">Enter the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/5.x/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context"></a><span data-ttu-id="228fd-244">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="228fd-244">Register the database context</span></span>
 
@@ -319,8 +319,8 @@ ms.locfileid: "94570256"
 * <span data-ttu-id="228fd-257">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-257">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
 * <span data-ttu-id="228fd-258">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="228fd-258">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="228fd-259">**Model sınıfında** **TodoItem (TodoApi. :::no-loc(Models)::: )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-259">Select **TodoItem (TodoApi.:::no-loc(Models):::)** in the **Model class**.</span></span>
-  * <span data-ttu-id="228fd-260">**Veri bağlamı sınıfında** **TodoContext (TodoApi. :::no-loc(Models)::: )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-260">Select **TodoContext (TodoApi.:::no-loc(Models):::)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="228fd-259">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-259">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="228fd-260">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-260">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
   * <span data-ttu-id="228fd-261">**Ekle** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-261">Select **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-262">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-262">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
@@ -536,7 +536,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="228fd-392">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-392">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
-[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/:::no-loc(Models):::/TodoItem.cs?name=snippet&highlight=8)]
+[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=8)]
 
 <span data-ttu-id="228fd-393">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-393">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
@@ -544,7 +544,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="228fd-395">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="228fd-395">Create a DTO model:</span></span>
 
-[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/:::no-loc(Models):::/TodoItemDTO.cs?name=snippet)]
+[!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
 <span data-ttu-id="228fd-396">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="228fd-396">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
@@ -725,25 +725,25 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="228fd-486">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-486">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-487">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-487">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-488">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-488">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-489">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-489">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-487">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-487">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-488">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-488">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-489">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-489">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-490">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-490">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-491">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-491">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="228fd-490">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-490">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-491">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-491">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="228fd-492">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-492">Replace the template code with the following code:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-493">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-493">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-494">Adlı bir klasör ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-494">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-494">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-494">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-495">`TodoItem` *:::no-loc(Models):::* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-495">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="228fd-495">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-495">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-496">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-496">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-497">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-497">Right-click the project.</span></span> <span data-ttu-id="228fd-498">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-498">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-499">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-499">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-497">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-497">Right-click the project.</span></span> <span data-ttu-id="228fd-498">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-498">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-499">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-499">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-501">Klasöre sağ tıklayın *:::no-loc(Models):::* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-501">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="228fd-501">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-501">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="228fd-502">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-502">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -751,11 +751,11 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ---
 
-  [!code-csharp[](first-web-api/samples/3.0/TodoApi/:::no-loc(Models):::/TodoItem.cs?name=snippet)]
+  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
 <span data-ttu-id="228fd-504">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-504">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-505">Model sınıfları projede herhangi bir yere gidebilir, ancak *:::no-loc(Models):::* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-505">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="228fd-505">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-505">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context"></a><span data-ttu-id="228fd-506">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-506">Add a database context</span></span>
 
@@ -775,17 +775,17 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="228fd-517">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-517">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="228fd-518">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-518">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-519">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-519">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="228fd-518">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-518">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-519">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-519">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-520">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-520">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-521">Klasöre bir `TodoContext` sınıf ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-521">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="228fd-521">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-521">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="228fd-522">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-522">Enter the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/3.0/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context"></a><span data-ttu-id="228fd-523">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="228fd-523">Register the database context</span></span>
 
@@ -810,8 +810,8 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * <span data-ttu-id="228fd-535">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-535">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
 * <span data-ttu-id="228fd-536">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="228fd-536">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="228fd-537">**Model sınıfında** **TodoItem (TodoApi. :::no-loc(Models)::: )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-537">Select **TodoItem (TodoApi.:::no-loc(Models):::)** in the **Model class**.</span></span>
-  * <span data-ttu-id="228fd-538">**Veri bağlamı sınıfında** **TodoContext (TodoApi. :::no-loc(Models)::: )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-538">Select **TodoContext (TodoApi.:::no-loc(Models):::)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="228fd-537">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-537">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="228fd-538">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-538">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
   * <span data-ttu-id="228fd-539">**Ekle** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-539">Select **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-540">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-540">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
@@ -1024,7 +1024,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="228fd-667">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-667">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
-[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/:::no-loc(Models):::/TodoItem.cs?name=snippet&highlight=6)]
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
 
 <span data-ttu-id="228fd-668">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-668">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
@@ -1032,7 +1032,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <span data-ttu-id="228fd-670">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="228fd-670">Create a DTO model:</span></span>
 
-[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/:::no-loc(Models):::/TodoItemDTO.cs?name=snippet)]
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
 <span data-ttu-id="228fd-671">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="228fd-671">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
@@ -1168,25 +1168,25 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="228fd-765">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-765">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-766">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-766">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-767">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-767">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-768">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-768">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-766">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-766">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-767">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-767">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-768">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-768">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-769">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-769">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-770">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-770">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="228fd-769">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-769">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-770">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-770">Name the class *TodoItem* and select **Add**.</span></span>
 
 * <span data-ttu-id="228fd-771">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-771">Replace the template code with the following code:</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-772">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-772">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-773">Adlı bir klasör ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-773">Add a folder named *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-773">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-773">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-774">`TodoItem` *:::no-loc(Models):::* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-774">Add a `TodoItem` class to the *:::no-loc(Models):::* folder with the following code:</span></span>
+* <span data-ttu-id="228fd-774">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-774">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-775">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-775">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-776">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-776">Right-click the project.</span></span> <span data-ttu-id="228fd-777">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-777">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-778">Klasörü adlandırın *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-778">Name the folder *:::no-loc(Models):::*.</span></span>
+* <span data-ttu-id="228fd-776">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-776">Right-click the project.</span></span> <span data-ttu-id="228fd-777">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-777">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-778">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-778">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-780">Klasöre sağ tıklayın *:::no-loc(Models):::* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-780">Right-click the *:::no-loc(Models):::* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="228fd-780">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-780">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
 * <span data-ttu-id="228fd-781">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-781">Name the class *TodoItem* , and then click **New**.</span></span>
 
@@ -1194,11 +1194,11 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ---
 
-  [!code-csharp[](first-web-api/samples/2.2/TodoApi/:::no-loc(Models):::/TodoItem.cs)]
+  [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoItem.cs)]
 
 <span data-ttu-id="228fd-783">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-783">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-784">Model sınıfları projede herhangi bir yere gidebilir, ancak *:::no-loc(Models):::* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-784">Model classes can go anywhere in the project, but the *:::no-loc(Models):::* folder is used by convention.</span></span>
+<span data-ttu-id="228fd-784">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-784">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
 ## <a name="add-a-database-context-21"></a><span data-ttu-id="228fd-785">Veritabanı bağlamı ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-785">Add a database context 2.1</span></span>
 
@@ -1206,17 +1206,17 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 # <a name="visual-studio"></a>[<span data-ttu-id="228fd-788">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-788">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-789">Klasöre sağ tıklayın *:::no-loc(Models):::* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-789">Right-click the *:::no-loc(Models):::* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-790">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-790">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="228fd-789">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-789">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-790">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-790">Name the class *TodoContext* and click **Add**.</span></span>
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-791">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-791">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-792">Klasöre bir `TodoContext` sınıf ekleyin *:::no-loc(Models):::* .</span><span class="sxs-lookup"><span data-stu-id="228fd-792">Add a `TodoContext` class to the *:::no-loc(Models):::* folder.</span></span>
+* <span data-ttu-id="228fd-792">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-792">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
 * <span data-ttu-id="228fd-793">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-793">Replace the template code with the following code:</span></span>
 
-  [!code-csharp[](first-web-api/samples/2.2/TodoApi/:::no-loc(Models):::/TodoContext.cs)]
+  [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoContext.cs)]
 
 ## <a name="register-the-database-context-21"></a><span data-ttu-id="228fd-794">Veritabanı bağlamını kaydetme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-794">Register the database context 2.1</span></span>
 
@@ -1495,7 +1495,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ## <a name="add-authentication-support-to-a-web-api-21"></a><span data-ttu-id="228fd-957">Web API 2,1 kimlik doğrulama desteği ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-957">Add authentication support to a web API 2.1</span></span>
 
-[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="additional-resources-21"></a><span data-ttu-id="228fd-958">Ek kaynaklar 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-958">Additional resources 2.1</span></span>
 

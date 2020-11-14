@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core bileşenleri oluşturma ve kullanma :::no-loc(Razor):::'
+title: 'ASP.NET Core bileşenleri oluşturma ve kullanma Razor'
 author: guardrex
-description: :::no-loc(Razor):::Verileri bağlama, olayları işleme ve bileşen yaşam döngülerini yönetme dahil olmak üzere bileşenleri oluşturma ve kullanma hakkında bilgi edinin.
+description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döngülerini yönetme dahil olmak üzere bileşenleri oluşturma ve kullanma hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/index
 ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -26,23 +26,23 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 11/11/2020
 ms.locfileid: "94507947"
 ---
-# <a name="create-and-use-aspnet-core-no-locrazor-components"></a><span data-ttu-id="c48ab-103">ASP.NET Core bileşenleri oluşturma ve kullanma :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c48ab-103">Create and use ASP.NET Core :::no-loc(Razor)::: components</span></span>
+# <a name="create-and-use-aspnet-core-no-locrazor-components"></a><span data-ttu-id="c48ab-103">ASP.NET Core bileşenleri oluşturma ve kullanma Razor</span><span class="sxs-lookup"><span data-stu-id="c48ab-103">Create and use ASP.NET Core Razor components</span></span>
 
 <span data-ttu-id="c48ab-104">[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)ve [tosapma Bartsch](https://www.aveo-solutions.com/) tarafından</span><span class="sxs-lookup"><span data-stu-id="c48ab-104">By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), and [Tobias Bartsch](https://www.aveo-solutions.com/)</span></span>
 
 <span data-ttu-id="c48ab-105">[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="c48ab-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="c48ab-106">:::no-loc(Blazor)::: uygulamalar, *Bileşenler* kullanılarak oluşturulmuştur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-106">:::no-loc(Blazor)::: apps are built using *components*.</span></span> <span data-ttu-id="c48ab-107">Bir bileşen, bir sayfa, iletişim veya form gibi bir kullanıcı arabirimi (UI) öbekidir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-107">A component is a self-contained chunk of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="c48ab-108">Bir bileşen, veri eklemek veya UI olaylarına yanıt vermek için gereken HTML işaretlemesini ve işleme mantığını içerir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-108">A component includes HTML markup and the processing logic required to inject data or respond to UI events.</span></span> <span data-ttu-id="c48ab-109">Bileşenler esnek ve hafif.</span><span class="sxs-lookup"><span data-stu-id="c48ab-109">Components are flexible and lightweight.</span></span> <span data-ttu-id="c48ab-110">Bunlar, iç içe geçmiş, yeniden kullanılabilir ve projeler arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-110">They can be nested, reused, and shared among projects.</span></span>
+<span data-ttu-id="c48ab-106">Blazor uygulamalar, *Bileşenler* kullanılarak oluşturulmuştur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-106">Blazor apps are built using *components*.</span></span> <span data-ttu-id="c48ab-107">Bir bileşen, bir sayfa, iletişim veya form gibi bir kullanıcı arabirimi (UI) öbekidir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-107">A component is a self-contained chunk of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="c48ab-108">Bir bileşen, veri eklemek veya UI olaylarına yanıt vermek için gereken HTML işaretlemesini ve işleme mantığını içerir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-108">A component includes HTML markup and the processing logic required to inject data or respond to UI events.</span></span> <span data-ttu-id="c48ab-109">Bileşenler esnek ve hafif.</span><span class="sxs-lookup"><span data-stu-id="c48ab-109">Components are flexible and lightweight.</span></span> <span data-ttu-id="c48ab-110">Bunlar, iç içe geçmiş, yeniden kullanılabilir ve projeler arasında paylaşılabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-110">They can be nested, reused, and shared among projects.</span></span>
 
 ## <a name="component-classes"></a><span data-ttu-id="c48ab-111">Bileşen sınıfları</span><span class="sxs-lookup"><span data-stu-id="c48ab-111">Component classes</span></span>
 
-<span data-ttu-id="c48ab-112">Bileşenler, [:::no-loc(Razor):::](xref:mvc/views/razor) `.razor` C# ve HTML biçimlendirmesinin bir birleşimi kullanılarak bileşen dosyalarında () uygulanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-112">Components are implemented in [:::no-loc(Razor):::](xref:mvc/views/razor) component files (`.razor`) using a combination of C# and HTML markup.</span></span> <span data-ttu-id="c48ab-113">İçindeki bir bileşen :::no-loc(Blazor)::: bir *:::no-loc(Razor)::: bileşen* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-113">A component in :::no-loc(Blazor)::: is formally referred to as a *:::no-loc(Razor)::: component*.</span></span>
+<span data-ttu-id="c48ab-112">Bileşenler, [Razor](xref:mvc/views/razor) `.razor` C# ve HTML biçimlendirmesinin bir birleşimi kullanılarak bileşen dosyalarında () uygulanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-112">Components are implemented in [Razor](xref:mvc/views/razor) component files (`.razor`) using a combination of C# and HTML markup.</span></span> <span data-ttu-id="c48ab-113">İçindeki bir bileşen Blazor bir *Razor bileşen* olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-113">A component in Blazor is formally referred to as a *Razor component*.</span></span>
 
-### <a name="no-locrazor-syntax"></a><span data-ttu-id="c48ab-114">:::no-loc(Razor)::: sözdizimi</span><span class="sxs-lookup"><span data-stu-id="c48ab-114">:::no-loc(Razor)::: syntax</span></span>
+### <a name="no-locrazor-syntax"></a><span data-ttu-id="c48ab-114">Razor sözdizimi</span><span class="sxs-lookup"><span data-stu-id="c48ab-114">Razor syntax</span></span>
 
-<span data-ttu-id="c48ab-115">:::no-loc(Razor)::: uygulamalardaki bileşenler :::no-loc(Blazor)::: yaygın olarak :::no-loc(Razor)::: söz dizimini kullanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-115">:::no-loc(Razor)::: components in :::no-loc(Blazor)::: apps extensively use :::no-loc(Razor)::: syntax.</span></span> <span data-ttu-id="c48ab-116">:::no-loc(Razor):::Biçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .</span><span class="sxs-lookup"><span data-stu-id="c48ab-116">If you aren't familiar with the :::no-loc(Razor)::: markup language, we recommend reading <xref:mvc/views/razor> before proceeding.</span></span>
+<span data-ttu-id="c48ab-115">Razor uygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-115">Razor components in Blazor apps extensively use Razor syntax.</span></span> <span data-ttu-id="c48ab-116">RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .</span><span class="sxs-lookup"><span data-stu-id="c48ab-116">If you aren't familiar with the Razor markup language, we recommend reading <xref:mvc/views/razor> before proceeding.</span></span>
 
-<span data-ttu-id="c48ab-117">Söz dizimi üzerindeki içeriğe erişirken :::no-loc(Razor)::: , aşağıdaki bölümlere özel bir dikkat ödeyin:</span><span class="sxs-lookup"><span data-stu-id="c48ab-117">When accessing the content on :::no-loc(Razor)::: syntax, pay special attention to the following sections:</span></span>
+<span data-ttu-id="c48ab-117">Söz dizimi üzerindeki içeriğe erişirken Razor , aşağıdaki bölümlere özel bir dikkat ödeyin:</span><span class="sxs-lookup"><span data-stu-id="c48ab-117">When accessing the content on Razor syntax, pay special attention to the following sections:</span></span>
 
 * <span data-ttu-id="c48ab-118">[Yönergeler](xref:mvc/views/razor#directives): `@` -genellikle bileşen biçimlendirmesinin ayrıştırılma veya işlev şeklini değiştiren ayrılmış anahtar sözcükler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-118">[Directives](xref:mvc/views/razor#directives): `@`-prefixed reserved keywords that typically change the way component markup is parsed or function.</span></span>
 * <span data-ttu-id="c48ab-119">[Yönerge öznitelikleri](xref:mvc/views/razor#directive-attributes): `@` -önek olarak bileşen öğelerinin ayrıştırılma veya işlev şeklini değiştiren ayrılmış anahtar sözcükler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-119">[Directive attributes](xref:mvc/views/razor#directive-attributes): `@`-prefixed reserved keywords that typically change the way component elements are parsed or function.</span></span>
@@ -53,7 +53,7 @@ ms.locfileid: "94507947"
 
 ### <a name="routing"></a><span data-ttu-id="c48ab-123">Yönlendirme</span><span class="sxs-lookup"><span data-stu-id="c48ab-123">Routing</span></span>
 
-<span data-ttu-id="c48ab-124">Uygulamasında yönlendirme, :::no-loc(Blazor)::: uygulamadaki her erişilebilir bileşene bir rota şablonu sağlanarak elde edilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-124">Routing in :::no-loc(Blazor)::: is achieved by providing a route template to each accessible component in the app.</span></span> <span data-ttu-id="c48ab-125">:::no-loc(Razor)::: [`@page`][9] Yönergeyle bir dosya derlendiğinde, oluşturulan sınıfa <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> yol şablonunu belirten bir değer verilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-125">When a :::no-loc(Razor)::: file with an [`@page`][9] directive is compiled, the generated class is given a <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> specifying the route template.</span></span> <span data-ttu-id="c48ab-126">Çalışma zamanında, yönlendirici bileşen sınıflarını bir ile arar <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> ve hangi bileşenin Istenen URL ile eşleşen bir rota şablonuna sahip olduğunu işler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-126">At runtime, the router looks for component classes with a <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> and renders whichever component has a route template that matches the requested URL.</span></span> <span data-ttu-id="c48ab-127">Daha fazla bilgi için bkz. <xref:blazor/fundamentals/routing>.</span><span class="sxs-lookup"><span data-stu-id="c48ab-127">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
+<span data-ttu-id="c48ab-124">Uygulamasında yönlendirme, Blazor uygulamadaki her erişilebilir bileşene bir rota şablonu sağlanarak elde edilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-124">Routing in Blazor is achieved by providing a route template to each accessible component in the app.</span></span> <span data-ttu-id="c48ab-125">Razor [`@page`][9] Yönergeyle bir dosya derlendiğinde, oluşturulan sınıfa <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> yol şablonunu belirten bir değer verilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-125">When a Razor file with an [`@page`][9] directive is compiled, the generated class is given a <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> specifying the route template.</span></span> <span data-ttu-id="c48ab-126">Çalışma zamanında, yönlendirici bileşen sınıflarını bir ile arar <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> ve hangi bileşenin Istenen URL ile eşleşen bir rota şablonuna sahip olduğunu işler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-126">At runtime, the router looks for component classes with a <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> and renders whichever component has a route template that matches the requested URL.</span></span> <span data-ttu-id="c48ab-127">Daha fazla bilgi için bkz. <xref:blazor/fundamentals/routing>.</span><span class="sxs-lookup"><span data-stu-id="c48ab-127">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
 
 ```razor
 @page "/ParentComponent"
@@ -63,7 +63,7 @@ ms.locfileid: "94507947"
 
 ### <a name="markup"></a><span data-ttu-id="c48ab-128">İşaretleme</span><span class="sxs-lookup"><span data-stu-id="c48ab-128">Markup</span></span>
 
-<span data-ttu-id="c48ab-129">Bir bileşen için Kullanıcı arabirimi HTML kullanılarak tanımlanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-129">The UI for a component is defined using HTML.</span></span> <span data-ttu-id="c48ab-130">Dinamik işleme mantığı (örneğin, döngüler, koşullar, ifadeler) adlı gömülü C# sözdizimi kullanılarak eklenir *:::no-loc(Razor):::* .</span><span class="sxs-lookup"><span data-stu-id="c48ab-130">Dynamic rendering logic (for example, loops, conditionals, expressions) is added using an embedded C# syntax called *:::no-loc(Razor):::*.</span></span> <span data-ttu-id="c48ab-131">Bir uygulama derlendiğinde, HTML biçimlendirme ve C# işleme mantığı bir bileşen sınıfına dönüştürülür.</span><span class="sxs-lookup"><span data-stu-id="c48ab-131">When an app is compiled, the HTML markup and C# rendering logic are converted into a component class.</span></span> <span data-ttu-id="c48ab-132">Oluşturulan sınıfın adı, dosyanın adıyla eşleşir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-132">The name of the generated class matches the name of the file.</span></span>
+<span data-ttu-id="c48ab-129">Bir bileşen için Kullanıcı arabirimi HTML kullanılarak tanımlanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-129">The UI for a component is defined using HTML.</span></span> <span data-ttu-id="c48ab-130">Dinamik işleme mantığı (örneğin, döngüler, koşullar, ifadeler) adlı gömülü C# sözdizimi kullanılarak eklenir *Razor* .</span><span class="sxs-lookup"><span data-stu-id="c48ab-130">Dynamic rendering logic (for example, loops, conditionals, expressions) is added using an embedded C# syntax called *Razor*.</span></span> <span data-ttu-id="c48ab-131">Bir uygulama derlendiğinde, HTML biçimlendirme ve C# işleme mantığı bir bileşen sınıfına dönüştürülür.</span><span class="sxs-lookup"><span data-stu-id="c48ab-131">When an app is compiled, the HTML markup and C# rendering logic are converted into a component class.</span></span> <span data-ttu-id="c48ab-132">Oluşturulan sınıfın adı, dosyanın adıyla eşleşir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-132">The name of the generated class matches the name of the file.</span></span>
 
 <span data-ttu-id="c48ab-133">Bileşen sınıfının üyeleri bir [`@code`][1] blokta tanımlanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-133">Members of the component class are defined in an [`@code`][1] block.</span></span> <span data-ttu-id="c48ab-134">[`@code`][1]Bloğunda, bileşen durumu (özellikler, alanlar) olay işleme yöntemleriyle veya diğer bileşen mantığını tanımlamaya yönelik yöntemlerle belirtilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-134">In the [`@code`][1] block, component state (properties, fields) is specified with methods for event handling or for defining other component logic.</span></span> <span data-ttu-id="c48ab-135">Birden çok [`@code`][1] blok izin verilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-135">More than one [`@code`][1] block is permissible.</span></span>
 
@@ -77,38 +77,38 @@ ms.locfileid: "94507947"
 
 @code {
     private string headingFontStyle = "italic";
-    private string headingText = "Put on your new :::no-loc(Blazor):::!";
+    private string headingText = "Put on your new Blazor!";
 }
 ```
 
-<span data-ttu-id="c48ab-141">Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-141">After the component is initially rendered, the component regenerates its render tree in response to events.</span></span> <span data-ttu-id="c48ab-142">:::no-loc(Blazor)::: ardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular.</span><span class="sxs-lookup"><span data-stu-id="c48ab-142">:::no-loc(Blazor)::: then compares the new render tree against the previous one and applies any modifications to the browser's Document Object Model (DOM).</span></span>
+<span data-ttu-id="c48ab-141">Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-141">After the component is initially rendered, the component regenerates its render tree in response to events.</span></span> <span data-ttu-id="c48ab-142">Blazor ardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular.</span><span class="sxs-lookup"><span data-stu-id="c48ab-142">Blazor then compares the new render tree against the previous one and applies any modifications to the browser's Document Object Model (DOM).</span></span>
 
 <span data-ttu-id="c48ab-143">Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-143">Components are ordinary C# classes and can be placed anywhere within a project.</span></span> <span data-ttu-id="c48ab-144">Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-144">Components that produce webpages usually reside in the `Pages` folder.</span></span> <span data-ttu-id="c48ab-145">Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-145">Non-page components are frequently placed in the `Shared` folder or a custom folder added to the project.</span></span>
 
 ### <a name="namespaces"></a><span data-ttu-id="c48ab-146">Ad alanları</span><span class="sxs-lookup"><span data-stu-id="c48ab-146">Namespaces</span></span>
 
-<span data-ttu-id="c48ab-147">Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-147">Typically, a component's namespace is derived from the app's root namespace and the component's location (folder) within the app.</span></span> <span data-ttu-id="c48ab-148">Uygulamanın kök ad alanı ise `:::no-loc(Blazor):::Sample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:</span><span class="sxs-lookup"><span data-stu-id="c48ab-148">If the app's root namespace is `:::no-loc(Blazor):::Sample` and the `Counter` component resides in the `Pages` folder:</span></span>
+<span data-ttu-id="c48ab-147">Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-147">Typically, a component's namespace is derived from the app's root namespace and the component's location (folder) within the app.</span></span> <span data-ttu-id="c48ab-148">Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:</span><span class="sxs-lookup"><span data-stu-id="c48ab-148">If the app's root namespace is `BlazorSample` and the `Counter` component resides in the `Pages` folder:</span></span>
 
-* <span data-ttu-id="c48ab-149">`Counter`Bileşenin ad alanı `:::no-loc(Blazor):::Sample.Pages` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-149">The `Counter` component's namespace is `:::no-loc(Blazor):::Sample.Pages`.</span></span>
-* <span data-ttu-id="c48ab-150">Bileşenin tam nitelikli tür adı `:::no-loc(Blazor):::Sample.Pages.Counter` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-150">The fully qualified type name of the component is `:::no-loc(Blazor):::Sample.Pages.Counter`.</span></span>
+* <span data-ttu-id="c48ab-149">`Counter`Bileşenin ad alanı `BlazorSample.Pages` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-149">The `Counter` component's namespace is `BlazorSample.Pages`.</span></span>
+* <span data-ttu-id="c48ab-150">Bileşenin tam nitelikli tür adı `BlazorSample.Pages.Counter` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-150">The fully qualified type name of the component is `BlazorSample.Pages.Counter`.</span></span>
 
 <span data-ttu-id="c48ab-151">Bileşenleri tutan özel klasörler için, [`@using`][2] üst bileşene veya uygulamanın dosyasına bir yönerge ekleyin `_Imports.razor` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-151">For custom folders that hold components, add a [`@using`][2] directive to the parent component or to the app's `_Imports.razor` file.</span></span> <span data-ttu-id="c48ab-152">Aşağıdaki örnek, klasördeki bileşenleri kullanılabilir hale getirir `Components` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-152">The following example makes components in the `Components` folder available:</span></span>
 
 ```razor
-@using :::no-loc(Blazor):::Sample.Components
+@using BlazorSample.Components
 ```
 
 <span data-ttu-id="c48ab-153">Bileşenlere Ayrıca kendi tam adları kullanılarak başvurulabilir, bu da [`@using`][2] yönergeyi gerektirmez:</span><span class="sxs-lookup"><span data-stu-id="c48ab-153">Components can also be referenced using their fully qualified names, which doesn't require the [`@using`][2] directive:</span></span>
 
 ```razor
-<:::no-loc(Blazor):::Sample.Components.MyComponent />
+<BlazorSample.Components.MyComponent />
 ```
 
-<span data-ttu-id="c48ab-154">İle yazılmış bir bileşenin ad alanı, :::no-loc(Razor)::: tabanlıdır (öncelik sırasına göre):</span><span class="sxs-lookup"><span data-stu-id="c48ab-154">The namespace of a component authored with :::no-loc(Razor)::: is based on (in priority order):</span></span>
+<span data-ttu-id="c48ab-154">İle yazılmış bir bileşenin ad alanı, Razor tabanlıdır (öncelik sırasına göre):</span><span class="sxs-lookup"><span data-stu-id="c48ab-154">The namespace of a component authored with Razor is based on (in priority order):</span></span>
 
-* <span data-ttu-id="c48ab-155">[`@namespace`][8]:::no-loc(Razor):::dosya ( `.razor` ) biçimlendirmesinde atama () `@namespace :::no-loc(Blazor):::Sample.MyNamespace` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-155">[`@namespace`][8] designation in :::no-loc(Razor)::: file (`.razor`) markup (`@namespace :::no-loc(Blazor):::Sample.MyNamespace`).</span></span>
-* <span data-ttu-id="c48ab-156">Proje, `RootNamespace` Proje dosyasında ( `<RootNamespace>:::no-loc(Blazor):::Sample</RootNamespace>` ).</span><span class="sxs-lookup"><span data-stu-id="c48ab-156">The project's `RootNamespace` in the project file (`<RootNamespace>:::no-loc(Blazor):::Sample</RootNamespace>`).</span></span>
-* <span data-ttu-id="c48ab-157">Proje dosyasının dosya adından () alınan proje adı `.csproj` ve proje kökünden bileşen yolu.</span><span class="sxs-lookup"><span data-stu-id="c48ab-157">The project name, taken from the project file's file name (`.csproj`), and the path from the project root to the component.</span></span> <span data-ttu-id="c48ab-158">Örneğin, çerçeve `{PROJECT ROOT}/Pages/Index.razor` `:::no-loc(Blazor):::Sample.csproj` ad alanına () çözümler `:::no-loc(Blazor):::Sample.Pages` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-158">For example, the framework resolves `{PROJECT ROOT}/Pages/Index.razor` (`:::no-loc(Blazor):::Sample.csproj`) to the namespace `:::no-loc(Blazor):::Sample.Pages`.</span></span> <span data-ttu-id="c48ab-159">Bileşenler C# ad bağlama kurallarını izler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-159">Components follow C# name binding rules.</span></span> <span data-ttu-id="c48ab-160">`Index`Bu örnekteki bileşen için, kapsamdaki bileşenler tüm bileşenlerdir:</span><span class="sxs-lookup"><span data-stu-id="c48ab-160">For the `Index` component in this example, the components in scope are all of the components:</span></span>
+* <span data-ttu-id="c48ab-155">[`@namespace`][8]Razordosya ( `.razor` ) biçimlendirmesinde atama () `@namespace BlazorSample.MyNamespace` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-155">[`@namespace`][8] designation in Razor file (`.razor`) markup (`@namespace BlazorSample.MyNamespace`).</span></span>
+* <span data-ttu-id="c48ab-156">Proje, `RootNamespace` Proje dosyasında ( `<RootNamespace>BlazorSample</RootNamespace>` ).</span><span class="sxs-lookup"><span data-stu-id="c48ab-156">The project's `RootNamespace` in the project file (`<RootNamespace>BlazorSample</RootNamespace>`).</span></span>
+* <span data-ttu-id="c48ab-157">Proje dosyasının dosya adından () alınan proje adı `.csproj` ve proje kökünden bileşen yolu.</span><span class="sxs-lookup"><span data-stu-id="c48ab-157">The project name, taken from the project file's file name (`.csproj`), and the path from the project root to the component.</span></span> <span data-ttu-id="c48ab-158">Örneğin, çerçeve `{PROJECT ROOT}/Pages/Index.razor` `BlazorSample.csproj` ad alanına () çözümler `BlazorSample.Pages` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-158">For example, the framework resolves `{PROJECT ROOT}/Pages/Index.razor` (`BlazorSample.csproj`) to the namespace `BlazorSample.Pages`.</span></span> <span data-ttu-id="c48ab-159">Bileşenler C# ad bağlama kurallarını izler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-159">Components follow C# name binding rules.</span></span> <span data-ttu-id="c48ab-160">`Index`Bu örnekteki bileşen için, kapsamdaki bileşenler tüm bileşenlerdir:</span><span class="sxs-lookup"><span data-stu-id="c48ab-160">For the `Index` component in this example, the components in scope are all of the components:</span></span>
   * <span data-ttu-id="c48ab-161">Aynı klasörde, `Pages` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-161">In the same folder, `Pages`.</span></span>
   * <span data-ttu-id="c48ab-162">Proje kökündeki, açıkça farklı bir ad alanı belirtmeyen bileşenler.</span><span class="sxs-lookup"><span data-stu-id="c48ab-162">The components in the project's root that don't explicitly specify a different namespace.</span></span>
 
@@ -117,16 +117,16 @@ ms.locfileid: "94507947"
 >
 > <span data-ttu-id="c48ab-164">Diğer ad [`using`](/dotnet/csharp/language-reference/keywords/using-statement) deyimleri (örneğin,) ile bileşenleri içeri aktarma `@using Foo = Bar` desteklenmiyor.</span><span class="sxs-lookup"><span data-stu-id="c48ab-164">Importing components with aliased [`using`](/dotnet/csharp/language-reference/keywords/using-statement) statements (for example, `@using Foo = Bar`) isn't supported.</span></span>
 >
-> <span data-ttu-id="c48ab-165">Kısmen nitelenmiş adlar desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-165">Partially qualified names aren't supported.</span></span> <span data-ttu-id="c48ab-166">Örneğin, `@using :::no-loc(Blazor):::Sample` `NavMenu` ile bileşeni () ekleme ve başvuru `NavMenu.razor` `<Shared.NavMenu></Shared.NavMenu>` desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-166">For example, adding `@using :::no-loc(Blazor):::Sample` and referencing the `NavMenu` component (`NavMenu.razor`) with `<Shared.NavMenu></Shared.NavMenu>` isn't supported.</span></span>
+> <span data-ttu-id="c48ab-165">Kısmen nitelenmiş adlar desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-165">Partially qualified names aren't supported.</span></span> <span data-ttu-id="c48ab-166">Örneğin, `@using BlazorSample` `NavMenu` ile bileşeni () ekleme ve başvuru `NavMenu.razor` `<Shared.NavMenu></Shared.NavMenu>` desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-166">For example, adding `@using BlazorSample` and referencing the `NavMenu` component (`NavMenu.razor`) with `<Shared.NavMenu></Shared.NavMenu>` isn't supported.</span></span>
 
 ### <a name="partial-class-support"></a><span data-ttu-id="c48ab-167">Kısmi sınıf desteği</span><span class="sxs-lookup"><span data-stu-id="c48ab-167">Partial class support</span></span>
 
-<span data-ttu-id="c48ab-168">:::no-loc(Razor)::: bileşenler kısmi sınıflar olarak oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-168">:::no-loc(Razor)::: components are generated as partial classes.</span></span> <span data-ttu-id="c48ab-169">:::no-loc(Razor)::: bileşenler aşağıdaki yaklaşımlardan birini kullanarak yazılır:</span><span class="sxs-lookup"><span data-stu-id="c48ab-169">:::no-loc(Razor)::: components are authored using either of the following approaches:</span></span>
+<span data-ttu-id="c48ab-168">Razor bileşenler kısmi sınıflar olarak oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-168">Razor components are generated as partial classes.</span></span> <span data-ttu-id="c48ab-169">Razor bileşenler aşağıdaki yaklaşımlardan birini kullanarak yazılır:</span><span class="sxs-lookup"><span data-stu-id="c48ab-169">Razor components are authored using either of the following approaches:</span></span>
 
-* <span data-ttu-id="c48ab-170">C# kodu, [`@code`][1] tek bir dosyada HTML işaretlemesi ve kodu olan bir blokta tanımlanmıştır :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="c48ab-170">C# code is defined in an [`@code`][1] block with HTML markup and :::no-loc(Razor)::: code in a single file.</span></span> <span data-ttu-id="c48ab-171">:::no-loc(Blazor)::: Şablonlar, :::no-loc(Razor)::: Bu yaklaşımı kullanarak bileşenlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-171">:::no-loc(Blazor)::: templates define their :::no-loc(Razor)::: components using this approach.</span></span>
+* <span data-ttu-id="c48ab-170">C# kodu, [`@code`][1] tek bir dosyada HTML işaretlemesi ve kodu olan bir blokta tanımlanmıştır Razor .</span><span class="sxs-lookup"><span data-stu-id="c48ab-170">C# code is defined in an [`@code`][1] block with HTML markup and Razor code in a single file.</span></span> <span data-ttu-id="c48ab-171">Blazor Şablonlar, Razor Bu yaklaşımı kullanarak bileşenlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-171">Blazor templates define their Razor components using this approach.</span></span>
 * <span data-ttu-id="c48ab-172">C# kodu, kısmi sınıf olarak tanımlanmış bir arka plan kod dosyasına yerleştirilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-172">C# code is placed in a code-behind file defined as a partial class.</span></span>
 
-<span data-ttu-id="c48ab-173">Aşağıdaki örnek, `Counter` [`@code`][1] bir şablondan oluşturulan uygulamada bir blok içeren varsayılan bileşeni gösterir :::no-loc(Blazor)::: .</span><span class="sxs-lookup"><span data-stu-id="c48ab-173">The following example shows the default `Counter` component with an [`@code`][1] block in an app generated from a :::no-loc(Blazor)::: template.</span></span> <span data-ttu-id="c48ab-174">HTML Markup, :::no-loc(Razor)::: Code ve C# kodu aynı dosyada:</span><span class="sxs-lookup"><span data-stu-id="c48ab-174">HTML markup, :::no-loc(Razor)::: code, and C# code are in the same file:</span></span>
+<span data-ttu-id="c48ab-173">Aşağıdaki örnek, `Counter` [`@code`][1] bir şablondan oluşturulan uygulamada bir blok içeren varsayılan bileşeni gösterir Blazor .</span><span class="sxs-lookup"><span data-stu-id="c48ab-173">The following example shows the default `Counter` component with an [`@code`][1] block in an app generated from a Blazor template.</span></span> <span data-ttu-id="c48ab-174">HTML Markup, Razor Code ve C# kodu aynı dosyada:</span><span class="sxs-lookup"><span data-stu-id="c48ab-174">HTML markup, Razor code, and C# code are in the same file:</span></span>
 
 <span data-ttu-id="c48ab-175">`Pages/Counter.razor`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-175">`Pages/Counter.razor`:</span></span>
 
@@ -166,7 +166,7 @@ ms.locfileid: "94507947"
 <span data-ttu-id="c48ab-178">`Counter.razor.cs`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-178">`Counter.razor.cs`:</span></span>
 
 ```csharp
-namespace :::no-loc(Blazor):::Sample.Pages
+namespace BlazorSample.Pages
 {
     public partial class Counter
     {
@@ -180,7 +180,7 @@ namespace :::no-loc(Blazor):::Sample.Pages
 }
 ```
 
-<span data-ttu-id="c48ab-179">Gerekli olan ad alanlarını kısmi sınıf dosyasına gereken şekilde ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c48ab-179">Add any required namespaces to the partial class file as needed.</span></span> <span data-ttu-id="c48ab-180">Bileşenler tarafından kullanılan tipik ad alanları :::no-loc(Razor)::: şunlardır:</span><span class="sxs-lookup"><span data-stu-id="c48ab-180">Typical namespaces used by :::no-loc(Razor)::: components include:</span></span>
+<span data-ttu-id="c48ab-179">Gerekli olan ad alanlarını kısmi sınıf dosyasına gereken şekilde ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c48ab-179">Add any required namespaces to the partial class file as needed.</span></span> <span data-ttu-id="c48ab-180">Bileşenler tarafından kullanılan tipik ad alanları Razor şunlardır:</span><span class="sxs-lookup"><span data-stu-id="c48ab-180">Typical namespaces used by Razor components include:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -192,32 +192,32 @@ using Microsoft.AspNetCore.Components.Web;
 ```
 
 > [!IMPORTANT]
-> <span data-ttu-id="c48ab-181">[`@using`][2]`_Imports.razor`dosyadaki yönergeler :::no-loc(Razor)::: `.razor` , C# dosyalarına () değil, yalnızca dosyalar () için geçerlidir `.cs` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-181">[`@using`][2] directives in the `_Imports.razor` file are only applied to :::no-loc(Razor)::: files (`.razor`), not C# files (`.cs`).</span></span>
+> <span data-ttu-id="c48ab-181">[`@using`][2]`_Imports.razor`dosyadaki yönergeler Razor `.razor` , C# dosyalarına () değil, yalnızca dosyalar () için geçerlidir `.cs` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-181">[`@using`][2] directives in the `_Imports.razor` file are only applied to Razor files (`.razor`), not C# files (`.cs`).</span></span>
 
 ### <a name="specify-a-base-class"></a><span data-ttu-id="c48ab-182">Temel sınıf belirtin</span><span class="sxs-lookup"><span data-stu-id="c48ab-182">Specify a base class</span></span>
 
-<span data-ttu-id="c48ab-183">[`@inherits`][6]Yönergesi bir bileşen için temel sınıf belirtmek üzere kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-183">The [`@inherits`][6] directive can be used to specify a base class for a component.</span></span> <span data-ttu-id="c48ab-184">Aşağıdaki örnek, bileşenin `:::no-loc(Blazor):::RocksBase` özelliklerini ve yöntemlerini sağlamak için bir bileşenin bir temel sınıfı nasıl devralmasını gösterir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-184">The following example shows how a component can inherit a base class, `:::no-loc(Blazor):::RocksBase`, to provide the component's properties and methods.</span></span> <span data-ttu-id="c48ab-185">Taban sınıfın türevi olması gerekir <xref:Microsoft.AspNetCore.Components.ComponentBase> .</span><span class="sxs-lookup"><span data-stu-id="c48ab-185">The base class should derive from <xref:Microsoft.AspNetCore.Components.ComponentBase>.</span></span>
+<span data-ttu-id="c48ab-183">[`@inherits`][6]Yönergesi bir bileşen için temel sınıf belirtmek üzere kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-183">The [`@inherits`][6] directive can be used to specify a base class for a component.</span></span> <span data-ttu-id="c48ab-184">Aşağıdaki örnek, bileşenin `BlazorRocksBase` özelliklerini ve yöntemlerini sağlamak için bir bileşenin bir temel sınıfı nasıl devralmasını gösterir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-184">The following example shows how a component can inherit a base class, `BlazorRocksBase`, to provide the component's properties and methods.</span></span> <span data-ttu-id="c48ab-185">Taban sınıfın türevi olması gerekir <xref:Microsoft.AspNetCore.Components.ComponentBase> .</span><span class="sxs-lookup"><span data-stu-id="c48ab-185">The base class should derive from <xref:Microsoft.AspNetCore.Components.ComponentBase>.</span></span>
 
-<span data-ttu-id="c48ab-186">`Pages/:::no-loc(Blazor):::Rocks.razor`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-186">`Pages/:::no-loc(Blazor):::Rocks.razor`:</span></span>
+<span data-ttu-id="c48ab-186">`Pages/BlazorRocks.razor`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-186">`Pages/BlazorRocks.razor`:</span></span>
 
 ```razor
-@page "/:::no-loc(Blazor):::Rocks"
-@inherits :::no-loc(Blazor):::RocksBase
+@page "/BlazorRocks"
+@inherits BlazorRocksBase
 
-<h1>@:::no-loc(Blazor):::RocksText</h1>
+<h1>@BlazorRocksText</h1>
 ```
 
-<span data-ttu-id="c48ab-187">`:::no-loc(Blazor):::RocksBase.cs`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-187">`:::no-loc(Blazor):::RocksBase.cs`:</span></span>
+<span data-ttu-id="c48ab-187">`BlazorRocksBase.cs`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-187">`BlazorRocksBase.cs`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components;
 
-namespace :::no-loc(Blazor):::Sample
+namespace BlazorSample
 {
-    public class :::no-loc(Blazor):::RocksBase : ComponentBase
+    public class BlazorRocksBase : ComponentBase
     {
-        public string :::no-loc(Blazor):::RocksText { get; set; } = 
-            ":::no-loc(Blazor)::: rocks the browser!";
+        public string BlazorRocksText { get; set; } = 
+            "Blazor rocks the browser!";
     }
 }
 ```
@@ -258,7 +258,7 @@ namespace :::no-loc(Blazor):::Sample
 
 <span data-ttu-id="c48ab-207">`Components/ChildComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-207">`Components/ChildComponent.razor`:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
 <span data-ttu-id="c48ab-208">Örnek uygulamadan aşağıdaki örnekte, `ParentComponent` `Title` öğesinin özelliğinin değerini ayarlar `ChildComponent` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-208">In the following example from the sample app, the `ParentComponent` sets the value of the `Title` property of the `ChildComponent`.</span></span>
 
@@ -277,7 +277,7 @@ namespace :::no-loc(Blazor):::Sample
 
 <span data-ttu-id="c48ab-218">`Components/ChildComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="c48ab-218">`Components/ChildComponent.razor`:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
 > <span data-ttu-id="c48ab-219">İçeriği alan özelliğin <xref:Microsoft.AspNetCore.Components.RenderFragment> `ChildContent` kural tarafından adlandırılması gerekir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-219">The property receiving the <xref:Microsoft.AspNetCore.Components.RenderFragment> content must be named `ChildContent` by convention.</span></span>
@@ -288,7 +288,7 @@ namespace :::no-loc(Blazor):::Sample
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
 
-<span data-ttu-id="c48ab-222">Alt :::no-loc(Blazor)::: bileşenin içeriğinde artırma döngüsü değişkeni kullanılıyorsa, alt içeriği işleyen bir döngü içindeki işleme bileşenleri `for` yerel bir dizin değişkeni gerektirir:</span><span class="sxs-lookup"><span data-stu-id="c48ab-222">Due to the way that :::no-loc(Blazor)::: renders child content, rendering components inside a `for` loop requires a local index variable if the incrementing loop variable is used in the child component's content:</span></span>
+<span data-ttu-id="c48ab-222">Alt Blazor bileşenin içeriğinde artırma döngüsü değişkeni kullanılıyorsa, alt içeriği işleyen bir döngü içindeki işleme bileşenleri `for` yerel bir dizin değişkeni gerektirir:</span><span class="sxs-lookup"><span data-stu-id="c48ab-222">Due to the way that Blazor renders child content, rendering components inside a `for` loop requires a local index variable if the incrementing loop variable is used in the child component's content:</span></span>
 >
 > ```razor
 > @for (int c = 0; c < 10; c++)
@@ -313,7 +313,7 @@ namespace :::no-loc(Blazor):::Sample
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a><span data-ttu-id="c48ab-224">Öznitelik döndürme ve rastgele parametreler</span><span class="sxs-lookup"><span data-stu-id="c48ab-224">Attribute splatting and arbitrary parameters</span></span>
 
-<span data-ttu-id="c48ab-225">Bileşenler, bileşen tarafından tanımlanan parametrelere ek olarak ek öznitelikler yakalayabilir ve işleyebilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-225">Components can capture and render additional attributes in addition to the component's declared parameters.</span></span> <span data-ttu-id="c48ab-226">Ek öznitelikler bir sözlükte yakalanıp, sonra bileşen yönergesi kullanılarak işlendiğinde bir *öğe üzerine bırakılabilir* [`@attributes`][3] :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="c48ab-226">Additional attributes can be captured in a dictionary and then *splatted* onto an element when the component is rendered using the [`@attributes`][3] :::no-loc(Razor)::: directive.</span></span> <span data-ttu-id="c48ab-227">Bu senaryo, çeşitli özelleştirmeleri destekleyen bir işaretleme öğesi üreten bir bileşen tanımlarken yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-227">This scenario is useful when defining a component that produces a markup element that supports a variety of customizations.</span></span> <span data-ttu-id="c48ab-228">Örneğin, `<input>` çok sayıda parametreyi destekleyen bir için öznitelikleri ayrı olarak tanımlamak sıkıcı olabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-228">For example, it can be tedious to define attributes separately for an `<input>` that supports many parameters.</span></span>
+<span data-ttu-id="c48ab-225">Bileşenler, bileşen tarafından tanımlanan parametrelere ek olarak ek öznitelikler yakalayabilir ve işleyebilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-225">Components can capture and render additional attributes in addition to the component's declared parameters.</span></span> <span data-ttu-id="c48ab-226">Ek öznitelikler bir sözlükte yakalanıp, sonra bileşen yönergesi kullanılarak işlendiğinde bir *öğe üzerine bırakılabilir* [`@attributes`][3] Razor .</span><span class="sxs-lookup"><span data-stu-id="c48ab-226">Additional attributes can be captured in a dictionary and then *splatted* onto an element when the component is rendered using the [`@attributes`][3] Razor directive.</span></span> <span data-ttu-id="c48ab-227">Bu senaryo, çeşitli özelleştirmeleri destekleyen bir işaretleme öğesi üreten bir bileşen tanımlarken yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-227">This scenario is useful when defining a component that produces a markup element that supports a variety of customizations.</span></span> <span data-ttu-id="c48ab-228">Örneğin, `<input>` çok sayıda parametreyi destekleyen bir için öznitelikleri ayrı olarak tanımlamak sıkıcı olabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-228">For example, it can be tedious to define attributes separately for an `<input>` that supports many parameters.</span></span>
 
 <span data-ttu-id="c48ab-229">Aşağıdaki örnekte, ilk `<input>` öğesi ( `id="useIndividualParams"` ) bağımsız bileşen parametrelerini kullanır, ancak ikinci `<input>` öğe ( `id="useAttributesDict"` ) öznitelik splatesini kullanır:</span><span class="sxs-lookup"><span data-stu-id="c48ab-229">In the following example, the first `<input>` element (`id="useIndividualParams"`) uses individual component parameters, while the second `<input>` element (`id="useAttributesDict"`) uses attribute splatting:</span></span>
 
@@ -468,9 +468,9 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="synchronization-context"></a><span data-ttu-id="c48ab-267">Eşitleme bağlamı</span><span class="sxs-lookup"><span data-stu-id="c48ab-267">Synchronization context</span></span>
 
-<span data-ttu-id="c48ab-268">:::no-loc(Blazor):::<xref:System.Threading.SynchronizationContext>yürütmenin tek bir mantıksal iş parçacığını zorlamak için bir eşitleme bağlamı () kullanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-268">:::no-loc(Blazor)::: uses a synchronization context (<xref:System.Threading.SynchronizationContext>) to enforce a single logical thread of execution.</span></span> <span data-ttu-id="c48ab-269">Bir bileşenin [yaşam döngüsü yöntemleri](xref:blazor/components/lifecycle) ve tarafından oluşturulan tüm olay geri çağırmaları :::no-loc(Blazor)::: eşitleme bağlamında yürütülür.</span><span class="sxs-lookup"><span data-stu-id="c48ab-269">A component's [lifecycle methods](xref:blazor/components/lifecycle) and any event callbacks that are raised by :::no-loc(Blazor)::: are executed on the synchronization context.</span></span>
+<span data-ttu-id="c48ab-268">Blazor<xref:System.Threading.SynchronizationContext>yürütmenin tek bir mantıksal iş parçacığını zorlamak için bir eşitleme bağlamı () kullanır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-268">Blazor uses a synchronization context (<xref:System.Threading.SynchronizationContext>) to enforce a single logical thread of execution.</span></span> <span data-ttu-id="c48ab-269">Bir bileşenin [yaşam döngüsü yöntemleri](xref:blazor/components/lifecycle) ve tarafından oluşturulan tüm olay geri çağırmaları Blazor eşitleme bağlamında yürütülür.</span><span class="sxs-lookup"><span data-stu-id="c48ab-269">A component's [lifecycle methods](xref:blazor/components/lifecycle) and any event callbacks that are raised by Blazor are executed on the synchronization context.</span></span>
 
-<span data-ttu-id="c48ab-270">:::no-loc(Blazor Server):::, tek iş parçacıklı bir ortamı öykünmeye çalışır ve bu sayede tek iş parçacıklı bir tarayıcıda WebAssembly modeliyle yakından eşleşir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-270">:::no-loc(Blazor Server):::'s synchronization context attempts to emulate a single-threaded environment so that it closely matches the WebAssembly model in the browser, which is single threaded.</span></span> <span data-ttu-id="c48ab-271">Belirli bir zamanda, iş, tek bir mantıksal iş parçacığının izlenimi vererek tam olarak bir iş parçacığında gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-271">At any given point in time, work is performed on exactly one thread, giving the impression of a single logical thread.</span></span> <span data-ttu-id="c48ab-272">Aynı anda iki işlem yürütülmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-272">No two operations execute concurrently.</span></span>
+<span data-ttu-id="c48ab-270">Blazor Server, tek iş parçacıklı bir ortamı öykünmeye çalışır ve bu sayede tek iş parçacıklı bir tarayıcıda WebAssembly modeliyle yakından eşleşir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-270">Blazor Server's synchronization context attempts to emulate a single-threaded environment so that it closely matches the WebAssembly model in the browser, which is single threaded.</span></span> <span data-ttu-id="c48ab-271">Belirli bir zamanda, iş, tek bir mantıksal iş parçacığının izlenimi vererek tam olarak bir iş parçacığında gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-271">At any given point in time, work is performed on exactly one thread, giving the impression of a single logical thread.</span></span> <span data-ttu-id="c48ab-272">Aynı anda iki işlem yürütülmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-272">No two operations execute concurrently.</span></span>
 
 ### <a name="avoid-thread-blocking-calls"></a><span data-ttu-id="c48ab-273">İş parçacığı engelleme çağrılarını önleyin</span><span class="sxs-lookup"><span data-stu-id="c48ab-273">Avoid thread-blocking calls</span></span>
 
@@ -485,7 +485,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ### <a name="invoke-component-methods-externally-to-update-state"></a><span data-ttu-id="c48ab-276">Durumu güncelleştirmek için bileşen yöntemlerini dışarıdan çağır</span><span class="sxs-lookup"><span data-stu-id="c48ab-276">Invoke component methods externally to update state</span></span>
 
-<span data-ttu-id="c48ab-277">Bir bileşenin, Zamanlayıcı veya diğer bildirimler gibi bir dış olay temel alınarak güncellenmesi gerekir, bu `InvokeAsync` yöntemi, :::no-loc(Blazor)::: eşitleme bağlamına dağımakta olan yöntemini kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-277">In the event a component must be updated based on an external event, such as a timer or other notifications, use the `InvokeAsync` method, which dispatches to :::no-loc(Blazor):::'s synchronization context.</span></span> <span data-ttu-id="c48ab-278">Örneğin, güncelleştirilmiş durumdaki herhangi bir dinleme bileşenine bildirimde bulunan bir *bildirim hizmeti* düşünün:</span><span class="sxs-lookup"><span data-stu-id="c48ab-278">For example, consider a *notifier service* that can notify any listening component of the updated state:</span></span>
+<span data-ttu-id="c48ab-277">Bir bileşenin, Zamanlayıcı veya diğer bildirimler gibi bir dış olay temel alınarak güncellenmesi gerekir, bu `InvokeAsync` yöntemi, Blazor eşitleme bağlamına dağımakta olan yöntemini kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-277">In the event a component must be updated based on an external event, such as a timer or other notifications, use the `InvokeAsync` method, which dispatches to Blazor's synchronization context.</span></span> <span data-ttu-id="c48ab-278">Örneğin, güncelleştirilmiş durumdaki herhangi bir dinleme bileşenine bildirimde bulunan bir *bildirim hizmeti* düşünün:</span><span class="sxs-lookup"><span data-stu-id="c48ab-278">For example, consider a *notifier service* that can notify any listening component of the updated state:</span></span>
 
 ```csharp
 public class NotifierService
@@ -505,13 +505,13 @@ public class NotifierService
 
 <span data-ttu-id="c48ab-279">Şunu kaydedin `NotifierService` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-279">Register the `NotifierService`:</span></span>
 
-* <span data-ttu-id="c48ab-280">İçinde :::no-loc(Blazor WebAssembly)::: , hizmeti şu şekilde ayrı kaydedin `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-280">In :::no-loc(Blazor WebAssembly):::, register the service as singleton in `Program.Main`:</span></span>
+* <span data-ttu-id="c48ab-280">İçinde Blazor WebAssembly , hizmeti şu şekilde ayrı kaydedin `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-280">In Blazor WebAssembly, register the service as singleton in `Program.Main`:</span></span>
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* <span data-ttu-id="c48ab-281">' De :::no-loc(Blazor Server)::: , hizmeti kapsamında şu şekilde kaydedin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-281">In :::no-loc(Blazor Server):::, register the service as scoped in `Startup.ConfigureServices`:</span></span>
+* <span data-ttu-id="c48ab-281">' De Blazor Server , hizmeti kapsamında şu şekilde kaydedin `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-281">In Blazor Server, register the service as scoped in `Startup.ConfigureServices`:</span></span>
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -550,11 +550,11 @@ public class NotifierService
 }
 ```
 
-<span data-ttu-id="c48ab-283">Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu :::no-loc(Blazor)::: eşitleme bağlamı dışında çağırır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-283">In the preceding example, `NotifierService` invokes the component's `OnNotify` method outside of :::no-loc(Blazor):::'s synchronization context.</span></span> <span data-ttu-id="c48ab-284">`InvokeAsync` doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-284">`InvokeAsync` is used to switch to the correct context and queue a render.</span></span>
+<span data-ttu-id="c48ab-283">Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu Blazor eşitleme bağlamı dışında çağırır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-283">In the preceding example, `NotifierService` invokes the component's `OnNotify` method outside of Blazor's synchronization context.</span></span> <span data-ttu-id="c48ab-284">`InvokeAsync` doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-284">`InvokeAsync` is used to switch to the correct context and queue a render.</span></span>
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a><span data-ttu-id="c48ab-285">\@Öğe ve bileşenlerin korunmasını denetlemek için anahtar kullanın</span><span class="sxs-lookup"><span data-stu-id="c48ab-285">Use \@key to control the preservation of elements and components</span></span>
 
-<span data-ttu-id="c48ab-286">Bir öğe veya bileşen listesi işlenirken ve öğeler ya da bileşenler daha sonra değiştiğinde, :::no-loc(Blazor)::: Bu, önceki öğelerin veya bileşenlerin ne zaman tutulacağına ve model nesnelerinin bunlara nasıl eşleneceğine karar vermelidir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-286">When rendering a list of elements or components and the elements or components subsequently change, :::no-loc(Blazor):::'s diffing algorithm must decide which of the previous elements or components can be retained and how model objects should map to them.</span></span> <span data-ttu-id="c48ab-287">Normalde, bu işlem otomatiktir ve yoksayılabilir, ancak işlemi denetlemek isteyebileceğiniz durumlar vardır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-287">Normally, this process is automatic and can be ignored, but there are cases where you may want to control the process.</span></span>
+<span data-ttu-id="c48ab-286">Bir öğe veya bileşen listesi işlenirken ve öğeler ya da bileşenler daha sonra değiştiğinde, Blazor Bu, önceki öğelerin veya bileşenlerin ne zaman tutulacağına ve model nesnelerinin bunlara nasıl eşleneceğine karar vermelidir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-286">When rendering a list of elements or components and the elements or components subsequently change, Blazor's diffing algorithm must decide which of the previous elements or components can be retained and how model objects should map to them.</span></span> <span data-ttu-id="c48ab-287">Normalde, bu işlem otomatiktir ve yoksayılabilir, ancak işlemi denetlemek isteyebileceğiniz durumlar vardır.</span><span class="sxs-lookup"><span data-stu-id="c48ab-287">Normally, this process is automatic and can be ignored, but there are cases where you may want to control the process.</span></span>
 
 <span data-ttu-id="c48ab-288">Aşağıdaki örneği inceleyin:</span><span class="sxs-lookup"><span data-stu-id="c48ab-288">Consider the following example:</span></span>
 
@@ -601,7 +601,7 @@ public class NotifierService
 
 <span data-ttu-id="c48ab-305">Genellikle, [`@key`][5] her bir liste işlendiğinde (örneğin, bir [foreach](/dotnet/csharp/language-reference/keywords/foreach-in) bloğunda) ve tanımlamak için uygun bir değer varsa, bu durum kullanılır [`@key`][5] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-305">Typically, it makes sense to use [`@key`][5] whenever a list is rendered (for example, in a [foreach](/dotnet/csharp/language-reference/keywords/foreach-in) block) and a suitable value exists to define the [`@key`][5].</span></span>
 
-<span data-ttu-id="c48ab-306">Bir [`@key`][5] :::no-loc(Blazor)::: nesne değiştiğinde bir öğeyi veya bileşen alt ağacını korumayı engellemek için ' i de kullanabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="c48ab-306">You can also use [`@key`][5] to prevent :::no-loc(Blazor)::: from preserving an element or component subtree when an object changes:</span></span>
+<span data-ttu-id="c48ab-306">Bir [`@key`][5] Blazor nesne değiştiğinde bir öğeyi veya bileşen alt ağacını korumayı engellemek için ' i de kullanabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="c48ab-306">You can also use [`@key`][5] to prevent Blazor from preserving an element or component subtree when an object changes:</span></span>
 
 ```razor
 <div @key="currentPerson">
@@ -609,13 +609,13 @@ public class NotifierService
 </div>
 ```
 
-<span data-ttu-id="c48ab-307">`@currentPerson`Değişiklik olursa, [`@key`][5] öznitelik yönergesi :::no-loc(Blazor)::: tüm `<div>` ve alt öğelerini atmayı ve yeni öğeler ve bileşenlerle Kullanıcı arabiriminde alt ağacı yeniden oluşturmayı zorlar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-307">If `@currentPerson` changes, the [`@key`][5] attribute directive forces :::no-loc(Blazor)::: to discard the entire `<div>` and its descendants and rebuild the subtree within the UI with new elements and components.</span></span> <span data-ttu-id="c48ab-308">Değişiklik sırasında hiçbir Kullanıcı arabirimi durumunun korunmayacağını garanti etmeniz gerekirse bu yararlı olabilir `@currentPerson` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-308">This can be useful if you need to guarantee that no UI state is preserved when `@currentPerson` changes.</span></span>
+<span data-ttu-id="c48ab-307">`@currentPerson`Değişiklik olursa, [`@key`][5] öznitelik yönergesi Blazor tüm `<div>` ve alt öğelerini atmayı ve yeni öğeler ve bileşenlerle Kullanıcı arabiriminde alt ağacı yeniden oluşturmayı zorlar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-307">If `@currentPerson` changes, the [`@key`][5] attribute directive forces Blazor to discard the entire `<div>` and its descendants and rebuild the subtree within the UI with new elements and components.</span></span> <span data-ttu-id="c48ab-308">Değişiklik sırasında hiçbir Kullanıcı arabirimi durumunun korunmayacağını garanti etmeniz gerekirse bu yararlı olabilir `@currentPerson` .</span><span class="sxs-lookup"><span data-stu-id="c48ab-308">This can be useful if you need to guarantee that no UI state is preserved when `@currentPerson` changes.</span></span>
 
 ### <a name="when-not-to-use-key"></a><span data-ttu-id="c48ab-309">Anahtar ne zaman kullanılmaz? \@</span><span class="sxs-lookup"><span data-stu-id="c48ab-309">When not to use \@key</span></span>
 
 <span data-ttu-id="c48ab-310">İle yayılma yaparken bir performans maliyeti vardır [`@key`][5] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-310">There's a performance cost when diffing with [`@key`][5].</span></span> <span data-ttu-id="c48ab-311">Performans maliyeti büyük değildir, ancak yalnızca [`@key`][5] öğenin veya bileşen koruma kurallarının denetlenmesi uygulamanın avantajına göre belirleyin.</span><span class="sxs-lookup"><span data-stu-id="c48ab-311">The performance cost isn't large, but only specify [`@key`][5] if controlling the element or component preservation rules benefit the app.</span></span>
 
-<span data-ttu-id="c48ab-312">[`@key`][5]Kullanılmasa bile, :::no-loc(Blazor)::: alt öğe ve bileşen örneklerini mümkün olduğunca korur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-312">Even if [`@key`][5] isn't used, :::no-loc(Blazor)::: preserves child element and component instances as much as possible.</span></span> <span data-ttu-id="c48ab-313">Kullanmanın tek avantajı [`@key`][5] model örneklerinin, eşlemeyi seçme algoritması yerine, korunan bileşen örneklerine *nasıl* eşlendiğine ilişkin denetimdir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-313">The only advantage to using [`@key`][5] is control over *how* model instances are mapped to the preserved component instances, instead of the diffing algorithm selecting the mapping.</span></span>
+<span data-ttu-id="c48ab-312">[`@key`][5]Kullanılmasa bile, Blazor alt öğe ve bileşen örneklerini mümkün olduğunca korur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-312">Even if [`@key`][5] isn't used, Blazor preserves child element and component instances as much as possible.</span></span> <span data-ttu-id="c48ab-313">Kullanmanın tek avantajı [`@key`][5] model örneklerinin, eşlemeyi seçme algoritması yerine, korunan bileşen örneklerine *nasıl* eşlendiğine ilişkin denetimdir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-313">The only advantage to using [`@key`][5] is control over *how* model instances are mapped to the preserved component instances, instead of the diffing algorithm selecting the mapping.</span></span>
 
 ### <a name="what-values-to-use-for-key"></a><span data-ttu-id="c48ab-314">Anahtar için kullanılacak değerler \@</span><span class="sxs-lookup"><span data-stu-id="c48ab-314">What values to use for \@key</span></span>
 
@@ -624,11 +624,11 @@ public class NotifierService
 * <span data-ttu-id="c48ab-316">Model nesne örnekleri (örneğin, `Person` Önceki örnekte olduğu gibi).</span><span class="sxs-lookup"><span data-stu-id="c48ab-316">Model object instances (for example, a `Person` instance as in the earlier example).</span></span> <span data-ttu-id="c48ab-317">Bu, nesne başvurusu eşitliğine göre koruma sağlar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-317">This ensures preservation based on object reference equality.</span></span>
 * <span data-ttu-id="c48ab-318">Benzersiz tanımlayıcılar (örneğin, veya türündeki birincil anahtar değerleri `int` `string` `Guid` ).</span><span class="sxs-lookup"><span data-stu-id="c48ab-318">Unique identifiers (for example, primary key values of type `int`, `string`, or `Guid`).</span></span>
 
-<span data-ttu-id="c48ab-319">Bu değerlerin çakışmayın için kullanıldığından emin olun [`@key`][5] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-319">Ensure that values used for [`@key`][5] don't clash.</span></span> <span data-ttu-id="c48ab-320">Aynı üst öğe içinde çakışan değerler algılanırsa, :::no-loc(Blazor)::: eski öğeleri veya bileşenleri yeni öğe veya bileşenlere kesin bir şekilde eşlemediğinden bir özel durum oluşturur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-320">If clashing values are detected within the same parent element, :::no-loc(Blazor)::: throws an exception because it can't deterministically map old elements or components to new elements or components.</span></span> <span data-ttu-id="c48ab-321">Yalnızca nesne örnekleri veya birincil anahtar değerleri gibi farklı değerleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-321">Only use distinct values, such as object instances or primary key values.</span></span>
+<span data-ttu-id="c48ab-319">Bu değerlerin çakışmayın için kullanıldığından emin olun [`@key`][5] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-319">Ensure that values used for [`@key`][5] don't clash.</span></span> <span data-ttu-id="c48ab-320">Aynı üst öğe içinde çakışan değerler algılanırsa, Blazor eski öğeleri veya bileşenleri yeni öğe veya bileşenlere kesin bir şekilde eşlemediğinden bir özel durum oluşturur.</span><span class="sxs-lookup"><span data-stu-id="c48ab-320">If clashing values are detected within the same parent element, Blazor throws an exception because it can't deterministically map old elements or components to new elements or components.</span></span> <span data-ttu-id="c48ab-321">Yalnızca nesne örnekleri veya birincil anahtar değerleri gibi farklı değerleri kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-321">Only use distinct values, such as object instances or primary key values.</span></span>
 
 ## <a name="overwritten-parameters"></a><span data-ttu-id="c48ab-322">Üzerine yazılan parametreler</span><span class="sxs-lookup"><span data-stu-id="c48ab-322">Overwritten parameters</span></span>
 
-<span data-ttu-id="c48ab-323">:::no-loc(Blazor):::Framework genellikle güvenli üst-alt parametre ataması uygular:</span><span class="sxs-lookup"><span data-stu-id="c48ab-323">The :::no-loc(Blazor)::: framework generally imposes safe parent-to-child parameter assignment:</span></span>
+<span data-ttu-id="c48ab-323">BlazorFramework genellikle güvenli üst-alt parametre ataması uygular:</span><span class="sxs-lookup"><span data-stu-id="c48ab-323">The Blazor framework generally imposes safe parent-to-child parameter assignment:</span></span>
 
 * <span data-ttu-id="c48ab-324">Parametrelerin üzerine yazılması beklenmedik.</span><span class="sxs-lookup"><span data-stu-id="c48ab-324">Parameters aren't overwritten unexpectedly.</span></span>
 * <span data-ttu-id="c48ab-325">Yan etkiler en aza indirilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-325">Side-effects are minimized.</span></span> <span data-ttu-id="c48ab-326">Örneğin, sonsuz işleme döngüleri oluşturabileceğinden ek işlemeye kaçınılmaz.</span><span class="sxs-lookup"><span data-stu-id="c48ab-326">For example, additional renders are avoided because they may create infinite rendering loops.</span></span>
@@ -734,11 +734,11 @@ public class NotifierService
 }
 ```
 
-<span data-ttu-id="c48ab-348">Daha fazla bilgi için bkz. [ :::no-loc(Blazor)::: Iki yönlü bağlama hatası (DotNet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599).</span><span class="sxs-lookup"><span data-stu-id="c48ab-348">For additional information, see [:::no-loc(Blazor)::: Two Way Binding Error (dotnet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599).</span></span> 
+<span data-ttu-id="c48ab-348">Daha fazla bilgi için bkz. [ Blazor Iki yönlü bağlama hatası (DotNet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599).</span><span class="sxs-lookup"><span data-stu-id="c48ab-348">For additional information, see [Blazor Two Way Binding Error (dotnet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599).</span></span> 
 
 ## <a name="apply-an-attribute"></a><span data-ttu-id="c48ab-349">Öznitelik uygulama</span><span class="sxs-lookup"><span data-stu-id="c48ab-349">Apply an attribute</span></span>
 
-<span data-ttu-id="c48ab-350">Öznitelikler :::no-loc(Razor)::: , yönergeyle birlikte bileşenlere uygulanabilir [`@attribute`][7] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-350">Attributes can be applied to :::no-loc(Razor)::: components with the [`@attribute`][7] directive.</span></span> <span data-ttu-id="c48ab-351">Aşağıdaki örnek, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) bileşen sınıfına özniteliğini uygular:</span><span class="sxs-lookup"><span data-stu-id="c48ab-351">The following example applies the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute to the component class:</span></span>
+<span data-ttu-id="c48ab-350">Öznitelikler Razor , yönergeyle birlikte bileşenlere uygulanabilir [`@attribute`][7] .</span><span class="sxs-lookup"><span data-stu-id="c48ab-350">Attributes can be applied to Razor components with the [`@attribute`][7] directive.</span></span> <span data-ttu-id="c48ab-351">Aşağıdaki örnek, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) bileşen sınıfına özniteliğini uygular:</span><span class="sxs-lookup"><span data-stu-id="c48ab-351">The following example applies the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute to the component class:</span></span>
 
 ```razor
 @page "/"
@@ -795,9 +795,9 @@ public class NotifierService
 }
 ```
 
-## <a name="no-locrazor-templates"></a><span data-ttu-id="c48ab-368">:::no-loc(Razor)::: şablondan</span><span class="sxs-lookup"><span data-stu-id="c48ab-368">:::no-loc(Razor)::: templates</span></span>
+## <a name="no-locrazor-templates"></a><span data-ttu-id="c48ab-368">Razor şablondan</span><span class="sxs-lookup"><span data-stu-id="c48ab-368">Razor templates</span></span>
 
-<span data-ttu-id="c48ab-369">İşleme parçaları, :::no-loc(Razor)::: şablon sözdizimi kullanılarak tanımlanabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-369">Render fragments can be defined using :::no-loc(Razor)::: template syntax.</span></span> <span data-ttu-id="c48ab-370">:::no-loc(Razor)::: Şablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:</span><span class="sxs-lookup"><span data-stu-id="c48ab-370">:::no-loc(Razor)::: templates are a way to define a UI snippet and assume the following format:</span></span>
+<span data-ttu-id="c48ab-369">İşleme parçaları, Razor şablon sözdizimi kullanılarak tanımlanabilir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-369">Render fragments can be defined using Razor template syntax.</span></span> <span data-ttu-id="c48ab-370">Razor Şablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:</span><span class="sxs-lookup"><span data-stu-id="c48ab-370">Razor templates are a way to define a UI snippet and assume the following format:</span></span>
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>
@@ -831,7 +831,7 @@ public class NotifierService
 
 ## <a name="static-assets"></a><span data-ttu-id="c48ab-374">Statik varlıklar</span><span class="sxs-lookup"><span data-stu-id="c48ab-374">Static assets</span></span>
 
-<span data-ttu-id="c48ab-375">:::no-loc(Blazor):::Projenin [ `web root (wwwroot)` klasörü](xref:fundamentals/index#web-root)altına statik varlıklar yerleştirmekte olan ASP.NET Core uygulama kuralına uyar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-375">:::no-loc(Blazor)::: follows the convention of ASP.NET Core apps placing static assets under the project's [`web root (wwwroot)` folder](xref:fundamentals/index#web-root).</span></span>
+<span data-ttu-id="c48ab-375">BlazorProjenin [ `web root (wwwroot)` klasörü](xref:fundamentals/index#web-root)altına statik varlıklar yerleştirmekte olan ASP.NET Core uygulama kuralına uyar.</span><span class="sxs-lookup"><span data-stu-id="c48ab-375">Blazor follows the convention of ASP.NET Core apps placing static assets under the project's [`web root (wwwroot)` folder](xref:fundamentals/index#web-root).</span></span>
 
 <span data-ttu-id="c48ab-376">`/`Statik bir varlık için Web köküne başvurmak üzere temel göreli bir yol () kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-376">Use a base-relative path (`/`) to refer to the web root for a static asset.</span></span> <span data-ttu-id="c48ab-377">Aşağıdaki örnekte, bu `logo.png` klasörde fiziksel olarak bulunur `{PROJECT ROOT}/wwwroot/images` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-377">In the following example, `logo.png` is physically located in the `{PROJECT ROOT}/wwwroot/images` folder:</span></span>
 
@@ -839,17 +839,17 @@ public class NotifierService
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-<span data-ttu-id="c48ab-378">:::no-loc(Razor):::bileşenler, **not** tilde işareti gösterimini ( `~/` ) desteklemez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-378">:::no-loc(Razor)::: components do **not** support tilde-slash notation (`~/`).</span></span>
+<span data-ttu-id="c48ab-378">Razorbileşenler, **not** tilde işareti gösterimini ( `~/` ) desteklemez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-378">Razor components do **not** support tilde-slash notation (`~/`).</span></span>
 
 <span data-ttu-id="c48ab-379">Uygulamanın temel yolunu ayarlama hakkında daha fazla bilgi için bkz <xref:blazor/host-and-deploy/index#app-base-path> ..</span><span class="sxs-lookup"><span data-stu-id="c48ab-379">For information on setting an app's base path, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
 
 ## <a name="tag-helpers-arent-supported-in-components"></a><span data-ttu-id="c48ab-380">Etiket Yardımcıları bileşenlerde desteklenmiyor</span><span class="sxs-lookup"><span data-stu-id="c48ab-380">Tag Helpers aren't supported in components</span></span>
 
-<span data-ttu-id="c48ab-381">[`Tag Helpers`](xref:mvc/views/tag-helpers/intro):::no-loc(Razor):::bileşenlerde ( `.razor` Dosyalar) desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-381">[`Tag Helpers`](xref:mvc/views/tag-helpers/intro) aren't supported in :::no-loc(Razor)::: components (`.razor` files).</span></span> <span data-ttu-id="c48ab-382">' De etiket Yardımcısı benzeri işlevsellik sağlamak için :::no-loc(Blazor)::: , etiket Yardımcısı ile aynı işlevselliğe sahip bir bileşen oluşturun ve bunun yerine bileşeni kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-382">To provide Tag Helper-like functionality in :::no-loc(Blazor):::, create a component with the same functionality as the Tag Helper and use the component instead.</span></span>
+<span data-ttu-id="c48ab-381">[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)Razorbileşenlerde ( `.razor` Dosyalar) desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-381">[`Tag Helpers`](xref:mvc/views/tag-helpers/intro) aren't supported in Razor components (`.razor` files).</span></span> <span data-ttu-id="c48ab-382">' De etiket Yardımcısı benzeri işlevsellik sağlamak için Blazor , etiket Yardımcısı ile aynı işlevselliğe sahip bir bileşen oluşturun ve bunun yerine bileşeni kullanın.</span><span class="sxs-lookup"><span data-stu-id="c48ab-382">To provide Tag Helper-like functionality in Blazor, create a component with the same functionality as the Tag Helper and use the component instead.</span></span>
 
 ## <a name="scalable-vector-graphics-svg-images"></a><span data-ttu-id="c48ab-383">Ölçeklenebilir vektör grafik (SVG) görüntüleri</span><span class="sxs-lookup"><span data-stu-id="c48ab-383">Scalable Vector Graphics (SVG) images</span></span>
 
-<span data-ttu-id="c48ab-384">İşleme :::no-loc(Blazor)::: HTML, ölçeklenebilir vektör grafik (SVG) görüntüleri de dahil olmak üzere tarayıcıda desteklenen görüntüler ( `.svg` ) etiketi aracılığıyla desteklenir `<img>` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-384">Since :::no-loc(Blazor)::: renders HTML, browser-supported images, including Scalable Vector Graphics (SVG) images (`.svg`), are supported via the `<img>` tag:</span></span>
+<span data-ttu-id="c48ab-384">İşleme Blazor HTML, ölçeklenebilir vektör grafik (SVG) görüntüleri de dahil olmak üzere tarayıcıda desteklenen görüntüler ( `.svg` ) etiketi aracılığıyla desteklenir `<img>` :</span><span class="sxs-lookup"><span data-stu-id="c48ab-384">Since Blazor renders HTML, browser-supported images, including Scalable Vector Graphics (SVG) images (`.svg`), are supported via the `<img>` tag:</span></span>
 
 ```html
 <img alt="Example image" src="some-image.svg" />
@@ -863,11 +863,11 @@ public class NotifierService
 }
 ```
 
-<span data-ttu-id="c48ab-386">Ancak, satır içi SVG işaretlemesi tüm senaryolarda desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-386">However, inline SVG markup isn't supported in all scenarios.</span></span> <span data-ttu-id="c48ab-387">Bir `<svg>` etiketi doğrudan bir bileşen dosyasına ( `.razor` ) yerleştirirseniz, temel görüntü işleme desteklenir, ancak birçok gelişmiş senaryo desteklenmemiştir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-387">If you place an `<svg>` tag directly into a component file (`.razor`), basic image rendering is supported but many advanced scenarios aren't yet supported.</span></span> <span data-ttu-id="c48ab-388">Örneğin, `<use>` Etiketler Şu anda dikkate alınamaz ve [`@bind`][10] bazı SVG etiketleriyle kullanılamaz.</span><span class="sxs-lookup"><span data-stu-id="c48ab-388">For example, `<use>` tags aren't currently respected, and [`@bind`][10] can't be used with some SVG tags.</span></span> <span data-ttu-id="c48ab-389">Daha fazla bilgi için bkz. [Içindeki SVG desteği :::no-loc(Blazor)::: (DotNet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).</span><span class="sxs-lookup"><span data-stu-id="c48ab-389">For more information, see [SVG support in :::no-loc(Blazor)::: (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).</span></span>
+<span data-ttu-id="c48ab-386">Ancak, satır içi SVG işaretlemesi tüm senaryolarda desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="c48ab-386">However, inline SVG markup isn't supported in all scenarios.</span></span> <span data-ttu-id="c48ab-387">Bir `<svg>` etiketi doğrudan bir bileşen dosyasına ( `.razor` ) yerleştirirseniz, temel görüntü işleme desteklenir, ancak birçok gelişmiş senaryo desteklenmemiştir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-387">If you place an `<svg>` tag directly into a component file (`.razor`), basic image rendering is supported but many advanced scenarios aren't yet supported.</span></span> <span data-ttu-id="c48ab-388">Örneğin, `<use>` Etiketler Şu anda dikkate alınamaz ve [`@bind`][10] bazı SVG etiketleriyle kullanılamaz.</span><span class="sxs-lookup"><span data-stu-id="c48ab-388">For example, `<use>` tags aren't currently respected, and [`@bind`][10] can't be used with some SVG tags.</span></span> <span data-ttu-id="c48ab-389">Daha fazla bilgi için bkz. [Içindeki SVG desteği Blazor (DotNet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).</span><span class="sxs-lookup"><span data-stu-id="c48ab-389">For more information, see [SVG support in Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="c48ab-390">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="c48ab-390">Additional resources</span></span>
 
-* <span data-ttu-id="c48ab-391"><xref:blazor/security/server/threat-mitigation>: :::no-loc(Blazor Server)::: Kaynak tükenmesi ile Çekişmek zorunda olan uygulamalar oluşturmaya yönelik yönergeler içerir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-391"><xref:blazor/security/server/threat-mitigation>: Includes guidance on building :::no-loc(Blazor Server)::: apps that must contend with resource exhaustion.</span></span>
+* <span data-ttu-id="c48ab-391"><xref:blazor/security/server/threat-mitigation>: Blazor Server Kaynak tükenmesi ile Çekişmek zorunda olan uygulamalar oluşturmaya yönelik yönergeler içerir.</span><span class="sxs-lookup"><span data-stu-id="c48ab-391"><xref:blazor/security/server/threat-mitigation>: Includes guidance on building Blazor Server apps that must contend with resource exhaustion.</span></span>
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

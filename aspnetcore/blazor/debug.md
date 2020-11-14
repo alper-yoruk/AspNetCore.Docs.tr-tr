@@ -1,23 +1,23 @@
 ---
-title: 'Hata ayıklama ASP.NET Core :::no-loc(Blazor WebAssembly):::'
+title: 'Hata ayıklama ASP.NET Core Blazor WebAssembly'
 author: guardrex
-description: 'Uygulamalarda hata ayıklamayı öğrenin :::no-loc(Blazor)::: .'
+description: 'Uygulamalarda hata ayıklamayı öğrenin Blazor .'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/debug
 ms.openlocfilehash: 990882c03ddc14c664aa8da0518fb36087199aca
 ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
@@ -26,11 +26,11 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 11/12/2020
 ms.locfileid: "94550523"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="738be-103">Hata ayıklama ASP.NET Core :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="738be-103">Debug ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="738be-103">Hata ayıklama ASP.NET Core Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="738be-103">Debug ASP.NET Core Blazor WebAssembly</span></span>
 
 [<span data-ttu-id="738be-104">Daniel Roth</span><span class="sxs-lookup"><span data-stu-id="738be-104">Daniel Roth</span></span>](https://github.com/danroth27)
 
-<span data-ttu-id="738be-105">:::no-loc(Blazor WebAssembly)::: uygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz.</span><span class="sxs-lookup"><span data-stu-id="738be-105">:::no-loc(Blazor WebAssembly)::: apps can be debugged using the browser dev tools in Chromium-based browsers (Edge/Chrome).</span></span> <span data-ttu-id="738be-106">Ayrıca, aşağıdaki tümleşik geliştirme ortamlarını (IDEs) kullanarak uygulamanızda hata ayıklaması yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-106">You can also debug your app using the following integrated development environments (IDEs):</span></span>
+<span data-ttu-id="738be-105">Blazor WebAssembly uygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz.</span><span class="sxs-lookup"><span data-stu-id="738be-105">Blazor WebAssembly apps can be debugged using the browser dev tools in Chromium-based browsers (Edge/Chrome).</span></span> <span data-ttu-id="738be-106">Ayrıca, aşağıdaki tümleşik geliştirme ortamlarını (IDEs) kullanarak uygulamanızda hata ayıklaması yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-106">You can also debug your app using the following integrated development environments (IDEs):</span></span>
 
 * <span data-ttu-id="738be-107">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="738be-107">Visual Studio</span></span>
 * <span data-ttu-id="738be-108">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="738be-108">Visual Studio for Mac</span></span>
@@ -70,7 +70,7 @@ ms.locfileid: "94550523"
 
 ## <a name="enable-debugging"></a><span data-ttu-id="738be-133">Hata ayıklamayı etkinleştir</span><span class="sxs-lookup"><span data-stu-id="738be-133">Enable debugging</span></span>
 
-<span data-ttu-id="738be-134">Mevcut bir uygulamada hata ayıklamayı etkinleştirmek için :::no-loc(Blazor WebAssembly)::: , `launchSettings.json` Başlangıç projesindeki dosyayı her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :</span><span class="sxs-lookup"><span data-stu-id="738be-134">To enable debugging for an existing :::no-loc(Blazor WebAssembly)::: app, update the `launchSettings.json` file in the startup project to include the following `inspectUri` property in each launch profile:</span></span>
+<span data-ttu-id="738be-134">Mevcut bir uygulamada hata ayıklamayı etkinleştirmek için Blazor WebAssembly , `launchSettings.json` Başlangıç projesindeki dosyayı her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :</span><span class="sxs-lookup"><span data-stu-id="738be-134">To enable debugging for an existing Blazor WebAssembly app, update the `launchSettings.json` file in the startup project to include the following `inspectUri` property in each launch profile:</span></span>
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
@@ -82,16 +82,16 @@ ms.locfileid: "94550523"
 
 <span data-ttu-id="738be-136">`inspectUri`Özelliği:</span><span class="sxs-lookup"><span data-stu-id="738be-136">The `inspectUri` property:</span></span>
 
-* <span data-ttu-id="738be-137">IDE 'nin uygulamanın bir uygulama olduğunu algılamasını sağlar :::no-loc(Blazor WebAssembly)::: .</span><span class="sxs-lookup"><span data-stu-id="738be-137">Enables the IDE to detect that the app is a :::no-loc(Blazor WebAssembly)::: app.</span></span>
-* <span data-ttu-id="738be-138">Betik hata ayıklama altyapısına, :::no-loc(Blazor)::: hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.</span><span class="sxs-lookup"><span data-stu-id="738be-138">Instructs the script debugging infrastructure to connect to the browser through :::no-loc(Blazor):::'s debugging proxy.</span></span>
+* <span data-ttu-id="738be-137">IDE 'nin uygulamanın bir uygulama olduğunu algılamasını sağlar Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="738be-137">Enables the IDE to detect that the app is a Blazor WebAssembly app.</span></span>
+* <span data-ttu-id="738be-138">Betik hata ayıklama altyapısına, Blazor hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.</span><span class="sxs-lookup"><span data-stu-id="738be-138">Instructs the script debugging infrastructure to connect to the browser through Blazor's debugging proxy.</span></span>
 
 <span data-ttu-id="738be-139">`wsProtocol`Başlatılan tarayıcıda () WebSockets Protokolü (), ana bilgisayar ( `url.hostname` ), bağlantı noktası () `url.port` ve Inspector URI 'si için yer tutucu değerleri `browserInspectUri` , Framework tarafından sağlanır.</span><span class="sxs-lookup"><span data-stu-id="738be-139">The placeholder values for the WebSockets protocol (`wsProtocol`), host (`url.hostname`), port (`url.port`), and inspector URI on the launched browser (`browserInspectUri`) are provided by the framework.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="738be-140">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="738be-140">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="738be-141">:::no-loc(Blazor WebAssembly):::Visual Studio 'da bir uygulamada hata ayıklamak için:</span><span class="sxs-lookup"><span data-stu-id="738be-141">To debug a :::no-loc(Blazor WebAssembly)::: app in Visual Studio:</span></span>
+<span data-ttu-id="738be-141">Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:</span><span class="sxs-lookup"><span data-stu-id="738be-141">To debug a Blazor WebAssembly app in Visual Studio:</span></span>
 
-1. <span data-ttu-id="738be-142">Yeni ASP.NET Core barındırılan bir :::no-loc(Blazor WebAssembly)::: uygulama oluşturun.</span><span class="sxs-lookup"><span data-stu-id="738be-142">Create a new ASP.NET Core hosted :::no-loc(Blazor WebAssembly)::: app.</span></span>
+1. <span data-ttu-id="738be-142">Yeni ASP.NET Core barındırılan bir Blazor WebAssembly uygulama oluşturun.</span><span class="sxs-lookup"><span data-stu-id="738be-142">Create a new ASP.NET Core hosted Blazor WebAssembly app.</span></span>
 1. <span data-ttu-id="738be-143">Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.</span><span class="sxs-lookup"><span data-stu-id="738be-143">Press <kbd>F5</kbd> to run the app in the debugger.</span></span>
 
    > [!NOTE]
@@ -102,7 +102,7 @@ ms.locfileid: "94550523"
 1. <span data-ttu-id="738be-148">Visual Studio 'da, `currentCount` **Yereller** penceresindeki alanın değerini inceleyin.</span><span class="sxs-lookup"><span data-stu-id="738be-148">In Visual Studio, inspect the value of the `currentCount` field in the **Locals** window.</span></span>
 1. <span data-ttu-id="738be-149">Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın.</span><span class="sxs-lookup"><span data-stu-id="738be-149">Press <kbd>F5</kbd> to continue execution.</span></span>
 
-<span data-ttu-id="738be-150">Bir uygulamada hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunda hata ayıklama de yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-150">While debugging a :::no-loc(Blazor WebAssembly)::: app, you can also debug server code:</span></span>
+<span data-ttu-id="738be-150">Bir uygulamada hata ayıklarken Blazor WebAssembly , sunucu kodunda hata ayıklama de yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-150">While debugging a Blazor WebAssembly app, you can also debug server code:</span></span>
 
 1. <span data-ttu-id="738be-151">İçindeki sayfada bir kesme noktası ayarlayın `Pages/FetchData.razor` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .</span><span class="sxs-lookup"><span data-stu-id="738be-151">Set a breakpoint in the `Pages/FetchData.razor` page in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>.</span></span>
 1. <span data-ttu-id="738be-152">Eylem yönteminde içinde bir kesme noktası ayarlayın `WeatherForecastController` `Get` .</span><span class="sxs-lookup"><span data-stu-id="738be-152">Set a breakpoint in the `WeatherForecastController` in the `Get` action method.</span></span>
@@ -157,17 +157,17 @@ ms.locfileid: "94550523"
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
 ```
 
-<span data-ttu-id="738be-170">Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bilgi için :::no-loc(Blazor WebAssembly)::: bkz <xref:blazor/host-and-deploy/index#app-base-path> ..</span><span class="sxs-lookup"><span data-stu-id="738be-170">For information on using a custom app base path for :::no-loc(Blazor WebAssembly)::: apps, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
+<span data-ttu-id="738be-170">Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bilgi için Blazor WebAssembly bkz <xref:blazor/host-and-deploy/index#app-base-path> ..</span><span class="sxs-lookup"><span data-stu-id="738be-170">For information on using a custom app base path for Blazor WebAssembly apps, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="738be-171">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="738be-171">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<h2 id="vscode"><span data-ttu-id="738be-172">Tek başına hata ayıkla :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="738be-172">Debug standalone :::no-loc(Blazor WebAssembly):::</span></span></h2>
+<h2 id="vscode"><span data-ttu-id="738be-172">Tek başına hata ayıkla Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="738be-172">Debug standalone Blazor WebAssembly</span></span></h2>
 
-1. <span data-ttu-id="738be-173">Tek başına :::no-loc(Blazor WebAssembly)::: uygulamayı vs Code açın.</span><span class="sxs-lookup"><span data-stu-id="738be-173">Open the standalone :::no-loc(Blazor WebAssembly)::: app in VS Code.</span></span>
+1. <span data-ttu-id="738be-173">Tek başına Blazor WebAssembly uygulamayı vs Code açın.</span><span class="sxs-lookup"><span data-stu-id="738be-173">Open the standalone Blazor WebAssembly app in VS Code.</span></span>
 
    <span data-ttu-id="738be-174">Hata ayıklamayı etkinleştirmek için ek kurulumun gerekli olduğunu belirten bir bildirim alabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-174">You may receive a notification that additional setup is required to enable debugging:</span></span>
 
-   > <span data-ttu-id="738be-175">Uygulamalarda hata ayıklamak için ek kurulum gereklidir :::no-loc(Blazor WebAssembly)::: .</span><span class="sxs-lookup"><span data-stu-id="738be-175">Additional setup is required to debug :::no-loc(Blazor WebAssembly)::: applications.</span></span>
+   > <span data-ttu-id="738be-175">Uygulamalarda hata ayıklamak için ek kurulum gereklidir Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="738be-175">Additional setup is required to debug Blazor WebAssembly applications.</span></span>
 
    <span data-ttu-id="738be-176">Bildirimi alırsanız:</span><span class="sxs-lookup"><span data-stu-id="738be-176">If you receive the notification:</span></span>
 
@@ -180,7 +180,7 @@ ms.locfileid: "94550523"
    > [!NOTE]
    > <span data-ttu-id="738be-186">**Hata ayıklama olmadan Başlat** ( <kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez.</span><span class="sxs-lookup"><span data-stu-id="738be-186">**Start Without Debugging** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) isn't supported.</span></span> <span data-ttu-id="738be-187">Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.</span><span class="sxs-lookup"><span data-stu-id="738be-187">When the app is run in Debug configuration, debugging overhead always results in a small performance reduction.</span></span>
 
-1. <span data-ttu-id="738be-188">İstendiğinde, hata ayıklamayı başlatmak için **:::no-loc(Blazor WebAssembly)::: Hata Ayıkla** seçeneğini belirleyin.</span><span class="sxs-lookup"><span data-stu-id="738be-188">When prompted, select the **:::no-loc(Blazor WebAssembly)::: Debug** option to start debugging.</span></span>
+1. <span data-ttu-id="738be-188">İstendiğinde, hata ayıklamayı başlatmak için **Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.</span><span class="sxs-lookup"><span data-stu-id="738be-188">When prompted, select the **Blazor WebAssembly Debug** option to start debugging.</span></span>
 
 1. <span data-ttu-id="738be-189">Tek başına uygulama başlatılır ve bir hata ayıklama tarayıcısı açılır.</span><span class="sxs-lookup"><span data-stu-id="738be-189">The standalone app is launched, and a debugging browser is opened.</span></span>
 
@@ -191,9 +191,9 @@ ms.locfileid: "94550523"
 > [!NOTE]
 > <span data-ttu-id="738be-192">Hata ayıklama proxy 'si çalışmadan önce uygulama başlatma sırasında kesme noktaları isabet **etmez** .</span><span class="sxs-lookup"><span data-stu-id="738be-192">Breakpoints are **not** hit during app startup before the debug proxy is running.</span></span> <span data-ttu-id="738be-193">Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.</span><span class="sxs-lookup"><span data-stu-id="738be-193">This includes breakpoints in `Program.Main` (`Program.cs`) and breakpoints in the [`OnInitialized{Async}` methods](xref:blazor/components/lifecycle#component-initialization-methods) of components that are loaded by the first page requested from the app.</span></span>
 
-## <a name="debug-hosted-no-locblazor-webassembly"></a><span data-ttu-id="738be-194">Barındırılan hata ayıklama :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="738be-194">Debug hosted :::no-loc(Blazor WebAssembly):::</span></span>
+## <a name="debug-hosted-no-locblazor-webassembly"></a><span data-ttu-id="738be-194">Barındırılan hata ayıklama Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="738be-194">Debug hosted Blazor WebAssembly</span></span>
 
-1. <span data-ttu-id="738be-195">Barındırılan :::no-loc(Blazor WebAssembly)::: uygulamanın çözüm klasörünü vs Code açın.</span><span class="sxs-lookup"><span data-stu-id="738be-195">Open the hosted :::no-loc(Blazor WebAssembly)::: app's solution folder in VS Code.</span></span>
+1. <span data-ttu-id="738be-195">Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.</span><span class="sxs-lookup"><span data-stu-id="738be-195">Open the hosted Blazor WebAssembly app's solution folder in VS Code.</span></span>
 
 1. <span data-ttu-id="738be-196">Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="738be-196">If there's no launch configuration set for the project, the following notification appears.</span></span> <span data-ttu-id="738be-197">**Evet** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="738be-197">Select **Yes**.</span></span>
 
@@ -205,13 +205,13 @@ ms.locfileid: "94550523"
 
 ## <a name="attach-to-an-existing-debugging-session"></a><span data-ttu-id="738be-202">Varolan bir hata ayıklama oturumuna Ekle</span><span class="sxs-lookup"><span data-stu-id="738be-202">Attach to an existing debugging session</span></span>
 
-<span data-ttu-id="738be-203">Çalışan bir uygulamaya eklemek için :::no-loc(Blazor)::: `launch.json` aşağıdaki yapılandırmaya sahip bir dosya oluşturun:</span><span class="sxs-lookup"><span data-stu-id="738be-203">To attach to a running :::no-loc(Blazor)::: app, create a `launch.json` file with the following configuration:</span></span>
+<span data-ttu-id="738be-203">Çalışan bir uygulamaya eklemek için Blazor `launch.json` aşağıdaki yapılandırmaya sahip bir dosya oluşturun:</span><span class="sxs-lookup"><span data-stu-id="738be-203">To attach to a running Blazor app, create a `launch.json` file with the following configuration:</span></span>
 
 ```json
 {
   "type": "blazorwasm",
   "request": "attach",
-  "name": "Attach to Existing :::no-loc(Blazor WebAssembly)::: Application"
+  "name": "Attach to Existing Blazor WebAssembly Application"
 }
 ```
 
@@ -224,11 +224,11 @@ ms.locfileid: "94550523"
 
 | <span data-ttu-id="738be-208">Seçenek</span><span class="sxs-lookup"><span data-stu-id="738be-208">Option</span></span>    | <span data-ttu-id="738be-209">Açıklama</span><span class="sxs-lookup"><span data-stu-id="738be-209">Description</span></span> |
 | --------- | ----------- |
-| `request` | <span data-ttu-id="738be-210">`launch`Bir uygulamaya hata ayıklama oturumu başlatmak ve eklemek :::no-loc(Blazor WebAssembly)::: veya `attach` zaten çalışan bir uygulamaya hata ayıklama oturumu eklemek için kullanın.</span><span class="sxs-lookup"><span data-stu-id="738be-210">Use `launch` to launch and attach a debugging session to a :::no-loc(Blazor WebAssembly)::: app or `attach` to attach a debugging session to an already-running app.</span></span> |
+| `request` | <span data-ttu-id="738be-210">`launch`Bir uygulamaya hata ayıklama oturumu başlatmak ve eklemek Blazor WebAssembly veya `attach` zaten çalışan bir uygulamaya hata ayıklama oturumu eklemek için kullanın.</span><span class="sxs-lookup"><span data-stu-id="738be-210">Use `launch` to launch and attach a debugging session to a Blazor WebAssembly app or `attach` to attach a debugging session to an already-running app.</span></span> |
 | `url`     | <span data-ttu-id="738be-211">Hata ayıklanırken tarayıcıda açılacak URL.</span><span class="sxs-lookup"><span data-stu-id="738be-211">The URL to open in the browser when debugging.</span></span> <span data-ttu-id="738be-212">Varsayılan olarak olur `https://localhost:5001` .</span><span class="sxs-lookup"><span data-stu-id="738be-212">Defaults to `https://localhost:5001`.</span></span> |
 | `browser` | <span data-ttu-id="738be-213">Hata ayıklama oturumu için başlatılacak tarayıcı.</span><span class="sxs-lookup"><span data-stu-id="738be-213">The browser to launch for the debugging session.</span></span> <span data-ttu-id="738be-214">Ayarlanan `edge` veya `chrome`.</span><span class="sxs-lookup"><span data-stu-id="738be-214">Set to `edge` or `chrome`.</span></span> <span data-ttu-id="738be-215">Varsayılan olarak olur `chrome` .</span><span class="sxs-lookup"><span data-stu-id="738be-215">Defaults to `chrome`.</span></span> |
 | `trace`   | <span data-ttu-id="738be-216">JS hata ayıklayıcısından Günlükler oluşturmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="738be-216">Used to generate logs from the JS debugger.</span></span> <span data-ttu-id="738be-217">`true`Günlük oluşturmak için olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="738be-217">Set to `true` to generate logs.</span></span> |
-| `hosted`  | <span data-ttu-id="738be-218">`true`Barındırılan bir uygulama başlatılırken ve hata ayıklandığında olarak ayarlanmalıdır :::no-loc(Blazor WebAssembly)::: .</span><span class="sxs-lookup"><span data-stu-id="738be-218">Must be set to `true` if launching and debugging a hosted :::no-loc(Blazor WebAssembly)::: app.</span></span> |
+| `hosted`  | <span data-ttu-id="738be-218">`true`Barındırılan bir uygulama başlatılırken ve hata ayıklandığında olarak ayarlanmalıdır Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="738be-218">Must be set to `true` if launching and debugging a hosted Blazor WebAssembly app.</span></span> |
 | `webRoot` | <span data-ttu-id="738be-219">Web sunucusunun mutlak yolunu belirtir.</span><span class="sxs-lookup"><span data-stu-id="738be-219">Specifies the absolute path of the web server.</span></span> <span data-ttu-id="738be-220">Bir uygulama bir alt rotadan sunulduysa ayarlanmalıdır.</span><span class="sxs-lookup"><span data-stu-id="738be-220">Should be set if an app is served from a sub-route.</span></span> |
 | `timeout` | <span data-ttu-id="738be-221">Hata ayıklama oturumunun eklenmesi için beklenecek milisaniye sayısı.</span><span class="sxs-lookup"><span data-stu-id="738be-221">The number of milliseconds to wait for the debugging session to attach.</span></span> <span data-ttu-id="738be-222">Varsayılan değer 30.000 milisaniyedir (30 saniye).</span><span class="sxs-lookup"><span data-stu-id="738be-222">Defaults to 30,000 milliseconds (30 seconds).</span></span> |
 | `program` | <span data-ttu-id="738be-223">Barındırılan uygulama sunucusunu çalıştırmak için çalıştırılabilir dosyaya bir başvuru.</span><span class="sxs-lookup"><span data-stu-id="738be-223">A reference to the executable to run the server of the hosted app.</span></span> <span data-ttu-id="738be-224">`hosted`İse ayarlanmalıdır `true` .</span><span class="sxs-lookup"><span data-stu-id="738be-224">Must be set if `hosted` is `true`.</span></span> |
@@ -237,7 +237,7 @@ ms.locfileid: "94550523"
 
 ## <a name="example-launch-configurations"></a><span data-ttu-id="738be-229">Örnek başlatma yapılandırması</span><span class="sxs-lookup"><span data-stu-id="738be-229">Example launch configurations</span></span>
 
-### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a><span data-ttu-id="738be-230">Tek başına bir uygulamayı başlatma ve hata ayıklama :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="738be-230">Launch and debug a standalone :::no-loc(Blazor WebAssembly)::: app</span></span>
+### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a><span data-ttu-id="738be-230">Tek başına bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="738be-230">Launch and debug a standalone Blazor WebAssembly app</span></span>
 
 ```json
 {
@@ -258,13 +258,13 @@ ms.locfileid: "94550523"
 }
 ```
 
-### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a><span data-ttu-id="738be-232">Microsoft Edge ile barındırılan bir uygulamayı başlatma ve hata ayıklama :::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="738be-232">Launch and debug a hosted :::no-loc(Blazor WebAssembly)::: app with Microsoft Edge</span></span>
+### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a><span data-ttu-id="738be-232">Microsoft Edge ile barındırılan bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="738be-232">Launch and debug a hosted Blazor WebAssembly app with Microsoft Edge</span></span>
 
 <span data-ttu-id="738be-233">Tarayıcı yapılandırması varsayılan olarak Google Chrome olarak belirlenmiştir.</span><span class="sxs-lookup"><span data-stu-id="738be-233">Browser configuration defaults to Google Chrome.</span></span> <span data-ttu-id="738be-234">Hata ayıklama için Microsoft Edge kullanılırken, `browser` olarak ayarlayın `edge` .</span><span class="sxs-lookup"><span data-stu-id="738be-234">When using Microsoft Edge for debugging, set `browser` to `edge`.</span></span> <span data-ttu-id="738be-235">Google Chrome 'ı kullanmak için `browser` seçeneği ayarlamayın veya seçeneğin değerini olarak ayarlayın `chrome` .</span><span class="sxs-lookup"><span data-stu-id="738be-235">To use Google Chrome, either don't set the `browser` option or set the option's value to `chrome`.</span></span>
 
 ```json
 {
-  "name": "Launch and Debug Hosted :::no-loc(Blazor WebAssembly)::: App",
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
   "hosted": true,
@@ -278,9 +278,9 @@ ms.locfileid: "94550523"
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="738be-238">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="738be-238">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="738be-239">Mac için Visual Studio bir uygulamada hata ayıklamak için :::no-loc(Blazor WebAssembly)::: :</span><span class="sxs-lookup"><span data-stu-id="738be-239">To debug a :::no-loc(Blazor WebAssembly)::: app in Visual Studio for Mac:</span></span>
+<span data-ttu-id="738be-239">Mac için Visual Studio bir uygulamada hata ayıklamak için Blazor WebAssembly :</span><span class="sxs-lookup"><span data-stu-id="738be-239">To debug a Blazor WebAssembly app in Visual Studio for Mac:</span></span>
 
-1. <span data-ttu-id="738be-240">Yeni ASP.NET Core barındırılan bir :::no-loc(Blazor WebAssembly)::: uygulama oluşturun.</span><span class="sxs-lookup"><span data-stu-id="738be-240">Create a new ASP.NET Core hosted :::no-loc(Blazor WebAssembly)::: app.</span></span>
+1. <span data-ttu-id="738be-240">Yeni ASP.NET Core barındırılan bir Blazor WebAssembly uygulama oluşturun.</span><span class="sxs-lookup"><span data-stu-id="738be-240">Create a new ASP.NET Core hosted Blazor WebAssembly app.</span></span>
 1. <span data-ttu-id="738be-241"><kbd>&#8984;</kbd> + Uygulamayı hata ayıklayıcıda çalıştırmak için&#8984;<kbd>&#8617;</kbd> tuşuna basın.</span><span class="sxs-lookup"><span data-stu-id="738be-241">Press <kbd>&#8984;</kbd>+<kbd>&#8617;</kbd> to run the app in the debugger.</span></span>
 
    > [!NOTE]
@@ -294,7 +294,7 @@ ms.locfileid: "94550523"
 1. <span data-ttu-id="738be-247">Visual Studio 'da, `currentCount` **Yereller** penceresindeki alanın değerini inceleyin.</span><span class="sxs-lookup"><span data-stu-id="738be-247">In Visual Studio, inspect the value of the `currentCount` field in the **Locals** window.</span></span>
 1. <span data-ttu-id="738be-248"><kbd>&#8984;</kbd> + Yürütmeye devam etmek için&#8984;<kbd>&#8617;</kbd> tuşuna basın.</span><span class="sxs-lookup"><span data-stu-id="738be-248">Press <kbd>&#8984;</kbd>+<kbd>&#8617;</kbd> to continue execution.</span></span>
 
-<span data-ttu-id="738be-249">Bir uygulamada hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunda hata ayıklama de yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-249">While debugging a :::no-loc(Blazor WebAssembly)::: app, you can also debug server code:</span></span>
+<span data-ttu-id="738be-249">Bir uygulamada hata ayıklarken Blazor WebAssembly , sunucu kodunda hata ayıklama de yapabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-249">While debugging a Blazor WebAssembly app, you can also debug server code:</span></span>
 
 1. <span data-ttu-id="738be-250">İçindeki sayfada bir kesme noktası ayarlayın `Pages/FetchData.razor` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .</span><span class="sxs-lookup"><span data-stu-id="738be-250">Set a breakpoint in the `Pages/FetchData.razor` page in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>.</span></span>
 1. <span data-ttu-id="738be-251">Eylem yönteminde içinde bir kesme noktası ayarlayın `WeatherForecastController` `Get` .</span><span class="sxs-lookup"><span data-stu-id="738be-251">Set a breakpoint in the `WeatherForecastController` in the `Get` action method.</span></span>
@@ -336,11 +336,11 @@ ms.locfileid: "94550523"
 
 1. <span data-ttu-id="738be-269">Bileşen kodunda ( `.razor` Dosyalar) ve C# kod dosyalarında ( `.cs` ), kod yürütüldüğünde ayarladığınız kesme noktaları isabet edilir.</span><span class="sxs-lookup"><span data-stu-id="738be-269">In component code (`.razor` files) and C# code files (`.cs`), breakpoints that you set are hit when code executes.</span></span> <span data-ttu-id="738be-270">Kesme noktası isabet ettikten sonra, kod üzerinden tek adımlı (<kbd>F10</kbd><kbd>) ve</kbd>kod yürütme işlemini normal şekilde yapın.</span><span class="sxs-lookup"><span data-stu-id="738be-270">After a breakpoint is hit, single-step (<kbd>F10</kbd>) through the code or resume (<kbd>F8</kbd>) code execution normally.</span></span>
 
-<span data-ttu-id="738be-271">:::no-loc(Blazor):::[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler.</span><span class="sxs-lookup"><span data-stu-id="738be-271">:::no-loc(Blazor)::: provides a debugging proxy that implements the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) and augments the protocol with .NET-specific information.</span></span> <span data-ttu-id="738be-272">Klavye kısayoluna hata ayıklama basıldığında, :::no-loc(Blazor)::: Ara sunucu üzerindeki Chrome DevTools ' ı işaret eder.</span><span class="sxs-lookup"><span data-stu-id="738be-272">When debugging keyboard shortcut is pressed, :::no-loc(Blazor)::: points the Chrome DevTools at the proxy.</span></span> <span data-ttu-id="738be-273">Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).</span><span class="sxs-lookup"><span data-stu-id="738be-273">The proxy connects to the browser window you're seeking to debug (hence the need to enable remote debugging).</span></span>
+<span data-ttu-id="738be-271">Blazor[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler.</span><span class="sxs-lookup"><span data-stu-id="738be-271">Blazor provides a debugging proxy that implements the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) and augments the protocol with .NET-specific information.</span></span> <span data-ttu-id="738be-272">Klavye kısayoluna hata ayıklama basıldığında, Blazor Ara sunucu üzerindeki Chrome DevTools ' ı işaret eder.</span><span class="sxs-lookup"><span data-stu-id="738be-272">When debugging keyboard shortcut is pressed, Blazor points the Chrome DevTools at the proxy.</span></span> <span data-ttu-id="738be-273">Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).</span><span class="sxs-lookup"><span data-stu-id="738be-273">The proxy connects to the browser window you're seeking to debug (hence the need to enable remote debugging).</span></span>
 
 ## <a name="browser-source-maps"></a><span data-ttu-id="738be-274">Tarayıcı kaynağı eşlemeleri</span><span class="sxs-lookup"><span data-stu-id="738be-274">Browser source maps</span></span>
 
-<span data-ttu-id="738be-275">Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir.</span><span class="sxs-lookup"><span data-stu-id="738be-275">Browser source maps allow the browser to map compiled files back to their original source files and are commonly used for client-side debugging.</span></span> <span data-ttu-id="738be-276">Ancak, :::no-loc(Blazor)::: Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez.</span><span class="sxs-lookup"><span data-stu-id="738be-276">However, :::no-loc(Blazor)::: doesn't currently map C# directly to JavaScript/WASM.</span></span> <span data-ttu-id="738be-277">Bunun yerine, :::no-loc(Blazor)::: tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.</span><span class="sxs-lookup"><span data-stu-id="738be-277">Instead, :::no-loc(Blazor)::: does IL interpretation within the browser, so source maps aren't relevant.</span></span>
+<span data-ttu-id="738be-275">Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir.</span><span class="sxs-lookup"><span data-stu-id="738be-275">Browser source maps allow the browser to map compiled files back to their original source files and are commonly used for client-side debugging.</span></span> <span data-ttu-id="738be-276">Ancak, Blazor Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez.</span><span class="sxs-lookup"><span data-stu-id="738be-276">However, Blazor doesn't currently map C# directly to JavaScript/WASM.</span></span> <span data-ttu-id="738be-277">Bunun yerine, Blazor tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.</span><span class="sxs-lookup"><span data-stu-id="738be-277">Instead, Blazor does IL interpretation within the browser, so source maps aren't relevant.</span></span>
 
 ## <a name="firewall-configuration"></a><span data-ttu-id="738be-278">Güvenlik duvarı yapılandırması</span><span class="sxs-lookup"><span data-stu-id="738be-278">Firewall configuration</span></span>
 
@@ -373,7 +373,7 @@ ms.locfileid: "94550523"
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a><span data-ttu-id="738be-305">`OnInitialized{Async}`İsabet bulunmayan kesme noktaları</span><span class="sxs-lookup"><span data-stu-id="738be-305">Breakpoints in `OnInitialized{Async}` not hit</span></span>
 
-<span data-ttu-id="738be-306">:::no-loc(Blazor):::Çerçevenin hata ayıklama proxy 'sinin başlatılması kısa bir süre sürer, bu nedenle [ `OnInitialized{Async}` yaşam döngüsü yöntemindeki](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları isabet edemeyebilir.</span><span class="sxs-lookup"><span data-stu-id="738be-306">The :::no-loc(Blazor)::: framework's debugging proxy takes a short time to launch, so breakpoints in the [`OnInitialized{Async}` lifecycle method](xref:blazor/components/lifecycle#component-initialization-methods) might not be hit.</span></span> <span data-ttu-id="738be-307">Hata ayıklama proxy 'sine, kesme noktasından önce başlamak için bir süre önce, Yöntem gövdesinin başlangıcında bir gecikme eklemeniz önerilir.</span><span class="sxs-lookup"><span data-stu-id="738be-307">We recommend adding a delay at the start of the method body to give the debug proxy some time to launch before the breakpoint is hit.</span></span> <span data-ttu-id="738be-308">Uygulamanın yayın derlemesi için gecikmeye izin olmadığından emin olmak için bir [ `if` derleyici yönergesine](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) göre gecikmeyi dahil edebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="738be-308">You can include the delay based on an [`if` compiler directive](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) to ensure that the delay isn't present for a release build of the app.</span></span>
+<span data-ttu-id="738be-306">BlazorÇerçevenin hata ayıklama proxy 'sinin başlatılması kısa bir süre sürer, bu nedenle [ `OnInitialized{Async}` yaşam döngüsü yöntemindeki](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları isabet edemeyebilir.</span><span class="sxs-lookup"><span data-stu-id="738be-306">The Blazor framework's debugging proxy takes a short time to launch, so breakpoints in the [`OnInitialized{Async}` lifecycle method](xref:blazor/components/lifecycle#component-initialization-methods) might not be hit.</span></span> <span data-ttu-id="738be-307">Hata ayıklama proxy 'sine, kesme noktasından önce başlamak için bir süre önce, Yöntem gövdesinin başlangıcında bir gecikme eklemeniz önerilir.</span><span class="sxs-lookup"><span data-stu-id="738be-307">We recommend adding a delay at the start of the method body to give the debug proxy some time to launch before the breakpoint is hit.</span></span> <span data-ttu-id="738be-308">Uygulamanın yayın derlemesi için gecikmeye izin olmadığından emin olmak için bir [ `if` derleyici yönergesine](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) göre gecikmeyi dahil edebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="738be-308">You can include the delay based on an [`if` compiler directive](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) to ensure that the delay isn't present for a release build of the app.</span></span>
 
 <span data-ttu-id="738be-309"><xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:</span><span class="sxs-lookup"><span data-stu-id="738be-309"><xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:</span></span>
 
@@ -406,7 +406,7 @@ protected override async Task OnInitializedAsync()
 <span data-ttu-id="738be-312">Visual Studio, zaman aşımına ulaşılmış olduğunu belirten hata ayıklama bağdaştırıcısının başarısız bir özel durum oluşturursa, zaman aşımını bir kayıt defteri ayarıyla ayarlayabilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="738be-312">If Visual Studio throws an exception that the debug adapter failed to launch mentioning that the timeout was reached, you can adjust the timeout with a Registry setting:</span></span>
 
 ```console
-VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging ":::no-loc(Blazor):::TimeoutInMilliseconds" dword {TIMEOUT}
+VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging "BlazorTimeoutInMilliseconds" dword {TIMEOUT}
 ```
 
 <span data-ttu-id="738be-313">`{TIMEOUT}`Önceki komutta yer tutucu milisaniyedir.</span><span class="sxs-lookup"><span data-stu-id="738be-313">The `{TIMEOUT}` placeholder in the preceding command is in milliseconds.</span></span> <span data-ttu-id="738be-314">Örneğin, bir dakika olarak atanır `60000` .</span><span class="sxs-lookup"><span data-stu-id="738be-314">For example, one minute is assigned as `60000`.</span></span>
