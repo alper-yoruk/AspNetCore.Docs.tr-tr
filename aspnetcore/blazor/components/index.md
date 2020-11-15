@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507947"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637710"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -244,11 +244,25 @@ Bir bileşen bir bileşen adıyla eşleşmeyen büyük harfle yazılmış bir HT
 
 Bileşenler, yönergede belirtilen yol şablonundan rota parametreleri alabilir [`@page`][9] . Yönlendirici, karşılık gelen bileşen parametrelerini doldurmak için yol parametrelerini kullanır.
 
+::: moniker range=">= aspnetcore-5.0"
+
+İsteğe bağlı parametreler desteklenir. Aşağıdaki örnekte, `text` isteğe bağlı parametresi, yol segmentinin değerini bileşenin `Text` özelliğine atar. Segment yoksa, değeri `Text` olarak ayarlanır `fantastic` .
+
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
+[!code-razor[](index/samples_snapshot/RouteParameter-5x.razor?highlight=1,6-7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](index/samples_snapshot/RouteParameter-3x.razor?highlight=2,7-8)]
 
 İsteğe bağlı parametreler desteklenmez, bu nedenle [`@page`][9] Önceki örnekte iki yönergeler uygulanır. İlki, bir parametre olmadan bileşene gezinmesine izin verir. İkinci [`@page`][9] yönerge, `{text}` route parametresini alır ve değeri `Text` özelliğine atar.
+
+::: moniker-end
 
 `{*pageRoute}`Birden çok klasör sınırlarındaki yolları yakalayan catch-all yol parametreleri () hakkında daha fazla bilgi için bkz <xref:blazor/fundamentals/routing#catch-all-route-parameters> ..
 
@@ -265,6 +279,14 @@ Bileşenler, bileşen sınıfında özniteliği ile ortak özellikler kullanıla
 `Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+Kural gereği, C# kodundan oluşan bir öznitelik değeri, [ Razor ayrılmış `@` simgesi](xref:mvc/views/razor#razor-syntax)kullanılarak bir parametreye atanır:
+
+* Üst alan veya özellik: `Title="@{FIELD OR PROPERTY}` yer tutucunun `{FIELD OR PROPERTY}` bir C# alanı veya üst bileşenin özelliği olduğu.
+* Bir yöntemin sonucu: `Title="@{METHOD}"` yer tutucunun, `{METHOD}` üst bileşenin C# yöntemi olduğu yerdir.
+* [Örtük veya açık ifade](xref:mvc/views/razor#implicit-razor-expressions): `Title="@({EXPRESSION})"` , yer tutucu `{EXPRESSION}` bir C# ifadesi.
+  
+Daha fazla bilgi için bkz. <xref:mvc/views/razor>.
 
 > [!WARNING]
 > Kendi *bileşen parametrelerine* yazan bileşenler oluşturmayın, bunun yerine özel bir alan kullanın. Daha fazla bilgi için, [üzerine yazılan parametreler](#overwritten-parameters) bölümüne bakın.
@@ -294,7 +316,7 @@ Alt Blazor bileşenin içeriğinde artırma döngüsü değişkeni kullanılıyo
 > @for (int c = 0; c < 10; c++)
 > {
 >     var current = c;
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @current
 >     </ChildComponent>
 > }
@@ -305,7 +327,7 @@ Alt Blazor bileşenin içeriğinde artırma döngüsü değişkeni kullanılıyo
 > ```razor
 > @foreach(var c in Enumerable.Range(0,10))
 > {
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @c
 >     </ChildComponent>
 > }
@@ -650,7 +672,7 @@ Aşağıdaki hatalı bileşeni göz önünde bulundurun `Expander` :
 * Bileşen doğrudan `Expanded` parametresine yazar, bu, üzerine yazılan parametrelerle ilgili sorunu gösterir ve kaçınılması gerekir.
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
@@ -702,7 +724,7 @@ Aşağıdaki düzeltilen `Expander` bileşen:
 * Kendi iç geçiş durumunu korumak için özel alanını kullanır, bu da doğrudan bir parametreye yazmayı nasıl önleyeceğinizi gösterir.
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 

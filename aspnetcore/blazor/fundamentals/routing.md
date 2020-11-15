@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 585b697aedf31bce2305df0ec5f84824c4019156
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430997"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637697"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -112,7 +112,31 @@ Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen ve 
 
 ## <a name="route-parameters"></a>Rota parametreleri
 
-Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/küçük harfe duyarsız) doldurmak için yol parametrelerini kullanır:
+Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/küçük harfe duyarsız) doldurmak için yol parametrelerini kullanır.
+
+::: moniker range=">= aspnetcore-5.0"
+
+İsteğe bağlı parametreler desteklenir. Aşağıdaki örnekte, `text` isteğe bağlı parametresi, yol segmentinin değerini bileşenin `Text` özelliğine atar. Segment yoksa, değeri `Text` olarak ayarlanır `fantastic` :
+
+```razor
+@page "/RouteParameter/{text?}"
+
+<h1>Blazor is @Text!</h1>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```razor
 @page "/RouteParameter"
@@ -133,6 +157,8 @@ Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/kü
 
 İsteğe bağlı parametreler desteklenmez. `@page`Önceki örnekte iki yönergeler uygulanır. İlki, bir parametre olmadan bileşene gezinmesine izin verir. İkinci `@page` yönerge, `{text}` yol parametresini alır ve değeri `Text` özelliğine atar.
 
+::: moniker-end
+
 ## <a name="route-constraints"></a>Yol kısıtlamaları
 
 Yol kısıtlaması bir yönlendirme segmentinde bir bileşene tür eşleştirmeyi zorlar.
@@ -148,14 +174,14 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 
 | Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Evet                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Evet                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Evet                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Evet                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Evet                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Evet                              |
 
 > [!WARNING]
 > URL 'YI doğrulayan ve bir CLR türüne (veya gibi) dönüştürülen yol kısıtlamaları `int` <xref:System.DateTime> , her zaman sabit kültürü kullanır. Bu kısıtlamalar, URL 'nin yerelleştirilemeyen olduğunu varsayar.
@@ -288,7 +314,7 @@ Aşağıdaki HTML biçimlendirmesi işlenir:
 
 <xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI ve gezinme ile çalışmak için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
 
-| Üye | Description |
+| Üye | Açıklama |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Geçerli mutlak URI 'yi alır. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Mutlak bir URI oluşturmak için göreli URI yollarına eklenebilir olan temel URI 'yi (sondaki eğik çizgiyle birlikte) alır. Genellikle, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> `href` `<base>` `wwwroot/index.html` ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` () içinde belge öğesindeki özniteliğine karşılık gelir Blazor Server . |

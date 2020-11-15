@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508033"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637723"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -81,7 +81,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 Varsayılan uygulama <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> , her bir özelliğin değerini [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) içinde karşılık gelen bir değere sahip veya özniteliğiyle ayarlar <xref:Microsoft.AspNetCore.Components.ParameterView> . İçinde karşılık gelen bir değere sahip olmayan parametreler <xref:Microsoft.AspNetCore.Components.ParameterView> değişmeden bırakılır.
 
-[`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A)Çağrılmadıysa, özel kod gelen parametreler değerini gerekli herhangi bir şekilde yorumlayabilir. Örneğin, sınıftaki özelliklere gelen parametreleri atama gereksinimi yoktur.
+[`base.SetParametersAsync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A)Çağrılmadıysa, özel kod gelen parametreler değerini gerekli herhangi bir şekilde yorumlayabilir. Örneğin, sınıftaki özelliklere gelen parametreleri atama gereksinimi yoktur.
 
 Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasını geri alır. Daha fazla bilgi için bkz. [bileşen aktiften çıkarma `IDisposable` ](#component-disposal-with-idisposable) bölümü.
 
@@ -109,7 +109,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor Server[içerik](xref:blazor/fundamentals/additional-scenarios#render-mode) araması yapan uygulamalar <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_iki kez_** yapılır:
+Blazor Server[içerik](xref:blazor/fundamentals/additional-scenarios#render-mode) araması yapan uygulamalar <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *iki kez* yapılır:
 
 * Bir kez, bileşen sayfanın bir parçası olarak başlangıçta statik olarak işlendiğinde.
 * Tarayıcı sunucuya geri bir bağlantı kurduğunda ikinci bir zaman.
@@ -218,7 +218,7 @@ Daha fazla bilgi için bkz. <xref:blazor/webassembly-performance-best-practices#
 
 Yaşam döngüsü olaylarında gerçekleştirilen zaman uyumsuz eylemler, bileşen işlenmeden önce tamamlanmamış olabilir. `null`Yaşam döngüsü yöntemi yürütülürken nesneler, verilerle tamamen doldurulmuş olabilir. Nesnelerin başlatıldığını onaylamak için işleme mantığı sağlayın. Nesneler olduğunda yer tutucu Kullanıcı arabirimi öğelerini (örneğin, bir yükleme iletisi) işleme `null` .
 
-`FetchData` Blazor Şablonların bileşeninde, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> Asychronously () tahmin verileri almak için geçersiz kılınır `forecasts` . Ne zaman olduğunda `forecasts` `null` , kullanıcıya bir yükleme iletisi görüntülenir. `Task` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> İşlem tamamlandıktan sonra, bileşen güncelleştirilmiş duruma geri döner.
+`FetchData` Blazor Şablonların bileşeninde, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> zaman uyumsuz olarak tahmin verileri () almak için geçersiz kılınır `forecasts` . Ne zaman olduğunda `forecasts` `null` , kullanıcıya bir yükleme iletisi görüntülenir. `Task` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> İşlem tamamlandıktan sonra, bileşen güncelleştirilmiş duruma geri döner.
 
 `Pages/FetchData.razor`Blazor Serverşablonda:
 
@@ -392,3 +392,7 @@ Aşağıdaki örnekte:
     }
 }
 ```
+
+## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server yeniden bağlanma olayları
+
+Bu makalede ele alınan bileşen yaşam döngüsü olayları, yeniden [ Blazor Server bağlanma olay işleyicilerinden](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui)ayrı olarak çalışır. Bir Blazor Server uygulama SignalR istemciyle bağlantısını kaybettiğinde yalnızca Kullanıcı Arabirimi güncelleştirmeleri kesintiye uğrar. Bağlantı yeniden oluşturulduğunda Kullanıcı Arabirimi güncelleştirmeleri sürdürülür. Devre işleyici olayları ve yapılandırması hakkında daha fazla bilgi için bkz <xref:blazor/fundamentals/additional-scenarios> ..

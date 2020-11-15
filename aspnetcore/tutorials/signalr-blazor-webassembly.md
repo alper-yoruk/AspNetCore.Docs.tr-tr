@@ -1,5 +1,5 @@
 ---
-title: İle ASP.NET Core kullanma SignalRBlazor WebAssembly
+title: SignalRBarındırılan bir uygulamayla ASP.NET Core kullanma Blazor WebAssembly
 author: guardrex
 description: İle ASP.NET Core kullanan bir sohbet uygulaması oluşturun SignalR Blazor WebAssembly .
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: afbfc44db8cb833df7a79061f9bd73052859fec2
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 2975ee699a2535cdf63ef2f5af5790f178a09f93
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508181"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637736"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>İle ASP.NET Core kullanma SignalRBlazor WebAssembly
+# <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>SignalRBarındırılan bir uygulamayla ASP.NET Core kullanma Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
@@ -43,7 +43,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 ::: moniker range=">= aspnetcore-5.0"
 
