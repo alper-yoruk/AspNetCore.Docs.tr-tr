@@ -5,7 +5,7 @@ description: Bir ASP.NET Core Web API 'sini taramak ve test etmek için HttpRepl
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/11/2020
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 8dd763d270a00c9a71913d68d6a039b2d98c3864
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
+ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570217"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94634619"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>HttpRepl ile Web API 'Lerini test etme
 
@@ -48,7 +48,7 @@ Aşağıdaki [http fiilleri](https://github.com/microsoft/api-guidelines/blob/vN
 
 Takip etmek için, [örnek ASP.NET Core Web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) 'sini ([indirme](xref:index#how-to-download-a-sample)) görüntüleyin veya indirin.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -1127,3 +1127,6 @@ https://localhost:5001/>
 
 * [REST API istekleri](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HttpRepl GitHub deposu](https://github.com/dotnet/HttpRepl)
+* [Visual Studio 'Yu HttpRepl 'yi başlatmak için yapılandırma](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
+* [HttpRepl 'yi başlatmak için Visual Studio Code yapılandırma](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
+* [HttpRepl 'yi başlatmak için Mac için Visual Studio yapılandırma](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)

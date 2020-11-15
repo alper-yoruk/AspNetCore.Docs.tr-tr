@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: e25549d557dd971d0f2f4d67a182574f07138acb
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 84747e2d13275a23e83dc2dc0f666cb0c8d001b1
+ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508129"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94634632"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -357,7 +357,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 
 .NET 5,0 ' den önce, bir ASP.NET Core uygulaması için bir *Dockerfile* oluşturup yayımlarken, tüm .NET Core SDK ve ASP.NET Core görüntüsünün çekmesini sağlar. Bu sürümle birlikte, SDK görüntüleri baytları çekililerek ASP.NET Core görüntü için çekilen baytlar büyük ölçüde ortadan kalkar. Daha fazla bilgi için bkz. [Bu GitHub sorun açıklaması](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750).
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft ile kimlik doğrulaması Azure Active Directory. Identity . Web
 
@@ -451,10 +451,8 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* Şu komutu çalıştırın: `dotnet watch`.
+* `dotnet watch` komutunu çalıştırın.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
-
-Otomatik yenileme işlevini gelecekte Visual Studio 'ya getirmeyi umuyoruz.
 
 ### <a name="console-logger-formatter"></a>Konsol günlükçü biçimlendiricisi
 
