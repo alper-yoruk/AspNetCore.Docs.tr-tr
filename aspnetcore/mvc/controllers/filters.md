@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d075faa951a34fb3856b54eb9e21593b6616b4f1
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058512"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673971"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -554,6 +554,18 @@ Bir için bir <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter> çağr�
 ### <a name="ifilterfactory"></a>IFilterFactory
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> . Bu nedenle, bir `IFilterFactory` örnek, `IFilterMetadata` filtre ardışık düzeninde herhangi bir yerde örnek olarak kullanılabilir. Çalışma zamanı filtreyi çağırmayı hazırlarken, bir öğesine dönüştürmeyi dener `IFilterFactory` . Atama başarılı olursa, <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> çağrılan örneği oluşturmak için yöntemi çağırılır `IFilterMetadata` . Bu, tam filtre işlem hattının uygulama başladığında açıkça ayarlanması gerektiğinden esnek bir tasarım sağlar.
+
+`IFilterFactory.IsReusable`:
+
+* , Fabrika tarafından oluşturulan filtre örneğinin, içinde oluşturulduğu istek kapsamının dışında yeniden kullanılabilir olabileceğini gösteren bir ipucu.
+* Tek bir yaşam süresine sahip hizmetlere bağımlı olan bir filtreyle ***Not** _ kullanılması gerekir.
+
+ASP.NET Core çalışma zamanı garanti etmez:
+
+_ Filtrenin tek bir örneğinin oluşturulacaktır.
+* Filtre, sonraki bir noktada dı kapsayıcısından yeniden istenmeyecek.
+
+[!WARNING] Yalnızca `IFilterFactory.IsReusable` `true` filtrelerin kaynağı belirsiz ise, filtrelerin durum bilgisiz olup olmadığını ve bırden çok http isteği genelinde kullanımı güvenli olduğunu döndürecek şekilde yapılandırın. Örneğin, döndürülürse, kapsamdaki veya geçici olarak kaydedilen bir filtre döndürme `IFilterFactory.IsReusable``true`
 
 `IFilterFactory` , filtre oluşturmaya yönelik başka bir yaklaşım olarak özel öznitelik uygulamaları kullanılarak uygulanabilir:
 

@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056133"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673958"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>BlazorKarşıya dosya yükleme ASP.NET Core
 
@@ -46,7 +46,7 @@ Varsayılan olarak, Kullanıcı tek dosya seçer. `multiple`Kullanıcının ayn�
 Kullanıcı tarafından seçilen dosyadan veri okumak için:
 
 * Dosyada çağrı yapın `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` ve döndürülen akıştan okuyun. Daha fazla bilgi için [dosya akışları](#file-streams) bölümüne bakın.
-* <xref:System.IO.Stream>Tarafından döndürülen, `OpenReadStream` okunan bayt cinsinden en büyük boyutu zorlar `Stream` . Varsayılan olarak, yalnızca boyut olarak 524.288 KB 'tan (512 KB) daha küçük dosyalara daha fazla okuma için izin verilir. Bu sınır, geliştiricilerin yanlışlıkla bellekteki büyük dosyaları yanlışlıkla okumasını engellemek için vardır. `maxAllowedSize`Üzerinde parametresi, `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` gerekirse daha büyük bir boyut belirtmek için kullanılabilir.
+* <xref:System.IO.Stream>Tarafından döndürülen, `OpenReadStream` okunan bayt cinsinden en büyük boyutu zorlar `Stream` . Varsayılan olarak, boyutu 512.000 bayttan (500 KB) daha büyük olmayan dosyalar, daha fazla okuma yapılmadan önce okunarak bir özel duruma neden olur. Bu sınır, geliştiricilerin yanlışlıkla bellekteki büyük dosyaları yanlışlıkla okumasını engellemek için vardır. `maxAllowedSize`Üzerinde parametresi, `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` gerekirse daha büyük bir boyut belirtmek için kullanılabilir.
 * Gelen dosya akışını doğrudan belleğe okumaktan kaçının. Örneğin, dosya baytlarını bir <xref:System.IO.MemoryStream> bayt dizisi olarak bir veya Read öğesine kopyalamayın. Bu yaklaşımlar, özellikle içinde, performans ve güvenlik sorunlarına neden olabilir Blazor Server . Bunun yerine, dosya baytlarını bir blob veya diskteki bir dosya gibi bir dış depoya kopyalamayı göz önünde bulundurun.
 
 Görüntü dosyası alan bir bileşen, `RequestImageFileAsync` görüntünün uygulamaya akışı tamamlanmadan önce tarayıcının JavaScript çalışma zamanı içindeki görüntü verilerini yeniden boyutlandırmak için dosyanın kullanışlı yöntemini çağırabilir.

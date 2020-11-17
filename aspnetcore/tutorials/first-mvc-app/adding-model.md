@@ -3,7 +3,7 @@ title: 4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 author: rick-anderson
 description: ASP.NET Core MVC 'deki öğretici serisinin 4. bölümü.
 ms.author: riande
-ms.date: 01/13/2020
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fa1d79bed56f17afe69697a7e24ec200e6a0ab22
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422742"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688455"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
 [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Tom Dykstra](https://github.com/tdykstra) tarafından
 
-Bu bölümde, bir veritabanında film yönetmeye yönelik sınıflar eklersiniz. Bu sınıflar, **d** VC uygulamasının " **d** odel" parçası olacaktır.
+Bu bölümde, bir veritabanında film yönetmeye yönelik sınıflar eklersiniz. Bu sınıflar, **d** VC uygulamasının "**d** odel" parçası olacaktır.
 
 Bu sınıfları bir veritabanıyla çalışmak için [Entity Framework Core](/ef/core) (EF Core) ile birlikte kullanırsınız. EF Core, yazmanız gereken veri erişim kodunu kolaylaştıran bir nesne ilişkisel eşleme (ORM) çerçevesidir.
 
-Oluşturduğunuz model sınıfları, EF Core hiçbir bağımlılığı olmadığından, POCO sınıfları olarak bilinir ( **P** Lain **C** **O** ) **O**. Yalnızca veritabanında depolanacak verilerin özelliklerini tanımlar.
+Oluşturduğunuz model sınıfları, EF Core hiçbir bağımlılığı olmadığından, POCO sınıfları olarak bilinir ( **P** Lain **C** **O**) **O**. Yalnızca veritabanında depolanacak verilerin özelliklerini tanımlar.
 
 Bu öğreticide, önce model sınıflarını yazdığınızda EF Core veritabanını oluşturur.
 
@@ -89,7 +89,7 @@ Yukarıdaki komut, EF Core SQL Server sağlayıcısını ekler. Sağlayıcı pak
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Proje** menüsünde, **NuGet Paketlerini Yönet** ' i seçin.
+**Proje** menüsünde, **NuGet Paketlerini Yönet**' i seçin.
 
 Sağ üst köşedeki **Ara** alanına girip `Microsoft.EntityFrameworkCore.SQLite` aramak için **dönüş** tuşuna basın. Eşleşen NuGet paketini seçin ve **paket Ekle** düğmesine basın.
 
@@ -104,6 +104,14 @@ Aşağıdaki NuGet paketlerini yüklemek için yukarıdaki adımları yineleyin:
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Microsoft.EntityFrameworkCore.Design`
+
+Aşağıdaki .NET CLı komutunu çalıştırın:
+
+```dotnetcli
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+Yukarıdaki komut [ASPNET-CodeGenerator scafkatlama aracını](xref:fundamentals/tools/dotnet-aspnet-codegenerator)ekler.
 
 ---
 
@@ -138,11 +146,11 @@ Aşağıdaki Vurgulanan kodu içine ekleyin `Startup.ConfigureServices` :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 ---
 
@@ -156,11 +164,11 @@ Dosyaya bir bağlantı dizesi ekleyin *appsettings.json* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
 
 ---
 
@@ -172,7 +180,7 @@ Film modeli için oluşturma, okuma, güncelleştirme ve silme (CRUD) sayfaları
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Çözüm Gezgini** , *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
+**Çözüm Gezgini**, *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
 
 ![Yukarıdaki adımın görünümü](adding-model/_static/add_controller21.png)
 
@@ -189,18 +197,18 @@ Film modeli için oluşturma, okuma, güncelleştirme ve silme (CRUD) sayfaları
 
 * **Görünümler:** Her seçeneğin varsayılan kısmını işaretli tut
 * **Denetleyici adı:** Varsayılan *MoviesController* tut
-* **Ekle** ’yi seçin
+* **Ekle**’yi seçin
 
 Visual Studio şunları oluşturur:
 
-* Bir filmler denetleyicisi ( *denetleyiciler/MoviesController. cs* )
-* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme ( *Görünümler/filmler/ \* . cshtml* )
+* Bir filmler denetleyicisi (*denetleyiciler/MoviesController. cs*)
+* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
 
 Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 
 * Linux 'ta, scafkatlama aracı yolunu dışarı aktarın:
 
@@ -218,7 +226,7 @@ Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 
 ### <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 
 * Şu komutu çalıştırın:
 
@@ -316,7 +324,7 @@ dotnet ef database update
   > [!NOTE]
   > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamanın Genelleştirilmiş olması gerekir. Genelleştirme yönergeleri için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)bakın.
 
-* **Düzenleme** , **Ayrıntılar** ve **silme** sayfalarını test edin.
+* **Düzenleme**, **Ayrıntılar** ve **silme** sayfalarını test edin.
 
 ## <a name="dependency-injection-in-the-controller"></a>Denetleyiciye bağımlılık ekleme
 
@@ -475,7 +483,7 @@ Yukarıdaki komut, EF Core SQL Server sağlayıcısını ekler. Sağlayıcı pak
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Proje** menüsünde, **NuGet Paketlerini Yönet** ' i seçin.
+**Proje** menüsünde, **NuGet Paketlerini Yönet**' i seçin.
 
 Sağ üst köşedeki **Ara** alanına girip `Microsoft.EntityFrameworkCore.SQLite` aramak için **dönüş** tuşuna basın. Eşleşen NuGet paketini seçin ve **paket Ekle** düğmesine basın.
 
@@ -558,7 +566,7 @@ Film modeli için oluşturma, okuma, güncelleştirme ve silme (CRUD) sayfaları
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Çözüm Gezgini** , *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
+**Çözüm Gezgini**, *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
 
 ![Yukarıdaki adımın görünümü](adding-model/_static/add_controller21.png)
 
@@ -575,18 +583,18 @@ Film modeli için oluşturma, okuma, güncelleştirme ve silme (CRUD) sayfaları
 
 * **Görünümler:** Her seçeneğin varsayılan kısmını işaretli tut
 * **Denetleyici adı:** Varsayılan *MoviesController* tut
-* **Ekle** ’yi seçin
+* **Ekle**’yi seçin
 
 Visual Studio şunları oluşturur:
 
-* Bir filmler denetleyicisi ( *denetleyiciler/MoviesController. cs* )
-* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme ( *Görünümler/filmler/ \* . cshtml* )
+* Bir filmler denetleyicisi (*denetleyiciler/MoviesController. cs*)
+* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
 
 Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 
 * Linux 'ta, scafkatlama aracı yolunu dışarı aktarın:
 
@@ -604,7 +612,7 @@ Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 
 ### <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 
 * Şu komutu çalıştırın:
 
@@ -702,7 +710,7 @@ dotnet ef database update
   > [!NOTE]
   > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamanın Genelleştirilmiş olması gerekir. Genelleştirme yönergeleri için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)bakın.
 
-* **Düzenleme** , **Ayrıntılar** ve **silme** sayfalarını test edin.
+* **Düzenleme**, **Ayrıntılar** ve **silme** sayfalarını test edin.
 
 ## <a name="dependency-injection-in-the-controller"></a>Denetleyiciye bağımlılık ekleme
 
@@ -833,7 +841,7 @@ Bu bölümde, film modeli scafkatdır. Diğer bir deyişle, scafkatlama aracı f
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Çözüm Gezgini** , *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
+**Çözüm Gezgini**, *denetleyiciler* klasörüne sağ tıklayıp **yeni > yapı iskelesi> öğesi ekleyin**.
 
 ![Yukarıdaki adımın görünümü](adding-model/_static/add_controller21.png)
 
@@ -850,15 +858,15 @@ Bu bölümde, film modeli scafkatdır. Diğer bir deyişle, scafkatlama aracı f
 
 * **Görünümler:** Her seçeneğin varsayılan kısmını işaretli tut
 * **Denetleyici adı:** Varsayılan *MoviesController* tut
-* **Ekle** ’yi seçin
+* **Ekle**’yi seçin
 
 ![Denetleyici Ekle iletişim kutusu](adding-model/_static/add_controller2.png)
 
 Visual Studio şunları oluşturur:
 
-* Entity Framework Core [veritabanı bağlam sınıfı](xref:data/ef-mvc/intro#create-the-database-context) ( *Data/MvcMovieContext. cs* )
-* Bir filmler denetleyicisi ( *denetleyiciler/MoviesController. cs* )
-* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme ( *Görünümler/filmler/ \* . cshtml* )
+* Entity Framework Core [veritabanı bağlam sınıfı](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext. cs*)
+* Bir filmler denetleyicisi (*denetleyiciler/MoviesController. cs*)
+* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
 
 Veritabanı bağlamı ve [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (oluşturma, okuma, güncelleştirme ve silme) eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 
@@ -867,7 +875,7 @@ Veritabanı bağlamı ve [CRUD](https://wikipedia.org/wiki/Create,_read,_update_
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 * Scafkatlama aracını yükler:
 
   ```dotnetcli
@@ -892,7 +900,7 @@ Veritabanı bağlamı ve [CRUD](https://wikipedia.org/wiki/Create,_read,_update_
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Proje dizininde bir komut penceresi açın ( *program.cs* , *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+* Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
 * Scafkatlama aracını yükler:
 
   ```dotnetcli
@@ -1021,7 +1029,7 @@ Login failed for user 'User-name'.
   > [!NOTE]
   > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamanın Genelleştirilmiş olması gerekir. Genelleştirme yönergeleri için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)bakın.
 
-* **Düzenle** , **Ayrıntılar** ve **Sil** bağlantılarını test edin.
+* **Düzenle**, **Ayrıntılar** ve **Sil** bağlantılarını test edin.
 
 Sınıfı inceleyin `Startup` :
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 2efed6b76228227f032482346a36f528b3448de2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 833114a12c8c1ac67097b3592cf410d7a69bb628
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053572"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673984"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC 'de kimlik doğrulaması ve yetkilendirme
 
@@ -76,7 +76,7 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 Sunucusunda, taşıyıcı belirteç kimlik doğrulaması [JWT taşıyıcı ara yazılımı](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)kullanılarak yapılandırılır.
 
-.NET gRPC istemcisinde, belirteç aramalar ile üst bilgi olarak gönderilebilir:
+.NET gRPC istemcisinde, belirteç, koleksiyon kullanılarak çağrılarla gönderilebilir `Metadata` . `Metadata`Koleksiyondaki girişler, http üstbilgileri olarak bir gRPC çağrısıyla gönderilir:
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -92,7 +92,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-`ChannelCredentials`Kanalı üzerinde yapılandırmak, belirteci gRPC çağrılarıyla hizmete göndermenin alternatif bir yoludur. Kimlik bilgisi her bir gRPC çağrısının yapılışında çalıştırılır. Bu, belirteci kendi kendinize geçirmek için birden çok yere kod yazma gereksinimini ortadan kaldırır.
+`ChannelCredentials`Kanalı üzerinde yapılandırmak, belirteci gRPC çağrılarıyla hizmete göndermenin alternatif bir yoludur. `ChannelCredentials` `CallCredentials` , Otomatik olarak ayarlanması için bir yol sağlayan, içerebilir `Metadata` .
+
+`CallCredentials` Her bir gRPC çağrısı yapıldığında çalıştırılır ve bu, belirteci kendiniz geçirmek için birden çok yere kod yazma ihtiyacını önler. `CallCredentials`Yalnızca KANALıN TLS ile güvenliği sağlanmasıyla uygulandığını unutmayın. `CallCredentials` güvenli olmayan TLS olmayan kanallarda uygulanmaz.
 
 Aşağıdaki örnekteki kimlik bilgileri, kanalı her gRPC çağrısıyla birlikte gönderecek şekilde yapılandırır:
 
@@ -152,7 +154,7 @@ Desteklenen birçok ASP.NET Core kimlik doğrulama mekanizması gRPC ile çalı�
 
 * Azure Active Directory
 * İstemci sertifikası
-* IdentitySunucu
+* IdentityServer
 * JWT belirteci
 * OAuth 2.0
 * OpenID Connect

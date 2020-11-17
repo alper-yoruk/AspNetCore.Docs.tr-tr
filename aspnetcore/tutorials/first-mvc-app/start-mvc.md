@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 1c703cdbd168c2e83d09c40f7740689df8938dad
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: c96e7107c85bf36f55f6571c71c20d09bc94ddb3
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422765"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688528"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC ile çalışmaya başlama
 
@@ -66,16 +66,16 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
-1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri** ' yi seçin.
-1. **Yeni projenizi yapılandırın** Iletişim kutusunda `MvcMovie` **Proje adı** ' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
-1. **Oluştur** ’u seçin.
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri**' yi seçin.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `MvcMovie` **Proje adı**' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
+1. **Oluştur**’u seçin.
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
     1. **Oluştur**
 
-![Yeni bir ASP.NET Core Web uygulaması oluşturma ](start-mvc/_static/5/mvc.png)
+![Yeni bir ASP.NET Core Web uygulaması oluşturma ](start-mvc/_static/mvcVS19v16.9.png)
 
 Projeyi oluşturmaya yönelik alternatif yaklaşımlar için bkz. [Visual Studio 'da yeni proje oluşturma](/visualstudio/ide/create-new-project).
 
@@ -94,18 +94,18 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
    code -r MvcMovie
    ```
 
-  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet** ’i seçin
+  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet**’i seçin
 
   * `dotnet new mvc -o MvcMovie`: *Mvcmovie* klasöründe yeni BIR ASP.NET Core MVC projesi oluşturur.
   * `code -r MvcMovie`: Visual Studio Code ' de *Mvcmovie. csproj* proje dosyasını yükler.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)** ' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)**' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri**' yi seçin.
 
   ![macOS Web uygulaması şablon seçimi](start-mvc/_static/web_app_template_vsmac.png)
 
@@ -114,9 +114,9 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
   * **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
   * **Hedef çerçeve** seçme seçeneği sunulursa, en son 5. x sürümünü seçin.
 
-  **İleri** ’yi seçin.
+  **İleri**’yi seçin.
 
-* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur** ' u seçin.
+* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur**' u seçin.
 
   ![macOS projeyi Adlandır](start-mvc/_static/MvcMovie.png)
 
@@ -142,7 +142,7 @@ Uygulamayı hata ayıklamasız modda çalıştırmak için **CTRL-F5** ' i seçi
 
   Aşağıdaki görüntüde uygulama gösterilmektedir:
 
-  ![Giriş veya dizin sayfası](start-mvc/_static/home2.2.png)
+  ![Giriş veya dizin sayfası](start-mvc/_static/home50-vs.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -154,7 +154,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 
   Uygulamayı CTRL + F5 (hata ayıklama modu) ile başlatmak, kod değişiklikleri yapmanıza, dosyayı kaydetmenize, tarayıcıyı yenilemanıza ve kod değişikliklerini görmenize olanak tanır. Birçok geliştirici, sayfayı yenilemek ve değişiklikleri görüntülemek için hata ayıklama olmayan modu kullanmayı tercih eder.
 
-  ![Giriş veya dizin sayfası](start-mvc/_static/home2.2.png)
+  ![Giriş veya dizin sayfası](start-mvc/_static/home50-port5001.png)
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -218,17 +218,17 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio 'da **Yeni proje oluştur** ' u seçin.
+* Visual Studio 'da **Yeni proje oluştur**' u seçin.
 
 * **ASP.NET Core Web uygulaması** > **İleri ' yi** seçin.
 
 ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/np_2.1.png)
 
-* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur** ' u seçin. Kodu kopyaladığınızda, ad alanının eşleşmesi için, projeyi **Mvcfilmi** olarak adlandırmak önemlidir.
+* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur**' u seçin. Kodu kopyaladığınızda, ad alanının eşleşmesi için, projeyi **Mvcfilmi** olarak adlandırmak önemlidir.
 
   ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/config.png)
 
-* **Web uygulaması (Model-View-Controller)** seçeneğini belirleyin. Açılan kutularda **.NET Core** ve **ASP.NET Core 3,1** ' i seçin ve ardından **Oluştur** ' u seçin.
+* **Web uygulaması (Model-View-Controller)** seçeneğini belirleyin. Açılan kutularda **.NET Core** ve **ASP.NET Core 3,1**' i seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni proje iletişim kutusu, sol bölmede .NET Core, ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -247,18 +247,18 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
    code -r MvcMovie
    ```
 
-  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet** ’i seçin
+  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet**’i seçin
 
   * `dotnet new mvc -o MvcMovie`: *Mvcmovie* klasöründe yeni BIR ASP.NET Core MVC projesi oluşturur.
   * `code -r MvcMovie`: Visual Studio Code ' de *Mvcmovie. csproj* proje dosyasını yükler.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)** ' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)**' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri**' yi seçin.
 
   ![macOS Web uygulaması şablon seçimi](start-mvc/_static/web_app_template_vsmac.png)
 
@@ -267,9 +267,9 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
   * **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
   * **Hedef çerçeve** seçme seçeneği sunulursa, en son 3. x sürümünü seçin.
 
-  **İleri** ’yi seçin.
+  **İleri**’yi seçin.
 
-* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur** ' u seçin.
+* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur**' u seçin.
 
   ![macOS projeyi Adlandır](start-mvc/_static/MvcMovie.png)
 
@@ -370,18 +370,18 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio 'da **Yeni proje oluştur** ' u seçin.
+* Visual Studio 'da **Yeni proje oluştur**' u seçin.
 
-* **ASP.NET Core Web uygulaması** ' nı seçin ve ardından **İleri** ' yi seçin.
+* **ASP.NET Core Web uygulaması** ' nı seçin ve ardından **İleri**' yi seçin.
 
 ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/np_2.1.png)
 
-* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur** ' u seçin. Kodu kopyaladığınızda, ad alanının eşleşmesi için, projeyi **Mvcfilmi** olarak adlandırmak önemlidir.
+* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur**' u seçin. Kodu kopyaladığınızda, ad alanının eşleşmesi için, projeyi **Mvcfilmi** olarak adlandırmak önemlidir.
 
   ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/config.png)
 
 
-* **Web uygulaması (Model-View-Controller)** öğesini seçin ve ardından **Oluştur** ' u seçin.
+* **Web uygulaması (Model-View-Controller)** öğesini seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni proje iletişim kutusu, sol bölmede .NET Core, ASP.NET Core Web ](start-mvc/_static/new_project22-21.png)
 
@@ -400,27 +400,27 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
    code -r MvcMovie
    ```
 
-  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet** ’i seçin
+  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet**’i seçin
 
   * `dotnet new mvc -o MvcMovie`: *Mvcmovie* klasöründe yeni BIR ASP.NET Core MVC projesi oluşturur.
   * `code -r MvcMovie`: Visual Studio Code ' de *Mvcmovie. csproj* proje dosyasını yükler.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](./start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)** ' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)**' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri**' yi seçin.
 
 * **Yeni Web uygulamanızı yapılandırın** iletişim kutusunda:
 
   * **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
   * **Hedef çerçeve** seçme seçeneği sunulursa, en son 2. x sürümünü seçin.
 
-  **İleri** ’yi seçin.
+  **İleri**’yi seçin.
 
-* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur** ' u seçin.
+* Projeyi **Mvcfilmi** olarak adlandırın ve **Oluştur**' u seçin.
 
 ---
 
@@ -442,7 +442,7 @@ Uygulamayı hata ayıklamasız modda çalıştırmak için **CTRL-F5** ' i seçi
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* İzlemeye onay vermek için **Kabul Et** 'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](start-mvc/_static/privacy.png)
 
@@ -460,7 +460,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 
   Uygulamayı CTRL + F5 (hata ayıklama modu) ile başlatmak, kod değişiklikleri yapmanıza, dosyayı kaydetmenize, tarayıcıyı yenilemanıza ve kod değişikliklerini görmenize olanak tanır. Birçok geliştirici, sayfayı yenilemek ve değişiklikleri görüntülemek için hata ayıklama olmayan modu kullanmayı tercih eder.
 
-* İzlemeye onay vermek için **Kabul Et** 'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](start-mvc/_static/privacy.png)
 
@@ -477,7 +477,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 * Adres çubuğu `localhost:port#` gibi bir şey gösterir `example.com` . Bunun nedeni `localhost` , Yerel bilgisayarınız için Standart ana bilgisayar adıdır. Visual Studio bir web projesi oluşturduğunda, web sunucusu için rastgele bir bağlantı noktası kullanılır. Uygulamayı çalıştırdığınızda, farklı bir bağlantı noktası numarası görürsünüz.
 * Uygulamayı **Çalıştır** menüsünden Hata Ayıkla veya hata ayıklama olmayan modda başlatabilirsiniz.
 
-* İzlemeye onay vermek için **Kabul Et** 'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](./start-mvc/_static/output_privacy_macos.png)
 

@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f1aa388015bd540a6fda263eac53753ada63bf79
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051622"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673997"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core ' de SameSite s ile çalışma
 
@@ -166,7 +166,7 @@ Kasım 2019 ' de 2016 standartdan 2019 standardına güncelleştirme için [düz
 
 ' De `Startup.ConfigureServices` aşağıdakine benzer bir kod ekleyin:
 
-::: moniker range="= aspnetcore-3.1"
+::: moniker range=">= aspnetcore-3.1"
 
 [!code-csharp[](samesite/sample/Startup31.cs?name=snippet)]
 

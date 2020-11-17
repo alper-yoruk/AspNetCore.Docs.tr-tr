@@ -1,10 +1,10 @@
 ---
-title: 'Öğretici: EF Core ile geçiş özelliğini kullanma-ASP.NET MVC'
-description: Bu öğreticide, ASP.NET Core MVC uygulamasındaki veri modeli değişikliklerini yönetmek için EF Core geçişleri özelliğini kullanmaya başlayabilirsiniz.
+title: Eğitim Bölümü 5, Contoso University örneğine geçişler uygulama
+description: Contoso Üniversitesi öğreticisi serisinin 5. bölümü. ASP.NET Core MVC uygulamasında veri modeli değişikliklerini yönetmek için EF Core geçişleri özelliğini kullanın.
 author: rick-anderson
 ms.author: riande
-ms.custom: mvc
-ms.date: 03/27/2019
+ms.custom: contperfq2
+ms.date: 11/13/2020
 ms.topic: tutorial
 no-loc:
 - appsettings.json
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 070c18db55956d79560904f53395b5001c7bce6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054040"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94674010"
 ---
-# <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile geçiş özelliğini kullanma-ASP.NET MVC
+# <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>Öğretici: 5. kısım, Contoso Üniversitesi örneğine geçişler uygulama
 
 Bu öğreticide, veri modeli değişikliklerini yönetmek için EF Core geçişleri özelliğini kullanmaya başlayabilirsiniz. Sonraki öğreticilerde, veri modelini değiştirirken daha fazla geçiş ekleyeceksiniz.
 
@@ -34,7 +34,6 @@ Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
 > * Geçişler hakkında bilgi edinin
-> * Bağlantı dizesini değiştirme
 > * İlk geçiş oluşturma
 > * Yukarı ve aşağı yöntemleri inceleyin
 > * Veri modeli anlık görüntüsü hakkında bilgi edinin
@@ -52,28 +51,21 @@ Veritabanını veri modeliyle eşitlenmiş halde tutma yöntemi, uygulamayı ür
 
 Geçişlerle çalışmak için **Paket Yöneticisi konsolu 'nu** (PMC) veya CLI 'yi kullanabilirsiniz.  Bu öğreticiler CLı komutlarının nasıl kullanılacağını göstermektedir. PMC hakkındaki bilgiler [Bu öğreticinin sonunda](#pmc).
 
-## <a name="change-the-connection-string"></a>Bağlantı dizesini değiştirme
+## <a name="drop-the-database"></a>Veritabanını bırak
 
-*appsettings.json* Dosyasında, bağlantı dizesindeki veritabanının adını ContosoUniversity2 veya kullandığınız bilgisayarda kullanmadığınız başka bir ad olarak değiştirin.
+Veritabanını silin. **SQL Server Nesne Gezgini** (ssox) veya `database drop` CLI komutunu kullanın:
 
-[!code-json[](intro/samples/cu/appsettings2.json?range=1-4)]
+ ```dotnetcli
+ dotnet ef database drop
+ ```
 
-Bu değişiklik projeyi ilk geçişin yeni bir veritabanı oluşturacak şekilde ayarlar. Bu, geçişleri kullanmaya başlamak için gerekli değildir, ancak daha sonra iyi bir fikir olduğunu göreceksiniz.
-
-> [!NOTE]
-> Veritabanı adını değiştirmeye alternatif olarak, veritabanını silebilirsiniz. **SQL Server Nesne Gezgini** (ssox) veya `database drop` CLI komutunu kullanın:
->
-> ```dotnetcli
-> dotnet ef database drop
-> ```
->
-> Aşağıdaki bölümde CLı komutlarının nasıl çalıştırılacağı açıklanmaktadır.
+Aşağıdaki bölümde CLı komutlarının nasıl çalıştırılacağı açıklanmaktadır.
 
 ## <a name="create-an-initial-migration"></a>İlk geçiş oluşturma
 
 Değişikliklerinizi kaydedin ve projeyi derleyin. Sonra bir komut penceresi açın ve proje klasörüne gidin. Bunu yapmanın hızlı bir yolu aşağıda verilmiştir:
 
-* **Çözüm Gezgini** ' de projeye sağ tıklayın ve bağlam menüsünden **klasörü dosya Gezgini 'nde aç** ' ı seçin.
+* **Çözüm Gezgini**' de projeye sağ tıklayın ve bağlam menüsünden **klasörü dosya Gezgini 'nde aç** ' ı seçin.
 
   ![Dosya Gezgini menü öğesinde aç](migrations/_static/open-in-file-explorer.png)
 
@@ -94,11 +86,11 @@ Yukarıdaki komutlarda aşağıdakine benzer bir çıktı görüntülenir:
 
 ```console
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 Done. To undo this action, use 'ef migrations remove'
 ```
 
-" *Başka bir işlem tarafından kullanıldığından," dosya... ContosoUniversity.dll dosyasına erişilemiyor* . ", Windows Sistem tepsisindeki IIS Express simgesini bulun ve sağ tıklayın, sonra da **Contosouniversity > siteyi durdur** ' a tıklayın.
+"*Başka bir işlem tarafından kullanıldığından," dosya... ContosoUniversity.dll dosyasına erişilemiyor*. ", Windows Sistem tepsisindeki IIS Express simgesini bulun ve sağ tıklayın, sonra da **Contosouniversity > siteyi durdur**' a tıklayın.
 
 ## <a name="examine-up-and-down-methods"></a>Yukarı ve aşağı yöntemleri inceleyin
 
@@ -132,7 +124,7 @@ Komutun çıktısı, `migrations add` veritabanının AYARLANDıĞı SQL komutla
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (274ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
       CREATE DATABASE [ContosoUniversity2];
@@ -155,7 +147,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-      VALUES (N'20190327172701_InitialCreate', N'2.2.0-rtm-35687');
+      VALUES (N'20190327172701_InitialCreate', N'5.0-rtm');
 Done.
 ```
 
@@ -181,20 +173,9 @@ PMC komutları hakkında daha fazla bilgi için bkz. [Paket Yöneticisi Konsolu 
 
 ## <a name="get-the-code"></a>Kodu alma
 
-[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)
 
 ## <a name="next-step"></a>Sonraki adım
-
-Bu öğreticide şunları yaptınız:
-
-> [!div class="checklist"]
-> * Geçişler hakkında öğrenildi
-> * NuGet geçiş paketleri hakkında bilgi edinildi
-> * Bağlantı dizesi değiştirildi
-> * İlk geçiş oluşturuldu
-> * Yukarı ve aşağı yöntemleri İnceleme
-> * Veri modeli anlık görüntüsü hakkında bilgi edinildi
-> * Geçiş uygulandı
 
 Veri modelini genişletme hakkında daha gelişmiş konulara bakmak için sonraki öğreticiye ilerleyin. Ek geçişler oluşturma ve uygulama gibi.
 

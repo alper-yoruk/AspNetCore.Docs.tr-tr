@@ -3,7 +3,7 @@ title: Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 author: rick-anderson
 description: ASP.NET Core MVC 'de öğretici serisinin 3. bölümü.
 ms.author: riande
-ms.date: 8/04/2019
+ms.date: 11/16/2019
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce2754d22b61578bdbe5e78a69e08bdc1e83190d
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422723"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688359"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 
@@ -56,7 +56,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
   * *Index. cshtml* **adlı ad** kutusu değerini saklayın.
 
-  * **Ekle** ’yi seçin
+  * **Ekle**’yi seçin
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view.png)
 
@@ -74,11 +74,11 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 * **Yeni dosya** iletişim kutusunda:
 
   * Sol bölmedeki **ASP .NET Core** ' u seçin.
-  * Orta bölmedeki **MVC görünümü sayfasını** seçin.
+  * Orta bölmede **Razor Görünüm** ' ü seçin.
   * **Ad** kutusuna *Index* yazın.
-  * **Yeni** 'yi seçin.
+  * **Yeni**'yi seçin.
 
-![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
+![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_macVSM8.9.png)
 
 ---
 
@@ -92,7 +92,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 ## <a name="change-views-and-layout-pages"></a>Görünümleri ve düzen sayfalarını değiştirme
 
-Menü bağlantılarını ( **Mvcmovie** , **Home** ve **Gizlilik** ) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını (**Mvcmovie**, **Home** ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody` , oluşturduğunuz tüm görünüme özgü sayfaların, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Görünümler/Home/privacy. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
@@ -121,9 +121,9 @@ Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yaptı:
 
 Önceki biçimlendirmede, `asp-area=""` Bu uygulama [alan](xref:mvc/controllers/areas)kullandığından [tutturucu etiketi Yardımcısı özniteliği](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) ve öznitelik değeri atlandı.
 
-**Not** : `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
+**Not**: `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
 
-Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi** :
+Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi**:
 
 ![Gizlilik sekmesi](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -225,7 +225,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
   * *Index. cshtml* **adlı ad** kutusu değerini saklayın.
 
-  * **Ekle** ’yi seçin
+  * **Ekle**’yi seçin
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view.png)
 
@@ -245,7 +245,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
   * Sol bölmedeki **Web** ' i seçin.
   * Orta bölmedeki **boş HTML dosyasını** seçin.
   * **Ad** kutusuna *Index. cshtml* yazın.
-  * **Yeni** 'yi seçin.
+  * **Yeni**'yi seçin.
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
 
@@ -261,7 +261,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 ## <a name="change-views-and-layout-pages"></a>Görünümleri ve düzen sayfalarını değiştirme
 
-Menü bağlantılarını ( **Mvcmovie** , **Home** ve **Gizlilik** ) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını (**Mvcmovie**, **Home** ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody` , oluşturduğunuz tüm görünüme özgü sayfaların, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Görünümler/Home/privacy. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
@@ -281,9 +281,9 @@ Aşağıdaki biçimlendirme vurgulanan değişiklikleri göstermektedir:
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**Not** : `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
+**Not**: `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
 
-Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi** :
+Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi**:
 
 ![Gizlilik sekmesi](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 5849f4bfb9d0355177ceb5c2f4236c6d39dd9e92
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 7323cf11ad4556443def4068873e6805b449058a
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94340042"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94674023"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -119,10 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
-1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri** ' yi seçin.
-1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı** ' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
-1. **Oluştur** ’u seçin.
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri**' yi seçin.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı**' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
+1. **Oluştur**’u seçin.
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
@@ -143,13 +143,15 @@ To run the app after downloading the completed project:
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
-Aşağıdaki kodu kopyalayıp *Sayfalar/paylaşılan/_Layout. cshtml* dosyasına yapıştırın: [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+Aşağıdaki kodu kopyalayıp *Sayfalar/paylaşılan/_Layout. cshtml* dosyasına yapıştırın:
+
+[!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
 Düzen dosyası site üst bilgisini, alt bilgisini ve menüsünü ayarlar. Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
 * Her "ContosoUniversity" öğesinin "Contoso Üniversitesi" olarak her oluşumu. Üç oluşum vardır.
 * **Giriş** ve **Gizlilik** menü girişleri silinir.
-* , **Öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** **için girişler** eklenir.
+* , **Öğrenciler**, **Kurslar**, **eğitmenler** ve **Departmanlar** **için girişler** eklenir.
 
 *Pages/Index. cshtml* dosyasında, dosyanın içeriğini aşağıdaki kodla değiştirin:
 
@@ -227,7 +229,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar/öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
 * **Yeni yapı Iskelesi öğesi Ekle** iletişim kutusunda:
   * Sol sekmede, **yüklü > ortak > Razor sayfaları** ' nı seçin
   * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD**.
@@ -235,7 +237,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
     * Veri bağlamı adını yerine End ile değiştirin `SchoolContext` `ContosoUniversityContext` . Güncelleştirilmiş bağlam adı: `ContosoUniversity.Data.SchoolContext`
-   * **Ekle** ’yi seçin.
+   * **Ekle**'yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -585,7 +587,7 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 * *Contosouniversity. csproj* öğesini silin ve *Contosoüniversıtysqlite. csproj* öğesini *contosouniversity. csproj* olarak yeniden adlandırın.
-* *Program.cs* ' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
+* *Program.cs*' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
 * *appSettings.js* silin ve üzerinde *appSettings.js* *appSettingsSQLite.js* yeniden adlandırın.
 * *Geçişler* klasörünü silin ve *migrationssql* öğesini *geçişlerle* yeniden adlandırın.
 * İçin genel arama yapın `#if SQLiteVersion` ve `#if SQLiteVersion` ilgili `#endif` ifadeyi kaldırın.
@@ -612,10 +614,10 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
-* **ASP.NET Core Web uygulaması** ' nı seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
+* **ASP.NET Core Web uygulaması**' nı seçin.
 * Projeyi *Contosouniversity* olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
-* Açılan menüden **.NET Core** ve **3,0 ASP.NET Core** seçin ve ardından **Web uygulaması** ' nı seçin.
+* Açılan menüden **.NET Core** ve **3,0 ASP.NET Core** seçin ve ardından **Web uygulaması**' nı seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -632,11 +634,11 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
-*Sayfa/paylaşılan/_Layout. cshtml* 'yi güncelleştirerek site üst bilgisini, alt bilgisini ve menüsünü ayarlayın:
+*Sayfa/paylaşılan/_Layout. cshtml*'yi güncelleştirerek site üst bilgisini, alt bilgisini ve menüsünü ayarlayın:
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Giriş** ve **Gizlilik** menü girişlerini silin ve **hakkında** , **öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için girişler ekleyin.
+* **Giriş** ve **Gizlilik** menü girişlerini silin ve **hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler** ve **Departmanlar** için girişler ekleyin.
 
 Değişiklikler vurgulanır.
 
@@ -715,13 +717,13 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar* klasöründe bir *öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
 * **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
 * **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext* olarak değiştirin.
-  * **Ekle** ’yi seçin.
+  * **Ekle**'yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -1000,9 +1002,9 @@ Bu sitenin kullanıcı arabirimi stili yerleşik şablonlar tarafından üretilm
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * Yeni bir ASP.NET Core Web uygulaması oluşturun. Projeyi **Contosouniversity** olarak adlandırın. Kod kopyalama/yapıştırma olduğunda, ad alanlarının eşleşmesi için *Contosouniversity* projesini adlandırmak önemlidir.
-* Açılan listede **ASP.NET Core 2,1** ' i seçin ve ardından **Web uygulaması** ' nı seçin.
+* Açılan listede **ASP.NET Core 2,1** ' i seçin ve ardından **Web uygulaması**' nı seçin.
 
 Yukarıdaki adımların görüntüleri için bkz. [ Razor Web uygulaması oluşturma](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
 Uygulamayı çalıştırın.
@@ -1023,7 +1025,7 @@ Site menüsünü, düzeni ve giriş sayfasını birkaç değişiklik ayarlar. *S
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **kişi** menü girişini silin.
+* **Öğrenciler**, **Kurslar**, **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **kişi** menü girişini silin.
 
 Değişiklikler vurgulanır. (Tüm *biçimlendirme gösterilmez.* )
 
@@ -1096,7 +1098,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi** ekleyin >.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi** ekleyin >.
 * **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
 
 **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunu doldurun:
@@ -1104,7 +1106,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext** olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Ekle** ’yi seçin.
+* **Ekle**'yi seçin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 
@@ -1148,7 +1150,7 @@ Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframew
 
 ## <a name="update-main"></a>Ana güncelleştirme
 
-*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
+*Program.cs*' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
 * Yeniden  [oluşturulmasını](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated)çağırın.
@@ -1231,7 +1233,7 @@ Drop-Database
 
 Veritabanı adı, daha önce belirttiğiniz bağlam adından ve bir tire ve bir GUID ile oluşturulur. Bu nedenle, veritabanı adı "SchoolContext-{GUID}" olacaktır. GUID her kullanıcı için farklı olacaktır.
 Visual Studio 'daki **Görünüm** menüsünden **SQL Server Nesne Gezgini** (ssox) öğesini açın.
-SSOX 'te, **(LocalDB) \MSSQLLocalDB > veritabanları > SchoolContext-{GUID}** ' a tıklayın.
+SSOX 'te, **(LocalDB) \MSSQLLocalDB > veritabanları > SchoolContext-{GUID}**' a tıklayın.
 
 **Tables** düğümünü genişletin.
 

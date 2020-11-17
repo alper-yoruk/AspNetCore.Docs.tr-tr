@@ -3,7 +3,7 @@ title: 2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 author: rick-anderson
 description: ASP.NET Core MVC 'deki öğretici serisinin 2. bölümü.
 ms.author: riande
-ms.date: 08/05/2017
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 1851a61441ed351442f86939022319ad59d10006
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: e51edc15b14a5bdd1d53e547e0b469ad608f46d0
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422639"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688436"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 
@@ -46,24 +46,24 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , denetleyiciler ' e sağ tıklayın **> > denetleyicisi Ekle** Çözüm Gezgini ' ye 
-   ![ sağ tıklayın > denetleyici Ekle ' ye sağ tıklayın](~/tutorials/first-mvc-app/adding-controller/_static/add_controllerCopy.png)
+* **Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> > denetleyicisi Ekle** Çözüm Gezgini ' ye 
+   ![ sağ tıklayın > denetleyici Ekle ' ye sağ tıklayın](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
 
-  ![MVC denetleyicisi ekleme ve adlandırma](~/tutorials/first-mvc-app/adding-controller/_static/acCopy.png)
+  ![MVC denetleyicisi ekleme ve adlandırma](~/tutorials/first-mvc-app/adding-controller/_static/acCopyVS19v16.9.png)
 
-* **Boş MVC denetleyicisi Ekle iletişim kutusunda** , **Merhaba worldcontroller** yazın ve **Ekle** ' yi seçin.
+* **Add New Item-MvcMovie iletişim kutusunda** **HelloWorldController.cs** girin ve **Ekle**' yi seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **Gezgin** simgesini seçin ve ardından **yeni dosya > denetleyiciler** ' i (sağ tıklayın) ve yeni dosyayı *HelloWorldController.cs* olarak adlandırın.
 
-  ![Bağlamsal menü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
+  ![Bağlamsal menü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_fileVSC1.51.png)
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Çözüm Gezgini** , denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
+**Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
 ![Bağlamsal menü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
 **ASP.NET Core** ve **Denetleyici sınıfını** seçin.
@@ -134,7 +134,7 @@ Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Y�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V** IEW ve **C** ) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
+Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V** IEW ve **C**) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
 
 > [!div class="step-by-step"]
 > [Önceki](start-mvc.md) 
@@ -160,14 +160,14 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
+* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
    ![ bağlamsal menü ekleyin](~/tutorials/first-mvc-app/adding-controller/_static/add_controller.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
 
   ![MVC denetleyicisi ekleme ve adlandırma](~/tutorials/first-mvc-app/adding-controller/_static/ac.png)
 
-* **Boş MVC denetleyicisi Ekle iletişim kutusunda** , **Merhaba worldcontroller** yazın ve **Ekle** ' yi seçin.
+* **Boş MVC denetleyicisi Ekle iletişim kutusunda**, **Merhaba worldcontroller** yazın ve **Ekle**' yi seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -177,10 +177,10 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Çözüm Gezgini** , denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
+**Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
 ![Bağlamsal menü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-**ASP.NET Core** ve **MVC denetleyici sınıfı** ' nı seçin.
+**ASP.NET Core** ve **MVC denetleyici sınıfı**' nı seçin.
 
 Denetleyiciyi **Merhaba Dünya denetleyicisine** adlandırın.
 
