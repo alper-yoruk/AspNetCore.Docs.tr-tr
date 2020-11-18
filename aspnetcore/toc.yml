@@ -167,7 +167,7 @@
           href: /learn/modules/create-razor-pages-aspnet-core/
         - name: Web API’si uygulamaları >>
           displayName: tutorial
-          href: /learn/modules/build-web-api-net-core/
+          href: /learn/modules/build-web-api-aspnet-core/
         - name: Buluta özel mikro hizmetler
           items:
             - name: Oluşturma ve dağıtma >>
