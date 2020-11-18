@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 84e344aabc9171020c0117d55eaf1a95e6b768db
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce119d79bc96f01803b63c715332ec3d287473ff
+ms.sourcegitcommit: df808efa68574dd674f1985aa9d03f4f5fab883f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422541"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94851188"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>8. bölüm, ASP.NET Core MVC uygulamasına yeni bir alan ekleyin
 
@@ -41,7 +41,7 @@ EF Code First otomatik olarak bir veritabanı oluşturmak için kullanıldığı
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>Film modeline bir derecelendirme özelliği ekleyin
 
-`Rating` *Modeller/film. cs* 'ye bir özellik ekleyin:
+`Rating` *Modeller/film. cs*'ye bir özellik ekleyin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?name=snippet)]
 
@@ -75,13 +75,13 @@ Yeni özelliği tarayıcı görünümünde görüntülemek, oluşturmak ve düze
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-63)]
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Movies/Index.cshtml?highlight=28-49&range=12-51)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-63)]
 
 ::: moniker-end
 
@@ -123,7 +123,7 @@ Bu öğretici için Code First Migrations kullanılır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
+**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
 
   ![PMC menüsü](adding-model/_static/pmc.png)
 
