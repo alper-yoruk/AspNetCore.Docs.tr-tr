@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051128"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703676"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -193,7 +193,7 @@ Ara yazılım varsayılan olarak tüm yeniden yönlendirmelere bir [Status307Tem
 
 ::: moniker range=">= aspnetcore-3.0"
 
-*Startup.cs* 'de Hizmetleri yapılandırırken:
+*Startup.cs*'de Hizmetleri yapılandırırken:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -214,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-*Startup.cs* 'de Hizmetleri yapılandırırken:
+*Startup.cs*'de Hizmetleri yapılandırırken:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -450,6 +450,20 @@ Visual Studio 'da sertifika sorunlarını gidermek için [IIS Express (DotNet/As
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>Visual Studio ile kullanılan SSL sertifikası IIS Express
 
 IIS Express sertifikayla ilgili sorunları gidermek için Visual Studio yükleyicisinden **Onar** ' ı seçin. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/aspnetcore/issues/16892)bakın.
+
+<a name="trust-ff"></a>
+
+### <a name="firefox-sec_error_inadequate_key_usage-certificate-error"></a>Firefox SEC_ERROR_INADEQUATE_KEY_USAGE sertifika hatası
+
+Firefox tarayıcısı kendi sertifika deposunu kullanır ve bu nedenle [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) veya [Kestrel](xref:fundamentals/servers/kestrel) geliştirici sertifikalarına güvenmez.
+
+Firefox 'u IIS Express veya Kestrel ile kullanmak için, ayarlayın  `security.enterprise_roots.enabled` = `true`
+
+1. `about:config`Firefox tarayıcısına girin.
+1. Riski **kabul et '** i seçin ve riski kabul ediyorsanız devam edin.
+1. **Tümünü göster** ' i seçin
+1. Kurmak `security.enterprise_roots.enabled` = `true`
+1. Firefox 'u çık ve yeniden Başlat
 
 ## <a name="additional-information"></a>Ek bilgiler
 

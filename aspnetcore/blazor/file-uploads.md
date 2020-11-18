@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
+ms.sourcegitcommit: 54fdca99f30b18d69cf0753ca3c84c7dab8f2b0e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673958"
+ms.locfileid: "94691176"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>BlazorKarşıya dosya yükleme ASP.NET Core
 
@@ -53,6 +53,9 @@ Görüntü dosyası alan bir bileşen, `RequestImageFileAsync` görüntünün uy
 
 Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yüklemeyi gösterir. `InputFileChangeEventArgs.GetMultipleFiles` birden çok dosyanın okunmasına izin verir. Kötü amaçlı bir kullanıcının uygulamanın beklediği kadar çok sayıda dosyayı karşıya yüklemesini engellemek için, okumak istediğiniz en fazla dosya sayısını belirtin. `InputFileChangeEventArgs.File` dosya karşıya yükleme birden çok dosyayı desteklemiyorsa, ilk ve yalnızca dosyanın okunmasına izin verir.
 
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs> , <xref:Microsoft.AspNetCore.Components.Forms?displayProperty=fullName> genellikle uygulama dosyasındaki ad alanlarından biri olan ad alanıdır `_Imports.razor` .
+
 ```razor
 <h3>Upload PNG images</h3>
 
@@ -75,7 +78,7 @@ Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yük
 }
 
 @code {
-    IList<string> imageDataUrls = new List<string>();
+    private IList<string> imageDataUrls = new List<string>();
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {

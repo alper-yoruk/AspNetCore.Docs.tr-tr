@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 4a80e3e82a18e0066c7628c8f40401155538e32b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c32c5befe0be3b1ad4bd87649d3cc74b0296a134
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061203"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703715"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma
 
@@ -64,6 +64,10 @@ En basit `fetch` çağrı, yolu temsil eden tek bir parametre kabul eder. Nesne 
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
+1. *Wwwroot/CSS* klasörüne *site. CSS* adlı bir CSS dosyası ekleyin. *Site. css* içeriğini aşağıdaki stillerle değiştirin:
+
+    [!code-css[](first-web-api/samples/3.0/TodoApi/wwwroot/css/site.css)]
+
 1. *Wwwroot/js* klasörüne *site.js* adlı bir JavaScript dosyası ekleyin. *site.js* içeriğini aşağıdaki kodla değiştirin:
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
@@ -71,7 +75,7 @@ En basit `fetch` çağrı, yolu temsil eden tek bir parametre kabul eder. Nesne 
 HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:
 
 1. *ÜzerindeProperties\launchSettings.js* açın.
-1. `launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html* 'de açmaya zorlamak için özelliği kaldırın &mdash; .
+1. `launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html*'de açmaya zorlamak için özelliği kaldırın &mdash; .
 
 Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır. Web API isteklerinin açıklamaları aşağıda verilmiştir.
 
@@ -102,7 +106,7 @@ Web API 'SI başarılı bir durum kodu döndürdüğünde, `getItems` Işlev HTM
 
 Bir yapılacaklar öğesinin güncelleştirilmesi bir tane eklemeye benzer; Ancak, iki önemli fark vardır:
 
-* Yol, güncelleştirilecek öğenin benzersiz tanımlayıcısı ile sone düzeltildi. Örneğin, *api/todoıtems/1* .
+* Yol, güncelleştirilecek öğenin benzersiz tanımlayıcısı ile sone düzeltildi. Örneğin, *api/todoıtems/1*.
 * HTTP eylemi fiili, seçeneğinde gösterildiği gibi konur `method` .
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

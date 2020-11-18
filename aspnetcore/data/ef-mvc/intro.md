@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550653"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703741"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -38,7 +38,7 @@ Contoso Üniversitesi örnek Web uygulaması, Entity Framework (EF) Core ve Visu
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * ASP.NET Core MVC 'yi yeni kullanmaya başladıysanız, bunu başlatmadan önce [ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc) öğreticisini kullanmaya başlayın.
 
@@ -73,10 +73,10 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 
 ## <a name="create-web-app"></a>Web uygulaması oluşturma
 
-1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
-1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri** ' yi seçin.
-1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı** ' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
-1. **Oluştur** ’u seçin.
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri**' yi seçin.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı**' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
+1. **Oluştur**’u seçin.
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
@@ -90,13 +90,13 @@ Birkaç temel değişiklik site menüsünü, düzeni ve giriş sayfasını ayarl
 *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın ve aşağıdaki değişiklikleri yapın:
 
 * Her oluşumunu ' a `ContosoUniversity` değiştirin `Contoso University` . Üç oluşum vardır.
-* **Hakkında** , **öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
+* **Hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
 
 Yukarıdaki değişiklikler aşağıdaki kodda vurgulanır:
 
 [!code-cshtml[](intro/samples/5cu/Views/Shared/_Layout.cshtml?highlight=6,24-38,52)]
 
-*Görünümler/Home/Index. cshtml* 'de, dosyanın içeriğini aşağıdaki biçimlendirmeyle değiştirin:
+*Görünümler/Home/Index. cshtml*'de, dosyanın içeriğini aşağıdaki biçimlendirmeyle değiştirin:
 
 [!code-cshtml[](intro/samples/5cu/Views/Home/Index.cshtml)]
 
@@ -110,7 +110,7 @@ Bu öğretici SQL Server kullanır ve sağlayıcı paketi [Microsoft. EntityFram
 
 EF SQL Server paketi ve bağımlılıkları `Microsoft.EntityFrameworkCore` ve `Microsoft.EntityFrameworkCore.Relational` , EF için çalışma zamanı desteği sağlar.
 
-[Microsoft. AspNetCore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ve [Microsoft. Aspnetcore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ekleyin. Program Yöneticisi konsolunda (PMC), NuGet paketlerini eklemek için aşağıdaki komutları girin:
+[Microsoft. AspNetCore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ve [Microsoft. Aspnetcore. Diagnostics. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ekleyin. Paket Yöneticisi konsolunda (PMC), NuGet paketlerini eklemek için aşağıdaki komutları girin:
 
 ```powershell
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
@@ -142,7 +142,7 @@ Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturu
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-`ID`Özelliği, bu sınıfa karşılık gelen veritabanı tablosunun birincil anahtar ( **PK** ) sütunudur. Varsayılan olarak, EF, `ID` birincil anahtar olarak veya adında bir özelliği Yorumlar `classnameID` . Örneğin, PK yerine adlandırılmış olabilir `StudentID` `ID` .
+`ID`Özelliği, bu sınıfa karşılık gelen veritabanı tablosunun birincil anahtar (**PK**) sütunudur. Varsayılan olarak, EF, `ID` birincil anahtar olarak veya adında bir özelliği Yorumlar `classnameID` . Örneğin, PK yerine adlandırılmış olabilir `StudentID` `ID` .
 
 `Enrollments`Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri, bu varlıkla ilgili diğer varlıkları tutar. `Enrollments`Bir `Student` varlığın özelliği:
 
@@ -150,7 +150,7 @@ Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturu
 * Veritabanındaki belirli bir `Student` satırda iki ilişkili `Enrollment` satır varsa:
   * Bu `Student` varlığın `Enrollments` gezinti özelliği bu iki varlığı içerir `Enrollment` .
   
-`Enrollment` satırlar `StudentID` yabancı anahtar ( **FK** ) sütununda öğrencinin PK değerini içerir.
+`Enrollment` satırlar `StudentID` yabancı anahtar (**FK**) sütununda öğrencinin PK değerini içerir.
 
 Bir gezinti özelliği birden çok varlığı tutabilir:
 
@@ -231,7 +231,7 @@ Dosyayı açın *appsettings.json* ve aşağıdaki biçimlendirmede gösterildi�
 
 <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> `ConfigureServices` Aşağıdaki kodda gösterildiği gibi öğesine ekleyin:
 
-[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=1=2,22-23)]
+[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=6)]
 
 , `AddDatabaseDeveloperPageExceptionFilter` [Geliştirme ortamında](xref:fundamentals/environments)yararlı hata bilgileri sağlar.
 
@@ -280,14 +280,14 @@ Verileri sorgulamak ve kaydetmek için EF 'i kullanacak bir MVC denetleyicisi ve
 
 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, yapı iskelesi olarak bilinir.
 
-* **Çözüm Gezgini** , klasöre sağ tıklayın `Controllers` ve **> yeni yapı iskelesi öğesi Ekle** ' yi seçin.
+* **Çözüm Gezgini**, klasöre sağ tıklayın `Controllers` ve **> yeni yapı iskelesi öğesi Ekle**' yi seçin.
 * **Yapı Iskelesi Ekle** iletişim kutusunda:
   * **Entity Framework kullanarak, görünümlerle MVC denetleyicisi ' ni** seçin.
-  * **Ekle** 'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görünür: ![ Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
-  * **Model sınıfında** **öğrenci** ' yi seçin.
+  * **Ekle**'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görünür: ![ Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
+  * **Model sınıfında** **öğrenci**' yi seçin.
   * **Veri bağlamı sınıfında** **SchoolContext** öğesini seçin.
   * Varsayılan **Studentscontroller** adını olarak kabul edin.
-  * **Ekle** 'ye tıklayın.
+  * **Ekle**'ye tıklayın.
 
 Visual Studio yapı iskelesi altyapısı, `StudentsController.cs` denetleyicisiyle birlikte çalışan bir dosya ve bir dizi görünüm ( `*.cshtml` Dosyalar) oluşturur.
 
@@ -325,7 +325,7 @@ Uygulama başlatıldığında, `DbInitializer.Initialize` yöntemi çağırır `
 Visual Studio 'da veritabanını görüntülemek için **SQL Server Nesne Gezgini** (ssox) kullanın:
 
 * Visual Studio 'daki **Görünüm** menüsünden **SQL Server Nesne Gezgini** ' yi seçin.
-* SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları** ' nı seçin.
+* SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' nı seçin.
 * `ContosoUniversity1`Dosyadaki bağlantı dizesinde bulunan veritabanı adı girişini seçin *appsettings.json* .
 * Veritabanındaki tabloları görmek için **Tablolar** düğümünü genişletin.
 
@@ -402,7 +402,7 @@ Bu öğretici ASP.NET Core 3,1 için güncelleştirilmedi. [ASP.NET Core 5,0](xr
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :
@@ -430,23 +430,23 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 
 * Visual Studio'yu açın.
 
-* **Dosya** menüsünden **Yeni > proje** ' yi seçin.
+* **Dosya** menüsünden **Yeni > proje**' yi seçin.
 
-* Sol bölmeden, **yüklü > Visual C# > Web** ' i seçin.
+* Sol bölmeden, **yüklü > Visual C# > Web**' i seçin.
 
 * **ASP.NET Core Web uygulaması** proje şablonunu seçin.
 
-* Ad olarak **Contosouniversity** yazın ve **Tamam** ' a tıklayın.
+* Ad olarak **Contosouniversity** yazın ve **Tamam**' a tıklayın.
 
   ![Yeni Proje iletişim kutusu](intro/_static/new-project2.png)
 
 * **Yeni ASP.NET Core Web uygulaması** iletişim kutusunun görünmesini bekleyin.
 
-* **.NET Core** , **ASP.NET Core 2,2** ve **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
+* **.NET Core**, **ASP.NET Core 2,2** ve **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
 
 * **Kimlik doğrulamanın** **kimlik doğrulaması yok** olarak ayarlandığından emin olun.
 
-* **Tamam** 'ı seçin
+* **Tamam**'ı seçin
 
   ![Yeni ASP.NET Core projesi iletişim kutusu](intro/_static/new-aspnet2.png)
 
@@ -458,13 +458,13 @@ Birkaç basit değişiklik, site menüsünü, düzeni ve giriş sayfasını ayar
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Hakkında** , **öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
+* **Hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
 
 Değişiklikler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
-*Görünümler/Home/Index. cshtml* 'de, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Görünümler/Home/Index. cshtml*'de, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[](intro/samples/cu/Views/Home/Index.cshtml)]
 
@@ -588,7 +588,7 @@ Burada, `EnsureCreated` veritabanını otomatik olarak oluşturmak için yöntem
 
 Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa, veritabanının yeni olduğunu ve test verileriyle hazırlanması gerektiğini varsayar. Performansı iyileştirmek için test verilerini koleksiyonlar yerine dizilere yükler `List<T>` .
 
-*Program.cs* ' de, `Main` Uygulama başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
+*Program.cs*' de, `Main` Uygulama başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
 * Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
@@ -609,16 +609,16 @@ Bu bölümde, verileri sorgulamak ve kaydetmek için EF 'i kullanacak bir MVC de
 
 CRUD eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, yapı iskelesi olarak bilinir. Yapı iskelesi, yapı oluşturma işleminden farklı olarak, kendi gereksinimlerinize uyacak şekilde değiştirebileceğiniz bir başlangıç noktası ve genellikle oluşturulan kodu değiştirmezsiniz. Oluşturulan kodu özelleştirmeniz gerektiğinde, kısmi sınıfları kullanırsınız veya işlemler değiştiğinde kodu yeniden oluşturmanız gerekir.
 
-* **Çözüm Gezgini** ' de **denetleyiciler** klasörüne sağ tıklayın ve **> yeni iskele öğe Ekle** ' yi seçin.
+* **Çözüm Gezgini** ' de **denetleyiciler** klasörüne sağ tıklayın ve **> yeni iskele öğe Ekle**' yi seçin.
 * **Yapı Iskelesi Ekle** iletişim kutusunda:
   * **Entity Framework kullanarak, görünümlerle MVC denetleyicisi ' ni** seçin.
-  * **Ekle** 'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görünür: ![ Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
-  * **Model sınıfı** ' nda **öğrenci** ' yi seçin.
+  * **Ekle**'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görünür: ![ Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
+  * **Model sınıfı** ' nda **öğrenci**' yi seçin.
   * **Veri bağlamı sınıfında** **SchoolContext** öğesini seçin.
   * Varsayılan **Studentscontroller** adını olarak kabul edin.
-  * **Ekle** 'ye tıklayın.
+  * **Ekle**'ye tıklayın.
 
-Visual Studio yapı iskelesi altyapısı, denetleyicisiyle birlikte çalışan bir *StudentsController.cs* dosyası ve bir dizi görünüm ( *. cshtml* dosyası) oluşturur.
+Visual Studio yapı iskelesi altyapısı, denetleyicisiyle birlikte çalışan bir *StudentsController.cs* dosyası ve bir dizi görünüm (*. cshtml* dosyası) oluşturur.
 
 Denetleyicinin bir `SchoolContext` Oluşturucu parametresi olarak aldığını unutmayın.
 
@@ -652,7 +652,7 @@ Tarayıcıyı kapatın.
 
 SSOX penceresi henüz açık değilse, Visual Studio 'daki **Görünüm** menüsünden bunu seçin.
 
-SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları** ' na tıklayın ve ardından dosyadaki bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın *appsettings.json* .
+SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' na tıklayın ve ardından dosyadaki bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın *appsettings.json* .
 
 Veritabanındaki tabloları görmek için **Tablolar** düğümünü genişletin.
 
