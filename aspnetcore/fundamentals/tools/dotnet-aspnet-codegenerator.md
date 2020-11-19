@@ -4,7 +4,7 @@ author: rick-anderson
 description: DotNet ASPNET-CodeGenerator komutu yapı ASP.NET Core projeler.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 07/04/2019
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 88d761b09833a14de5af9f9610753174867aa09a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8844b0014cac58f414d79df4c64bc0efac75bfe1
+ms.sourcegitcommit: d29535ea0b4197443fd884aaa6e5b4b763d04fc7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059994"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920709"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>DotNet ASPNET-CodeGenerator
 
@@ -31,9 +31,9 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 `dotnet aspnet-codegenerator` -ASP.NET Core scafkatlama altyapısını çalıştırır. `dotnet aspnet-codegenerator` yalnızca komut satırından yapı iskelesi sağlamak için gereklidir, Visual Studio ile scafkatlamayı kullanmak gerekli değildir.
 
-Bu makale [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) ve üzeri için geçerlidir.
+## <a name="install-and-update-aspnet-codegenerator"></a>ASPNET-CodeGenerator 'ı yükleyip güncelleştirme
 
-## <a name="installing-aspnet-codegenerator"></a>ASPNET-CodeGenerator yükleniyor
+[.NET SDK 'yı](https://dotnet.microsoft.com/download)yükler.
 
 `dotnet-aspnet-codegenerator` yüklenmesi gereken [küresel bir araçtır](/dotnet/core/tools/global-tools) . Aşağıdaki komut aracın en son kararlı sürümünü yüklüyor `dotnet-aspnet-codegenerator` :
 
@@ -47,6 +47,17 @@ Aşağıdaki komut, `dotnet-aspnet-codegenerator` yüklü .NET Core SDK 'larınd
 dotnet tool update -g dotnet-aspnet-codegenerator
 ```
 
+## <a name="uninstall-aspnet-codegenerator"></a>ASPNET-CodeGenerator 'ı kaldır
+
+`aspnet-codegenerator`Sorunları çözmek için kaldırmak gerekli olabilir. Örneğin, bir önizleme sürümünü yüklediyseniz `aspnet-codegenerator` , yayınlanan sürümü yüklemeden önce bu sürümü kaldırın.
+
+Aşağıdaki komutlar `dotnet-aspnet-codegenerator` Aracı kaldırır ve en son kararlı sürümü kurar:
+
+```dotnetcli
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+```
+
 ## <a name="synopsis"></a>Özeti
 
 ```
@@ -54,7 +65,7 @@ dotnet aspnet-codegenerator [arguments] [-p|--project] [-n|--nuget-package-dir] 
 dotnet aspnet-codegenerator [-h|--help]
 ```
 
-## <a name="description"></a>Açıklama
+## <a name="description"></a>Description
 
 `dotnet aspnet-codegenerator`Genel komut ASP.NET Core kod Oluşturucu ve yapı iskelesi altyapısını çalıştırır.
 
@@ -109,7 +120,7 @@ Aşağıdaki bölümler, desteklenen oluşturucular için kullanılabilen seçen
 * Alan
 * Kumandasını
 * Identity  
-* Razorsayfasında
+* Razorpage (sayfa) 
 * Görüntüle
 
 <a name="area"></a>
@@ -155,7 +166,7 @@ dotnet aspnet-codegenerator controller -h
 
 Bir örneği için bkz. [film modelini yapı iskelesi](xref:tutorials/first-mvc-app/adding-model) `dotnet aspnet-codegenerator controller` .
 
-### <a name="no-locrazorpage"></a>Razorsayfasında
+### <a name="no-locrazorpage"></a>Razorpage (sayfa) 
 
 <a name="rp"></a>
 
