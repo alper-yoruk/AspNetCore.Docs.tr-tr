@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 49300d32096e577db9b13a0510cc310b91ddb51d
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 4de34a75da932b41190caa8434ac5be8cc0710fd
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365359"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981940"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 'de model bağlama
 
@@ -67,7 +67,7 @@ Framework daha sonra yöntemi çağırır `GetById` , parametresi için 2 ' ye g
 
 Önceki örnekte, model bağlama hedefleri basit türler olan yöntem parametreleridir. Hedefler, karmaşık bir türün özellikleri de olabilir. Her bir özellik başarıyla bağlandıktan sonra, bu özellik için [model doğrulaması](xref:mvc/models/validation) oluşur. Hangi verilerin modele bağladığına ve tüm bağlama veya doğrulama hatalarıyla ilgili kayıt, [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) veya [Pagemodel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)içinde depolanır. Bu işlemin başarılı olup olmadığını öğrenmek için uygulama [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) bayrağını denetler.
 
-## <a name="targets"></a>Targets
+## <a name="targets"></a>Hedefler
 
 Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
@@ -204,7 +204,7 @@ Tür dönüştürme hatalarının model durumu hatalarına neden olmasını iste
 
 Model cildin kaynak dizeleri dönüştürebileceğiniz basit türler aşağıdakileri içerir:
 
-* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Boole](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [Tarih Saat](xref:System.ComponentModel.DateTimeConverter)
@@ -304,7 +304,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ### <a name="modelbinder-attribute"></a>[Modelciltçi] özniteliği
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> türlere, özelliklere veya parametrelere uygulanabilir. Belirli örneği veya türü bağlamak için kullanılan model Bağlayıcısı türünü belirtmeyi sağlar. Örneğin:
+<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> türlere, özelliklere veya parametrelere uygulanabilir. Belirli örneği veya türü bağlamak için kullanılan model Bağlayıcısı türünü belirtmeyi sağlar. Örnek:
 
 ```C#
 [HttpPost]
@@ -325,7 +325,7 @@ public class Instructor
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
@@ -333,13 +333,13 @@ Ayrıca bkz `[Required]` . [model doğrulama](xref:mvc/models/validation#require
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -384,7 +384,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 
@@ -488,7 +488,7 @@ HTTP isteğine eklenen karşıya yüklenen dosya.  Ayrıca, `IEnumerable<IFormFi
 
 ### <a name="cancellationtoken"></a>CancellationToken
 
-Zaman uyumsuz denetleyicilerde etkinliği iptal etmek için kullanılır.
+Eylemler, isteğe bağlı `CancellationToken` olarak bir parametre olarak bağlanabilir. Bu, <xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted> http isteğini temel alan bağlantı iptal edildiğinde bu sinyalleri bağlar. Eylemler, denetleyici eylemlerinin bir parçası olarak yürütülen uzun süren zaman uyumsuz işlemleri iptal etmek için bu parametreyi kullanabilir.
 
 ### <a name="formcollection"></a>Form koleksiyonu
 
@@ -554,7 +554,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama 
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -616,7 +616,7 @@ Framework daha sonra yöntemi çağırır `GetById` , parametresi için 2 ' ye g
 
 Önceki örnekte, model bağlama hedefleri basit türler olan yöntem parametreleridir. Hedefler, karmaşık bir türün özellikleri de olabilir. Her bir özellik başarıyla bağlandıktan sonra, bu özellik için [model doğrulaması](xref:mvc/models/validation) oluşur. Hangi verilerin modele bağladığına ve tüm bağlama veya doğrulama hatalarıyla ilgili kayıt, [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) veya [Pagemodel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)içinde depolanır. Bu işlemin başarılı olup olmadığını öğrenmek için uygulama [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) bayrağını denetler.
 
-## <a name="targets"></a>Targets
+## <a name="targets"></a>Hedefler
 
 Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
@@ -753,7 +753,7 @@ Tür dönüştürme hatalarının model durumu hatalarına neden olmasını iste
 
 Model cildin kaynak dizeleri dönüştürebileceğiniz basit türler aşağıdakileri içerir:
 
-* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Boole](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [Tarih Saat](xref:System.ComponentModel.DateTimeConverter)
@@ -835,13 +835,13 @@ Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öz
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -867,7 +867,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -912,7 +912,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 
@@ -1023,7 +1023,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 

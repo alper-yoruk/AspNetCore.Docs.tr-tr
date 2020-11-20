@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 84747e2d13275a23e83dc2dc0f666cb0c8d001b1
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634632"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981953"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -148,7 +148,7 @@ Blazor`InputRadio` `InputRadioGroup` Tümleşik doğrulama ile radyo düğmesi g
 
 ### <a name="component-virtualization"></a>Bileşen sanallaştırma
 
-Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Daha fazla bilgi için bkz. <xref:blazor/forms-validation#radio-buttons>.
+Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Daha fazla bilgi için bkz. <xref:blazor/components/virtualization>.
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` olay desteği
 
@@ -390,7 +390,7 @@ Bkz. [Kerberos kimlik doğrulaması ve rol tabanlı erişim denetimi (RBAC)](xre
 
 JSON verileri, ve ' dan ' a okunabilir ve yazılabilir ve `HttpRequest` `HttpResponse` Yeni <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> ve `WriteAsJsonAsync` genişletme yöntemleri kullanılarak yapılabilir. Bu uzantı yöntemleri JSON verilerini işlemek için serileştiricide [System.Text.Js](xref:System.Text.Json) kullanır. Yeni `HasJsonContentType` genişletme yöntemi bir ISTEĞIN JSON içerik türüne sahip olup olmadığını da denetleyebilir.
 
-JSON uzantısı yöntemleri, JSON API 'Leri bir [endpoint routing](xref:fundamentals/routing) programlama stilinde, * *. **koda yol** * çağırıyoruz. Basit bir şekilde temel JSON API 'Leri oluşturmak isteyen geliştiriciler için yeni bir seçenektir. Örneğin, yalnızca birkaç uç nokta içeren bir Web uygulaması, ASP.NET Core MVC 'nin tüm işlevleri yerine kod yolunu kullanmayı seçebilir:
+JSON uzantısı yöntemleri, JSON API 'Leri bir [endpoint routing](xref:fundamentals/routing) programlama stilinde, * *.**koda yol*** çağırıyoruz. Basit bir şekilde temel JSON API 'Leri oluşturmak isteyen geliştiriciler için yeni bir seçenektir. Örneğin, yalnızca birkaç uç nokta içeren bir Web uygulaması, ASP.NET Core MVC 'nin tüm işlevleri yerine kod yolunu kullanmayı seçebilir:
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>

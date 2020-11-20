@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 8a2dc802a1d05ead7445e350e3aef0ce7dfb2bb8
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637723"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981927"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -39,7 +39,7 @@ Bileşen yaşam döngüsü olayları:
 1. Bileşen bir istek üzerinde ilk kez işleme alıyorsa:
    * Bileşenin örneğini oluşturun.
    * Özellik ekleme işlemini gerçekleştirin. Öğesini çalıştırın [`SetParametersAsync`](#before-parameters-are-set) .
-   * Çağrısı yapın [`OnInitialized{Async}`](#component-initialization-methods) . Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülmemişse, bileşeni işle.
+   * Çağrısı yapın [`OnInitialized{Async}`](#component-initialization-methods) . Bir <xref:System.Threading.Tasks.Task> döndürülürse,, <xref:System.Threading.Tasks.Task> bekletildi ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülürse, bileşen işlenir.
 1. [`OnParametersSet{Async}`](#after-parameters-are-set)Bileşeni çağırın ve işleme. Bir <xref:System.Threading.Tasks.Task> ' dan döndürülürse, `OnParametersSetAsync` ' <xref:System.Threading.Tasks.Task> de beklemiş olur ve sonra bileşen tekrar kullanılır.
 
 ![Bir::: No-Loc (Razor)::: bileşen::: No-Loc (Blazor)::: içinde bileşen yaşam döngüsü olayları](lifecycle/_static/lifecycle1.png)

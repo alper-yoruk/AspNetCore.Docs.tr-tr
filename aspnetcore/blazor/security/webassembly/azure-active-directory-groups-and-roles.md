@@ -19,16 +19,19 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 680b44a705b66be0aab824487119cdb118b44d0f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055314"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981888"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) grupları, yönetici rolleri ve Kullanıcı tanımlı roller
 
 Sağlayan, [Luke Latham](https://github.com/guardrex) ve [Javier Calvarro Nelson](https://github.com/javiercn)
+
+> [!NOTE]
+> Bu makale Blazor , Microsoft v 1.0 ile ASP.NET Core Apps sürüm 3,1 için geçerlidir Identity ve v 2.0 ile 5,0 sürümüne güncelleştirme için zamanlanır Identity . Daha fazla bilgi için bkz. [ Blazor AAD/B2C grupları ve rolleriyle birlikte bulunan (dotnet/AspNetCore.Docs #17683)](https://github.com/dotnet/AspNetCore.Docs/issues/17683).
 
 Azure Active Directory (AAD), ile birleştirilebilir çeşitli yetkilendirme yaklaşımları sağlar ASP.NET Core Identity :
 
@@ -506,7 +509,7 @@ Sunucu API 'SI, istemci tarafı WebAssembly uygulamasındaki sayfalara ve kaynak
 > [!NOTE]
 > Bu kılavuz Şu anda kullanıcıları [AAD Kullanıcı tanımlı rollerinin](#user-defined-roles)temelinde yetkilendirmeye dahil değildir.
 
-Bu bölümdeki kılavuz, sunucu API uygulamasını Microsoft Graph API çağrısı için bir [*Daemon uygulaması*](/azure/active-directory/develop/scenario-daemon-overview) olarak yapılandırır. Bu yaklaşım şu **değildir** :
+Bu bölümdeki kılavuz, sunucu API uygulamasını Microsoft Graph API çağrısı için bir [*Daemon uygulaması*](/azure/active-directory/develop/scenario-daemon-overview) olarak yapılandırır. Bu yaklaşım şu **değildir**:
 
 * `access_as_user`Kapsam gerektir.
 * API isteğini yapan kullanıcı/istemci adına Graph API erişin.
@@ -532,7 +535,7 @@ Uygulama ayarları dosyasında ( `appsettings.json` veya `appsettings.Production
 },
 ```
 
-Örneğin:
+Örnek:
 
 ```json
 "AzureAd": {

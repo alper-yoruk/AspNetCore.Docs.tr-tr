@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 209d055f6205eceb9efb5434427c303345791809
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94703676"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981966"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -464,6 +464,8 @@ Firefox 'u IIS Express veya Kestrel ile kullanmak için, ayarlayın  `security.e
 1. **Tümünü göster** ' i seçin
 1. Kurmak `security.enterprise_roots.enabled` = `true`
 1. Firefox 'u çık ve yeniden Başlat
+
+Daha fazla bilgi için bkz. [Firefox 'Ta sertifika yetkililerini (CA 'lar) ayarlama](https://support.mozilla.org/kb/setting-certificate-authorities-firefox).
 
 ## <a name="additional-information"></a>Ek bilgiler
 
