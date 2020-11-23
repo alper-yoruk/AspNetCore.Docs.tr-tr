@@ -1,7 +1,7 @@
 ---
 title: RazorASP.NET Core sayfalara giriş
 author: Rick-Anderson
-description: RazorASP.NET Core sayfalarındaki sayfaların, MVC kullanmaktan daha kolay ve daha üretken bir şekilde kodlamasını nasıl sağladığını öğrenin.
+description: RazorASP.NET Core sayfalarındaki sayfaların, MVC kullanmaktan daha kolay ve daha üretken olmasını nasıl sağladığını açıklar.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
@@ -18,16 +18,15 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 89e06d00e9312a428c4e164b0dc60527fe12d904
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: bc5f3c85d7ace120dec8369f4550a097b4f258ce
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430880"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417649"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
 
-::: moniker range=">= aspnetcore-3.0"
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Ryan şimdi ak](https://github.com/rynowak)
 
@@ -39,19 +38,43 @@ Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bö
 
 ## <a name="prerequisites"></a>Önkoşullar
 
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
+
+# <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
+
+[!INCLUDE[](~/includes/net-core-prereqs-mac-5.0.md)]
+
+---
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="rpvs17"></a>
 
@@ -73,7 +96,7 @@ Bir sayfa projesi oluşturma hakkında ayrıntılı yönergeler için bkz. [ Raz
 
 ## <a name="no-locrazor-pages"></a>Razor Sayfaları
 
-Razor*Startup.cs* 'de sayfalar etkin:
+Razor*Startup.cs*'de sayfalar etkin:
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -91,7 +114,7 @@ Bir sınıf kullanan benzer bir sayfa `PageModel` aşağıdaki iki dosyada göst
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-Kural gereği, `PageModel` sınıf dosyası Razor *. cs* eklenmiş olan sayfa dosyasıyla aynı ada sahiptir. Örneğin, önceki Razor sayfa *Pages/Index2. cshtml* ' dir. Sınıfını içeren dosya `PageModel` *sayfa/Index2. cshtml. cs* olarak adlandırılır.
+Kural gereği, `PageModel` sınıf dosyası Razor *. cs* eklenmiş olan sayfa dosyasıyla aynı ada sahiptir. Örneğin, önceki Razor sayfa *Pages/Index2. cshtml*' dir. Sınıfını içeren dosya `PageModel` *sayfa/Index2. cshtml. cs* olarak adlandırılır.
 
 URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindeki konumuna göre belirlenir. Aşağıdaki tabloda, bir Razor sayfa yolu ve eşleşen URL gösterilmektedir:
 
@@ -167,7 +190,7 @@ Doğrulama hatalarını kontrol edin.
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
-Sayfalardan işlenmiş HTML */Create. cshtml* :
+Sayfalardan işlenmiş HTML */Create. cshtml*:
 
 [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
@@ -216,7 +239,7 @@ Razor Sayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özellik
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml)]
 
-İlişkili `PageModel` Sınıf ( *Index.cshtml.cs* ):
+İlişkili `PageModel` Sınıf (*Index.cshtml.cs*):
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
@@ -358,7 +381,7 @@ Sayfalar, görünüm altyapısının tüm özellikleri ile çalışır Razor . D
 
 Bu özelliklerden bazılarının avantajlarından yararlanarak bu sayfayı declutter edelim.
 
-*Sayfa/paylaşılan/_Layout. cshtml* 'ye bir [Düzen sayfası](xref:mvc/views/layout) ekleyin:
+*Sayfa/paylaşılan/_Layout. cshtml*'ye bir [Düzen sayfası](xref:mvc/views/layout) ekleyin:
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Shared/_Layout2.cshtml?hightlight=12)]
 
@@ -370,7 +393,7 @@ Bu özelliklerden bazılarının avantajlarından yararlanarak bu sayfayı declu
 
 Daha fazla bilgi için bkz. [Düzen sayfası](xref:mvc/views/layout).
 
-[Layout](xref:mvc/views/layout#specifying-a-layout) özelliği *Pages/_ViewStart. cshtml* ' de ayarlanır:
+[Layout](xref:mvc/views/layout#specifying-a-layout) özelliği *Pages/_ViewStart. cshtml*' de ayarlanır:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -420,7 +443,7 @@ Güncelleştirilmiş *sayfalar/oluşturma. cshtml* görünüm dosyası *_ViewImp
 
 Yukarıdaki kodda *_ViewImports. cshtml* ad alanı ve etiket yardımcıları içeri aktardı. Düzen dosyası JavaScript dosyalarını içeri aktardı.
 
-[ Razor Başlangıç projesi sayfaları](#rpvs17) */_ValidationScriptsPartial. cshtml* , Istemci tarafı doğrulama 'yı bağlayan sayfaları içerir.
+[ Razor Başlangıç projesi sayfaları](#rpvs17) */_ValidationScriptsPartial. cshtml*, Istemci tarafı doğrulama 'yı bağlayan sayfaları içerir.
 
 Kısmi görünümler hakkında daha fazla bilgi için bkz <xref:mvc/views/partial> ..
 
@@ -444,13 +467,13 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örneğin:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örnek:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örneğin:
+Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örnek:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -458,7 +481,7 @@ Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluştu
 
 Sayfa adı, kök */Pages* klasöründeki sayfanın başında `/` (örneğin,) bir yoldur `/Index` . Önceki URL oluşturma örnekleri, bir URL 'YI sabit kodlamadan gelişmiş seçenekler ve işlevsel yetenekler sunar. URL oluşturma [yönlendirme](xref:mvc/controllers/routing) kullanır ve yolun hedef yolda nasıl tanımlandığınıza göre parametreleri oluşturabilir ve kodlayabilir.
 
-Sayfalar için URL oluşturma göreli adları destekler. Aşağıdaki tabloda, `RedirectToPage` *sayfalarda/müşteriler/Create. cshtml* 'de farklı parametreler kullanılarak hangi dizin sayfasının seçildiği gösterilmektedir.
+Sayfalar için URL oluşturma göreli adları destekler. Aşağıdaki tabloda, `RedirectToPage` *sayfalarda/müşteriler/Create. cshtml*'de farklı parametreler kullanılarak hangi dizin sayfasının seçildiği gösterilmektedir.
 
 | RedirectToPage (x)| Sayfa |
 | ----------------- | ------------ |
@@ -622,16 +645,6 @@ Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. <
 
 ::: moniker range="< aspnetcore-3.0"
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Ryan şimdi ak](https://github.com/rynowak)
-
-Razor Sayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir yönüdür.
-
-Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz. [ASP.NET Core MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc).
-
-Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
-
-## <a name="prerequisites"></a>Önkoşullar
-
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
@@ -668,7 +681,7 @@ Oluşturulan *. csproj* dosyasını Mac için Visual Studio açın.
 
 ## <a name="no-locrazor-pages"></a>Razor Sayfaları
 
-Razor*Startup.cs* 'de sayfalar etkin:
+Razor*Startup.cs*'de sayfalar etkin:
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -686,7 +699,7 @@ Bir sınıf kullanan benzer bir sayfa `PageModel` aşağıdaki iki dosyada göst
 
 [!code-csharp[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-Kural gereği, `PageModel` sınıf dosyası Razor *. cs* eklenmiş olan sayfa dosyasıyla aynı ada sahiptir. Örneğin, önceki Razor sayfa *Pages/Index2. cshtml* ' dir. Sınıfını içeren dosya `PageModel` *sayfa/Index2. cshtml. cs* olarak adlandırılır.
+Kural gereği, `PageModel` sınıf dosyası Razor *. cs* eklenmiş olan sayfa dosyasıyla aynı ada sahiptir. Örneğin, önceki Razor sayfa *Pages/Index2. cshtml*' dir. Sınıfını içeren dosya `PageModel` *sayfa/Index2. cshtml. cs* olarak adlandırılır.
 
 URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindeki konumuna göre belirlenir. Aşağıdaki tabloda, bir Razor sayfa yolu ve eşleşen URL gösterilmektedir:
 
@@ -768,11 +781,11 @@ Razor Sayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özellik
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Giriş sayfası ( *Index. cshtml* ):
+Giriş sayfası (*Index. cshtml*):
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml)]
 
-İlişkili `PageModel` Sınıf ( *Index.cshtml.cs* ):
+İlişkili `PageModel` Sınıf (*Index.cshtml.cs*):
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
 
@@ -874,11 +887,11 @@ services.AddMvc()
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Sayfalarla düzenleri, partileri, şablonları ve etiket yardımcıları kullanma Razor
 
-Sayfalar, görünüm altyapısının tüm özellikleri ile çalışır Razor . Düzenler, partıals, şablonlar, etiket yardımcıları, *_ViewStart. cshtml* , *_ViewImports. cshtml* geleneksel görünümlerde aynı şekilde çalışır Razor .
+Sayfalar, görünüm altyapısının tüm özellikleri ile çalışır Razor . Düzenler, partıals, şablonlar, etiket yardımcıları, *_ViewStart. cshtml*, *_ViewImports. cshtml* geleneksel görünümlerde aynı şekilde çalışır Razor .
 
 Bu özelliklerden bazılarının avantajlarından yararlanarak bu sayfayı declutter edelim.
 
-*Sayfa/paylaşılan/_Layout. cshtml* 'ye bir [Düzen sayfası](xref:mvc/views/layout) ekleyin:
+*Sayfa/paylaşılan/_Layout. cshtml*'ye bir [Düzen sayfası](xref:mvc/views/layout) ekleyin:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_LayoutSimple.cshtml)]
 
@@ -889,7 +902,7 @@ Bu özelliklerden bazılarının avantajlarından yararlanarak bu sayfayı declu
 
 Daha fazla bilgi için bkz. [Düzen sayfası](xref:mvc/views/layout) .
 
-[Layout](xref:mvc/views/layout#specifying-a-layout) özelliği *Pages/_ViewStart. cshtml* ' de ayarlanır:
+[Layout](xref:mvc/views/layout#specifying-a-layout) özelliği *Pages/_ViewStart. cshtml*' de ayarlanır:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -937,7 +950,7 @@ Güncelleştirilmiş *Sayfalar/Create. cshtml* görünüm dosyası:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-[ Razor Başlangıç projesi sayfaları](#rpvs17) */_ValidationScriptsPartial. cshtml* , Istemci tarafı doğrulama 'yı bağlayan sayfaları içerir.
+[ Razor Başlangıç projesi sayfaları](#rpvs17) */_ValidationScriptsPartial. cshtml*, Istemci tarafı doğrulama 'yı bağlayan sayfaları içerir.
 
 Kısmi görünümler hakkında daha fazla bilgi için bkz <xref:mvc/views/partial> ..
 
@@ -960,7 +973,7 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örneğin:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örnek:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -968,7 +981,7 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
 
 Sayfa adı, kök */Pages* klasöründeki sayfanın başında `/` (örneğin,) bir yoldur `/Index` . Önceki URL oluşturma örnekleri bir URL 'YI kodlamadan gelişmiş seçenekler ve işlevsel yetenekler sunar. URL oluşturma [yönlendirme](xref:mvc/controllers/routing) kullanır ve yolun hedef yolda nasıl tanımlandığınıza göre parametreleri oluşturabilir ve kodlayabilir.
 
-Sayfalar için URL oluşturma göreli adları destekler. Aşağıdaki tabloda, `RedirectToPage` *sayfa/müşteri/oluşturma. cshtml* 'den farklı parametrelerle hangi dizin sayfasının seçildiği gösterilmektedir:
+Sayfalar için URL oluşturma göreli adları destekler. Aşağıdaki tabloda, `RedirectToPage` *sayfa/müşteri/oluşturma. cshtml*'den farklı parametrelerle hangi dizin sayfasının seçildiği gösterilmektedir:
 
 | RedirectToPage (x)| Sayfa |
 | ----------------- | ------------ |
@@ -1025,7 +1038,7 @@ Mizanpajda, başlık ViewData sözlüğünden okundu:
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core bir [denetleyicide](/dotnet/api/microsoft.aspnetcore.mvc.controller) [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Controller_TempData) özelliğini kullanıma sunar. Bu özellik, okunana kadar verileri depolar. `Keep`Ve `Peek` yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData` , bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
+ASP.NET Core bir [denetleyicide](/dotnet/api/microsoft.aspnetcore.mvc.controller) [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata#Microsoft_AspNetCore_Mvc_Controller_TempData) özelliğini kullanıma sunar. Bu özellik, okunana kadar verileri depolar. `Keep`Ve `Peek` yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData` , bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
 
 Aşağıdaki kod, şunu kullanarak değerini ayarlar `Message` `TempData` :
 

@@ -5,7 +5,7 @@ description: GRPC 'yi .NET uygulamaları için nasıl yapılandıracağınızı 
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 11/23/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: e0b782a254cafc440638ca77a3b9ac885dc3575e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059968"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417597"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET için gRPC yapılandırması
 
@@ -32,7 +32,7 @@ ms.locfileid: "93059968"
 
 gRPC Hizmetleri, `AddGrpc` *Startup.cs* içinde ile yapılandırılır. Aşağıdaki tabloda, gRPC hizmetlerini yapılandırma seçenekleri açıklanmaktadır:
 
-| Seçenek | Varsayılan değer | Açıklama |
+| Seçenek | Varsayılan değer | Description |
 | ------ | ------------- | ----------- |
 | MaxSendMessageSize | `null` | Sunucudan gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
 | MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek, bayt olarak en büyük ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
@@ -55,7 +55,7 @@ Tek bir hizmetin seçenekleri ' de belirtilen genel seçenekleri geçersiz kıla
 
 gRPC istemci yapılandırması üzerinde ayarlanır `GrpcChannelOptions` . Aşağıdaki tabloda, gRPC kanallarını yapılandırma seçenekleri açıklanmaktadır:
 
-| Seçenek | Varsayılan değer | Açıklama |
+| Seçenek | Varsayılan değer | Description |
 | ------ | ------------- | ----------- |
 | HttpHandler | Yeni örnek | `HttpMessageHandler`GRPC çağrısı yapmak için kullanılır. İstemci `HttpClientHandler` , gRPC çağrılarına YÖNELIK http işlem hattına özel bir yapılandırma veya ek işleyiciler ekleme şeklinde ayarlanabilir. Hayır `HttpMessageHandler` belirtilirse `HttpClientHandler` kanal için otomatik elden çıkarmada yeni bir örnek oluşturulur. |
 | HttpClient | `null` | `HttpClient`GRPC çağrısı yapmak için kullanılır. Bu ayar, için bir alternatiftir `HttpHandler` . |
@@ -65,6 +65,7 @@ gRPC istemci yapılandırması üzerinde ayarlanır `GrpcChannelOptions` . Aşa�
 | <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | İstemci tarafından alınabilecek, bayt olarak en büyük ileti boyutu. İstemci bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, istemcinin daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
 | Kimlik bilgileri | `null` | Bir `ChannelCredentials` örnek. Kimlik bilgileri, gRPC çağrılarına kimlik doğrulama meta verileri eklemek için kullanılır. |
 | CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
+| ThrowOperationCanceledOnCancellation | `false` | Olarak ayarlanırsa `true` , istemciler <xref:System.OperationCanceledException> bir çağrı iptal edildiğinde veya son tarihi aşıldığında atar. |
 
 Aşağıdaki kod:
 

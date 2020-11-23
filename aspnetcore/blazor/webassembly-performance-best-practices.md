@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 423745d734d8da2b8f3f974f9b4dd1a0265d4877
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054742"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417389"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 
@@ -32,8 +32,8 @@ ms.locfileid: "93054742"
 
 Blazor WebAssembly , en gerçekçi uygulama kullanıcı arabirimi senaryolarında yüksek performansa olanak tanımak için dikkatle tasarlanır ve iyileştirilir. Ancak en iyi sonuçları üretmek, doğru desenleri ve özellikleri kullanan geliştiricilere bağlıdır. Aşağıdaki noktaları göz önünde bulundurun:
 
-* **Çalışma zamanı işleme** : .NET kodu WebAssembly çalışma zamanının içindeki yorumlayıcı üzerinde çalışır, bu nedenle CPU üretilen işi sınırlıdır. Yoğun senaryolarda uygulama, [işleme hızını iyileştirmenin](#optimize-rendering-speed)avantajlarından yararlanır.
-* **Başlangıç zamanı** : uygulama bir .NET çalışma zamanını tarayıcıya aktarır, bu nedenle [uygulama indirme boyutunu en aza indirecek](#minimize-app-download-size)Özellikler kullanılması önemlidir.
+* **Çalışma zamanı işleme**: .NET kodu WebAssembly çalışma zamanının içindeki yorumlayıcı üzerinde çalışır, bu nedenle CPU üretilen işi sınırlıdır. Yoğun senaryolarda uygulama, [işleme hızını iyileştirmenin](#optimize-rendering-speed)avantajlarından yararlanır.
+* **Başlangıç zamanı**: uygulama bir .NET çalışma zamanını tarayıcıya aktarır, bu nedenle [uygulama indirme boyutunu en aza indirecek](#minimize-app-download-size)Özellikler kullanılması önemlidir.
 
 ## <a name="optimize-rendering-speed"></a>İşleme hızını iyileştirme
 
@@ -150,7 +150,7 @@ Daha fazla bilgi için bkz. <xref:blazor/components/virtualization>.
 
 Çoğu Blazor bileşen agresif iyileştirme çabalarına gerek kalmaz. Bunun nedeni çoğu bileşenin kullanıcı arabiriminde genellikle tekrarlanmamasından ve yüksek sıklıkta yeniden oturum etmamamasından kaynaklanır. Örneğin, `@page` iletişim kutuları veya formlar gibi üst düzey kullanıcı arabirimi parçalarını temsil eden bileşenler ve bileşenler, büyük olasılıkla yalnızca bir kez ve Kullanıcı hareketiyle yanıt olarak yalnızca bir kez görünür. Bu bileşenler yüksek bir işleme iş yükü oluşturmaz, bu sayede, işleme performansı hakkında endişelenmeden istediğiniz Framework özelliklerinin herhangi bir birleşimini ücretsiz olarak kullanabilirsiniz.
 
-Ancak, ölçeklendirilmesi gereken bileşenleri oluşturduğunuz yaygın senaryolar da vardır. Örneğin:
+Ancak, ölçeklendirilmesi gereken bileşenleri oluşturduğunuz yaygın senaryolar da vardır. Örnek:
 
  * Büyük iç içe yerleştirilmiş formlarda yüzlerce ayrı giriş, etiket ve diğer öğeler bulunabilir.
  * Kılavuzlarda binlerce hücre olabilir.
@@ -297,7 +297,7 @@ Yukarıdaki örnekte, `Data` her hücre için farklıdır, ancak `Options` tüm�
 
 `<CascadingValue>`Bileşenin adlı isteğe bağlı bir parametresi vardır `IsFixed` .
 
- * `IsFixed`Değer `false` (varsayılan) ise, basamaklı değerin her alıcısı değişiklik bildirimlerini almak için bir abonelik ayarlar. Bu durumda, her biri, `[CascadingParameter]` abonelik izlemenin düzenli olarak **çok daha pahalıdır** `[Parameter]` .
+ * `IsFixed`Değer `false` (varsayılan) ise, basamaklı değerin her alıcısı değişiklik bildirimlerini almak için bir abonelik ayarlar. Bu durumda, `[CascadingParameter]` abonelik izlemenin nedeni, her biri düzenli olarak **oldukça yüksektir** `[Parameter]` .
  * `IsFixed`Değer `true` (örneğin, `<CascadingValue Value="@someValue" IsFixed="true">` ) ise, alıcı başlangıç değerini alır, ancak güncelleştirmeleri almak için herhangi bir abonelik ayarlamayın *not* . Bu durumda, her biri `[CascadingParameter]` hafif ve sıradan **daha pahalı** değildir `[Parameter]` .
 
 Mümkün olan yerlerde, `IsFixed="true"` basamaklı değerler üzerinde kullanmanız gerekir. Bunu, sağlanan değer zaman içinde değişmeyen her seferinde yapabilirsiniz. Bir bileşenin `this` basamaklı bir değer olarak geçtiği ortak düzende şunu kullanmanız gerekir `IsFixed="true"` :

@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981953"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417558"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -130,7 +130,7 @@ Openapı varsayılan olarak etkinken, Web API geliştiricileri için uygulama ba
 
 ## Blazor
 
-### <a name="performance-improvements"></a>Performans geliştirmeleri
+### <a name="performance-improvements"></a>Performans iyileştirmeleri
 
 .NET 5 için, Blazor WebAssembly karmaşık UI işleme ve JSON serileştirmesi üzerinde belirli bir odak ile çalışma zamanı performansı için önemli geliştirmeler yaptık. Performans testlerimizde, Blazor WebAssembly .NET 5 ' te çoğu senaryo için iki-üç kat daha hızlıdır. Daha fazla bilgi için bkz. [ASP.net Blog: .NET 5 Release Candidate 1 ' de ASP.NET Core Updates](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements).
 
@@ -328,7 +328,7 @@ Aşağıdaki örnek, bir yapılandırma dosyası kullanarak uç noktaya özel be
 
 Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bunun ne kadar etkili olduğu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.
 
-## <a name="performance-improvements"></a>Performans geliştirmeleri
+## <a name="performance-improvements"></a>Performans iyileştirmeleri
 
 ### <a name="http2"></a>HTTP/2
 
@@ -361,7 +361,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft ile kimlik doğrulaması Azure Active Directory. Identity . Web
 
-ASP.NET Core proje şablonları, <xref:Microsoft.Identity.Web?displayProperty=fullName> [Azure etkinlik dizini](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) ile kimlik doğrulamasını işleyecek şekilde ile tümleşir. [Microsoft. Identity . Web paketi](https://www.nuget.org/packages/Microsoft.Identity.Web/) şunları sağlar:
+ASP.NET Core proje şablonları, <xref:Microsoft.Identity.Web?displayProperty=fullName> [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) ile kimlik doğrulamayı işlemek için ile tümleşir. [Microsoft. Identity . Web paketi](https://www.nuget.org/packages/Microsoft.Identity.Web/) şunları sağlar:
 
 * Azure AD ile kimlik doğrulaması için daha iyi bir deneyim.
 * [Microsoft Graph](/graph/overview)dahil olmak üzere, kullanıcılarınız adına Azure kaynaklarına erişmenin daha kolay bir yolu. Bkz [. Microsoft. Identity . ](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)Temel bir oturum açma ile başlayan ve Azure API 'leri kullanarak, Microsoft Graph kullanarak ve kendi API 'lerinizi koruyan Web örneği. `Microsoft.Identity.Web` , .NET 5 ile birlikte kullanılabilir.
@@ -451,7 +451,7 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* `dotnet watch` komutunu çalıştırın.
+* `dotnet watch` öğesini çalıştırın.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
 
 ### <a name="console-logger-formatter"></a>Konsol günlükçü biçimlendiricisi

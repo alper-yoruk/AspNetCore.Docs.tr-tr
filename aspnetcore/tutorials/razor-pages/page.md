@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: a9494feacbe783b20a9f5eb98ef9e481f2c713fa
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360898"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417636"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
@@ -98,7 +98,7 @@ Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-**Razor Pagesfilmi** , **ana sayfası** ve **gizliliği** bağlayan menüyü seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır.
+**Razor Pagesfilmi**, **ana sayfası** ve **gizliliği** bağlayan menüyü seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır.
 
 *Sayfalar/paylaşılan/_Layout. cshtml* dosyasını açın ve inceleyin.
 
@@ -119,7 +119,7 @@ Satırı bulun `@RenderBody()` . `RenderBody` , sayfaya özgü tüm görünümle
 
 Önceki vurgulanan biçimlendirme C# ' ye geçme örneğidir Razor . `{`Ve `}` karakterleri bir C# kodu bloğunu kapsar.
 
-`PageModel`Temel sınıf, `ViewData` verileri bir görünüme geçirmek için kullanılabilecek bir Dictionary özelliği içerir. Nesneler, `ViewData` bir * **anahtar değeri** _ düzeniyle kullanılarak sözlüğe eklenir. Yukarıdaki örnekte, `Title` özelliği `ViewData` sözlüğe eklenir.
+`PageModel`Temel sınıf, `ViewData` verileri bir görünüme geçirmek için kullanılabilecek bir Dictionary özelliği içerir. Nesneler, `ViewData` bir ***anahtar değeri** _ düzeniyle kullanılarak sözlüğe eklenir. Yukarıdaki örnekte, `Title` özelliği `ViewData` sözlüğe eklenir.
 
 `Title`Özelliği, _Pages/Shared/_Layout. cshtml * dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout. cshtml* dosyasının ilk birkaç satırını gösterir.
 
@@ -151,7 +151,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 1. **Rpmovie** bağlantısını seçerek değişiklikleri kaydedin ve uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-1. **Home** , **rpmovie** , **Create** , **Edit** ve Links 'i test edin **Delete** . Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+1. **Home**, **rpmovie**, **Create** , **Edit** ve Links 'i test edin **Delete** . Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
 
 > [!NOTE]
 > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamayı globalize için gerekli adımları uygulamanız gerekir. Ondalık virgülden ekleme hakkında yönergeler için bkz. [GitHub sorunu 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
@@ -237,12 +237,6 @@ Gibi etiket yardımcıları hakkında daha fazla bilgi için `<form method="post
 
 ::: moniker range="< aspnetcore-3.0"
 
-Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Bu öğreticide Razor , [önceki öğreticide](xref:tutorials/razor-pages/model)yapı iskelesi tarafından oluşturulan sayfalar incelenir.
-
-Örneği [görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22) .
-
 ## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>Create,, Delete Ayrıntıları ve düzenleme sayfaları
 
 *Pages/filmler/ Index . cshtml.cs* sayfa modelini inceleyin:
@@ -284,7 +278,7 @@ Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 <xref:System.Web.Mvc.Html.DisplayNameExtensions.DisplayNameFor%2A?displayProperty=nameWithType>HTML Yardımcısı, `Title` görünen adı belirlemede lambda ifadesinde başvurulan özelliği inceler. Lambda ifadesi değerlendirilmek yerine incelenir. Diğer bir deyişle `model` ,, `model.Movie` , veya boş olduğunda erişim ihlali `model.Movie[0]` yoktur `null` . Lambda ifadesi değerlendirildiğinde, örneğin ile, `@Html.DisplayFor(modelItem => item.Title)` modelin özellik değerleri değerlendirilir.
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-**Razor Pagesfilmi** , **ana sayfası** ve **gizliliği** bağlayan menüyü seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır.
+**Razor Pagesfilmi**, **ana sayfası** ve **gizliliği** bağlayan menüyü seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır.
 
 *Sayfalar/paylaşılan/_Layout. cshtml* dosyasını açın ve inceleyin.
 
@@ -332,7 +326,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 Değişikliklerinizi kaydedin ve **Rpmovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-Diğer bağlantıları test edin ( **giriş** , **rpmovie** , **Create** , **düzenleme** ve **Delete** ). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+Diğer bağlantıları test edin (**giriş**, **rpmovie**, **Create** , **düzenleme** ve **Delete** ). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
 
 > [!NOTE]
 > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamayı globalize için gerekli adımları uygulamanız gerekir. Bu GitHub, ondalık virgülden ekleme hakkında yönergeler için [4076 sorun](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .

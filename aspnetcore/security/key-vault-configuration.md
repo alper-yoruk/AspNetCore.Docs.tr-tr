@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 10a949831c180f51bc6bb9b8294150a558f9343c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: fcd5524bed11cca2380ffd8956f437f742729b55
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060137"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417621"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core Azure Key Vault yapılandırma sağlayıcısı
 
@@ -32,7 +32,7 @@ ms.locfileid: "93060137"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini yüklemek için [Microsoft Azure Key Vault](https://azure.microsoft.com/services/key-vault/) yapılandırma sağlayıcısının nasıl kullanılacağı açıklanmaktadır. Azure Key Vault, uygulama ve hizmetler tarafından kullanılan şifreleme anahtarlarını ve gizli dizileri koruma konusunda yardımcı olan bulut tabanlı bir hizmettir. ASP.NET Core uygulamalarla Azure Key Vault kullanmaya yönelik yaygın senaryolar şunlardır:
+Bu belgede, uygulama yapılandırma değerlerini Azure Key Vault gizliliklerden yüklemek için [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) yapılandırma sağlayıcısının nasıl kullanılacağı açıklanmaktadır. Azure Key Vault, uygulama ve hizmetler tarafından kullanılan şifreleme anahtarlarını ve gizli dizileri koruma konusunda yardımcı olan bulut tabanlı bir hizmettir. ASP.NET Core uygulamalarla Azure Key Vault kullanmaya yönelik yaygın senaryolar şunlardır:
 
 * Hassas yapılandırma verilerine erişimi denetleme.
 * Yapılandırma verilerini depolarken FIPS 140-2 düzey 2 doğrulanan donanım güvenlik modülleri (HSM 'ler) gereksinimini karşılarsınız.
@@ -41,7 +41,7 @@ Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini 
 
 ## <a name="packages"></a>Paketler
 
-Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [ . AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
+Azure.Extensions.AspNetCore.Configyönlendirmeye bir paket başvurusu ekleyin [ . Gizli](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/) dizi paketi.
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -87,7 +87,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 1. [Azure Portal](https://portal.azure.com/)aşağıdaki yöntemlerden birini kullanarak Azure Cloud Shell 'i açın:
 
-   * Kod bloğunun sağ üst köşesindeki **Deneyin** ’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
+   * Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
    * **Cloud Shell Başlat** düğmesini kullanarak tarayıcınızda Cloud Shell açın.
    * Azure portal sağ üst köşesindeki menüdeki **Cloud Shell** düğmesini seçin.
 
@@ -127,23 +127,23 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki ifade olarak AYARLANDıĞıNDA bir uygulama kimliği ve X. 509.440 sertifikası kullanır `Certificate` .
 
-1. PKCS # 12 Arşivi ( *. pfx* ) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
+1. PKCS # 12 Arşivi (*. pfx*) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
 1. Sertifikayı geçerli kullanıcının kişisel sertifika deposuna yükler. Anahtarı verilebilir olarak işaretlemek isteğe bağlıdır. Sertifikanın daha sonra bu işlemde kullanılan parmak izini aklınızda bulunur.
-1. PKCS # 12 Arşivi ( *. pfx* ) sertifikasını der kodlu bir sertifika ( *. cer* ) olarak dışarı aktarın.
-1. Uygulamayı Azure AD 'ye kaydedin ( **uygulama kayıtları** ).
-1. DER kodlu sertifikayı ( *. cer* ) Azure AD 'ye yükleyin:
+1. PKCS # 12 Arşivi (*. pfx*) sertifikasını der kodlu bir sertifika (*. cer*) olarak dışarı aktarın.
+1. Uygulamayı Azure AD 'ye kaydedin (**uygulama kayıtları**).
+1. DER kodlu sertifikayı (*. cer*) Azure AD 'ye yükleyin:
    1. Azure AD 'de uygulamayı seçin.
    1. **Sertifikalar & gizli** dizi sayfasına gidin.
-   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.
+   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek* veya *. CRT* sertifikası kabul edilebilir.
 1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri** ' ni seçin.
-1. **Erişim Ilkesi Ekle** ' yi seçin.
+1. **Erişim ilkeleri**' ni seçin.
+1. **Erişim Ilkesi Ekle**' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
-1. **Tamam** ’ı seçin.
-1. **Kaydet** ’i seçin.
+1. **Tamam**’ı seçin.
+1. **Kaydet**’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -153,9 +153,9 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :
+X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, **Addavzurekeykasasını** dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :
 
-[!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
+[!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=46-49)]
 
 Örnek değerler:
 
@@ -163,7 +163,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama <xre
 * Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appsettings.json* :
+*appsettings.json*:
 
 [!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -191,15 +191,15 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Örnek uygulama:
 
-* `AzureServiceTokenProvider`Bir bağlantı dizesi olmadan sınıfın bir örneğini oluşturur. Bir bağlantı dizesi sağlanmazsa, sağlayıcı Azure kaynakları için yönetilen kimliklerden bir erişim belirteci almaya çalışır.
-* <xref:Microsoft.Azure.KeyVault.KeyVaultClient> `AzureServiceTokenProvider` Örnek belirteci geri çağırması ile yeni bir oluşturulur.
-* <xref:Microsoft.Azure.KeyVault.KeyVaultClient>Örnek, <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> tüm gizli değerleri yükleyen ve çift tire ( `--` ) değerini anahtar adlarında iki nokta () ile değiştirir `:` .
+* , Sınıfının bir örneğini oluşturur `DefaultAzureCredential` , kimlik bilgileri Azure kaynakları için ortamdan bir erişim belirteci almaya çalışır.
+* Örnekle yeni bir [`Azure.Security.KeyVault.Secrets.Secrets`](/dotnet/api/azure.security.keyvault.secrets) oluşturulur `DefaultAzureCredential` .
+* `Azure.Security.KeyVault.Secrets.Secrets`Örnek, `Azure.Extensions.Aspnetcore.Configuration.Secrets` tüm gizli değerleri yükleyen ve çift tire ( `--` ) değerini anahtar adlarında iki nokta () ile değiştirir `:` .
 
-[!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=13-21)]
+[!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=12-14)]
 
 Anahtar Kasası adı örnek değeri: `contosovault`
-    
-*appsettings.json* :
+
+*appsettings.json*:
 
 ```json
 {
@@ -215,11 +215,11 @@ Sağlayıcıyı yönetilen bir kimlik ve bir Azure DevOps işlem hattı ile kull
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> şunları kabul edebilir <xref:Microsoft.Extensions.Configuration.AzureKeyVault.AzureKeyVaultConfigurationOptions> :
+Addadzurekeykasası bir AzureKeyVaultConfigurationOptions kabul edebilir:
 
 ```csharp
-config.AddAzureKeyVault(
-    new AzureKeyVaultConfigurationOptions()
+config.AddAzureKeyVault(new SecretClient(new URI("Your Key Vault Endpoint"), new DefaultAzureCredential()),
+                        new AzureKeyVaultConfigurationOptions())
     {
         ...
     });
@@ -227,25 +227,23 @@ config.AddAzureKeyVault(
 
 | Özellik         | Açıklama |
 | ---------------- | ----------- |
-| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient> değerlerini almak için kullanmak üzere. |
-| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
+| `Manager`        | `Azure.Extensions.Aspnetcore.Configuration.Secrets` gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
 | `ReloadInterval` | `Timespan` anahtar kasasındaki değişiklikleri yoklamaya yönelik denemeler arasında bekleme. Varsayılan değer `null` (yapılandırma yeniden yüklenmez). |
-| `Vault`          | Anahtar Kasası URI 'SI. |
 
 ## <a name="use-a-key-name-prefix"></a>Anahtar adı öneki kullanın
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*><xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>, Anahtar Kasası gizli dizilerini yapılandırma anahtarlarına nasıl dönüştürdüğünü denetlemenize olanak tanıyan, uygulamasını kabul eden bir aşırı yükleme sağlar. Örneğin, uygulama başlangıcında sağladığınız önek değerine göre gizli değerleri yüklemek için arabirimini uygulayabilirsiniz. Bu, örneğin, uygulama sürümüne göre gizli dizileri yüklemeyi sağlar.
+Addavzurekeykasası `Azure.Extensions.Aspnetcore.Configuration.Secrets` , Anahtar Kasası gizli dizilerini yapılandırma anahtarlarına nasıl dönüştürdüğünü denetlemenize olanak tanıyan, uygulamasını kabul eden bir aşırı yükleme sağlar. Örneğin, uygulama başlangıcında sağladığınız önek değerine göre gizli değerleri yüklemek için arabirimini uygulayabilirsiniz. Bu, örneğin, uygulama sürümüne göre gizli dizileri yüklemeyi sağlar.
 
 > [!WARNING]
 > Birden çok uygulama için gizli dizileri aynı kasaya yerleştirmek veya çevresel gizli dizileri (örneğin, *geliştirme* ve *Üretim* gizlilikleri) aynı kasaya yerleştirmek için Anahtar Kasası gizli dizileri üzerinde ön ekleri kullanmayın. Farklı uygulama ve geliştirme/üretim ortamlarının, uygulama ortamlarını en yüksek düzeyde güvenlik için yalıtmak üzere ayrı anahtar kasaları kullanmasını öneririz.
 
 Aşağıdaki örnekte, için anahtar kasasında (ve geliştirme ortamı için gizli Yönetim Aracı kullanılarak) bir gizli dizi oluşturulur `5000-AppSecret` (Anahtar Kasası gizli adlarında dönemlere izin verilmez). Bu gizli anahtar, uygulamanın 5.0.0.0 sürümü için bir uygulama gizli anahtarı temsil eder. Uygulamanın başka bir sürümü olan 5.1.0.0, anahtar kasasına (ve gizli Yönetici Aracı kullanılarak) bir gizli dizi eklenir `5100-AppSecret` . Her bir uygulama sürümü sürümü sürümlü gizli değerini yapılandırma olarak yükler `AppSecret` , bu, gizli anahtarı yüklerken sürümü de kapatıyor.
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> özel bir ile çağrılır <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
+Addadzurekeykasası özel bir ile çağırılır `Azure.Extensions.Aspnetcore.Configuration.Secrets` :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
+`Azure.Extensions.Aspnetcore.Configuration.Secrets`Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
 
 * `Load` adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
 * `GetKey`:
@@ -295,7 +293,7 @@ Bu yaklaşım uygulandığında:
 1. Uygulamanın sürümü proje dosyasında olarak değiştirilirse `5.1.0.0` ve uygulama yeniden çalıştırıldığında, döndürülen gizli değer `5.1.0.0_secret_value_dev` geliştirme ortamında ve `5.1.0.0_secret_value_prod` üretimde bulunur.
 
 > [!NOTE]
-> Ayrıca, kendi uygulamanızı da sağlayabilirsiniz <xref:Microsoft.Azure.KeyVault.KeyVaultClient> <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> . Özel istemci, uygulama genelinde istemcinin tek bir örneğini paylaşıma izin verir.
+> <xref:Azure.Security.KeyVault.Secrets.SecretClient>Addavzurekeykasası için kendi uygulamanızı da sağlayabilirsiniz. Özel istemci, uygulama genelinde istemcinin tek bir örneğini paylaşıma izin verir.
 
 ## <a name="bind-an-array-to-a-class"></a>Bir diziyi sınıfa bağlama
 
@@ -349,7 +347,7 @@ Configuration.Reload();
 
 ## <a name="disabled-and-expired-secrets"></a>Devre dışı ve süre dolma parolaları
 
-Devre dışı ve son kullanma parolası bir oluşturur <xref:Microsoft.Azure.KeyVault.Models.KeyVaultErrorException> . Uygulamanın üretilmesini engellemek için, farklı bir yapılandırma sağlayıcısı kullanarak yapılandırmayı sağlayın veya devre dışı ya da süre dolma parolasını güncelleştirin.
+Devre dışı ve son kullanma parolası bir oluşturur <xref:Azure.RequestFailedException> . Uygulamanın üretilmesini engellemek için, farklı bir yapılandırma sağlayıcısı kullanarak yapılandırmayı sağlayın veya devre dışı ya da süre dolma parolasını güncelleştirin.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
@@ -360,7 +358,7 @@ Uygulama, sağlayıcıyı kullanarak yapılandırmayı yükleyemediğinde, [ASP.
 * Uygulamanın anahtar kasasına erişme yetkisi yok.
 * Erişim ilkesi `Get` ve `List` izinleri içermez.
 * Anahtar kasasında yapılandırma verileri (ad-değer çifti) yanlış olarak adlandırılmış, eksik, devre dışı veya zaman aşımına uğradı.
-* Uygulamanın Anahtar Kasası adı ( `KeyVaultName` ), Azure AD uygulama kimliği ( `AzureADApplicationId` ) veya Azure AD sertifika parmak izi ( `AzureADCertThumbprint` ) yanlış.
+* Uygulamanın Anahtar Kasası adı ( `KeyVaultName` ), Azure AD uygulama kimliği () veya Azure AD `AzureADApplicationId` sertifika parmak izi () ya da Azure AD `AzureADCertThumbprint` directoryıd () yanlış `AzureADDirectoryId` .
 * Yüklemeye çalıştığınız değer için uygulamada yapılandırma anahtarı (ad) yanlış.
 * Uygulama için erişim ilkesini anahtar kasasına eklerken, ilke oluşturulmuştur, ancak **erişim ilkeleri** Kullanıcı arabiriminde **Kaydet** düğmesi seçilmedi.
 
@@ -433,7 +431,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 1. [Azure Portal](https://portal.azure.com/)aşağıdaki yöntemlerden birini kullanarak Azure Cloud Shell 'i açın:
 
-   * Kod bloğunun sağ üst köşesindeki **Deneyin** ’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
+   * Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
    * **Cloud Shell Başlat** düğmesini kullanarak tarayıcınızda Cloud Shell açın.
    * Azure portal sağ üst köşesindeki menüdeki **Cloud Shell** düğmesini seçin.
 
@@ -473,23 +471,23 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki ifade olarak AYARLANDıĞıNDA bir uygulama kimliği ve X. 509.440 sertifikası kullanır `Certificate` .
 
-1. PKCS # 12 Arşivi ( *. pfx* ) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
+1. PKCS # 12 Arşivi (*. pfx*) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
 1. Sertifikayı geçerli kullanıcının kişisel sertifika deposuna yükler. Anahtarı verilebilir olarak işaretlemek isteğe bağlıdır. Sertifikanın daha sonra bu işlemde kullanılan parmak izini aklınızda bulunur.
-1. PKCS # 12 Arşivi ( *. pfx* ) sertifikasını der kodlu bir sertifika ( *. cer* ) olarak dışarı aktarın.
-1. Uygulamayı Azure AD 'ye kaydedin ( **uygulama kayıtları** ).
-1. DER kodlu sertifikayı ( *. cer* ) Azure AD 'ye yükleyin:
+1. PKCS # 12 Arşivi (*. pfx*) sertifikasını der kodlu bir sertifika (*. cer*) olarak dışarı aktarın.
+1. Uygulamayı Azure AD 'ye kaydedin (**uygulama kayıtları**).
+1. DER kodlu sertifikayı (*. cer*) Azure AD 'ye yükleyin:
    1. Azure AD 'de uygulamayı seçin.
    1. **Sertifikalar & gizli** dizi sayfasına gidin.
-   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.
+   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek* veya *. CRT* sertifikası kabul edilebilir.
 1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri** ' ni seçin.
-1. **Erişim Ilkesi Ekle** ' yi seçin.
+1. **Erişim ilkeleri**' ni seçin.
+1. **Erişim Ilkesi Ekle**' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
-1. **Tamam** ’ı seçin.
-1. **Kaydet** ’i seçin.
+1. **Tamam**’ı seçin.
+1. **Kaydet**’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -509,7 +507,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama <xre
 * Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appsettings.json* :
+*appsettings.json*:
 
 [!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -545,7 +543,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Anahtar Kasası adı örnek değeri: `contosovault`
     
-*appsettings.json* :
+*appsettings.json*:
 
 ```json
 {
@@ -702,4 +700,3 @@ Uygulama, sağlayıcıyı kullanarak yapılandırmayı yükleyemediğinde, [ASP.
 * [Öğretici: .NET 'te Azure Windows sanal makinesi ile Azure Key Vault kullanma](/azure/key-vault/tutorial-net-windows-virtual-machine)
 
 ::: moniker-end
-

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 25ada6e3a210ed830514e69da7d5212264b4b91e
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674010"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417571"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>Öğretici: 5. kısım, Contoso Üniversitesi örneğine geçişler uygulama
 
@@ -53,9 +53,10 @@ Geçişlerle çalışmak için **Paket Yöneticisi konsolu 'nu** (PMC) veya CLI 
 
 ## <a name="drop-the-database"></a>Veritabanını bırak
 
-Veritabanını silin. **SQL Server Nesne Gezgini** (ssox) veya `database drop` CLI komutunu kullanın:
+EF Core araçlarını [küresel bir araç](/ef/core/miscellaneous/cli/dotnet) olarak yükleyip veritabanını silin:
 
  ```dotnetcli
+ dotnet tool install --global dotnet-ef
  dotnet ef database drop
  ```
 
@@ -76,11 +77,8 @@ Değişikliklerinizi kaydedin ve projeyi derleyin. Sonra bir komut penceresi aç
 Komut penceresine aşağıdaki komutu girin:
 
 ```dotnetcli
-dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 ```
-
-`dotnet tool install --global dotnet-ef``dotnet ef` [genel bir araç](/ef/core/miscellaneous/cli/dotnet)olarak yüklenir.
 
 Yukarıdaki komutlarda aşağıdakine benzer bir çıktı görüntülenir:
 

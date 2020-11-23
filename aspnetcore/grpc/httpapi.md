@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 45e2a1a5e6a9f00294147db769454b78c5b866e5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059942"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417584"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>gRPC'den JSON Web API'leri oluşturma
 
@@ -137,7 +137,7 @@ GRPC HTTP API 'sindeki geliştirici ilgisini ölçmek istiyoruz. GRPC HTTP API '
 
 GRPC-Gateway ve gRPC HTTP API 'SI arasındaki en büyük fark GRPC-Gateway, bir ters proxy sunucu oluşturmak için kod oluşturmayı kullanır. Ters proxy, gRPC 'ye geri çağrı yapar ve ardından bunları gRPC hizmetine gönderir.
 
-GRPC-Gateway yükleme ve kullanımı için bkz. [GRPC-Gateway belgeleri](https://grpc-ecosystem.github.io/grpc-gateway/docs/usage.html).
+GRPC-Gateway yükleme ve kullanımı için bkz. [GRPC-Gateway Benioku](https://github.com/grpc-ecosystem/grpc-gateway/#grpc-gateway).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
