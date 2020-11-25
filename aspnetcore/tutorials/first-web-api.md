@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570256"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96024986"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -34,7 +34,7 @@ Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretil
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -61,7 +61,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -81,10 +81,10 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
-* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.
-* Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.
-* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 5,0** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur** ' a tıklayın.
+* **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
+* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.
+* Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.
+* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 5,0** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur**' a tıklayın.
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/5/vs.png)
 
@@ -102,7 +102,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
    code -r ../TodoApi
    ```
 
-* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.
+* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.
 
   Önceki komutlar:
 
@@ -111,17 +111,17 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 5. x **hedef çerçevesini** seçin. **İleri** ’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 5. x **hedef çerçevesini** seçin. **İleri**’yi seçin.
 
-* **Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.
+* **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
@@ -149,7 +149,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
   Visual Studio başlatılır:
 
 * IIS Express Web sunucusu.
-* Varsayılan tarayıcı ve `https://localhost:<port>/https://localhost:5001/swagger/index.html` ' a gider, burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.
+* Varsayılan tarayıcı ve `https://localhost:<port>/swagger/index.html` ' a gider, burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -163,7 +163,7 @@ Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin. 
 
 ---
 
-Swagger sayfası `/swagger/index.html` görüntülenir. **Al**  >  **deneyin**  >  **Çalıştır** ' ı seçin. Sayfa şunu görüntüler:
+Swagger sayfası `/swagger/index.html` görüntülenir. **Al**  >  **deneyin**  >  **Çalıştır**' ı seçin. Sayfa şunu görüntüler:
 
 * Dalgalı tahmin API 'sini test etmek için [kıvrımlı](https://curl.haxx.se/) komutu.
 * Dalgalı tahmin API 'sini test etmek için URL.
@@ -215,7 +215,7 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 ### <a name="update-the-launchurl"></a>LaunchUrl 'Yi güncelleştirme
 
-*Properties\launchSettings.jstarihinde* , ' `launchUrl` den ' `"swagger"` e Güncelleştir `"api/TodoItems"` :
+*Properties\launchSettings.jstarihinde*, ' `launchUrl` den ' `"swagger"` e Güncelleştir `"api/TodoItems"` :
 
 ```json
 "launchUrl": "api/TodoItems",
@@ -229,9 +229,9 @@ Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu aşağıdaki kodla değiştirin:
 
@@ -247,9 +247,9 @@ Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI 
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.
+* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
-* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.
+* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
 * Şablon kodunu aşağıdaki kodla değiştirin:
 
@@ -269,13 +269,11 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 ### <a name="add-nuget-packages"></a>NuGet paketlerini ekleme
 
-* **Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet** ' i seçin.
-* **Gözatın** sekmesini seçin ve ardından * * Microsoft girin.
-Arama kutusunda **Entityframeworkcore. SqlServer** .
+* **Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet**' i seçin.
+* **Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
-* 5,0 RC sürümü kullanılabilir durumda olan **ön sürümü dahil et** onay kutusunu seçin. 
 * Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.
-* Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install** ' ı seçin.
+* Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install**' ı seçin.
 * Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.
 
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
@@ -283,7 +281,7 @@ Arama kutusunda **Entityframeworkcore. SqlServer** .
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -316,12 +314,12 @@ Yukarıdaki kod:
 
 * *Denetleyiciler* klasörüne sağ tıklayın.
 * **Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
-* **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.
+* **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
 * **API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:
 
   * **Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.
-  * **Ekle** ’yi seçin.
+  * **Ekle**’yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -330,8 +328,8 @@ Aşağıdaki komutları çalıştırın:
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
@@ -379,7 +377,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 * Web uygulamasını başlatın.
 * Postman 'ı başlatın.
 * **SSL sertifikası doğrulamasını** devre dışı bırak
-  * **Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
+  * **Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
     > [!WARNING]
     > Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.
 
@@ -402,7 +400,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
     }
     ```
 
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/3/create.png)
 
@@ -419,7 +417,7 @@ Postman 'da test etmek için:
 
 * HTTP yöntemini olarak ayarlayın `GET` .
 * URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` . Örneğin, `https://localhost:5001/api/TodoItems/1`.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 ## <a name="examine-the-get-methods"></a>GET yöntemlerini inceleyin
 
@@ -451,7 +449,7 @@ Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test e
 * **Almak** için http yöntemini ayarlayın.
 * İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` . Örneğin, `https://localhost:5001/api/TodoItems`.
 * Postman 'da **iki bölme görünümü** ayarlayın.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 Bu uygulama, bellek içi bir veritabanını kullanır. Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez. Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .
 
@@ -519,7 +517,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 
 * Yöntemini olarak ayarlayın `DELETE` .
 * Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 <a name="over-post-v5"></a>
 
@@ -560,7 +558,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -587,7 +585,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -607,10 +605,10 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
-* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.
-* Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.
-* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur** ' a tıklayın.
+* **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
+* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.
+* Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.
+* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur**' a tıklayın.
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/vs3.png)
 
@@ -628,7 +626,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
    code -r ../TodoApi
    ```
 
-* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.
+* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.
 
   Önceki komutlar:
 
@@ -637,17 +635,17 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini** seçin. **İleri** ’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini** seçin. **İleri**’yi seçin.
 
-* **Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.
+* **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
@@ -670,7 +668,7 @@ Proje şablonu bir API oluşturur `WeatherForecast` . `Get`Uygulamayı test etme
 
 Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın. Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/WeatherForecast` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.
 
-IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet** ' i seçin. Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet** ' i seçin.
+IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet**' i seçin. Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet**' i seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -725,9 +723,9 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -743,9 +741,9 @@ Aşağıdakine benzer bir JSON döndürülür:
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.
+* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
-* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.
+* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -765,17 +763,17 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 ### <a name="add-nuget-packages"></a>NuGet paketlerini ekleme
 
-* **Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet** ' i seçin.
+* **Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet**' i seçin.
 * **Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.
 * Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.
-* Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install** ' ı seçin.
+* Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install**' ı seçin.
 * Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.
 
 ![NuGet Paket Yöneticisi](first-web-api/_static/vs3NuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -807,12 +805,12 @@ Yukarıdaki kod:
 
 * *Denetleyiciler* klasörüne sağ tıklayın.
 * **Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
-* **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.
+* **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
 * **API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:
 
   * **Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.
-  * **Ekle** ’yi seçin.
+  * **Ekle**’yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -870,7 +868,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 * Web uygulamasını başlatın.
 * Postman 'ı başlatın.
 * **SSL sertifikası doğrulamasını** devre dışı bırak
-  * **Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
+  * **Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
     > [!WARNING]
     > Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.
 
@@ -893,7 +891,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
     }
     ```
 
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/3/create.png)
 
@@ -906,7 +904,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 * HTTP yöntemini olarak ayarlayın `GET` .
 * URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` . Örneğin, `https://localhost:5001/api/TodoItems/1`.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 ## <a name="examine-the-get-methods"></a>GET yöntemlerini inceleyin
 
@@ -938,7 +936,7 @@ Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test e
 * **Almak** için http yöntemini ayarlayın.
 * İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` . Örneğin, `https://localhost:5001/api/TodoItems`.
 * Postman 'da **iki bölme görünümü** ayarlayın.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 Bu uygulama, bellek içi bir veritabanını kullanır. Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez. Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .
 
@@ -1006,7 +1004,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 
 * Yöntemini olarak ayarlayın `DELETE` .
 * Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 <a name="over-post"></a>
 <a name="over-post-v3"></a>
@@ -1048,7 +1046,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -1098,10 +1096,10 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
-* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.
-* Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.
-* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 2,2** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur** ' a tıklayın. **Docker desteğini etkinleştir** **' i seçmeyin** .
+* **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
+* **ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.
+* Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.
+* **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 2,2** ' un seçili olduğunu doğrulayın. **API** şablonunu seçin ve **Oluştur**' a tıklayın. **Docker desteğini etkinleştir** **' i seçmeyin** .
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/vs.png)
 
@@ -1118,19 +1116,19 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
   Bu komutlar yeni bir Web API projesi oluşturur ve yeni proje klasöründe Visual Studio Code yeni bir örneğini açar.
 
-* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.
+* Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
   
-* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini** seçin. **İleri** ’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini** seçin. **İleri**’yi seçin.
 
-* **Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.
+* **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
@@ -1144,7 +1142,7 @@ Proje şablonu bir API oluşturur `values` . `Get`Uygulamayı test etmek için b
 
 Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın. Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/api/values` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.
 
-IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet** ' i seçin. Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet** ' i seçin.
+IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet**' i seçin. Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet**' i seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -1168,9 +1166,9 @@ Aşağıdaki JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini** , projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -1186,9 +1184,9 @@ Aşağıdaki JSON döndürülür:
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.
+* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
-* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.
+* Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -1206,7 +1204,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1239,7 +1237,7 @@ Yukarıdaki kod:
 * *Denetleyiciler* klasörüne sağ tıklayın.
 * **Add** > **Yeni öğe** Ekle ' yi seçin.
 * **Yeni öğe Ekle** iletişim kutusunda, **API denetleyici sınıfı** şablonunu seçin.
-* Sınıfı *TodoController* olarak adlandırın ve **Ekle** ' yi seçin.
+* Sınıfı *TodoController* olarak adlandırın ve **Ekle**' yi seçin.
 
   ![Arama kutusu ve Web API denetleyicisi seçiliyken denetleyiciyi içeren yeni öğe iletişim kutusu Ekle](first-web-api/_static/new_controller.png)
 
@@ -1325,11 +1323,11 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
+* **Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-* **Postman**  >  **tercihleri** ' nden ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın. Alternatif olarak, wranı seçin ve **Ayarlar** ' ı seçip SSL sertifikası doğrulamasını devre dışı bırakın.
+* **Postman**  >  **tercihleri** ' nden (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın. Alternatif olarak, wranı seçin ve **Ayarlar**' ı seçip SSL sertifikası doğrulamasını devre dışı bırakın.
 
 ---
   
@@ -1340,7 +1338,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
   * **Almak** için http yöntemini ayarlayın.
   * İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/todo` . Örneğin, `https://localhost:5001/api/todo`.
 * Postman 'da **iki bölme görünümü** ayarlayın.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 ![Get isteği ile Postman](first-web-api/_static/2pv.png)
 
@@ -1377,7 +1375,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
     }
     ```
 
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/create.png)
 
@@ -1392,7 +1390,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
 
 * ALıNACAK yöntemi ayarlayın.
 * URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/2` . Örneğin, `https://localhost:5001/api/TodoItems/2`.
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 ## <a name="add-a-puttodoitem-method-21"></a>PutTodoItem yöntemi ekleme 2,1
 
@@ -1436,7 +1434,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 
 * Yöntemini olarak ayarlayın `DELETE` .
 * Silinecek nesnenin URI 'sini ayarlayın (örneğin, `https://localhost:5001/api/todo/1` ).
-* **Gönder** ’i seçin.
+* **Gönder**’i seçin.
 
 Örnek uygulama, tüm öğeleri silmenizi sağlar. Ancak, son öğe silindiğinde, API 'nin bir sonraki çağrılışında model sınıfı Oluşturucu tarafından yeni bir tane oluşturulur.
 
@@ -1461,7 +1459,7 @@ Proje dizininde bir *Wwwroot* klasörü oluşturun.
 HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:
 
 * *ÜzerindeProperties\launchSettings.js* açın.
-* `launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html* 'de açmaya zorlamak için özelliği kaldırın &mdash; .
+* `launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html*'de açmaya zorlamak için özelliği kaldırın &mdash; .
 
 Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır. API çağrılarının açıklamaları aşağıda verilmiştir.
 

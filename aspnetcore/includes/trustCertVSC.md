@@ -14,3 +14,4 @@
 
   Daha fazla bilgi için bkz. [ASP.NET Core https geliştirme sertifikasına güvenin](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) .
   
+[!INCLUDE[trust FF](~/includes/trust-ff.md)]

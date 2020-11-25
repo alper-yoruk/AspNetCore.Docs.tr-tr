@@ -1,0 +1,1 @@
+Firefox tarayıcısına güvenme hakkında daha fazla bilgi için bkz. [firefox SEC_ERROR_INADEQUATE_KEY_USAGE sertifika hatası](xref:security/enforcing-ssl#trust-ff).

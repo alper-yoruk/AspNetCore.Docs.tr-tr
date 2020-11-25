@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: b4dcbe9536107cdc5b0342782abc4bad0b89a8dc
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: fa113a3e0a2a69fb4aa1318056dcfc6e261490f6
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360966"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "96025038"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
 
@@ -75,11 +75,11 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
    ![::: No-Loc (Oluştur):: başlangıç penceresinden yeni bir proje](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. **Create Yeni bir proje** Iletişim kutusunda **ASP.NET Core Web uygulaması** ' nı seçin ve ardından **İleri** ' yi seçin.
+1. **Create Yeni bir proje** Iletişim kutusunda **ASP.NET Core Web uygulaması**' nı seçin ve ardından **İleri**' yi seçin.
 
     ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/5/np.png)
     
-1. **Yeni projenizi yapılandırın** Iletişim kutusunda `RazorPagesMovie` **Proje adı** ' nı girin. Büyük/küçük harf eşleştirme da dahil olmak üzere Project *Razor pagesmovie* 'in adı, örnek kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi önemlidir.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `RazorPagesMovie` **Proje adı**' nı girin. Büyük/küçük harf eşleştirme da dahil olmak üzere Project *Razor pagesmovie*'in adı, örnek kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi önemlidir.
 
 1. **Create** seçeneğini belirleyin.
 
@@ -114,11 +114,11 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Dosya** > **yeni çözüm** ' ü seçin.
+1. **Dosya** > **yeni çözüm**' ü seçin.
 
     ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-1. Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması** ' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri** ' yi seçin.
+1. Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
     ![macOS Web uygulaması şablon seçimi](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -126,7 +126,7 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
     1. **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
     1. **Hedef çerçeve** seçme seçeneği sunulursa, en son .NET 5. x sürümünü seçin.
-    1. **İleri** ’yi seçin.
+    1. **İleri**’yi seçin.
 
 1. Projeyi *Razor pagesmovie* olarak adlandırın ve seçin **Create** .
 
@@ -219,7 +219,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * Create Yeni bir ASP.NET Core Web uygulaması ve **İleri ' yi** seçin.
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2.1.png)
 * Projeyi **Razor pagesfilmi** olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project *Razor pagesfilmi* olarak adlandırmak önemlidir.
@@ -249,17 +249,17 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
   * `dotnet new`Komutu Razor *Razor pagesmovie* klasöründe yeni bir sayfalar projesi oluşturur.
   * `code`Komutu, Visual Studio Code geçerli örneğindeki *Razor pagesmovie* klasörünü açar.
 
-* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet** ’i seçin.
+* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet**’i seçin.
 
   Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
   ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması** ' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
   ![macOS Web uygulaması şablon seçimi](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -268,7 +268,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
   * **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
   * **Hedef çerçeve** seçme seçeneği sunulursa, en son 3. x sürümünü seçin.
 
-  **İleri** ’yi seçin.
+  **İleri**’yi seçin.
 
 * Projeyi **Razor pagesfilmi** olarak adlandırın ve ardından öğesini seçin **Create** .
 
@@ -361,7 +361,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 
 * Create Yeni bir ASP.NET Core Web uygulaması ve **İleri ' yi** seçin.
 
@@ -395,24 +395,24 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
   * `dotnet new`Komutu Razor *Razor pagesmovie* klasöründe yeni bir sayfalar projesi oluşturur.
   * `code`Komutu, Visual Studio Code geçerli örneğindeki *Razor pagesmovie* klasörünü açar.
 
-* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet** ’i seçin.
+* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet**’i seçin.
 
   Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Dosya** > **yeni çözüm** ' ü seçin.
+* **Dosya** > **yeni çözüm**' ü seçin.
 
 ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması** ' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
 * **Yeni Web uygulamasını Yapılandır** iletişim kutusunda:
 
   * **Kimlik** doğrulamasının **kimlik doğrulaması yok** olarak ayarlandığını onaylayın.
   * **Hedef çerçeve** seçme seçeneği sunulursa, en son 2. x sürümünü seçin.
 
-  **İleri** ’yi seçin.
+  **İleri**’yi seçin.
 
 * Projeyi **Razor pagesfilmi** olarak adlandırın ve ardından öğesini seçin **Create** .
 
@@ -429,7 +429,6 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 * Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 
   Uygulamayı <kbd>CTRL + F5</kbd> (hata ayıklama modu) ile başlatmak, kod değişiklikleri yapmanıza, dosyayı kaydetmenize, tarayıcıyı yenilemanıza ve kod değişikliklerini görmenize olanak tanır. Birçok geliştirici uygulamayı hemen başlatmak ve değişiklikleri görüntülemek için hata ayıklamasız modu kullanmayı tercih eder.
-
 
   [!INCLUDE[](~/includes/trustCertVS.md)]
 

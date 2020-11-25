@@ -9,3 +9,5 @@ Aşağıdaki iletişim kutusu görüntülenir:
 ![Güvenlik Uyarısı iletişim kutusu](~/getting-started/_static/cert.png)
 
 Geliştirme sertifikasına güvenmeyi kabul ediyorsanız **Evet** ' i seçin.
+
+[!INCLUDE[trust FF](~/includes/trust-ff.md)]
