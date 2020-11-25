@@ -5,7 +5,7 @@ description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döng�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/09/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981875"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035690"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
-[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)ve [tosapma Bartsch](https://www.aveo-solutions.com/) tarafından
+[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), [Scott Ade](https://github.com/scottaddie)ve [tosapma Bartsch](https://www.aveo-solutions.com/) tarafından
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -85,7 +85,7 @@ Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yan
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
-### <a name="namespaces"></a>Ad Alanları
+### <a name="namespaces"></a>Ad alanları
 
 Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
@@ -886,6 +886,64 @@ Benzer şekilde, SVG görüntüleri bir stil sayfası dosyasının () CSS kurall
 ```
 
 Ancak, satır içi SVG işaretlemesi tüm senaryolarda desteklenmez. Bir `<svg>` etiketi doğrudan bir bileşen dosyasına ( `.razor` ) yerleştirirseniz, temel görüntü işleme desteklenir, ancak birçok gelişmiş senaryo desteklenmemiştir. Örneğin, `<use>` Etiketler Şu anda dikkate alınamaz ve [`@bind`][10] bazı SVG etiketleriyle kullanılamaz. Daha fazla bilgi için bkz. [Içindeki SVG desteği Blazor (DotNet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
+
+## <a name="whitespace-rendering-behavior"></a>Boşluk işleme davranışı
+
+::: moniker range=">= aspnetcore-5.0"
+
+[`@preservewhitespace`](xref:mvc/views/razor#preservewhitespace)Yönergesi bir değeriyle birlikte kullanılmamışsa `true` , şu durumlarda fazladan boşluk varsayılan olarak kaldırılır:
+
+* Bir öğe içinde baştaki veya sondaki.
+* Bir parametre içinde baştaki veya sondaki `RenderFragment` . Örneğin, alt içerik başka bir bileşene geçirildi.
+* Ya da gibi bir C# kod bloğunun önünde veya sonrasında gelir `@if` `@foreach` .
+
+Boşluk kaldırma, bir CSS kuralı kullanılırken işlenen çıktıyı etkileyebilir `white-space: pre` . Bu performans iyileştirmesini devre dışı bırakmak ve boşluğu korumak için aşağıdaki eylemlerden birini gerçekleştirin:
+
+* `@preservewhitespace true` `.razor` Tercihi belirli bir bileşene uygulamak için dosyanın en üstüne yönergesini ekleyin.
+* `@preservewhitespace true`Bir `_Imports.razor` alt dizine veya tüm projeye tercihi uygulamak için yönergesini bir dosyanın içine ekleyin.
+
+Çoğu durumda, uygulamalar genellikle normal şekilde çalışmaya devam ederken (ancak daha hızlı), hiçbir eylem gerekmez. Boşluğu çıkarmak belirli bir bileşen için herhangi bir soruna neden oluyorsa, `@preservewhitespace true` Bu iyileştirmeyi devre dışı bırakmak için o bileşende kullanın.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Boşluk, bileşenin kaynak kodunda tutulur. Görsel bir efekt olmasa bile, yalnızca boşluk metni tarayıcı Belge Nesne Modeli (DOM) içinde işlenir.
+
+Aşağıdaki bileşen kodunu göz önünde bulundurun Razor :
+
+```razor
+<ul>
+    @foreach (var item in Items)
+    {
+        <li>
+            @item.Text
+        </li>
+    }
+</ul>
+```
+
+Yukarıdaki örnek aşağıdaki gereksiz boşluğu işler:
+
+* `@foreach`Kod bloğunun dışında.
+* Öğesinin etrafında `<li>` .
+* Çıktı etrafında `@item.Text` .
+
+100 öğe içeren bir liste, boşluk olan 402 alan ile sonuçlanır ve ek boşluklardan hiçbiri işlenmiş çıktıyı görsel olarak etkiler.
+
+Bileşenler için statik HTML işlenirken, bir etiketin içindeki boşluk korunmaz. Örneğin, işlenen çıktıda aşağıdaki bileşenin kaynağını görüntüleyin:
+
+```razor
+<img     alt="My image"   src="img.png"     />
+```
+
+Yukarıdaki biçimlendirmeden boşluk korunmaz Razor :
+
+```razor
+<img alt="My image" src="img.png" />
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

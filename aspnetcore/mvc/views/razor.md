@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059201"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035716"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core için sözdizimi başvurusu
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
-Razor , Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında ( *. Razor* ) bulunur.
+Razor , Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında (*. Razor*) bulunur.
 
 ## <a name="rendering-html"></a>HTML işleniyor
 
@@ -497,7 +497,7 @@ RazorBileşenler için `@code` bir diğer addır [`@functions`](#functions) ve �
 
 ::: moniker-end
 
-Örneğin:
+Örnek:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -658,7 +658,7 @@ Razor`Model`görünüme geçirilen modele erişim için bir özellik sunar:
 
 RazorAşağıdaki tabloda gösterilen sayfalar örneği için:
 
-* Her sayfa *sayfaları/_ViewImports. cshtml* 'yi içeri aktarır.
+* Her sayfa *sayfaları/_ViewImports. cshtml*'yi içeri aktarır.
 * *Pages/_ViewImports. cshtml* içerir `@namespace Hello.World` .
 * Her sayfa `Hello.World` , ad alanının kökü olarak bulunur.
 
@@ -694,6 +694,20 @@ Yukarıdaki örnekteki *evente Pages* klasöründe bir içeri aktarmalar dosyas�
 ::: moniker range="< aspnetcore-3.0"
 
 `@page`Bir *. cshtml* dosyasının ilk satırındaki yönerge, dosyanın bir sayfa olduğunu gösterir Razor . Daha fazla bilgi için bkz. <xref:razor-pages/index>.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### `@preservewhitespace`
+
+*Bu senaryo yalnızca bileşenler için geçerlidir Razor ( `.razor` ).*
+
+`false`(Varsayılan) olarak ayarlandığında, bileşenlerden () oluşturulan İşaretlemede boşluk Razor `.razor` Şu durumlarda kaldırılır:
+
+* Bir öğe içinde baştaki veya sondaki.
+* Bir parametre içinde baştaki veya sondaki `RenderFragment` . Örneğin, alt içerik başka bir bileşene geçirildi.
+* Ya da gibi bir C# kod bloğunun önünde veya sonrasında gelir `@if` `@foreach` .
 
 ::: moniker-end
 
@@ -994,7 +1008,7 @@ Bildiriminde bir kesme noktası ayarlayın `return csharpDocument;` `CustomTempl
 RazorGörünüm altyapısı, görünümler için büyük/küçük harfe duyarlı aramalar gerçekleştirir. Ancak gerçek arama, temel alınan dosya sistemine göre belirlenir:
 
 * Dosya tabanlı kaynak:
-  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harfe duyarsızdır. Örneğin, `return View("Test")` */views/Home/test.exe* , */views/Home/test.exe* ve diğer tüm büyük/küçük harf çeşitlerüyle sonuçlanır.
+  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harfe duyarsızdır. Örneğin, `return View("Test")` */views/Home/test.exe*, */views/Home/test.exe* ve diğer tüm büyük/küçük harf çeşitlerüyle sonuçlanır.
   * Büyük/küçük harf duyarlı dosya sistemlerinde (örneğin, Linux, OSX ve ile `EmbeddedFileProvider` ), aramalar büyük/küçük harfe duyarlıdır. Örneğin, `return View("Test")` özellikle */views/Home/test.exe. cshtml* ile eşleşir.
 * Önceden derlenmiş görünümler: ASP.NET Core 2,0 ve üzeri sürümlerde, önceden derlenmiş görünümleri aramak tüm işletim sistemlerinde büyük/küçük harfe duyarlıdır. Davranış, fiziksel dosya sağlayıcısının Windows 'daki davranışlarıyla aynıdır. Ön derlenmiş iki görünüm yalnızca bir durumda farklıysa, arama sonucu belirleyici değildir.
 

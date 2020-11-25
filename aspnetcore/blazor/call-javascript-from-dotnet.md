@@ -5,7 +5,7 @@ description: Uygulamalarda .NET metotlarından JavaScript işlevlerini çağırm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, devx-track-js
-ms.date: 10/20/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: f5373f1905958ee5c51ee76bd07690d079fb50f5
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: c73de0e30b7b564915f30d75f754f89fecccdc78
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570022"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035729"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
-Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)ve [Luke Latham](https://github.com/guardrex)
+, [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Pranav Krishnamoorthy](https://github.com/pranavkm)ve [Luke Latham](https://github.com/guardrex) tarafından
 
-Bir Blazor uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirliği* ( *js birlikte çalışma* ) olarak adlandırılır.
+Bir Blazor uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirliği* (*js birlikte çalışma*) olarak adlandırılır.
 
 Bu makalede, .NET 'ten JavaScript işlevlerini çağırma ele alınmaktadır. JavaScript 'ten .NET yöntemlerini çağırma hakkında daha fazla bilgi için bkz <xref:blazor/call-dotnet-from-javascript> ..
 
@@ -543,28 +543,6 @@ public async ValueTask<string> Prompt(string message)
 
 `IJSInProcessObjectReference` işlevleri zaman uyumlu olarak çağrılabilen bir JavaScript nesnesine olan başvuruyu temsil eder.
 
-`IJSUnmarshalledObjectReference` işlevleri .NET verilerinin serileştirilmesi olmadan çağrılabilen bir JavaScript nesnesine yönelik başvuruyu temsil eder. Bu, Blazor WebAssembly performans önemli olduğunda ' de kullanılabilir:
-
-```javascript
-window.unmarshalledInstance = {
-  helloWorld: function (personNamePointer) {
-    const personName = Blazor.platform.readStringField(value, 0);
-    return `Hello ${personName}`;
-  }
-};
-```
-
-```csharp
-var unmarshalledRuntime = (IJSUnmarshalledRuntime)js;
-var jsUnmarshalledReference = unmarshalledRuntime
-    .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
-
-string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
-    "helloWorld");
-```
-
-Önceki örnekte, <xref:Microsoft.JSInterop.IJSRuntime> hizmet sınıfına eklenir ve şuna atanır `js` (gösterilmez).
-
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>Kullanıcı arabirimini (DOM öğeleri) işleyen JavaScript kitaplıklarının kullanımı
 
 Bazen, tarayıcı DOM içinde görünür kullanıcı arabirimi öğeleri üreten JavaScript kitaplıklarını kullanmak isteyebilirsiniz. İlk bakışta, bu durum, Blazor Dağıtılmış Sistem, Dom öğelerinin ağacı üzerinde denetime sahip olma ve bazı dış kodlar Dom ağacını bir kez değiştiğinden ve bunların SLA 'ları uygulama mekanizmasını geçersiz kılacağından hatalara açık hale gelebilir. Bu, Blazor belirli bir kısıtlama değildir. Aynı zorluk, fark tabanlı kullanıcı arabirimi çerçevesiyle oluşur.
@@ -707,6 +685,158 @@ JavaScript arasında büyük miktarda veri aktaran kodu geliştirirken aşağıd
 ## <a name="js-modules"></a>JS modülleri
 
 JS yalıtım için, JS birlikte çalışma, tarayıcıların [EcmaScript modülleri (ESM)](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) için varsayılan desteğiyle ([ECMAScript belirtimi](https://tc39.es/ecma262/#sec-modules)) birlikte çalışmaktadır.
+
+## <a name="unmarshalled-js-interop"></a>Unmarshalled JS birlikte çalışması
+
+Blazor WebAssembly .NET nesneleri JS birlikte çalışma için serileştirildiğinde ve aşağıdakilerden biri doğru olduğunda, bileşenler düşük performansa sahip olabilir:
+
+* Yüksek hacimli .NET nesneleri hızla serileştirilir. Örnek: JS birlikte çalışma çağrıları, bir fare tekerleği dönme gibi bir giriş cihazını taşımaya dayanılarak yapılır.
+* Büyük .NET nesneleri veya çok sayıda .NET nesnesi, JS birlikte çalışma için serileştirilmelidir. Örnek: JS birlikte çalışma çağrıları onlarca dosya serileştirmesini gerektirir.
+
+<xref:Microsoft.JSInterop.IJSUnmarshalledObjectReference> işlevleri .NET verilerinin serileştirilmesi olmadan çağrılabilen bir JavaScript nesnesine yönelik başvuruyu temsil eder.
+
+Aşağıdaki örnekte:
+
+* Dize ve tamsayı içeren bir [struct](/dotnet/csharp/language-reference/builtin-types/struct) , seri hale getirilebilir JavaScript 'e geçirilir.
+* JavaScript işlevleri verileri işler ve çağırana bir Boole ya da dize döndürür.
+* JavaScript dizesi doğrudan bir .NET nesnesine dönüştürülebilir değildir `string` . `unmarshalledFunctionReturnString`İşlevi `BINDING.js_string_to_mono_string` bir JavaScript dizesinin dönüştürülmesini yönetmek için çağırır.
+
+> [!NOTE]
+> JavaScript 'e geçirilen [Yapı](/dotnet/csharp/language-reference/builtin-types/struct) kötü bileşen performansına neden olmadığından, aşağıdaki örnekler bu senaryo için tipik kullanım durumları değildir. Örnek, yalnızca serileştirilmiş .NET verilerini geçirme kavramlarını göstermek için küçük bir nesne kullanır.
+
+`<script>`İçindeki bir bloğun veya bir `wwwroot/index.html` dış JavaScript dosyasındaki içeriği şunun tarafından başvuruluyor `wwwroot/index.html` :
+
+```javascript
+window.returnJSObjectReference = () => {
+    return {
+        unmarshalledFunctionReturnBoolean: function (fields) {
+            const name = Blazor.platform.readStringField(fields, 0);
+            const year = Blazor.platform.readInt32Field(fields, 8);
+
+            return name === "Brigadier Alistair Gordon Lethbridge-Stewart" &&
+                year === 1968;
+        },
+        unmarshalledFunctionReturnString: function (fields) {
+            const name = Blazor.platform.readStringField(fields, 0);
+            const year = Blazor.platform.readInt32Field(fields, 8);
+
+            return BINDING.js_string_to_mono_string(`Hello, ${name} (${year})!`);
+        }
+    };
+}
+```
+
+> [!WARNING]
+> `js_string_to_mono_string`İşlevin adı, davranışı ve varlığı gelecek .NET sürümünde değişebilir. Örnek:
+>
+> * İşlevin yeniden adlandırılması olasıdır.
+> * İşlevin kendisi, çerçeve tarafından dizelerin otomatik dönüştürülmesini tercih ederek kaldırılabilir.
+
+`Pages/UnmarshalledJSInterop.razor` (URL: `/unmarshalled-js-interop` ):
+
+```razor
+@page "/unmarshalled-js-interop"
+@using System.Runtime.InteropServices
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+<h1>Unmarshalled JS interop</h1>
+
+@if (callResultForBoolean)
+{
+    <p>JS interop was successful!</p>
+}
+
+@if (!string.IsNullOrEmpty(callResultForString))
+{
+    <p>@callResultForString</p>
+}
+
+<p>
+    <button @onclick="CallJSUnmarshalledForBoolean">
+        Call Unmarshalled JS & Return Boolean
+    </button>
+    <button @onclick="CallJSUnmarshalledForString">
+        Call Unmarshalled JS & Return String
+    </button>
+</p>
+
+<p>
+    <a href="https://www.doctorwho.tv">Doctor Who</a>
+    is a registered trademark of the <a href="https://www.bbc.com/">BBC</a>.
+</p>
+
+@code {
+    private bool callResultForBoolean;
+    private string callResultForString;
+
+    private void CallJSUnmarshalledForBoolean()
+    {
+        var unmarshalledRuntime = (IJSUnmarshalledRuntime)JS;
+
+        var jsUnmarshalledReference = unmarshalledRuntime
+            .InvokeUnmarshalled<IJSUnmarshalledObjectReference>(
+                "returnJSObjectReference");
+
+        callResultForBoolean = 
+            jsUnmarshalledReference.InvokeUnmarshalled<InteropStruct, bool>(
+                "unmarshalledFunctionReturnBoolean", GetStruct());
+    }
+
+    private void CallJSUnmarshalledForString()
+    {
+        var unmarshalledRuntime = (IJSUnmarshalledRuntime)JS;
+
+        var jsUnmarshalledReference = unmarshalledRuntime
+            .InvokeUnmarshalled<IJSUnmarshalledObjectReference>(
+                "returnJSObjectReference");
+
+        callResultForString = 
+            jsUnmarshalledReference.InvokeUnmarshalled<InteropStruct, string>(
+                "unmarshalledFunctionReturnString", GetStruct());
+    }
+
+    private InteropStruct GetStruct()
+    {
+        return new InteropStruct
+        {
+            Name = "Brigadier Alistair Gordon Lethbridge-Stewart",
+            Year = 1968,
+        };
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct InteropStruct
+    {
+        [FieldOffset(0)]
+        public string Name;
+
+        [FieldOffset(8)]
+        public int Year;
+    }
+}
+```
+
+`IJSUnmarshalledObjectReference`Örnek, C# kodunda atılmazsa JavaScript 'e atılabilir. Aşağıdaki `dispose` Işlev JavaScript 'ten çağrıldığında nesne başvurusunu ortadan kaldırmaktadır:
+
+```javascript
+window.exampleJSObjectReferenceNotDisposedInCSharp = () => {
+    return {
+        dispose: function () {
+            DotNet.disposeJSObjectReference(this);
+        },
+
+        ...
+    };
+}
+```
+
+Dizi türleri JavaScript nesnelerinden .NET nesnelerine kullanılarak dönüştürülebilir `js_typed_array_to_array` , ancak JavaScript dizisi türü belirlenmiş bir dizi olmalıdır. JavaScript 'teki diziler, C# kodunda .NET nesne dizisi () olarak okunabilir `object[]` .
+
+Dize dizileri gibi diğer veri türleri dönüştürülebilirler, ancak yeni bir mono dizi nesnesi ( `mono_obj_array_new` ) oluşturulmasını ve değerini () ayarlamayı gerektirebilir `mono_obj_array_set` .
+
+> [!WARNING]
+> , Ve gibi Framework tarafından sunulan JavaScript işlevleri, Blazor `js_typed_array_to_array` `mono_obj_array_new` `mono_obj_array_set` ad değişikliklerine, davranış değişikliklerine veya gelecekteki .net sürümlerinde kaldırılmaya tabidir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

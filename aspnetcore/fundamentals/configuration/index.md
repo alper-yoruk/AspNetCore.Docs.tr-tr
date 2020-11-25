@@ -5,7 +5,7 @@ description: ASP.NET Core uygulamasını yapılandırmak için yapılandırma AP
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2020
+ms.date: 11/24/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c04dcc65f7518d2d8b32cdce7a7fbb756dd8ec3a
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417545"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035872"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -108,20 +108,20 @@ Ek JSON yapılandırma dosyaları ekleme hakkında bilgi için bu belgede [JSON 
 
 <a name="security"></a>
 
-## <a name="security-and-secret-manager"></a>Güvenlik ve gizli dizi Yöneticisi
+## <a name="security-and-user-secrets"></a>Güvenlik ve Kullanıcı gizli dizileri
 
 Yapılandırma verileri yönergeleri:
 
-_ Yapılandırma sağlayıcısı kodunda veya düz metin yapılandırma dosyalarında parolaları veya diğer hassas verileri hiçbir şekilde depolamayin. [Gizli](xref:security/app-secrets) dizi, geliştirmelerde gizli dizileri depolamak için kullanılabilir.
+_ Yapılandırma sağlayıcısı kodunda veya düz metin yapılandırma dosyalarında parolaları veya diğer hassas verileri hiçbir şekilde depolamayin. Gizli dizi geliştirmede gizli dizileri depolamak için [gizli dizi Yöneticisi](xref:security/app-secrets) aracı kullanılabilir.
 * Geliştirme veya test ortamlarında üretim gizli dizileri kullanmayın.
 * Yanlışlıkla bir kaynak kodu deposuna uygulanamazlar için proje dışındaki gizli dizileri belirtin.
 
-[Varsayılan](#default)olarak, [gizli yönetici](xref:security/app-secrets) yapılandırma ayarlarını *appsettings.json* ve appSettings sonrasında okur *.* `Environment` *. JSON*.
+[Varsayılan](#default)olarak, Kullanıcı gizli dizileri yapılandırma kaynağı JSON yapılandırma kaynaklarından sonra kaydedilir. Bu nedenle, Kullanıcı gizli anahtarları anahtarlar ve appSettings 'e göre önceliklidir *appsettings.json* *.* `Environment` *. JSON*.
 
 Parolaları veya diğer hassas verileri depolama hakkında daha fazla bilgi için:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>: Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için [dosya yapılandırma sağlayıcısını](#fcp) kullanır.
+* <xref:security/app-secrets>: Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi Aracı, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için [dosya yapılandırma sağlayıcısını](#fcp) kullanır.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) ASP.NET Core uygulamalar için uygulama gizli dizilerini güvenli bir şekilde depolar. Daha fazla bilgi için bkz. <xref:security/key-vault-configuration>.
 
@@ -129,7 +129,7 @@ Parolaları veya diğer hassas verileri depolama hakkında daha fazla bilgi içi
 
 ## <a name="environment-variables"></a>Ortam değişkenleri
 
-[Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> yapılandırma, appSettings sonrasında anahtar-değer çiftleri ' nden yapılandırmayı yükler *appsettings.json* *.* `Environment` *. JSON* ve [gizli yönetici](xref:security/app-secrets). Bu nedenle, ortamdan okunan anahtar değerleri, öğesinden okunan değerleri geçersiz *appsettings.json* kılar *.* `Environment` *. JSON* ve gizli yönetici.
+[Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> yapılandırma, appSettings sonrasında anahtar-değer çiftleri ' nden yapılandırmayı yükler *appsettings.json* *.* `Environment` *. JSON* ve [Kullanıcı gizli](xref:security/app-secrets)dizileri. Bu nedenle, ortamdan okunan anahtar değerleri, öğesinden okunan değerleri geçersiz *appsettings.json* kılar *.* `Environment` *. JSON* ve Kullanıcı gizli dizileri.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -243,7 +243,7 @@ setx Logging__1__Level=Information
 [Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> aşağıdaki yapılandırma kaynaklarından sonra komut satırı bağımsız değişkeninden anahtar-değer çiftlerinden yapılandırma yükler:
 
 * *appsettings.json* ve *appSettings*. `Environment` . *JSON* dosyaları.
-* Geliştirme ortamında [uygulama gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
+* Geliştirme ortamında [uygulama gizli](xref:security/app-secrets) dizileri.
 * Ortam değişkenleri.
 
 [Varsayılan](#default)olarak, komut satırı geçersiz kılma yapılandırma değerleri, diğer tüm yapılandırma sağlayıcılarıyla ayarlanan yapılandırma değerleri olarak ayarlanır.
@@ -355,7 +355,7 @@ Aşağıdaki tabloda ASP.NET Core uygulamalar için kullanılabilen yapılandır
 | [Dosya yapılandırma sağlayıcısı](#file-configuration-provider) | INı, JSON ve XML dosyaları |
 | [Dosya başına anahtar yapılandırma sağlayıcısı](#key-per-file-configuration-provider) | Dizin dosyaları |
 | [Bellek yapılandırma sağlayıcısı](#memory-configuration-provider) | Bellek içi Koleksiyonlar |
-| [Gizli dizi Yöneticisi](xref:security/app-secrets)  | Kullanıcı profili dizinindeki dosya |
+| [Kullanıcı gizli dizileri](xref:security/app-secrets) | Kullanıcı profili dizinindeki dosya |
 
 Yapılandırma kaynakları, yapılandırma sağlayıcılarının belirtilme sırasına göre okundu. Koddaki yapılandırma sağlayıcılarını, uygulamanın gerektirdiği temel yapılandırma kaynakları için önceliklere uyacak şekilde sıralayın.
 
@@ -363,7 +363,7 @@ Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
 1. *appsettings.json*
 1. *appSettings*. `Environment` . *JSON*
-1. [Gizli dizi Yöneticisi](xref:security/app-secrets)
+1. [Kullanıcı gizli dizileri](xref:security/app-secrets)
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
 1. Komut satırı [yapılandırma sağlayıcısını](#command-line-configuration-provider)kullanan komut satırı bağımsız değişkenleri.
 
@@ -865,7 +865,7 @@ Ana bilgisayar oluştururken ASP.NET Core [DotNet yeni](/dotnet/core/tools/dotne
 * Uygulama yapılandırması şuradan sağlanır:
   * *appsettings.json*[dosya yapılandırma sağlayıcısını](#file-configuration-provider)kullanma.
   * *appSettings.* [Dosya yapılandırma sağlayıcısı](#file-configuration-provider)kullanılarak {Environment}. JSON.
-  * [Secret Manager](xref:security/app-secrets) Uygulama, `Development` giriş derlemesini kullanarak ortamda çalıştırıldığında gizli Yöneticisi.
+  * Uygulama, giriş derlemesini kullanarak ortamda çalıştırıldığında [Kullanıcı gizli](xref:security/app-secrets) dizileri `Development` .
   * Ortam [değişkenleri yapılandırma sağlayıcısını](#environment-variables-configuration-provider)kullanarak ortam değişkenleri.
   * Komut satırı [yapılandırma sağlayıcısını](#command-line-configuration-provider)kullanan komut satırı bağımsız değişkenleri.
 
@@ -880,7 +880,7 @@ Hassas yapılandırma verilerini güvenli hale getirmek için aşağıdaki uygul
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>: Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için dosya yapılandırma sağlayıcısını kullanır. Dosya yapılandırma sağlayıcısı, bu konunun ilerleyen kısımlarında açıklanmıştır.
+* <xref:security/app-secrets>: Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi Aracı, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için dosya yapılandırma sağlayıcısını kullanır. Dosya yapılandırma sağlayıcısı, bu konunun ilerleyen kısımlarında açıklanmıştır.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) ASP.NET Core uygulamalar için uygulama gizli dizilerini güvenli bir şekilde depolar. Daha fazla bilgi için bkz. <xref:security/key-vault-configuration>.
 
@@ -983,7 +983,7 @@ Aşağıdaki tabloda ASP.NET Core uygulamalar için kullanılabilen yapılandır
 | [Dosya yapılandırma sağlayıcısı](#file-configuration-provider) | Dosyalar (ıNı, JSON, XML) |
 | [Dosya başına anahtar yapılandırma sağlayıcısı](#key-per-file-configuration-provider) | Dizin dosyaları |
 | [Bellek yapılandırma sağlayıcısı](#memory-configuration-provider) | Bellek içi Koleksiyonlar |
-| [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) (*güvenlik* konuları) | Kullanıcı profili dizinindeki dosya |
+| [Kullanıcı gizli](xref:security/app-secrets) dizileri (*güvenlik* konuları) | Kullanıcı profili dizinindeki dosya |
 
 Yapılandırma kaynakları, başlangıçta yapılandırma sağlayıcılarının belirtilme sırasına göre okundu. Bu konu başlığı altında açıklanan yapılandırma sağlayıcıları, kodun onları düzenler sırasına göre değil alfabetik sırayla açıklanmıştır. Koddaki yapılandırma sağlayıcılarını, uygulamanın gerektirdiği temel yapılandırma kaynakları için önceliklere uyacak şekilde sıralayın.
 
@@ -991,7 +991,7 @@ Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
 1. Dosyalar ( *appsettings.json* , *appSettings. { Environment}. JSON*, `{Environment}` uygulamanın geçerli barındırma ortamıdır
 1. [Azure Key Vault](xref:security/key-vault-configuration)
-1. [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) (yalnızca geliştirme ortamı)
+1. [Kullanıcı gizli](xref:security/app-secrets) dizileri (yalnızca geliştirme ortamı)
 1. Ortam değişkenleri
 1. Komut satırı bağımsız değişkenleri
 
@@ -1067,7 +1067,7 @@ Komut satırı yapılandırmasını etkinleştirmek için, <xref:Microsoft.Exten
 `CreateDefaultBuilder` Ayrıca yüklenir:
 
 * Ve appSettings 'ten isteğe bağlı yapılandırma *appsettings.json* *. { Environment}. JSON* dosyaları.
-* Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
+* Geliştirme ortamında [Kullanıcı gizli](xref:security/app-secrets) dizileri.
 * Ortam değişkenleri.
 
 `CreateDefaultBuilder` Komut satırı yapılandırma sağlayıcısını son ekler. Diğer sağlayıcılar tarafından ayarlanan çalışma zamanında geçersiz kılma yapılandırmasında komut satırı bağımsız değişkenleri geçirildi.
@@ -1182,7 +1182,7 @@ Ortam değişkenleri yapılandırmasını etkinleştirmek için, <xref:Microsoft
 
 * Önek olmadan çağırarak ön eki edilmemiş ortam değişkenlerinden uygulama yapılandırması `AddEnvironmentVariables` .
 * Ve appSettings 'ten isteğe bağlı yapılandırma *appsettings.json* *. { Environment}. JSON* dosyaları.
-* Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
+* Geliştirme ortamında [Kullanıcı gizli](xref:security/app-secrets) dizileri.
 * Komut satırı bağımsız değişkenleri.
 
 Ortam değişkenleri yapılandırma sağlayıcısı, Kullanıcı gizli dizileri ve *appSettings* dosyalarından yapılandırma kurulduktan sonra çağrılır. Bu konumda sağlayıcıyı çağırmak, çalışma zamanında ortam değişkenlerinin Kullanıcı parolaları ve *appSettings* dosyaları tarafından ayarlanan yapılandırmayı geçersiz kılmak için okumasına izin verir.
@@ -1342,7 +1342,7 @@ Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) böl
 `CreateDefaultBuilder` Ayrıca yüklenir:
 
 * Ortam değişkenleri.
-* Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
+* Geliştirme ortamında [Kullanıcı gizli](xref:security/app-secrets) dizileri.
 * Komut satırı bağımsız değişkenleri.
 
 JSON yapılandırma sağlayıcısı önce oluşturulur. Bu nedenle, Kullanıcı gizli dizileri, ortam değişkenleri ve komut satırı bağımsız değişkenleri, *appSettings* dosyaları tarafından ayarlanan yapılandırmayı geçersiz kılar.
