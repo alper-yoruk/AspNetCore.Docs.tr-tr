@@ -6,93 +6,93 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 08/13/2020
 no-loc:
-- 'appsettings.json'
-- 'ASP.NET Core Identity'
-- 'cookie'
-- 'Cookie'
-- 'Blazor'
-- 'Blazor Server'
-- 'Blazor WebAssembly'
-- 'Identity'
-- "Let's Encrypt"
-- 'Razor'
-- 'SignalR'
-- 'Models'
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+- Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570256"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96024986"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core"></a><span data-ttu-id="228fd-103">Öğretici: ASP.NET Core bir Web API 'SI oluşturma</span><span class="sxs-lookup"><span data-stu-id="228fd-103">Tutorial: Create a web API with ASP.NET Core</span></span>
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a><span data-ttu-id="68923-103">Öğretici: ASP.NET Core bir Web API 'SI oluşturma</span><span class="sxs-lookup"><span data-stu-id="68923-103">Tutorial: Create a web API with ASP.NET Core</span></span>
 
-<span data-ttu-id="228fd-104">[Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkabağı](https://twitter.com/serpent5)ve [Mike te son](https://github.com/mikewasson)</span><span class="sxs-lookup"><span data-stu-id="228fd-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5), and [Mike Wasson](https://github.com/mikewasson)</span></span>
+<span data-ttu-id="68923-104">[Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkabağı](https://twitter.com/serpent5)ve [Mike te son](https://github.com/mikewasson)</span><span class="sxs-lookup"><span data-stu-id="68923-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5), and [Mike Wasson](https://github.com/mikewasson)</span></span>
 
-<span data-ttu-id="228fd-105">Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-105">This tutorial teaches the basics of building a web API with ASP.NET Core.</span></span>
+<span data-ttu-id="68923-105">Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretilir.</span><span class="sxs-lookup"><span data-stu-id="68923-105">This tutorial teaches the basics of building a web API with ASP.NET Core.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="228fd-106">Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="228fd-106">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="68923-106">Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="68923-106">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="228fd-107">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-107">Create a web API project.</span></span>
-> * <span data-ttu-id="228fd-108">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-108">Add a model class and a database context.</span></span>
-> * <span data-ttu-id="228fd-109">CRUD yöntemleriyle bir denetleyiciyi dolandırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-109">Scaffold a controller with CRUD methods.</span></span>
-> * <span data-ttu-id="228fd-110">Yönlendirmeyi, URL yollarını ve dönüş değerlerini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-110">Configure routing, URL paths, and return values.</span></span>
-> * <span data-ttu-id="228fd-111">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-111">Call the web API with Postman.</span></span>
+> * <span data-ttu-id="68923-107">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-107">Create a web API project.</span></span>
+> * <span data-ttu-id="68923-108">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-108">Add a model class and a database context.</span></span>
+> * <span data-ttu-id="68923-109">CRUD yöntemleriyle bir denetleyiciyi dolandırın.</span><span class="sxs-lookup"><span data-stu-id="68923-109">Scaffold a controller with CRUD methods.</span></span>
+> * <span data-ttu-id="68923-110">Yönlendirmeyi, URL yollarını ve dönüş değerlerini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="68923-110">Configure routing, URL paths, and return values.</span></span>
+> * <span data-ttu-id="68923-111">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-111">Call the web API with Postman.</span></span>
 
-<span data-ttu-id="228fd-112">Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="228fd-112">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
+<span data-ttu-id="68923-112">Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="68923-112">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
 
-## <a name="overview"></a><span data-ttu-id="228fd-113">Genel Bakış</span><span class="sxs-lookup"><span data-stu-id="228fd-113">Overview</span></span>
+## <a name="overview"></a><span data-ttu-id="68923-113">Genel Bakış</span><span class="sxs-lookup"><span data-stu-id="68923-113">Overview</span></span>
 
-<span data-ttu-id="228fd-114">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="228fd-114">This tutorial creates the following API:</span></span>
+<span data-ttu-id="68923-114">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="68923-114">This tutorial creates the following API:</span></span>
 
-|<span data-ttu-id="228fd-115">API</span><span class="sxs-lookup"><span data-stu-id="228fd-115">API</span></span> | <span data-ttu-id="228fd-116">Açıklama</span><span class="sxs-lookup"><span data-stu-id="228fd-116">Description</span></span> | <span data-ttu-id="228fd-117">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-117">Request body</span></span> | <span data-ttu-id="228fd-118">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-118">Response body</span></span> |
+|<span data-ttu-id="68923-115">API</span><span class="sxs-lookup"><span data-stu-id="68923-115">API</span></span> | <span data-ttu-id="68923-116">Açıklama</span><span class="sxs-lookup"><span data-stu-id="68923-116">Description</span></span> | <span data-ttu-id="68923-117">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-117">Request body</span></span> | <span data-ttu-id="68923-118">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-118">Response body</span></span> |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | <span data-ttu-id="228fd-119">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="228fd-119">Get all to-do items</span></span> | <span data-ttu-id="228fd-120">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-120">None</span></span> | <span data-ttu-id="228fd-121">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="228fd-121">Array of to-do items</span></span>|
-|`GET /api/TodoItems/{id}` | <span data-ttu-id="228fd-122">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="228fd-122">Get an item by ID</span></span> | <span data-ttu-id="228fd-123">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-123">None</span></span> | <span data-ttu-id="228fd-124">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-124">To-do item</span></span>|
-|`POST /api/TodoItems` | <span data-ttu-id="228fd-125">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="228fd-125">Add a new item</span></span> | <span data-ttu-id="228fd-126">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-126">To-do item</span></span> | <span data-ttu-id="228fd-127">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-127">To-do item</span></span> |
-|`PUT /api/TodoItems/{id}` | <span data-ttu-id="228fd-128">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-128">Update an existing item &nbsp;</span></span> | <span data-ttu-id="228fd-129">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-129">To-do item</span></span> | <span data-ttu-id="228fd-130">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-130">None</span></span> |
-|<span data-ttu-id="228fd-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-132">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-132">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-133">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-133">None</span></span> | <span data-ttu-id="228fd-134">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-134">None</span></span>|
+|`GET /api/TodoItems` | <span data-ttu-id="68923-119">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="68923-119">Get all to-do items</span></span> | <span data-ttu-id="68923-120">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-120">None</span></span> | <span data-ttu-id="68923-121">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="68923-121">Array of to-do items</span></span>|
+|`GET /api/TodoItems/{id}` | <span data-ttu-id="68923-122">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="68923-122">Get an item by ID</span></span> | <span data-ttu-id="68923-123">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-123">None</span></span> | <span data-ttu-id="68923-124">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-124">To-do item</span></span>|
+|`POST /api/TodoItems` | <span data-ttu-id="68923-125">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="68923-125">Add a new item</span></span> | <span data-ttu-id="68923-126">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-126">To-do item</span></span> | <span data-ttu-id="68923-127">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-127">To-do item</span></span> |
+|`PUT /api/TodoItems/{id}` | <span data-ttu-id="68923-128">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-128">Update an existing item &nbsp;</span></span> | <span data-ttu-id="68923-129">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-129">To-do item</span></span> | <span data-ttu-id="68923-130">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-130">None</span></span> |
+|<span data-ttu-id="68923-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-132">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-132">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-133">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-133">None</span></span> | <span data-ttu-id="68923-134">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-134">None</span></span>|
 
-<span data-ttu-id="228fd-135">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="228fd-135">The following diagram shows the design of the app.</span></span>
+<span data-ttu-id="68923-135">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="68923-135">The following diagram shows the design of the app.</span></span>
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a><span data-ttu-id="228fd-141">Ön koşullar</span><span class="sxs-lookup"><span data-stu-id="228fd-141">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="68923-141">Önkoşullar</span><span class="sxs-lookup"><span data-stu-id="68923-141">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-142">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-142">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-142">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-142">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-143">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-143">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-143">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-143">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-144">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-144">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-144">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-144">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-5.0.md)]
 
 ---
 
-## <a name="create-a-web-project"></a><span data-ttu-id="228fd-145">Web projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="228fd-145">Create a web project</span></span>
+## <a name="create-a-web-project"></a><span data-ttu-id="68923-145">Web projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="68923-145">Create a web project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-146">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-146">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-146">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-146">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-147">**Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-147">From the **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="228fd-148">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-148">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
-* <span data-ttu-id="228fd-149">Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-149">Name the project *TodoApi* and click **Create**.</span></span>
-* <span data-ttu-id="228fd-150">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 5,0** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-150">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 5.0** are selected.</span></span> <span data-ttu-id="228fd-151">**API** şablonunu seçin ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-151">Select the **API** template and click **Create**.</span></span>
+* <span data-ttu-id="68923-147">**Dosya** menüsünden **Yeni** > **Proje**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-147">From the **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="68923-148">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-148">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
+* <span data-ttu-id="68923-149">Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-149">Name the project *TodoApi* and click **Create**.</span></span>
+* <span data-ttu-id="68923-150">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 5,0** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="68923-150">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 5.0** are selected.</span></span> <span data-ttu-id="68923-151">**API** şablonunu seçin ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-151">Select the **API** template and click **Create**.</span></span>
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/5/vs.png)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-153">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-153">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-153">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-153">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-154">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="228fd-154">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="228fd-155">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-155">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
-* <span data-ttu-id="228fd-156">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-156">Run the following commands:</span></span>
+* <span data-ttu-id="68923-154">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="68923-154">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="68923-155">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-155">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
+* <span data-ttu-id="68923-156">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-156">Run the following commands:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
@@ -102,32 +102,32 @@ ms.locfileid: "94570256"
    code -r ../TodoApi
    ```
 
-* <span data-ttu-id="228fd-157">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-157">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
+* <span data-ttu-id="68923-157">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-157">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
 
-  <span data-ttu-id="228fd-158">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="228fd-158">The preceding commands:</span></span>
+  <span data-ttu-id="68923-158">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="68923-158">The preceding commands:</span></span>
 
-  * <span data-ttu-id="228fd-159">Yeni bir Web API projesi oluşturur ve Visual Studio Code açar.</span><span class="sxs-lookup"><span data-stu-id="228fd-159">Creates a new web API project and opens it in Visual Studio Code.</span></span>
-  * <span data-ttu-id="228fd-160">Sonraki bölümde gerekli olan NuGet paketlerini ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-160">Adds the NuGet packages which are required in the next section.</span></span>
+  * <span data-ttu-id="68923-159">Yeni bir Web API projesi oluşturur ve Visual Studio Code açar.</span><span class="sxs-lookup"><span data-stu-id="68923-159">Creates a new web API project and opens it in Visual Studio Code.</span></span>
+  * <span data-ttu-id="68923-160">Sonraki bölümde gerekli olan NuGet paketlerini ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-160">Adds the NuGet packages which are required in the next section.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-161">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-161">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-161">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-161">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-162">**Dosya** > **yeni çözüm** ' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-162">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="68923-162">**Dosya** > **yeni çözüm**' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-162">Select **File** > **New Solution**.</span></span>
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* <span data-ttu-id="228fd-164">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-164">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="228fd-165">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-165">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
+* <span data-ttu-id="68923-164">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-164">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="68923-165">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-165">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* <span data-ttu-id="228fd-167">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 5. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-167">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 5.x **Target Framework**.</span></span> <span data-ttu-id="228fd-168">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-168">Select **Next**.</span></span>
+* <span data-ttu-id="68923-167">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 5. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-167">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 5.x **Target Framework**.</span></span> <span data-ttu-id="68923-168">**İleri**’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-168">Select **Next**.</span></span>
 
-* <span data-ttu-id="228fd-169">**Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-169">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
+* <span data-ttu-id="68923-169">**Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-169">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
 [!INCLUDE[](~/includes/mac-terminal-access.md)]
 
-<span data-ttu-id="228fd-171">Proje klasöründe bir komut terminali açın ve aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-171">Open a command terminal in the project folder and run the following commands:</span></span>
+<span data-ttu-id="68923-171">Proje klasöründe bir komut terminali açın ve aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-171">Open a command terminal in the project folder and run the following commands:</span></span>
 
    ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -136,47 +136,47 @@ ms.locfileid: "94570256"
 
 ---
 
-### <a name="test-the-project"></a><span data-ttu-id="228fd-172">Projeyi test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-172">Test the project</span></span>
+### <a name="test-the-project"></a><span data-ttu-id="68923-172">Projeyi test etme</span><span class="sxs-lookup"><span data-stu-id="68923-172">Test the project</span></span>
 
-<span data-ttu-id="228fd-173">Proje şablonu, `WeatherForecast` [Swagger](xref:tutorials/web-api-help-pages-using-swagger)desteğiyle bir API oluşturur.</span><span class="sxs-lookup"><span data-stu-id="228fd-173">The project template creates a `WeatherForecast` API with support for [Swagger](xref:tutorials/web-api-help-pages-using-swagger).</span></span>
+<span data-ttu-id="68923-173">Proje şablonu, `WeatherForecast` [Swagger](xref:tutorials/web-api-help-pages-using-swagger)desteğiyle bir API oluşturur.</span><span class="sxs-lookup"><span data-stu-id="68923-173">The project template creates a `WeatherForecast` API with support for [Swagger](xref:tutorials/web-api-help-pages-using-swagger).</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-174">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-174">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-174">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-174">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="228fd-175">Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-175">Press Ctrl+F5 to run without the debugger.</span></span>
+<span data-ttu-id="68923-175">Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-175">Press Ctrl+F5 to run without the debugger.</span></span>
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-  <span data-ttu-id="228fd-176">Visual Studio başlatılır:</span><span class="sxs-lookup"><span data-stu-id="228fd-176">Visual Studio launches:</span></span>
+  <span data-ttu-id="68923-176">Visual Studio başlatılır:</span><span class="sxs-lookup"><span data-stu-id="68923-176">Visual Studio launches:</span></span>
 
-* <span data-ttu-id="228fd-177">IIS Express Web sunucusu.</span><span class="sxs-lookup"><span data-stu-id="228fd-177">The IIS Express web server.</span></span>
-* <span data-ttu-id="228fd-178">Varsayılan tarayıcı ve `https://localhost:<port>/https://localhost:5001/swagger/index.html` ' a gider, burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-178">The default browser and navigates to `https://localhost:<port>/https://localhost:5001/swagger/index.html`, where `<port>` is a randomly chosen port number.</span></span>
+* <span data-ttu-id="68923-177">IIS Express Web sunucusu.</span><span class="sxs-lookup"><span data-stu-id="68923-177">The IIS Express web server.</span></span>
+* <span data-ttu-id="68923-178">Varsayılan tarayıcı ve `https://localhost:<port>/swagger/index.html` ' a gider, burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-178">The default browser and navigates to `https://localhost:<port>/swagger/index.html`, where `<port>` is a randomly chosen port number.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-179">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-179">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-179">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-179">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-<span data-ttu-id="228fd-180">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-180">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="228fd-181">Bir tarayıcıda aşağıdaki URL 'ye gidin: [https://localhost:5001/swagger](https://localhost:5001/swagger)</span><span class="sxs-lookup"><span data-stu-id="228fd-181">In a browser, go to following URL: [https://localhost:5001/swagger](https://localhost:5001/swagger)</span></span>
+<span data-ttu-id="68923-180">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-180">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="68923-181">Bir tarayıcıda aşağıdaki URL 'ye gidin: [https://localhost:5001/swagger](https://localhost:5001/swagger)</span><span class="sxs-lookup"><span data-stu-id="68923-181">In a browser, go to following URL: [https://localhost:5001/swagger](https://localhost:5001/swagger)</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-182">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-182">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-182">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-182">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="228fd-183">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-183">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="228fd-184">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-184">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="228fd-185">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="228fd-185">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="228fd-186">`/swagger`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/swagger` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-186">Append `/swagger` to the URL (change the URL to `https://localhost:<port>/swagger`).</span></span>
+<span data-ttu-id="68923-183">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-183">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="68923-184">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-184">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="68923-185">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="68923-185">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="68923-186">`/swagger`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/swagger` ).</span><span class="sxs-lookup"><span data-stu-id="68923-186">Append `/swagger` to the URL (change the URL to `https://localhost:<port>/swagger`).</span></span>
 
 ---
 
-<span data-ttu-id="228fd-187">Swagger sayfası `/swagger/index.html` görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="228fd-187">The Swagger page `/swagger/index.html` is displayed.</span></span> <span data-ttu-id="228fd-188">**Al**  >  **deneyin**  >  **Çalıştır** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-188">Select **GET** > **Try it out** > **Execute**.</span></span> <span data-ttu-id="228fd-189">Sayfa şunu görüntüler:</span><span class="sxs-lookup"><span data-stu-id="228fd-189">The page displays:</span></span>
+<span data-ttu-id="68923-187">Swagger sayfası `/swagger/index.html` görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="68923-187">The Swagger page `/swagger/index.html` is displayed.</span></span> <span data-ttu-id="68923-188">**Al**  >  **deneyin**  >  **Çalıştır**' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-188">Select **GET** > **Try it out** > **Execute**.</span></span> <span data-ttu-id="68923-189">Sayfa şunu görüntüler:</span><span class="sxs-lookup"><span data-stu-id="68923-189">The page displays:</span></span>
 
-* <span data-ttu-id="228fd-190">Dalgalı tahmin API 'sini test etmek için [kıvrımlı](https://curl.haxx.se/) komutu.</span><span class="sxs-lookup"><span data-stu-id="228fd-190">The [Curl](https://curl.haxx.se/) command to test the WeatherForecast API.</span></span>
-* <span data-ttu-id="228fd-191">Dalgalı tahmin API 'sini test etmek için URL.</span><span class="sxs-lookup"><span data-stu-id="228fd-191">The URL to test the WeatherForecast API.</span></span>
-* <span data-ttu-id="228fd-192">Yanıt kodu, gövde ve üstbilgiler.</span><span class="sxs-lookup"><span data-stu-id="228fd-192">The response code, body, and headers.</span></span>
-* <span data-ttu-id="228fd-193">Medya türleri ve örnek değer ve şema içeren bir açılır liste kutusu.</span><span class="sxs-lookup"><span data-stu-id="228fd-193">A drop down list box with media types and the example value and schema.</span></span>
+* <span data-ttu-id="68923-190">Dalgalı tahmin API 'sini test etmek için [kıvrımlı](https://curl.haxx.se/) komutu.</span><span class="sxs-lookup"><span data-stu-id="68923-190">The [Curl](https://curl.haxx.se/) command to test the WeatherForecast API.</span></span>
+* <span data-ttu-id="68923-191">Dalgalı tahmin API 'sini test etmek için URL.</span><span class="sxs-lookup"><span data-stu-id="68923-191">The URL to test the WeatherForecast API.</span></span>
+* <span data-ttu-id="68923-192">Yanıt kodu, gövde ve üstbilgiler.</span><span class="sxs-lookup"><span data-stu-id="68923-192">The response code, body, and headers.</span></span>
+* <span data-ttu-id="68923-193">Medya türleri ve örnek değer ve şema içeren bir açılır liste kutusu.</span><span class="sxs-lookup"><span data-stu-id="68923-193">A drop down list box with media types and the example value and schema.</span></span>
 
 <!-- Review: Do we care the IE generates several errors. It shows the data, but with  Unrecognized response type; displaying content as text.
 -->
-<span data-ttu-id="228fd-194">Swagger, Web API 'Leri için yararlı belgeler ve yardım sayfaları oluşturmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-194">Swagger is used to generate useful documentation and help pages for web APIs.</span></span> <span data-ttu-id="228fd-195">Bu öğretici, bir Web API 'SI oluşturmaya odaklanmaktadır.</span><span class="sxs-lookup"><span data-stu-id="228fd-195">This tutorial focuses on creating a web API.</span></span> <span data-ttu-id="228fd-196">Swagger hakkında daha fazla bilgi için bkz <xref:tutorials/web-api-help-pages-using-swagger> ..</span><span class="sxs-lookup"><span data-stu-id="228fd-196">For more information on Swagger, see <xref:tutorials/web-api-help-pages-using-swagger>.</span></span>
+<span data-ttu-id="68923-194">Swagger, Web API 'Leri için yararlı belgeler ve yardım sayfaları oluşturmak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-194">Swagger is used to generate useful documentation and help pages for web APIs.</span></span> <span data-ttu-id="68923-195">Bu öğretici, bir Web API 'SI oluşturmaya odaklanmaktadır.</span><span class="sxs-lookup"><span data-stu-id="68923-195">This tutorial focuses on creating a web API.</span></span> <span data-ttu-id="68923-196">Swagger hakkında daha fazla bilgi için bkz <xref:tutorials/web-api-help-pages-using-swagger> ..</span><span class="sxs-lookup"><span data-stu-id="68923-196">For more information on Swagger, see <xref:tutorials/web-api-help-pages-using-swagger>.</span></span>
 
-<span data-ttu-id="228fd-197">**Istek URL** 'sini tarayıcıda kopyalayın ve geçmiş:`https://localhost:<port>/WeatherForecast`</span><span class="sxs-lookup"><span data-stu-id="228fd-197">Copy and past the **Request URL** in the browser:  `https://localhost:<port>/WeatherForecast`</span></span>
+<span data-ttu-id="68923-197">**Istek URL** 'sini tarayıcıda kopyalayın ve geçmiş:`https://localhost:<port>/WeatherForecast`</span><span class="sxs-lookup"><span data-stu-id="68923-197">Copy and past the **Request URL** in the browser:  `https://localhost:<port>/WeatherForecast`</span></span>
 
-<span data-ttu-id="228fd-198">Aşağıdakine benzer bir JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="228fd-198">JSON similar to the following is returned:</span></span>
+<span data-ttu-id="68923-198">Aşağıdakine benzer bir JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="68923-198">JSON similar to the following is returned:</span></span>
 
 ```json
 [
@@ -213,187 +213,185 @@ ms.locfileid: "94570256"
 ]
 ```
 
-### <a name="update-the-launchurl"></a><span data-ttu-id="228fd-199">LaunchUrl 'Yi güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="228fd-199">Update the launchUrl</span></span>
+### <a name="update-the-launchurl"></a><span data-ttu-id="68923-199">LaunchUrl 'Yi güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="68923-199">Update the launchUrl</span></span>
 
-<span data-ttu-id="228fd-200">*Properties\launchSettings.jstarihinde* , ' `launchUrl` den ' `"swagger"` e Güncelleştir `"api/TodoItems"` :</span><span class="sxs-lookup"><span data-stu-id="228fd-200">In *Properties\launchSettings.json* , update `launchUrl` from `"swagger"` to `"api/TodoItems"`:</span></span>
+<span data-ttu-id="68923-200">*Properties\launchSettings.jstarihinde*, ' `launchUrl` den ' `"swagger"` e Güncelleştir `"api/TodoItems"` :</span><span class="sxs-lookup"><span data-stu-id="68923-200">In *Properties\launchSettings.json*, update `launchUrl` from `"swagger"` to `"api/TodoItems"`:</span></span>
 
 ```json
 "launchUrl": "api/TodoItems",
 ```
 
-<span data-ttu-id="228fd-201">Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI aşağıdaki bölümlerde eklenen denetleyicinin GET yöntemine değiştirir.</span><span class="sxs-lookup"><span data-stu-id="228fd-201">Because Swagger has been removed, the preceding markup changes the URL that is launched to the GET method of the controller added in the following sections.</span></span>
+<span data-ttu-id="68923-201">Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI aşağıdaki bölümlerde eklenen denetleyicinin GET yöntemine değiştirir.</span><span class="sxs-lookup"><span data-stu-id="68923-201">Because Swagger has been removed, the preceding markup changes the URL that is launched to the GET method of the controller added in the following sections.</span></span>
 
-## <a name="add-a-model-class"></a><span data-ttu-id="228fd-202">Model sınıfı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-202">Add a model class</span></span>
+## <a name="add-a-model-class"></a><span data-ttu-id="68923-202">Model sınıfı ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-202">Add a model class</span></span>
 
-<span data-ttu-id="228fd-203">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-203">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="228fd-204">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-204">The model for this app is a single `TodoItem` class.</span></span>
+<span data-ttu-id="68923-203">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="68923-203">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="68923-204">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-204">The model for this app is a single `TodoItem` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-205">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-205">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-205">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-205">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-206">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-206">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-207">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-208">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-208">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-206">**Çözüm Gezgini**, projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-206">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="68923-207">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-207">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-208">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-208">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-209">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-209">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-210">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-210">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="68923-209">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-209">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-210">Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-210">Name the class *TodoItem* and select **Add**.</span></span>
 
-* <span data-ttu-id="228fd-211">Şablon kodunu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-211">Replace the template code with the following:</span></span>
+* <span data-ttu-id="68923-211">Şablon kodunu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-211">Replace the template code with the following:</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-212">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-212">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-212">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-212">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-213">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-213">Add a folder named *Models*.</span></span>
+* <span data-ttu-id="68923-213">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-213">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-214">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-214">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
+* <span data-ttu-id="68923-214">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-214">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-215">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-215">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-215">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-215">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-216">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-216">Right-click the project.</span></span> <span data-ttu-id="228fd-217">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-218">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-218">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-216">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-216">Right-click the project.</span></span> <span data-ttu-id="68923-217">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-217">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-218">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-218">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-220">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-220">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="68923-220">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-220">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
-* <span data-ttu-id="228fd-221">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-221">Name the class *TodoItem* , and then click **New**.</span></span>
+* <span data-ttu-id="68923-221">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-221">Name the class *TodoItem*, and then click **New**.</span></span>
 
-* <span data-ttu-id="228fd-222">Şablon kodunu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-222">Replace the template code with the following:</span></span>
+* <span data-ttu-id="68923-222">Şablon kodunu aşağıdaki kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-222">Replace the template code with the following:</span></span>
 
 ---
 
   [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoItem.cs?name=snippet)]
 
-<span data-ttu-id="228fd-223">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-223">The `Id` property functions as the unique key in a relational database.</span></span>
+<span data-ttu-id="68923-223">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="68923-223">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-224">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-224">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
+<span data-ttu-id="68923-224">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-224">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
-## <a name="add-a-database-context"></a><span data-ttu-id="228fd-225">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-225">Add a database context</span></span>
+## <a name="add-a-database-context"></a><span data-ttu-id="68923-225">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-225">Add a database context</span></span>
 
-<span data-ttu-id="228fd-226">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-226">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="228fd-227">Bu sınıf sınıfından türeterek oluşturulur <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> .</span><span class="sxs-lookup"><span data-stu-id="228fd-227">This class is created by deriving from the <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> class.</span></span>
+<span data-ttu-id="68923-226">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-226">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="68923-227">Bu sınıf sınıfından türeterek oluşturulur <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> .</span><span class="sxs-lookup"><span data-stu-id="68923-227">This class is created by deriving from the <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-228">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-228">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-228">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-228">Visual Studio</span></span>](#tab/visual-studio)
 
-### <a name="add-nuget-packages"></a><span data-ttu-id="228fd-229">NuGet paketlerini ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-229">Add NuGet packages</span></span>
+### <a name="add-nuget-packages"></a><span data-ttu-id="68923-229">NuGet paketlerini ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-229">Add NuGet packages</span></span>
 
-* <span data-ttu-id="228fd-230">**Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-230">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
-* <span data-ttu-id="228fd-231">**Gözatın** sekmesini seçin ve ardından \* \* Microsoft girin.</span><span class="sxs-lookup"><span data-stu-id="228fd-231">Select the **Browse** tab, and then enter \*\*Microsoft.</span></span>
-<span data-ttu-id="228fd-232">Arama kutusunda **Entityframeworkcore. SqlServer** .</span><span class="sxs-lookup"><span data-stu-id="228fd-232">**EntityFrameworkCore.SqlServer** in the search box.</span></span>
+* <span data-ttu-id="68923-230">**Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-230">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
+* <span data-ttu-id="68923-231">**Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.</span><span class="sxs-lookup"><span data-stu-id="68923-231">Select the **Browse** tab, and then enter **Microsoft.EntityFrameworkCore.SqlServer** in the search box.</span></span>
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
-* <span data-ttu-id="228fd-233">5,0 RC sürümü kullanılabilir durumda olan **ön sürümü dahil et** onay kutusunu seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-233">Select the **Include prerelease** checkbox so the 5.0 RC version is available.</span></span> 
-* <span data-ttu-id="228fd-234">Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-234">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
-* <span data-ttu-id="228fd-235">Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-235">Select the **Project** check box in the right pane and then select **Install**.</span></span>
-* <span data-ttu-id="228fd-236">Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-236">Use the preceding instructions to add the **Microsoft.EntityFrameworkCore.InMemory** NuGet package.</span></span>
+* <span data-ttu-id="68923-232">Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-232">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
+* <span data-ttu-id="68923-233">Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install**' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-233">Select the **Project** check box in the right pane and then select **Install**.</span></span>
+* <span data-ttu-id="68923-234">Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-234">Use the preceding instructions to add the **Microsoft.EntityFrameworkCore.InMemory** NuGet package.</span></span>
 
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
-<span data-ttu-id="228fd-237">![NuGet Paket Yöneticisi](first-web-api/_static/5/vsNuGet.png)</span><span class="sxs-lookup"><span data-stu-id="228fd-237">![NuGet Package Manager](first-web-api/_static/5/vsNuGet.png)</span></span>
+<span data-ttu-id="68923-235">![NuGet Paket Yöneticisi](first-web-api/_static/5/vsNuGet.png)</span><span class="sxs-lookup"><span data-stu-id="68923-235">![NuGet Package Manager](first-web-api/_static/5/vsNuGet.png)</span></span>
 
-## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="228fd-238">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-238">Add the TodoContext database context</span></span>
+## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="68923-236">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-236">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="228fd-239">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-239">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-240">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-240">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="68923-237">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-237">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-238">Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-238">Name the class *TodoContext* and click **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-241">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-241">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-239">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-239">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-242">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-242">Add a `TodoContext` class to the *Models* folder.</span></span>
+* <span data-ttu-id="68923-240">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-240">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
-* <span data-ttu-id="228fd-243">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-243">Enter the following code:</span></span>
+* <span data-ttu-id="68923-241">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="68923-241">Enter the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/5.x/TodoApi/Models/TodoContext.cs)]
 
-## <a name="register-the-database-context"></a><span data-ttu-id="228fd-244">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="228fd-244">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="68923-242">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="68923-242">Register the database context</span></span>
 
-<span data-ttu-id="228fd-245">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="228fd-245">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="228fd-246">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="228fd-246">The container provides the service to controllers.</span></span>
+<span data-ttu-id="68923-243">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="68923-243">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="68923-244">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="68923-244">The container provides the service to controllers.</span></span>
 
-<span data-ttu-id="228fd-247">Aşağıdaki kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-247">Update *Startup.cs* with the following code:</span></span>
+<span data-ttu-id="68923-245">Aşağıdaki kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-245">Update *Startup.cs* with the following code:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
-<span data-ttu-id="228fd-248">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-248">The preceding code:</span></span>
+<span data-ttu-id="68923-246">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="68923-246">The preceding code:</span></span>
 
-* <span data-ttu-id="228fd-249">Swagger çağrılarını kaldırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-249">Removes the Swagger calls.</span></span>
-* <span data-ttu-id="228fd-250">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-250">Removes unused `using` declarations.</span></span>
-* <span data-ttu-id="228fd-251">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-251">Adds the database context to the DI container.</span></span>
-* <span data-ttu-id="228fd-252">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-252">Specifies that the database context will use an in-memory database.</span></span>
+* <span data-ttu-id="68923-247">Swagger çağrılarını kaldırır.</span><span class="sxs-lookup"><span data-stu-id="68923-247">Removes the Swagger calls.</span></span>
+* <span data-ttu-id="68923-248">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="68923-248">Removes unused `using` declarations.</span></span>
+* <span data-ttu-id="68923-249">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-249">Adds the database context to the DI container.</span></span>
+* <span data-ttu-id="68923-250">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-250">Specifies that the database context will use an in-memory database.</span></span>
 
-## <a name="scaffold-a-controller"></a><span data-ttu-id="228fd-253">Denetleyiciyi bir denetleyiciye katlama</span><span class="sxs-lookup"><span data-stu-id="228fd-253">Scaffold a controller</span></span>
+## <a name="scaffold-a-controller"></a><span data-ttu-id="68923-251">Denetleyiciyi bir denetleyiciye katlama</span><span class="sxs-lookup"><span data-stu-id="68923-251">Scaffold a controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-254">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-254">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-252">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-252">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-255">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-255">Right-click the *Controllers* folder.</span></span>
-* <span data-ttu-id="228fd-256">**Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-256">Select **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="228fd-257">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-257">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
-* <span data-ttu-id="228fd-258">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="228fd-258">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
+* <span data-ttu-id="68923-253">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-253">Right-click the *Controllers* folder.</span></span>
+* <span data-ttu-id="68923-254">**Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-254">Select **Add** > **New Scaffolded Item**.</span></span>
+* <span data-ttu-id="68923-255">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-255">Select **API Controller with actions, using Entity Framework**, and then select **Add**.</span></span>
+* <span data-ttu-id="68923-256">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="68923-256">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="228fd-259">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-259">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
-  * <span data-ttu-id="228fd-260">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-260">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
-  * <span data-ttu-id="228fd-261">**Ekle** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-261">Select **Add**.</span></span>
+  * <span data-ttu-id="68923-257">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-257">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="68923-258">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-258">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="68923-259">**Ekle**’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-259">Select **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-262">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-262">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-260">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-260">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="228fd-263">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-263">Run the following commands:</span></span>
+<span data-ttu-id="68923-261">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-261">Run the following commands:</span></span>
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
-<span data-ttu-id="228fd-264">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="228fd-264">The preceding commands:</span></span>
+<span data-ttu-id="68923-262">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="68923-262">The preceding commands:</span></span>
 
-* <span data-ttu-id="228fd-265">Yapı iskelesi için gereken NuGet paketlerini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-265">Add NuGet packages required for scaffolding.</span></span>
-* <span data-ttu-id="228fd-266">Scafkatlama altyapısını ( `dotnet-aspnet-codegenerator` ) kurar.</span><span class="sxs-lookup"><span data-stu-id="228fd-266">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
-* <span data-ttu-id="228fd-267">Yapı iskelesi `TodoItemsController` .</span><span class="sxs-lookup"><span data-stu-id="228fd-267">Scaffolds the `TodoItemsController`.</span></span>
+* <span data-ttu-id="68923-263">Yapı iskelesi için gereken NuGet paketlerini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-263">Add NuGet packages required for scaffolding.</span></span>
+* <span data-ttu-id="68923-264">Scafkatlama altyapısını ( `dotnet-aspnet-codegenerator` ) kurar.</span><span class="sxs-lookup"><span data-stu-id="68923-264">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
+* <span data-ttu-id="68923-265">Yapı iskelesi `TodoItemsController` .</span><span class="sxs-lookup"><span data-stu-id="68923-265">Scaffolds the `TodoItemsController`.</span></span>
 
 ---
 
-<span data-ttu-id="228fd-268">Oluşturulan kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-268">The generated code:</span></span>
+<span data-ttu-id="68923-266">Oluşturulan kod:</span><span class="sxs-lookup"><span data-stu-id="68923-266">The generated code:</span></span>
 
-* <span data-ttu-id="228fd-269">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="228fd-269">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="228fd-270">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-270">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="228fd-271">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="228fd-271">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
-* <span data-ttu-id="228fd-272">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="228fd-272">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="228fd-273">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-273">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+* <span data-ttu-id="68923-267">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="68923-267">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="68923-268">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-268">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="68923-269">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="68923-269">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
+* <span data-ttu-id="68923-270">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="68923-270">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="68923-271">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-271">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-<span data-ttu-id="228fd-274">İçin ASP.NET Core şablonları:</span><span class="sxs-lookup"><span data-stu-id="228fd-274">The ASP.NET Core templates for:</span></span>
+<span data-ttu-id="68923-272">İçin ASP.NET Core şablonları:</span><span class="sxs-lookup"><span data-stu-id="68923-272">The ASP.NET Core templates for:</span></span>
 
-* <span data-ttu-id="228fd-275">Görünümleri olan denetleyiciler `[action]` yol şablonuna dahildir.</span><span class="sxs-lookup"><span data-stu-id="228fd-275">Controllers with views include `[action]` in the route template.</span></span>
-* <span data-ttu-id="228fd-276">API denetleyicileri `[action]` yol şablonuna dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="228fd-276">API controllers don't include `[action]` in the route template.</span></span>
+* <span data-ttu-id="68923-273">Görünümleri olan denetleyiciler `[action]` yol şablonuna dahildir.</span><span class="sxs-lookup"><span data-stu-id="68923-273">Controllers with views include `[action]` in the route template.</span></span>
+* <span data-ttu-id="68923-274">API denetleyicileri `[action]` yol şablonuna dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="68923-274">API controllers don't include `[action]` in the route template.</span></span>
 
-<span data-ttu-id="228fd-277">`[action]`Belirteç yol şablonunda olmadığında, [eylem](xref:mvc/controllers/routing#action) adı rotadan çıkarılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-277">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="228fd-278">Diğer bir deyişle, eylemin ilişkili Yöntem adı eşleşen rotada kullanılmaz.</span><span class="sxs-lookup"><span data-stu-id="228fd-278">That is, the action's associated method name isn't used in the matching route.</span></span>
+<span data-ttu-id="68923-275">`[action]`Belirteç yol şablonunda olmadığında, [eylem](xref:mvc/controllers/routing#action) adı rotadan çıkarılır.</span><span class="sxs-lookup"><span data-stu-id="68923-275">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="68923-276">Diğer bir deyişle, eylemin ilişkili Yöntem adı eşleşen rotada kullanılmaz.</span><span class="sxs-lookup"><span data-stu-id="68923-276">That is, the action's associated method name isn't used in the matching route.</span></span>
 
-## <a name="update-the-posttodoitem-create-method"></a><span data-ttu-id="228fd-279">PostTodoItem Create metodunu güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="228fd-279">Update the PostTodoItem create method</span></span>
+## <a name="update-the-posttodoitem-create-method"></a><span data-ttu-id="68923-277">PostTodoItem Create metodunu güncelleştirme</span><span class="sxs-lookup"><span data-stu-id="68923-277">Update the PostTodoItem create method</span></span>
 
-<span data-ttu-id="228fd-280">İçindeki return ifadesini, `PostTodoItem` [NameOf](/dotnet/csharp/language-reference/operators/nameof) işlecini kullanmak için değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-280">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
+<span data-ttu-id="68923-278">İçindeki return ifadesini, `PostTodoItem` [NameOf](/dotnet/csharp/language-reference/operators/nameof) işlecini kullanmak için değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-278">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-<span data-ttu-id="228fd-281">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="228fd-281">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="228fd-282">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="228fd-282">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
+<span data-ttu-id="68923-279">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="68923-279">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="68923-280">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="68923-280">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
 
-<span data-ttu-id="228fd-283">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="228fd-283">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+<span data-ttu-id="68923-281">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="68923-281">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="228fd-284"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="228fd-284">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
+<span data-ttu-id="68923-282"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="68923-282">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
 
-* <span data-ttu-id="228fd-285">Başarılı olursa bir [HTTP 201 durum kodu](https://developer.mozilla.org/docs/Web/HTTP/Status/201) döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-285">Returns an [HTTP 201 status code](https://developer.mozilla.org/docs/Web/HTTP/Status/201) if successful.</span></span> <span data-ttu-id="228fd-286">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="228fd-286">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
-* <span data-ttu-id="228fd-287">Yanıta bir [konum](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) üst bilgisi ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-287">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="228fd-288">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar öğesinin [URI](https://developer.mozilla.org/docs/Glossary/URI) 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-288">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="228fd-289">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-289">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
-* <span data-ttu-id="228fd-290">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="228fd-290">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="228fd-291">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="228fd-291">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
+* <span data-ttu-id="68923-283">Başarılı olursa bir [HTTP 201 durum kodu](https://developer.mozilla.org/docs/Web/HTTP/Status/201) döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-283">Returns an [HTTP 201 status code](https://developer.mozilla.org/docs/Web/HTTP/Status/201) if successful.</span></span> <span data-ttu-id="68923-284">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="68923-284">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
+* <span data-ttu-id="68923-285">Yanıta bir [konum](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) üst bilgisi ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-285">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="68923-286">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar öğesinin [URI](https://developer.mozilla.org/docs/Glossary/URI) 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-286">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="68923-287">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="68923-287">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
+* <span data-ttu-id="68923-288">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="68923-288">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="68923-289">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="68923-289">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
 
-### <a name="install-postman"></a><span data-ttu-id="228fd-292">Postman yükleme</span><span class="sxs-lookup"><span data-stu-id="228fd-292">Install Postman</span></span>
+### <a name="install-postman"></a><span data-ttu-id="68923-290">Postman yükleme</span><span class="sxs-lookup"><span data-stu-id="68923-290">Install Postman</span></span>
 
-<span data-ttu-id="228fd-293">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-293">This tutorial uses Postman to test the web API.</span></span>
+<span data-ttu-id="68923-291">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-291">This tutorial uses Postman to test the web API.</span></span>
 
-* <span data-ttu-id="228fd-294">[Postman](https://www.getpostman.com/downloads/) yükleme</span><span class="sxs-lookup"><span data-stu-id="228fd-294">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
-* <span data-ttu-id="228fd-295">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-295">Start the web app.</span></span>
-* <span data-ttu-id="228fd-296">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-296">Start Postman.</span></span>
-* <span data-ttu-id="228fd-297">**SSL sertifikası doğrulamasını** devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="228fd-297">Disable **SSL certificate verification**</span></span>
-  * <span data-ttu-id="228fd-298">**Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-298">From **File** > **Settings** ( **General** tab), disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="68923-292">[Postman](https://www.getpostman.com/downloads/) yükleme</span><span class="sxs-lookup"><span data-stu-id="68923-292">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
+* <span data-ttu-id="68923-293">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-293">Start the web app.</span></span>
+* <span data-ttu-id="68923-294">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-294">Start Postman.</span></span>
+* <span data-ttu-id="68923-295">**SSL sertifikası doğrulamasını** devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="68923-295">Disable **SSL certificate verification**</span></span>
+  * <span data-ttu-id="68923-296">**Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-296">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
     > [!WARNING]
-    > <span data-ttu-id="228fd-299">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-299">Re-enable SSL certificate verification after testing the controller.</span></span>
+    > <span data-ttu-id="68923-297">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-297">Re-enable SSL certificate verification after testing the controller.</span></span>
 
 <a name="post"></a>
 
-### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="228fd-300">Postman ile test PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="228fd-300">Test PostTodoItem with Postman</span></span>
+### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="68923-298">Postman ile test PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="68923-298">Test PostTodoItem with Postman</span></span>
 
-* <span data-ttu-id="228fd-301">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-301">Create a new request.</span></span>
-* <span data-ttu-id="228fd-302">HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="228fd-302">Set the HTTP method to `POST`.</span></span>
-* <span data-ttu-id="228fd-303">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="228fd-303">Set the URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="228fd-304">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="228fd-304">For example, `https://localhost:5001/api/TodoItems`.</span></span>
-* <span data-ttu-id="228fd-305">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-305">Select the **Body** tab.</span></span>
-* <span data-ttu-id="228fd-306">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-306">Select the **raw** radio button.</span></span>
-* <span data-ttu-id="228fd-307">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-307">Set the type to **JSON (application/json)**.</span></span>
-* <span data-ttu-id="228fd-308">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-308">In the request body enter JSON for a to-do item:</span></span>
+* <span data-ttu-id="68923-299">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-299">Create a new request.</span></span>
+* <span data-ttu-id="68923-300">HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="68923-300">Set the HTTP method to `POST`.</span></span>
+* <span data-ttu-id="68923-301">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="68923-301">Set the URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="68923-302">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="68923-302">For example, `https://localhost:5001/api/TodoItems`.</span></span>
+* <span data-ttu-id="68923-303">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-303">Select the **Body** tab.</span></span>
+* <span data-ttu-id="68923-304">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-304">Select the **raw** radio button.</span></span>
+* <span data-ttu-id="68923-305">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-305">Set the type to **JSON (application/json)**.</span></span>
+* <span data-ttu-id="68923-306">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="68923-306">In the request body enter JSON for a to-do item:</span></span>
 
     ```json
     {
@@ -402,38 +400,38 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* <span data-ttu-id="228fd-309">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-309">Select **Send**.</span></span>
+* <span data-ttu-id="68923-307">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-307">Select **Send**.</span></span>
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a><span data-ttu-id="228fd-311">Konum üst bilgisi URI 'sini test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-311">Test the location header URI</span></span>
+### <a name="test-the-location-header-uri"></a><span data-ttu-id="68923-309">Konum üst bilgisi URI 'sini test etme</span><span class="sxs-lookup"><span data-stu-id="68923-309">Test the location header URI</span></span>
 
-<span data-ttu-id="228fd-312">Konum üst bilgisi URI 'SI tarayıcıda test edilebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-312">The location header URI can be tested in the browser.</span></span> <span data-ttu-id="228fd-313">Konum üst bilgisi URI 'sini kopyalayıp tarayıcıya yapıştırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-313">Copy and paste the location header URI into the browser.</span></span>
+<span data-ttu-id="68923-310">Konum üst bilgisi URI 'SI tarayıcıda test edilebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-310">The location header URI can be tested in the browser.</span></span> <span data-ttu-id="68923-311">Konum üst bilgisi URI 'sini kopyalayıp tarayıcıya yapıştırın.</span><span class="sxs-lookup"><span data-stu-id="68923-311">Copy and paste the location header URI into the browser.</span></span>
 
-<span data-ttu-id="228fd-314">Postman 'da test etmek için:</span><span class="sxs-lookup"><span data-stu-id="228fd-314">To test in Postman:</span></span>
+<span data-ttu-id="68923-312">Postman 'da test etmek için:</span><span class="sxs-lookup"><span data-stu-id="68923-312">To test in Postman:</span></span>
 
-* <span data-ttu-id="228fd-315">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-315">Select the **Headers** tab in the **Response** pane.</span></span>
-* <span data-ttu-id="228fd-316">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="228fd-316">Copy the **Location** header value:</span></span>
+* <span data-ttu-id="68923-313">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-313">Select the **Headers** tab in the **Response** pane.</span></span>
+* <span data-ttu-id="68923-314">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="68923-314">Copy the **Location** header value:</span></span>
 
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/3/create.png)
 
-* <span data-ttu-id="228fd-318">HTTP yöntemini olarak ayarlayın `GET` .</span><span class="sxs-lookup"><span data-stu-id="228fd-318">Set the HTTP method to `GET`.</span></span>
-* <span data-ttu-id="228fd-319">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` .</span><span class="sxs-lookup"><span data-stu-id="228fd-319">Set the URI to `https://localhost:<port>/api/TodoItems/1`.</span></span> <span data-ttu-id="228fd-320">Örneğin, `https://localhost:5001/api/TodoItems/1`.</span><span class="sxs-lookup"><span data-stu-id="228fd-320">For example, `https://localhost:5001/api/TodoItems/1`.</span></span>
-* <span data-ttu-id="228fd-321">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-321">Select **Send**.</span></span>
+* <span data-ttu-id="68923-316">HTTP yöntemini olarak ayarlayın `GET` .</span><span class="sxs-lookup"><span data-stu-id="68923-316">Set the HTTP method to `GET`.</span></span>
+* <span data-ttu-id="68923-317">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` .</span><span class="sxs-lookup"><span data-stu-id="68923-317">Set the URI to `https://localhost:<port>/api/TodoItems/1`.</span></span> <span data-ttu-id="68923-318">Örneğin, `https://localhost:5001/api/TodoItems/1`.</span><span class="sxs-lookup"><span data-stu-id="68923-318">For example, `https://localhost:5001/api/TodoItems/1`.</span></span>
+* <span data-ttu-id="68923-319">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-319">Select **Send**.</span></span>
 
-## <a name="examine-the-get-methods"></a><span data-ttu-id="228fd-322">GET yöntemlerini inceleyin</span><span class="sxs-lookup"><span data-stu-id="228fd-322">Examine the GET methods</span></span>
+## <a name="examine-the-get-methods"></a><span data-ttu-id="68923-320">GET yöntemlerini inceleyin</span><span class="sxs-lookup"><span data-stu-id="68923-320">Examine the GET methods</span></span>
 
-<span data-ttu-id="228fd-323">İki uç nokta al uygulandı:</span><span class="sxs-lookup"><span data-stu-id="228fd-323">Two GET endpoints are implemented:</span></span>
+<span data-ttu-id="68923-321">İki uç nokta al uygulandı:</span><span class="sxs-lookup"><span data-stu-id="68923-321">Two GET endpoints are implemented:</span></span>
 
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-<span data-ttu-id="228fd-324">Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="228fd-324">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="228fd-325">Örnek:</span><span class="sxs-lookup"><span data-stu-id="228fd-325">For example:</span></span>
+<span data-ttu-id="68923-322">Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="68923-322">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="68923-323">Örnek:</span><span class="sxs-lookup"><span data-stu-id="68923-323">For example:</span></span>
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
 
-<span data-ttu-id="228fd-326">Şuna benzer bir yanıt, şu çağrı tarafından üretilir `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="228fd-326">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
+<span data-ttu-id="68923-324">Şuna benzer bir yanıt, şu çağrı tarafından üretilir `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="68923-324">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
 
 ```json
 [
@@ -445,55 +443,55 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-### <a name="test-get-with-postman"></a><span data-ttu-id="228fd-327">Postman ile test al</span><span class="sxs-lookup"><span data-stu-id="228fd-327">Test Get with Postman</span></span>
+### <a name="test-get-with-postman"></a><span data-ttu-id="68923-325">Postman ile test al</span><span class="sxs-lookup"><span data-stu-id="68923-325">Test Get with Postman</span></span>
 
-* <span data-ttu-id="228fd-328">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-328">Create a new request.</span></span>
-* <span data-ttu-id="228fd-329">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-329">Set the HTTP method to **GET**.</span></span>
-* <span data-ttu-id="228fd-330">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="228fd-330">Set the request URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="228fd-331">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="228fd-331">For example, `https://localhost:5001/api/TodoItems`.</span></span>
-* <span data-ttu-id="228fd-332">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-332">Set **Two pane view** in Postman.</span></span>
-* <span data-ttu-id="228fd-333">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-333">Select **Send**.</span></span>
+* <span data-ttu-id="68923-326">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-326">Create a new request.</span></span>
+* <span data-ttu-id="68923-327">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-327">Set the HTTP method to **GET**.</span></span>
+* <span data-ttu-id="68923-328">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="68923-328">Set the request URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="68923-329">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="68923-329">For example, `https://localhost:5001/api/TodoItems`.</span></span>
+* <span data-ttu-id="68923-330">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-330">Set **Two pane view** in Postman.</span></span>
+* <span data-ttu-id="68923-331">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-331">Select **Send**.</span></span>
 
-<span data-ttu-id="228fd-334">Bu uygulama, bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-334">This app uses an in-memory database.</span></span> <span data-ttu-id="228fd-335">Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez.</span><span class="sxs-lookup"><span data-stu-id="228fd-335">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="228fd-336">Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .</span><span class="sxs-lookup"><span data-stu-id="228fd-336">If no data is returned, [POST](#post) data to the app.</span></span>
+<span data-ttu-id="68923-332">Bu uygulama, bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-332">This app uses an in-memory database.</span></span> <span data-ttu-id="68923-333">Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez.</span><span class="sxs-lookup"><span data-stu-id="68923-333">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="68923-334">Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .</span><span class="sxs-lookup"><span data-stu-id="68923-334">If no data is returned, [POST](#post) data to the app.</span></span>
 
-## <a name="routing-and-url-paths"></a><span data-ttu-id="228fd-337">Yönlendirme ve URL yolları</span><span class="sxs-lookup"><span data-stu-id="228fd-337">Routing and URL paths</span></span>
+## <a name="routing-and-url-paths"></a><span data-ttu-id="68923-335">Yönlendirme ve URL yolları</span><span class="sxs-lookup"><span data-stu-id="68923-335">Routing and URL paths</span></span>
 
-<span data-ttu-id="228fd-338">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="228fd-338">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="228fd-339">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="228fd-339">The URL path for each method is constructed as follows:</span></span>
+<span data-ttu-id="68923-336">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="68923-336">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="68923-337">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="68923-337">The URL path for each method is constructed as follows:</span></span>
 
-* <span data-ttu-id="228fd-340">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="228fd-340">Start with the template string in the controller's `Route` attribute:</span></span>
+* <span data-ttu-id="68923-338">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="68923-338">Start with the template string in the controller's `Route` attribute:</span></span>
 
   [!code-csharp[](first-web-api/samples/5.x/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* <span data-ttu-id="228fd-341">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-341">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="228fd-342">Bu örnek için denetleyici sınıfı adı **todoıtems** denetleyicisidir, bu nedenle denetleyicinin adı "todoıtems" olur.</span><span class="sxs-lookup"><span data-stu-id="228fd-342">For this sample, the controller class name is **TodoItems** Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="228fd-343">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-343">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
-* <span data-ttu-id="228fd-344">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-344">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="228fd-345">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="228fd-345">This sample doesn't use a template.</span></span> <span data-ttu-id="228fd-346">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="228fd-346">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+* <span data-ttu-id="68923-339">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="68923-339">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="68923-340">Bu örnek için denetleyici sınıfı adı **todoıtems** denetleyicisidir, bu nedenle denetleyicinin adı "todoıtems" olur.</span><span class="sxs-lookup"><span data-stu-id="68923-340">For this sample, the controller class name is **TodoItems** Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="68923-341">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-341">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
+* <span data-ttu-id="68923-342">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-342">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="68923-343">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="68923-343">This sample doesn't use a template.</span></span> <span data-ttu-id="68923-344">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="68923-344">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="228fd-347">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-347">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="228fd-348">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="228fd-348">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
+<span data-ttu-id="68923-345">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="68923-345">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="68923-346">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="68923-346">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a><span data-ttu-id="228fd-349">Dönüş değerleri</span><span class="sxs-lookup"><span data-stu-id="228fd-349">Return values</span></span>
+## <a name="return-values"></a><span data-ttu-id="68923-347">Dönüş değerleri</span><span class="sxs-lookup"><span data-stu-id="68923-347">Return values</span></span>
 
-<span data-ttu-id="228fd-350">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="228fd-350">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="228fd-351">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="228fd-351">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="228fd-352">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak [200 Tamam](https://developer.mozilla.org/docs/Web/HTTP/Status/200)olur.</span><span class="sxs-lookup"><span data-stu-id="228fd-352">The response code for this return type is [200 OK](https://developer.mozilla.org/docs/Web/HTTP/Status/200), assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="228fd-353">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-353">Unhandled exceptions are translated into 5xx errors.</span></span>
+<span data-ttu-id="68923-348">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="68923-348">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="68923-349">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="68923-349">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="68923-350">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak [200 Tamam](https://developer.mozilla.org/docs/Web/HTTP/Status/200)olur.</span><span class="sxs-lookup"><span data-stu-id="68923-350">The response code for this return type is [200 OK](https://developer.mozilla.org/docs/Web/HTTP/Status/200), assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="68923-351">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="68923-351">Unhandled exceptions are translated into 5xx errors.</span></span>
 
-<span data-ttu-id="228fd-354">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-354">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="228fd-355">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-355">For example, `GetTodoItem` can return two different status values:</span></span>
+<span data-ttu-id="68923-352">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-352">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="68923-353">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="68923-353">For example, `GetTodoItem` can return two different status values:</span></span>
 
-* <span data-ttu-id="228fd-356">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem [404 durum](https://developer.mozilla.org/docs/Web/HTTP/Status/404) <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-356">If no item matches the requested ID, the method returns a [404 status](https://developer.mozilla.org/docs/Web/HTTP/Status/404) <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
-* <span data-ttu-id="228fd-357">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-357">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="228fd-358">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="228fd-358">Returning `item` results in an HTTP 200 response.</span></span>
+* <span data-ttu-id="68923-354">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem [404 durum](https://developer.mozilla.org/docs/Web/HTTP/Status/404) <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-354">If no item matches the requested ID, the method returns a [404 status](https://developer.mozilla.org/docs/Web/HTTP/Status/404) <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
+* <span data-ttu-id="68923-355">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-355">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="68923-356">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="68923-356">Returning `item` results in an HTTP 200 response.</span></span>
 
-## <a name="the-puttodoitem-method"></a><span data-ttu-id="228fd-359">PutTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="228fd-359">The PutTodoItem method</span></span>
+## <a name="the-puttodoitem-method"></a><span data-ttu-id="68923-357">PutTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="68923-357">The PutTodoItem method</span></span>
 
-<span data-ttu-id="228fd-360">`PutTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-360">Examine the `PutTodoItem` method:</span></span>
+<span data-ttu-id="68923-358">`PutTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-358">Examine the `PutTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
-<span data-ttu-id="228fd-361">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="228fd-361">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="228fd-362">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-362">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="228fd-363">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="228fd-363">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="228fd-364">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="228fd-364">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
+<span data-ttu-id="68923-359">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="68923-359">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="68923-360">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="68923-360">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="68923-361">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="68923-361">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="68923-362">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="68923-362">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
 
-<span data-ttu-id="228fd-365">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-365">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
+<span data-ttu-id="68923-363">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-363">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
 
-### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="228fd-366">PutTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-366">Test the PutTodoItem method</span></span>
+### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="68923-364">PutTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="68923-364">Test the PutTodoItem method</span></span>
 
-<span data-ttu-id="228fd-367">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-367">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="228fd-368">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-368">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="228fd-369">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="228fd-369">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
+<span data-ttu-id="68923-365">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-365">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="68923-366">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-366">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="68923-367">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="68923-367">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
 
-<span data-ttu-id="228fd-370">Kimlik = 1 olan Yapılacaklar öğesini güncelleştirin ve adını şu şekilde ayarlayın `"feed fish"` :</span><span class="sxs-lookup"><span data-stu-id="228fd-370">Update the to-do item that has Id = 1 and set its name to `"feed fish"`:</span></span>
+<span data-ttu-id="68923-368">Kimlik = 1 olan Yapılacaklar öğesini güncelleştirin ve adını şu şekilde ayarlayın `"feed fish"` :</span><span class="sxs-lookup"><span data-stu-id="68923-368">Update the to-do item that has Id = 1 and set its name to `"feed fish"`:</span></span>
 
 ```json
   {
@@ -503,122 +501,122 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   }
 ```
 
-<span data-ttu-id="228fd-371">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="228fd-371">The following image shows the Postman update:</span></span>
+<span data-ttu-id="68923-369">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="68923-369">The following image shows the Postman update:</span></span>
 
 ![204 (Içerik yok) yanıtı gösteren Postman konsolu](first-web-api/_static/3/pmcput.png)
 
-## <a name="the-deletetodoitem-method"></a><span data-ttu-id="228fd-373">DeleteTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="228fd-373">The DeleteTodoItem method</span></span>
+## <a name="the-deletetodoitem-method"></a><span data-ttu-id="68923-371">DeleteTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="68923-371">The DeleteTodoItem method</span></span>
 
-<span data-ttu-id="228fd-374">`DeleteTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-374">Examine the `DeleteTodoItem` method:</span></span>
+<span data-ttu-id="68923-372">`DeleteTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-372">Examine the `DeleteTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
-### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="228fd-375">DeleteTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-375">Test the DeleteTodoItem method</span></span>
+### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="68923-373">DeleteTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="68923-373">Test the DeleteTodoItem method</span></span>
 
-<span data-ttu-id="228fd-376">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="228fd-376">Use Postman to delete a to-do item:</span></span>
+<span data-ttu-id="68923-374">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="68923-374">Use Postman to delete a to-do item:</span></span>
 
-* <span data-ttu-id="228fd-377">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="228fd-377">Set the method to `DELETE`.</span></span>
-* <span data-ttu-id="228fd-378">Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-378">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
-* <span data-ttu-id="228fd-379">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-379">Select **Send**.</span></span>
+* <span data-ttu-id="68923-375">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="68923-375">Set the method to `DELETE`.</span></span>
+* <span data-ttu-id="68923-376">Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="68923-376">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
+* <span data-ttu-id="68923-377">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-377">Select **Send**.</span></span>
 
 <a name="over-post-v5"></a>
 
-## <a name="prevent-over-posting"></a><span data-ttu-id="228fd-380">Fazla nakletmeyi engelle</span><span class="sxs-lookup"><span data-stu-id="228fd-380">Prevent over-posting</span></span>
+## <a name="prevent-over-posting"></a><span data-ttu-id="68923-378">Fazla nakletmeyi engelle</span><span class="sxs-lookup"><span data-stu-id="68923-378">Prevent over-posting</span></span>
 
-<span data-ttu-id="228fd-381">Şu anda örnek uygulama tüm nesneyi kullanıma sunar `TodoItem` .</span><span class="sxs-lookup"><span data-stu-id="228fd-381">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="228fd-382">Üretim uygulamaları tipik olarak, bir modelin alt kümesini kullanarak girdi ve döndürülen verileri sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-382">Production apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="228fd-383">Bunun arkasında birden çok neden vardır ve güvenlik önemli bir değer.</span><span class="sxs-lookup"><span data-stu-id="228fd-383">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="228fd-384">Bir modelin alt kümesi genellikle Veri Aktarımı nesnesi (DTO), giriş modeli veya görünüm modeli olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-384">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="228fd-385">Bu makalede **DTO** kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-385">**DTO** is used in this article.</span></span>
+<span data-ttu-id="68923-379">Şu anda örnek uygulama tüm nesneyi kullanıma sunar `TodoItem` .</span><span class="sxs-lookup"><span data-stu-id="68923-379">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="68923-380">Üretim uygulamaları tipik olarak, bir modelin alt kümesini kullanarak girdi ve döndürülen verileri sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="68923-380">Production apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="68923-381">Bunun arkasında birden çok neden vardır ve güvenlik önemli bir değer.</span><span class="sxs-lookup"><span data-stu-id="68923-381">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="68923-382">Bir modelin alt kümesi genellikle Veri Aktarımı nesnesi (DTO), giriş modeli veya görünüm modeli olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="68923-382">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="68923-383">Bu makalede **DTO** kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-383">**DTO** is used in this article.</span></span>
 
-<span data-ttu-id="228fd-386">Bir DTO için kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-386">A DTO may be used to:</span></span>
+<span data-ttu-id="68923-384">Bir DTO için kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="68923-384">A DTO may be used to:</span></span>
 
-* <span data-ttu-id="228fd-387">Fazla nakletmeyi önleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-387">Prevent over-posting.</span></span>
-* <span data-ttu-id="228fd-388">İstemcilerin görüntülemesi beklenen özellikleri gizleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-388">Hide properties that clients are not supposed to view.</span></span>
-* <span data-ttu-id="228fd-389">Yük boyutunu azaltmak için bazı özellikleri atlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-389">Omit some properties in order to reduce payload size.</span></span>
-* <span data-ttu-id="228fd-390">İç içe geçmiş nesneler içeren nesne grafiklerini düzleştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-390">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="228fd-391">Düzleştirilmiş nesne grafikleri istemciler için daha uygun olabilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-391">Flattened object graphs can be more convenient for clients.</span></span>
+* <span data-ttu-id="68923-385">Fazla nakletmeyi önleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-385">Prevent over-posting.</span></span>
+* <span data-ttu-id="68923-386">İstemcilerin görüntülemesi beklenen özellikleri gizleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-386">Hide properties that clients are not supposed to view.</span></span>
+* <span data-ttu-id="68923-387">Yük boyutunu azaltmak için bazı özellikleri atlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-387">Omit some properties in order to reduce payload size.</span></span>
+* <span data-ttu-id="68923-388">İç içe geçmiş nesneler içeren nesne grafiklerini düzleştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-388">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="68923-389">Düzleştirilmiş nesne grafikleri istemciler için daha uygun olabilir.</span><span class="sxs-lookup"><span data-stu-id="68923-389">Flattened object graphs can be more convenient for clients.</span></span>
 
-<span data-ttu-id="228fd-392">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-392">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
+<span data-ttu-id="68923-390">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-390">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=8)]
 
-<span data-ttu-id="228fd-393">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-393">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
+<span data-ttu-id="68923-391">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-391">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
-<span data-ttu-id="228fd-394">Gizli dizi alanını nakledebildiğinizi ve alabilirim.</span><span class="sxs-lookup"><span data-stu-id="228fd-394">Verify you can post and get the secret field.</span></span>
+<span data-ttu-id="68923-392">Gizli dizi alanını nakledebildiğinizi ve alabilirim.</span><span class="sxs-lookup"><span data-stu-id="68923-392">Verify you can post and get the secret field.</span></span>
 
-<span data-ttu-id="228fd-395">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="228fd-395">Create a DTO model:</span></span>
+<span data-ttu-id="68923-393">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="68923-393">Create a DTO model:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
-<span data-ttu-id="228fd-396">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="228fd-396">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
+<span data-ttu-id="68923-394">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="68923-394">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
 [!code-csharp[](first-web-api/samples/5.x/TodoApiDTO/Controllers/TodoItemsController.cs?name=snippet)]
 
-<span data-ttu-id="228fd-397">Gizli dizi alanını nakledemeyeceğinizi veya alamazsınız.</span><span class="sxs-lookup"><span data-stu-id="228fd-397">Verify you can't post or get the secret field.</span></span>
+<span data-ttu-id="68923-395">Gizli dizi alanını nakledemeyeceğinizi veya alamazsınız.</span><span class="sxs-lookup"><span data-stu-id="68923-395">Verify you can't post or get the secret field.</span></span>
 
-## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="228fd-398">JavaScript ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="228fd-398">Call the web API with JavaScript</span></span>
+## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="68923-396">JavaScript ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="68923-396">Call the web API with JavaScript</span></span>
 
-<span data-ttu-id="228fd-399">Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="228fd-399">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
+<span data-ttu-id="68923-397">Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="68923-397">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="228fd-400">Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="228fd-400">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="68923-398">Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="68923-398">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="228fd-401">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-401">Create a web API project.</span></span>
-> * <span data-ttu-id="228fd-402">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-402">Add a model class and a database context.</span></span>
-> * <span data-ttu-id="228fd-403">CRUD yöntemleriyle bir denetleyiciyi dolandırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-403">Scaffold a controller with CRUD methods.</span></span>
-> * <span data-ttu-id="228fd-404">Yönlendirmeyi, URL yollarını ve dönüş değerlerini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-404">Configure routing, URL paths, and return values.</span></span>
-> * <span data-ttu-id="228fd-405">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-405">Call the web API with Postman.</span></span>
+> * <span data-ttu-id="68923-399">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-399">Create a web API project.</span></span>
+> * <span data-ttu-id="68923-400">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-400">Add a model class and a database context.</span></span>
+> * <span data-ttu-id="68923-401">CRUD yöntemleriyle bir denetleyiciyi dolandırın.</span><span class="sxs-lookup"><span data-stu-id="68923-401">Scaffold a controller with CRUD methods.</span></span>
+> * <span data-ttu-id="68923-402">Yönlendirmeyi, URL yollarını ve dönüş değerlerini yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="68923-402">Configure routing, URL paths, and return values.</span></span>
+> * <span data-ttu-id="68923-403">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-403">Call the web API with Postman.</span></span>
 
-<span data-ttu-id="228fd-406">Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="228fd-406">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
+<span data-ttu-id="68923-404">Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="68923-404">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
 
-## <a name="overview"></a><span data-ttu-id="228fd-407">Genel Bakış</span><span class="sxs-lookup"><span data-stu-id="228fd-407">Overview</span></span>
+## <a name="overview"></a><span data-ttu-id="68923-405">Genel Bakış</span><span class="sxs-lookup"><span data-stu-id="68923-405">Overview</span></span>
 
-<span data-ttu-id="228fd-408">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="228fd-408">This tutorial creates the following API:</span></span>
+<span data-ttu-id="68923-406">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="68923-406">This tutorial creates the following API:</span></span>
 
-|<span data-ttu-id="228fd-409">API</span><span class="sxs-lookup"><span data-stu-id="228fd-409">API</span></span> | <span data-ttu-id="228fd-410">Açıklama</span><span class="sxs-lookup"><span data-stu-id="228fd-410">Description</span></span> | <span data-ttu-id="228fd-411">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-411">Request body</span></span> | <span data-ttu-id="228fd-412">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-412">Response body</span></span> |
+|<span data-ttu-id="68923-407">API</span><span class="sxs-lookup"><span data-stu-id="68923-407">API</span></span> | <span data-ttu-id="68923-408">Açıklama</span><span class="sxs-lookup"><span data-stu-id="68923-408">Description</span></span> | <span data-ttu-id="68923-409">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-409">Request body</span></span> | <span data-ttu-id="68923-410">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-410">Response body</span></span> |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | <span data-ttu-id="228fd-413">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="228fd-413">Get all to-do items</span></span> | <span data-ttu-id="228fd-414">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-414">None</span></span> | <span data-ttu-id="228fd-415">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="228fd-415">Array of to-do items</span></span>|
-|`GET /api/TodoItems/{id}` | <span data-ttu-id="228fd-416">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="228fd-416">Get an item by ID</span></span> | <span data-ttu-id="228fd-417">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-417">None</span></span> | <span data-ttu-id="228fd-418">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-418">To-do item</span></span>|
-|`POST /api/TodoItems` | <span data-ttu-id="228fd-419">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="228fd-419">Add a new item</span></span> | <span data-ttu-id="228fd-420">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-420">To-do item</span></span> | <span data-ttu-id="228fd-421">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-421">To-do item</span></span> |
-|`PUT /api/TodoItems/{id}` | <span data-ttu-id="228fd-422">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-422">Update an existing item &nbsp;</span></span> | <span data-ttu-id="228fd-423">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-423">To-do item</span></span> | <span data-ttu-id="228fd-424">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-424">None</span></span> |
-|<span data-ttu-id="228fd-425">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-425">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-426">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-426">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-427">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-427">None</span></span> | <span data-ttu-id="228fd-428">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-428">None</span></span>|
+|`GET /api/TodoItems` | <span data-ttu-id="68923-411">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="68923-411">Get all to-do items</span></span> | <span data-ttu-id="68923-412">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-412">None</span></span> | <span data-ttu-id="68923-413">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="68923-413">Array of to-do items</span></span>|
+|`GET /api/TodoItems/{id}` | <span data-ttu-id="68923-414">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="68923-414">Get an item by ID</span></span> | <span data-ttu-id="68923-415">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-415">None</span></span> | <span data-ttu-id="68923-416">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-416">To-do item</span></span>|
+|`POST /api/TodoItems` | <span data-ttu-id="68923-417">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="68923-417">Add a new item</span></span> | <span data-ttu-id="68923-418">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-418">To-do item</span></span> | <span data-ttu-id="68923-419">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-419">To-do item</span></span> |
+|`PUT /api/TodoItems/{id}` | <span data-ttu-id="68923-420">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-420">Update an existing item &nbsp;</span></span> | <span data-ttu-id="68923-421">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-421">To-do item</span></span> | <span data-ttu-id="68923-422">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-422">None</span></span> |
+|<span data-ttu-id="68923-423">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-423">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-424">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-424">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-425">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-425">None</span></span> | <span data-ttu-id="68923-426">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-426">None</span></span>|
 
-<span data-ttu-id="228fd-429">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="228fd-429">The following diagram shows the design of the app.</span></span>
+<span data-ttu-id="68923-427">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="68923-427">The following diagram shows the design of the app.</span></span>
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a><span data-ttu-id="228fd-435">Ön koşullar</span><span class="sxs-lookup"><span data-stu-id="228fd-435">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="68923-433">Önkoşullar</span><span class="sxs-lookup"><span data-stu-id="68923-433">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-436">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-436">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-434">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-434">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-437">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-437">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-435">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-435">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-438">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-438">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-436">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-436">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
-## <a name="create-a-web-project"></a><span data-ttu-id="228fd-439">Web projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="228fd-439">Create a web project</span></span>
+## <a name="create-a-web-project"></a><span data-ttu-id="68923-437">Web projesi oluşturma</span><span class="sxs-lookup"><span data-stu-id="68923-437">Create a web project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-440">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-440">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-438">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-438">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-441">**Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-441">From the **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="228fd-442">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-442">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
-* <span data-ttu-id="228fd-443">Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-443">Name the project *TodoApi* and click **Create**.</span></span>
-* <span data-ttu-id="228fd-444">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-444">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 3.1** are selected.</span></span> <span data-ttu-id="228fd-445">**API** şablonunu seçin ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-445">Select the **API** template and click **Create**.</span></span>
+* <span data-ttu-id="68923-439">**Dosya** menüsünden **Yeni** > **Proje**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-439">From the **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="68923-440">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-440">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
+* <span data-ttu-id="68923-441">Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-441">Name the project *TodoApi* and click **Create**.</span></span>
+* <span data-ttu-id="68923-442">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="68923-442">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 3.1** are selected.</span></span> <span data-ttu-id="68923-443">**API** şablonunu seçin ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-443">Select the **API** template and click **Create**.</span></span>
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/vs3.png)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-447">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-447">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-445">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-445">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-448">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="228fd-448">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="228fd-449">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-449">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
-* <span data-ttu-id="228fd-450">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-450">Run the following commands:</span></span>
+* <span data-ttu-id="68923-446">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="68923-446">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="68923-447">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-447">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
+* <span data-ttu-id="68923-448">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-448">Run the following commands:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
@@ -628,32 +626,32 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
    code -r ../TodoApi
    ```
 
-* <span data-ttu-id="228fd-451">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-451">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
+* <span data-ttu-id="68923-449">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-449">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
 
-  <span data-ttu-id="228fd-452">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="228fd-452">The preceding commands:</span></span>
+  <span data-ttu-id="68923-450">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="68923-450">The preceding commands:</span></span>
 
-  * <span data-ttu-id="228fd-453">Yeni bir Web API projesi oluşturur ve Visual Studio Code açar.</span><span class="sxs-lookup"><span data-stu-id="228fd-453">Creates a new web API project and opens it in Visual Studio Code.</span></span>
-  * <span data-ttu-id="228fd-454">Sonraki bölümde gerekli olan NuGet paketlerini ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-454">Adds the NuGet packages which are required in the next section.</span></span>
+  * <span data-ttu-id="68923-451">Yeni bir Web API projesi oluşturur ve Visual Studio Code açar.</span><span class="sxs-lookup"><span data-stu-id="68923-451">Creates a new web API project and opens it in Visual Studio Code.</span></span>
+  * <span data-ttu-id="68923-452">Sonraki bölümde gerekli olan NuGet paketlerini ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-452">Adds the NuGet packages which are required in the next section.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-455">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-455">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-453">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-453">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-456">**Dosya** > **yeni çözüm** ' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-456">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="68923-454">**Dosya** > **yeni çözüm**' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-454">Select **File** > **New Solution**.</span></span>
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* <span data-ttu-id="228fd-458">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-458">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="228fd-459">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-459">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
+* <span data-ttu-id="68923-456">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-456">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="68923-457">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-457">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* <span data-ttu-id="228fd-461">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-461">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 3.x **Target Framework**.</span></span> <span data-ttu-id="228fd-462">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-462">Select **Next**.</span></span>
+* <span data-ttu-id="68923-459">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-459">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 3.x **Target Framework**.</span></span> <span data-ttu-id="68923-460">**İleri**’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-460">Select **Next**.</span></span>
 
-* <span data-ttu-id="228fd-463">**Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-463">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
+* <span data-ttu-id="68923-461">**Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-461">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
 [!INCLUDE[](~/includes/mac-terminal-access.md)]
 
-<span data-ttu-id="228fd-465">Proje klasöründe bir komut terminali açın ve aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-465">Open a command terminal in the project folder and run the following commands:</span></span>
+<span data-ttu-id="68923-463">Proje klasöründe bir komut terminali açın ve aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-463">Open a command terminal in the project folder and run the following commands:</span></span>
 
    ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -662,27 +660,27 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 ---
 
-### <a name="test-the-api"></a><span data-ttu-id="228fd-466">API’yi test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-466">Test the API</span></span>
+### <a name="test-the-api"></a><span data-ttu-id="68923-464">API’yi test etme</span><span class="sxs-lookup"><span data-stu-id="68923-464">Test the API</span></span>
 
-<span data-ttu-id="228fd-467">Proje şablonu bir API oluşturur `WeatherForecast` .</span><span class="sxs-lookup"><span data-stu-id="228fd-467">The project template creates a `WeatherForecast` API.</span></span> <span data-ttu-id="228fd-468">`Get`Uygulamayı test etmek için bir tarayıcıdan yöntemi çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-468">Call the `Get` method from a browser to test the app.</span></span>
+<span data-ttu-id="68923-465">Proje şablonu bir API oluşturur `WeatherForecast` .</span><span class="sxs-lookup"><span data-stu-id="68923-465">The project template creates a `WeatherForecast` API.</span></span> <span data-ttu-id="68923-466">`Get`Uygulamayı test etmek için bir tarayıcıdan yöntemi çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-466">Call the `Get` method from a browser to test the app.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-469">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-469">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-467">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-467">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="228fd-470">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-470">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="228fd-471">Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/WeatherForecast` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-471">Visual Studio launches a browser and navigates to `https://localhost:<port>/WeatherForecast`, where `<port>` is a randomly chosen port number.</span></span>
+<span data-ttu-id="68923-468">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-468">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="68923-469">Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/WeatherForecast` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-469">Visual Studio launches a browser and navigates to `https://localhost:<port>/WeatherForecast`, where `<port>` is a randomly chosen port number.</span></span>
 
-<span data-ttu-id="228fd-472">IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-472">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="228fd-473">Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-473">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
+<span data-ttu-id="68923-470">IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-470">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="68923-471">Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-471">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-474">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-474">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-472">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-472">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="228fd-475">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-475">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="228fd-476">Bir tarayıcıda aşağıdaki URL 'ye gidin: `https://localhost:5001/WeatherForecast` .</span><span class="sxs-lookup"><span data-stu-id="228fd-476">In a browser, go to following URL: `https://localhost:5001/WeatherForecast`.</span></span>
+<span data-ttu-id="68923-473">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-473">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="68923-474">Bir tarayıcıda aşağıdaki URL 'ye gidin: `https://localhost:5001/WeatherForecast` .</span><span class="sxs-lookup"><span data-stu-id="68923-474">In a browser, go to following URL: `https://localhost:5001/WeatherForecast`.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-477">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-477">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-475">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-475">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="228fd-478">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-478">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="228fd-479">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-479">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="228fd-480">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="228fd-480">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="228fd-481">`/WeatherForecast`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/WeatherForecast` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-481">Append `/WeatherForecast` to the URL (change the URL to `https://localhost:<port>/WeatherForecast`).</span></span>
+<span data-ttu-id="68923-476">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-476">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="68923-477">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-477">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="68923-478">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="68923-478">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="68923-479">`/WeatherForecast`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/WeatherForecast` ).</span><span class="sxs-lookup"><span data-stu-id="68923-479">Append `/WeatherForecast` to the URL (change the URL to `https://localhost:<port>/WeatherForecast`).</span></span>
 
 ---
 
-<span data-ttu-id="228fd-482">Aşağıdakine benzer bir JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="228fd-482">JSON similar to the following is returned:</span></span>
+<span data-ttu-id="68923-480">Aşağıdakine benzer bir JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="68923-480">JSON similar to the following is returned:</span></span>
 
 ```json
 [
@@ -719,104 +717,104 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-## <a name="add-a-model-class"></a><span data-ttu-id="228fd-483">Model sınıfı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-483">Add a model class</span></span>
+## <a name="add-a-model-class"></a><span data-ttu-id="68923-481">Model sınıfı ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-481">Add a model class</span></span>
 
-<span data-ttu-id="228fd-484">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-484">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="228fd-485">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-485">The model for this app is a single `TodoItem` class.</span></span>
+<span data-ttu-id="68923-482">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="68923-482">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="68923-483">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-483">The model for this app is a single `TodoItem` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-486">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-486">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-484">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-484">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-487">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-487">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-488">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-488">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-489">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-489">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-485">**Çözüm Gezgini**, projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-485">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="68923-486">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-486">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-487">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-487">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-490">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-490">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-491">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-491">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="68923-488">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-488">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-489">Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-489">Name the class *TodoItem* and select **Add**.</span></span>
 
-* <span data-ttu-id="228fd-492">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-492">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-490">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-490">Replace the template code with the following code:</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-493">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-493">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-491">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-491">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-494">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-494">Add a folder named *Models*.</span></span>
+* <span data-ttu-id="68923-492">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-492">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-495">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-495">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
+* <span data-ttu-id="68923-493">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-493">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-496">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-496">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-494">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-494">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-497">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-497">Right-click the project.</span></span> <span data-ttu-id="228fd-498">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-498">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-499">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-499">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-495">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-495">Right-click the project.</span></span> <span data-ttu-id="68923-496">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-496">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-497">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-497">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-501">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-501">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="68923-499">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-499">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
-* <span data-ttu-id="228fd-502">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-502">Name the class *TodoItem* , and then click **New**.</span></span>
+* <span data-ttu-id="68923-500">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-500">Name the class *TodoItem*, and then click **New**.</span></span>
 
-* <span data-ttu-id="228fd-503">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-503">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-501">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-501">Replace the template code with the following code:</span></span>
 
 ---
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
-<span data-ttu-id="228fd-504">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-504">The `Id` property functions as the unique key in a relational database.</span></span>
+<span data-ttu-id="68923-502">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="68923-502">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-505">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-505">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
+<span data-ttu-id="68923-503">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-503">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
-## <a name="add-a-database-context"></a><span data-ttu-id="228fd-506">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-506">Add a database context</span></span>
+## <a name="add-a-database-context"></a><span data-ttu-id="68923-504">Veritabanı bağlamı ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-504">Add a database context</span></span>
 
-<span data-ttu-id="228fd-507">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-507">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="228fd-508">Bu sınıf sınıfından türeterek oluşturulur `Microsoft.EntityFrameworkCore.DbContext` .</span><span class="sxs-lookup"><span data-stu-id="228fd-508">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
+<span data-ttu-id="68923-505">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-505">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="68923-506">Bu sınıf sınıfından türeterek oluşturulur `Microsoft.EntityFrameworkCore.DbContext` .</span><span class="sxs-lookup"><span data-stu-id="68923-506">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-509">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-509">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-507">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-507">Visual Studio</span></span>](#tab/visual-studio)
 
-### <a name="add-nuget-packages"></a><span data-ttu-id="228fd-510">NuGet paketlerini ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-510">Add NuGet packages</span></span>
+### <a name="add-nuget-packages"></a><span data-ttu-id="68923-508">NuGet paketlerini ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-508">Add NuGet packages</span></span>
 
-* <span data-ttu-id="228fd-511">**Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-511">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
-* <span data-ttu-id="228fd-512">**Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.</span><span class="sxs-lookup"><span data-stu-id="228fd-512">Select the **Browse** tab, and then enter **Microsoft.EntityFrameworkCore.SqlServer** in the search box.</span></span>
-* <span data-ttu-id="228fd-513">Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-513">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
-* <span data-ttu-id="228fd-514">Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-514">Select the **Project** check box in the right pane and then select **Install**.</span></span>
-* <span data-ttu-id="228fd-515">Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-515">Use the preceding instructions to add the **Microsoft.EntityFrameworkCore.InMemory** NuGet package.</span></span>
+* <span data-ttu-id="68923-509">**Araçlar** menüsünde **nuget Paket Yöneticisi > çözüm Için NuGet Paketlerini Yönet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-509">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
+* <span data-ttu-id="68923-510">**Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.</span><span class="sxs-lookup"><span data-stu-id="68923-510">Select the **Browse** tab, and then enter **Microsoft.EntityFrameworkCore.SqlServer** in the search box.</span></span>
+* <span data-ttu-id="68923-511">Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-511">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
+* <span data-ttu-id="68923-512">Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install**' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-512">Select the **Project** check box in the right pane and then select **Install**.</span></span>
+* <span data-ttu-id="68923-513">Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-513">Use the preceding instructions to add the **Microsoft.EntityFrameworkCore.InMemory** NuGet package.</span></span>
 
 ![NuGet Paket Yöneticisi](first-web-api/_static/vs3NuGet.png)
 
-## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="228fd-517">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-517">Add the TodoContext database context</span></span>
+## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="68923-515">TodoContext veritabanı bağlamını ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-515">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="228fd-518">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-518">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-519">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-519">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="68923-516">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-516">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-517">Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-517">Name the class *TodoContext* and click **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-520">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-520">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-518">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-518">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-521">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-521">Add a `TodoContext` class to the *Models* folder.</span></span>
+* <span data-ttu-id="68923-519">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-519">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
-* <span data-ttu-id="228fd-522">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-522">Enter the following code:</span></span>
+* <span data-ttu-id="68923-520">Aşağıdaki kodu girin:</span><span class="sxs-lookup"><span data-stu-id="68923-520">Enter the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoContext.cs)]
 
-## <a name="register-the-database-context"></a><span data-ttu-id="228fd-523">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="228fd-523">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="68923-521">Veritabanı bağlamını kaydetme</span><span class="sxs-lookup"><span data-stu-id="68923-521">Register the database context</span></span>
 
-<span data-ttu-id="228fd-524">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="228fd-524">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="228fd-525">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="228fd-525">The container provides the service to controllers.</span></span>
+<span data-ttu-id="68923-522">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="68923-522">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="68923-523">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="68923-523">The container provides the service to controllers.</span></span>
 
-<span data-ttu-id="228fd-526">Aşağıdaki Vurgulanan kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-526">Update *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="68923-524">Aşağıdaki Vurgulanan kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-524">Update *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
-<span data-ttu-id="228fd-527">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-527">The preceding code:</span></span>
+<span data-ttu-id="68923-525">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="68923-525">The preceding code:</span></span>
 
-* <span data-ttu-id="228fd-528">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-528">Removes unused `using` declarations.</span></span>
-* <span data-ttu-id="228fd-529">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-529">Adds the database context to the DI container.</span></span>
-* <span data-ttu-id="228fd-530">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-530">Specifies that the database context will use an in-memory database.</span></span>
+* <span data-ttu-id="68923-526">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="68923-526">Removes unused `using` declarations.</span></span>
+* <span data-ttu-id="68923-527">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-527">Adds the database context to the DI container.</span></span>
+* <span data-ttu-id="68923-528">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-528">Specifies that the database context will use an in-memory database.</span></span>
 
-## <a name="scaffold-a-controller"></a><span data-ttu-id="228fd-531">Denetleyiciyi bir denetleyiciye katlama</span><span class="sxs-lookup"><span data-stu-id="228fd-531">Scaffold a controller</span></span>
+## <a name="scaffold-a-controller"></a><span data-ttu-id="68923-529">Denetleyiciyi bir denetleyiciye katlama</span><span class="sxs-lookup"><span data-stu-id="68923-529">Scaffold a controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-532">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-532">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-530">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-530">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-533">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-533">Right-click the *Controllers* folder.</span></span>
-* <span data-ttu-id="228fd-534">**Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-534">Select **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="228fd-535">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi** ' ni seçin ve ardından **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-535">Select **API Controller with actions, using Entity Framework** , and then select **Add**.</span></span>
-* <span data-ttu-id="228fd-536">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="228fd-536">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
+* <span data-ttu-id="68923-531">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-531">Right-click the *Controllers* folder.</span></span>
+* <span data-ttu-id="68923-532">**Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-532">Select **Add** > **New Scaffolded Item**.</span></span>
+* <span data-ttu-id="68923-533">**Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-533">Select **API Controller with actions, using Entity Framework**, and then select **Add**.</span></span>
+* <span data-ttu-id="68923-534">**API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:</span><span class="sxs-lookup"><span data-stu-id="68923-534">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="228fd-537">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-537">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
-  * <span data-ttu-id="228fd-538">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-538">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
-  * <span data-ttu-id="228fd-539">**Ekle** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-539">Select **Add**.</span></span>
+  * <span data-ttu-id="68923-535">**Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-535">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="68923-536">**Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-536">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="68923-537">**Ekle**’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-537">Select **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-540">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-540">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-538">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-538">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="228fd-541">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-541">Run the following commands:</span></span>
+<span data-ttu-id="68923-539">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-539">Run the following commands:</span></span>
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -826,65 +824,65 @@ dotnet tool update -g Dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
-<span data-ttu-id="228fd-542">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="228fd-542">The preceding commands:</span></span>
+<span data-ttu-id="68923-540">Önceki komutlar:</span><span class="sxs-lookup"><span data-stu-id="68923-540">The preceding commands:</span></span>
 
-* <span data-ttu-id="228fd-543">Yapı iskelesi için gereken NuGet paketlerini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-543">Add NuGet packages required for scaffolding.</span></span>
-* <span data-ttu-id="228fd-544">Scafkatlama altyapısını ( `dotnet-aspnet-codegenerator` ) kurar.</span><span class="sxs-lookup"><span data-stu-id="228fd-544">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
-* <span data-ttu-id="228fd-545">Yapı iskelesi `TodoItemsController` .</span><span class="sxs-lookup"><span data-stu-id="228fd-545">Scaffolds the `TodoItemsController`.</span></span>
+* <span data-ttu-id="68923-541">Yapı iskelesi için gereken NuGet paketlerini ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-541">Add NuGet packages required for scaffolding.</span></span>
+* <span data-ttu-id="68923-542">Scafkatlama altyapısını ( `dotnet-aspnet-codegenerator` ) kurar.</span><span class="sxs-lookup"><span data-stu-id="68923-542">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
+* <span data-ttu-id="68923-543">Yapı iskelesi `TodoItemsController` .</span><span class="sxs-lookup"><span data-stu-id="68923-543">Scaffolds the `TodoItemsController`.</span></span>
 
 ---
 
-<span data-ttu-id="228fd-546">Oluşturulan kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-546">The generated code:</span></span>
+<span data-ttu-id="68923-544">Oluşturulan kod:</span><span class="sxs-lookup"><span data-stu-id="68923-544">The generated code:</span></span>
 
-* <span data-ttu-id="228fd-547">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="228fd-547">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="228fd-548">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-548">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="228fd-549">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="228fd-549">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
-* <span data-ttu-id="228fd-550">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="228fd-550">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="228fd-551">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-551">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+* <span data-ttu-id="68923-545">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="68923-545">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="68923-546">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-546">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="68923-547">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="68923-547">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
+* <span data-ttu-id="68923-548">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="68923-548">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="68923-549">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-549">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-<span data-ttu-id="228fd-552">İçin ASP.NET Core şablonları:</span><span class="sxs-lookup"><span data-stu-id="228fd-552">The ASP.NET Core templates for:</span></span>
+<span data-ttu-id="68923-550">İçin ASP.NET Core şablonları:</span><span class="sxs-lookup"><span data-stu-id="68923-550">The ASP.NET Core templates for:</span></span>
 
-* <span data-ttu-id="228fd-553">Görünümleri olan denetleyiciler `[action]` yol şablonuna dahildir.</span><span class="sxs-lookup"><span data-stu-id="228fd-553">Controllers with views include `[action]` in the route template.</span></span>
-* <span data-ttu-id="228fd-554">API denetleyicileri `[action]` yol şablonuna dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="228fd-554">API controllers don't include `[action]` in the route template.</span></span>
+* <span data-ttu-id="68923-551">Görünümleri olan denetleyiciler `[action]` yol şablonuna dahildir.</span><span class="sxs-lookup"><span data-stu-id="68923-551">Controllers with views include `[action]` in the route template.</span></span>
+* <span data-ttu-id="68923-552">API denetleyicileri `[action]` yol şablonuna dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="68923-552">API controllers don't include `[action]` in the route template.</span></span>
 
-<span data-ttu-id="228fd-555">`[action]`Belirteç yol şablonunda olmadığında, [eylem](xref:mvc/controllers/routing#action) adı rotadan çıkarılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-555">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="228fd-556">Diğer bir deyişle, eylemin ilişkili Yöntem adı eşleşen rotada kullanılmaz.</span><span class="sxs-lookup"><span data-stu-id="228fd-556">That is, the action's associated method name isn't used in the matching route.</span></span>
+<span data-ttu-id="68923-553">`[action]`Belirteç yol şablonunda olmadığında, [eylem](xref:mvc/controllers/routing#action) adı rotadan çıkarılır.</span><span class="sxs-lookup"><span data-stu-id="68923-553">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="68923-554">Diğer bir deyişle, eylemin ilişkili Yöntem adı eşleşen rotada kullanılmaz.</span><span class="sxs-lookup"><span data-stu-id="68923-554">That is, the action's associated method name isn't used in the matching route.</span></span>
 
-## <a name="examine-the-posttodoitem-create-method"></a><span data-ttu-id="228fd-557">PostTodoItem Create metodunu inceleyin</span><span class="sxs-lookup"><span data-stu-id="228fd-557">Examine the PostTodoItem create method</span></span>
+## <a name="examine-the-posttodoitem-create-method"></a><span data-ttu-id="68923-555">PostTodoItem Create metodunu inceleyin</span><span class="sxs-lookup"><span data-stu-id="68923-555">Examine the PostTodoItem create method</span></span>
 
-<span data-ttu-id="228fd-558">İçindeki return ifadesini, `PostTodoItem` [NameOf](/dotnet/csharp/language-reference/operators/nameof) işlecini kullanmak için değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-558">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
+<span data-ttu-id="68923-556">İçindeki return ifadesini, `PostTodoItem` [NameOf](/dotnet/csharp/language-reference/operators/nameof) işlecini kullanmak için değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-556">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-<span data-ttu-id="228fd-559">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="228fd-559">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="228fd-560">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="228fd-560">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
+<span data-ttu-id="68923-557">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="68923-557">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="68923-558">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="68923-558">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
 
-<span data-ttu-id="228fd-561">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="228fd-561">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+<span data-ttu-id="68923-559">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="68923-559">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="228fd-562"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="228fd-562">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
+<span data-ttu-id="68923-560"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="68923-560">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
 
-* <span data-ttu-id="228fd-563">Başarılı olursa bir HTTP 201 durum kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-563">Returns an HTTP 201 status code if successful.</span></span> <span data-ttu-id="228fd-564">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="228fd-564">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
-* <span data-ttu-id="228fd-565">Yanıta bir [konum](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) üst bilgisi ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-565">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="228fd-566">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar öğesinin [URI](https://developer.mozilla.org/docs/Glossary/URI) 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-566">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="228fd-567">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-567">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
-* <span data-ttu-id="228fd-568">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="228fd-568">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="228fd-569">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="228fd-569">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
+* <span data-ttu-id="68923-561">Başarılı olursa bir HTTP 201 durum kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-561">Returns an HTTP 201 status code if successful.</span></span> <span data-ttu-id="68923-562">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="68923-562">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
+* <span data-ttu-id="68923-563">Yanıta bir [konum](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) üst bilgisi ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-563">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="68923-564">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar öğesinin [URI](https://developer.mozilla.org/docs/Glossary/URI) 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-564">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="68923-565">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="68923-565">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
+* <span data-ttu-id="68923-566">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="68923-566">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="68923-567">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="68923-567">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
 
-### <a name="install-postman"></a><span data-ttu-id="228fd-570">Postman yükleme</span><span class="sxs-lookup"><span data-stu-id="228fd-570">Install Postman</span></span>
+### <a name="install-postman"></a><span data-ttu-id="68923-568">Postman yükleme</span><span class="sxs-lookup"><span data-stu-id="68923-568">Install Postman</span></span>
 
-<span data-ttu-id="228fd-571">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-571">This tutorial uses Postman to test the web API.</span></span>
+<span data-ttu-id="68923-569">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-569">This tutorial uses Postman to test the web API.</span></span>
 
-* <span data-ttu-id="228fd-572">[Postman](https://www.getpostman.com/downloads/) yükleme</span><span class="sxs-lookup"><span data-stu-id="228fd-572">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
-* <span data-ttu-id="228fd-573">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-573">Start the web app.</span></span>
-* <span data-ttu-id="228fd-574">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-574">Start Postman.</span></span>
-* <span data-ttu-id="228fd-575">**SSL sertifikası doğrulamasını** devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="228fd-575">Disable **SSL certificate verification**</span></span>
-  * <span data-ttu-id="228fd-576">**Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-576">From **File** > **Settings** ( **General** tab), disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="68923-570">[Postman](https://www.getpostman.com/downloads/) yükleme</span><span class="sxs-lookup"><span data-stu-id="68923-570">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
+* <span data-ttu-id="68923-571">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-571">Start the web app.</span></span>
+* <span data-ttu-id="68923-572">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-572">Start Postman.</span></span>
+* <span data-ttu-id="68923-573">**SSL sertifikası doğrulamasını** devre dışı bırak</span><span class="sxs-lookup"><span data-stu-id="68923-573">Disable **SSL certificate verification**</span></span>
+  * <span data-ttu-id="68923-574">**Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-574">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
     > [!WARNING]
-    > <span data-ttu-id="228fd-577">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-577">Re-enable SSL certificate verification after testing the controller.</span></span>
+    > <span data-ttu-id="68923-575">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-575">Re-enable SSL certificate verification after testing the controller.</span></span>
 
 <a name="post"></a>
 
-### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="228fd-578">Postman ile test PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="228fd-578">Test PostTodoItem with Postman</span></span>
+### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="68923-576">Postman ile test PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="68923-576">Test PostTodoItem with Postman</span></span>
 
-* <span data-ttu-id="228fd-579">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-579">Create a new request.</span></span>
-* <span data-ttu-id="228fd-580">HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="228fd-580">Set the HTTP method to `POST`.</span></span>
-* <span data-ttu-id="228fd-581">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="228fd-581">Set the URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="228fd-582">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="228fd-582">For example, `https://localhost:5001/api/TodoItems`.</span></span>
-* <span data-ttu-id="228fd-583">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-583">Select the **Body** tab.</span></span>
-* <span data-ttu-id="228fd-584">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-584">Select the **raw** radio button.</span></span>
-* <span data-ttu-id="228fd-585">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-585">Set the type to **JSON (application/json)**.</span></span>
-* <span data-ttu-id="228fd-586">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-586">In the request body enter JSON for a to-do item:</span></span>
+* <span data-ttu-id="68923-577">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-577">Create a new request.</span></span>
+* <span data-ttu-id="68923-578">HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="68923-578">Set the HTTP method to `POST`.</span></span>
+* <span data-ttu-id="68923-579">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="68923-579">Set the URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="68923-580">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="68923-580">For example, `https://localhost:5001/api/TodoItems`.</span></span>
+* <span data-ttu-id="68923-581">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-581">Select the **Body** tab.</span></span>
+* <span data-ttu-id="68923-582">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-582">Select the **raw** radio button.</span></span>
+* <span data-ttu-id="68923-583">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-583">Set the type to **JSON (application/json)**.</span></span>
+* <span data-ttu-id="68923-584">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="68923-584">In the request body enter JSON for a to-do item:</span></span>
 
     ```json
     {
@@ -893,34 +891,34 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* <span data-ttu-id="228fd-587">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-587">Select **Send**.</span></span>
+* <span data-ttu-id="68923-585">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-585">Select **Send**.</span></span>
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri-with-postman"></a><span data-ttu-id="228fd-589">Konum üstbilgisi URI 'sini Postman ile test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-589">Test the location header URI with Postman</span></span>
+### <a name="test-the-location-header-uri-with-postman"></a><span data-ttu-id="68923-587">Konum üstbilgisi URI 'sini Postman ile test etme</span><span class="sxs-lookup"><span data-stu-id="68923-587">Test the location header URI with Postman</span></span>
 
-* <span data-ttu-id="228fd-590">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-590">Select the **Headers** tab in the **Response** pane.</span></span>
-* <span data-ttu-id="228fd-591">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="228fd-591">Copy the **Location** header value:</span></span>
+* <span data-ttu-id="68923-588">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-588">Select the **Headers** tab in the **Response** pane.</span></span>
+* <span data-ttu-id="68923-589">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="68923-589">Copy the **Location** header value:</span></span>
 
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/3/create.png)
 
-* <span data-ttu-id="228fd-593">HTTP yöntemini olarak ayarlayın `GET` .</span><span class="sxs-lookup"><span data-stu-id="228fd-593">Set the HTTP method to `GET`.</span></span>
-* <span data-ttu-id="228fd-594">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` .</span><span class="sxs-lookup"><span data-stu-id="228fd-594">Set the URI to `https://localhost:<port>/api/TodoItems/1`.</span></span> <span data-ttu-id="228fd-595">Örneğin, `https://localhost:5001/api/TodoItems/1`.</span><span class="sxs-lookup"><span data-stu-id="228fd-595">For example, `https://localhost:5001/api/TodoItems/1`.</span></span>
-* <span data-ttu-id="228fd-596">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-596">Select **Send**.</span></span>
+* <span data-ttu-id="68923-591">HTTP yöntemini olarak ayarlayın `GET` .</span><span class="sxs-lookup"><span data-stu-id="68923-591">Set the HTTP method to `GET`.</span></span>
+* <span data-ttu-id="68923-592">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` .</span><span class="sxs-lookup"><span data-stu-id="68923-592">Set the URI to `https://localhost:<port>/api/TodoItems/1`.</span></span> <span data-ttu-id="68923-593">Örneğin, `https://localhost:5001/api/TodoItems/1`.</span><span class="sxs-lookup"><span data-stu-id="68923-593">For example, `https://localhost:5001/api/TodoItems/1`.</span></span>
+* <span data-ttu-id="68923-594">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-594">Select **Send**.</span></span>
 
-## <a name="examine-the-get-methods"></a><span data-ttu-id="228fd-597">GET yöntemlerini inceleyin</span><span class="sxs-lookup"><span data-stu-id="228fd-597">Examine the GET methods</span></span>
+## <a name="examine-the-get-methods"></a><span data-ttu-id="68923-595">GET yöntemlerini inceleyin</span><span class="sxs-lookup"><span data-stu-id="68923-595">Examine the GET methods</span></span>
 
-<span data-ttu-id="228fd-598">Bu yöntemler iki al uç noktası uygular:</span><span class="sxs-lookup"><span data-stu-id="228fd-598">These methods implement two GET endpoints:</span></span>
+<span data-ttu-id="68923-596">Bu yöntemler iki al uç noktası uygular:</span><span class="sxs-lookup"><span data-stu-id="68923-596">These methods implement two GET endpoints:</span></span>
 
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-<span data-ttu-id="228fd-599">Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="228fd-599">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="228fd-600">Örnek:</span><span class="sxs-lookup"><span data-stu-id="228fd-600">For example:</span></span>
+<span data-ttu-id="68923-597">Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="68923-597">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="68923-598">Örnek:</span><span class="sxs-lookup"><span data-stu-id="68923-598">For example:</span></span>
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
 
-<span data-ttu-id="228fd-601">Şuna benzer bir yanıt, şu çağrı tarafından üretilir `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="228fd-601">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
+<span data-ttu-id="68923-599">Şuna benzer bir yanıt, şu çağrı tarafından üretilir `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="68923-599">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
 
 ```json
 [
@@ -932,55 +930,55 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-### <a name="test-get-with-postman"></a><span data-ttu-id="228fd-602">Postman ile test al</span><span class="sxs-lookup"><span data-stu-id="228fd-602">Test Get with Postman</span></span>
+### <a name="test-get-with-postman"></a><span data-ttu-id="68923-600">Postman ile test al</span><span class="sxs-lookup"><span data-stu-id="68923-600">Test Get with Postman</span></span>
 
-* <span data-ttu-id="228fd-603">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-603">Create a new request.</span></span>
-* <span data-ttu-id="228fd-604">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-604">Set the HTTP method to **GET**.</span></span>
-* <span data-ttu-id="228fd-605">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="228fd-605">Set the request URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="228fd-606">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="228fd-606">For example, `https://localhost:5001/api/TodoItems`.</span></span>
-* <span data-ttu-id="228fd-607">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-607">Set **Two pane view** in Postman.</span></span>
-* <span data-ttu-id="228fd-608">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-608">Select **Send**.</span></span>
+* <span data-ttu-id="68923-601">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-601">Create a new request.</span></span>
+* <span data-ttu-id="68923-602">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-602">Set the HTTP method to **GET**.</span></span>
+* <span data-ttu-id="68923-603">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="68923-603">Set the request URI to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="68923-604">Örneğin, `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="68923-604">For example, `https://localhost:5001/api/TodoItems`.</span></span>
+* <span data-ttu-id="68923-605">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-605">Set **Two pane view** in Postman.</span></span>
+* <span data-ttu-id="68923-606">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-606">Select **Send**.</span></span>
 
-<span data-ttu-id="228fd-609">Bu uygulama, bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-609">This app uses an in-memory database.</span></span> <span data-ttu-id="228fd-610">Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez.</span><span class="sxs-lookup"><span data-stu-id="228fd-610">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="228fd-611">Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .</span><span class="sxs-lookup"><span data-stu-id="228fd-611">If no data is returned, [POST](#post) data to the app.</span></span>
+<span data-ttu-id="68923-607">Bu uygulama, bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-607">This app uses an in-memory database.</span></span> <span data-ttu-id="68923-608">Uygulama durdurulup başlatılırsa, önceki GET isteği herhangi bir veri döndürmez.</span><span class="sxs-lookup"><span data-stu-id="68923-608">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="68923-609">Hiçbir veri döndürülmezse, verileri uygulamaya [gönderin](#post) .</span><span class="sxs-lookup"><span data-stu-id="68923-609">If no data is returned, [POST](#post) data to the app.</span></span>
 
-## <a name="routing-and-url-paths"></a><span data-ttu-id="228fd-612">Yönlendirme ve URL yolları</span><span class="sxs-lookup"><span data-stu-id="228fd-612">Routing and URL paths</span></span>
+## <a name="routing-and-url-paths"></a><span data-ttu-id="68923-610">Yönlendirme ve URL yolları</span><span class="sxs-lookup"><span data-stu-id="68923-610">Routing and URL paths</span></span>
 
-<span data-ttu-id="228fd-613">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="228fd-613">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="228fd-614">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="228fd-614">The URL path for each method is constructed as follows:</span></span>
+<span data-ttu-id="68923-611">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="68923-611">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="68923-612">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="68923-612">The URL path for each method is constructed as follows:</span></span>
 
-* <span data-ttu-id="228fd-615">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="228fd-615">Start with the template string in the controller's `Route` attribute:</span></span>
+* <span data-ttu-id="68923-613">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="68923-613">Start with the template string in the controller's `Route` attribute:</span></span>
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* <span data-ttu-id="228fd-616">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-616">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="228fd-617">Bu örnek için denetleyici sınıfı adı **todoıtems** denetleyicisidir, bu nedenle denetleyicinin adı "todoıtems" olur.</span><span class="sxs-lookup"><span data-stu-id="228fd-617">For this sample, the controller class name is **TodoItems** Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="228fd-618">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-618">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
-* <span data-ttu-id="228fd-619">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-619">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="228fd-620">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="228fd-620">This sample doesn't use a template.</span></span> <span data-ttu-id="228fd-621">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="228fd-621">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+* <span data-ttu-id="68923-614">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="68923-614">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="68923-615">Bu örnek için denetleyici sınıfı adı **todoıtems** denetleyicisidir, bu nedenle denetleyicinin adı "todoıtems" olur.</span><span class="sxs-lookup"><span data-stu-id="68923-615">For this sample, the controller class name is **TodoItems** Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="68923-616">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-616">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
+* <span data-ttu-id="68923-617">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-617">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="68923-618">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="68923-618">This sample doesn't use a template.</span></span> <span data-ttu-id="68923-619">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="68923-619">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="228fd-622">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-622">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="228fd-623">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="228fd-623">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
+<span data-ttu-id="68923-620">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="68923-620">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="68923-621">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="68923-621">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a><span data-ttu-id="228fd-624">Dönüş değerleri</span><span class="sxs-lookup"><span data-stu-id="228fd-624">Return values</span></span> 
+## <a name="return-values"></a><span data-ttu-id="68923-622">Dönüş değerleri</span><span class="sxs-lookup"><span data-stu-id="68923-622">Return values</span></span> 
 
-<span data-ttu-id="228fd-625">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="228fd-625">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="228fd-626">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="228fd-626">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="228fd-627">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir.</span><span class="sxs-lookup"><span data-stu-id="228fd-627">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="228fd-628">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-628">Unhandled exceptions are translated into 5xx errors.</span></span>
+<span data-ttu-id="68923-623">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="68923-623">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="68923-624">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="68923-624">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="68923-625">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir.</span><span class="sxs-lookup"><span data-stu-id="68923-625">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="68923-626">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="68923-626">Unhandled exceptions are translated into 5xx errors.</span></span>
 
-<span data-ttu-id="228fd-629">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-629">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="228fd-630">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-630">For example, `GetTodoItem` can return two different status values:</span></span>
+<span data-ttu-id="68923-627">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-627">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="68923-628">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="68923-628">For example, `GetTodoItem` can return two different status values:</span></span>
 
-* <span data-ttu-id="228fd-631">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-631">If no item matches the requested ID, the method returns a 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
-* <span data-ttu-id="228fd-632">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-632">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="228fd-633">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="228fd-633">Returning `item` results in an HTTP 200 response.</span></span>
+* <span data-ttu-id="68923-629">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-629">If no item matches the requested ID, the method returns a 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
+* <span data-ttu-id="68923-630">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-630">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="68923-631">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="68923-631">Returning `item` results in an HTTP 200 response.</span></span>
 
-## <a name="the-puttodoitem-method"></a><span data-ttu-id="228fd-634">PutTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="228fd-634">The PutTodoItem method</span></span>
+## <a name="the-puttodoitem-method"></a><span data-ttu-id="68923-632">PutTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="68923-632">The PutTodoItem method</span></span>
 
-<span data-ttu-id="228fd-635">`PutTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-635">Examine the `PutTodoItem` method:</span></span>
+<span data-ttu-id="68923-633">`PutTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-633">Examine the `PutTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
-<span data-ttu-id="228fd-636">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="228fd-636">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="228fd-637">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-637">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="228fd-638">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="228fd-638">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="228fd-639">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="228fd-639">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
+<span data-ttu-id="68923-634">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="68923-634">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="68923-635">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="68923-635">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="68923-636">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="68923-636">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="68923-637">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="68923-637">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
 
-<span data-ttu-id="228fd-640">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-640">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
+<span data-ttu-id="68923-638">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-638">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
 
-### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="228fd-641">PutTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-641">Test the PutTodoItem method</span></span>
+### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="68923-639">PutTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="68923-639">Test the PutTodoItem method</span></span>
 
-<span data-ttu-id="228fd-642">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-642">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="228fd-643">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-643">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="228fd-644">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="228fd-644">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
+<span data-ttu-id="68923-640">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-640">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="68923-641">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-641">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="68923-642">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="68923-642">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
 
-<span data-ttu-id="228fd-645">ID = 1 olan Yapılacaklar öğesini güncelleştirin ve adını "Feed balık" olarak ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="228fd-645">Update the to-do item that has Id = 1 and set its name to "feed fish":</span></span>
+<span data-ttu-id="68923-643">ID = 1 olan Yapılacaklar öğesini güncelleştirin ve adını "Feed balık" olarak ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="68923-643">Update the to-do item that has Id = 1 and set its name to "feed fish":</span></span>
 
 ```json
   {
@@ -990,295 +988,295 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   }
 ```
 
-<span data-ttu-id="228fd-646">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="228fd-646">The following image shows the Postman update:</span></span>
+<span data-ttu-id="68923-644">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="68923-644">The following image shows the Postman update:</span></span>
 
 ![204 (Içerik yok) yanıtı gösteren Postman konsolu](first-web-api/_static/3/pmcput.png)
 
-## <a name="the-deletetodoitem-method"></a><span data-ttu-id="228fd-648">DeleteTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="228fd-648">The DeleteTodoItem method</span></span>
+## <a name="the-deletetodoitem-method"></a><span data-ttu-id="68923-646">DeleteTodoItem yöntemi</span><span class="sxs-lookup"><span data-stu-id="68923-646">The DeleteTodoItem method</span></span>
 
-<span data-ttu-id="228fd-649">`DeleteTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-649">Examine the `DeleteTodoItem` method:</span></span>
+<span data-ttu-id="68923-647">`DeleteTodoItem` yöntemini inceleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-647">Examine the `DeleteTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
-### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="228fd-650">DeleteTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-650">Test the DeleteTodoItem method</span></span>
+### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="68923-648">DeleteTodoItem yöntemini test etme</span><span class="sxs-lookup"><span data-stu-id="68923-648">Test the DeleteTodoItem method</span></span>
 
-<span data-ttu-id="228fd-651">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="228fd-651">Use Postman to delete a to-do item:</span></span>
+<span data-ttu-id="68923-649">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="68923-649">Use Postman to delete a to-do item:</span></span>
 
-* <span data-ttu-id="228fd-652">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="228fd-652">Set the method to `DELETE`.</span></span>
-* <span data-ttu-id="228fd-653">Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-653">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
-* <span data-ttu-id="228fd-654">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-654">Select **Send**.</span></span>
+* <span data-ttu-id="68923-650">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="68923-650">Set the method to `DELETE`.</span></span>
+* <span data-ttu-id="68923-651">Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="68923-651">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
+* <span data-ttu-id="68923-652">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-652">Select **Send**.</span></span>
 
 <a name="over-post"></a>
 <a name="over-post-v3"></a>
 
-## <a name="prevent-over-posting"></a><span data-ttu-id="228fd-655">Fazla nakletmeyi engelle</span><span class="sxs-lookup"><span data-stu-id="228fd-655">Prevent over-posting</span></span>
+## <a name="prevent-over-posting"></a><span data-ttu-id="68923-653">Fazla nakletmeyi engelle</span><span class="sxs-lookup"><span data-stu-id="68923-653">Prevent over-posting</span></span>
 
-<span data-ttu-id="228fd-656">Şu anda örnek uygulama tüm nesneyi kullanıma sunar `TodoItem` .</span><span class="sxs-lookup"><span data-stu-id="228fd-656">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="228fd-657">Üretim uygulamaları tipik olarak, bir modelin alt kümesini kullanarak girdi ve döndürülen verileri sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-657">Production apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="228fd-658">Bunun arkasında birden çok neden vardır ve güvenlik önemli bir değer.</span><span class="sxs-lookup"><span data-stu-id="228fd-658">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="228fd-659">Bir modelin alt kümesi genellikle Veri Aktarımı nesnesi (DTO), giriş modeli veya görünüm modeli olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-659">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="228fd-660">Bu makalede **DTO** kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-660">**DTO** is used in this article.</span></span>
+<span data-ttu-id="68923-654">Şu anda örnek uygulama tüm nesneyi kullanıma sunar `TodoItem` .</span><span class="sxs-lookup"><span data-stu-id="68923-654">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="68923-655">Üretim uygulamaları tipik olarak, bir modelin alt kümesini kullanarak girdi ve döndürülen verileri sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="68923-655">Production apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="68923-656">Bunun arkasında birden çok neden vardır ve güvenlik önemli bir değer.</span><span class="sxs-lookup"><span data-stu-id="68923-656">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="68923-657">Bir modelin alt kümesi genellikle Veri Aktarımı nesnesi (DTO), giriş modeli veya görünüm modeli olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="68923-657">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="68923-658">Bu makalede **DTO** kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-658">**DTO** is used in this article.</span></span>
 
-<span data-ttu-id="228fd-661">Bir DTO için kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-661">A DTO may be used to:</span></span>
+<span data-ttu-id="68923-659">Bir DTO için kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="68923-659">A DTO may be used to:</span></span>
 
-* <span data-ttu-id="228fd-662">Fazla nakletmeyi önleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-662">Prevent over-posting.</span></span>
-* <span data-ttu-id="228fd-663">İstemcilerin görüntülemesi beklenen özellikleri gizleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-663">Hide properties that clients are not supposed to view.</span></span>
-* <span data-ttu-id="228fd-664">Yük boyutunu azaltmak için bazı özellikleri atlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-664">Omit some properties in order to reduce payload size.</span></span>
-* <span data-ttu-id="228fd-665">İç içe geçmiş nesneler içeren nesne grafiklerini düzleştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-665">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="228fd-666">Düzleştirilmiş nesne grafikleri istemciler için daha uygun olabilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-666">Flattened object graphs can be more convenient for clients.</span></span>
+* <span data-ttu-id="68923-660">Fazla nakletmeyi önleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-660">Prevent over-posting.</span></span>
+* <span data-ttu-id="68923-661">İstemcilerin görüntülemesi beklenen özellikleri gizleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-661">Hide properties that clients are not supposed to view.</span></span>
+* <span data-ttu-id="68923-662">Yük boyutunu azaltmak için bazı özellikleri atlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-662">Omit some properties in order to reduce payload size.</span></span>
+* <span data-ttu-id="68923-663">İç içe geçmiş nesneler içeren nesne grafiklerini düzleştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-663">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="68923-664">Düzleştirilmiş nesne grafikleri istemciler için daha uygun olabilir.</span><span class="sxs-lookup"><span data-stu-id="68923-664">Flattened object graphs can be more convenient for clients.</span></span>
 
-<span data-ttu-id="228fd-667">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-667">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
+<span data-ttu-id="68923-665">DTO yaklaşımını göstermek için, `TodoItem` sınıfı gizli bir alan içerecek şekilde güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-665">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
 
-<span data-ttu-id="228fd-668">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-668">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
+<span data-ttu-id="68923-666">Gizli alanın bu uygulamadan gizlenmesi gerekir, ancak bir yönetim uygulaması onu kullanıma sunmayı seçebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-666">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
-<span data-ttu-id="228fd-669">Gizli dizi alanını nakledebildiğinizi ve alabilirim.</span><span class="sxs-lookup"><span data-stu-id="228fd-669">Verify you can post and get the secret field.</span></span>
+<span data-ttu-id="68923-667">Gizli dizi alanını nakledebildiğinizi ve alabilirim.</span><span class="sxs-lookup"><span data-stu-id="68923-667">Verify you can post and get the secret field.</span></span>
 
-<span data-ttu-id="228fd-670">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="228fd-670">Create a DTO model:</span></span>
+<span data-ttu-id="68923-668">Bir DTO modeli oluşturun:</span><span class="sxs-lookup"><span data-stu-id="68923-668">Create a DTO model:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
-<span data-ttu-id="228fd-671">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="228fd-671">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
+<span data-ttu-id="68923-669">`TodoItemsController`Kullanmak için öğesini güncelleştirin `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="68923-669">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Controllers/TodoItemsController.cs?name=snippet)]
 
-<span data-ttu-id="228fd-672">Gizli dizi alanını nakledemeyeceğinizi veya alamazsınız.</span><span class="sxs-lookup"><span data-stu-id="228fd-672">Verify you can't post or get the secret field.</span></span>
+<span data-ttu-id="68923-670">Gizli dizi alanını nakledemeyeceğinizi veya alamazsınız.</span><span class="sxs-lookup"><span data-stu-id="68923-670">Verify you can't post or get the secret field.</span></span>
 
-## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="228fd-673">JavaScript ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="228fd-673">Call the web API with JavaScript</span></span>
+## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="68923-671">JavaScript ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="68923-671">Call the web API with JavaScript</span></span>
 
-<span data-ttu-id="228fd-674">Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="228fd-674">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
+<span data-ttu-id="68923-672">Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="68923-672">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="228fd-675">Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="228fd-675">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="68923-673">Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:</span><span class="sxs-lookup"><span data-stu-id="68923-673">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="228fd-676">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-676">Create a web API project.</span></span>
-> * <span data-ttu-id="228fd-677">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-677">Add a model class and a database context.</span></span>
-> * <span data-ttu-id="228fd-678">Denetleyici ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-678">Add a controller.</span></span>
-> * <span data-ttu-id="228fd-679">CRUD yöntemleri ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-679">Add CRUD methods.</span></span>
-> * <span data-ttu-id="228fd-680">Yönlendirme ve URL yollarını yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-680">Configure routing and URL paths.</span></span>
-> * <span data-ttu-id="228fd-681">Dönüş değerlerini belirtin.</span><span class="sxs-lookup"><span data-stu-id="228fd-681">Specify return values.</span></span>
-> * <span data-ttu-id="228fd-682">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-682">Call the web API with Postman.</span></span>
-> * <span data-ttu-id="228fd-683">JavaScript ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-683">Call the web API with JavaScript.</span></span>
+> * <span data-ttu-id="68923-674">Bir Web API projesi oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-674">Create a web API project.</span></span>
+> * <span data-ttu-id="68923-675">Bir model sınıfı ve bir veritabanı bağlamı ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-675">Add a model class and a database context.</span></span>
+> * <span data-ttu-id="68923-676">Denetleyici ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-676">Add a controller.</span></span>
+> * <span data-ttu-id="68923-677">CRUD yöntemleri ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-677">Add CRUD methods.</span></span>
+> * <span data-ttu-id="68923-678">Yönlendirme ve URL yollarını yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="68923-678">Configure routing and URL paths.</span></span>
+> * <span data-ttu-id="68923-679">Dönüş değerlerini belirtin.</span><span class="sxs-lookup"><span data-stu-id="68923-679">Specify return values.</span></span>
+> * <span data-ttu-id="68923-680">Postman ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-680">Call the web API with Postman.</span></span>
+> * <span data-ttu-id="68923-681">JavaScript ile Web API 'sini çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-681">Call the web API with JavaScript.</span></span>
 
-<span data-ttu-id="228fd-684">Sonunda, ilişkisel bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="228fd-684">At the end, you have a web API that can manage "to-do" items stored in a relational database.</span></span>
+<span data-ttu-id="68923-682">Sonunda, ilişkisel bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek için bir Web API 'SI vardır.</span><span class="sxs-lookup"><span data-stu-id="68923-682">At the end, you have a web API that can manage "to-do" items stored in a relational database.</span></span>
 
-## <a name="overview-21"></a><span data-ttu-id="228fd-685">Genel Bakış 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-685">Overview 2.1</span></span>
+## <a name="overview-21"></a><span data-ttu-id="68923-683">Genel Bakış 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-683">Overview 2.1</span></span>
 
-<span data-ttu-id="228fd-686">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="228fd-686">This tutorial creates the following API:</span></span>
+<span data-ttu-id="68923-684">Bu öğretici aşağıdaki API 'YI oluşturur:</span><span class="sxs-lookup"><span data-stu-id="68923-684">This tutorial creates the following API:</span></span>
 
-|<span data-ttu-id="228fd-687">API</span><span class="sxs-lookup"><span data-stu-id="228fd-687">API</span></span> | <span data-ttu-id="228fd-688">Açıklama</span><span class="sxs-lookup"><span data-stu-id="228fd-688">Description</span></span> | <span data-ttu-id="228fd-689">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-689">Request body</span></span> | <span data-ttu-id="228fd-690">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="228fd-690">Response body</span></span> |
+|<span data-ttu-id="68923-685">API</span><span class="sxs-lookup"><span data-stu-id="68923-685">API</span></span> | <span data-ttu-id="68923-686">Açıklama</span><span class="sxs-lookup"><span data-stu-id="68923-686">Description</span></span> | <span data-ttu-id="68923-687">İstek gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-687">Request body</span></span> | <span data-ttu-id="68923-688">Yanıt gövdesi</span><span class="sxs-lookup"><span data-stu-id="68923-688">Response body</span></span> |
 |--- | ---- | ---- | ---- |
-|<span data-ttu-id="228fd-691">/Api/TodoItems al</span><span class="sxs-lookup"><span data-stu-id="228fd-691">GET /api/TodoItems</span></span> | <span data-ttu-id="228fd-692">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="228fd-692">Get all to-do items</span></span> | <span data-ttu-id="228fd-693">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-693">None</span></span> | <span data-ttu-id="228fd-694">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="228fd-694">Array of to-do items</span></span>|
-|<span data-ttu-id="228fd-695">/Api/TodoItems/{id} al</span><span class="sxs-lookup"><span data-stu-id="228fd-695">GET /api/TodoItems/{id}</span></span> | <span data-ttu-id="228fd-696">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="228fd-696">Get an item by ID</span></span> | <span data-ttu-id="228fd-697">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-697">None</span></span> | <span data-ttu-id="228fd-698">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-698">To-do item</span></span>|
-|<span data-ttu-id="228fd-699">POST/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="228fd-699">POST /api/TodoItems</span></span> | <span data-ttu-id="228fd-700">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="228fd-700">Add a new item</span></span> | <span data-ttu-id="228fd-701">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-701">To-do item</span></span> | <span data-ttu-id="228fd-702">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-702">To-do item</span></span> |
-|<span data-ttu-id="228fd-703">/Api/TodoItems/{id} koy</span><span class="sxs-lookup"><span data-stu-id="228fd-703">PUT /api/TodoItems/{id}</span></span> | <span data-ttu-id="228fd-704">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-704">Update an existing item &nbsp;</span></span> | <span data-ttu-id="228fd-705">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="228fd-705">To-do item</span></span> | <span data-ttu-id="228fd-706">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-706">None</span></span> |
-|<span data-ttu-id="228fd-707">/Api/TodoItems/{id} &nbsp; Sil &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-707">DELETE /api/TodoItems/{id} &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-708">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="228fd-708">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="228fd-709">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-709">None</span></span> | <span data-ttu-id="228fd-710">Yok</span><span class="sxs-lookup"><span data-stu-id="228fd-710">None</span></span>|
+|<span data-ttu-id="68923-689">/Api/TodoItems al</span><span class="sxs-lookup"><span data-stu-id="68923-689">GET /api/TodoItems</span></span> | <span data-ttu-id="68923-690">Tüm yapılacaklar öğelerini Al</span><span class="sxs-lookup"><span data-stu-id="68923-690">Get all to-do items</span></span> | <span data-ttu-id="68923-691">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-691">None</span></span> | <span data-ttu-id="68923-692">Yapılacaklar öğeleri dizisi</span><span class="sxs-lookup"><span data-stu-id="68923-692">Array of to-do items</span></span>|
+|<span data-ttu-id="68923-693">/Api/TodoItems/{id} al</span><span class="sxs-lookup"><span data-stu-id="68923-693">GET /api/TodoItems/{id}</span></span> | <span data-ttu-id="68923-694">KIMLIĞE göre öğe al</span><span class="sxs-lookup"><span data-stu-id="68923-694">Get an item by ID</span></span> | <span data-ttu-id="68923-695">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-695">None</span></span> | <span data-ttu-id="68923-696">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-696">To-do item</span></span>|
+|<span data-ttu-id="68923-697">POST/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="68923-697">POST /api/TodoItems</span></span> | <span data-ttu-id="68923-698">Yeni öğe Ekle</span><span class="sxs-lookup"><span data-stu-id="68923-698">Add a new item</span></span> | <span data-ttu-id="68923-699">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-699">To-do item</span></span> | <span data-ttu-id="68923-700">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-700">To-do item</span></span> |
+|<span data-ttu-id="68923-701">/Api/TodoItems/{id} koy</span><span class="sxs-lookup"><span data-stu-id="68923-701">PUT /api/TodoItems/{id}</span></span> | <span data-ttu-id="68923-702">Mevcut bir öğeyi güncelleştir &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-702">Update an existing item &nbsp;</span></span> | <span data-ttu-id="68923-703">Yapılacaklar öğesi</span><span class="sxs-lookup"><span data-stu-id="68923-703">To-do item</span></span> | <span data-ttu-id="68923-704">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-704">None</span></span> |
+|<span data-ttu-id="68923-705">/Api/TodoItems/{id} &nbsp; Sil &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-705">DELETE /api/TodoItems/{id} &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-706">Öğe &nbsp; silme &nbsp;</span><span class="sxs-lookup"><span data-stu-id="68923-706">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="68923-707">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-707">None</span></span> | <span data-ttu-id="68923-708">Yok</span><span class="sxs-lookup"><span data-stu-id="68923-708">None</span></span>|
 
-<span data-ttu-id="228fd-711">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="228fd-711">The following diagram shows the design of the app.</span></span>
+<span data-ttu-id="68923-709">Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="68923-709">The following diagram shows the design of the app.</span></span>
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites-21"></a><span data-ttu-id="228fd-717">Önkoşullar 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-717">Prerequisites 2.1</span></span>
+## <a name="prerequisites-21"></a><span data-ttu-id="68923-715">Önkoşullar 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-715">Prerequisites 2.1</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-718">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-718">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-716">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-716">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-719">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-719">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-717">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-717">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-720">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-720">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-718">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-718">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
 
-## <a name="create-a-web-project-21"></a><span data-ttu-id="228fd-721">Web projesi oluşturma 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-721">Create a web project 2.1</span></span>
+## <a name="create-a-web-project-21"></a><span data-ttu-id="68923-719">Web projesi oluşturma 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-719">Create a web project 2.1</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-722">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-722">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-720">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-720">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-723">**Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-723">From the **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="228fd-724">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-724">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
-* <span data-ttu-id="228fd-725">Projeyi *TodoApi* olarak adlandırın ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-725">Name the project *TodoApi* and click **Create**.</span></span>
-* <span data-ttu-id="228fd-726">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 2,2** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-726">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 2.2** are selected.</span></span> <span data-ttu-id="228fd-727">**API** şablonunu seçin ve **Oluştur** ' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-727">Select the **API** template and click **Create**.</span></span> <span data-ttu-id="228fd-728">**Docker desteğini etkinleştir** **' i seçmeyin** .</span><span class="sxs-lookup"><span data-stu-id="228fd-728">**Don't** select **Enable Docker Support**.</span></span>
+* <span data-ttu-id="68923-721">**Dosya** menüsünden **Yeni** > **Proje**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-721">From the **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="68923-722">**ASP.NET Core Web uygulaması** şablonunu seçin ve **İleri**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-722">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
+* <span data-ttu-id="68923-723">Projeyi *TodoApi* olarak adlandırın ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-723">Name the project *TodoApi* and click **Create**.</span></span>
+* <span data-ttu-id="68923-724">**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 2,2** ' un seçili olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="68923-724">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 2.2** are selected.</span></span> <span data-ttu-id="68923-725">**API** şablonunu seçin ve **Oluştur**' a tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-725">Select the **API** template and click **Create**.</span></span> <span data-ttu-id="68923-726">**Docker desteğini etkinleştir** **' i seçmeyin** .</span><span class="sxs-lookup"><span data-stu-id="68923-726">**Don't** select **Enable Docker Support**.</span></span>
 
 ![VS Yeni proje iletişim kutusu](first-web-api/_static/vs.png)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-730">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-730">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-728">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-728">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-731">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="228fd-731">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="228fd-732">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-732">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
-* <span data-ttu-id="228fd-733">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="228fd-733">Run the following commands:</span></span>
+* <span data-ttu-id="68923-729">[Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.</span><span class="sxs-lookup"><span data-stu-id="68923-729">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="68923-730">Dizinleri ( `cd` ) proje klasörünü içerecek olan klasöre değiştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-730">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
+* <span data-ttu-id="68923-731">Aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="68923-731">Run the following commands:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
    code -r TodoApi
    ```
 
-  <span data-ttu-id="228fd-734">Bu komutlar yeni bir Web API projesi oluşturur ve yeni proje klasöründe Visual Studio Code yeni bir örneğini açar.</span><span class="sxs-lookup"><span data-stu-id="228fd-734">These commands create a new web API project and open a new instance of Visual Studio Code in the new project folder.</span></span>
+  <span data-ttu-id="68923-732">Bu komutlar yeni bir Web API projesi oluşturur ve yeni proje klasöründe Visual Studio Code yeni bir örneğini açar.</span><span class="sxs-lookup"><span data-stu-id="68923-732">These commands create a new web API project and open a new instance of Visual Studio Code in the new project folder.</span></span>
 
-* <span data-ttu-id="228fd-735">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-735">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
+* <span data-ttu-id="68923-733">Bir iletişim kutusu projeye gerekli varlıkları eklemek isteyip istemediğinizi sorduğunda **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-733">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-736">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-736">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-734">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-734">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-737">**Dosya** > **yeni çözüm** ' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-737">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="68923-735">**Dosya** > **yeni çözüm**' ü seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-735">Select **File** > **New Solution**.</span></span>
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* <span data-ttu-id="228fd-739">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-739">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="228fd-740">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-740">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
+* <span data-ttu-id="68923-737">Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-737">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="68923-738">Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-738">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
   
-* <span data-ttu-id="228fd-741">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-741">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 2.x **Target Framework**.</span></span> <span data-ttu-id="228fd-742">**İleri** ’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-742">Select **Next**.</span></span>
+* <span data-ttu-id="68923-739">**Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini** seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-739">In the **Configure the new ASP.NET Core Web API** dialog, select the latest .NET Core 2.x **Target Framework**.</span></span> <span data-ttu-id="68923-740">**İleri**’yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-740">Select **Next**.</span></span>
 
-* <span data-ttu-id="228fd-743">**Proje adı** için *TodoApi* girin ve ardından **Oluştur** ' u seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-743">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
+* <span data-ttu-id="68923-741">**Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-741">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
 
   ![yapılandırma iletişim kutusu](first-web-api-mac/_static/2.png)
 
 ---
 
-### <a name="test-the-api-21"></a><span data-ttu-id="228fd-745">API 2,1 'YI test etme</span><span class="sxs-lookup"><span data-stu-id="228fd-745">Test the API 2.1</span></span>
+### <a name="test-the-api-21"></a><span data-ttu-id="68923-743">API 2,1 'YI test etme</span><span class="sxs-lookup"><span data-stu-id="68923-743">Test the API 2.1</span></span>
 
-<span data-ttu-id="228fd-746">Proje şablonu bir API oluşturur `values` .</span><span class="sxs-lookup"><span data-stu-id="228fd-746">The project template creates a `values` API.</span></span> <span data-ttu-id="228fd-747">`Get`Uygulamayı test etmek için bir tarayıcıdan yöntemi çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-747">Call the `Get` method from a browser to test the app.</span></span>
+<span data-ttu-id="68923-744">Proje şablonu bir API oluşturur `values` .</span><span class="sxs-lookup"><span data-stu-id="68923-744">The project template creates a `values` API.</span></span> <span data-ttu-id="68923-745">`Get`Uygulamayı test etmek için bir tarayıcıdan yöntemi çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-745">Call the `Get` method from a browser to test the app.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-748">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-748">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-746">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-746">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="228fd-749">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-749">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="228fd-750">Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/api/values` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-750">Visual Studio launches a browser and navigates to `https://localhost:<port>/api/values`, where `<port>` is a randomly chosen port number.</span></span>
+<span data-ttu-id="68923-747">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-747">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="68923-748">Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>/api/values` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-748">Visual Studio launches a browser and navigates to `https://localhost:<port>/api/values`, where `<port>` is a randomly chosen port number.</span></span>
 
-<span data-ttu-id="228fd-751">IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-751">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="228fd-752">Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet** ' i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-752">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
+<span data-ttu-id="68923-749">IIS Express sertifikaya güvenip güvenmemeyi soran bir iletişim kutusu alırsanız **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-749">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="68923-750">Sonraki görüntülenen **güvenlik uyarısı** Iletişim kutusunda **Evet**' i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-750">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-753">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-753">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-751">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-751">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="228fd-754">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="228fd-754">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="228fd-755">Bir tarayıcıda aşağıdaki URL 'ye gidin: `https://localhost:5001/api/values` .</span><span class="sxs-lookup"><span data-stu-id="228fd-755">In a browser, go to following URL: `https://localhost:5001/api/values`.</span></span>
+<span data-ttu-id="68923-752">Uygulamayı çalıştırmak için CTRL + F5 tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="68923-752">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="68923-753">Bir tarayıcıda aşağıdaki URL 'ye gidin: `https://localhost:5001/api/values` .</span><span class="sxs-lookup"><span data-stu-id="68923-753">In a browser, go to following URL: `https://localhost:5001/api/values`.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-756">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-756">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-754">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-754">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="228fd-757">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-757">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="228fd-758">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-758">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="228fd-759">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="228fd-759">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="228fd-760">`/api/values`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/api/values` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-760">Append `/api/values` to the URL (change the URL to `https://localhost:<port>/api/values`).</span></span>
+<span data-ttu-id="68923-755">Uygulamayı **başlatmak**  >  için **hata ayıklamayı Başlat** ' ı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-755">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="68923-756">Mac için Visual Studio bir tarayıcı başlatır ve ' a gider `https://localhost:<port>` , burada `<port>` rastgele seçilmiş bir bağlantı noktası numarasıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-756">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="68923-757">HTTP 404 (bulunamadı) hatası döndürüldü.</span><span class="sxs-lookup"><span data-stu-id="68923-757">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="68923-758">`/api/values`URL 'ye ekleyin (URL 'yi olarak değiştirin `https://localhost:<port>/api/values` ).</span><span class="sxs-lookup"><span data-stu-id="68923-758">Append `/api/values` to the URL (change the URL to `https://localhost:<port>/api/values`).</span></span>
 
 ---
 
-<span data-ttu-id="228fd-761">Aşağıdaki JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="228fd-761">The following JSON is returned:</span></span>
+<span data-ttu-id="68923-759">Aşağıdaki JSON döndürülür:</span><span class="sxs-lookup"><span data-stu-id="68923-759">The following JSON is returned:</span></span>
 
 ```json
 ["value1","value2"]
 ```
 
-## <a name="add-a-model-class-21"></a><span data-ttu-id="228fd-762">Model sınıfı ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-762">Add a model class 2.1</span></span>
+## <a name="add-a-model-class-21"></a><span data-ttu-id="68923-760">Model sınıfı ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-760">Add a model class 2.1</span></span>
 
-<span data-ttu-id="228fd-763">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-763">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="228fd-764">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-764">The model for this app is a single `TodoItem` class.</span></span>
+<span data-ttu-id="68923-761">*Model* , uygulamanın yönettiği verileri temsil eden bir sınıf kümesidir.</span><span class="sxs-lookup"><span data-stu-id="68923-761">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="68923-762">Bu uygulamanın modeli tek bir `TodoItem` sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-762">The model for this app is a single `TodoItem` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-765">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-765">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-763">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-763">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-766">**Çözüm Gezgini** , projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-766">In **Solution Explorer** , right-click the project.</span></span> <span data-ttu-id="228fd-767">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-767">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-768">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-768">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-764">**Çözüm Gezgini**, projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-764">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="68923-765">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-765">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-766">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-766">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="228fd-769">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-769">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-770">Sınıfı *TodoItem* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-770">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="68923-767">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-767">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-768">Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-768">Name the class *TodoItem* and select **Add**.</span></span>
 
-* <span data-ttu-id="228fd-771">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-771">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-769">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-769">Replace the template code with the following code:</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="228fd-772">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="228fd-772">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="68923-770">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="68923-770">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="228fd-773">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-773">Add a folder named *Models*.</span></span>
+* <span data-ttu-id="68923-771">Adlı bir klasör ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-771">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="228fd-774">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-774">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
+* <span data-ttu-id="68923-772">`TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-772">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="228fd-775">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-775">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="68923-773">Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-773">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="228fd-776">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-776">Right-click the project.</span></span> <span data-ttu-id="228fd-777">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-777">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="228fd-778">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-778">Name the folder *Models*.</span></span>
+* <span data-ttu-id="68923-774">Projeye sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-774">Right-click the project.</span></span> <span data-ttu-id="68923-775">**Add**  >  **Yeni klasör** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-775">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="68923-776">Klasörü adlandırın *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-776">Name the folder *Models*.</span></span>
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="228fd-780">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı** ' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-780">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="68923-778">Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-778">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
-* <span data-ttu-id="228fd-781">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-781">Name the class *TodoItem* , and then click **New**.</span></span>
+* <span data-ttu-id="68923-779">Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-779">Name the class *TodoItem*, and then click **New**.</span></span>
 
-* <span data-ttu-id="228fd-782">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-782">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-780">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-780">Replace the template code with the following code:</span></span>
 
 ---
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoItem.cs)]
 
-<span data-ttu-id="228fd-783">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="228fd-783">The `Id` property functions as the unique key in a relational database.</span></span>
+<span data-ttu-id="68923-781">`Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.</span><span class="sxs-lookup"><span data-stu-id="68923-781">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="228fd-784">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-784">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
+<span data-ttu-id="68923-782">Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-782">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
-## <a name="add-a-database-context-21"></a><span data-ttu-id="228fd-785">Veritabanı bağlamı ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-785">Add a database context 2.1</span></span>
+## <a name="add-a-database-context-21"></a><span data-ttu-id="68923-783">Veritabanı bağlamı ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-783">Add a database context 2.1</span></span>
 
-<span data-ttu-id="228fd-786">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="228fd-786">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="228fd-787">Bu sınıf sınıfından türeterek oluşturulur `Microsoft.EntityFrameworkCore.DbContext` .</span><span class="sxs-lookup"><span data-stu-id="228fd-787">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
+<span data-ttu-id="68923-784">*Veritabanı bağlamı* , bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır.</span><span class="sxs-lookup"><span data-stu-id="68923-784">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="68923-785">Bu sınıf sınıfından türeterek oluşturulur `Microsoft.EntityFrameworkCore.DbContext` .</span><span class="sxs-lookup"><span data-stu-id="68923-785">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-788">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-788">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-786">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-786">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-789">Klasöre sağ tıklayın *Models* ve sınıf **Ekle** ' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="228fd-789">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="228fd-790">Sınıfı *TodoContext* olarak adlandırın ve **Ekle** ' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-790">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="68923-787">Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**.</span><span class="sxs-lookup"><span data-stu-id="68923-787">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="68923-788">Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-788">Name the class *TodoContext* and click **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-791">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-791">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-789">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-789">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-792">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="228fd-792">Add a `TodoContext` class to the *Models* folder.</span></span>
+* <span data-ttu-id="68923-790">Klasöre bir `TodoContext` sınıf ekleyin *Models* .</span><span class="sxs-lookup"><span data-stu-id="68923-790">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
-* <span data-ttu-id="228fd-793">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-793">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-791">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-791">Replace the template code with the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoContext.cs)]
 
-## <a name="register-the-database-context-21"></a><span data-ttu-id="228fd-794">Veritabanı bağlamını kaydetme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-794">Register the database context 2.1</span></span>
+## <a name="register-the-database-context-21"></a><span data-ttu-id="68923-792">Veritabanı bağlamını kaydetme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-792">Register the database context 2.1</span></span>
 
-<span data-ttu-id="228fd-795">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="228fd-795">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="228fd-796">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="228fd-796">The container provides the service to controllers.</span></span>
+<span data-ttu-id="68923-793">ASP.NET Core, VERITABANı bağlamı gibi hizmetlerin [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısına kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="68923-793">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="68923-794">Kapsayıcı hizmeti denetleyicilere sağlar.</span><span class="sxs-lookup"><span data-stu-id="68923-794">The container provides the service to controllers.</span></span>
 
-<span data-ttu-id="228fd-797">Aşağıdaki Vurgulanan kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-797">Update *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="68923-795">Aşağıdaki Vurgulanan kodla *Startup.cs* güncelleştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-795">Update *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
-<span data-ttu-id="228fd-798">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-798">The preceding code:</span></span>
+<span data-ttu-id="68923-796">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="68923-796">The preceding code:</span></span>
 
-* <span data-ttu-id="228fd-799">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-799">Removes unused `using` declarations.</span></span>
-* <span data-ttu-id="228fd-800">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-800">Adds the database context to the DI container.</span></span>
-* <span data-ttu-id="228fd-801">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-801">Specifies that the database context will use an in-memory database.</span></span>
+* <span data-ttu-id="68923-797">Kullanılmayan `using` bildirimleri kaldırır.</span><span class="sxs-lookup"><span data-stu-id="68923-797">Removes unused `using` declarations.</span></span>
+* <span data-ttu-id="68923-798">Veritabanı bağlamını dı kapsayıcısına ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-798">Adds the database context to the DI container.</span></span>
+* <span data-ttu-id="68923-799">Veritabanı bağlamının bellek içi bir veritabanını kullanacağı belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-799">Specifies that the database context will use an in-memory database.</span></span>
 
-## <a name="add-a-controller-21"></a><span data-ttu-id="228fd-802">Denetleyici ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-802">Add a controller 2.1</span></span>
+## <a name="add-a-controller-21"></a><span data-ttu-id="68923-800">Denetleyici ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-800">Add a controller 2.1</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-803">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-803">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-801">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-801">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-804">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-804">Right-click the *Controllers* folder.</span></span>
-* <span data-ttu-id="228fd-805">**Add** > **Yeni öğe** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-805">Select **Add** > **New Item**.</span></span>
-* <span data-ttu-id="228fd-806">**Yeni öğe Ekle** iletişim kutusunda, **API denetleyici sınıfı** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-806">In the **Add New Item** dialog, select the **API Controller Class** template.</span></span>
-* <span data-ttu-id="228fd-807">Sınıfı *TodoController* olarak adlandırın ve **Ekle** ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-807">Name the class *TodoController* , and select **Add**.</span></span>
+* <span data-ttu-id="68923-802">*Denetleyiciler* klasörüne sağ tıklayın.</span><span class="sxs-lookup"><span data-stu-id="68923-802">Right-click the *Controllers* folder.</span></span>
+* <span data-ttu-id="68923-803">**Add** > **Yeni öğe** Ekle ' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-803">Select **Add** > **New Item**.</span></span>
+* <span data-ttu-id="68923-804">**Yeni öğe Ekle** iletişim kutusunda, **API denetleyici sınıfı** şablonunu seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-804">In the **Add New Item** dialog, select the **API Controller Class** template.</span></span>
+* <span data-ttu-id="68923-805">Sınıfı *TodoController* olarak adlandırın ve **Ekle**' yi seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-805">Name the class *TodoController*, and select **Add**.</span></span>
 
   ![Arama kutusu ve Web API denetleyicisi seçiliyken denetleyiciyi içeren yeni öğe iletişim kutusu Ekle](first-web-api/_static/new_controller.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-809">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-809">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-807">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-807">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-810">*Denetleyiciler* klasöründe adlı bir sınıf oluşturun `TodoController` .</span><span class="sxs-lookup"><span data-stu-id="228fd-810">In the *Controllers* folder, create a class named `TodoController`.</span></span>
+* <span data-ttu-id="68923-808">*Denetleyiciler* klasöründe adlı bir sınıf oluşturun `TodoController` .</span><span class="sxs-lookup"><span data-stu-id="68923-808">In the *Controllers* folder, create a class named `TodoController`.</span></span>
 
 ---
 
-* <span data-ttu-id="228fd-811">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-811">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="68923-809">Şablon kodunu şu kodla değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-809">Replace the template code with the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController2.cs?name=snippet_todo1)]
 
-<span data-ttu-id="228fd-812">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="228fd-812">The preceding code:</span></span>
+<span data-ttu-id="68923-810">Yukarıdaki kod:</span><span class="sxs-lookup"><span data-stu-id="68923-810">The preceding code:</span></span>
 
-* <span data-ttu-id="228fd-813">Yöntemler olmadan bir API denetleyici sınıfı tanımlar.</span><span class="sxs-lookup"><span data-stu-id="228fd-813">Defines an API controller class without methods.</span></span>
-* <span data-ttu-id="228fd-814">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="228fd-814">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="228fd-815">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-815">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="228fd-816">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="228fd-816">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
-* <span data-ttu-id="228fd-817">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="228fd-817">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="228fd-818">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-818">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
-* <span data-ttu-id="228fd-819">Veritabanı boşsa veritabanına adlı bir öğe ekler `Item1` .</span><span class="sxs-lookup"><span data-stu-id="228fd-819">Adds an item named `Item1` to the database if the database is empty.</span></span> <span data-ttu-id="228fd-820">Bu kod oluşturucuda yer aldığı için, her yeni HTTP isteği olduğunda çalışır.</span><span class="sxs-lookup"><span data-stu-id="228fd-820">This code is in the constructor, so it runs every time there's a new HTTP request.</span></span> <span data-ttu-id="228fd-821">Tüm öğeleri silerseniz, `Item1` BIR API yönteminin bir sonraki çağrılışında Oluşturucu yeniden oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="228fd-821">If you delete all items, the constructor creates `Item1` again the next time an API method is called.</span></span> <span data-ttu-id="228fd-822">Bu nedenle, aslında çalışırken silme işe yaramadı gibi görünebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-822">So it may look like the deletion didn't work when it actually did work.</span></span>
+* <span data-ttu-id="68923-811">Yöntemler olmadan bir API denetleyici sınıfı tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68923-811">Defines an API controller class without methods.</span></span>
+* <span data-ttu-id="68923-812">Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler.</span><span class="sxs-lookup"><span data-stu-id="68923-812">Marks the class with the [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute.</span></span> <span data-ttu-id="68923-813">Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-813">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="68923-814">Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..</span><span class="sxs-lookup"><span data-stu-id="68923-814">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
+* <span data-ttu-id="68923-815">Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` .</span><span class="sxs-lookup"><span data-stu-id="68923-815">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="68923-816">Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68923-816">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+* <span data-ttu-id="68923-817">Veritabanı boşsa veritabanına adlı bir öğe ekler `Item1` .</span><span class="sxs-lookup"><span data-stu-id="68923-817">Adds an item named `Item1` to the database if the database is empty.</span></span> <span data-ttu-id="68923-818">Bu kod oluşturucuda yer aldığı için, her yeni HTTP isteği olduğunda çalışır.</span><span class="sxs-lookup"><span data-stu-id="68923-818">This code is in the constructor, so it runs every time there's a new HTTP request.</span></span> <span data-ttu-id="68923-819">Tüm öğeleri silerseniz, `Item1` BIR API yönteminin bir sonraki çağrılışında Oluşturucu yeniden oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="68923-819">If you delete all items, the constructor creates `Item1` again the next time an API method is called.</span></span> <span data-ttu-id="68923-820">Bu nedenle, aslında çalışırken silme işe yaramadı gibi görünebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-820">So it may look like the deletion didn't work when it actually did work.</span></span>
 
-## <a name="add-get-methods-21"></a><span data-ttu-id="228fd-823">Get yöntemleri ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-823">Add Get methods 2.1</span></span>
+## <a name="add-get-methods-21"></a><span data-ttu-id="68923-821">Get yöntemleri ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-821">Add Get methods 2.1</span></span>
 
-<span data-ttu-id="228fd-824">Yapılacaklar öğelerini alan bir API sağlamak için aşağıdaki yöntemleri `TodoController` sınıfına ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-824">To provide an API that retrieves to-do items, add the following methods to the `TodoController` class:</span></span>
+<span data-ttu-id="68923-822">Yapılacaklar öğelerini alan bir API sağlamak için aşağıdaki yöntemleri `TodoController` sınıfına ekleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-822">To provide an API that retrieves to-do items, add the following methods to the `TodoController` class:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetAll)]
 
-<span data-ttu-id="228fd-825">Bu yöntemler iki al uç noktası uygular:</span><span class="sxs-lookup"><span data-stu-id="228fd-825">These methods implement two GET endpoints:</span></span>
+<span data-ttu-id="68923-823">Bu yöntemler iki al uç noktası uygular:</span><span class="sxs-lookup"><span data-stu-id="68923-823">These methods implement two GET endpoints:</span></span>
 
 * `GET /api/todo`
 * `GET /api/todo/{id}`
 
-<span data-ttu-id="228fd-826">Hala çalışıyorsa uygulamayı durdurun.</span><span class="sxs-lookup"><span data-stu-id="228fd-826">Stop the app if it's still running.</span></span> <span data-ttu-id="228fd-827">Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-827">Then run it again to include the latest changes.</span></span>
+<span data-ttu-id="68923-824">Hala çalışıyorsa uygulamayı durdurun.</span><span class="sxs-lookup"><span data-stu-id="68923-824">Stop the app if it's still running.</span></span> <span data-ttu-id="68923-825">Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="68923-825">Then run it again to include the latest changes.</span></span>
 
-<span data-ttu-id="228fd-828">Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="228fd-828">Test the app by calling the two endpoints from a browser.</span></span> <span data-ttu-id="228fd-829">Örnek:</span><span class="sxs-lookup"><span data-stu-id="228fd-829">For example:</span></span>
+<span data-ttu-id="68923-826">Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin.</span><span class="sxs-lookup"><span data-stu-id="68923-826">Test the app by calling the two endpoints from a browser.</span></span> <span data-ttu-id="68923-827">Örnek:</span><span class="sxs-lookup"><span data-stu-id="68923-827">For example:</span></span>
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
 
-<span data-ttu-id="228fd-830">Aşağıdaki HTTP yanıtı, çağrısı tarafından oluşturulur `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="228fd-830">The following HTTP response is produced by the call to `GetTodoItems`:</span></span>
+<span data-ttu-id="68923-828">Aşağıdaki HTTP yanıtı, çağrısı tarafından oluşturulur `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="68923-828">The following HTTP response is produced by the call to `GetTodoItems`:</span></span>
 
 ```json
 [
@@ -1290,85 +1288,85 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-## <a name="routing-and-url-paths-21"></a><span data-ttu-id="228fd-831">Yönlendirme ve URL yolları 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-831">Routing and URL paths 2.1</span></span>
+## <a name="routing-and-url-paths-21"></a><span data-ttu-id="68923-829">Yönlendirme ve URL yolları 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-829">Routing and URL paths 2.1</span></span>
 
-<span data-ttu-id="228fd-832">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="228fd-832">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="228fd-833">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="228fd-833">The URL path for each method is constructed as follows:</span></span>
+<span data-ttu-id="68923-830">[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir.</span><span class="sxs-lookup"><span data-stu-id="68923-830">The [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="68923-831">Her yöntemin URL yolu şu şekilde oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="68923-831">The URL path for each method is constructed as follows:</span></span>
 
-* <span data-ttu-id="228fd-834">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="228fd-834">Start with the template string in the controller's `Route` attribute:</span></span>
+* <span data-ttu-id="68923-832">Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :</span><span class="sxs-lookup"><span data-stu-id="68923-832">Start with the template string in the controller's `Route` attribute:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=TodoController&highlight=3)]
 
-* <span data-ttu-id="228fd-835">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-835">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="228fd-836">Bu örnek için denetleyici sınıf adı **Todo** Controller olduğundan, denetleyici adı "Todo" olur.</span><span class="sxs-lookup"><span data-stu-id="228fd-836">For this sample, the controller class name is **Todo** Controller, so the controller name is "todo".</span></span> <span data-ttu-id="228fd-837">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-837">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
-* <span data-ttu-id="228fd-838">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-838">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="228fd-839">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="228fd-839">This sample doesn't use a template.</span></span> <span data-ttu-id="228fd-840">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="228fd-840">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+* <span data-ttu-id="68923-833">`[controller]`Denetleyicinin adıyla değiştirin; bu kural, denetleyici sınıf adı "denetleyici" sonekidir.</span><span class="sxs-lookup"><span data-stu-id="68923-833">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="68923-834">Bu örnek için denetleyici sınıf adı **Todo** Controller olduğundan, denetleyici adı "Todo" olur.</span><span class="sxs-lookup"><span data-stu-id="68923-834">For this sample, the controller class name is **Todo** Controller, so the controller name is "todo".</span></span> <span data-ttu-id="68923-835">ASP.NET Core [yönlendirme](xref:mvc/controllers/routing) büyük/küçük harfe duyarlıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-835">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
+* <span data-ttu-id="68923-836">`[HttpGet]`Özniteliğin bir yol şablonu varsa (örneğin, `[HttpGet("products")]` ), yola ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-836">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="68923-837">Bu örnek, bir şablon kullanmaz.</span><span class="sxs-lookup"><span data-stu-id="68923-837">This sample doesn't use a template.</span></span> <span data-ttu-id="68923-838">Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="68923-838">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="228fd-841">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="228fd-841">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="228fd-842">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="228fd-842">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its`id` parameter.</span></span>
+<span data-ttu-id="68923-839">Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersiz tanımlayıcısı için bir yer tutucu değişkenidir.</span><span class="sxs-lookup"><span data-stu-id="68923-839">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="68923-840">`GetTodoItem`Çağrıldığında, `"{id}"` URL 'deki değeri, yönteminin parametresindeki yöntemine sağlanır `id` .</span><span class="sxs-lookup"><span data-stu-id="68923-840">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its`id` parameter.</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values-21"></a><span data-ttu-id="228fd-843">Dönüş değerleri 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-843">Return values 2.1</span></span>
+## <a name="return-values-21"></a><span data-ttu-id="68923-841">Dönüş değerleri 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-841">Return values 2.1</span></span>
 
-<span data-ttu-id="228fd-844">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="228fd-844">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="228fd-845">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="228fd-845">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="228fd-846">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir.</span><span class="sxs-lookup"><span data-stu-id="228fd-846">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="228fd-847">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-847">Unhandled exceptions are translated into 5xx errors.</span></span>
+<span data-ttu-id="68923-842">`GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="68923-842">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="68923-843">ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar.</span><span class="sxs-lookup"><span data-stu-id="68923-843">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="68923-844">Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir.</span><span class="sxs-lookup"><span data-stu-id="68923-844">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="68923-845">İşlenmemiş özel durumlar 5 xx hataya çevrilir.</span><span class="sxs-lookup"><span data-stu-id="68923-845">Unhandled exceptions are translated into 5xx errors.</span></span>
 
-<span data-ttu-id="228fd-848">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-848">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="228fd-849">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-849">For example, `GetTodoItem` can return two different status values:</span></span>
+<span data-ttu-id="68923-846">`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir.</span><span class="sxs-lookup"><span data-stu-id="68923-846">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="68923-847">Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:</span><span class="sxs-lookup"><span data-stu-id="68923-847">For example, `GetTodoItem` can return two different status values:</span></span>
 
-* <span data-ttu-id="228fd-850">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-850">If no item matches the requested ID, the method returns a 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
-* <span data-ttu-id="228fd-851">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-851">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="228fd-852">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="228fd-852">Returning `item` results in an HTTP 200 response.</span></span>
+* <span data-ttu-id="68923-848">İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-848">If no item matches the requested ID, the method returns a 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> error code.</span></span>
+* <span data-ttu-id="68923-849">Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-849">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="68923-850">`item`Sonuçları BIR HTTP 200 yanıtına döndürme.</span><span class="sxs-lookup"><span data-stu-id="68923-850">Returning `item` results in an HTTP 200 response.</span></span>
 
-## <a name="test-the-gettodoitems-method-21"></a><span data-ttu-id="228fd-853">GetTodoItems yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-853">Test the GetTodoItems method 2.1</span></span>
+## <a name="test-the-gettodoitems-method-21"></a><span data-ttu-id="68923-851">GetTodoItems yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-851">Test the GetTodoItems method 2.1</span></span>
 
-<span data-ttu-id="228fd-854">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-854">This tutorial uses Postman to test the web API.</span></span>
+<span data-ttu-id="68923-852">Bu öğretici, Web API 'sini test etmek için Postman kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-852">This tutorial uses Postman to test the web API.</span></span>
 
-* <span data-ttu-id="228fd-855">[Postman](https://www.getpostman.com/downloads/)'yi yükleme.</span><span class="sxs-lookup"><span data-stu-id="228fd-855">Install [Postman](https://www.getpostman.com/downloads/).</span></span>
-* <span data-ttu-id="228fd-856">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-856">Start the web app.</span></span>
-* <span data-ttu-id="228fd-857">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="228fd-857">Start Postman.</span></span>
-* <span data-ttu-id="228fd-858">**SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-858">Disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="68923-853">[Postman](https://www.getpostman.com/downloads/)'yi yükleme.</span><span class="sxs-lookup"><span data-stu-id="68923-853">Install [Postman](https://www.getpostman.com/downloads/).</span></span>
+* <span data-ttu-id="68923-854">Web uygulamasını başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-854">Start the web app.</span></span>
+* <span data-ttu-id="68923-855">Postman 'ı başlatın.</span><span class="sxs-lookup"><span data-stu-id="68923-855">Start Postman.</span></span>
+* <span data-ttu-id="68923-856">**SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-856">Disable **SSL certificate verification**.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="228fd-859">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-859">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="68923-857">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-857">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="228fd-860">**Dosya** > **ayarlarından** ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-860">From **File** > **Settings** ( **General** tab), disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="68923-858">**Dosya** > **ayarlarından** (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-858">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="228fd-861">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="228fd-861">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="68923-859">Visual Studio Code/Mac için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="68923-859">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="228fd-862">**Postman**  >  **tercihleri** ' nden ( **genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-862">From **Postman** > **Preferences** ( **General** tab), disable **SSL certificate verification**.</span></span> <span data-ttu-id="228fd-863">Alternatif olarak, wranı seçin ve **Ayarlar** ' ı seçip SSL sertifikası doğrulamasını devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="228fd-863">Alternatively, select the wrench and select **Settings** , then disable the SSL certificate verification.</span></span>
+* <span data-ttu-id="68923-860">**Postman**  >  **tercihleri** ' nden (**genel** sekmesinden) **SSL sertifikası doğrulamasını** devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-860">From **Postman** > **Preferences** (**General** tab), disable **SSL certificate verification**.</span></span> <span data-ttu-id="68923-861">Alternatif olarak, wranı seçin ve **Ayarlar**' ı seçip SSL sertifikası doğrulamasını devre dışı bırakın.</span><span class="sxs-lookup"><span data-stu-id="68923-861">Alternatively, select the wrench and select **Settings**, then disable the SSL certificate verification.</span></span>
 
 ---
   
 > [!WARNING]
-> <span data-ttu-id="228fd-864">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="228fd-864">Re-enable SSL certificate verification after testing the controller.</span></span>
+> <span data-ttu-id="68923-862">Denetleyiciyi test ettikten sonra SSL sertifikası doğrulamasını yeniden etkinleştirin.</span><span class="sxs-lookup"><span data-stu-id="68923-862">Re-enable SSL certificate verification after testing the controller.</span></span>
 
-* <span data-ttu-id="228fd-865">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-865">Create a new request.</span></span>
-  * <span data-ttu-id="228fd-866">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-866">Set the HTTP method to **GET**.</span></span>
-  * <span data-ttu-id="228fd-867">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/todo` .</span><span class="sxs-lookup"><span data-stu-id="228fd-867">Set the request URI to `https://localhost:<port>/api/todo`.</span></span> <span data-ttu-id="228fd-868">Örneğin, `https://localhost:5001/api/todo`.</span><span class="sxs-lookup"><span data-stu-id="228fd-868">For example, `https://localhost:5001/api/todo`.</span></span>
-* <span data-ttu-id="228fd-869">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-869">Set **Two pane view** in Postman.</span></span>
-* <span data-ttu-id="228fd-870">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-870">Select **Send**.</span></span>
+* <span data-ttu-id="68923-863">Yeni bir istek oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-863">Create a new request.</span></span>
+  * <span data-ttu-id="68923-864">**Almak** için http yöntemini ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-864">Set the HTTP method to **GET**.</span></span>
+  * <span data-ttu-id="68923-865">İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/todo` .</span><span class="sxs-lookup"><span data-stu-id="68923-865">Set the request URI to `https://localhost:<port>/api/todo`.</span></span> <span data-ttu-id="68923-866">Örneğin, `https://localhost:5001/api/todo`.</span><span class="sxs-lookup"><span data-stu-id="68923-866">For example, `https://localhost:5001/api/todo`.</span></span>
+* <span data-ttu-id="68923-867">Postman 'da **iki bölme görünümü** ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-867">Set **Two pane view** in Postman.</span></span>
+* <span data-ttu-id="68923-868">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-868">Select **Send**.</span></span>
 
 ![Get isteği ile Postman](first-web-api/_static/2pv.png)
 
-## <a name="add-a-create-method-21"></a><span data-ttu-id="228fd-872">Create yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-872">Add a Create method 2.1</span></span>
+## <a name="add-a-create-method-21"></a><span data-ttu-id="68923-870">Create yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-870">Add a Create method 2.1</span></span>
 
-<span data-ttu-id="228fd-873">`PostTodoItem` *Controllers/TodoController. cs* içindeki şu yöntemi ekleyin:</span><span class="sxs-lookup"><span data-stu-id="228fd-873">Add the following `PostTodoItem` method inside of *Controllers/TodoController.cs* :</span></span> 
+<span data-ttu-id="68923-871">`PostTodoItem` *Controllers/TodoController. cs* içindeki şu yöntemi ekleyin:</span><span class="sxs-lookup"><span data-stu-id="68923-871">Add the following `PostTodoItem` method inside of *Controllers/TodoController.cs*:</span></span> 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-<span data-ttu-id="228fd-874">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="228fd-874">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="228fd-875">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="228fd-875">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
+<span data-ttu-id="68923-872">Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) .</span><span class="sxs-lookup"><span data-stu-id="68923-872">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribute.</span></span> <span data-ttu-id="68923-873">Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.</span><span class="sxs-lookup"><span data-stu-id="68923-873">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
 
-<span data-ttu-id="228fd-876">`CreatedAtAction`Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="228fd-876">The `CreatedAtAction` method:</span></span>
+<span data-ttu-id="68923-874">`CreatedAtAction`Yöntemi:</span><span class="sxs-lookup"><span data-stu-id="68923-874">The `CreatedAtAction` method:</span></span>
 
-* <span data-ttu-id="228fd-877">Başarılı olursa bir HTTP 201 durum kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="228fd-877">Returns an HTTP 201 status code, if successful.</span></span> <span data-ttu-id="228fd-878">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="228fd-878">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
-* <span data-ttu-id="228fd-879">Yanıta bir `Location` üst bilgi ekler.</span><span class="sxs-lookup"><span data-stu-id="228fd-879">Adds a `Location` header to the response.</span></span> <span data-ttu-id="228fd-880">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar ÖĞESININ URI 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="228fd-880">The `Location` header specifies the URI of the newly created to-do item.</span></span> <span data-ttu-id="228fd-881">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-881">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
-* <span data-ttu-id="228fd-882">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="228fd-882">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="228fd-883">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="228fd-883">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
+* <span data-ttu-id="68923-875">Başarılı olursa bir HTTP 201 durum kodu döndürür.</span><span class="sxs-lookup"><span data-stu-id="68923-875">Returns an HTTP 201 status code, if successful.</span></span> <span data-ttu-id="68923-876">HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.</span><span class="sxs-lookup"><span data-stu-id="68923-876">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
+* <span data-ttu-id="68923-877">Yanıta bir `Location` üst bilgi ekler.</span><span class="sxs-lookup"><span data-stu-id="68923-877">Adds a `Location` header to the response.</span></span> <span data-ttu-id="68923-878">`Location`Üst bilgi, yeni oluşturulan Yapılacaklar ÖĞESININ URI 'sini belirtir.</span><span class="sxs-lookup"><span data-stu-id="68923-878">The `Location` header specifies the URI of the newly created to-do item.</span></span> <span data-ttu-id="68923-879">Daha fazla bilgi için bkz. [10.2.2 201 oluşturma](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="68923-879">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
+* <span data-ttu-id="68923-880">`GetTodoItem`ÜSTBILGININ URI 'sini oluşturma eylemine başvurur `Location` .</span><span class="sxs-lookup"><span data-stu-id="68923-880">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="68923-881">C# `nameof` anahtar sözcüğü, çağrıda eylem adının sabit kodlanmasını önlemek için kullanılır `CreatedAtAction` .</span><span class="sxs-lookup"><span data-stu-id="68923-881">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-### <a name="test-the-posttodoitem-method-21"></a><span data-ttu-id="228fd-884">PostTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-884">Test the PostTodoItem method 2.1</span></span>
+### <a name="test-the-posttodoitem-method-21"></a><span data-ttu-id="68923-882">PostTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-882">Test the PostTodoItem method 2.1</span></span>
 
-* <span data-ttu-id="228fd-885">Projeyi derleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-885">Build the project.</span></span>
-* <span data-ttu-id="228fd-886">Postman 'da HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="228fd-886">In Postman, set the HTTP method to `POST`.</span></span>
-* <span data-ttu-id="228fd-887">URI değerini olarak ayarlayın `https://localhost:<port>/api/Todo` .</span><span class="sxs-lookup"><span data-stu-id="228fd-887">Set the URI to `https://localhost:<port>/api/Todo`.</span></span> <span data-ttu-id="228fd-888">Örneğin, `https://localhost:5001/api/Todo`.</span><span class="sxs-lookup"><span data-stu-id="228fd-888">For example, `https://localhost:5001/api/Todo`.</span></span>
-* <span data-ttu-id="228fd-889">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-889">Select the **Body** tab.</span></span>
-* <span data-ttu-id="228fd-890">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-890">Select the **raw** radio button.</span></span>
-* <span data-ttu-id="228fd-891">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-891">Set the type to **JSON (application/json)**.</span></span>
-* <span data-ttu-id="228fd-892">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="228fd-892">In the request body enter JSON for a to-do item:</span></span>
+* <span data-ttu-id="68923-883">Projeyi derleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-883">Build the project.</span></span>
+* <span data-ttu-id="68923-884">Postman 'da HTTP yöntemini olarak ayarlayın `POST` .</span><span class="sxs-lookup"><span data-stu-id="68923-884">In Postman, set the HTTP method to `POST`.</span></span>
+* <span data-ttu-id="68923-885">URI değerini olarak ayarlayın `https://localhost:<port>/api/Todo` .</span><span class="sxs-lookup"><span data-stu-id="68923-885">Set the URI to `https://localhost:<port>/api/Todo`.</span></span> <span data-ttu-id="68923-886">Örneğin, `https://localhost:5001/api/Todo`.</span><span class="sxs-lookup"><span data-stu-id="68923-886">For example, `https://localhost:5001/api/Todo`.</span></span>
+* <span data-ttu-id="68923-887">**Gövde** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-887">Select the **Body** tab.</span></span>
+* <span data-ttu-id="68923-888">**Ham** radyo düğmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-888">Select the **raw** radio button.</span></span>
+* <span data-ttu-id="68923-889">Türü **JSON (Application/JSON)** olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-889">Set the type to **JSON (application/json)**.</span></span>
+* <span data-ttu-id="68923-890">İstek gövdesinde, bir yapılacaklar öğesi için JSON girin:</span><span class="sxs-lookup"><span data-stu-id="68923-890">In the request body enter JSON for a to-do item:</span></span>
 
     ```json
     {
@@ -1377,38 +1375,38 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* <span data-ttu-id="228fd-893">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-893">Select **Send**.</span></span>
+* <span data-ttu-id="68923-891">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-891">Select **Send**.</span></span>
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/create.png)
 
-  <span data-ttu-id="228fd-895">Bir 405 yöntemine Izin verilmiyor hatası alırsanız, yöntem eklendikten sonra projeyi derlememe sonucu büyük olasılıkla oluşur `PostTodoItem` .</span><span class="sxs-lookup"><span data-stu-id="228fd-895">If you get a 405 Method Not Allowed error, it's probably the result of not compiling the project after adding the `PostTodoItem` method.</span></span>
+  <span data-ttu-id="68923-893">Bir 405 yöntemine Izin verilmiyor hatası alırsanız, yöntem eklendikten sonra projeyi derlememe sonucu büyük olasılıkla oluşur `PostTodoItem` .</span><span class="sxs-lookup"><span data-stu-id="68923-893">If you get a 405 Method Not Allowed error, it's probably the result of not compiling the project after adding the `PostTodoItem` method.</span></span>
 
-### <a name="test-the-location-header-uri-21"></a><span data-ttu-id="228fd-896">Konum üst bilgisi URI 2,1 ' i test edin</span><span class="sxs-lookup"><span data-stu-id="228fd-896">Test the location header URI 2.1</span></span>
+### <a name="test-the-location-header-uri-21"></a><span data-ttu-id="68923-894">Konum üst bilgisi URI 2,1 ' i test edin</span><span class="sxs-lookup"><span data-stu-id="68923-894">Test the location header URI 2.1</span></span>
 
-* <span data-ttu-id="228fd-897">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-897">Select the **Headers** tab in the **Response** pane.</span></span>
-* <span data-ttu-id="228fd-898">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="228fd-898">Copy the **Location** header value:</span></span>
+* <span data-ttu-id="68923-895">**Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-895">Select the **Headers** tab in the **Response** pane.</span></span>
+* <span data-ttu-id="68923-896">**Konum** üst bilgisi değerini kopyalayın:</span><span class="sxs-lookup"><span data-stu-id="68923-896">Copy the **Location** header value:</span></span>
 
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/pmc2.png)
 
-* <span data-ttu-id="228fd-900">ALıNACAK yöntemi ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="228fd-900">Set the method to GET.</span></span>
-* <span data-ttu-id="228fd-901">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/2` .</span><span class="sxs-lookup"><span data-stu-id="228fd-901">Set the URI to `https://localhost:<port>/api/TodoItems/2`.</span></span> <span data-ttu-id="228fd-902">Örneğin, `https://localhost:5001/api/TodoItems/2`.</span><span class="sxs-lookup"><span data-stu-id="228fd-902">For example, `https://localhost:5001/api/TodoItems/2`.</span></span>
-* <span data-ttu-id="228fd-903">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-903">Select **Send**.</span></span>
+* <span data-ttu-id="68923-898">ALıNACAK yöntemi ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="68923-898">Set the method to GET.</span></span>
+* <span data-ttu-id="68923-899">URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/2` .</span><span class="sxs-lookup"><span data-stu-id="68923-899">Set the URI to `https://localhost:<port>/api/TodoItems/2`.</span></span> <span data-ttu-id="68923-900">Örneğin, `https://localhost:5001/api/TodoItems/2`.</span><span class="sxs-lookup"><span data-stu-id="68923-900">For example, `https://localhost:5001/api/TodoItems/2`.</span></span>
+* <span data-ttu-id="68923-901">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-901">Select **Send**.</span></span>
 
-## <a name="add-a-puttodoitem-method-21"></a><span data-ttu-id="228fd-904">PutTodoItem yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-904">Add a PutTodoItem method 2.1</span></span>
+## <a name="add-a-puttodoitem-method-21"></a><span data-ttu-id="68923-902">PutTodoItem yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-902">Add a PutTodoItem method 2.1</span></span>
 
-<span data-ttu-id="228fd-905">Aşağıdaki yöntemi ekleyin `PutTodoItem` :</span><span class="sxs-lookup"><span data-stu-id="228fd-905">Add the following `PutTodoItem` method:</span></span>
+<span data-ttu-id="68923-903">Aşağıdaki yöntemi ekleyin `PutTodoItem` :</span><span class="sxs-lookup"><span data-stu-id="68923-903">Add the following `PutTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
-<span data-ttu-id="228fd-906">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="228fd-906">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="228fd-907">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-907">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="228fd-908">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="228fd-908">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="228fd-909">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="228fd-909">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
+<span data-ttu-id="68923-904">`PutTodoItem``PostTodoItem`, http put kullanması dışında öğesine benzerdir.</span><span class="sxs-lookup"><span data-stu-id="68923-904">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="68923-905">Yanıt 204 ' dir [(Içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="68923-905">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="68923-906">HTTP belirtimine göre bir PUT isteği, istemcinin yalnızca değişiklikleri değil, tüm güncelleştirilmiş varlığı göndermesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="68923-906">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="68923-907">Kısmi güncelleştirmeleri desteklemek için [http Patch](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute)kullanın.</span><span class="sxs-lookup"><span data-stu-id="68923-907">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
 
-<span data-ttu-id="228fd-910">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="228fd-910">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
+<span data-ttu-id="68923-908">Çağrılırken bir hata alırsanız `PutTodoItem` , `GET` veritabanında bir öğe olduğundan emin olmak için çağırın.</span><span class="sxs-lookup"><span data-stu-id="68923-908">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
 
-### <a name="test-the-puttodoitem-method-21"></a><span data-ttu-id="228fd-911">PutTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-911">Test the PutTodoItem method 2.1</span></span>
+### <a name="test-the-puttodoitem-method-21"></a><span data-ttu-id="68923-909">PutTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-909">Test the PutTodoItem method 2.1</span></span>
 
-<span data-ttu-id="228fd-912">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-912">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="228fd-913">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="228fd-913">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="228fd-914">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="228fd-914">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
+<span data-ttu-id="68923-910">Bu örnek, uygulama her başlatıldığında başlatılmış olması gereken bellek içi bir veritabanını kullanır.</span><span class="sxs-lookup"><span data-stu-id="68923-910">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="68923-911">Bir PUT çağrısı yapmadan önce veritabanında bir öğe olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="68923-911">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="68923-912">PUT çağrısı yapmadan önce veritabanında bir öğe olduğundan emin olmak için GET çağrısı yapın.</span><span class="sxs-lookup"><span data-stu-id="68923-912">Call GET to ensure there's an item in the database before making a PUT call.</span></span>
 
-<span data-ttu-id="228fd-915">ID = 1 olan Yapılacaklar öğesini güncelleştirin ve adını "Feed balık" olarak ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="228fd-915">Update the to-do item that has Id = 1 and set its name to "feed fish":</span></span>
+<span data-ttu-id="68923-913">ID = 1 olan Yapılacaklar öğesini güncelleştirin ve adını "Feed balık" olarak ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="68923-913">Update the to-do item that has Id = 1 and set its name to "feed fish":</span></span>
 
 ```json
   {
@@ -1418,74 +1416,74 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   }
 ```
 
-<span data-ttu-id="228fd-916">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="228fd-916">The following image shows the Postman update:</span></span>
+<span data-ttu-id="68923-914">Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:</span><span class="sxs-lookup"><span data-stu-id="68923-914">The following image shows the Postman update:</span></span>
 
 ![204 (Içerik yok) yanıtı gösteren Postman konsolu](first-web-api/_static/pmcput.png)
 
-## <a name="add-a-deletetodoitem-method-21"></a><span data-ttu-id="228fd-918">DeleteTodoItem yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-918">Add a DeleteTodoItem method 2.1</span></span>
+## <a name="add-a-deletetodoitem-method-21"></a><span data-ttu-id="68923-916">DeleteTodoItem yöntemi ekleme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-916">Add a DeleteTodoItem method 2.1</span></span>
 
-<span data-ttu-id="228fd-919">Aşağıdaki yöntemi ekleyin `DeleteTodoItem` :</span><span class="sxs-lookup"><span data-stu-id="228fd-919">Add the following `DeleteTodoItem` method:</span></span>
+<span data-ttu-id="68923-917">Aşağıdaki yöntemi ekleyin `DeleteTodoItem` :</span><span class="sxs-lookup"><span data-stu-id="68923-917">Add the following `DeleteTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Delete)]
 
-<span data-ttu-id="228fd-920">`DeleteTodoItem`Yanıt 204 ' dir [(içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="228fd-920">The `DeleteTodoItem` response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span>
+<span data-ttu-id="68923-918">`DeleteTodoItem`Yanıt 204 ' dir [(içerik yok)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="68923-918">The `DeleteTodoItem` response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span>
 
-### <a name="test-the-deletetodoitem-method-21"></a><span data-ttu-id="228fd-921">DeleteTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-921">Test the DeleteTodoItem method 2.1</span></span>
+### <a name="test-the-deletetodoitem-method-21"></a><span data-ttu-id="68923-919">DeleteTodoItem yöntemini test etme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-919">Test the DeleteTodoItem method 2.1</span></span>
 
-<span data-ttu-id="228fd-922">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="228fd-922">Use Postman to delete a to-do item:</span></span>
+<span data-ttu-id="68923-920">Bir yapılacaklar öğesini silmek için Postman kullanın:</span><span class="sxs-lookup"><span data-stu-id="68923-920">Use Postman to delete a to-do item:</span></span>
 
-* <span data-ttu-id="228fd-923">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="228fd-923">Set the method to `DELETE`.</span></span>
-* <span data-ttu-id="228fd-924">Silinecek nesnenin URI 'sini ayarlayın (örneğin, `https://localhost:5001/api/todo/1` ).</span><span class="sxs-lookup"><span data-stu-id="228fd-924">Set the URI of the object to delete (for example, `https://localhost:5001/api/todo/1`).</span></span>
-* <span data-ttu-id="228fd-925">**Gönder** ’i seçin.</span><span class="sxs-lookup"><span data-stu-id="228fd-925">Select **Send**.</span></span>
+* <span data-ttu-id="68923-921">Yöntemini olarak ayarlayın `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="68923-921">Set the method to `DELETE`.</span></span>
+* <span data-ttu-id="68923-922">Silinecek nesnenin URI 'sini ayarlayın (örneğin, `https://localhost:5001/api/todo/1` ).</span><span class="sxs-lookup"><span data-stu-id="68923-922">Set the URI of the object to delete (for example, `https://localhost:5001/api/todo/1`).</span></span>
+* <span data-ttu-id="68923-923">**Gönder**’i seçin.</span><span class="sxs-lookup"><span data-stu-id="68923-923">Select **Send**.</span></span>
 
-<span data-ttu-id="228fd-926">Örnek uygulama, tüm öğeleri silmenizi sağlar.</span><span class="sxs-lookup"><span data-stu-id="228fd-926">The sample app allows you to delete all the items.</span></span> <span data-ttu-id="228fd-927">Ancak, son öğe silindiğinde, API 'nin bir sonraki çağrılışında model sınıfı Oluşturucu tarafından yeni bir tane oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="228fd-927">However, when the last item is deleted, a new one is created by the model class constructor the next time the API is called.</span></span>
+<span data-ttu-id="68923-924">Örnek uygulama, tüm öğeleri silmenizi sağlar.</span><span class="sxs-lookup"><span data-stu-id="68923-924">The sample app allows you to delete all the items.</span></span> <span data-ttu-id="68923-925">Ancak, son öğe silindiğinde, API 'nin bir sonraki çağrılışında model sınıfı Oluşturucu tarafından yeni bir tane oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="68923-925">However, when the last item is deleted, a new one is created by the model class constructor the next time the API is called.</span></span>
 
-## <a name="call-the-web-api-with-javascript-21"></a><span data-ttu-id="228fd-928">JavaScript 2,1 ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="228fd-928">Call the web API with JavaScript 2.1</span></span>
+## <a name="call-the-web-api-with-javascript-21"></a><span data-ttu-id="68923-926">JavaScript 2,1 ile Web API 'sini çağırma</span><span class="sxs-lookup"><span data-stu-id="68923-926">Call the web API with JavaScript 2.1</span></span>
 
-<span data-ttu-id="228fd-929">Bu bölümde, Web API 'sini çağırmak için JavaScript kullanan bir HTML sayfası eklenir.</span><span class="sxs-lookup"><span data-stu-id="228fd-929">In this section, an HTML page is added that uses JavaScript to call the web API.</span></span> <span data-ttu-id="228fd-930">jQuery isteği başlatır.</span><span class="sxs-lookup"><span data-stu-id="228fd-930">jQuery initiates the request.</span></span> <span data-ttu-id="228fd-931">JavaScript, sayfayı Web API 'sinin yanıtından alınan ayrıntılarla güncelleştirir.</span><span class="sxs-lookup"><span data-stu-id="228fd-931">JavaScript updates the page with the details from the web API's response.</span></span>
+<span data-ttu-id="68923-927">Bu bölümde, Web API 'sini çağırmak için JavaScript kullanan bir HTML sayfası eklenir.</span><span class="sxs-lookup"><span data-stu-id="68923-927">In this section, an HTML page is added that uses JavaScript to call the web API.</span></span> <span data-ttu-id="68923-928">jQuery isteği başlatır.</span><span class="sxs-lookup"><span data-stu-id="68923-928">jQuery initiates the request.</span></span> <span data-ttu-id="68923-929">JavaScript, sayfayı Web API 'sinin yanıtından alınan ayrıntılarla güncelleştirir.</span><span class="sxs-lookup"><span data-stu-id="68923-929">JavaScript updates the page with the details from the web API's response.</span></span>
 
-<span data-ttu-id="228fd-932">Uygulamayı [statik dosyalara sunacak](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) şekilde yapılandırın ve aşağıdaki vurgulanmış kodla *Startup.cs* güncelleştirerek [varsayılan dosya eşlemesini etkinleştirin](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) :</span><span class="sxs-lookup"><span data-stu-id="228fd-932">Configure the app to [serve static files](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) and [enable default file mapping](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) by updating *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="68923-930">Uygulamayı [statik dosyalara sunacak](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) şekilde yapılandırın ve aşağıdaki vurgulanmış kodla *Startup.cs* güncelleştirerek [varsayılan dosya eşlemesini etkinleştirin](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) :</span><span class="sxs-lookup"><span data-stu-id="68923-930">Configure the app to [serve static files](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) and [enable default file mapping](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) by updating *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
-<span data-ttu-id="228fd-933">Proje dizininde bir *Wwwroot* klasörü oluşturun.</span><span class="sxs-lookup"><span data-stu-id="228fd-933">Create a *wwwroot* folder in the project directory.</span></span>
+<span data-ttu-id="68923-931">Proje dizininde bir *Wwwroot* klasörü oluşturun.</span><span class="sxs-lookup"><span data-stu-id="68923-931">Create a *wwwroot* folder in the project directory.</span></span>
 
-<span data-ttu-id="228fd-934">*Wwwroot* dizinine *index.html* adlı bir HTML dosyası ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-934">Add an HTML file named *index.html* to the *wwwroot* directory.</span></span> <span data-ttu-id="228fd-935">İçeriğini aşağıdaki biçimlendirmeyle değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-935">Replace its contents with the following markup:</span></span>
+<span data-ttu-id="68923-932">*Wwwroot* dizinine *index.html* adlı bir HTML dosyası ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-932">Add an HTML file named *index.html* to the *wwwroot* directory.</span></span> <span data-ttu-id="68923-933">İçeriğini aşağıdaki biçimlendirmeyle değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-933">Replace its contents with the following markup:</span></span>
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-<span data-ttu-id="228fd-936">*Wwwroot* dizinine *site.js* adlı bir JavaScript dosyası ekleyin.</span><span class="sxs-lookup"><span data-stu-id="228fd-936">Add a JavaScript file named *site.js* to the *wwwroot* directory.</span></span> <span data-ttu-id="228fd-937">Dosyanın içeriğini aşağıdaki kod ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="228fd-937">Replace its contents with the following code:</span></span>
+<span data-ttu-id="68923-934">*Wwwroot* dizinine *site.js* adlı bir JavaScript dosyası ekleyin.</span><span class="sxs-lookup"><span data-stu-id="68923-934">Add a JavaScript file named *site.js* to the *wwwroot* directory.</span></span> <span data-ttu-id="68923-935">Dosyanın içeriğini aşağıdaki kod ile değiştirin:</span><span class="sxs-lookup"><span data-stu-id="68923-935">Replace its contents with the following code:</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
-<span data-ttu-id="228fd-938">HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:</span><span class="sxs-lookup"><span data-stu-id="228fd-938">A change to the ASP.NET Core project's launch settings may be required to test the HTML page locally:</span></span>
+<span data-ttu-id="68923-936">HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:</span><span class="sxs-lookup"><span data-stu-id="68923-936">A change to the ASP.NET Core project's launch settings may be required to test the HTML page locally:</span></span>
 
-* <span data-ttu-id="228fd-939">*ÜzerindeProperties\launchSettings.js* açın.</span><span class="sxs-lookup"><span data-stu-id="228fd-939">Open *Properties\launchSettings.json*.</span></span>
-* <span data-ttu-id="228fd-940">`launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html* 'de açmaya zorlamak için özelliği kaldırın &mdash; .</span><span class="sxs-lookup"><span data-stu-id="228fd-940">Remove the `launchUrl` property to force the app to open at *index.html*&mdash;the project's default file.</span></span>
+* <span data-ttu-id="68923-937">*ÜzerindeProperties\launchSettings.js* açın.</span><span class="sxs-lookup"><span data-stu-id="68923-937">Open *Properties\launchSettings.json*.</span></span>
+* <span data-ttu-id="68923-938">`launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html*'de açmaya zorlamak için özelliği kaldırın &mdash; .</span><span class="sxs-lookup"><span data-stu-id="68923-938">Remove the `launchUrl` property to force the app to open at *index.html*&mdash;the project's default file.</span></span>
 
-<span data-ttu-id="228fd-941">Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır.</span><span class="sxs-lookup"><span data-stu-id="228fd-941">This sample calls all of the CRUD methods of the web API.</span></span> <span data-ttu-id="228fd-942">API çağrılarının açıklamaları aşağıda verilmiştir.</span><span class="sxs-lookup"><span data-stu-id="228fd-942">Following are explanations of the calls to the API.</span></span>
+<span data-ttu-id="68923-939">Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır.</span><span class="sxs-lookup"><span data-stu-id="68923-939">This sample calls all of the CRUD methods of the web API.</span></span> <span data-ttu-id="68923-940">API çağrılarının açıklamaları aşağıda verilmiştir.</span><span class="sxs-lookup"><span data-stu-id="68923-940">Following are explanations of the calls to the API.</span></span>
 
-### <a name="get-a-list-of-to-do-items-21"></a><span data-ttu-id="228fd-943">Yapılacaklar öğelerinin bir listesini alın 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-943">Get a list of to-do items 2.1</span></span>
+### <a name="get-a-list-of-to-do-items-21"></a><span data-ttu-id="68923-941">Yapılacaklar öğelerinin bir listesini alın 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-941">Get a list of to-do items 2.1</span></span>
 
-<span data-ttu-id="228fd-944">jQuery, bir to-do öğesi dizisini temsil eden JSON döndüren Web API 'sine bir HTTP GET isteği gönderir.</span><span class="sxs-lookup"><span data-stu-id="228fd-944">jQuery sends an HTTP GET request to the web API, which returns JSON representing an array of to-do items.</span></span> <span data-ttu-id="228fd-945">`success`Geri çağırma işlevi, istek başarılı olursa çağrılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-945">The `success` callback function is invoked if the request succeeds.</span></span> <span data-ttu-id="228fd-946">Geri aramada, DOM, yapılacaklar bilgileriyle güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-946">In the callback, the DOM is updated with the to-do information.</span></span>
+<span data-ttu-id="68923-942">jQuery, bir to-do öğesi dizisini temsil eden JSON döndüren Web API 'sine bir HTTP GET isteği gönderir.</span><span class="sxs-lookup"><span data-stu-id="68923-942">jQuery sends an HTTP GET request to the web API, which returns JSON representing an array of to-do items.</span></span> <span data-ttu-id="68923-943">`success`Geri çağırma işlevi, istek başarılı olursa çağrılır.</span><span class="sxs-lookup"><span data-stu-id="68923-943">The `success` callback function is invoked if the request succeeds.</span></span> <span data-ttu-id="68923-944">Geri aramada, DOM, yapılacaklar bilgileriyle güncelleştirilir.</span><span class="sxs-lookup"><span data-stu-id="68923-944">In the callback, the DOM is updated with the to-do information.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_GetData)]
 
-### <a name="add-a-to-do-item-21"></a><span data-ttu-id="228fd-947">Yapılacak bir öğe ekleyin 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-947">Add a to-do item 2.1</span></span>
+### <a name="add-a-to-do-item-21"></a><span data-ttu-id="68923-945">Yapılacak bir öğe ekleyin 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-945">Add a to-do item 2.1</span></span>
 
-<span data-ttu-id="228fd-948">jQuery, istek gövdesinde Yapılacaklar öğesiyle bir HTTP POST isteği gönderir.</span><span class="sxs-lookup"><span data-stu-id="228fd-948">jQuery sends an HTTP POST request with the to-do item in the request body.</span></span> <span data-ttu-id="228fd-949">`accepts`Ve `contentType` seçenekleri, `application/json` alınan ve gönderilen medya türünü belirtmek için olarak ayarlanır.</span><span class="sxs-lookup"><span data-stu-id="228fd-949">The `accepts` and `contentType` options are set to `application/json` to specify the media type being received and sent.</span></span> <span data-ttu-id="228fd-950">Yapılacaklar öğesi [JSON. stringbelirt](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)kullanılarak JSON 'a dönüştürülür.</span><span class="sxs-lookup"><span data-stu-id="228fd-950">The to-do item is converted to JSON by using [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span></span> <span data-ttu-id="228fd-951">API başarılı bir durum kodu döndürdüğünde, `getData` Işlev HTML tablosunu güncelleştirmek için çağrılır.</span><span class="sxs-lookup"><span data-stu-id="228fd-951">When the API returns a successful status code, the `getData` function is invoked to update the HTML table.</span></span>
+<span data-ttu-id="68923-946">jQuery, istek gövdesinde Yapılacaklar öğesiyle bir HTTP POST isteği gönderir.</span><span class="sxs-lookup"><span data-stu-id="68923-946">jQuery sends an HTTP POST request with the to-do item in the request body.</span></span> <span data-ttu-id="68923-947">`accepts`Ve `contentType` seçenekleri, `application/json` alınan ve gönderilen medya türünü belirtmek için olarak ayarlanır.</span><span class="sxs-lookup"><span data-stu-id="68923-947">The `accepts` and `contentType` options are set to `application/json` to specify the media type being received and sent.</span></span> <span data-ttu-id="68923-948">Yapılacaklar öğesi [JSON. stringbelirt](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)kullanılarak JSON 'a dönüştürülür.</span><span class="sxs-lookup"><span data-stu-id="68923-948">The to-do item is converted to JSON by using [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span></span> <span data-ttu-id="68923-949">API başarılı bir durum kodu döndürdüğünde, `getData` Işlev HTML tablosunu güncelleştirmek için çağrılır.</span><span class="sxs-lookup"><span data-stu-id="68923-949">When the API returns a successful status code, the `getData` function is invoked to update the HTML table.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AddItem)]
 
-### <a name="update-a-to-do-item-21"></a><span data-ttu-id="228fd-952">Yapılacak bir öğeyi güncelleştirme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-952">Update a to-do item 2.1</span></span>
+### <a name="update-a-to-do-item-21"></a><span data-ttu-id="68923-950">Yapılacak bir öğeyi güncelleştirme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-950">Update a to-do item 2.1</span></span>
 
-<span data-ttu-id="228fd-953">Bir yapılacaklar öğesinin güncelleştirilmesi, bir tane eklemeye benzer.</span><span class="sxs-lookup"><span data-stu-id="228fd-953">Updating a to-do item is similar to adding one.</span></span> <span data-ttu-id="228fd-954">`url`Öğenin benzersiz tanımlayıcısını ekleme değişiklikleri ve öğesi `type` `PUT` .</span><span class="sxs-lookup"><span data-stu-id="228fd-954">The `url` changes to add the unique identifier of the item, and the `type` is `PUT`.</span></span>
+<span data-ttu-id="68923-951">Bir yapılacaklar öğesinin güncelleştirilmesi, bir tane eklemeye benzer.</span><span class="sxs-lookup"><span data-stu-id="68923-951">Updating a to-do item is similar to adding one.</span></span> <span data-ttu-id="68923-952">`url`Öğenin benzersiz tanımlayıcısını ekleme değişiklikleri ve öğesi `type` `PUT` .</span><span class="sxs-lookup"><span data-stu-id="68923-952">The `url` changes to add the unique identifier of the item, and the `type` is `PUT`.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxPut)]
 
-### <a name="delete-a-to-do-item-21"></a><span data-ttu-id="228fd-955">Yapılacak bir öğeyi silme 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-955">Delete a to-do item 2.1</span></span>
+### <a name="delete-a-to-do-item-21"></a><span data-ttu-id="68923-953">Yapılacak bir öğeyi silme 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-953">Delete a to-do item 2.1</span></span>
 
-<span data-ttu-id="228fd-956">Bir yapılacaklar öğesinin silinmesi, `type` Ajax çağrısının üzerine ayarlanarak `DELETE` ve öğenin URL 'sindeki benzersiz tanımlayıcısını belirterek gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="228fd-956">Deleting a to-do item is accomplished by setting the `type` on the AJAX call to `DELETE` and specifying the item's unique identifier in the URL.</span></span>
+<span data-ttu-id="68923-954">Bir yapılacaklar öğesinin silinmesi, `type` Ajax çağrısının üzerine ayarlanarak `DELETE` ve öğenin URL 'sindeki benzersiz tanımlayıcısını belirterek gerçekleştirilir.</span><span class="sxs-lookup"><span data-stu-id="68923-954">Deleting a to-do item is accomplished by setting the `type` on the AJAX call to `DELETE` and specifying the item's unique identifier in the URL.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxDelete)]
 
@@ -1493,15 +1491,15 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <a name="auth"></a>
 
-## <a name="add-authentication-support-to-a-web-api-21"></a><span data-ttu-id="228fd-957">Web API 2,1 kimlik doğrulama desteği ekleme</span><span class="sxs-lookup"><span data-stu-id="228fd-957">Add authentication support to a web API 2.1</span></span>
+## <a name="add-authentication-support-to-a-web-api-21"></a><span data-ttu-id="68923-955">Web API 2,1 kimlik doğrulama desteği ekleme</span><span class="sxs-lookup"><span data-stu-id="68923-955">Add authentication support to a web API 2.1</span></span>
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources-21"></a><span data-ttu-id="228fd-958">Ek kaynaklar 2,1</span><span class="sxs-lookup"><span data-stu-id="228fd-958">Additional resources 2.1</span></span>
+## <a name="additional-resources-21"></a><span data-ttu-id="68923-956">Ek kaynaklar 2,1</span><span class="sxs-lookup"><span data-stu-id="68923-956">Additional resources 2.1</span></span>
 
-<span data-ttu-id="228fd-959">[Bu öğretici için örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span><span class="sxs-lookup"><span data-stu-id="228fd-959">[View or download sample code for this tutorial](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span></span> <span data-ttu-id="228fd-960">Bkz. [indirme](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="228fd-960">See [how to download](xref:index#how-to-download-a-sample).</span></span>
+<span data-ttu-id="68923-957">[Bu öğretici için örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span><span class="sxs-lookup"><span data-stu-id="68923-957">[View or download sample code for this tutorial](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span></span> <span data-ttu-id="68923-958">Bkz. [indirme](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="68923-958">See [how to download](xref:index#how-to-download-a-sample).</span></span>
 
-<span data-ttu-id="228fd-961">Daha fazla bilgi için aşağıdaki kaynaklara bakın:</span><span class="sxs-lookup"><span data-stu-id="228fd-961">For more information, see the following resources:</span></span>
+<span data-ttu-id="68923-959">Daha fazla bilgi için aşağıdaki kaynaklara bakın:</span><span class="sxs-lookup"><span data-stu-id="68923-959">For more information, see the following resources:</span></span>
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
@@ -1510,4 +1508,4 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* [<span data-ttu-id="228fd-962">Bu öğreticinin YouTube sürümü</span><span class="sxs-lookup"><span data-stu-id="228fd-962">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* [<span data-ttu-id="68923-960">Bu öğreticinin YouTube sürümü</span><span class="sxs-lookup"><span data-stu-id="68923-960">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=TTkhEyGBfAk)
