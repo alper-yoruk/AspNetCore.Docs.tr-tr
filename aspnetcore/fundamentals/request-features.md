@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88e97d88341789a76a79da8d92098c2e00396fe7
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053715"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870431"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core içindeki istek özellikleri
 
 [Steve Smith](https://ardalis.com/) tarafından
 
-`HttpContext`Uygulamaların ve ara yazılımların istekleri işlemek için kullandığı API 'nin, *özellik arabirimleri* olarak adlandırılan bir soyutlama katmanı vardır. Her özellik arabirimi tarafından sunulan işlevlerin ayrıntılı bir alt kümesini sağlar `HttpContext` . Bu arabirimler, isteğin tamamı yeniden uygulanması gerekmeden işlenirken, sunucu veya ara yazılım tarafından eklenebilir, değiştirilebilir, sarmalanabilir, değiştirilebilir veya kaldırılabilir `HttpContext` . Ayrıca, test sırasında işlevselliği sahte bir şekilde kullanılabilir.
+`HttpContext`Uygulamaların ve ara yazılımların istekleri işlemek için kullandığı API 'nin altında, *özellik arabirimleri* olarak adlandırılan bir soyutlama katmanı vardır. Her özellik arabirimi tarafından sunulan işlevlerin ayrıntılı bir alt kümesini sağlar `HttpContext` . Bu arabirimler, isteğin tamamı yeniden uygulanması gerekmeden işlenirken, sunucu veya ara yazılım tarafından eklenebilir, değiştirilebilir, sarmalanabilir, değiştirilebilir veya kaldırılabilir `HttpContext` . Ayrıca, test sırasında işlevselliği sahte bir şekilde kullanılabilir.
 
 ## <a name="feature-collections"></a>Özellik koleksiyonları
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: baed18df2d127b592f420aac0432e0b28f076d46
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508051"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870392"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -34,7 +34,7 @@ ms.locfileid: "94508051"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> , <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Belirteçler, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> Framework tarafından kaydedilen hizmet kullanılarak alınır. Bir belirteç alınamadığından, bir oluşturulur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A>, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir.
 
-Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> uygulamanın temel adresiyle önceden yapılandırılmış bir yetkili URL 'si sağlar. **Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.** Giden istek URI 'Leri uygulamanın temel URI 'SI içinde olmadığında, [özel bir sınıf kullanın `AuthorizationMessageHandler` ( *önerilir* )](#custom-authorizationmessagehandler-class) veya öğesini [yapılandırın `AuthorizationMessageHandler`](#configure-authorizationmessagehandler).
+Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> uygulamanın temel adresiyle önceden yapılandırılmış bir yetkili URL 'si sağlar. **Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.** Giden istek URI 'Leri uygulamanın temel URI 'SI içinde olmadığında, [özel bir sınıf kullanın `AuthorizationMessageHandler` (*önerilir*)](#custom-authorizationmessagehandler-class) veya öğesini [yapılandırın `AuthorizationMessageHandler`](#configure-authorizationmessagehandler).
 
 > [!NOTE]
 > Sunucu API 'SI erişimi için istemci uygulama yapılandırmasına ek olarak, istemci ve sunucu aynı temel adreste olmadığında sunucu API 'SI de çıkış noktaları arası isteklere (CORS) izin vermelidir. Sunucu tarafı CORS yapılandırması hakkında daha fazla bilgi için bu makalenin ilerleyen bölümlerindeki [çıkış noktaları arası kaynak paylaşımı (CORS)](#cross-origin-resource-sharing-cors) bölümüne bakın.
@@ -884,6 +884,31 @@ app.UseEndpoints(endpoints =>
 
 Sunucu uygulamasında, yoksa bir klasör oluşturun `Pages` . `_Host.cshtml`Sunucu uygulamasının klasörünün içinde bir sayfa oluşturun `Pages` . İçeriği *`Client`* uygulamanın `wwwroot/index.html` dosyasından `Pages/_Host.cshtml` dosyasına yapıştırın. Dosyanın içeriğini güncelleştirin:
 
+::: moniker range=">= aspnetcore-5.0"
+
+* `@page "_Host"`Dosyanın en üstüne ekleyin.
+* `<div id="app">Loading...</div>`Etiketi aşağıdaki kodla değiştirin:
+
+  ```cshtml
+  <div id="app">
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
+              render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </div>
+  ```
+  
+  Yukarıdaki örnekte, yer tutucu, `{CLIENT APP ASSEMBLY NAME}` istemci uygulamanın derleme adıdır (örneğin `BlazorSample.Client` ).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * `@page "_Host"`Dosyanın en üstüne ekleyin.
 * `<app>Loading...</app>`Etiketi aşağıdaki kodla değiştirin:
 
@@ -891,7 +916,7 @@ Sunucu uygulamasında, yoksa bir klasör oluşturun `Pages` . `_Host.cshtml`Sunu
   <app>
       @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
       {
-          <component type="typeof(Wasm.Authentication.Client.App)" 
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
               render-mode="Static" />
       }
       else
@@ -900,6 +925,10 @@ Sunucu uygulamasında, yoksa bir klasör oluşturun `Pages` . `_Host.cshtml`Sunu
       }
   </app>
   ```
+  
+  Yukarıdaki örnekte, yer tutucu, `{CLIENT APP ASSEMBLY NAME}` istemci uygulamanın derleme adıdır (örneğin `BlazorSample.Client` ).
+
+::: moniker-end
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>Barındırılan uygulamalar ve üçüncü taraf oturum açma sağlayıcıları için seçenekler
 

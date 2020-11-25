@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053312"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870457"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core Facebook, Google ve dış sağlayıcı kimlik doğrulaması
 
 Tarafından [Valeriy Novyıtskyy](https://github.com/01binary) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu öğreticide, kullanıcıların dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle OAuth 2,0 kullanarak oturum açmasını sağlayan ASP.NET Core 3,0 uygulamasının nasıl oluşturulacağı gösterilmektedir.
+Bu öğreticide, kullanıcıların dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle OAuth 2,0 kullanarak oturum açmasını sağlayan bir ASP.NET Core uygulamasının nasıl oluşturulacağı gösterilmektedir.
 
 [Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins)ve [Microsoft](xref:security/authentication/microsoft-logins) sağlayıcıları aşağıdaki bölümlerde ele alınmıştır ve bu makalede oluşturulan Başlatıcı projesini kullanır. Diğer sağlayıcılar, [Aspnet. Security. OAuth. Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) ve [Aspnet. Security. OpenID. Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers)gibi üçüncü taraf paketlerinde kullanılabilir.
 
@@ -46,10 +46,10 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 
 * Yeni bir proje oluşturma.
 * **ASP.NET Core Web uygulaması** ' nı ve **İleri ' yi** seçin.
-* Bir **Proje adı** girin ve **konumu** onaylayın veya değiştirin. **Oluştur** ’u seçin.
-* Açılan kutuda ASP.NET Core en son sürümünü ( **ASP.NET Core {X. Y}** ) seçin ve ardından **Web uygulaması** ' nı seçin.
-* **Kimlik doğrulaması** altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları** olarak ayarlayın. **Tamam** ’ı seçin.
-* **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur** ' u seçin.
+* Bir **Proje adı** girin ve **konumu** onaylayın veya değiştirin. **Oluştur**’u seçin.
+* Açılan kutuda ASP.NET Core en son sürümünü (**ASP.NET Core {X. Y}**) seçin ve ardından **Web uygulaması**' nı seçin.
+* **Kimlik doğrulaması** altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları** olarak ayarlayın. **Tamam**’ı seçin.
+* **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur**' u seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -79,7 +79,7 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 ## <a name="apply-migrations"></a>Geçişleri Uygula
 
 * Uygulamayı çalıştırın ve **Kaydet** bağlantısını seçin.
-* Yeni hesap için e-posta ve parolayı girip **Kaydet** ' i seçin.
+* Yeni hesap için e-posta ve parolayı girip **Kaydet**' i seçin.
 * Geçişleri uygulamak için yönergeleri izleyin.
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -115,7 +115,7 @@ Bir parola oluşturmak ve dış sağlayıcılar ile oturum açma işlemi sıras�
 
 ![Web uygulaması yönetme görünümü](index/_static/pass1a.png)
 
-* **Oluştur** ’u seçin
+* **Oluştur**’u seçin
 
 ![Parola sayfanızı ayarlama](index/_static/pass2a.png)
 
