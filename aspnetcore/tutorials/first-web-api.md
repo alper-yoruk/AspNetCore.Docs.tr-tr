@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: ccbfc27eb89e23938a69f0ab4cb306d6a4136889
+ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "96024986"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96175058"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -61,7 +61,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -174,7 +174,7 @@ Swagger sayfası `/swagger/index.html` görüntülenir. **Al**  >  **deneyin**  
 -->
 Swagger, Web API 'Leri için yararlı belgeler ve yardım sayfaları oluşturmak için kullanılır. Bu öğretici, bir Web API 'SI oluşturmaya odaklanmaktadır. Swagger hakkında daha fazla bilgi için bkz <xref:tutorials/web-api-help-pages-using-swagger> ..
 
-**Istek URL** 'sini tarayıcıda kopyalayın ve geçmiş:`https://localhost:<port>/WeatherForecast`
+**Istek URL** 'sini kopyalayıp tarayıcıya yapıştırın:`https://localhost:<port>/WeatherForecast`
 
 Aşağıdakine benzer bir JSON döndürülür:
 
@@ -319,7 +319,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.
-  * **Ekle**’yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -426,7 +426,7 @@ Postman 'da test etmek için:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -585,7 +585,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -810,7 +810,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.
-  * **Ekle**’yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -913,7 +913,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -1271,7 +1271,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
