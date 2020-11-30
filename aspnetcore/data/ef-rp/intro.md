@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 7323cf11ad4556443def4068873e6805b449058a
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674023"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320154"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -125,7 +125,7 @@ To run the app after downloading the completed project:
 1. **Oluştur**’u seçin.
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
-    1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
+    1. **ASP.NET Core Web uygulaması**.
     1. **Create** 
        Oluştur ![ Yeni ASP.NET Core projesi iletişim kutusu](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     
@@ -237,7 +237,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
     * Veri bağlamı adını yerine End ile değiştirin `SchoolContext` `ContosoUniversityContext` . Güncelleştirilmiş bağlam adı: `ContosoUniversity.Data.SchoolContext`
-   * **Ekle**'yi seçin.
+   * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -723,7 +723,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext* olarak değiştirin.
-  * **Ekle**'yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -1106,7 +1106,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext** olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Ekle**'yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 

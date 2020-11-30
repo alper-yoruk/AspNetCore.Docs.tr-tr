@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 4fec0fa750b9209849030d0d6b7de8f4e163d62f
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 92545eab4004f6b67080f79d64b94bb424d5a102
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570139"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320089"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorCSS yalıtımı ASP.NET Core
 
@@ -143,7 +143,7 @@ Aşağıdaki örnek, `Parent` adlı bir alt bileşen ile çağrılan bir üst bi
 
 CSS preiþlemcileri, değişkenler, iç içe geçme, modüller, mixıns ve devralma gibi özelliklerden yararlanarak CSS geliştirmeyi iyileştirmek için yararlıdır. CSS yalıtımı, Sass veya daha düşük gibi CSS ön işlemcilerini yerel olarak desteklemeirken, Blazor derleme işlemi SıRASıNDA CSS seçicileri yeniden yazmadan önce, ön işlemci derlemesi gerçekleştiği sürece CSS ön işlemcilerini tümleştirmek sorunsuz olur. Örneğin, Visual Studio 'yu kullanarak, Visual Studio görev Çalıştırıcısı Gezgininde **derleme** görevi olarak var olan Önişlemci derlemesini yapılandırın.
 
-[Delegate. SassBuilder](https://www.nuget.org/packages/Delegate.SassBuilder)gibi birçok üçüncü taraf NuGet PAKETI, CSS yalıtımı gerçekleşmeden önce derleme işleminin başlangıcında Sass/SCSS dosyalarını derleyebilir ve ek ek yapılandırma gerekmez.
+[Delegate. SassBuilder](https://www.nuget.org/packages/Delegate.SassBuilder)gibi birçok üçüncü taraf NuGet PAKETI, CSS yalıtımı gerçekleşmeden önce derleme işleminin başlangıcında Sass/SCSS dosyalarını derleyebilir ve ek yapılandırma gerekmez.
 
 ## <a name="css-isolation-configuration"></a>CSS yalıtım yapılandırması
 

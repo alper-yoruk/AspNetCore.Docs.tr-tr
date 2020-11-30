@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: bfc8f334b9229fed54e6b9841e4fb255ed18249a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6a74b8c5668a37082f648ae74210d90684c4559c
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056627"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320115"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>Blazor ServerEntity Framework Core ile ASP.NET Core (EFCore)
 
@@ -65,7 +65,7 @@ Aşağıdaki öneriler, uygulamalarda EF Core kullanmak için tutarlı bir yakla
 * Varsayılan olarak, işlem başına bir bağlam kullanmayı düşünün. Bağlam hızlı, düşük yük örneği oluşturma için tasarlanmıştır:
 
   ```csharp
-  var using context = new MyContext();
+  using var context = new MyContext();
 
   return await context.MyEntities.ToListAsync();
   ```
@@ -144,7 +144,7 @@ Son olarak, [`OnInitializedAsync`](xref:blazor/components/lifecycle) Yeni bağla
 
 <h3 id="enable-sensitive-data-logging">Hassas verileri günlüğe kaydetmeyi etkinleştir</h3>
 
-<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> özel durum iletileri ve çerçeve günlüğe kaydetme içindeki uygulama verilerini içerir. Günlüğe kaydedilen veriler, varlık örneklerinin özelliklerine atanan değerleri ve veritabanına gönderilen komutlara yönelik parametre değerlerini içerebilir. Verileri günlüğe kaydetme <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> bir **güvenlik riskidir** . Bu, veritabanında çalıştırılan SQL deyimlerini günlüğe kaydederken parolalar ve diğer kIşIsel bilgileri (PII) açığa çıkarmak olabilir.
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> özel durum iletileri ve çerçeve günlüğe kaydetme içindeki uygulama verilerini içerir. Günlüğe kaydedilen veriler, varlık örneklerinin özelliklerine atanan değerleri ve veritabanına gönderilen komutlara yönelik parametre değerlerini içerebilir. Verileri günlüğe kaydetme <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> bir **güvenlik riskidir**. Bu, veritabanında çalıştırılan SQL deyimlerini günlüğe kaydederken parolalar ve diğer kIşIsel bilgileri (PII) açığa çıkarmak olabilir.
 
 Yalnızca <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> geliştirme ve test için etkinleştirme yapmanızı öneririz:
 
@@ -196,7 +196,7 @@ Aşağıdaki öneriler, uygulamalarda EF Core kullanmak için tutarlı bir yakla
 * Varsayılan olarak, işlem başına bir bağlam kullanmayı düşünün. Bağlam hızlı, düşük yük örneği oluşturma için tasarlanmıştır:
 
   ```csharp
-  var using context = new MyContext();
+  using var context = new MyContext();
 
   return await context.MyEntities.ToListAsync();
   ```
@@ -287,7 +287,7 @@ Yukarıdaki örnekte:
 
 <h3 id="enable-sensitive-data-logging">Hassas verileri günlüğe kaydetmeyi etkinleştir</h3>
 
-<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> özel durum iletileri ve çerçeve günlüğe kaydetme içindeki uygulama verilerini içerir. Günlüğe kaydedilen veriler, varlık örneklerinin özelliklerine atanan değerleri ve veritabanına gönderilen komutlara yönelik parametre değerlerini içerebilir. Verileri günlüğe kaydetme <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> bir **güvenlik riskidir** . Bu, veritabanında çalıştırılan SQL deyimlerini günlüğe kaydederken parolalar ve diğer kIşIsel bilgileri (PII) açığa çıkarmak olabilir.
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> özel durum iletileri ve çerçeve günlüğe kaydetme içindeki uygulama verilerini içerir. Günlüğe kaydedilen veriler, varlık örneklerinin özelliklerine atanan değerleri ve veritabanına gönderilen komutlara yönelik parametre değerlerini içerebilir. Verileri günlüğe kaydetme <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> bir **güvenlik riskidir**. Bu, veritabanında çalıştırılan SQL deyimlerini günlüğe kaydederken parolalar ve diğer kIşIsel bilgileri (PII) açığa çıkarmak olabilir.
 
 Yalnızca <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> geliştirme ve test için etkinleştirme yapmanızı öneririz:
 

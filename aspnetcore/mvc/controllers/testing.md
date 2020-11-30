@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 962c1cf0be0f80ecd6c3adda7d22db7f16519a2a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 348b0fe4da6037933aabdb5b400d36ca073a146a
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060358"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320102"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core 'de birim test denetleyicisi mantığı
 
@@ -50,7 +50,7 @@ Ana denetleyici bir beyin fırtınası oturumlarının listesini görüntüler v
 
 Önceki denetleyici:
 
-* [Açık bağımlılıklar ilkesini](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)izler.
+* [Açık bağımlılıklar ilkesini](/dotnet/architecture/modern-web-apps-azure/architectural-principles#explicit-dependencies)izler.
 * Bir örneği sağlamak için [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) bekliyor `IBrainstormSessionRepository` .
 * `IBrainstormSessionRepository`, [Moq](https://www.nuget.org/packages/Moq/)gibi bir sahte nesne çerçevesi kullanılarak bir moclenmiş hizmetle test edilebilir. Bir ilişkili *nesne* , test için kullanılan önceden tanımlanmış bir özellik ve Yöntem davranışları kümesine sahip bir fabricobject nesnesidir. Daha fazla bilgi için bkz. [tümleştirme testlerine giriş](xref:test/integration-tests#introduction-to-integration-tests).
 
@@ -90,7 +90,7 @@ Geçersiz bir model durumu, <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelSta
 > [!NOTE]
 > Bu örnekte kullanılan moq kitaplığı, doğrulanabilir olmayan bir şekilde ("gevşek" bir veya saplamalar olarak da adlandırılır) doğrulanabilir veya "katı" olarak karışık bir şekilde karışık bir şekilde karıştırılamaz. [Moq Ile sahte davranışı özelleştirme](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior)hakkında daha fazla bilgi edinin.
 
-Örnek uygulamadaki [Sessioncontroller](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) , belirli bir beyin fırtınası oturumuyla ilgili bilgileri görüntüler. Denetleyici geçersiz `id` değerlerle ilgilenme mantığını içerir ( `return` Bu senaryoları kapsayan aşağıdaki örnekte iki senaryo vardır). Son `return` ifade, `StormSessionViewModel` görünüme ( *Controllers/sessioncontroller. cs* ) yeni bir döndürür:
+Örnek uygulamadaki [Sessioncontroller](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) , belirli bir beyin fırtınası oturumuyla ilgili bilgileri görüntüler. Denetleyici geçersiz `id` değerlerle ilgilenme mantığını içerir ( `return` Bu senaryoları kapsayan aşağıdaki örnekte iki senaryo vardır). Son `return` ifade, `StormSessionViewModel` görünüme (*Controllers/sessioncontroller. cs*) yeni bir döndürür:
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -253,7 +253,7 @@ Geçersiz bir model durumu, <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelSta
 > [!NOTE]
 > Bu örnekte kullanılan moq kitaplığı, doğrulanabilir olmayan bir şekilde ("gevşek" bir veya saplamalar olarak da adlandırılır) doğrulanabilir veya "katı" olarak karışık bir şekilde karışık bir şekilde karıştırılamaz. [Moq Ile sahte davranışı özelleştirme](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior)hakkında daha fazla bilgi edinin.
 
-Örnek uygulamadaki [Sessioncontroller](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) , belirli bir beyin fırtınası oturumuyla ilgili bilgileri görüntüler. Denetleyici geçersiz `id` değerlerle ilgilenme mantığını içerir ( `return` Bu senaryoları kapsayan aşağıdaki örnekte iki senaryo vardır). Son `return` ifade, `StormSessionViewModel` görünüme ( *Controllers/sessioncontroller. cs* ) yeni bir döndürür:
+Örnek uygulamadaki [Sessioncontroller](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) , belirli bir beyin fırtınası oturumuyla ilgili bilgileri görüntüler. Denetleyici geçersiz `id` değerlerle ilgilenme mantığını içerir ( `return` Bu senaryoları kapsayan aşağıdaki örnekte iki senaryo vardır). Son `return` ifade, `StormSessionViewModel` görünüme (*Controllers/sessioncontroller. cs*) yeni bir döndürür:
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -360,6 +360,6 @@ Geçerli bir oturum için `id` son test şunları onaylar:
 
 * <xref:test/integration-tests>
 * [Visual Studio ile birim testleri oluşturma ve çalıştırma](/visualstudio/test/unit-test-your-code)
-* [ASP.NET Core MVC Için Mysınanan. AspNetCore. Mvc-Floent test Kitaplığı](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): MVC ve Web API uygulamalarını test etmek için akıcı bir arabirim sağlayan, türü kesin belirlenmiş birim testi kitaplığı. ( *Microsoft tarafından korunmaz veya desteklenmez.* )
-* [JustMockLite](https://github.com/telerik/JustMockLite): .NET geliştiricileri için bir sahte işlem çerçevesi. ( *Microsoft tarafından korunmaz veya desteklenmez.* )
+* [ASP.NET Core MVC Için Mysınanan. AspNetCore. Mvc-Floent test Kitaplığı](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): MVC ve Web API uygulamalarını test etmek için akıcı bir arabirim sağlayan, türü kesin belirlenmiş birim testi kitaplığı. (*Microsoft tarafından korunmaz veya desteklenmez.*)
+* [JustMockLite](https://github.com/telerik/JustMockLite): .NET geliştiricileri için bir sahte işlem çerçevesi. (*Microsoft tarafından korunmaz veya desteklenmez.*)
 
