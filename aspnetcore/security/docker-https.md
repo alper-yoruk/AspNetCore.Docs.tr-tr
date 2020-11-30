@@ -7,7 +7,6 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
-- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -19,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 63d6e220c0f28e552207039c1649041bfdf4a0d4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a4aac2ce06fee20bdef157efc361f3099a217b1a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059682"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332160"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS üzerinden Docker ile görüntüleri barındırma ASP.NET Core
 
@@ -47,6 +46,8 @@ Bu belgedeki bazı yönergeler için [.NET Core 2,2 SDK](https://dotnet.microsof
 Bir etki alanı için [Üretim barındırma](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) için bir [sertifika yetkilisinden](https://wikipedia.org/wiki/Certificate_authority) bir sertifika gereklidir. [Let's Encrypt](https://letsencrypt.org/) , ücretsiz sertifikalar sunan bir sertifika yetkilisindir.
 
 Bu belge, üzerine önceden oluşturulmuş görüntüleri barındırmak için [otomatik olarak imzalanan geliştirme sertifikaları](https://en.wikipedia.org/wiki/Self-signed_certificate) kullanır `localhost` . Yönergeler, üretim sertifikalarını kullanmaya benzerdir.
+
+Geliştirme ve test için otomatik olarak imzalanan sertifikalar oluşturmak üzere [DotNet dev-CERT](/dotnet/core/additional-tools/self-signed-certificates-guide) kullanın.
 
 Üretim sertifikaları için:
 
@@ -84,6 +85,9 @@ docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://
 [PowerShell](/powershell/scripting/overview)kullanırken `%USERPROFILE%` ile değiştirin `$env:USERPROFILE` .
 
 Parolanın, sertifika için kullanılan parolayla eşleşmesi gerekir.
+
+
+Note: Bu durumda sertifika bir `.pfx` dosya olmalıdır.  `.crt` `.key` Parola ile veya olmayan bir veya dosya kullanmadan, örnek kapsayıcıda desteklenmez.  Örneğin, bir `.crt` dosya belirtirken kapsayıcı, ' sunucu modu SSL 'nin ilişkili özel anahtara sahip bir sertifika kullanması gerekir. ' gibi hata iletileri döndürebilir. [WSL](/windows/wsl/about)kullanırken, sertifikanın doğru şekilde yüklendiğinden emin olmak için bağlama yolunu doğrulayın.
 
 ### <a name="macos-or-linux"></a>macOS veya Linux
 

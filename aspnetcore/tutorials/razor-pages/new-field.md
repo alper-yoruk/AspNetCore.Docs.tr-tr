@@ -21,12 +21,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 2dca5a9552dd2800212f8cd78ace0578b3d38cdb
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 5263063d82d79dbeeca3e4cec007d240ca8a452a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360885"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332186"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Bölüm 7, ASP.NET Core bir sayfaya yeni bir alan ekleyin Razor
 
@@ -56,7 +56,7 @@ Bir veritabanını otomatik olarak oluşturmak için EF Code First kullanırken 
 
 1. Uygulamayı oluşturun.
 
-1. *Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:
+1. *Sayfaları/filmleri/ Index . cshtml*'yi düzenleyin ve bir `Rating` alan ekleyin:
 
    <a name="addrat"></a>
 
@@ -97,7 +97,7 @@ Bu öğretici için Code First Migrations kullanın.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Derecelendirme alanı için bir geçiş ekleyin
 
-1. **Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
+1. **Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
 2. PMC 'de aşağıdaki komutları girin:
 
    ```powershell
@@ -122,8 +122,8 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 
 1. SSOX 'te veritabanını seçin.
 1. Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
-1. **Mevcut bağlantıları kapat** ' a bakın.
-1. **Tamam** ’ı seçin.
+1. **Mevcut bağlantıları kapat**' a bakın.
+1. **Tamam**’ı seçin.
 1. [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
 
    ```powershell
@@ -197,7 +197,7 @@ Bir veritabanını otomatik olarak oluşturmak için EF Code First kullanırken 
 
 1. Uygulamayı oluşturun.
 
-1. *Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:
+1. *Sayfaları/filmleri/ Index . cshtml*'yi düzenleyin ve bir `Rating` alan ekleyin:
 
    <a name="addrat"></a>
 
@@ -238,7 +238,7 @@ Bu öğretici için Code First Migrations kullanın.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Derecelendirme alanı için bir geçiş ekleyin
 
-1. **Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
+1. **Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
 2. PMC 'de aşağıdaki komutları girin:
 
    ```powershell
@@ -263,8 +263,8 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 
 * SSOX 'te veritabanını seçin.
 * Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
-* **Mevcut bağlantıları kapat** ' a bakın.
-* **Tamam** ’ı seçin.
+* **Mevcut bağlantıları kapat**' a bakın.
+* **Tamam**’ı seçin.
 * [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
 
   ```powershell
@@ -338,7 +338,7 @@ Bir veritabanını otomatik olarak oluşturmak için EF Code First kullanırken 
 
 Uygulamayı oluşturun.
 
-*Sayfaları/filmleri/ Index . cshtml* 'yi düzenleyin ve bir `Rating` alan ekleyin:
+*Sayfaları/filmleri/ Index . cshtml*'yi düzenleyin ve bir `Rating` alan ekleyin:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
@@ -378,7 +378,7 @@ Bu öğretici için Code First Migrations kullanın.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Derecelendirme alanı için bir geçiş ekleyin
 
-**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
+**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
 PMC 'de aşağıdaki komutları girin:
 
 ```powershell
@@ -397,14 +397,14 @@ Update-Database
 
 <a name="ssox"></a>
 
-DdatabaseB 'deki tüm kayıtları silerseniz, başlatıcı DdatabaseB 'yi temel alır ve `Rating` alanı içerir. Bunu, tarayıcıda veya [SQL Server Nesne Gezgini](xref:tutorials/razor-pages/sql#ssox) (ssox) silme bağlantılarıyla yapabilirsiniz.
+Veritabanındaki tüm kayıtları silerseniz, başlatıcı veritabanını temel alır ve `Rating` alanı içerir. Bunu, tarayıcıda veya [SQL Server Nesne Gezgini](xref:tutorials/razor-pages/sql#ssox) (ssox) silme bağlantılarıyla yapabilirsiniz.
 
 Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır. SSOX 'te veritabanını silmek için:
 
 * SSOX 'te veritabanını seçin.
 * Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
-* **Mevcut bağlantıları kapat** ' a bakın.
-* **Tamam** ’ı seçin.
+* **Mevcut bağlantıları kapat**' a bakın.
+* **Tamam**’ı seçin.
 * [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
 
   ```powershell
@@ -432,7 +432,7 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 > * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
 
-Delete veritabanını yeniden oluşturmak için veritabanı ve geçişleri kullanın. Veritabanını silmek için veritabanı dosyasını ( *Mvcmovie. db* ) silin. Ardından şu `ef database update` komutu çalıştırın:
+Delete veritabanını yeniden oluşturmak için veritabanı ve geçişleri kullanın. Veritabanını silmek için veritabanı dosyasını (*Mvcmovie. db*) silin. Ardından şu `ef database update` komutu çalıştırın:
 
 ```dotnetcli
 dotnet ef database update

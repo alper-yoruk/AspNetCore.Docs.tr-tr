@@ -4,14 +4,14 @@ author: codemillmatt
 description: ASP.NET Core Web API 'sini Visual Studio kullanarak Azure API Management yayımlamayı öğrenin.
 ms.author: masoucou
 ms.custom: devx-track-csharp, mvc
-ms.date: 08/26/2020
+ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
-ms.openlocfilehash: 3cc6b8c0bd93f133151e1c8ad18a55b11975a9be
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945760"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332245"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>Visual Studio ile Azure API Management bir ASP.NET Core Web API 'SI yayımlama
 
@@ -93,7 +93,7 @@ ASP.NET Core Web API 'sini Azure API Management yayımlamak için aşağıdaki a
 
     ![Yayımla iletişim kutusu: Azure hizmet örneği seçin](publish-to-azure-api-management-using-vs/_static/publish_dialog_create_new_app_svc.png)
 
-    **App Service oluştur** iletişim kutusu görüntülenir. **Uygulama adı**, **kaynak grubu**ve **App Service planı** giriş alanları doldurulur. Bu adları koruyabilir veya değiştirebilirsiniz.
+    **App Service oluştur** iletişim kutusu görüntülenir. **Uygulama adı**, **kaynak grubu** ve **App Service planı** giriş alanları doldurulur. Bu adları koruyabilir veya değiştirebilirsiniz.
 1. **Oluştur** düğmesini seçin.
 
     ![App Service Oluştur iletişim kutusu](publish-to-azure-api-management-using-vs/_static/publish_dialog_app_svc_attributes.png)
@@ -108,11 +108,15 @@ Bu noktada, Azure API Management hizmetine bir API eklemeniz gerekir. Aşağıda
 
 1. Daha önce Azure portal oluşturulan API Management hizmet örneğini açın. **API** dikey penceresini seçin:
 
-    ![API Management hizmet örneğinden seçilen API dikey penceresi](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+  ![API Management hizmet örneğinden seçilen API dikey penceresi](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+
+1. **Echo API 'sinin** yanındaki 3 noktayı seçin ve ardından kaldırmak için açılır menüden **Sil** ' i seçin.
+
+  ![API Management hizmet örneğinden yankı API 'SI siliniyor](publish-to-azure-api-management-using-vs/_static/portal_delete_echo.png)
 
 1. **Yenı API Ekle** PANELINDEN **boş API** kutucuğunu seçin:
 
-    ![Boş API kutucuğunun vurgulandığını gösteren ekran](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
+  ![Boş API kutucuğunun vurgulandığını gösteren ekran](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
 
 1. Görüntülenen **boş API oluştur** iletişim kutusuna aşağıdaki değerleri girin:    
 
