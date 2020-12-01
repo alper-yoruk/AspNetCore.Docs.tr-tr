@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/26/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 2c5bc221901d9e41984fb591755a8ad94e7e1420
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 6627825239d815d2c8bcad98e22340f07f921ab9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570243"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420025"
 ---
 # <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>Sayfalardaki Eğitim Serisi Bölüm 4 Razor
 
@@ -74,7 +72,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
    ![Görünüm menüsü](sql/_static/5/ssox.png)
 
-1. Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
+1. Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı**' nı seçin:
 
    ![Film tablosunda açık bağlamsal menüler](sql/_static/5/design.png)
 
@@ -82,7 +80,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
    Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
 
-1. Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
+1. Tabloya sağ tıklayın `Movie` ve **verileri görüntüle**' yi seçin:
 
    ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
 
@@ -118,7 +116,7 @@ Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz 
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
+`SeedData` *Modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf oluşturun:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -154,11 +152,11 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Delete veritabanındaki tüm kayıtlar. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarını kullanma
+1. Veritabanındaki tüm kayıtları silin. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarını kullanma
 
 1. Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:
 
-   1. Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' u seçin:
+   1. Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur**' u seçin:
 
       ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -169,7 +167,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
+Çekirdek yöntemi çalışacak şekilde veritabanındaki tüm kayıtları silin. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 ---
 
@@ -228,7 +226,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
   ![Görünüm menüsü](sql/_static/ssox.png)
 
-* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
+* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı**' nı seçin:
 
   ![Film tablosunda açık bağlamsal menüler](sql/_static/design.png)
 
@@ -236,7 +234,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
 Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
 
-* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
+* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle**' yi seçin:
 
   ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
 
@@ -272,7 +270,7 @@ Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz 
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
+`SeedData` *Modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf oluşturun:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -308,10 +306,10 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Delete veritabanındaki tüm kayıtlar. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox)'ten silme bağlantılarını kullanın.
+* Veritabanındaki tüm kayıtları silin. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox)'ten silme bağlantılarını kullanın.
 * Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:
 
-  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
+  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur**' a dokunun:
 
     ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -322,7 +320,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
+Çekirdek yöntemi çalışacak şekilde veritabanındaki tüm kayıtları silin. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 ---
 
@@ -390,7 +388,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
   ![Görünüm menüsü](sql/_static/ssox.png)
 
-* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
+* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı**' nı seçin:
 
   ![Film tablosunda bağlam menüsü açık](sql/_static/design.png)
 
@@ -398,7 +396,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
 Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
 
-* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
+* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle**' yi seçin:
 
   ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
 
@@ -416,7 +414,7 @@ Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsa
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
+`SeedData` *Modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf oluşturun:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -452,10 +450,10 @@ SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veri
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Delete veritabanındaki tüm kayıtlar. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
+* Veritabanındaki tüm kayıtları silin. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
 * Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
 
-  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
+  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur**' a dokunun:
 
     ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -466,11 +464,11 @@ SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veri
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
+Çekirdek yöntemi çalışacak şekilde veritabanındaki tüm kayıtları silin. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
+Çekirdek yöntemi çalışacak şekilde veritabanındaki tüm kayıtları silin. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 ---
 

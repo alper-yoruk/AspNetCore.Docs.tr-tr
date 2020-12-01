@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/20/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 7146c1955a578502a63578de4f1abce932cb8b32
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360614"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419973"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>5. bölüm, ASP.NET Core uygulamasında oluşturulan sayfaları güncelleştirme
 
@@ -55,7 +53,7 @@ Hedef URL 'yi görmek için *sayfalara/filmlere* gidin ve bir **düzenleme** ba�
 
 ![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si https://localhost:1234/Movies/Edit/5 gösteriliyor](~/tutorials/razor-pages/da1/edit7.png)
 
-**Düzenle** , **Ayrıntılar** ve bağlantılar, **Delete** *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+**Düzenle**, **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -77,7 +75,7 @@ Oluşturulan biçimlendirmeyi incelemek için bir tarayıcıdan **Görünüm kay
 
 ### <a name="add-route-template"></a>Rota şablonu Ekle
 
-Delete Razor Yol şablonunu kullanmak için düzenleme, Ayrıntılar ve sayfaları güncelleştirin `{id:int}` . Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin.
+RazorYol şablonunu kullanmak Için düzenleme, Ayrıntılar ve silme sayfalarını güncelleştirin `{id:int}` . Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin.
 
 Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 
@@ -98,7 +96,7 @@ Tamsayı içermeyen yol şablonuna sahip sayfaya yönelik bir istek, `{id:int}` 
 Davranışını test edin `@page "{id:int?}"` :
 
 1. *Pages/filmler/details. cshtml* içindeki Page yönergesini olarak ayarlayın `@page "{id:int?}"` .
-1. `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs* ' de bir kesme noktası ayarlayın.
+1. `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs*' de bir kesme noktası ayarlayın.
 1. `https://localhost:5001/Movies/Details/` sayfasına gidin.
 
 `@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404):
@@ -116,8 +114,8 @@ Davranışını test edin `@page "{id:int?}"` :
 Bloğu test etmek için `catch` :
 
 1. Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)` .
-1. Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet** ' i girmeyin.
-1. Başka bir tarayıcı penceresinde, **Delete** aynı filmin bağlantısını seçin ve ardından filmi silin.
+1. Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet**' i girmeyin.
+1. Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
 1. Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
 
 Üretim kodu eşzamanlılık çakışmalarını algılamak isteyebilir. Daha fazla bilgi için bkz. [eşzamanlılık çakışmalarını işleme](xref:data/ef-rp/concurrency) .
@@ -146,7 +144,7 @@ Filmler/Düzenle sayfası gönderildiğinde:
 * Model durumunda hatalar varsa, örneğin, `ReleaseDate` bir tarihe dönüştürülemiyorsa, form gönderilen değerlerle birlikte görüntülenir.
 * Model hatası yoksa, film kaydedilir.
 
-, Ve sayfalarındaki HTTP GET metotları Index Create Delete Razor benzer bir düzene uyar. Sayfadaki HTTP POST `OnPostAsync` yöntemi, Create Razor düzenleme sayfasındaki yöntemine benzer bir düzen izler `OnPostAsync` Razor .
+IndexSayfalarında, oluşturma ve silme gıbı http get yöntemleri Razor benzer bir düzene sahiptir. `OnPostAsync`Oluşturma SAYFASıNDAKI http post yöntemi, Razor `OnPostAsync` düzenleme sayfasındaki yöntemine benzer bir düzen izler Razor .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -176,7 +174,7 @@ Hedef URL 'yi görmek için sayfalara/filmlere gidin ve bir **düzenleme** bağl
 
 ![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si http://localhost:1234/Movies/Edit/5 gösteriliyor](~/tutorials/razor-pages/da1/edit7.png)
 
-**Düzenle** , **Ayrıntılar** ve bağlantılar, **Delete** *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+**Düzenle**, **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -194,7 +192,7 @@ Oluşturulan biçimlendirmeyi incelemek için bir tarayıcıdan **Görünüm kay
 
 Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle iletir. Örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` .
 
-Delete Razor "{İd: int}" yol şablonunu kullanmak için düzenleme, Ayrıntılar ve sayfaları güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
+Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve silme sayfalarını güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 
 ```html
 <td>
@@ -213,7 +211,7 @@ Tamsayıyı **içermeyen "** {id: int}" yol şablonuna sahip sayfaya yönelik bi
 Davranışını test etmek için `@page "{id:int?}"` :
 
 * *Pages/filmler/details. cshtml* içindeki Page yönergesini olarak ayarlayın `@page "{id:int?}"` .
-* `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs* ' de bir kesme noktası ayarlayın.
+* `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs*' de bir kesme noktası ayarlayın.
 * `https://localhost:5001/Movies/Details/` sayfasına gidin.
 
 `@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404):
@@ -231,8 +229,8 @@ Davranışını test etmek için `@page "{id:int?}"` :
 Bloğu test etmek için `catch` :
 
 * Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)`
-* Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet** ' i girmeyin.
-* Başka bir tarayıcı penceresinde, **Delete** aynı filmin bağlantısını seçin ve ardından filmi silin.
+* Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet**' i girmeyin.
+* Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
 * Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
 
 Üretim kodu eşzamanlılık çakışmalarını algılamak isteyebilir. Daha fazla bilgi için bkz. [eşzamanlılık çakışmalarını işleme](xref:data/ef-rp/concurrency) .
@@ -261,7 +259,7 @@ Filmler/Düzenle sayfası gönderildiğinde:
 * Model durumunda hatalar varsa, örneğin, `ReleaseDate` bir tarihe dönüştürülemiyorsa, form gönderilen değerlerle birlikte görüntülenir.
 * Model hatası yoksa, film kaydedilir.
 
-, Ve sayfalarındaki HTTP GET metotları Index Create Delete Razor benzer bir düzene uyar. Sayfadaki HTTP POST `OnPostAsync` yöntemi, Create Razor düzenleme sayfasındaki yöntemine benzer bir düzen izler `OnPostAsync` Razor .
+IndexSayfalarında, oluşturma ve silme gıbı http get yöntemleri Razor benzer bir düzene sahiptir. `OnPostAsync`Oluşturma SAYFASıNDAKI http post yöntemi, Razor `OnPostAsync` düzenleme sayfasındaki yöntemine benzer bir düzen izler Razor .
 
 Arama sonraki öğreticiye eklenir.
 

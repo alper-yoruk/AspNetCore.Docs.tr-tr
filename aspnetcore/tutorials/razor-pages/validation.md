@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/29/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: d69ab3452f4f15e916049e5c772a20fe9f9fac65
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: f155922c9cb5ea7fdbad0963221ceddd19f4fe60
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570230"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419960"
 ---
 # <a name="part-8-of-tutorial-series-on-no-locrazor-pages"></a>Sayfalardaki eğitim serisinin 5. bölümü Razor .
 
@@ -36,7 +34,7 @@ Bu bölümde, doğrulama mantığı `Movie` modele eklenir. Doğrulama kurallar�
 
 ## <a name="validation"></a>Doğrulama
 
-Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeon **Y** ourself") olarak adlandırılır. Razor Sayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
+Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D** on't **R** epeon **Y** ourself") olarak adlandırılır. Razor Sayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
 
 * Uygulamadaki kod miktarını azaltın.
 * Kodu daha az hata haline getirin ve test ve bakım yapmayı kolaylaştırın.
@@ -85,7 +83,7 @@ Doğrulama kurallarının ASP.NET Core tarafından otomatik olarak zorlanmasına
 
 Uygulamayı çalıştırın ve sayfalar/Filmler ' e gidin.
 
-**Create Yeni** bağlantıyı seçin. Formu, bazı geçersiz değerlerle doldurun. JQuery istemci tarafı doğrulaması hatayı algıladığında, bir hata iletisi görüntüler.
+**Yeni oluştur** bağlantısını seçin. Formu, bazı geçersiz değerlerle doldurun. JQuery istemci tarafı doğrulaması hatayı algıladığında, bir hata iletisi görüntüler.
 
 ![Birden çok jQuery istemci tarafı doğrulama hatası içeren film görünümü formu](validation/_static/val.png)
 
@@ -93,11 +91,11 @@ Uygulamayı çalıştırın ve sayfalar/Filmler ' e gidin.
 
 Formun geçersiz bir değer içeren her alanda otomatik olarak bir doğrulama hata iletisi nasıl oluşturulduğuna dikkat edin. Hatalar, Kullanıcı JavaScript devre dışı bırakıldığında, JavaScript ve jQuery kullanılarak istemci tarafı ve sunucu tarafı ile zorlanır.
 
-Önemli bir avantaj, ya da düzenleme sayfalarında **hiçbir** kod değişikliği gerekli değildir Create . Veri ek açıklamaları modele uygulandıktan sonra, doğrulama kullanıcı arabirimi etkinleştirilmiştir. RazorBu öğreticide oluşturulan sayfalar, model sınıfının özelliklerindeki doğrulama özniteliklerini kullanarak doğrulama kurallarını otomatik olarak çekti `Movie` . Düzenleme sayfasını kullanarak doğrulama testi, aynı doğrulama uygulanır.
+Önemli bir avantaj, oluşturma veya düzenleme sayfalarında **hiçbir** kod değişikliği gerekli değildir. Veri ek açıklamaları modele uygulandıktan sonra, doğrulama kullanıcı arabirimi etkinleştirilmiştir. RazorBu öğreticide oluşturulan sayfalar, model sınıfının özelliklerindeki doğrulama özniteliklerini kullanarak doğrulama kurallarını otomatik olarak çekti `Movie` . Düzenleme sayfasını kullanarak doğrulama testi, aynı doğrulama uygulanır.
 
 Form verileri, istemci tarafı doğrulama hatası kalmayana kadar sunucuya nakledilmez. Form verilerinin aşağıdaki yaklaşımlardan bir veya daha fazlası tarafından nakledilmediğinden emin olun:
 
-* Yöntemine bir kesme noktası koyun `OnPostAsync` . Seçerek veya kaydederek formu gönderebilirsiniz **Create** . **Save** Kesme noktası hiçbir şekilde isabet ettirilmez.
+* Yöntemine bir kesme noktası koyun `OnPostAsync` . **Oluştur** veya **Kaydet**' i seçerek formu gönderebilirsiniz. Kesme noktası hiçbir şekilde isabet ettirilmez.
 * [Fiddler aracını](https://www.telerik.com/fiddler)kullanın.
 * Ağ trafiğini izlemek için tarayıcı Geliştirici Araçları ' nı kullanın.
 
@@ -108,7 +106,7 @@ Tarayıcıda JavaScript devre dışı bırakıldığında, formun hatalarla gön
 İsteğe bağlı, test sunucusu-tarafı doğrulaması:
 
 1. Tarayıcıda JavaScript 'ı devre dışı bırakın. JavaScript tarayıcı geliştirici araçları kullanılarak devre dışı bırakılabilir. Tarayıcıda JavaScript devre dışı bırakılamaz, başka bir tarayıcı deneyin.
-1. `OnPostAsync`Veya düzenleme sayfasının yönteminde bir kesme noktası ayarlayın Create .
+1. `OnPostAsync`Oluşturma veya düzenleme sayfasının yönteminde bir kesme noktası ayarlayın.
 1. Geçersiz verilerle form gönderme.
 1. Model durumunun geçersiz olduğunu doğrulayın:
 
@@ -121,7 +119,7 @@ Tarayıcıda JavaScript devre dışı bırakıldığında, formun hatalarla gön
   
 Alternatif olarak, [sunucuda istemci tarafı doğrulamayı devre dışı bırakın](xref:mvc/models/validation#disable-client-side-validation).
 
-Aşağıdaki kod, öğreticide daha önce *Create . cshtml* sayfa scafkatın bir bölümünü gösterir. Bu, Create ve düzenleme sayfaları tarafından şu şekilde kullanılır:
+Aşağıdaki kod, öğreticide daha önce *Create. cshtml* sayfa scafkatın bir bölümünü gösterir. Bu sayfa oluşturma ve düzenleme sayfaları tarafından kullanılır:
 
 * Başlangıç formunu görüntüleyin.
 * Hata durumunda formu yeniden görüntüleyin.
@@ -130,7 +128,7 @@ Aşağıdaki kod, öğreticide daha önce *Create . cshtml* sayfa scafkatın bir
 
 [Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) , [dataaçıklamaların](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery doğrulaması için gerekli HTML özniteliklerini üretir. [Doğrulama etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-validation-tag-helpers) doğrulama hatalarını görüntüler. Daha fazla bilgi için bkz. [doğrulama](xref:mvc/models/validation) .
 
-CreateVe düzenleme sayfalarında hiçbir doğrulama kuralı yoktur. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfında belirtilmiştir. Bu doğrulama kuralları Razor , modeli düzenlediğiniz sayfalara otomatik olarak uygulanır `Movie` .
+Oluşturma ve düzenleme sayfalarında hiçbir doğrulama kuralı yoktur. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfında belirtilmiştir. Bu doğrulama kuralları Razor , modeli düzenlediğiniz sayfalara otomatik olarak uygulanır `Movie` .
 
 Doğrulama mantığının değişmesi gerektiğinde, yalnızca modelde yapılır. Doğrulama, uygulamanın tamamında tutarlı bir şekilde uygulanır, doğrulama mantığı tek bir yerde tanımlanır. Tek bir yerde doğrulama, kodun temiz kalmasına yardımcı olur ve bakım ve güncelleştirme işlemlerini kolaylaştırır.
 
@@ -216,7 +214,7 @@ CREATE TABLE [dbo].[Movie] (
 
 Önceki şema değişiklikleri, EF 'in özel durum oluşturmasına neden olmaz. Ancak, şemanın modelle tutarlı olması için bir geçiş oluşturun.
 
-**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
+**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
 PMC 'de aşağıdaki komutları girin:
 
 ```powershell

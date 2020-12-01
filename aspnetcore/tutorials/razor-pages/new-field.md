@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 5263063d82d79dbeeca3e4cec007d240ca8a452a
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 6b6856731c61957a9e23f76e2bc15befe56ea57d
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96332186"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420012"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Bölüm 7, ASP.NET Core bir sayfaya yeni bir alan ekleyin Razor
 
@@ -63,8 +61,8 @@ Bir veritabanını otomatik olarak oluşturmak için EF Code First kullanırken 
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie50/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. Aşağıdaki sayfaları güncelleştirin:
-   1. `Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.
-   1. [ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.
+   1. `Rating`Alanı silme ve Ayrıntılar sayfalarına ekleyin.
+   1. [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Create.cshtml) dosyasını bir `Rating` alanla güncelleştirin.
    1. `Rating`Alanı düzenleme sayfasına ekleyin.
 
 Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz. Uygulamayı veritabanına güncelleştirme olmadan çalıştırmak şunu oluşturur `SqlException` :
@@ -108,7 +106,7 @@ Bu öğretici için Code First Migrations kullanın.
 `Add-Migration`Komut, çerçeveye şunları belirtir:
 
 * `Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.
-* Create Veritabanı şemasının yeni modele geçirilmesi için kod.
+* Veritabanı şemasını yeni modele geçirmek için kod oluşturun.
 
 "Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır. Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.
 
@@ -121,7 +119,7 @@ Veritabanındaki tüm kayıtları silerseniz, başlatıcı veritabanını temel 
 Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır. SSOX 'te veritabanını silmek için:
 
 1. SSOX 'te veritabanını seçin.
-1. Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
+1. Veritabanına sağ tıklayın ve **Sil**' i seçin.
 1. **Mevcut bağlantıları kapat**' a bakın.
 1. **Tamam**’ı seçin.
 1. [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
@@ -151,7 +149,7 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 > * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
 
-1. Delete Geçiş klasörü.  
+1. Geçiş klasörünü silin.  
 
 1. Veritabanını yeniden oluşturmak için aşağıdaki komutları kullanın.
 
@@ -204,8 +202,8 @@ Bir veritabanını otomatik olarak oluşturmak için EF Code First kullanırken 
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 1. Aşağıdaki sayfaları güncelleştirin:
-   1. `Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.
-   1. [ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.
+   1. `Rating`Alanı silme ve Ayrıntılar sayfalarına ekleyin.
+   1. [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) dosyasını bir `Rating` alanla güncelleştirin.
    1. `Rating`Alanı düzenleme sayfasına ekleyin.
 
 Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz. Uygulamayı veritabanına güncelleştirme olmadan çalıştırmak şunu oluşturur `SqlException` :
@@ -249,7 +247,7 @@ Bu öğretici için Code First Migrations kullanın.
 `Add-Migration`Komut, çerçeveye şunları belirtir:
 
 * `Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.
-* Create Veritabanı şemasının yeni modele geçirilmesi için kod.
+* Veritabanı şemasını yeni modele geçirmek için kod oluşturun.
 
 "Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır. Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.
 
@@ -262,7 +260,7 @@ Veritabanındaki tüm kayıtları silerseniz, başlatıcı veritabanını temel 
 Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır. SSOX 'te veritabanını silmek için:
 
 * SSOX 'te veritabanını seçin.
-* Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
+* Veritabanına sağ tıklayın ve **Sil**' i seçin.
 * **Mevcut bağlantıları kapat**' a bakın.
 * **Tamam**’ı seçin.
 * [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
@@ -292,7 +290,7 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 > * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
 
-1. Delete Geçiş klasörü.  
+1. Geçiş klasörünü silin.  
 
 1. Veritabanını yeniden oluşturmak için aşağıdaki komutları kullanın.
 
@@ -344,8 +342,8 @@ Uygulamayı oluşturun.
 
 Aşağıdaki sayfaları güncelleştirin:
 
-* `Rating`Alanını Delete ve ayrıntılar sayfasına ekleyin.
-* [ Create . Cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) 'yi bir `Rating` alanla güncelleştirin.
+* `Rating`Alanı silme ve Ayrıntılar sayfalarına ekleyin.
+* [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) dosyasını bir `Rating` alanla güncelleştirin.
 * `Rating`Alanı düzenleme sayfasına ekleyin.
 
 Veritabanı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama çalışmaz. Uygulama Şu anda çalıştırıldığında, uygulama şunu oluşturur `SqlException` :
@@ -389,7 +387,7 @@ Update-Database
 `Add-Migration`Komut, çerçeveye şunları belirtir:
 
 * `Movie`Modeli `Movie` veritabanı şemasıyla karşılaştırın.
-* Create Veritabanı şemasının yeni modele geçirilmesi için kod.
+* Veritabanı şemasını yeni modele geçirmek için kod oluşturun.
 
 "Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır. Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.
 
@@ -402,7 +400,7 @@ Veritabanındaki tüm kayıtları silerseniz, başlatıcı veritabanını temel 
 Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritabanını yeniden oluşturmaktır. SSOX 'te veritabanını silmek için:
 
 * SSOX 'te veritabanını seçin.
-* Veritabanına sağ tıklayın ve öğesini seçin **Delete** .
+* Veritabanına sağ tıklayın ve **Sil**' i seçin.
 * **Mevcut bağlantıları kapat**' a bakın.
 * **Tamam**’ı seçin.
 * [PMC](xref:tutorials/razor-pages/new-field#pmc)'de veritabanını güncelleştirin:
@@ -432,7 +430,7 @@ Başka bir seçenek de veritabanını silmek ve geçişleri kullanarak veritaban
 > * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
 > * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
 
-Delete veritabanını yeniden oluşturmak için veritabanı ve geçişleri kullanın. Veritabanını silmek için veritabanı dosyasını (*Mvcmovie. db*) silin. Ardından şu `ef database update` komutu çalıştırın:
+Veritabanını silin ve geçişleri kullanarak veritabanını yeniden oluşturun. Veritabanını silmek için veritabanı dosyasını (*Mvcmovie. db*) silin. Ardından şu `ef database update` komutu çalıştırın:
 
 ```dotnetcli
 dotnet ef database update

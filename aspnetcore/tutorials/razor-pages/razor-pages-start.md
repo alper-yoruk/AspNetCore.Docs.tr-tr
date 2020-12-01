@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/15/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: fa113a3e0a2a69fb4aa1318056dcfc6e261490f6
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 4b8bd9c886e615add6b0d3e372843a8ddb33ae18
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "96025038"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420051"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
 
@@ -43,7 +41,7 @@ Serinin sonunda, bir film veritabanını yöneten bir uygulamanız olacaktır.
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Create bir Razor Sayfalar Web uygulaması.
+> * Bir Razor Sayfalar Web uygulaması oluşturun.
 > * Uygulamayı çalıştırın.
 > * Proje dosyalarını inceleyin.
 
@@ -67,25 +65,25 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Create bir Razor Sayfalar Web uygulaması
+## <a name="create-a-no-locrazor-pages-web-app"></a>RazorSayfalar Web uygulaması oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Visual Studio 'Yu başlatın ve **Create Yeni bir proje** seçin. Daha fazla bilgi için bkz. [ Create Visual Studio 'da yeni bir proje](/visualstudio/ide/create-new-project).
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin. Daha fazla bilgi için bkz. [Visual Studio 'da yeni proje oluşturma](/visualstudio/ide/create-new-project).
 
-   ![::: No-Loc (Oluştur):: başlangıç penceresinden yeni bir proje](razor-pages-start/_static/5/start-window-create-new-project.png)
+   ![Başlangıç penceresinden yeni bir proje oluştur](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. **Create Yeni bir proje** Iletişim kutusunda **ASP.NET Core Web uygulaması**' nı seçin ve ardından **İleri**' yi seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması**' nı seçin ve ardından **İleri**' yi seçin.
 
     ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/5/np.png)
     
 1. **Yeni projenizi yapılandırın** Iletişim kutusunda `RazorPagesMovie` **Proje adı**' nı girin. Büyük/küçük harf eşleştirme da dahil olmak üzere Project *Razor pagesmovie*'in adı, örnek kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi önemlidir.
 
-1. **Create** seçeneğini belirleyin.
+1. **Oluştur**’u seçin.
 
     ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/config.png)
 
-1. **Create Yeni bir ASP.NET Core Web uygulaması** iletişim kutusunda şunları seçin:
+1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **Web uygulaması**.
     1. **Create**.
@@ -128,7 +126,7 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
     1. **Hedef çerçeve** seçme seçeneği sunulursa, en son .NET 5. x sürümünü seçin.
     1. **İleri**’yi seçin.
 
-1. Projeyi *Razor pagesmovie* olarak adlandırın ve seçin **Create** .
+1. Projeyi *Razor pagesmovie* olarak adlandırın ve **Oluştur**' u seçin.
 
     ![macOS projeyi Adlandır](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -191,7 +189,7 @@ Serinin sonunda, bir film veritabanını yöneten bir uygulamanız olacaktır.
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Create bir Razor Sayfalar Web uygulaması.
+> * Bir Razor Sayfalar Web uygulaması oluşturun.
 > * Uygulamayı çalıştırın.
 > * Proje dosyalarını inceleyin.
 
@@ -215,17 +213,17 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Create bir Razor Sayfalar Web uygulaması
+## <a name="create-a-no-locrazor-pages-web-app"></a>RazorSayfalar Web uygulaması oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-* Create Yeni bir ASP.NET Core Web uygulaması ve **İleri ' yi** seçin.
+* Yeni bir ASP.NET Core Web uygulaması oluşturun ve **İleri ' yi** seçin.
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2.1.png)
 * Projeyi **Razor pagesfilmi** olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project *Razor pagesfilmi* olarak adlandırmak önemlidir.
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/config.png)
 
-* Açılan **Web uygulamasındaki** **ASP.NET Core 3,1** ' i seçin ve ardından öğesini seçin **Create** .
+* Açılan **Web uygulamasındaki** **ASP.NET Core 3,1** ' i seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/3/npx.png)
 
@@ -270,7 +268,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   **İleri**’yi seçin.
 
-* Projeyi **Razor pagesfilmi** olarak adlandırın ve ardından öğesini seçin **Create** .
+* Projeyi **Razor pagesfilmi** olarak adlandırın ve **Oluştur**' u seçin.
 
   ![macOS projeyi Adlandır](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -333,7 +331,7 @@ Serinin sonunda, bir film veritabanını yöneten bir uygulamanız olacaktır.
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Create bir Razor Sayfalar Web uygulaması.
+> * Bir Razor Sayfalar Web uygulaması oluşturun.
 > * Uygulamayı çalıştırın.
 > * Proje dosyalarını inceleyin.
 
@@ -357,13 +355,13 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Create bir Razor Sayfalar Web uygulaması
+## <a name="create-a-no-locrazor-pages-web-app"></a>RazorSayfalar Web uygulaması oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 
-* Create Yeni bir ASP.NET Core Web uygulaması ve **İleri ' yi** seçin.
+* Yeni bir ASP.NET Core Web uygulaması oluşturun ve **İleri ' yi** seçin.
 
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2.1.png)
 
@@ -371,7 +369,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/config.png)
 
-* Açılan **Web uygulamasındaki** **ASP.NET Core 2,2** ' i seçin ve ardından öğesini seçin **Create** .
+* Açılan **Web uygulamasındaki** **ASP.NET Core 2,2** ' i seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2_2.2.png)
 
@@ -414,7 +412,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   **İleri**’yi seçin.
 
-* Projeyi **Razor pagesfilmi** olarak adlandırın ve ardından öğesini seçin **Create** .
+* Projeyi **Razor pagesfilmi** olarak adlandırın ve **Oluştur**' u seçin.
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 

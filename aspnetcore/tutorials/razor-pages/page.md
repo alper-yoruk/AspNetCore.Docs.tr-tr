@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/25/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417636"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420038"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
@@ -47,7 +45,7 @@ Bu öğreticide Razor , [önceki öğreticide](xref:tutorials/razor-pages/model)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>Create,, Delete Ayrıntıları ve düzenleme sayfaları
+## <a name="the-create-delete-details-and-edit-pages"></a>Oluşturma, silme, Ayrıntılar ve düzenleme sayfaları
 
 *Pages/filmler/ Index . cshtml.cs* sayfa modelini inceleyin:
 
@@ -65,7 +63,7 @@ Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , R
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Privacy.cshtml.cs?name=snippet)]
 
-Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/ Create . cshtml.cs* `OnPostAsync` yöntemi:
+Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -151,7 +149,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 1. **Rpmovie** bağlantısını seçerek değişiklikleri kaydedin ve uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-1. **Home**, **rpmovie**, **Create** , **Edit** ve Links 'i test edin **Delete** . Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+1. **Giriş**, **rpmovie**, **oluşturma**, **düzenleme** ve **silme** bağlantılarını test edin. Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
 
 > [!NOTE]
 > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamayı globalize için gerekli adımları uygulamanız gerekir. Ondalık virgülden ekleme hakkında yönergeler için bkz. [GitHub sorunu 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
@@ -162,15 +160,15 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor . *Pages* Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
 
-### <a name="the-no-loccreate-page-model"></a>CreateSayfa modeli
+### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 
-*Pages/filmler/ Create . cshtml.cs* sayfa modelini inceleyin:
+*Pages/filmler/Create. cshtml. cs* sayfa modelini inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet`Yöntemi, sayfa için gereken tüm durumları başlatır. CreateSayfada başlatılacak durum yok, bu nedenle `Page` döndürülür. Öğreticide daha sonra, `OnGet` başlatma durumuna bir örnek gösterilir. `Page`Yöntemi `PageResult` *Create . cshtml* sayfasını işleyen bir nesne oluşturur.
+`OnGet`Yöntemi, sayfa için gereken tüm durumları başlatır. Oluşturma sayfasında, başlatılacak durum yoktur, bu nedenle `Page` döndürülür. Öğreticide daha sonra, `OnGet` başlatma durumuna bir örnek gösterilir. `Page`Yöntemi `PageResult` *Create. cshtml* sayfasını işleyen bir nesne oluşturur.
 
-`Movie`Özelliği, [model bağlamayı](xref:mvc/models/model-binding)kabul etmek Için [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) özniteliğini kullanır. Form, Create form değerlerini gönderdiğinde, ASP.NET Core çalışma zamanı, gönderilen değerleri `Movie` modele bağlar.
+`Movie`Özelliği, [model bağlamayı](xref:mvc/models/model-binding)kabul etmek Için [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) özniteliğini kullanır. Oluşturma formu form değerlerini gönderirse, ASP.NET Core çalışma zamanı, gönderilen değerleri `Movie` modele bağlar.
 
 Bu `OnPostAsync` Yöntem, sayfa form verileri göndertiğinde çalıştırılır:
 
@@ -183,9 +181,9 @@ Model hatası yoksa:
 * Veriler kaydedilir.
 * Tarayıcı Index sayfaya yönlendirilir.
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor Sayfa
+### <a name="the-create-no-locrazor-page"></a>Oluştur Razor sayfası
 
-*Pages/filmler/ Create . cshtml* Razor sayfa dosyasını inceleyin:
+*Sayfalar/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
@@ -199,7 +197,7 @@ Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tip
 * `<input asp-for="Movie.Title" class="form-control" />`
 * `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
 
-![VS17 View::: No-Loc (Oluştur):::. cshtml sayfası](page/_static/th3.png)
+![Create. cshtml sayfasının VS17 görünümü](page/_static/th3.png)
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -237,7 +235,7 @@ Gibi etiket yardımcıları hakkında daha fazla bilgi için `<form method="post
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>Create,, Delete Ayrıntıları ve düzenleme sayfaları
+## <a name="the-create-delete-details-and-edit-pages"></a>Oluşturma, silme, Ayrıntılar ve düzenleme sayfaları
 
 *Pages/filmler/ Index . cshtml.cs* sayfa modelini inceleyin:
 
@@ -247,7 +245,7 @@ Razor Sayfalar öğesinden türetilir `PageModel` . Kural gereği, `PageModel` -
 
 Sayfa için bir istek yapıldığında, `OnGetAsync` yöntemi sayfaya bir film listesi döndürür Razor . `OnGetAsync` ya da sayfa `OnGet` Razor için durumu başlatmak üzere bir sayfada çağırılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
 
-Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , return yöntemi kullanılmaz. Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/ Create . cshtml.cs* `OnPostAsync` yöntemi:
+Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , return yöntemi kullanılmaz. Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -326,7 +324,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 Değişikliklerinizi kaydedin ve **Rpmovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-Diğer bağlantıları test edin (**giriş**, **rpmovie**, **Create** , **düzenleme** ve **Delete** ). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+Diğer bağlantıları test edin (**giriş**, **rpmovie**, **oluşturma**, **düzenleme** ve **silme**). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
 
 > [!NOTE]
 > Alana ondalık virgüller giremeyebilirsiniz `Price` . Ondalık bir nokta ve US-English tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamayı globalize için gerekli adımları uygulamanız gerekir. Bu GitHub, ondalık virgülden ekleme hakkında yönergeler için [4076 sorun](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
@@ -337,15 +335,15 @@ Diğer bağlantıları test edin (**giriş**, **rpmovie**, **Create** , **düzen
 
 Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor . *Pages* Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
 
-### <a name="the-no-loccreate-page-model"></a>CreateSayfa modeli
+### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 
-*Pages/filmler/ Create . cshtml.cs* sayfa modelini inceleyin:
+*Pages/filmler/Create. cshtml. cs* sayfa modelini inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet`Yöntemi, sayfa için gereken tüm durumları başlatır. CreateSayfada başlatılacak durum yok, bu nedenle `Page` döndürülür. Öğreticide daha sonra `OnGet` Yöntem başlatma durumunu görürsünüz. `Page`Yöntemi `PageResult` *Create . cshtml* sayfasını işleyen bir nesne oluşturur.
+`OnGet`Yöntemi, sayfa için gereken tüm durumları başlatır. Oluşturma sayfasında, başlatılacak durum yoktur, bu nedenle `Page` döndürülür. Öğreticide daha sonra `OnGet` Yöntem başlatma durumunu görürsünüz. `Page`Yöntemi `PageResult` *Create. cshtml* sayfasını işleyen bir nesne oluşturur.
 
-`Movie`Özelliği, <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> [model bağlamayı](xref:mvc/models/model-binding)kabul etmek Için [[BindProperty]] özniteliğini kullanır. Form, Create form değerlerini gönderdiğinde, ASP.NET Core çalışma zamanı, gönderilen değerleri `Movie` modele bağlar.
+`Movie`Özelliği, <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> [model bağlamayı](xref:mvc/models/model-binding)kabul etmek Için [[BindProperty]] özniteliğini kullanır. Oluşturma formu form değerlerini gönderirse, ASP.NET Core çalışma zamanı, gönderilen değerleri `Movie` modele bağlar.
 
 Bu `OnPostAsync` Yöntem, sayfa form verileri göndertiğinde çalıştırılır:
 
@@ -355,9 +353,9 @@ Herhangi bir model hatası varsa, form, gönderilen tüm form verileriyle birlik
 
 Model hatası yoksa, veriler kaydedilir ve tarayıcı Index sayfaya yönlendirilir.
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor Sayfa
+### <a name="the-create-no-locrazor-page"></a>Oluştur Razor sayfası
 
-*Pages/filmler/ Create . cshtml* Razor sayfa dosyasını inceleyin:
+*Sayfalar/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
@@ -365,7 +363,7 @@ Model hatası yoksa, veriler kaydedilir ve tarayıcı Index sayfaya yönlendiril
 
 Visual Studio etiketi, etiket `<form method="post">` yardımcıları için kullanılan farklı bir kalın yazı tipiyle görüntüler:
 
-![VS17 View::: No-Loc (Oluştur):::. cshtml sayfası](page/_static/th.png)
+![Create. cshtml sayfasının VS17 görünümü](page/_static/th.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
