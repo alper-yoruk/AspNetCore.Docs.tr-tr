@@ -1301,6 +1301,8 @@
       uid: mvc/compatibility-version
     - name: Ara yazılım yazma
       uid: fundamentals/middleware/write
+    - name: Route-to-code ile temel JSON API'leri
+      uid: web-api/route-to-code
     - name: İstek ve yanıt işlemleri
       displayName: middleware
       uid: fundamentals/middleware/request-response
