@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 06f55647ba2bb41152e16bb054e098abbe157cb8
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa51e53284bc25629b3975ff0e6de967b9a2b866
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059370"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513128"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core ara yazılımı
 
@@ -39,7 +39,7 @@ Ara yazılım, istekleri ve yanıtları işlemek için bir uygulama ardışık d
 
 İstek işlem hattını oluşturmak için istek temsilcileri kullanılır. İstek temsilcileri her HTTP isteğini işler.
 
-İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri* olarak da adlandırılan *ara yazılımlar* . İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
+İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri* olarak da adlandırılan *ara yazılımlar*. İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
 
 <xref:migration/http-modules> ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
 
@@ -90,16 +90,33 @@ Aşağıdaki diyagramda ASP.NET Core MVC ve Pages uygulamaları için tüm istek
 
 Ara yazılım bileşenlerinin yöntemine eklenme sırası, `Startup.Configure` Ara yazılım bileşenlerinin istekler üzerinde çağrıldığı sırayı ve yanıtın ters sırasını tanımlar. Sıra, güvenlik, performans ve işlevsellik açısından **önemlidir** .
 
-Aşağıdaki `Startup.Configure` Yöntem, güvenlikle ilgili ara yazılım bileşenlerini önerilen sırayla ekler:
+Aşağıdaki `Startup.Configure` Yöntem, güvenlikle ilgili ara yazılım bileşenlerini tipik önerilen sırayla ekler:
 
 [!code-csharp[](index/snapshot/StartupAll3.cs?name=snippet)]
 
 Yukarıdaki kodda:
 
 * [Bireysel kullanıcılar hesaplarıyla](xref:security/authentication/identity) yeni bir Web uygulaması oluştururken eklenmemiş olan ara yazılım, yorum yapılır.
-* Her ara yazılımın bu tam sıra, ancak birçok do olması gerekmez. Örneğin:
+* Her ara yazılımın bu tam sıra, ancak birçok do olması gerekmez. Örnek:
   * `UseCors`, `UseAuthentication` , ve `UseAuthorization` gösterilen sırayla başlamalıdır.
   * `UseCors` Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.
+
+Bazı senaryolarda, ara yazılım farklı sıralamaya sahip olur. Örneğin, önbelleğe alma ve sıkıştırma sıralaması, senaryoya özgüdür ve birden çok geçerli sipariş vardır. Örnek:
+
+```csharp
+app.UseResponseCaching();
+app.UseResponseCompression();
+```
+
+Yukarıdaki kodla, CPU sıkıştırılmış yanıtı önbelleğe alarak kaydedilebilir, ancak gzip veya brotli gibi farklı sıkıştırma algoritmaları kullanarak bir kaynağın birden çok temsilini önbelleğe alma işlemini sonlandırabilir.
+
+Aşağıdaki sıralama, sıkıştırılmış statik dosyaların önbelleğe alınmasına izin vermek için statik dosyaları birleştirir:
+
+```csharp
+app.UseResponseCaching
+app.UseResponseCompression
+app.UseStaticFiles
+```
 
 Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara yazılım bileşenleri ekler:
 
@@ -251,7 +268,7 @@ Yukarıdaki örnekte, "ana ardışık düzen üzerinden Merhaba" yanıtı. Tüm 
 
 ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *Order* sütunu, istek işleme ardışık düzeninde ara yazılım yerleştirme ve ara yazılımın istek işlemeyi sonlandırabilecekleri koşullar bölümünde notlar sağlar. Bir ara yazılım, istek işlem hattının ne kadar kısa süreli olduğunu ve daha fazla aşağı akış ara yazılımı bir isteği işlemesini engelliyorsa, bu, *Terminal ara yazılımı* olarak adlandırılır. Kısa devre oluşturma hakkında daha fazla bilgi için, [IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma](#create-a-middleware-pipeline-with-iapplicationbuilder) bölümüne bakın.
 
-| Ara yazılım | Açıklama | Sipariş verme |
+| Ara yazılım | Açıklama | Sipariş |
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
 | [Yetkilendirme](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | Yetkilendirme desteği sağlar. | Kimlik doğrulama ara yazılımı hemen sonrasında. |
@@ -271,14 +288,14 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | [Yerelleştirme iste](xref:fundamentals/localization) | Yerelleştirme desteği sağlar. | Yerelleştirmenin önemli bileşenlerinden önce. |
 | [Uç nokta yönlendirme](xref:fundamentals/routing) | İstek yollarını tanımlar ve kısıtlar. | Eşleşen yolların terminali. |
 | [Star](xref:Microsoft.AspNetCore.Builder.SpaApplicationBuilderExtensions.UseSpa%2A) | Tek sayfalı uygulama (SPA) için varsayılan sayfayı döndürerek, ara yazılım zincirindeki bu noktadan gelen tüm istekleri işler | Zincirde geç, böylece statik dosyalar, MVC eylemleri vb. hizmet sağlayan diğer ara yazılımlar önceliklidir.|
-| [Oturumuna](xref:fundamentals/app-state) | Kullanıcı oturumlarını yönetmek için destek sağlar. | Oturum gerektiren bileşenlerden önce. | 
+| [Oturum](xref:fundamentals/app-state) | Kullanıcı oturumlarını yönetmek için destek sağlar. | Oturum gerektiren bileşenlerden önce. | 
 | [Statik dosyalar](xref:fundamentals/static-files) | Statik dosyaları ve dizin taramayı sunma desteği sağlar. | Bir istek bir dosyayla eşleşiyorsa Terminal. |
 | [URL yeniden yazma](xref:fundamentals/url-rewriting) | URL 'Leri yeniden yazma ve istekleri yeniden yönlendirme desteği sağlar. | URL 'YI kullanan bileşenlerden önce. |
 | [WebSockets](xref:fundamentals/websockets) | WebSockets protokolünü etkinleştirilir. | WebSocket isteklerini kabul etmek için gereken bileşenlerden önce. |
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı* , *geçici* ve *tek* bir yaşam süresi Hizmetleri olan bir ara yazılım örneği içerir.
+* [Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı*, *geçici* ve *tek* bir yaşam süresi Hizmetleri olan bir ara yazılım örneği içerir.
 * <xref:fundamentals/middleware/write>
 * <xref:test/middleware>
 * <xref:migration/http-modules>
@@ -300,7 +317,7 @@ Ara yazılım, istekleri ve yanıtları işlemek için bir uygulama ardışık d
 
 İstek işlem hattını oluşturmak için istek temsilcileri kullanılır. İstek temsilcileri her HTTP isteğini işler.
 
-İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri* olarak da adlandırılan *ara yazılımlar* . İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
+İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri* olarak da adlandırılan *ara yazılımlar*. İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
 
 <xref:migration/http-modules> ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
 
@@ -459,7 +476,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *Order* sütunu, istek işleme ardışık düzeninde ara yazılım yerleştirme ve ara yazılımın istek işlemeyi sonlandırabilecekleri koşullar bölümünde notlar sağlar. Bir ara yazılım, istek işlem hattının ne kadar kısa süreli olduğunu ve daha fazla aşağı akış ara yazılımı bir isteği işlemesini engelliyorsa, bu, *Terminal ara yazılımı* olarak adlandırılır. Kısa devre oluşturma hakkında daha fazla bilgi için, [IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma](#create-a-middleware-pipeline-with-iapplicationbuilder) bölümüne bakın.
 
-| Ara yazılım | Açıklama | Sipariş verme |
+| Ara yazılım | Açıklama | Sipariş |
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
 | [Cookie İlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
@@ -476,7 +493,7 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | [Yanıt sıkıştırması](xref:performance/response-compression) | Yanıtları sıkıştırmak için destek sağlar. | Sıkıştırma gerektiren bileşenlerden önce. |
 | [Yerelleştirme iste](xref:fundamentals/localization) | Yerelleştirme desteği sağlar. | Yerelleştirmenin önemli bileşenlerinden önce. |
 | [Uç nokta yönlendirme](xref:fundamentals/routing) | İstek yollarını tanımlar ve kısıtlar. | Eşleşen yolların terminali. |
-| [Oturumuna](xref:fundamentals/app-state) | Kullanıcı oturumlarını yönetmek için destek sağlar. | Oturum gerektiren bileşenlerden önce. |
+| [Oturum](xref:fundamentals/app-state) | Kullanıcı oturumlarını yönetmek için destek sağlar. | Oturum gerektiren bileşenlerden önce. |
 | [Statik dosyalar](xref:fundamentals/static-files) | Statik dosyaları ve dizin taramayı sunma desteği sağlar. | Bir istek bir dosyayla eşleşiyorsa Terminal. |
 | [URL yeniden yazma](xref:fundamentals/url-rewriting) | URL 'Leri yeniden yazma ve istekleri yeniden yönlendirme desteği sağlar. | URL 'YI kullanan bileşenlerden önce. |
 | [WebSockets](xref:fundamentals/websockets) | WebSockets protokolünü etkinleştirilir. | WebSocket isteklerini kabul etmek için gereken bileşenlerden önce. |

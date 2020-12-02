@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - Route-to-code
 uid: web-api/route-to-code
-ms.openlocfilehash: 49eaa3ceb47c41226b7a50782436ec270e6e1b7b
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 1f5f532053f8f5ca7f73df8c1a910a484e2488d9
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96335613"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513102"
 ---
 # <a name="basic-json-apis-with-no-locroute-to-code-in-aspnet-core"></a>ASP.NET Core ile temel JSON API 'Leri Route-to-code
 
@@ -111,6 +111,21 @@ Bir yöntemi tanımlayan aşağıdaki statik sınıfı göz önünde bulundurun 
 `Startup.Configure`Yönteminde, `Map` yöntemi ve diğer sınıfın statik yöntemleri içinde çağrılır `UseEndpoints` :
 
 [!code-csharp[](route-to-code/sample/Startup5.cs?name=snippet)]
+
+## <a name="notable-missing-features-compared-to-web-api"></a>Web API 'siyle karşılaştırılan Notable eksik Özellikler
+
+Route-to-code , temel JSON API 'Leri için tasarlanmıştır. ASP.NET Core Web API 'SI tarafından sunulan gelişmiş özelliklerin birçoğu için destek sahibi değildir.
+
+Tarafından sağlanmayan Özellikler Route-to-code şunlardır:
+
+* Model bağlama
+* Model doğrulaması
+* Openapı/Swagger
+* İçerik anlaşması
+* Oluşturucu bağımlılığı ekleme
+* `ProblemDetails` ([https://tools.ietf.org/html/rfc7807](RFC 7807))
+
+Önceki listede bazı özelliklerden birini gerektiriyorsa API oluşturmak için [ASP.NET Core Web API 'sini](xref:web-api/index) kullanmayı düşünün.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
