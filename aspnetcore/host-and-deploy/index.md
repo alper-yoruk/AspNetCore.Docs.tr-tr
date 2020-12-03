@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 19e888859cea35624491a516404c57e30aa9db05
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4f3d4c29a189cf6aa14eb10f570f0b35d8ff9abc
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057225"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556625"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core barındırma ve dağıtma
 
@@ -39,6 +39,17 @@ Genel olarak, bir ASP.NET Core uygulamasını barındırma ortamına dağıtmak 
 ## <a name="publish-to-a-folder"></a>Klasöre yayımlama
 
 [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutu uygulama kodunu derler ve uygulamayı bir *Publish* klasöründe çalıştırmak için gereken dosyaları kopyalar. Visual Studio 'dan dağıtım yaparken, bu `dotnet publish` adım dosyalar dağıtım hedefine kopyalanmadan önce otomatik olarak gerçekleşir.
+
+## <a name="publish-settings-files"></a>Yayımlama ayarları dosyaları
+
+`*.json` dosyalar varsayılan olarak yayımlanır. Diğer ayar dosyalarını yayımlamak için bunları [`<ItemGroup><Content Include= ... />`](/visualstudio/msbuild/common-msbuild-project-items#content) Proje dosyasındaki bir öğe içinde belirtin. Aşağıdaki örnek XML dosyalarını yayımlar:
+
+```xml
+<ItemGroup>
+  <Content Include="**\*.xml" Exclude="bin\**\*;obj\**\*"
+    CopyToOutputDirectory="PreserveNewest" />
+</ItemGroup>
+```
 
 ### <a name="folder-contents"></a>Klasör içeriği
 

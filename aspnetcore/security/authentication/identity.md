@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: bfcef860beb07ab81dda1a10a1648491ae187bef
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ad4184fce494ba06acf7e583a42a54d04d37ea20
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052025"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556651"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>ASP.NET Core giriş Identity
 
@@ -62,10 +62,10 @@ Bireysel kullanıcı hesaplarıyla bir ASP.NET Core Web uygulaması projesi olu�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** > **Yeni** > **Proje** ’yi seçin.
-* **ASP.NET Core Web uygulaması** ' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam** ’a tıklayın.
-* Bir ASP.NET Core **Web uygulaması** seçip **kimlik doğrulamasını Değiştir** ' i seçin.
-* **Bireysel kullanıcı hesapları** ' nı seçip **Tamam** ' a tıklayın.
+* **Dosya** > **Yeni** > **Proje**’yi seçin.
+* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam**'a tıklayın.
+* Bir ASP.NET Core **Web uygulaması** seçip **kimlik doğrulamasını Değiştir**' i seçin.
+* **Bireysel kullanıcı hesapları** ' nı seçip **Tamam**' a tıklayın.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -81,7 +81,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örneğin:
+Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -123,6 +123,10 @@ Uygulamayı çalıştırın ve bir Kullanıcı kaydedin. Ekran boyutunuza bağl�
 
 Hizmetler ' de eklenir `ConfigureServices` . Tipik model, tüm yöntemleri çağırmalıdır `Add{Service}` ve sonra tüm `services.Configure{Service}` yöntemleri çağırır.
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configureservices&highlight=11-99)]
 
 Önceki vurgulanan kod Identity varsayılan seçenek değerleriyle yapılandırılır. Hizmetler, [bağımlılık ekleme](xref:fundamentals/dependency-injection)yoluyla uygulama için kullanılabilir hale getirilir.
@@ -130,6 +134,22 @@ Hizmetler ' de eklenir `ConfigureServices` . Tipik model, tüm yöntemleri çağ
 Identity çağırarak etkindir <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> . `UseAuthentication` istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configure&highlight=19)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-csharp[](identity/sample/WebApp5x/Startup.cs?name=snippet_configureservices&highlight=12-99)]
+
+Önceki kod Identity varsayılan seçenek değerleriyle yapılandırılır. Hizmetler, [bağımlılık ekleme](xref:fundamentals/dependency-injection)yoluyla uygulama için kullanılabilir hale getirilir.
+
+Identity[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)çağırarak etkinleştirilir. `UseAuthentication` istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
+
+[!code-csharp[](identity/sample/WebApp5x/Startup.cs?name=snippet_configure&highlight=19)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 Şablon tarafından oluşturulan uygulama [Yetkilendirme](xref:security/authorization/secure-data)kullanmaz. `app.UseAuthorization` , uygulamanın yetkilendirme eklemesi için doğru sırada eklendiğinden emin olmak için dahil edilmiştir. `UseRouting`, `UseAuthentication` , `UseAuthorization` ve `UseEndpoints` Önceki kodda gösterilen sırada çağrılmalıdır.
 
@@ -190,7 +210,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 [Signoutasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) , kullanıcının bir içinde depolanan taleplerini temizler cookie .
 
-*Sayfa/paylaşılan/_LoginPartial. cshtml* 'de gönderi belirtildi:
+*Sayfa/paylaşılan/_LoginPartial. cshtml*'de gönderi belirtildi:
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
@@ -296,10 +316,10 @@ Bireysel kullanıcı hesaplarıyla bir ASP.NET Core Web uygulaması projesi olu�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Dosya** > **Yeni** > **Proje** ’yi seçin.
-* **ASP.NET Core Web uygulaması** ' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam** ’a tıklayın.
-* Bir ASP.NET Core **Web uygulaması** seçip **kimlik doğrulamasını Değiştir** ' i seçin.
-* **Bireysel kullanıcı hesapları** ' nı seçip **Tamam** ' a tıklayın.
+* **Dosya** > **Yeni** > **Proje**’yi seçin.
+* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam**'a tıklayın.
+* Bir ASP.NET Core **Web uygulaması** seçip **kimlik doğrulamasını Değiştir**' i seçin.
+* **Bireysel kullanıcı hesapları** ' nı seçip **Tamam**' a tıklayın.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -309,7 +329,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örneğin:
+Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -346,8 +366,6 @@ Uygulamayı çalıştırın ve bir Kullanıcı kaydedin. Ekran boyutunuza bağl�
 ### <a name="configure-no-locidentity-services"></a>IdentityHizmetleri yapılandırma
 
 Hizmetler ' de eklenir `ConfigureServices` . Tipik model, tüm yöntemleri çağırmalıdır `Add{Service}` ve sonra tüm `services.Configure{Service}` yöntemleri çağırır.
-
-[!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configureservices)]
 
 Önceki kod Identity varsayılan seçenek değerleriyle yapılandırılır. Hizmetler, [bağımlılık ekleme](xref:fundamentals/dependency-injection)yoluyla uygulama için kullanılabilir hale getirilir.
 
@@ -409,7 +427,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 [Signoutasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) , kullanıcının bir içinde depolanan taleplerini temizler cookie .
 
-*Sayfa/paylaşılan/_LoginPartial. cshtml* 'de gönderi belirtildi:
+*Sayfa/paylaşılan/_LoginPartial. cshtml*'de gönderi belirtildi:
 
 [!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 

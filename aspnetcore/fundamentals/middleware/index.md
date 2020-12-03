@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: aa51e53284bc25629b3975ff0e6de967b9a2b866
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.openlocfilehash: bdeccf81a3bb620c2e1fe15a798d5a83375842c8
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96513128"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556547"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core ara yazılımı
 
@@ -113,9 +113,9 @@ Yukarıdaki kodla, CPU sıkıştırılmış yanıtı önbelleğe alarak kaydedil
 Aşağıdaki sıralama, sıkıştırılmış statik dosyaların önbelleğe alınmasına izin vermek için statik dosyaları birleştirir:
 
 ```csharp
-app.UseResponseCaching
-app.UseResponseCompression
-app.UseStaticFiles
+app.UseResponseCaching();
+app.UseResponseCompression();
+app.UseStaticFiles();
 ```
 
 Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara yazılım bileşenleri ekler:
@@ -193,6 +193,8 @@ public void Configure(IApplicationBuilder app)
     // Static files aren't compressed by Static File Middleware.
     app.UseStaticFiles();
 
+    app.UseRouting();
+
     app.UseResponseCompression();
 
     app.UseEndpoints(endpoints =>
@@ -260,7 +262,7 @@ Aşağıdaki tabloda, önceki kodu kullanmanın istekleri ve yanıtları göster
 
 <xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> Ayrıca, belirtilen koşulun sonucuna göre istek ardışık düzenini dallandırır. İle farklı olarak `MapWhen` , bu dal, kısa devre olmaması veya bir Terminal ara yazılımı içermesi durumunda ana işlem hattına yeniden katılır:
 
-[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
+[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=18-19)]
 
 Yukarıdaki örnekte, "ana ardışık düzen üzerinden Merhaba" yanıtı. Tüm istekler için yazılmıştır. İstek bir sorgu dizesi değişkeni içeriyorsa `branch` , ana işlem hattının yeniden katılması için değeri günlüğe kaydedilir.
 

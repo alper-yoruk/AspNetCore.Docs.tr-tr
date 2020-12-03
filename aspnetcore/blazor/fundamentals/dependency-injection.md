@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 0cec9a1ea6f6df52103ab190c85518ddc42a573f
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c68deb5237754872e11bfd9c83275b9a3b147319
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507935"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556521"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
 
@@ -154,7 +154,7 @@ Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
 
 | Ömür | Açıklama |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` . Ancak, Blazor Server barındırma modeli `Scoped` yaşam süresini destekler. Blazor ServerUygulamalarda, kapsamlı bir hizmet kaydı *bağlantının* kapsamına alınır. Bu nedenle, geçerli amaç bir uygulamadaki tarayıcıda istemci tarafını çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir Blazor WebAssembly . |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` .</p><p>Blazor ServerBarındırma modeli, `Scoped` http istekleri genelinde yaşam süresini destekler, ancak istemciye yüklenen bileşenler arasında Maalr bağlantısı/devre iletileri arasında değildir. RazorUygulamanın sayfaları veya MVC bölümü, kapsamlı hizmetleri normal şekilde ele alır ve sayfalar veya görünümler veya bir sayfa ya da bir bileşen görünümü arasında gezinilirken *her bir http isteğindeki* hizmetleri yeniden oluşturur. Kapsamdaki hizmetler, istemci üzerindeki bileşenler arasında gezinilirken, sunucu SignalR BAĞLANTıSıNıN http istekleri aracılığıyla değil Kullanıcı devresi bağlantısı üzerinden gerçekleştiği sırada yeniden yapılandırılmadı. İstemci üzerindeki aşağıdaki bileşen senaryolarında, Kullanıcı için yeni bir devre oluşturulması nedeniyle kapsamlı hizmetler yeniden yapılandırılır:</p><ul><li>Kullanıcı tarayıcının penceresini kapatır. Kullanıcı yeni bir pencere açar ve uygulamaya geri gider.</li><li>Kullanıcı, bir tarayıcı penceresinde uygulamanın son sekmesini kapatır. Kullanıcı yeni bir sekme açar ve uygulamaya geri gider.</li><li>Kullanıcı tarayıcının yeniden yükleme/yenileme düğmesini seçer.</li></ul><p>Uygulamalarda kapsamlı hizmetler genelinde Kullanıcı durumunu koruma hakkında daha fazla bilgi için Blazor Server bkz <xref:blazor/hosting-models?pivots=server> ..</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Dı, hizmetin *tek bir örneğini* oluşturur. Hizmet gerektiren tüm bileşenler `Singleton` aynı hizmetin bir örneğini alır. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Bir bileşen hizmet kapsayıcısından bir hizmetin örneğini edindiğinde `Transient` , hizmetin *Yeni bir örneğini* alır. |
 

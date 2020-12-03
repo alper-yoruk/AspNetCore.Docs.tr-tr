@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - Route-to-code
 uid: web-api/route-to-code
-ms.openlocfilehash: 1f5f532053f8f5ca7f73df8c1a910a484e2488d9
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.openlocfilehash: f8a3804a887ebfa0f5284d8991e903c978b18208
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96513102"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556612"
 ---
 # <a name="basic-json-apis-with-no-locroute-to-code-in-aspnet-core"></a>ASP.NET Core ile temel JSON API 'Leri Route-to-code
 
@@ -76,14 +76,14 @@ Yukarıdaki kod:
 
 JSON serileştirmesini özelleştirmenin iki yolu vardır:
 
-* Varsayılan serileştirme seçenekleri yöntemiyle ile yapılandırılabilir `JsonOptions` `Startup.ConfigureServices` .
-* `WriteAsJsonAsync` ve `ReadFromJsonAsync` bir nesneyi kabul eden aşırı yüklemeleri vardır `JsonSerializerOptions` . Bu `JsonSerializerOptions` nesne varsayılan seçenekleri geçersiz kılar.
+* Varsayılan serileştirme seçenekleri yöntemiyle ile yapılandırılabilir <xref:Microsoft.AspNetCore.Http.Json.JsonOptions> `Startup.ConfigureServices` .
+* `WriteAsJsonAsync` ve `ReadFromJsonAsync` bir nesneyi kabul eden aşırı yüklemeleri vardır <xref:System.Text.Json.JsonSerializerOptions> . Bu seçenek nesnesi varsayılan seçenekleri geçersiz kılar.
 
 [!code-csharp[](route-to-code/sample/Startup6.cs?name=snippet)]
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
 
-Route-to-code kimlik doğrulama ve yetkilendirmeyi destekler. Ve gibi öznitelikler `[Authorize]` `[AllowAnonymous]` bir istek temsilcisiyle eşlenen uç noktalara yerleştirilemez. Bunun yerine, yetkilendirme meta verileri `RequireAuthorization` ve `AllowAnonymous` genişletme yöntemleri kullanılarak eklenir.
+Route-to-code kimlik doğrulama ve yetkilendirmeyi destekler. Ve gibi öznitelikler `[Authorize]` `[AllowAnonymous]` bir istek temsilcisiyle eşlenen uç noktalara yerleştirilemez. Bunun yerine, yetkilendirme meta verileri <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization%2A> ve <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.AllowAnonymous%2A> genişletme yöntemleri kullanılarak eklenir.
 
 [!code-csharp[](route-to-code/sample/Startup.cs?name=snippet&highlight=30)]
 
@@ -123,7 +123,7 @@ Tarafından sağlanmayan Özellikler Route-to-code şunlardır:
 * Openapı/Swagger
 * İçerik anlaşması
 * Oluşturucu bağımlılığı ekleme
-* `ProblemDetails` ([https://tools.ietf.org/html/rfc7807](RFC 7807))
+* `ProblemDetails` ([RFC 7807](https://tools.ietf.org/html/rfc7807))
 
 Önceki listede bazı özelliklerden birini gerektiriyorsa API oluşturmak için [ASP.NET Core Web API 'sini](xref:web-api/index) kullanmayı düşünün.
 
