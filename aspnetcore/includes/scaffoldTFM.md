@@ -1,4 +1,4 @@
-İskele hatası alırsanız, Hedef Çerçeve Takma Kabının (TFM) proje dosyasındaki NuGet paket sürümüyle eşleştiğini doğrulayın. Örneğin, aşağıdaki proje dosyası .NET Core için 3.1 sürümünü ve listelenen NuGet paketlerini içerir:
+Bir yapı iskelesi hatası alırsanız, hedef çerçeve adının (tfd) proje dosyasındaki NuGet paket sürümüyle eşleştiğini doğrulayın. Örneğin, aşağıdaki proje dosyası .NET Core için 3,1 sürümünü ve listelenen NuGet paketlerini içerir:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417584"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855474"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>gRPC'den JSON Web API'leri oluşturma
 
@@ -105,6 +105,21 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 Bu, temel bir örnektir. Daha fazla özelleştirme seçeneği için bkz. [Httprule](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule) .
+
+### <a name="enable-swaggeropenapi-support"></a>Swagger/Openapı desteğini etkinleştir
+
+Swagger (Openapı), REST API 'Leri açıklamak için dilden bağımsız bir belirtimdir. gRPC HTTP API 'SI, Re, gRPC Hizmetleri için bir Swagger uç noktası oluşturmak üzere [swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) ile tümleştirilebilir. Swagger uç noktası daha sonra [Swagger Kullanıcı arabirimi](https://swagger.io/swagger-ui/) ve diğer araç ile kullanılabilir.
+
+Swagger 'yi gRPC HTTP API 'SI ile etkinleştirmek için:
+
+1. [Microsoft. AspNetCore. GRPC. Swagger](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.Swagger)öğesine bir paket başvurusu ekleyin.
+2. *Startup.cs* Içinde swashbuckle 'ı yapılandırın. `AddGrpcSwagger`Yöntemi, gRPC HTTP API uç noktaları eklemek Için swashbuckle 'yi yapılandırır.
+
+[!code-csharp[](~/grpc/httpapi/Startup.cs?name=snippet_1&highlight=6-10,15-19)]
+
+Swashbuckle 'nın, Restvıgrpc Hizmetleri için Swagger oluşturduğunu doğrulamak için, uygulamayı başlatın ve Swagger Kullanıcı arabirimi sayfasına gidin:
+
+![Swagger Kullanıcı arabirimi](~/grpc/httpapi/static/swaggerui.png)
 
 ### <a name="grpc-http-api-vs-grpc-web"></a>gRPC HTTP API vs gRPC-Web
 

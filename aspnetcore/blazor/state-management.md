@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 24f845bc1d98331f2ee54710d17beb6ffa95ad88
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570152"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855423"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -43,6 +43,9 @@ Tarayıcı belleğinde tutulan Kullanıcı durumu örnekleri şunları içerir:
 * [JavaScript birlikte çalışma](xref:blazor/call-javascript-from-dotnet) çağrıları aracılığıyla ayarlanan değerler.
 
 Kullanıcı tarayıcısını kapatıp yeniden açtığında veya sayfayı yeniden yüklediğinde, tarayıcının belleğinde tutulan Kullanıcı durumu kaybedilir.
+
+> [!NOTE]
+> [Korumalı tarayıcı depolaması](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) ( <xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> ad alanı) ASP.NET Core veri korumasına dayanır ve yalnızca uygulamalar için desteklenir Blazor Server .
 
 ## <a name="persist-state-across-browser-sessions"></a>Tarayıcı oturumlarında durumu kalıcı yap
 
@@ -68,12 +71,12 @@ Kalıcı durum için genel konumlar mevcuttur:
 
 <h2 id="server-side-storage-wasm">Sunucu tarafı depolama</h2>
 
-Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama bir Web API 'SI aracılığıyla erişilen bağımsız sunucu tarafı depolama kullanabilir. Seçeneklere şunlar dahildir:
+Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama bir Web API 'SI aracılığıyla erişilen bağımsız sunucu tarafı depolama kullanabilir. Seçenekler arasında şunlar bulunur:
 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Tablo depolama
+* Table Storage
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve herhangi bir yeni tarayıcı oturumunda kullanılabilir.
 
@@ -177,12 +180,12 @@ Kalıcı durum için genel konumlar mevcuttur:
 
 <h2 id="server-side-storage-server">Sunucu tarafı depolama</h2>
 
-Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama sunucu tarafı depolama kullanabilir. Seçeneklere şunlar dahildir:
+Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, uygulama sunucu tarafı depolama kullanabilir. Seçenekler arasında şunlar bulunur:
 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Tablo depolama
+* Table Storage
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve yeni bir devrede kullanılabilir.
 

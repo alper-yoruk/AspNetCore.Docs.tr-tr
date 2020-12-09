@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 1e571966b78f93e29e7901dd9648fbe3aca52726
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419986"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855488"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Bölüm 6, ASP.NET Core sayfalara arama ekleme Razor
 
@@ -70,7 +70,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-Sorgu *yalnızca* bu noktada tanımlanmış, veritabanında çalıştırılmadı. **not**
+Sorgu yalnızca ***tanımlı** _, bu noktada veritabanına karşı çalıştırılmadı. _*_not_*_
 
 `SearchString`Özellik null veya boş değilse, filmler sorgusu arama dizesinde filtrelenecek şekilde değiştirilir:
 
@@ -95,7 +95,7 @@ Aşağıdaki yol şablonu Index sayfaya eklenirse, arama dizesi BIR URL segmenti
 
 ![::: No-Loc (Dizin)::: URL 'ye eklenen ve iki filmde döndürülen bir film listesi, Ghostbusters ve Ghostbusters ve 2](search/_static/g2.png)
 
-ASP.NET Core çalışma zamanı, [model binding](xref:mvc/models/model-binding) `SearchString` özelliğin değerini sorgu dizesinden ( `?searchString=Ghost` ) veya rota verilerinden () ayarlamak için model bağlamayı kullanır `https://localhost:5001/Movies/Ghost` . Model bağlama, _ büyük/küçük harfe duyarlı *_değildir_*.
+ASP.NET Core çalışma zamanı, [model binding](xref:mvc/models/model-binding) `SearchString` özelliğin değerini sorgu dizesinden ( `?searchString=Ghost` ) veya rota verilerinden () ayarlamak için model bağlamayı kullanır `https://localhost:5001/Movies/Ghost` . Model bağlama büyük/küçük harfe duyarlı _*_değildir_*_ .
 
 Ancak, kullanıcıların bir filmi aramak için URL 'YI değiştirmesi beklenmez. Bu adımda, filmleri filtrelemek için Kullanıcı arabirimi eklenir. Yol kısıtlaması eklediyseniz `"{searchString?}"` , kaldırın.
 

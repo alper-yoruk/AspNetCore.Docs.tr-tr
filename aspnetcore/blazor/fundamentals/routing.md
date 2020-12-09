@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: a83637bb2690407dac5994bb63c765fcfa97462f
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3bfd623a206f260d24e2c9009acdb3b205b7ab2d
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981901"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855410"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -57,7 +57,7 @@ En yaygın yapılandırma, tüm istekleri bir sayfaya yönlendirmesidir Razor ve
 </Router>
 ```
 
-`.razor` `@page` Yönergeyle bir dosya derlendiğinde oluşturulan sınıf, <xref:Microsoft.AspNetCore.Components.RouteAttribute> yol şablonunu belirten bir.
+`.razor` `@page` Yönergeyle bir dosya derlendiğinde oluşturulan sınıf, <xref:Microsoft.AspNetCore.Components.RouteAttribute> yol şablonunu belirten bir. Uygulama önyüklenirken, olarak belirtilen derleme, `AppAssembly` içeren tüm bileşenler hakkında bilgi toplamak için taranır <xref:Microsoft.AspNetCore.Components.RouteAttribute> .
 
 Çalışma zamanında, <xref:Microsoft.AspNetCore.Components.RouteView> bileşen:
 

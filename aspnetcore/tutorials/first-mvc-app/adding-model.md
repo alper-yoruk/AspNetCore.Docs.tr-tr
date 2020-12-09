@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.openlocfilehash: d99d5bfd84c8c7e7d0c479964211591be434330c
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94688455"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855527"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
@@ -227,6 +227,12 @@ Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi* olarak bilinir.
 ### <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
 * Proje dizininde bir komut penceresi açın ( *program.cs*, *Startup.cs* ve *. csproj* dosyalarını içeren dizin).
+
+* Yapı iskelesi aracı yolunu dışarı aktarın:
+
+  ```console
+  export PATH=$HOME/.dotnet/tools:$PATH
+  ```
 
 * Şu komutu çalıştırın:
 
@@ -550,11 +556,11 @@ Dosyaya bir bağlantı dizesi ekleyin *appsettings.json* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-13)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-13)]
 
 ---
 

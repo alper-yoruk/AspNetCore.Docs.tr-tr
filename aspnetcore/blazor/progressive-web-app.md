@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c8ff2fc0f2f4d4e75f535f379ec94ea9de2e3ecb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055704"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855449"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 
@@ -75,7 +75,7 @@ PWA şablonu kullanılarak oluşturulan bir uygulamayı ziyaret ederken, kullan�
 
 ![Google Chrome 'daki onay iletişim kutusu kullanıcıya ' My::: No-Loc (Blazor):::P WA ' uygulaması için bir Install düğmesi sunar.](progressive-web-app/_static/image2.png)
 
-İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle** ' yi seçer.
+İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle**' yi seçer.
 
 Yüklendikten sonra uygulama, adres çubuğu olmadan kendi penceresinde görünür:
 
@@ -301,4 +301,5 @@ Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması olu
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
+* [Bütünlük PowerShell betiği sorunlarını giderme](xref:blazor/host-and-deploy/webassembly#troubleshoot-integrity-powershell-script)
 * [SignalR kimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

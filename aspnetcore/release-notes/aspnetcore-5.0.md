@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417558"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855501"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -130,7 +130,7 @@ Openapı varsayılan olarak etkinken, Web API geliştiricileri için uygulama ba
 
 ## Blazor
 
-### <a name="performance-improvements"></a>Performans iyileştirmeleri
+### <a name="performance-improvements"></a>Performans geliştirmeleri
 
 .NET 5 için, Blazor WebAssembly karmaşık UI işleme ve JSON serileştirmesi üzerinde belirli bir odak ile çalışma zamanı performansı için önemli geliştirmeler yaptık. Performans testlerimizde, Blazor WebAssembly .NET 5 ' te çoğu senaryo için iki-üç kat daha hızlıdır. Daha fazla bilgi için bkz. [ASP.net Blog: .NET 5 Release Candidate 1 ' de ASP.NET Core Updates](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements).
 
@@ -285,7 +285,7 @@ Kestrel [Yapılandırma](xref:fundamentals/configuration/index)yoluyla uç nokta
 * Kullanılan HTTP protokolleri
 * Kullanılan TLS protokolleri
 * Sertifika seçildi
-* Cient sertifika modu
+* İstemci sertifikası modu
 
 Yapılandırma, belirtilen sunucu adına göre hangi sertifikanın seçili olduğunu belirtmenizi sağlar. Sunucu adı, istemci tarafından gösterilen TLS protokolüne Sunucu Adı Belirtme (SNı) uzantısının bir parçasıdır. Kestrelyapılandırması aynı zamanda ana bilgisayar adında bir joker öneki de destekler.
 
@@ -328,7 +328,7 @@ Aşağıdaki örnek, bir yapılandırma dosyası kullanarak uç noktaya özel be
 
 Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bunun ne kadar etkili olduğu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.
 
-## <a name="performance-improvements"></a>Performans iyileştirmeleri
+## <a name="performance-improvements"></a>Performans geliştirmeleri
 
 ### <a name="http2"></a>HTTP/2
 
@@ -357,7 +357,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 
 .NET 5,0 ' den önce, bir ASP.NET Core uygulaması için bir *Dockerfile* oluşturup yayımlarken, tüm .NET Core SDK ve ASP.NET Core görüntüsünün çekmesini sağlar. Bu sürümle birlikte, SDK görüntüleri baytları çekililerek ASP.NET Core görüntü için çekilen baytlar büyük ölçüde ortadan kalkar. Daha fazla bilgi için bkz. [Bu GitHub sorun açıklaması](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750).
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft ile kimlik doğrulaması Azure Active Directory. Identity . Web
 
@@ -451,7 +451,7 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* `dotnet watch` öğesini çalıştırın.
+* Şu komutu çalıştırın: `dotnet watch`.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
 
 ### <a name="console-logger-formatter"></a>Konsol günlükçü biçimlendiricisi

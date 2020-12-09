@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: ca8aa126a44ea417017f0be0372e818a95ad8413
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9c65abd5a055bb677a14921296316e7e03760bc2
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053754"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855371"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını HTTP.sys
 
@@ -98,10 +98,11 @@ Ek HTTP.sys yapılandırması, [kayıt defteri ayarları](https://support.micros
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Ve için zaman uyumlu giriş/çıkışa izin verilip verilmeyeceğini `HttpContext.Request.Body` denetleyin `HttpContext.Response.Body` . | `false` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO> | Ve için zaman uyumlu giriş/çıkışa izin verilip verilmeyeceğini `HttpContext.Request.Body` denetleyin `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Anonim isteklere izin verin. | `true` |
 | [Authentication. düzenleri](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | İzin verilen kimlik doğrulama düzenlerini belirtin. Dinleyici elden atılırken önce herhangi bir zamanda değiştirilebilir. Değerler [authenticationdüzenlerinin numaralandırması](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes)tarafından sağlanır: `Basic` ,,, `Kerberos` `Negotiate` `None` , ve `NTLM` . | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Uygun üst bilgileri içeren yanıtlar için [çekirdek modu](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) önbelleğe almayı deneyin. Yanıt `Set-Cookie` , `Vary` veya `Pragma` üst bilgileri içermeyebilir. `Cache-Control` `public` Bir ya da değeri ya da bir üst bilgi içermelidir `shared-max-age` `max-age` `Expires` . | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching> | Uygun üst bilgileri içeren yanıtlar için [çekirdek modu](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) önbelleğe almayı deneyin. Yanıt `Set-Cookie` , `Vary` veya `Pragma` üst bilgileri içermeyebilir. `Cache-Control` `public` Bir ya da değeri ya da bir üst bilgi içermelidir `shared-max-age` `max-age` `Expires` . | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Http503Verbosity> | Azaltma koşulları nedeniyle istekleri reddetmeden HTTP.sys davranışı. | [Http503VerbosityLevel. <br> Basit](xref:Microsoft.AspNetCore.Server.HttpSys.Http503VerbosityLevel) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | En fazla eşzamanlı kabul sayısı. | 5 &times; [ortam. <br> ProcessorCount](xref:System.Environment.ProcessorCount) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Kabul edilecek eşzamanlı bağlantı sayısı üst sınırı. `-1`Sonsuz için kullanın. `null`Kayıt defterinin makine genelindeki ayarını kullanmak için kullanın. | `null`<br>(makine genelinde<br>ayarlanmasını |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | <a href="#maxrequestbodysize">MaxRequestBodySize</a> bölümüne bakın. | 30000000 bayt<br>(~ 28,6 MB) |
@@ -109,8 +110,8 @@ Ek HTTP.sys yapılandırması, [kayıt defteri ayarları](https://support.micros
 | `RequestQueueMode` | Bu, sunucunun istek kuyruğunu oluşturma ve yapılandırmadan sorumlu olup olmadığını veya mevcut bir kuyruğa iliştirilmesinin gerekip gerekmediğini belirtir.<br>Mevcut bir kuyruğa eklenirken, mevcut yapılandırma seçeneklerinin çoğu geçerli değildir. | `RequestQueueMode.Create` |
 | `RequestQueueName` | HTTP.sys istek kuyruğunun adı. | `null` (Anonim kuyruk) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | İstemci bağlantısının kesilmesinden kaynaklanan yanıt gövdesi yazmasının, özel durumlar oluşturması veya normal şekilde tamamlanması gerektiğini belirtin. | `false`<br>(normal olarak) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager>Kayıt defterinde da yapılandırılabilen HTTP.sys yapılandırmasını kullanıma sunun. Varsayılan değerler de dahil olmak üzere her bir ayar hakkında daha fazla bilgi edinmek için API bağlantılarını izleyin:<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): http sunucu apı 'sinin Keep-Alive bağlantısında varlık gövdesini boşaltışında izin verilen süre.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): istek varlığı gövdesinin gelmesi için izin verilen süre.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): http sunucusu API 'sinin istek üst bilgisini ayrıştırması için izin verilen süre.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): boştaki bir bağlantı için izin verilen süre.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): yanıt için en düşük gönderme hızı.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): isteğin, uygulamanın onu seçmeden önce istek kuyruğunda kalması için izin verilen süre.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection>HTTP.sys kaydolmak için öğesini belirtin. En yararlı olan [UrlPrefixCollection. Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), koleksiyona bir ön ek eklemek için kullanılır. Bunlar, dinleyici elden atılıyor öncesinde herhangi bir zamanda değiştirilebilir. |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager>Kayıt defterinde da yapılandırılabilen HTTP.sys yapılandırmasını kullanıma sunun. Varsayılan değerler de dahil olmak üzere her bir ayar hakkında daha fazla bilgi edinmek için API bağlantılarını izleyin:<ul><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody?displayProperty=nameWithType>: HTTP Sunucusu API 'sinin Keep-Alive bağlantısında varlık gövdesini boşaltışında izin verilen süre.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody?displayProperty=nameWithType>: İstek varlığı gövdesinin gelmesi için izin verilen süre.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait?displayProperty=nameWithType>: HTTP Sunucusu API 'sinin istek üst bilgisini ayrıştırması için izin verilen süre.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection?displayProperty=nameWithType>: Boştaki bir bağlantı için izin verilen süre.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond?displayProperty=nameWithType>: Yanıt için en düşük gönderme hızı.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue?displayProperty=nameWithType>: Uygulama onu seçmeden önce istek kuyruğunda kalan süre için izin verilir.</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection>HTTP.sys kaydolmak için öğesini belirtin. <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add%2A?displayProperty=nameWithType>Koleksiyona bir ön ek eklemek için kullanılan en yararlı seçenektir. Bunlar, dinleyici elden atılıyor öncesinde herhangi bir zamanda değiştirilebilir. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -151,8 +152,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Uygulama [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#framework-dependent-deployments-fdd)ise, .net core, .NET Framework veya her ikisini de (uygulama .NET Framework hedefleyen bir .NET Core uygulaması ise) yükler.
 
-   * **.NET Core** : uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
-   * **.NET Framework** : uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
+   * **.NET Core**: uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
+   * **.NET Framework**: uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
 
    Uygulama, [kendi içinde bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd)ise, uygulama çalışma zamanını dağıtımda içerir. Sunucuda çerçeve yüklemesi gerekmez.
 
@@ -180,7 +181,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Ön ek, sunucudaki URL öneklerini ister.
 
-   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe* . *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
+   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe*. *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
 
    Uygulamanın URL 'Lerini kaydetmek için *netsh.exe* aracını kullanın:
 
@@ -221,7 +222,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Başvuru amacıyla, GUID 'yi uygulamada bir paket etiketi olarak depolayın:
 
    * Visual Studio 'da:
-     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler** ' i seçerek uygulamanın proje özelliklerini açın.
+     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler**' i seçerek uygulamanın proje özelliklerini açın.
      * **Paket** sekmesini seçin.
      * **Etiketler** alanında oluşturduğunuz GUID 'yi girin.
    * Visual Studio kullanmadığınız durumlarda:
@@ -419,8 +420,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Uygulama [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#framework-dependent-deployments-fdd)ise, .net core, .NET Framework veya her ikisini de (uygulama .NET Framework hedefleyen bir .NET Core uygulaması ise) yükler.
 
-   * **.NET Core** : uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
-   * **.NET Framework** : uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
+   * **.NET Core**: uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
+   * **.NET Framework**: uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
 
    Uygulama, [kendi içinde bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd)ise, uygulama çalışma zamanını dağıtımda içerir. Sunucuda çerçeve yüklemesi gerekmez.
 
@@ -448,7 +449,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Ön ek, sunucudaki URL öneklerini ister.
 
-   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe* . *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
+   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe*. *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
 
    Uygulamanın URL 'Lerini kaydetmek için *netsh.exe* aracını kullanın:
 
@@ -489,7 +490,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Başvuru amacıyla, GUID 'yi uygulamada bir paket etiketi olarak depolayın:
 
    * Visual Studio 'da:
-     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler** ' i seçerek uygulamanın proje özelliklerini açın.
+     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler**' i seçerek uygulamanın proje özelliklerini açın.
      * **Paket** sekmesini seçin.
      * **Etiketler** alanında oluşturduğunuz GUID 'yi girin.
    * Visual Studio kullanmadığınız durumlarda:
@@ -672,8 +673,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Uygulama [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#framework-dependent-deployments-fdd)ise, .net core, .NET Framework veya her ikisini de (uygulama .NET Framework hedefleyen bir .NET Core uygulaması ise) yükler.
 
-   * **.NET Core** : uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
-   * **.NET Framework** : uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
+   * **.NET Core**: uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
+   * **.NET Framework**: uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
 
    Uygulama, [kendi içinde bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd)ise, uygulama çalışma zamanını dağıtımda içerir. Sunucuda çerçeve yüklemesi gerekmez.
 
@@ -701,7 +702,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Ön ek, sunucudaki URL öneklerini ister.
 
-   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe* . *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
+   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe*. *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
 
    Uygulamanın URL 'Lerini kaydetmek için *netsh.exe* aracını kullanın:
 
@@ -742,7 +743,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Başvuru amacıyla, GUID 'yi uygulamada bir paket etiketi olarak depolayın:
 
    * Visual Studio 'da:
-     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler** ' i seçerek uygulamanın proje özelliklerini açın.
+     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler**' i seçerek uygulamanın proje özelliklerini açın.
      * **Paket** sekmesini seçin.
      * **Etiketler** alanında oluşturduğunuz GUID 'yi girin.
    * Visual Studio kullanmadığınız durumlarda:
@@ -925,8 +926,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Uygulama [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#framework-dependent-deployments-fdd)ise, .net core, .NET Framework veya her ikisini de (uygulama .NET Framework hedefleyen bir .NET Core uygulaması ise) yükler.
 
-   * **.NET Core** : uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
-   * **.NET Framework** : uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
+   * **.NET Core**: uygulama .NET Core gerektiriyorsa .NET Core [Indirmelerinde](https://dotnet.microsoft.com/download) **.NET Core çalışma zamanı** yükleyicisini edinip çalıştırın. Tam SDK 'Yı sunucuya yüklemeyin.
+   * **.NET Framework**: uygulama .NET Framework gerektiriyorsa [.NET Framework yükleme kılavuzuna](/dotnet/framework/install/)bakın. Gerekli .NET Framework yüklemesi. En son .NET Framework yükleyicisi [.NET Core İndirmeleri](https://dotnet.microsoft.com/download) sayfasından edinilebilir.
 
    Uygulama, [kendi içinde bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd)ise, uygulama çalışma zamanını dağıtımda içerir. Sunucuda çerçeve yüklemesi gerekmez.
 
@@ -954,7 +955,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
 1. Ön ek, sunucudaki URL öneklerini ister.
 
-   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe* . *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
+   HTTP.sys yapılandırmaya yönelik yerleşik araç *netsh.exe*. *netsh.exe* , URL öneklerini ayırmak ve X. 509.440 sertifikaları atamak için kullanılır. Araç, yönetici ayrıcalıkları gerektirir.
 
    Uygulamanın URL 'Lerini kaydetmek için *netsh.exe* aracını kullanın:
 
@@ -995,7 +996,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Başvuru amacıyla, GUID 'yi uygulamada bir paket etiketi olarak depolayın:
 
    * Visual Studio 'da:
-     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler** ' i seçerek uygulamanın proje özelliklerini açın.
+     * **Çözüm Gezgini** ' de uygulamaya sağ tıklayıp **Özellikler**' i seçerek uygulamanın proje özelliklerini açın.
      * **Paket** sekmesini seçin.
      * **Etiketler** alanında oluşturduğunuz GUID 'yi girin.
    * Visual Studio kullanmadığınız durumlarda:

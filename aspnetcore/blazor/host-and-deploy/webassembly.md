@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94339990"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855293"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -540,7 +540,7 @@ IIS, `web.config` Blazor tek başına uygulamalar için Brotli veya gzip ile sı
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Depolama
+### <a name="azure-storage"></a>Azure Storage
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 
@@ -556,7 +556,7 @@ Dosyalar ' üst bilgilerinde uygunsuz MIME türleri nedeniyle çalışma zamanı
 
   Her dosya için Depolama Gezgini (Azure portal):
   
-  1. Dosyaya sağ tıklayın ve **Özellikler** ' i seçin.
+  1. Dosyaya sağ tıklayın ve **Özellikler**' i seçin.
   1. **ContentType** ' ı ayarlayın ve **Kaydet** düğmesini seçin.
 
 Daha fazla bilgi için bkz. [Azure Storage 'Da statik Web sitesi barındırma](/azure/storage/blobs/storage-blob-static-website).
@@ -922,7 +922,7 @@ Bir uygulama oluşturulduğunda, oluşturulan `blazor.boot.json` bildirim, derle
 
 Bunun başarısız olmasının yaygın nedenleri:
 
- * Web sunucusunun yanıtı, tarayıcı istenen dosya yerine bir hatadır (örneğin, bir *404-bulunamadı* veya *500-Internal Server Error* ). Bu, tarayıcı tarafından bir bütünlük denetimi hatası olarak bildirilir ve yanıt hatası olarak değildir.
+ * Web sunucusunun yanıtı, tarayıcı istenen dosya yerine bir hatadır (örneğin, bir *404-bulunamadı* veya *500-Internal Server Error*). Bu, tarayıcı tarafından bir bütünlük denetimi hatası olarak bildirilir ve yanıt hatası olarak değildir.
  * Dosya içeriğini tarayıcıya, dosyaların oluşturulması ve teslimi arasında değiştiren bir sorun. Bu durum oluşabilir:
    * Ya da yapı araçları derleme çıkışını el ile değiştirir.
    * Dağıtım işleminin bazı bir yönü dosyaları değiştirdiyseniz. Örneğin, git tabanlı bir dağıtım mekanizması kullanıyorsanız, Windows üzerinde dosya oluşturup Linux 'ta kullanıma alırsanız git 'in Windows stili satır sonlarını şeffaf olarak UNIX stili satır sonlarına dönüştürdüğünü göz önünde bulundurun. Dosya satır sonlarını değiştirmek için SHA-256 karmaları değiştirin. Bu sorundan kaçınmak için, [ `.gitattributes` Yapı yapıtlarını `binary` dosya olarak değerlendirmek üzere](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)kullanmayı düşünün.
@@ -933,12 +933,34 @@ Bu durumun hangi durumlarda geçerli olduğunu tanılamak için:
  1. Hatanın hata iletisini okuyarak tetikleneceği dosyayı aklınızda bulunur.
  1. Tarayıcınızın geliştirici araçlarını açın ve *ağ* sekmesine bakın. Gerekirse, istek ve yanıtların listesini görmek için sayfayı yeniden yükleyin. Bu listedeki hatayı tetikleyen dosyayı bulun.
  1. Yanıttaki HTTP durum kodunu denetleyin. Sunucu *200-Tamam* (veya başka bir 2xx durum kodu) dışında bir şey döndürürse, tanılamaya yönelik bir sunucu tarafı sorununuz vardır. Örneğin, 403 durum kodu bir yetkilendirme sorunu olduğu anlamına gelirken durum kodu 500, sunucunun belirtilmeyen bir şekilde başarısız olduğu anlamına gelir. Uygulamayı tanılamak ve onarmak için sunucu tarafı günlüklerine başvurun.
- 1. Durum kodu kaynak için *200-Tamam* ise, tarayıcının geliştirici araçlarındaki yanıt içeriğine bakın ve içeriğin beklenen verilerle uyumlu olduğunu denetleyin. Örneğin, yaygın bir sorun, isteklerin `index.html` diğer dosyalar için bile verilerinizi döndürmesi için yönlendirmeyi yanlış yapılandırmaktır. `.wasm`İsteklerin yanıtlarının, Weelsembly ikilileriyle ve `.dll` isteklerin yanıtlarının .NET Derleme ikili dosyalarına sahip olduğundan emin olun. Aksi takdirde, tanılamaya yönelik bir sunucu tarafı yönlendirme sorununuz vardır.
+ 1. Durum kodu kaynak için *200-Tamam* ise, tarayıcının geliştirici araçlarındaki yanıt içeriğine bakın ve içeriğin beklenen verilerle eşleşip eşleşmediğini denetleyin. Örneğin, yaygın bir sorun, isteklerin `index.html` diğer dosyalar için bile verilerinizi döndürmesi için yönlendirmeyi yanlış yapılandırmaktır. `.wasm`İsteklerin yanıtlarının, Weelsembly ikilileriyle ve `.dll` isteklerin yanıtlarının .NET Derleme ikili dosyalarına sahip olduğundan emin olun. Aksi takdirde, tanılamaya yönelik bir sunucu tarafı yönlendirme sorununuz vardır.
+ 1. [Sorun giderme bütünlüğü PowerShell betiği](#troubleshoot-integrity-powershell-script)ile uygulamanın yayımlanmış ve dağıtılan çıkışını doğrulamak için arama yapın.
 
 Sunucunun sürekli doğru verileri döndürdüğünü onaylamak için, dosyanın oluşturulması ve teslimi arasındaki içerikleri değiştirmek için başka bir şey olması gerekir. Bunu araştırmak için:
 
  * Dosyalar derlendikten sonra dosyaları değiştirirken derleme araç zinciri ve dağıtım mekanizmasını inceleyin. Git 'in, daha önce açıklandığı gibi dosya satır sonlarını dönüştürerken buna bir örnektir.
  * Yanıtları dinamik olarak değiştirmek üzere ayarlanmış olmaları durumunda Web sunucusunu veya CDN yapılandırmasını inceleyin (örneğin, HTML 'yi küçültmeye çalışırken). Web sunucusunun HTTP sıkıştırması uygulaması (örneğin, döndürme `content-encoding: br` veya döndürme `content-encoding: gzip` ), bu nedenle bu, sıkıştırmayı açma işleminden sonra sonucu etkilemez. Ancak, Web sunucusunun sıkıştırılmamış verileri değiştirmesi iyi *değildir* .
+
+### <a name="troubleshoot-integrity-powershell-script"></a>Bütünlük PowerShell betiği sorunlarını giderme
+
+[`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true)Yayımlanmış ve dağıtılan bir uygulamayı doğrulamak için PowerShell betiğini kullanın Blazor . Komut dosyası, uygulamanın, Blazor Framework 'ün tanımlayamıyorum bütünlük sorunları olduğunda bir başlangıç noktası olarak sağlanır. Uygulamanız için betiğin özelleştirilmesi gerekebilir.
+
+Betik, klasördeki dosyaları denetler `publish` ve bütünlük karmalarını içeren farklı bildirimlerde sorunları algılamak için dağıtılan uygulamadan indirilir. Bu denetimler en yaygın sorunları algılamamalıdır:
+
+* Yayımlanan çıktıda bir dosyayı gerçekleştirmeden değiştirdiniz.
+* Uygulama, dağıtım hedefine doğru şekilde dağıtılmadı veya dağıtım hedefinin ortamında bir değişiklik yapılamayabilir.
+* Dağıtılan uygulamayla çıkış arasında uygulamanın yayımlaması arasında farklılıklar vardır.
+
+PowerShell komut kabuğu 'nda aşağıdaki komutla betiği çağırın:
+
+```powershell
+.\integrity.ps1 {BASE URL} {PUBLISH OUTPUT FOLDER}
+```
+
+İçeremez
+
+* `{BASE URL}`: Dağıtılan uygulamanın URL 'SI.
+* `{PUBLISH OUTPUT FOLDER}`: Uygulamanın `publish` dağıtım için yayımlandığı klasörün veya konumun yolu.
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>PWA olmayan uygulamalar için bütünlük denetimini devre dışı bırakma
 
