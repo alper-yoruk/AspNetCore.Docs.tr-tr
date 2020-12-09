@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053871"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901177"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
 
@@ -52,7 +52,7 @@ Yöntemi, `OnGetAsync` Seçili öğrenci için kayıt verilerini okumak üzere a
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Details.cshtml.cs?name=snippet_OnGetAsync&highlight=8-12)]
 
-[Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) ve [thenınclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri, içeriğin `Student.Enrollments` gezinti özelliğini yüklemesine ve her kaydın gezinti özelliği içine olmasına neden olur `Enrollment.Course` . Bu yöntemler, [okuma ilgili verileri](xref:data/ef-rp/read-related-data) öğreticisinde ayrıntılı olarak incelendi.
+[Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) ve [thenınclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri, içeriğin `Student.Enrollments` gezinti özelliğini yüklemesine ve her kaydın gezinti özelliği içine olmasına neden olur `Enrollment.Course` . Bu yöntemler, [ilgili verileri oku](xref:data/ef-rp/read-related-data) öğreticisinde ayrıntılı olarak incelendi.
 
 [Asnotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilmediği senaryolarda performansı geliştirir. `AsNoTracking` Bu öğreticinin ilerleyen kısımlarında ele alınmıştır.
 
@@ -137,7 +137,7 @@ Kullanmak `StudentVM` yerine, oluşturma sayfası kullanımını gerektirir `Stu
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*Sayfalar/öğrenciler/Edit. cshtml. cs* ' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
+*Sayfalar/öğrenciler/Edit. cshtml. cs*' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -300,7 +300,7 @@ Kullanılması `StudentVM` Için [Create. cshtml](https://github.com/dotnet/AspN
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*Sayfalar/öğrenciler/Edit. cshtml. cs* ' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
+*Sayfalar/öğrenciler/Edit. cshtml. cs*' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -345,9 +345,9 @@ Yukarıdaki kod, isteğe bağlı parametresini `saveChangesError` `OnGetAsync` Y
 `OnPostAsync`Yöntemi seçili varlığı alır, ardından varlığın durumunu olarak ayarlamak Için [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) yöntemini çağırır `Deleted` . `SaveChanges`Çağrıldığında, BIR SQL DELETE komutu oluşturulur. `Remove`Başarısız olursa:
 
 * Veritabanı özel durumu yakalandı.
-* Sayfaları Sil `OnGetAsync` yöntemi ile çağırılır `saveChangesError=true` .
+* Delete sayfasının `OnGetAsync` yöntemi ile çağrılır `saveChangesError=true` .
 
-Silme sayfasına bir hata iletisi ekleyin Razor ( *Sayfalar/öğrenciler/delete. cshtml* ):
+Silme sayfasına bir hata iletisi ekleyin Razor (*Sayfalar/öğrenciler/delete. cshtml*):
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -405,7 +405,7 @@ Ancak `Include` başka varlıklar istiyorsanız `FindAsync` artık uygun değild
 
 ## <a name="customize-the-details-page"></a>Ayrıntılar sayfasını özelleştirme
 
-Sayfaya gidin `Pages/Students` . **Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/öğrenciler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+Sayfaya gidin `Pages/Students` . **Düzenle**, **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/öğrenciler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
@@ -439,7 +439,7 @@ Uygulamayı çalıştırın, Ayrıntılar bağlantısına tıklayın ve URL 'nin
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Ayrıntılar sayfasında ilgili kayıtları görüntüleme
 
-*Sayfaları/öğrencileri/ayrıntıları. cshtml* 'yi açın. Kayıtlar listesini göstermek için aşağıdaki vurgulanmış kodu ekleyin:
+*Sayfaları/öğrencileri/ayrıntıları. cshtml*'yi açın. Kayıtlar listesini göstermek için aşağıdaki vurgulanmış kodu ekleyin:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 

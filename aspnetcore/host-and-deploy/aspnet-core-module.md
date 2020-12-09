@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: a644214c208ece38bc118c31cf3c9265706706ea
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d0e6c0c31890c58aaca936fc6f1e92cb9a1ab456
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061502"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901242"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core Modülü
 
@@ -800,7 +800,7 @@ Modülün barındırma paketi yükleyici günlükleri konumunda bulunur `C:\\Use
 
 ### <a name="module"></a>Modül
 
-**IIS (X86/AMD64)** :
+**IIS (X86/AMD64)**:
 
 * `%windir%\System32\inetsrv\aspnetcore.dll`
 
@@ -810,7 +810,7 @@ Modülün barındırma paketi yükleyici günlükleri konumunda bulunur `C:\\Use
 
 * `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (X86/AMD64)** :
+**IIS Express (X86/AMD64)**:
 
 * `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
@@ -940,7 +940,7 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 | `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>*app_offline.htm* dosyası algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
 | `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider. Modül, yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın son geçen dakikada **rapidFailsPerMinute** kez başlayamadığı sürece sonraki gelen isteklerde işlemi yeniden başlatmayı dener.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
 | `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, **processPath** içinde belirtilen işlem için **stdout** ve **stderr** , **stdoutLogFile** içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
-| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Modülün günlük dosyasını oluşturması için yolda sunulan klasörlerin bulunması gerekir. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( *. log* ) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük *logs* dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
+| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Modülün günlük dosyasını oluşturması için yolda sunulan klasörlerin bulunması gerekir. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı (*. log*) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük *logs* dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ortam değişkenlerini ayarlama
 
@@ -986,7 +986,7 @@ Stdout günlüğünün kullanılması yalnızca IIS 'de barındırırken veya [V
 
 Genel uygulama günlüğü amaçları için stdout günlüğünü kullanmayın. ASP.NET Core uygulamasında rutin günlük kaydı için, günlük dosyası boyutunu sınırlayan ve günlükleri döndüren bir günlüğe kaydetme kitaplığı kullanın. Daha fazla bilgi için bkz. [üçüncü taraf günlüğü sağlayıcıları](xref:fundamentals/logging/index#third-party-logging-providers).
 
-Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt *.log* `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout* ) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout* ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934* dosya adı vardır.
+Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt *.log* `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout*) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout* ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934* dosya adı vardır.
 
 Aşağıdaki örnek `aspNetCore` öğesi, göreli yoldaki stdout günlüğünü yapılandırır `.\log\` . AppPool Kullanıcı kimliğinin, belirtilen yola yazma izni olduğunu doğrulayın.
 
@@ -1078,5 +1078,5 @@ Dosyalar, *applicationHost.config* dosyasında *aspnetcore* ' u arayarak bulunab
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>
-* [ASP.NET Core modülü başvuru kaynağı (ana dal)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2): belirli bir sürümü seçmek için **dal** açılan listesini kullanın (örneğin, `release/3.1` ).
+* [ASP.NET Core Module başvuru kaynağı [varsayılan dal (ana)]](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2): belirli bir sürümü seçmek için **dal** açılan listesini kullanın (örneğin, `release/3.1` ).
 * <xref:host-and-deploy/iis/modules>

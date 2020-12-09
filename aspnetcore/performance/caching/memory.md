@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9b19c782d1d42ddaba590f05bab31899402f681a
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061450"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901229"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 'de önbellek belleği
 
@@ -84,6 +84,9 @@ Geçerli saat ve önbelleğe alınmış saat görüntülenir:
 
 [!code-cshtml[](memory/3.0sample/WebCacheSample/Views/Home/Cache.cshtml)]
 
+Aşağıdaki kod, nesneyi oluşturmadan göreli bir süre için verileri önbelleğe almak üzere [set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_System_TimeSpan_) genişletme yöntemini kullanır `MemoryCacheEntryOptions` .
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_set)]
+
 `DateTime`Zaman aşımı süresi içinde istekler varken önbelleğe alınan değer önbellekte kalır.
 
 Aşağıdaki kod, verileri önbelleğe almak için [GetOrCreate](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.getorcreate#Microsoft_Extensions_Caching_Memory_CacheExtensions_GetOrCreate__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_System_Func_Microsoft_Extensions_Caching_Memory_ICacheEntry___0__) ve [Getorcreateasync](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.getorcreateasync#Microsoft_Extensions_Caching_Memory_CacheExtensions_GetOrCreateAsync__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_System_Func_Microsoft_Extensions_Caching_Memory_ICacheEntry_System_Threading_Tasks_Task___0___) kullanır.
@@ -122,7 +125,7 @@ Aşağıdaki örnek:
 
 `MemoryCache`Örnek, isteğe bağlı olarak bir boyut sınırı belirtebilir ve uygulayabilir. Önbelleğin, girdilerin boyutunu ölçmeye yönelik bir mekanizması olmadığından, önbellek boyutu sınırının tanımlı bir ölçü birimi yok. Önbellek boyutu sınırı ayarlandıysa, tüm girişlerin boyut belirtmesi gerekir. ASP.NET Core çalışma zamanı, bellek baskısı temelinde önbellek boyutunu sınırlamaz. En fazla geliştirici, önbellek boyutunu sınırlayacak. Belirtilen boyut, geliştiricinin seçtiği birimlerde bulunur.
 
-Örneğin:
+Örnek:
 
 * Web uygulaması öncelikle dizeleri önbelleğe alıyorsa, her önbellek girdisi boyutu dize uzunluğu olabilir.
 * Uygulama tüm girdilerin boyutunu 1 olarak belirtebilir ve boyut sınırı girdi sayısıdır.
@@ -298,7 +301,7 @@ Aşağıdaki örnek:
 
 `MemoryCache`Örnek, isteğe bağlı olarak bir boyut sınırı belirtebilir ve uygulayabilir. Önbelleğin, girdilerin boyutunu ölçmeye yönelik bir mekanizması olmadığından, önbellek boyutu sınırının tanımlı bir ölçü birimi yok. Önbellek boyutu sınırı ayarlandıysa, tüm girişlerin boyut belirtmesi gerekir. ASP.NET Core çalışma zamanı, bellek baskısı temelinde önbellek boyutunu sınırlamaz. En fazla geliştirici, önbellek boyutunu sınırlayacak. Belirtilen boyut, geliştiricinin seçtiği birimlerde bulunur.
 
-Örneğin:
+Örnek:
 
 * Web uygulaması öncelikle dizeleri önbelleğe alıyorsa, her önbellek girdisi boyutu dize uzunluğu olabilir.
 * Uygulama tüm girdilerin boyutunu 1 olarak belirtebilir ve boyut sınırı girdi sayısıdır.

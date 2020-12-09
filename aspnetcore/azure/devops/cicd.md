@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: eddd7034bf1860fb35cf00eefb7a11a408869700
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052649"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901216"
 ---
 # <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
 
@@ -43,26 +43,26 @@ Bu bölümde, aşağıdaki görevleri tamamlayacaksınız:
 ## <a name="publish-the-apps-code-to-github"></a>Uygulamanın kodunu GitHub 'a yayımlama
 
 1. Bir tarayıcı penceresi açın ve adresine gidin `https://github.com` .
-1. **+** Başlıktaki aşağı açılan düğmesine tıklayın ve **yeni depo** ' ı seçin:
+1. **+** Başlıktaki aşağı açılan düğmesine tıklayın ve **yeni depo**' ı seçin:
 
     ![GitHub yeni depo seçeneği](media/cicd/github-new-repo.png)
 
 1. **Sahip** açılır penceresinde hesabınızı seçin ve **Depo adı** metin kutusuna *basit-Feed-Reader* girin.
 1. **Depo oluştur** düğmesine tıklayın.
 1. Yerel makinenizin komut kabuğunu açın. *Basit akış okuyucusu* git deposunun depolandığı dizine gidin.
-1. Var olan *kaynağı* uzak *yukarı akış* olarak yeniden adlandırın. Şu kodu yürütün:
+1. Var olan *kaynağı* uzak *yukarı akış* olarak yeniden adlandırın. Aşağıdaki komutu yürütün:
 
     ```console
     git remote rename origin upstream
     ```
 
-1. GitHub 'daki deponun kopyasına işaret eden yeni bir *Başlangıç noktası* ekleyin. Şu kodu yürütün:
+1. GitHub 'daki deponun kopyasına işaret eden yeni bir *Başlangıç noktası* ekleyin. Aşağıdaki komutu yürütün:
 
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
 
-1. Yerel git deponuzu yeni oluşturulan GitHub deposuna yayımlayın. Şu kodu yürütün:
+1. Yerel git deponuzu yeni oluşturulan GitHub deposuna yayımlayın. Aşağıdaki komutu yürütün:
 
     ```console
     git push -u origin master
@@ -78,9 +78,9 @@ Yerel git dağıtımını aşağıdaki adımlarla kaldırın. Azure Pipelines (b
 
     ![hazırlama Web uygulaması arama terimi](media/cicd/portal-search-box.png)
 
-1. **Dağıtım Merkezi** ' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
+1. **Dağıtım Merkezi**' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
 1. *MyWebApp<unique_number>* App Service gidin. Bir anımsatıcı olarak, App Service hızlı bir şekilde bulmak için portalın arama kutusu kullanılabilir.
-1. **Dağıtım Merkezi** ' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
+1. **Dağıtım Merkezi**' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
 
 ## <a name="create-an-azure-devops-organization"></a>Azure DevOps kuruluşu oluşturma
 
@@ -111,14 +111,14 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Kaynak seçin-GitHub](media/cicd/vsts-select-source.png)
 
-1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örneğin:
+1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örnek:
 
     ![GitHub bağlantı adı](media/cicd/vsts-repo-authz.png)
 
 1. GitHub hesabınızda iki öğeli kimlik doğrulaması etkinleştirilirse, kişisel erişim belirteci gereklidir. Bu durumda, **GitHub kişisel erişim belirteci Ile yetkilendirme** bağlantısına tıklayın. Yardım için [resmi GitHub kişisel erişim belirteci oluşturma yönergelerine](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) bakın. İzinlerin yalnızca *Depo* kapsamı gereklidir. Aksi takdirde, **OAuth kullanarak Yetkilendir** düğmesine tıklayın.
 1. İstendiğinde, GitHub hesabınızda oturum açın. Ardından, Azure DevOps kuruluşunuza erişim vermek için yetkilendir ' i seçin. Başarılı olursa, yeni bir hizmet uç noktası oluşturulur.
 1. **Depo** düğmesinin yanındaki üç nokta düğmesine tıklayın. Listeden *<GitHub_username>/Simple-Feed-Reader* deposunu seçin. **Seç** düğmesine tıklayın.
-1. **El ile ve zamanlanmış yapılar açılır Için varsayılan daldan** *ana* dalı seçin. **Devam** düğmesine tıklayın. Şablon seçimi sayfası görüntülenir.
+1. **El ile ve zamanlanmış yapılar açılır Için varsayılan daldan** varsayılan dalı (*ana*) seçin. **Devam** düğmesine tıklayın. Şablon seçimi sayfası görüntülenir.
 
 ### <a name="create-the-build-definition"></a>Derleme tanımı oluşturma
 
@@ -132,7 +132,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Sürekli tümleştirme ayarlarını etkinleştir](media/cicd/vsts-enable-ci.png)
 
-    Bu ayarlar, GitHub deposunun *ana* dalına herhangi bir değişiklik gönderildiğinde bir yapılandırmanın tetiklenmesine neden olur. Sürekli tümleştirme, [GitHub 'daki değişiklikleri Yürüt ve Azure 'a otomatik olarak dağıt](#commit-changes-to-github-and-automatically-deploy-to-azure) bölümünde test edilir.
+    Bu ayarlar, GitHub deposunun varsayılan dalına (*ana*) herhangi bir değişiklik gönderildiğinde bir yapılandırmanın tetiklenmesine neden olur. Sürekli tümleştirme, [GitHub 'daki değişiklikleri Yürüt ve Azure 'a otomatik olarak dağıt](#commit-changes-to-github-and-automatically-deploy-to-azure) bölümünde test edilir.
 
 1. **& kuyruğu kaydet** düğmesine tıklayın ve **Kaydet** seçeneğini belirleyin:
 
@@ -166,7 +166,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
 1. **Kaynak türü** bölümünden **Yapı** kutucuğunu seçin. Bu tür, yayın işlem hattının derleme tanımına bağlanmasına izin verir.
 1. **Proje** açılır listesinden *myfirstproject* ' i seçin.
-1. **Kaynak (derleme tanımı)** açılır listesinden derleme tanımı adı, *MYFIRSTPROJECT-ASP.NET Core-CI* ' ı seçin.
+1. **Kaynak (derleme tanımı)** açılır listesinden derleme tanımı adı, *MYFIRSTPROJECT-ASP.NET Core-CI*' ı seçin.
 1. **Varsayılan sürüm** açılır listesinden *en son* ' u seçin. Bu seçenek derleme tanımının en son çalıştırması tarafından oluşturulan yapıtları oluşturur.
 1. **Kaynak diğer ad** metin kutusundaki metni *Drop* ile değiştirin.
 1. **Ekle** düğmesine tıklayın. **Yapıtlar** bölümü, değişiklikleri görüntüleyecek şekilde güncelleştirilir.
@@ -176,7 +176,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     Bu seçenek etkinken, her yeni derleme kullanılabilir olduğunda bir dağıtım oluşur.
 1. Doğru bir **sürekli dağıtım tetikleme** paneli görüntülenir. Özelliği etkinleştirmek için iki durumlu düğmeye tıklayın. **Çekme isteği tetikleyicisini** etkinleştirmek gerekli değildir.
-1. **Yapı Dalı filtreleri** bölümünde **Ekle** açılan düğmesine tıklayın. **Derleme tanımının varsayılan dal** seçeneğini belirleyin. Bu filtre, yayının yalnızca GitHub deposunun *ana* dalından bir derleme için tetiklenmesine neden olur.
+1. **Yapı Dalı filtreleri** bölümünde **Ekle** açılan düğmesine tıklayın. **Derleme tanımının varsayılan dal** seçeneğini belirleyin. Bu filtre, yayının yalnızca GitHub deposunun varsayılan dalından (*ana*) bir derleme için tetiklenmesine neden olur.
 1. **Kaydet** düğmesine tıklayın. Elde edilen **kaydetme** kalıcı Iletişim kutusunda **Tamam** düğmesine tıklayın.
 1. **Ortam 1** kutusuna tıklayın. Sağ tarafta bir **ortam** paneli görüntülenir. **Ortam adı** metin kutusundaki *ortam 1* metnini *Üretim* olarak değiştirin.
 
@@ -211,15 +211,15 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
     git commit -a -m "upgraded to V4"
     ```
 
-1. *Ana* daldaki değişikliği GitHub deponuzdaki *kaynak* uzak adına gönderin:
+1. Varsayılan daldaki (*ana*) değişikliği GitHub deponuzun *kaynak* uzak adına gönderin. Aşağıdaki komutta yer tutucusunu `{BRANCH}` varsayılan Dalla değiştirin (kullanın `master` ):
 
     ```console
-    git push origin master
+    git push origin {BRANCH}
     ```
 
-    Kayıt, GitHub deposunun *ana* dalında görünür:
+    Kayıt, GitHub deposunun varsayılan dalında (*ana*) görünür:
 
-    ![Ana dalda GitHub yürütmesi](media/cicd/github-commit.png)
+    ![Varsayılan dalda GitHub yürütmesi (ana)](media/cicd/github-commit.png)
 
     Derleme, derleme tanımının **Tetikleyiciler** sekmesinde sürekli tümleştirme etkinleştirildiğinden tetiklenir:
 
@@ -273,7 +273,7 @@ Yayımlanan yapıtları incelemek için **İndir** ve **keşfet** bağlantılar�
 
 ![Yayın ardışık düzenine genel bakış gösteren ekran görüntüsü](media/cicd/release-definition-overview.png)
 
-Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır** . **Yapıtlar** bölümündeki kutuya tıklanması aşağıdaki paneli ortaya çıkarır:
+Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır**. **Yapıtlar** bölümündeki kutuya tıklanması aşağıdaki paneli ortaya çıkarır:
 
 ![Yayın işlem hattı yapılarını gösteren ekran görüntüsü](media/cicd/release-definition-artifacts.png)
 
@@ -281,7 +281,7 @@ Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır** . *
 
 ![Yayın ardışık düzen görevlerini gösteren ekran görüntüsü](media/cicd/release-definition-tasks.png)
 
-Yayın işlem hattı iki görevden oluşur: *yuvaya Azure App Service dağıtın* ve *Azure App Service yuvası değiştirme 'yi yönetir* . İlk göreve tıkladığınızda aşağıdaki görev yapılandırması görünür:
+Yayın işlem hattı iki görevden oluşur: *yuvaya Azure App Service dağıtın* ve *Azure App Service yuvası değiştirme 'yi yönetir*. İlk göreve tıkladığınızda aşağıdaki görev yapılandırması görünür:
 
 ![Yayın işlem hattı dağıtım görevini gösteren ekran görüntüsü](media/cicd/release-definition-task1.png)
 

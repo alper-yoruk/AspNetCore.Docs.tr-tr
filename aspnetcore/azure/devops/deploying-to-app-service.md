@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 52c4905ecb3a76f1dd10629f834b2b541b698774
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f1c7acba0b7fb7dc07da576b188e580328ff4b89
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052363"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901164"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service için uygulama dağıtma
 
@@ -121,13 +121,13 @@ Uygulamayı dağıtmak için bir App Service [Web uygulaması](/azure/app-servic
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. Web uygulamasını yerel git 'ten dağıtımları kabul edecek şekilde yapılandırın ve *Git DAĞıTıM URL* 'sini görüntüleyin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
+    f. Web uygulamasını yerel git 'ten dağıtımları kabul edecek şekilde yapılandırın ve *Git DAĞıTıM URL*'sini görüntüleyin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
 
     ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    örneğin: *Web uygulaması URL 'sini* görüntüleyin. Boş Web uygulamasını görmek için bu URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
+    örneğin: *Web uygulaması URL 'sini* görüntüleyin. Boş Web uygulamasını görmek için bu URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -141,7 +141,7 @@ Uygulamayı dağıtmak için bir App Service [Web uygulaması](/azure/app-servic
     git remote add azure-prod GIT_DEPLOYMENT_URL
     ```
 
-    b. Yerel *ana* dalı *Azure-prod* uzak öğesinin *ana* dalına gönderin.
+    b. Yerel varsayılan dalı (*ana*) *Azure-prod* uzak öğesinin varsayılan dalına (*ana*) gönderin.
 
     ```console
     git push azure-prod master
@@ -160,12 +160,12 @@ Uygulama, komut kabuğundan zaten dağıtıldı. Uygulamaya bir güncelleştirme
 1. Visual Studio 'da *Simplefeedreader. sln* ' i açın.
 2. Çözüm Gezgini, *Pages\ındex.cshtml* dosyasını açın. `<h2>Simple Feed Reader</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V2</h2>` .
 3. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
-4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla** ' ya tıklayın.
+4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla**' ya tıklayın.
 
     ![Sağ tıklama, yayımlamayı gösteren ekran görüntüsü](./media/deploying-to-app-service/publish.png)
-5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç** ' i seçin. **Yayımla** ’ya tıklayın.
+5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ya tıklayın.
 6. **App Service** iletişim kutusunda, Azure aboneliğinizi oluşturmak Için kullanılan Microsoft veya kuruluş hesabının sağ üst köşede görüntülendiğini doğrulayın. Aksi takdirde, açılan eklentiye tıklayın ve ekleyin.
-7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm** Için **kaynak grubu** ' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** ’a tıklayın.
+7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm** Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** düğmesine tıklayın.
 
     ![Yayımla App Service iletişim kutusunu gösteren ekran görüntüsü](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -186,13 +186,13 @@ Dağıtım yuvaları, üretimde çalışan uygulamayı etkilemeden değişiklikl
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. Hazırlama yuvasını yerel git 'ten dağıtımı kullanacak şekilde yapılandırın ve **hazırlama** dağıtımı URL 'sini alın. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
+    b. Hazırlama yuvasını yerel git 'ten dağıtımı kullanacak şekilde yapılandırın ve **hazırlama** dağıtımı URL 'sini alın. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
 
     ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. Hazırlama yuvasının URL 'sini görüntüleyin. Boş hazırlama yuvasını görmek için URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
+    c. Hazırlama yuvasının URL 'sini görüntüleyin. Boş hazırlama yuvasını görmek için URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
@@ -214,7 +214,7 @@ Dağıtım yuvaları, üretimde çalışan uygulamayı etkilemeden değişiklikl
     git remote add azure-staging <Git_staging_deployment_URL>
     ```
 
-    b. Yerel *ana* dalı *Azure hazırlama* uzak uygulamasının *ana* dalına gönderin.
+    b. Yerel varsayılan dalı (*ana*) *Azure hazırlama* uzak öğesinin varsayılan dalına (*ana*) gönderin.
 
     ```console
     git push azure-staging master
