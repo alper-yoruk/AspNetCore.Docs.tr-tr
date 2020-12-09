@@ -1,9 +1,9 @@
-<span data-ttu-id="16563-101">İç içe bileşenler genellikle ' de açıklandığı gibi *zincirleme bağlama* kullanarak verileri bağlar <xref:blazor/components/data-binding> .</span><span class="sxs-lookup"><span data-stu-id="16563-101">Nested components typically bind data using *chained bind* as described in <xref:blazor/components/data-binding>.</span></span> <span data-ttu-id="16563-102">İç içe ve iç içe geçmiş bileşenler, kayıtlı bir bellek içi durum kapsayıcısını kullanarak verilere erişimi paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="16563-102">Nested and un-nested components can share access to data using a registered in-memory state container.</span></span> <span data-ttu-id="16563-103">Özel durum kapsayıcı sınıfı <xref:System.Action> , bileşenleri durum değişikliği uygulamasının farklı bölümlerinde bilgilendirmek için atanabilir bir şekilde kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="16563-103">A custom state container class can use an assignable <xref:System.Action> to notify components in different parts of the app of state changes.</span></span> <span data-ttu-id="16563-104">Aşağıdaki örnekte:</span><span class="sxs-lookup"><span data-stu-id="16563-104">In the following example:</span></span>
+<span data-ttu-id="5611d-101">İç içe bileşenler genellikle ' de açıklandığı gibi *zincirleme bağlama* kullanarak verileri bağlar <xref:blazor/components/data-binding> .</span><span class="sxs-lookup"><span data-stu-id="5611d-101">Nested components typically bind data using *chained bind* as described in <xref:blazor/components/data-binding>.</span></span> <span data-ttu-id="5611d-102">İç içe ve iç içe geçmiş bileşenler, kayıtlı bir bellek içi durum kapsayıcısını kullanarak verilere erişimi paylaşabilir.</span><span class="sxs-lookup"><span data-stu-id="5611d-102">Nested and un-nested components can share access to data using a registered in-memory state container.</span></span> <span data-ttu-id="5611d-103">Özel durum kapsayıcı sınıfı <xref:System.Action> , bileşenleri durum değişikliği uygulamasının farklı bölümlerinde bilgilendirmek için atanabilir bir şekilde kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="5611d-103">A custom state container class can use an assignable <xref:System.Action> to notify components in different parts of the app of state changes.</span></span> <span data-ttu-id="5611d-104">Aşağıdaki örnekte:</span><span class="sxs-lookup"><span data-stu-id="5611d-104">In the following example:</span></span>
 
-* <span data-ttu-id="16563-105">Bir çift bileşen, bir özelliği izlemek için bir durum kapsayıcısı kullanır.</span><span class="sxs-lookup"><span data-stu-id="16563-105">A pair of components uses a state container to track a property.</span></span>
-* <span data-ttu-id="16563-106">Örneğin bileşenleri iç içe, ancak bu yaklaşımın çalışması için iç içe geçme gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="16563-106">The components of the example are nested, but nesting isn't required for this approach to work.</span></span>
+* <span data-ttu-id="5611d-105">Bir çift bileşen, bir özelliği izlemek için bir durum kapsayıcısı kullanır.</span><span class="sxs-lookup"><span data-stu-id="5611d-105">A pair of components uses a state container to track a property.</span></span>
+* <span data-ttu-id="5611d-106">Örneğin bileşenleri iç içe, ancak bu yaklaşımın çalışması için iç içe geçme gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="5611d-106">The components of the example are nested, but nesting isn't required for this approach to work.</span></span>
 
-<span data-ttu-id="16563-107">`StateContainer.cs`:</span><span class="sxs-lookup"><span data-stu-id="16563-107">`StateContainer.cs`:</span></span>
+<span data-ttu-id="5611d-107">`StateContainer.cs`:</span><span class="sxs-lookup"><span data-stu-id="5611d-107">`StateContainer.cs`:</span></span>
 
 ```csharp
 public class StateContainer
@@ -22,19 +22,19 @@ public class StateContainer
 }
 ```
 
-<span data-ttu-id="16563-108">İçinde `Program.Main` (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="16563-108">In `Program.Main` (Blazor WebAssembly):</span></span>
+<span data-ttu-id="5611d-108">İçinde `Program.Main` (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="5611d-108">In `Program.Main` (Blazor WebAssembly):</span></span>
 
 ```csharp
 builder.Services.AddSingleton<StateContainer>();
 ```
 
-<span data-ttu-id="16563-109">İçinde `Startup.ConfigureServices` (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="16563-109">In `Startup.ConfigureServices` (Blazor Server):</span></span>
+<span data-ttu-id="5611d-109">İçinde `Startup.ConfigureServices` (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="5611d-109">In `Startup.ConfigureServices` (Blazor Server):</span></span>
 
 ```csharp
 services.AddSingleton<StateContainer>();
 ```
 
-<span data-ttu-id="16563-110">`Pages/Component1.razor`:</span><span class="sxs-lookup"><span data-stu-id="16563-110">`Pages/Component1.razor`:</span></span>
+<span data-ttu-id="5611d-110">`Pages/Component1.razor`:</span><span class="sxs-lookup"><span data-stu-id="5611d-110">`Pages/Component1.razor`:</span></span>
 
 ```razor
 @page "/Component1"
@@ -69,7 +69,7 @@ services.AddSingleton<StateContainer>();
 }
 ```
 
-<span data-ttu-id="16563-111">`Shared/Component2.razor`:</span><span class="sxs-lookup"><span data-stu-id="16563-111">`Shared/Component2.razor`:</span></span>
+<span data-ttu-id="5611d-111">`Shared/Component2.razor`:</span><span class="sxs-lookup"><span data-stu-id="5611d-111">`Shared/Component2.razor`:</span></span>
 
 ```razor
 @inject StateContainer StateContainer
