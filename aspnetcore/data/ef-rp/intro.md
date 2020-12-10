@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/intro
 ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 12/10/2020
 ms.locfileid: "96855514"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
@@ -126,7 +126,7 @@ To run the app after downloading the completed project:
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **ASP.NET Core Web uygulaması**.
-    1. **Create** 
+    1.  
        Oluştur ![ Yeni ASP.NET Core projesi iletişim kutusu](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -229,10 +229,10 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar/öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve  > **yeni yapı iskelesi Ekle öğesini** seçin.
 * **Yeni yapı Iskelesi öğesi Ekle** iletişim kutusunda:
   * Sol sekmede, **yüklü > ortak > Razor sayfaları** ' nı seçin
-  * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD**.
+  * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > .
 * **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
@@ -717,8 +717,8 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar* klasöründe bir *öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
-* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve  > **yeni yapı iskelesi Ekle öğesini** seçin.
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > .
 * **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
@@ -1098,8 +1098,8 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi** ekleyin >.
-* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
+* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayarak  > **yeni yapı iskelesi öğesi** ekleyin >.
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > .
 
 **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunu doldurun:
 
