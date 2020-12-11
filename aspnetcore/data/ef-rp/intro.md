@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.openlocfilehash: 86b57a9cad27673b72ad174a18741f5528f9f78a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 12/10/2020
-ms.locfileid: "96855514"
+ms.locfileid: "97011864"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -237,7 +237,8 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
     * Veri bağlamı adını yerine End ile değiştirin `SchoolContext` `ContosoUniversityContext` . Güncelleştirilmiş bağlam adı: `ContosoUniversity.Data.SchoolContext`
-   * **Ekle**’yi seçin.
+    * Veri bağlamı sınıfını eklemeyi bitirmeden **Ekle** ' yi seçin.
+   * **Ekle** ' yi seçerek **Razor sayfa ekle** iletişim kutusunu sona erdirin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 

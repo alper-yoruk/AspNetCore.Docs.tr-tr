@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855293"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011877"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -685,7 +685,7 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, `<base>` içindeki eti
   dotnet run --contentroot=/content-root-path
   ```
 
-* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` . **IIS Express** Bu ayar, uygulama Visual Studio hata ayıklayıcısı ve ile bir komut isteminden çalıştırıldığında kullanılır `dotnet run` .
+* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` .  Bu ayar, uygulama Visual Studio hata ayıklayıcısı ve ile bir komut isteminden çalıştırıldığında kullanılır `dotnet run` .
 
   ```json
   "commandLineArgs": "--contentroot=/content-root-path"
@@ -710,7 +710,7 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, `<base>` içindeki eti
   dotnet run --pathbase=/relative-URL-path
   ```
 
-* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` . **IIS Express** Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla ve ile bir komut isteminden çalıştırırken kullanılır `dotnet run` .
+* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` .  Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla ve ile bir komut isteminden çalıştırırken kullanılır `dotnet run` .
 
   ```json
   "commandLineArgs": "--pathbase=/relative-URL-path"
@@ -732,7 +732,7 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, `<base>` içindeki eti
   dotnet run --urls=http://127.0.0.1:0
   ```
 
-* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` . **IIS Express** Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla ve ile bir komut isteminden çalıştırırken kullanılır `dotnet run` .
+* IIS Express profilindeki uygulamanın dosyasına bir giriş ekleyin `launchSettings.json` .  Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla ve ile bir komut isteminden çalıştırırken kullanılır `dotnet run` .
 
   ```json
   "commandLineArgs": "--urls=http://127.0.0.1:0"
@@ -910,9 +910,7 @@ Blazor WebAssemblyUygulamanın başlangıç dosyalarını indirdiğinde, tarayı
 
 Web sunucunuz beklenen SHA-256 karmalarıyla eşleşmeyen yanıtlar döndürürse, tarayıcının geliştirici konsolunda aşağıdakine benzer bir hata görürsünüz:
 
-```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
-```
+> https://myapp.example.com/\_framework/My Blazor Hesaplanan SHA-256 bütünlüğü ' IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY = ' ile 'App.dll ' kaynağı için ' Integrity ' özniteliğinde geçerli bir Özet bulunamadı. Kaynak engellendi.
 
 Çoğu durumda bu, bütünlük denetimi ile ilgili bir sorun *değildir* . Bunun yerine, başka bir sorun olduğu anlamına gelir ve bu sorunu gidermek için bütünlük denetimi size uyarı verebilir.
 
@@ -961,6 +959,13 @@ PowerShell komut kabuğu 'nda aşağıdaki komutla betiği çağırın:
 
 * `{BASE URL}`: Dağıtılan uygulamanın URL 'SI.
 * `{PUBLISH OUTPUT FOLDER}`: Uygulamanın `publish` dağıtım için yayımlandığı klasörün veya konumun yolu.
+
+> [!NOTE]
+> `dotnet/AspNetCore.Docs`GitHub deposunu [BitDefender](https://www.bitdefender.com) virüs tarayıcısını kullanan bir sisteme kopyalamak için, komut dosyası için BitDefender 'a bir özel durum ekleyin `integrity.ps1` . Betiği, virüs tarayıcısı tarafından karantinaya almadan önce depoyu kopyalamadan önce BitDefender ' a özel durum ekleyin. Aşağıdaki örnek, bir Windows sistemindeki kopyalanmış depo için bir komut dosyasının tipik yoludur. Yolu gereken şekilde ayarlayın. Yer tutucu, `{USER}` kullanıcının yol segmentinde yer tutucudur.
+>
+> ```
+> C:\Users\{USER}\Documents\GitHub\AspNetCore.Docs\aspnetcore\blazor\host-and-deploy\webassembly\_samples\integrity.ps1
+> ```
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>PWA olmayan uygulamalar için bütünlük denetimini devre dışı bırakma
 

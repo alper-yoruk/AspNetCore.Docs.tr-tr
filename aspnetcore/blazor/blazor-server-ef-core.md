@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 6a74b8c5668a37082f648ae74210d90684c4559c
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 10fc0afe84065f2c226d1e9c2f4314142369613a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320115"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011890"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>Blazor ServerEntity Framework Core ile ASP.NET Core (EFCore)
 
@@ -111,7 +111,7 @@ Fabrika bileşenlere eklenir ve yeni örnekler oluşturmak için kullanılır. �
 > [!NOTE]
 > `Wrapper` bileşene bir [bileşen başvurusu](xref:blazor/components/index#capture-references-to-components) `GridWrapper` . `Index` `Pages/Index.razor` [Örnek uygulamadaki](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)bileşene () bakın.
 
-Yeni <xref:Microsoft.EntityFrameworkCore.DbContext> örnekler, her başına bağlantı dizesini yapılandırmanıza olanak tanıyan `DbContext` , örneğin [ASP.NET Core Identity model]) (XREF: Security/Authentication/customize_identity_model) gibi bir fabrika ile oluşturulabilir:
+Yeni <xref:Microsoft.EntityFrameworkCore.DbContext> örnekler `DbContext` , [ASP.NET Core Identity modelini](xref:security/authentication/customize_identity_model)kullanırken olduğu gibi, her bir bağlantı dizesini yapılandırmanıza olanak tanıyan bir fabrika ile oluşturulabilir:
 
 ```csharp
 services.AddDbContextFactory<ApplicationDbContext>(options =>
