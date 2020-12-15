@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: c6f9815f473380f96092d663cdd785fd19109701
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855306"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506909"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -65,9 +65,13 @@ Uygulamanın dosyasındaki varsayılan uygulama yerleşimini belirtin <xref:Micr
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 İçerik için varsayılan bir düzen sağlamak üzere <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> bir içerik belirtin <xref:Microsoft.AspNetCore.Components.LayoutView> <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 Bileşen hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.Routing.Router> bkz <xref:blazor/fundamentals/routing> ..
 
@@ -81,7 +85,7 @@ Aşağıdaki `MasterList` bileşenin içeriği konumuna öğesine eklenir `Maste
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-Düzen doğrudan bir bileşen içinde belirtildiğinde, yönlendirici veya *default layout* ' `@layout` den içe aktarılan bir yönergede ayarlanan varsayılan bir düzen geçersiz kılınır `_Imports.razor` .
+Düzen doğrudan bir bileşen içinde belirtildiğinde, yönlendirici veya  ' `@layout` den içe aktarılan bir yönergede ayarlanan varsayılan bir düzen geçersiz kılınır `_Imports.razor` .
 
 ## <a name="centralized-layout-selection"></a>Merkezi düzen seçimi
 
@@ -100,7 +104,7 @@ Aşağıdaki `_Imports.razor` Dosya içeri aktarmalar:
 İçinde bir düzen belirtildiğinde, `_Imports.razor` yönlendiricinin *varsayılan düzeni* olarak belirtilen bir düzen geçersiz kılınır.
 
 > [!WARNING]
-> **not** Razor `@layout` Kök dosyasına bir yönerge eklemeyin `_Imports.razor` ve bu, uygulamadaki sınırsız bir düzen döngüsüne neden olur. Varsayılan uygulama yerleşimini denetlemek için, bileşenin yerleşimini belirtin `Router` . Daha fazla bilgi için [varsayılan düzen](#default-layout) bölümüne bakın.
+>  Razor `@layout` Kök dosyasına bir yönerge eklemeyin `_Imports.razor` ve bu, uygulamadaki sınırsız bir düzen döngüsüne neden olur. Varsayılan uygulama yerleşimini denetlemek için, bileşenin yerleşimini belirtin `Router` . Daha fazla bilgi için [varsayılan düzen](#default-layout) bölümüne bakın.
 
 ## <a name="nested-layouts"></a>İç içe düzenleri
 

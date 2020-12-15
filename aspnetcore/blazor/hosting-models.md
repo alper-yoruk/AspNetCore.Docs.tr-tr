@@ -5,7 +5,7 @@ description: Blazor WebAssemblyModelleri anlayın ve Blazor Server barındırma.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/11/2020
+ms.date: 12/07/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,28 +19,26 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 1ec1f699d3beb5dbbc3851d9e3b6b1d3faf64cfd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a6f1c88b8e93c0d8ccfebca482895ebab8d18a81
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055678"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506922"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
-Blazor , bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zamanı ( *Blazor WebAssembly* ) veya ASP.NET Core () içindeki sunucu tarafında tarayıcıda istemci tarafı çalıştıracak şekilde tasarlanan bir Web çerçevesidir *Blazor Server* . Barındırma modelinden bağımsız olarak, uygulama ve bileşen modelleri *aynıdır* .
+Blazor , bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zamanı ( *Blazor WebAssembly* ) veya ASP.NET Core () içindeki sunucu tarafında tarayıcıda istemci tarafı çalıştıracak şekilde tasarlanan bir Web çerçevesidir *Blazor Server* . Barındırma modelinden bağımsız olarak, uygulama ve bileşen modelleri *aynıdır*.
 
 ## Blazor WebAssembly
 
-İçin sorumlu barındırma modeli, Blazor WebAssembly üzerinde tarayıcıda istemci tarafı çalıştırıyor. BlazorUygulama, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir. Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür. UI güncelleştirmeleri ve olay işleme aynı işlem içinde oluşur. Uygulamanın varlıkları, istemcilere statik içerik sunan bir Web sunucusuna veya hizmete statik dosyalar olarak dağıtılır. Uygulama, arka uç ASP.NET Core uygulaması olmadan dağıtım için oluşturulduğundan, *tek başına Blazor WebAssembly uygulama* olarak adlandırılır.
+Birincil Blazor barındırma modeli, WebAssembly üzerinde tarayıcıda istemci tarafı çalıştırıyor. BlazorUygulama, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir. Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür. UI güncelleştirmeleri ve olay işleme aynı işlem içinde oluşur. Uygulamanın varlıkları, istemcilere statik içerik sunan bir Web sunucusuna veya hizmete statik dosyalar olarak dağıtılır.
 
 ![::: No-Loc (Blazor WebAssembly):::: No-Loc (Blazor)::: uygulama, tarayıcı içindeki bir kullanıcı arabirimi iş parçacığında çalışır.](hosting-models/_static/blazor-webassembly.png)
 
-Blazorİstemci tarafı barındırma modelini kullanarak bir uygulama oluşturmak için **Blazor WebAssembly uygulama** şablonunu ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ) kullanın.
-
-**Blazor WebAssembly Uygulama** şablonunu seçtikten sonra, **ASP.NET Core barındırılan** onay kutusunu () seçerek uygulamayı ASP.NET Core arka ucunu kullanacak şekilde yapılandırma seçeneğiniz vardır [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) . ASP.NET Core uygulaması, Blazor uygulamayı istemcilere sunar. ASP.NET Core arka uca sahip bir uygulama *barındırılan Blazor WebAssembly uygulama* olarak adlandırılır. Blazor WebAssemblyUygulama, Web API çağrılarını veya () kullanarak ağ üzerinden sunucu ile etkileşime geçebilir [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> .
+Uygulama, Blazor WebAssembly dosyalarını sunacak bir arka uç ASP.NET Core uygulaması olmadan dağıtım için oluşturulduğunda, uygulamaya *tek başına* Blazor WebAssembly uygulama denir. Uygulama, dosyalarını sunacak bir arka uç uygulamasıyla dağıtım için oluşturulduğunda, uygulamaya *barındırılan* Blazor WebAssembly uygulama denir. Barındırılan bir Blazor WebAssembly uygulama, genellikle Web API çağrıları veya () kullanılarak ağ üzerinden sunucu ile etkileşime girer [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> .
 
 `blazor.webassembly.js`Betik, Framework ve işleyiciler tarafından sağlanır:
 
@@ -52,24 +50,24 @@ Blazor WebAssemblyBarındırma modeli çeşitli avantajlar sunar:
 * .NET sunucu tarafı bağımlılığı yoktur. Uygulama istemciye indirildikten sonra tam olarak çalışır.
 * İstemci kaynakları ve yetenekleri tamamen yararlanılabilir.
 * İş sunucudan istemciye boşaltılır.
-* Uygulamayı barındırmak için bir ASP.NET Core Web sunucusu gerekli değildir. Sunucusuz dağıtım senaryoları mümkündür (örneğin, bir CDN 'den uygulama sunma).
+* Uygulamayı barındırmak için bir ASP.NET Core Web sunucusu gerekli değildir. Uygulamaya bir Content Delivery Network (CDN) sunma gibi sunucusuz dağıtım senaryoları mümkündür.
 
-Barındırmak için aşağı taraf vardır Blazor WebAssembly :
+Blazor WebAssemblyBarındırma modeli aşağıdaki sınırlamalara sahiptir:
 
 * Uygulama tarayıcının özelliklerine kısıtlıdır.
 * Uyumlu istemci donanımı ve yazılımı (örneğin, WebAssembly desteği) gereklidir.
 * İndirme boyutu daha büyüktür ve uygulamaların yüklenmesi daha uzun sürer.
 * .NET çalışma zamanı ve araç desteği daha az olgun. Örneğin, [.NET Standard](/dotnet/standard/net-standard) desteğinin ve hata ayıklamada sınırlamalar mevcuttur.
 
-Barındırılan Blazor uygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da sunucu projesine sağ tıklayın ve **Add**  >  **Docker desteği** Ekle ' yi seçin.
+Bir uygulama oluşturmak için Blazor WebAssembly , bkz <xref:blazor/tooling> ..
+
+Barındırılan Blazor uygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da Docker desteği için, `Server` barındırılan bir çözümün projesine sağ tıklayın Blazor WebAssembly ve   >  **Docker desteği** Ekle ' yi seçin.
 
 ## Blazor Server
 
 Blazor ServerBarındırma modeliyle, uygulama sunucuda ASP.NET Core bir uygulama içinden yürütülür. Kullanıcı Arabirimi güncelleştirmeleri, olay işleme ve JavaScript çağrıları bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .
 
 ![Tarayıcı,::: No-Loc (SignalR)::: Connection üzerinden sunucu üzerinde uygulamayla (bir ASP.NET Core uygulama içinde barındırılan) etkileşime girer.](hosting-models/_static/blazor-server.png)
-
-BlazorBarındırma modelini kullanarak bir uygulama oluşturmak için Blazor Server ASP.NET Core **Blazor Server uygulama** şablonu ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new) ) kullanın. ASP.NET Core uygulama Blazor Server uygulamayı barındırır ve SignalR istemcilerin bağlanacağı uç noktayı oluşturur.
 
 ASP.NET Core uygulama, eklenecek uygulamanın sınıfına başvurur `Startup` :
 
@@ -87,20 +85,22 @@ Blazor ServerBarındırma modeli çeşitli avantajlar sunar:
 * Uygulamanın bileşen kodu da dahil olmak üzere, uygulamanın .NET/C# kod tabanı istemcilere sunulmuyor.
 
 > [!IMPORTANT]
-> Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu ayarlayan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , **istemci aynı sunucuya yeniden bağlanmalıdır** . Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR . Daha fazla bilgi için [sunucu bağlantısı](#connection-to-the-server) bölümüne bakın.
+> Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu oluşturan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , **istemci aynı sunucuya yeniden bağlanmalıdır**. Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR . Daha fazla bilgi için [sunucu bağlantısı](#connection-to-the-server) bölümüne bakın.
 
-Barındırmak için aşağı taraf vardır Blazor Server :
+Blazor ServerBarındırma modeli aşağıdaki sınırlamalara sahiptir:
 
 * Daha yüksek gecikme süresi genellikle vardır. Her Kullanıcı etkileşimi bir ağ atmasını içerir.
 * Çevrimdışı destek yoktur. İstemci bağlantısı başarısız olursa, uygulama çalışmayı durduruyor.
 * Ölçeklenebilirlik, çok sayıda kullanıcısı olan uygulamalar için zorlayıcı bir uygulamalardır. Sunucunun birden çok istemci bağlantısını yönetmesi ve istemci durumunu işlemesi gerekir.
-* Uygulamayı çalıştırmak için bir ASP.NET Core sunucusu gerekir. Sunucusuz dağıtım senaryoları mümkün değildir (örneğin, bir CDN 'den uygulama sunma).
+* Uygulamayı çalıştırmak için bir ASP.NET Core sunucusu gerekir. Uygulamaya bir Content Delivery Network (CDN) sunma gibi sunucusuz dağıtım senaryoları mümkün değildir.
 
-Blazor ServerUygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da projeye sağ tıklayın ve **Add**  >  **Docker desteği** Ekle ' yi seçin.
+Bir uygulama oluşturmak için Blazor Server , bkz <xref:blazor/tooling> ..
+
+Blazor ServerUygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da Docker desteği için, Visual Studio 'da projeye sağ tıklayın ve   >  **Docker desteği** Ekle ' yi seçin.
 
 ### <a name="comparison-to-server-rendered-ui"></a>Sunucu tarafından işlenmiş Kullanıcı arabirimine karşılaştırma
 
-Uygulamaları anlamanın bir yolu Blazor Server , görünümleri veya sayfaları kullanarak ASP.NET Core uygulamalarda Kullanıcı arabirimi oluşturma için geleneksel modellerden nasıl farklılık gösterir Razor Razor . Her iki model de Razor HTML içeriğini anlatmak için dili kullanır, ancak biçimlendirmenin nasıl işlendiği konusunda önemli ölçüde farklılık gösterir.
+Uygulamaları anlamanın bir yolu Blazor Server , görünümleri veya sayfaları kullanarak ASP.NET Core uygulamalarda Kullanıcı arabirimi oluşturma için geleneksel modellerden nasıl farklılık gösterir Razor Razor . Her iki model de, işleme için HTML içeriğini betimleyen [ Razor dili](xref:mvc/views/razor) kullanır, ancak biçimlendirmenin *nasıl işlendiği konusunda* önemli ölçüde farklılık gösterir.
 
 Bir Razor sayfa veya görünüm işlendiğinde, her Razor kod satırı metın biçiminde HTML yayar. Oluşturulduktan sonra sunucu, üretilen herhangi bir durum da dahil olmak üzere sayfayı veya görünüm örneğini ortadan kaldırır. Sayfa için başka bir istek gerçekleştiğinde, örneğin sunucu doğrulaması başarısız olduğunda ve doğrulama özeti görüntülendiğinde:
 
@@ -112,20 +112,20 @@ BlazorUygulama, *bileşen* olarak adlandırılan Kullanıcı arabiriminin yenide
 * HTML metnine açıldı (prerendering sırasında &dagger; ).
 * Düzenli işleme sırasında biçimlendirmeyi verimli bir şekilde güncelleştirmek için kullanılır.
 
-&dagger;*Prerendering* : istenen Razor Bileşen, sunucuda statik HTML 'ye derlendi ve istemciye gönderildiğinde, kullanıcıya işlendiğinde. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
+&dagger;*Prerendering*: istenen Razor Bileşen, sunucuda statik HTML 'ye derlendi ve istemciye gönderildiğinde, kullanıcıya işlendiğinde. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
 
 İçindeki bir kullanıcı arabirimi güncelleştirmesi Blazor tarafından tetiklenir:
 
 * Düğme seçme gibi kullanıcı etkileşimi.
 * Zamanlayıcı gibi uygulama Tetikleyicileri.
 
-Grafik yeniden tanımlanır ve bir UI *farkı* (fark) hesaplanır. Bu fark, istemcideki Kullanıcı arabirimini güncelleştirmek için gereken en küçük DOM düzenlemelerinin kümesidir. Fark istemciye bir ikili biçimde gönderilir ve tarayıcı tarafından uygulanır.
+Bileşen grafiği yeniden kullanılır ve bir UI *farkı* (fark) hesaplanır. Bu fark, istemcideki Kullanıcı arabirimini güncelleştirmek için gereken en küçük DOM düzenlemelerinin kümesidir. Fark istemciye bir ikili biçimde gönderilir ve tarayıcı tarafından uygulanır.
 
 Kullanıcı, istemci üzerinde bundan uzaklaştığında bir bileşen atılmış olur. Bir Kullanıcı bir bileşenle etkileşim kurarken, bileşenin durumu (hizmetler, kaynaklar) sunucunun belleğinde tutulmalıdır. Birçok bileşenin durumu sunucu tarafından eşzamanlı olarak Korunabileceğinden, bellek tükenmesi sorunu ele alınmalıdır. Blazor ServerSunucu belleğinin en iyi şekilde kullanılmasını sağlamak üzere bir uygulama yazma hakkında yönergeler için, bkz <xref:blazor/security/server/threat-mitigation> ..
 
 ### <a name="circuits"></a>Uygulanıp
 
-Bir Blazor Server uygulama [ASP.NET Core SignalR ](xref:signalr/introduction)üzerine kurulmuştur. Her istemci, devre adlı bir veya daha fazla bağlantı üzerinden sunucusuyla iletişim kurar SignalR . *circuit* Devre, Blazor SignalR geçici ağ kesintilerine tolerans sağlayan bağlantılar üzerinde soyutlamadır. Blazorİstemci SignalR bağlantının kesileceğini gördüğünde, yeni bir bağlantı kullanarak sunucuya yeniden bağlanmaya çalışır SignalR .
+Bir Blazor Server uygulama [ASP.NET Core SignalR ](xref:signalr/introduction)üzerine kurulmuştur. Her istemci, devre adlı bir veya daha fazla bağlantı üzerinden sunucusuyla iletişim kurar SignalR .  Devre, Blazor SignalR geçici ağ kesintilerine tolerans sağlayan bağlantılar üzerinde soyutlamadır. Blazorİstemci SignalR bağlantının kesileceğini gördüğünde, yeni bir bağlantı kullanarak sunucuya yeniden bağlanmaya çalışır SignalR .
 
 Bir uygulamaya bağlı her tarayıcı ekranı (tarayıcı sekmesi veya iframe) Blazor Server bir SignalR bağlantı kullanır. Bu, tipik sunucu tarafından işlenmiş uygulamalarla karşılaştırıldığında daha önemli bir ayırım ifade etmiştir. Sunucu tarafından işlenen bir uygulamada, aynı uygulamayı birden çok tarayıcı ekranında açmak genellikle sunucuda ek kaynak taleplerine çevirilmez. Bir Blazor Server uygulamada, her tarayıcı ekranı için ayrı bir devre ve sunucu tarafından yönetilecek bileşen durumunun ayrı örnekleri gerekir.
 
@@ -137,7 +137,7 @@ Blazor Server kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde 
 
 UI gecikme süresi, başlatılan bir eylemden Kullanıcı arabiriminin güncelleştirildiği zamana kadar geçen süredir. Bir uygulamanın kullanıcıya yanıt vermesi için kullanıcı ARABIRIMI gecikmesi için daha küçük değerler zorunludur. Bir Blazor Server uygulamada, her eylem sunucusuna gönderilir, işlenir ve bır UI farkı geri gönderilir. Sonuç olarak, UI gecikmesi ağ gecikme süresinin toplamı ve eylemi işlerken sunucu gecikmesi sayısıdır.
 
-Özel bir kurumsal ağla sınırlı bir iş kolu uygulaması için, ağ gecikmesi nedeniyle kullanıcı gecikmesi algılarını üzerindeki etki, genellikle çok sayıda CEPSİZ olur. Internet üzerinden dağıtılan bir uygulama için, özellikle de kullanıcılar coğrafi olarak coğrafi olarak dağıtılmışsa gecikme süresi kullanıcılara karşı farklılık gösterebilir.
+Özel bir kurumsal ağla sınırlı bir iş uygulaması için, ağ gecikmesi nedeniyle kullanıcı gecikmesi algılarını üzerindeki etki, genellikle çok sayıda CEPSİZ olur. Internet üzerinden dağıtılan bir uygulama için, özellikle de kullanıcılar coğrafi olarak coğrafi olarak dağıtılmışsa gecikme süresi kullanıcılara karşı farklılık gösterebilir.
 
 Bellek kullanımı ayrıca uygulama gecikme süresine de katkıda bulunabilir. Daha fazla bellek kullanımı, her ikisi de uygulama performansının düşmesine neden olan ve bu nedenle kullanıcı arabirimi gecikmesini arttığı diskte sık görülen çöp toplama veya disk belleği belleği
 
@@ -148,16 +148,17 @@ Blazor Server Ağ gecikmesi ve bellek kullanımını azaltarak Kullanıcı arabi
 
 ### <a name="connection-to-the-server"></a>Sunucuyla bağlantı
 
-Blazor Server uygulamalar sunucuya etkin bir SignalR bağlantı gerektirir. Bağlantı kaybolursa, uygulama sunucuya yeniden bağlanmaya çalışır. İstemcinin durumu hala bellekte olduğu sürece, istemci oturumu durum kaybı olmadan devam eder.
+Blazor Server uygulamalar sunucuya etkin bir SignalR bağlantı gerektirir. Bağlantı kaybolursa, uygulama sunucuya yeniden bağlanmaya çalışır. İstemcinin durumu sunucunun belleğinde kaldığı sürece, istemci oturumu durum kaybı olmadan devam eder.
 
-Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu ayarlayan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , istemci aynı sunucuya yeniden bağlanmalıdır. Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR .
+Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu oluşturan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , istemci aynı sunucuya yeniden bağlanmalıdır. Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR .
 
 Uygulamalar için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Sticky Sessions, SignalR hizmetin `ServerStickyMode` seçenek veya yapılandırma değeri olarak ayarlanarak Azure hizmeti için etkinleştirilir `Required` . Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/server#signalr-configuration>.
 
-IIS kullanırken, yapışkan oturumlar uygulama Isteği yönlendirme ile etkinleştirilir. Daha fazla bilgi için bkz. [uygulama Isteği yönlendirme kullanarak HTTP yük dengelemesi](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
+IIS kullanırken, yapışkan oturumlar *uygulama Isteği yönlendirme* ile etkinleştirilir. Daha fazla bilgi için bkz. [uygulama Isteği yönlendirme kullanarak HTTP yük dengelemesi](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
+* <xref:blazor/tooling>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

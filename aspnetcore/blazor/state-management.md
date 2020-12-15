@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 24f845bc1d98331f2ee54710d17beb6ffa95ad88
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 6e6f3047da30490caff4f820003a3018e8c26aaa
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855423"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506623"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -126,7 +126,7 @@ Genellikle, `sessionStorage` kullanmak daha güvenlidir. `sessionStorage` bir ku
 
 <h2 id="in-memory-state-container-service-wasm">Bellek içi durum kapsayıcısı hizmeti</h2>
 
-[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+[!INCLUDE[](~/blazor/includes/state-container.md)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -427,6 +427,8 @@ Bileşeni kullanmak için `CounterStateProvider` , bileşenin bir örneğini say
 </CounterStateProvider>
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 Sarmalanan bileşenler, kalıcı sayaç durumunu alır ve değiştirebilir. Aşağıdaki `Counter` Bileşen, bu kalıbı uygular:
 
 ```razor
@@ -670,6 +672,8 @@ Bileşeni kullanmak için `CounterStateProvider` , bileşenin bir örneğini say
 </CounterStateProvider>
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 Sarmalanan bileşenler, kalıcı sayaç durumunu alır ve değiştirebilir. Aşağıdaki `Counter` Bileşen, bu kalıbı uygular:
 
 ```razor
@@ -705,6 +709,6 @@ Birçok farklı durum nesnesini kalıcı hale getirmek ve farklı yerlerde nesne
 
 <h2 id="in-memory-state-container-service-server">Bellek içi durum kapsayıcısı hizmeti</h2>
 
-[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+[!INCLUDE[](~/blazor/includes/state-container.md)]
 
 ::: zone-end

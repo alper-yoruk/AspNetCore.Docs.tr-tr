@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 6a1feffb5341d432d6d1949a9e26b9537b85ba03
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6e7fa6e231e97793fbf7e1ac1d208bf3013c6fce
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054794"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506584"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 
@@ -75,6 +75,8 @@ Uygulamanın `Router` bileşeninde ( `App.razor` ):
 }
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 `OnNavigateAsync`Geri çağırma işlenmeyen bir özel durum oluşturursa, [ Blazor hata Kullanıcı arabirimi](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) çağrılır.
 
 ### <a name="assembly-load-logic-in-onnavigateasync"></a>İçindeki derleme yükleme mantığı `OnNavigateAsync`
@@ -84,7 +86,7 @@ Uygulamanın `Router` bileşeninde ( `App.razor` ):
 * `Path`Özelliği, kullanıcının, gibi uygulamanın temel yoluna göre hedef yoludur `/robot` .
 * , `CancellationToken` Zaman uyumsuz görevin iptalini gözlemlemek için kullanılabilir. `OnNavigateAsync` Kullanıcı farklı bir sayfaya gittiğinde, çalışmakta olan gezinti görevini otomatik olarak iptal eder.
 
-İçinde `OnNavigateAsync` , yüklenecek derlemeleri belirleme mantığını uygulayın. Seçeneklere şunlar dahildir:
+İçinde `OnNavigateAsync` , yüklenecek derlemeleri belirleme mantığını uygulayın. Seçenekler arasında şunlar bulunur:
 
 * Yöntemin içindeki koşullu denetimler `OnNavigateAsync` .
 * Bileşene eklenen ya da blok içinde uygulanan bir arama tablosu [`@code`](xref:mvc/views/razor#code) .
@@ -133,6 +135,8 @@ Birkaç saniye sürebilen derlemeler yüklenirken, `Router` bileşen kullanıcı
 ...
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 ### <a name="handle-cancellations-in-onnavigateasync"></a>Üzerinde iptalleri işle `OnNavigateAsync`
 
 `NavigationContext`Geri çağırmaya geçirilen nesne, `OnNavigateAsync` `CancellationToken` Yeni bir gezinti olayı gerçekleştiğinde ayarlanmış bir içerir. `OnNavigateAsync`Bu iptal belirteci, `OnNavigateAsync` geri çağırma işlemini eski bir gezinmede çalıştırmaya devam etmeden kaçınmak üzere ayarlandığında, geri çağırma işlemi throw olmalıdır.
@@ -169,6 +173,8 @@ Bir kullanıcı yönlendirme A 'ya gider ve sonra B 'ye yönlendirmek için, uyg
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 > [!NOTE]
 > ' Deki iptal belirteci `NavigationContext` iptal edildiğinde, bir bileşeni önceki bir gezinmede işlemek gibi istenmeden davranışa neden olabilir.
@@ -230,6 +236,8 @@ Aşağıdaki tamamlanmış `Router` Bileşen, `GrantImaharaRobotControls.dll` Ku
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 ## <a name="troubleshoot"></a>Sorun giderme
 

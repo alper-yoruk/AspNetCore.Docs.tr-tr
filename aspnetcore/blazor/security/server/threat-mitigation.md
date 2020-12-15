@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 0e8b26110a970526b5f6306da236a92f52e64604
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: d0ed36731d78d3e98aa294aca50492f0a3ac8174
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430961"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506701"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core için tehdit azaltma Kılavuzu Blazor Server
 
@@ -43,7 +43,7 @@ JS birlikte çalışması Internet üzerinden yapıldığından ve istemci uzak 
 
 ## <a name="no-locblazor-and-shared-state"></a>Blazor ve paylaşılan durum
 
-[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
+[!INCLUDE[](~/blazor/includes/security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>Kaynak tükenmesi
 
@@ -110,7 +110,7 @@ Varsayılan olarak, bir uygulama için Kullanıcı başına bağlantı sayısı 
 
 Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir veya daha fazla uygulamayı tüketmesine neden olan bir istemciyi içerir. Blazor Server uygulamalar, bazı varsayılan limitleri içerir ve SignalR açık olan DOS saldırılarına karşı korumak için diğer ASP.NET Core ve limitlere güvenir <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Server uygulama sınırı | Description | Varsayılan |
+| Blazor Server uygulama sınırı | Açıklama | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Belirli bir sunucunun bellekte tek seferde tuttuğu bağlantı kesilen en fazla bağlantı sayısı. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Bağlantısı kesilmiş bir devre dışı bırakılmadan önce bellekte tutulan en fazla süre. | 3 dakika |
@@ -119,7 +119,7 @@ Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir
 
 Tek bir gelen hub iletisinin en büyük ileti boyutunu ile ayarlayın <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalR ve ASP.NET Core sınırı | Description | Varsayılan |
+| SignalR ve ASP.NET Core sınırı | Açıklama | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Tek bir ileti için ileti boyutu. | 32 KB |
 
@@ -165,7 +165,7 @@ JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript '
 
 Olaylar bir uygulamaya giriş noktası sağlar Blazor Server . Web Apps 'teki uç noktaları koruma için aynı kurallar, uygulamalardaki olay işleme için geçerlidir Blazor Server . Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
 
-Örneğin:
+Örnek:
 
 * Bir için değişiklik olayı `<select>` , uygulamanın istemciye sunulan seçenekler içinde olmayan bir değer gönderebilir.
 * `<input>`Sunucu, istemci tarafı doğrulamayı atlayarak herhangi bir metin verisi gönderebilir.
@@ -361,7 +361,7 @@ Bir XSS Güvenlik açığının mevcut olması için, uygulamanın işlenen sayf
 
 * Normal sözdizimi aracılığıyla işlenen Kullanıcı girişi Razor (örneğin, `@someStringValue` ), Razor sözdizimi yalnızca metin YAZABILECEĞINDEN komutlar aracılığıyla Dom 'A eklendiğinden bir XSS Güvenlik Açığı sunmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Prerendering olduğunda çıktı HTML kodlamalı olur ve bu da içeriği statik metin olarak görüntüler.
 * Betik etiketlerine izin verilmez ve uygulamanın bileşen işleme ağacına dahil edilmemelidir. Bir komut dosyası etiketi bir bileşenin biçimlendirmesinde yer alıyorsa, derleme zamanı hatası oluşturulur.
-* Bileşen yazarları, kullanmadan C# içindeki bileşenleri yazabilir Razor . Bileşen yazarı, çıkış yayırken doğru API 'Leri kullanmaktan sorumludur. Örneğin, `builder.AddContent(0, someUserSuppliedString)` *not* `builder.AddMarkupContent(0, someUserSuppliedString)` ikinci olarak bir XSS Güvenlik Açığı oluşturmasından dolayı değil kullanın.
+* Bileşen yazarları, kullanmadan C# içindeki bileşenleri yazabilir Razor . Bileşen yazarı, çıkış yayırken doğru API 'Leri kullanmaktan sorumludur. Örneğin, `builder.AddContent(0, someUserSuppliedString)`  `builder.AddMarkupContent(0, someUserSuppliedString)` ikinci olarak bir XSS Güvenlik Açığı oluşturmasından dolayı değil kullanın.
 
 XSS saldırılarına karşı koruma kapsamında, [Içerik güvenlik ilkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)gibi XSS azaltmalarını gerçekleştirmeyi düşünün.
 

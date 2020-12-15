@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061320"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506636"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
 
@@ -94,7 +94,7 @@ Günlüğe kaydetmeyi tamamen devre dışı bırakmak için `signalR.LogLevel.No
 
 Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük düzeyleri gösterilmektedir. Günlük düzeyinin bu değerlerden birine ayarlanması, bu düzeyde ve tabloda üzerindeki tüm düzeylerde günlüğe kaydetmeyi sağlar.
 
-| Düzey | Açıklama |
+| Level | Açıklama |
 | ----- | ----------- |
 | `None` | Hiçbir ileti günlüğe kaydedilmez. |
 | `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. |
@@ -106,7 +106,7 @@ Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük d�
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
-Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örneğin:
+Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örnek:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -117,7 +117,7 @@ Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, a
 
 .NET istemcisinden günlükleri almak için, `ConfigureLogging` üzerinde yöntemini kullanabilirsiniz `HubConnectionBuilder` . Bu, `ConfigureLogging` ve üzerindeki yöntemiyle aynı şekilde çalışmaktadır `WebHostBuilder` `HostBuilder` . ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz. Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.
 
-Bir uygulamaya .NET istemci günlüğü eklemek için Blazor WebAssembly , bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..
+Bir uygulamaya .NET istemci günlüğü eklemek için Blazor WebAssembly , bkz <xref:blazor/fundamentals/logging#signalr-net-client-logging> ..
 
 ### <a name="console-logging"></a>Konsol günlüğü
 
@@ -158,7 +158,7 @@ Fiddler, HTTP izlemelerinin toplanması için çok güçlü bir araçtır. [Tele
 
 HTTPS kullanarak bağlanıyorsanız, Fiddler 'ın HTTPS trafiğinin şifresini çözebilmesini sağlamaya yönelik bazı ek adımlar vardır. Daha ayrıntılı bilgi için bkz. [Fiddler belgeleri](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).
 
-İzlemeyi topladıktan sonra, **Dosya**  >  **Save**  >  **tüm oturumları** menü çubuğundan Kaydet ' i seçerek izlemeyi dışarı aktarabilirsiniz.
+İzlemeyi topladıktan sonra, **Dosya**  >    >  **tüm oturumları** menü çubuğundan Kaydet ' i seçerek izlemeyi dışarı aktarabilirsiniz.
 
 ![Fiddler 'tan tüm oturumlar dışarı aktarılıyor](diagnostics/fiddler-export.png)
 
@@ -236,7 +236,7 @@ SignalR Sunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay ka
 
 ### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
 
-[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örneğin:
+[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örnek:
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections

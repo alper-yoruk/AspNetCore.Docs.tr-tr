@@ -5,7 +5,7 @@ description: BlazorGünlük düzeyi yapılandırma ve bileşenlerden günlük il
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 12/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,26 +19,31 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 72d339a4768b734ff33e7642b0af14f3f5725c7b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+zone_pivot_groups: blazor-hosting-models
+ms.openlocfilehash: 78117fa6e9c7d5aed3fb31bbd3afee55b3b5b875
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055990"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506714"
 ---
 # <a name="aspnet-core-no-locblazor-logging"></a>BlazorGünlüğe kaydetme ASP.NET Core
 
-## Blazor WebAssembly
+::: zone pivot="webassembly"
 
-Uygulamalarda oturum açma Blazor WebAssembly `WebAssemblyHostBuilder.Logging` özelliğini içindeki özelliği kullanarak yapılandırın `Program.Main` :
+Blazor WebAssemblyÖzelliği ile uygulamalarda özel günlük kaydını yapılandırın <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Logging?displayProperty=nameWithType> .
+
+Ad alanını şu <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting?displayProperty=fullName> şekilde ekleyin `Program.cs` :
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+```
 
-...
+' `Program.Main` De `Program.cs` , en düşük günlük kaydı düzeyini ile ayarlayın <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.SetMinimumLevel%2A?displayProperty=nameWithType> ve özel günlüğe kaydetme sağlayıcısını ekleyin:
 
+```csharp
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-
+...
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 builder.Logging.AddProvider(new CustomLoggingProvider());
 ```
@@ -47,82 +52,51 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklenebilir. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/configuration#logging-configuration>.
 
-## Blazor Server
-
-Genel ASP.NET Core günlük Kılavuzu için bkz <xref:fundamentals/logging/index> ..
-
-## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a>Blazor WebAssemblySignalR.NET istemci günlüğü
+## <a name="no-locsignalr-net-client-logging"></a>SignalR .NET istemci günlüğü
 
 Öğesine <xref:Microsoft.Extensions.Logging.ILoggerProvider> `WebAssemblyConsoleLogger` geçirilen günlüğe kaydetme sağlayıcılarına eklemek için bir ekleyin <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . Geleneksel olarak <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` tarayıcıya özgü günlüğe kaydetme API 'leri (örneğin,) etrafında bir sarmalayıcı olur `console.log` . ' Nin kullanımı, `WebAssemblyConsoleLogger` bir tarayıcı bağlamı Içinde mono içinde mümkün olan bir kayıt oluşturur.
+
+İçin ad alanını ekleyin <xref:Microsoft.Extensions.Logging?displayProperty=fullName> ve bileşene ekleyin <xref:Microsoft.Extensions.Logging.ILoggerProvider> :
 
 ```csharp
 @using Microsoft.Extensions.Logging
 @inject ILoggerProvider LoggerProvider
+```
 
-...
+Bileşenin [ `OnInitializedAsync` yönteminde](xref:blazor/components/lifecycle#component-initialization-methods), şunu kullanın <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilderExtensions.ConfigureLogging%2A?displayProperty=nameWithType> :
 
+```csharp
 var connection = new HubConnectionBuilder()
     .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"))
     .ConfigureLogging(logging => logging.AddProvider(LoggerProvider))
     .Build();
 ```
 
+::: zone-end
+
+::: zone pivot="server"
+
+İle ilgili genel ASP.NET Core günlük Kılavuzu için Blazor Server bkz <xref:fundamentals/logging/index> ..
+
+::: zone-end
+
 ## <a name="log-in-no-locrazor-components"></a>RazorBileşenlerdeki oturum açma
 
 Uygulama başlangıç yapılandırmasına göre günlüğe kaydetme defterleri.
 
-`using`İçin olan yönergesi <xref:Microsoft.Extensions.Logging> , ve gibi API 'Leri için IntelliSense 'i desteklemek için gereklidir <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .
+`using`İçin olan yönergesi <xref:Microsoft.Extensions.Logging> , ve gibi API 'Leri için [IntelliSense](/visualstudio/ide/using-intellisense) 'i desteklemek için gereklidir <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .
 
-Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILogger> gösterir Razor :
+Aşağıdaki örnekte, bileşenleri içindeki bir günlük kaydı gösterilmektedir <xref:Microsoft.Extensions.Logging.ILogger> .
 
-```razor
-@page "/counter"
-@using Microsoft.Extensions.Logging;
-@inject ILogger<Counter> logger;
+`Pages/Counter.razor`:
 
-<h1>Counter</h1>
+[!code-razor[](logging/samples_snapshot/Counter1.razor?highlight=3,16)]
 
-<p>Current count: @currentCount</p>
+Aşağıdaki örnekte, bileşenleri içindeki bir günlük kaydı gösterilmektedir <xref:Microsoft.Extensions.Logging.ILoggerFactory> .
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+`Pages/Counter.razor`:
 
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        logger.LogWarning("Someone has clicked me!");
-
-        currentCount++;
-    }
-}
-```
-
-Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILoggerFactory> gösterir Razor :
-
-```razor
-@page "/counter"
-@using Microsoft.Extensions.Logging;
-@inject ILoggerFactory LoggerFactory
-
-<h1>Counter</h1>
-
-<p>Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        var logger = LoggerFactory.CreateLogger<Counter>();
-        logger.LogWarning("Someone has clicked me!");
-
-        currentCount++;
-    }
-}
-```
+[!code-razor[](logging/samples_snapshot/Counter2.razor?highlight=3,16-17)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

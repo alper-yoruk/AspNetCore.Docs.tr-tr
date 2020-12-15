@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: affca6c9b585b91787f94a13144d07bedfefdd37
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431707"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506987"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>PreRender ve ASP.NET Core Razor bileşenleri tümleştirme
 
@@ -241,7 +241,7 @@ Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve gör�
      <base href="~/" />
      ```
 
-     `href`Yukarıdaki örnekte yer alan değer ( *uygulama temel yolu* ), uygulamanın kök URL yolunda () bulunduğunu varsayar `/` . Uygulama bir alt uygulama ise, makalenin *uygulama temel yolu* bölümündeki yönergeleri izleyin <xref:blazor/host-and-deploy/index#app-base-path> .
+     `href`Yukarıdaki örnekte yer alan değer ( *uygulama temel yolu*), uygulamanın kök URL yolunda () bulunduğunu varsayar `/` . Uygulama bir alt uygulama ise, makalenin *uygulama temel yolu* bölümündeki yönergeleri izleyin <xref:blazor/host-and-deploy/index#app-base-path> .
 
      Dosya, bir `_Layout.cshtml` `Pages/Shared` MVC uygulamasında bir Razor Sayfalar uygulamasının veya klasörünün klasöründe bulunur `Views/Shared` .
 
@@ -308,6 +308,8 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    </Router>
    ```
 
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 1. `_Host.cshtml` `Pages` Klasöre aşağıdaki içeriğe sahip bir dosya ekleyin:
 
    ```cshtml
@@ -341,7 +343,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"
@@ -376,6 +378,8 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
        </NotFound>
    </Router>
    ```
+
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 1. `_Host.cshtml` `Views/Home` Klasöre aşağıdaki içeriğe sahip bir dosya ekleyin:
 
@@ -418,7 +422,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    });
    ```
 
-1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"
