@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor Yönlendirme
 author: guardrex
-description: Uygulamalardaki istekleri yönlendirme ve gezinti bağlantısı bileşeni hakkında bilgi edinin.
+description: Uygulamalarda istek yönlendirmeyi yönetmeyi ve Blazor Gezinti için uygulamalarda gezinti bağlantısı bileşenini kullanmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/17/2020
+ms.date: 12/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,147 +19,146 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 3bfd623a206f260d24e2c9009acdb3b205b7ab2d
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: d6f64e67ad799847c0992bad8e4353bac07c9901
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855410"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485959"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-İsteklerin nasıl yönlendirileceğini ve <xref:Microsoft.AspNetCore.Components.Routing.NavLink> uygulamalarda gezinti bağlantıları oluşturmak için bileşenin nasıl kullanılacağını öğrenin Blazor .
-
-## <a name="aspnet-core-endpoint-routing-integration"></a>Uç nokta yönlendirme tümleştirmesi ASP.NET Core
-
-Blazor Server[ASP.NET Core uç nokta yönlendirme](xref:fundamentals/routing)ile tümleşiktir. ASP.NET Core bir uygulama, içindeki etkileşimli bileşenler için gelen bağlantıları kabul edecek şekilde <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> yapılandırılmıştır `Startup.Configure` :
-
-[!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
-
-En yaygın yapılandırma, tüm istekleri bir sayfaya yönlendirmesidir Razor ve bu, uygulamanın sunucu tarafı bölümü için ana bilgisayar işlevi görür Blazor Server . Kurala göre, *ana bilgisayar* sayfası genellikle adlandırılır `_Host.cshtml` . Ana bilgisayar dosyasında belirtilen yol, yol eşleştirilirken düşük bir öncelik ile çalıştığından bir *geri dönüş yolu* olarak adlandırılır. Geri dönüş yolu, diğer yollar eşleşmediği zaman kabul edilir. Bu, uygulamanın uygulamayı kesintiye uğramadan diğer denetleyicileri ve sayfaları kullanmasına izin verir Blazor Server .
-
-<xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A>Kök olmayan URL sunucusu barındırma için yapılandırma hakkında bilgi için bkz <xref:blazor/host-and-deploy/index#app-base-path> ..
+Bu makalede, istek yönlendirmeyi yönetme ve <xref:Microsoft.AspNetCore.Components.Routing.NavLink> uygulamalarda gezinti bağlantıları oluşturmak için bileşenin nasıl kullanılacağı hakkında bilgi edinin Blazor .
 
 ## <a name="route-templates"></a>Rota şablonları
 
-<xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşeni, belirtilen bir rota ile her bileşene yönlendirmeyi sağlar. <xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen `App.razor` dosyada görünür:
+<xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen, Razor bir uygulamadaki bileşenlere yönlendirmeyi sağlar Blazor . <xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen, `App` uygulamalar bileşeninde kullanılır Blazor .
 
-```razor
-<Router AppAssembly="@typeof(Startup).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <p>Sorry, there's nothing at this address.</p>
-    </NotFound>
-</Router>
-```
-
-`.razor` `@page` Yönergeyle bir dosya derlendiğinde oluşturulan sınıf, <xref:Microsoft.AspNetCore.Components.RouteAttribute> yol şablonunu belirten bir. Uygulama önyüklenirken, olarak belirtilen derleme, `AppAssembly` içeren tüm bileşenler hakkında bilgi toplamak için taranır <xref:Microsoft.AspNetCore.Components.RouteAttribute> .
-
-Çalışma zamanında, <xref:Microsoft.AspNetCore.Components.RouteView> bileşen:
-
-* ' İ <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> istediğiniz parametrelerle birlikte alır.
-* Belirtilen parametreleri kullanarak belirtilen bileşeni düzeniyle (veya isteğe bağlı bir varsayılan düzende) işler.
-
-İsteğe bağlı olarak, <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> bir düzen belirtmeyen bileşenler için kullanılacak düzen sınıfıyla bir parametre belirtebilirsiniz. Varsayılan Blazor Şablonlar, bileşeni belirtir `MainLayout` . `MainLayout.razor` Şablon projenin `Shared` klasörü. Düzenler hakkında daha fazla bilgi için bkz <xref:blazor/layouts> ..
-
-Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen ve için isteklere yanıt verir `/BlazorRoute` `/DifferentBlazorRoute` :
-
-```razor
-@page "/BlazorRoute"
-@page "/DifferentBlazorRoute"
-
-<h1>Blazor routing</h1>
-```
-
-> [!IMPORTANT]
-> URL 'Lerin doğru bir şekilde çözülmesi için, uygulamanın, () `<base>` `wwwroot/index.html` Blazor WebAssembly `Pages/_Host.cshtml` Blazor Server özniteliğinde belirtilen uygulama temel yolu ile dosyasında () veya dosyasında ( `href` `<base href="/">` ) bir etiket içermesi gerekir. Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/index#app-base-path>.
-
-## <a name="provide-custom-content-when-content-isnt-found"></a>İçerik bulunamadığında özel içerik sağla
-
-<xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen, istenen rota için içerik bulunmazsa uygulamanın özel içerik belirtmesini sağlar.
-
-`App.razor`Dosyasında, <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> bileşenin Şablon parametresinde özel içerik ayarlayın <xref:Microsoft.AspNetCore.Components.Routing.Router> :
-
-```razor
-<Router AppAssembly="typeof(Startup).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <h1>Sorry</h1>
-        <p>Sorry, there's nothing at this address.</p> b
-    </NotFound>
-</Router>
-```
-
-`<NotFound>`Etiketlerin içeriği, diğer etkileşimli bileşenler gibi rastgele öğeler içerebilir. İçeriğe varsayılan bir düzen uygulamak için <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> bkz <xref:blazor/layouts> ..
-
-## <a name="route-to-components-from-multiple-assemblies"></a>Birden çok derlemeden bileşenlere rota
-
-<xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> <xref:Microsoft.AspNetCore.Components.Routing.Router> Bileşen için yönlendirilebilir bileşenleri ararken dikkate alınması gereken ek derlemeleri belirtmek için parametresini kullanın. Belirtilen derlemeler, belirtilen derlemeye ek olarak değerlendirilir `AppAssembly` . Aşağıdaki örnekte, başvurulan bir `Component1` sınıf kitaplığında tanımlanan yönlendirilebilir bir bileşendir. Aşağıdaki <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> örnek, için yönlendirme desteği ile sonuçlanır `Component1` :
-
-```razor
-<Router
-    AppAssembly="@typeof(Program).Assembly"
-    AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
-    ...
-</Router>
-```
-
-## <a name="route-parameters"></a>Rota parametreleri
-
-Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/küçük harfe duyarsız) doldurmak için yol parametrelerini kullanır.
+`App.razor`:
 
 ::: moniker range=">= aspnetcore-5.0"
 
-İsteğe bağlı parametreler desteklenir. Aşağıdaki örnekte, `text` isteğe bağlı parametresi, yol segmentinin değerini bileşenin `Text` özelliğine atar. Segment yoksa, değeri `Text` olarak ayarlanır `fantastic` :
-
-```razor
-@page "/RouteParameter/{text?}"
-
-<h1>Blazor is @Text!</h1>
-
-@code {
-    [Parameter]
-    public string Text { get; set; }
-
-    protected override void OnInitialized()
-    {
-        Text = Text ?? "fantastic";
-    }
-}
-```
+[!code-razor[](routing/samples_snapshot/5.x/App1.razor)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-```razor
-@page "/RouteParameter"
-@page "/RouteParameter/{text}"
-
-<h1>Blazor is @Text!</h1>
-
-@code {
-    [Parameter]
-    public string Text { get; set; }
-
-    protected override void OnInitialized()
-    {
-        Text = Text ?? "fantastic";
-    }
-}
-```
-
-İsteğe bağlı parametreler desteklenmez. `@page`Önceki örnekte iki yönergeler uygulanır. İlki, bir parametre olmadan bileşene gezinmesine izin verir. İkinci `@page` yönerge, `{text}` yol parametresini alır ve değeri `Text` özelliğine atar.
+[!code-razor[](routing/samples_snapshot/3.x/App1.razor)]
 
 ::: moniker-end
 
-[`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) Farklı bir isteğe bağlı parametre değeriyle aynı bileşene uygulama gezintisine izin vermek için yerine kullanın. Önceki örneğe bağlı olarak, Kullanıcı ' dan veya ' den ' a kadar arasında `OnParametersSet` geziniyor olması gerekir `/RouteParameter` `/RouteParameter/awesome` `/RouteParameter/awesome` `/RouteParameter` :
+Razor `.razor` [ `@page` Yönergesi](xref:mvc/views/razor#page) içeren bir bileşen () derlendiğinde, oluşturulan bileşen sınıfı, <xref:Microsoft.AspNetCore.Components.RouteAttribute> bileşenin yol şablonunu belirten bir olarak sağlanır.
+
+Uygulama başlatıldığında, yönlendirici olarak belirtilen derleme, `AppAssembly` uygulamanın bir öğesine sahip olan bileşenleri için rota bilgilerini toplayacak şekilde taranır <xref:Microsoft.AspNetCore.Components.RouteAttribute> .
+
+Çalışma zamanında, <xref:Microsoft.AspNetCore.Components.RouteView> bileşen:
+
+* ' İ <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> herhangi bir rota parametresiyle birlikte alır.
+* Daha fazla iç içe yerleştirilmiş düzen dahil olmak üzere, belirtilen bileşeni [düzeniyle](xref:blazor/layouts)işler.
+
+İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> , [ `@layout` yönergeyle](xref:blazor/layouts#specify-a-layout-in-a-component)bir düzen belirtmeyen bileşenler için Düzen sınıfı ile bir parametre belirtin. Çerçevenin Blazor Proje şablonları, `MainLayout` `Shared/MainLayout.razor` uygulamanın varsayılan düzeni olarak bileşenini () belirtir. Düzenler hakkında daha fazla bilgi için bkz <xref:blazor/layouts> ..
+
+Bileşenler birden çok [ `@page` yönergeleri](xref:mvc/views/razor#page)kullanarak birden çok yol şablonunu destekler. Aşağıdaki örnek bileşen ve için istekleri yükler `/BlazorRoute` `/DifferentBlazorRoute` .
+
+`Pages/BlazorRoute.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/BlazorRoute.razor?highlight=1-2)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/BlazorRoute.razor?highlight=1-2)]
+
+::: moniker-end
+
+> [!IMPORTANT]
+> URL 'Lerin doğru çözümlenmesi için, uygulamanın, `<base>` `wwwroot/index.html` Blazor WebAssembly `Pages/_Host.cshtml` Blazor Server özniteliğinde belirtilen uygulama temel yolu ile dosyasında () veya dosyasında () bir etiket içermesi gerekir `href` . Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/index#app-base-path>.
+
+## <a name="provide-custom-content-when-content-isnt-found"></a>İçerik bulunamadığında özel içerik sağla
+
+<xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen, istenen rota için içerik bulunmazsa uygulamanın özel içerik belirtmesini sağlar.
+
+`App`Bileşende bileşen şablonunda özel içerik ayarlayın <xref:Microsoft.AspNetCore.Components.Routing.Router> <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> .
+
+`App.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/App2.razor?highlight=5-8)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/App2.razor?highlight=5-8)]
+
+::: moniker-end
+
+Diğer etkileşimli bileşenler gibi etiketlerin içeriği olarak rastgele öğeler desteklenir `<NotFound>` . İçeriğe varsayılan bir düzen uygulamak için <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> bkz <xref:blazor/layouts#default-layout> ..
+
+## <a name="route-to-components-from-multiple-assemblies"></a>Birden çok derlemeden bileşenlere rota
+
+<xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> <xref:Microsoft.AspNetCore.Components.Routing.Router> Bileşen için yönlendirilebilir bileşenleri ararken dikkate alınması gereken ek derlemeleri belirtmek için parametresini kullanın. Ek derlemeler, için belirtilen derlemeye ek olarak taranır `AppAssembly` . Aşağıdaki örnekte, `Component1` başvurulan [bileşen sınıfı kitaplığında](xref:blazor/components/class-libraries)tanımlanan yönlendirilebilir bir bileşendir. Aşağıdaki <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> örnek, için yönlendirme desteğine neden olur `Component1` .
+
+`App.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/App3.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/App3.razor)]
+
+::: moniker-end
+
+## <a name="route-parameters"></a>Rota parametreleri
+
+Yönlendirici, karşılık gelen [bileşen parametrelerini](xref:blazor/components/index#component-parameters) aynı adla doldurmak için yol parametrelerini kullanır. Yol parametresi adları büyük/küçük harfe duyarlıdır. Aşağıdaki örnekte `text` parametresi, yol segmentinin değerini bileşenin `Text` özelliğine atar. İçin bir istek yapıldığında `/RouteParameter/amazing` , `<h1>` etiket içeriği olarak işlenir `Blazor is amazing!` .
+
+`Pages/RouteParameter.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/RouteParameter1.razor?highlight=1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/RouteParameter1.razor?highlight=1)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+İsteğe bağlı parametreler desteklenir. Aşağıdaki örnekte, `text` isteğe bağlı parametresi, yol segmentinin değerini bileşenin `Text` özelliğine atar. Segment yoksa, değeri `Text` olarak ayarlanır `fantastic` .
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](routing/samples_snapshot/5.x/RouteParameter2.razor?highlight=1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+İsteğe bağlı parametreler desteklenmez. Aşağıdaki örnekte, iki [ `@page` yönergeler](xref:mvc/views/razor#page) uygulanır. İlk yönerge, bir parametre olmadan bileşene gezinmesine izin verir. İkinci yönerge, `{text}` yönlendirme parametresi değerini bileşenin `Text` özelliğine atar.
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](routing/samples_snapshot/3.x/RouteParameter2.razor?highlight=2)]
+
+::: moniker-end
+
+[`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) [`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) Farklı bir isteğe bağlı parametre değeriyle aynı bileşene uygulama gezintisine izin vermek için yerine kullanın. Önceki örneğe bağlı olarak, Kullanıcı ' dan veya ' den ' a kadar arasında `OnParametersSet` geziniyor olması gerekir `/RouteParameter` `/RouteParameter/amazing` `/RouteParameter/amazing` `/RouteParameter` :
 
 ```csharp
 protected override void OnParametersSet()
@@ -172,12 +171,24 @@ protected override void OnParametersSet()
 
 Yol kısıtlaması bir yönlendirme segmentinde bir bileşene tür eşleştirmeyi zorlar.
 
-Aşağıdaki örnekte, `Users` bileşen yolu yalnızca şu durumlarda eşleşir:
+Aşağıdaki örnekte, `User` bileşen yolu yalnızca şu durumlarda eşleşir:
 
 * `Id`Istek URL 'sinde bir yol kesimi var.
-* `Id`Segment bir tamsayıdır ( `int` ).
+* `Id`Segment bir Integer ( `int` ) türüdür.
 
-[!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
+`Pages/User.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/User.razor?highlight=1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/User.razor?highlight=1)]
+
+::: moniker-end
 
 Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür ile eşleşen yol kısıtlamaları için daha fazla bilgi için tablonun altındaki uyarıya bakın.
 
@@ -195,33 +206,37 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 > [!WARNING]
 > URL 'YI doğrulayan ve bir CLR türüne (veya gibi) dönüştürülen yol kısıtlamaları `int` <xref:System.DateTime> , her zaman sabit kültürü kullanır. Bu kısıtlamalar, URL 'nin yerelleştirilemeyen olduğunu varsayar.
 
-### <a name="routing-with-urls-that-contain-dots"></a>Noktalar içeren URL 'lerle yönlendirme
+## <a name="routing-with-urls-that-contain-dots"></a>Noktalar içeren URL 'lerle yönlendirme
 
-Barındırılan Blazor WebAssembly ve Blazor Server uygulamalar için, sunucu tarafı varsayılan yol şablonu, BIR istek URL 'sinin son segmentinin bir dosyanın istendiği nokta () içerdiğini varsayar `.` (örneğin, `https://localhost.com:5001/example/some.thing` ). Ek yapılandırma olmadan, bir bileşen bir bileşene yönlendirilmesi için bir uygulama *404-Found* yanıtı döndürür. Bir nokta içeren bir veya daha fazla parametre içeren bir yol kullanmak için, uygulamanın rotayı özel bir şablonla yapılandırması gerekir.
+Barındırılan Blazor WebAssembly ve Blazor Server uygulamalar için, sunucu tarafı varsayılan yol şablonu, BIR istek URL 'sinin son segmentinin bir dosyanın istendiği nokta () içerdiğini varsayar `.` . Örneğin, URL, `https://localhost.com:5001/example/some.thing` yönlendirici tarafından adlı bir dosya için bir istek olarak yorumlanır `some.thing` . Ek yapılandırma olmadan, bir uygulama bir  `some.thing` [ `@page` yönergeyle](xref:mvc/views/razor#page) bir bileşene yönlendirilecekse ve `some.thing` bir yol parametre değeri ise, uygulama 404-Found yanıtı döndürür. Bir nokta içeren bir veya daha fazla parametre içeren bir yol kullanmak için, uygulamanın rotayı özel bir şablonla yapılandırması gerekir.
 
-`Example`URL 'nin son segmentinden bir yol parametresi alabilen aşağıdaki bileşeni göz önünde bulundurun:
+`Example`URL 'nin son segmentinden bir yol parametresi alabilen aşağıdaki bileşeni göz önünde bulundurun.
 
-```razor
-@page "/example"
-@page "/example/{param}"
+`Pages/Example.razor`:
 
-<p>
-    Param: @Param
-</p>
+::: moniker range=">= aspnetcore-5.0"
 
-@code {
-    [Parameter]
-    public string Param { get; set; }
-}
-```
+[!code-razor[](routing/samples_snapshot/5.x/Example.razor?highlight=1)]
 
-Barındırılan bir çözümün *sunucu* uygulamasına Blazor WebAssembly isteği parametresindeki bir noktayla yönlendirmeye izin vermek için `param` , () içinde isteğe bağlı parametresine sahip bir geri dönüş dosya yolu şablonu ekleyin `Startup.Configure` `Startup.cs` :
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/Example.razor?highlight=2)]
+
+::: moniker-end
+
+*`Server`* Barındırılan bir Blazor WebAssembly çözümün uygulamasının isteği yol parametresindeki bir noktayla yönlendirmesine izin vermek için `param` , içinde isteğe bağlı parametresine sahip bir geri dönüş dosya yolu şablonu ekleyin `Startup.Configure` .
+
+`Startup.cs`:
 
 ```csharp
 endpoints.MapFallbackToFile("/example/{param?}", "index.html");
 ```
 
-Bir uygulamayı, Blazor Server isteği bir noktayla yönlendirmek üzere yapılandırmak için `param` , () içinde isteğe bağlı parametresine sahip bir geri dönüş sayfası yol şablonu ekleyin `Startup.Configure` `Startup.cs` :
+Bir uygulamayı, Blazor Server isteği Route parametresinde bir noktayla yönlendirmek üzere yapılandırmak için `param` , içinde isteğe bağlı parametresine sahip bir geri dönüş sayfası yol şablonu ekleyin `Startup.Configure` .
+
+`Startup.cs`:
 
 ```csharp
 endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
@@ -233,60 +248,144 @@ Daha fazla bilgi için bkz. <xref:fundamentals/routing>.
 
 ::: moniker range=">= aspnetcore-5.0"
 
-*Bu bölüm, .NET 5 Release Candidate 1 (RC1) veya sonraki sürümlerde ASP.NET Core için geçerlidir.*
+Birden çok klasör sınırlarındaki yolları yakalayan catch-all yol parametreleri, bileşenlerinde desteklenir.
 
-Birden çok klasör sınırlarındaki yolları yakalayan catch-all yol parametreleri, bileşenlerinde desteklenir. Catch-all yol parametresi şu olmalıdır:
+Catch-all Route parametreleri şunlardır:
 
 * Yol segmenti adıyla eşleşecek şekilde adlandırılır. Adlandırma, büyük/küçük harfe duyarlı değildir.
 * Bir `string` tür. Çerçeve otomatik atama sağlamaz.
 * URL 'nin sonunda.
 
-```razor
-@page "/page/{*pageRoute}"
+`Pages/CatchAll.razor`:
 
-@code {
-    [Parameter]
-    public string PageRoute { get; set; }
-}
-```
+[!code-razor[](routing/samples_snapshot/5.x/CatchAll.razor)]
 
-`/page/this/is/a/test`Yol şablonuna sahıp URL için `/page/{*pageRoute}` , değeri `PageRoute` olarak ayarlanır `this/is/a/test` .
+`/catch-all/this/is/a/test`Yol şablonuna sahıp URL için `/catch-all/{*pageRoute}` , değeri `PageRoute` olarak ayarlanır `this/is/a/test` .
 
-Yakalanan yolun eğik çizgileri ve kesimleri kodu çözülür. Bir yol şablonu için `/page/{*pageRoute}` , URL 'nin `/page/this/is/a%2Ftest%2A` verir `this/is/a/test*` .
+Yakalanan yolun eğik çizgileri ve kesimleri kodu çözülür. Bir yol şablonu için `/catch-all/{*pageRoute}` , URL 'nin `/catch-all/this/is/a%2Ftest%2A` verir `this/is/a/test*` .
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-Catch-all Route parametreleri ASP.NET Core 5,0 veya üzeri sürümlerde desteklenir.
+Catch-all Route parametreleri ASP.NET Core 5,0 veya üzeri sürümlerde desteklenir. Daha fazla bilgi için bu makalenin 5,0 sürümünü seçin.
 
 ::: moniker-end
 
-## <a name="navlink-component"></a>Gezinti bağlantısı bileşeni
+## <a name="uri-and-navigation-state-helpers"></a>URI ve gezinti durumu yardımcıları
+
+<xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI 'leri ve gezintiyi yönetmek için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
+
+| Üye | Description |
+| ------ | ----------- |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Geçerli mutlak URI 'yi alır. |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Mutlak bir URI oluşturmak için göreli URI yollarına eklenebilir olan temel URI 'yi (sondaki eğik çizgiyle birlikte) alır. Genellikle, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> `href` `<base>` `wwwroot/index.html` ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` () içinde belge öğesindeki özniteliğine karşılık gelir Blazor Server . |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | Belirtilen URI 'ye gider. `forceLoad`Şu ise `true` :<ul><li>İstemci tarafı yönlendirme atlanır.</li><li>Bu tarayıcı, URI 'nin normalde istemci tarafı yönlendirici tarafından işlenip işlenmediğini sunucudan yeni sayfayı yüklemeye zorlanır.</li></ul> |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | Gezinti konumu değiştiğinde harekete gelen bir olay. |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | Göreli bir URI 'yi mutlak bir URI 'ye dönüştürür. |
+| <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | Temel URI (örneğin, daha önce tarafından döndürülen bir URI) verildiğinde <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> , mutlak BIR URI 'yi taban URI önekine göre BIR URI 'ye dönüştürür. |
+
+Olay için <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> , <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> gezinti olayları hakkında aşağıdaki bilgileri sağlar:
+
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: Yeni konumun URL 'SI.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: Varsa `true` , Blazor Tarayıcıdan gezinme ele geçirilebilir. Varsa `false` , <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> gezintinin oluşmasına neden oldu.
+
+Aşağıdaki bileşen:
+
+* `Counter`Düğme seçildiğinde uygulamanın bileşenine () gider `Pages/Counter.razor` <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> .
+* Abone olunarak konum değişti olayını işler <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> .
+  * `HandleLocationChanged`Yöntemi, `Dispose` Framework tarafından çağrıldığında yok edilir. Yöntemi kaldırmak, bileşenin çöp toplamasına izin verir.
+  * Düğme seçildiğinde günlükçü uygulama aşağıdaki bilgileri günlüğe kaydeder:
+
+    > `BlazorSample.Pages.Navigate: Information: URL of new location: https://localhost:5001/counter`
+
+`Pages/Navigate.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/Navigate.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/Navigate.razor)]
+
+::: moniker-end
+
+Bileşen elden çıkarma hakkında daha fazla bilgi için bkz <xref:blazor/components/lifecycle#component-disposal-with-idisposable> ..
+
+## <a name="query-string-and-parse-parameters"></a>Sorgu dizesi ve ayrıştırma parametreleri
+
+Bir isteğin sorgu dizesi özelliğinden elde edilir <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri?displayProperty=nameWithType> :
+
+```razor
+@inject NavigationManager Navigation
+
+...
+
+var query = new Uri(Navigation.Uri).Query;
+```
+
+Bir sorgu dizesinin parametrelerini ayrıştırmak için:
+
+* Bir uygulama, <xref:Microsoft.AspNetCore.WebUtilities> API 'yi kullanabilir. API uygulama için kullanılabilir değilse, [Microsoft. AspNetCore. WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities)için uygulamanın proje dosyasına bir paket başvurusu ekleyin.
+* İle sorgu dizesini ayrıştırdıktan sonra değeri alın <xref:Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery%2A?displayProperty=nameWithType> .
+
+Aşağıdaki `ParseQueryString` bileşen örneği adlı bir sorgu dizesi parametre anahtarını ayrıştırır `ship` . Örneğin, URL sorgu dizesi anahtar-değer çifti `?ship=Tardis` içindeki değeri yakalar `Tardis` `queryValue` . Aşağıdaki örnekte, URL ile uygulamaya gidin `https://localhost:5001/parse-query-string?ship=Tardis` .
+
+`Pages/ParseQueryString.razor`:
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/ParseQueryString.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/3.x/ParseQueryString.razor)]
+
+::: moniker-end
+
+## <a name="navlink-component"></a>`NavLink` bileşeni
 
 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Gezinti bağlantıları oluştururken, HTML köprü öğelerinin () yerine bir bileşen kullanın `<a>` . Bir <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşen `<a>` , `active` `href` geçerli URL ile eşleşip eşleşmediğini temel alarak bir CSS sınıfına geçiş yaptığı sürece bir öğesi gibi davranır. `active`Sınıfı, bir kullanıcının hangi sayfanın etkin sayfa olduğunu anladığı gezinti bağlantıları arasında yardımcı olur. İsteğe bağlı olarak, <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> geçerli yol ile eşleştiğinde işlenen bağlantıya özel bır CSS sınıfı uygulamak için BIR CSS sınıfı adı atayın `href` .
 
 Aşağıdaki `NavMenu` Bileşen, [`Bootstrap`](https://getbootstrap.com/docs/) bileşenlerin nasıl kullanılacağını gösteren bir gezinti çubuğu oluşturur <xref:Microsoft.AspNetCore.Components.Routing.NavLink> :
 
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-razor[](routing/samples_snapshot/5.x/NavMenu.razor?highlight=4,9)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
+
+::: moniker-end
+
+> [!NOTE]
+> `NavMenu`Bileşen ( `NavMenu.razor` ), `Shared` proje şablonlarından oluşturulan bir uygulamanın klasöründe sağlanır Blazor .
 
 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch>Öğesinin özniteliğine atayabilmeniz için kullanabileceğiniz iki seçenek vardır `Match` `<NavLink>` :
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: <xref:Microsoft.AspNetCore.Components.Routing.NavLink> GEÇERLI URL 'nin tamamı eşleştiğinde etkin olur.
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*varsayılan*): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> geçerli URL 'nin herhangi bir önekiyle eşleştiğinde etkin olur.
 
-Yukarıdaki örnekte, ana giriş URL 'siyle <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` eşleşir ve yalnızca `active` uygulamanın varsayılan temel yol URL 'sindeki CSS sınıfını alır (örneğin, `https://localhost:5001/` ). İkincisi, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` Kullanıcı ön eki olan herhangi bir URL 'yi ziyaret ettiğinde sınıfı alır `MyComponent` (örneğin, `https://localhost:5001/MyComponent` ve `https://localhost:5001/MyComponent/AnotherSegment` ).
+Yukarıdaki örnekte, ana giriş URL 'siyle <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` eşleşir ve yalnızca `active` uygulamanın varsayılan temel yol URL 'sindeki CSS sınıfını alır (örneğin, `https://localhost:5001/` ). İkincisi, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` Kullanıcı ön eki olan herhangi bir URL 'yi ziyaret ettiğinde sınıfı alır `component` (örneğin, `https://localhost:5001/component` ve `https://localhost:5001/component/another-segment` ).
 
 Ek <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşen öznitelikleri, işlenen tutturucu etiketine geçirilir. Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşen `target` özniteliğini içerir:
 
 ```razor
-<NavLink href="my-page" target="_blank">My page</NavLink>
+<NavLink href="example-page" target="_blank">Example page</NavLink>
 ```
 
 Aşağıdaki HTML biçimlendirmesi işlenir:
 
 ```html
-<a href="my-page" target="_blank">My page</a>
+<a href="example-page" target="_blank">Example page</a>
 ```
 
 > [!WARNING]
@@ -319,109 +418,28 @@ Aşağıdaki HTML biçimlendirmesi işlenir:
 > }
 > ```
 
-## <a name="uri-and-navigation-state-helpers"></a>URI ve gezinti durumu yardımcıları
+## <a name="aspnet-core-endpoint-routing-integration"></a>Uç nokta yönlendirme tümleştirmesi ASP.NET Core
 
-<xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI ve gezinme ile çalışmak için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
+*Bu bölüm yalnızca uygulamalar için geçerlidir Blazor Server .*
 
-| Üye | Açıklama |
-| ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Geçerli mutlak URI 'yi alır. |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Mutlak bir URI oluşturmak için göreli URI yollarına eklenebilir olan temel URI 'yi (sondaki eğik çizgiyle birlikte) alır. Genellikle, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> `href` `<base>` `wwwroot/index.html` ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` () içinde belge öğesindeki özniteliğine karşılık gelir Blazor Server . |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | Belirtilen URI 'ye gider. `forceLoad`Şu ise `true` :<ul><li>İstemci tarafı yönlendirme atlanır.</li><li>Bu tarayıcı, URI 'nin normalde istemci tarafı yönlendirici tarafından işlenip işlenmediğini sunucudan yeni sayfayı yüklemeye zorlanır.</li></ul> |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | Gezinti konumu değiştiğinde harekete gelen bir olay. |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | Göreli bir URI 'yi mutlak bir URI 'ye dönüştürür. |
-| <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | Temel URI (örneğin, daha önce tarafından döndürülen bir URI) verildiğinde <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> , mutlak BIR URI 'yi taban URI önekine göre BIR URI 'ye dönüştürür. |
+Blazor Server[ASP.NET Core uç nokta yönlendirme](xref:fundamentals/routing)ile tümleşiktir. ASP.NET Core bir uygulama, içindeki etkileşimli bileşenlere yönelik gelen bağlantıları kabul edecek şekilde <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> yapılandırılmıştır `Startup.Configure` .
 
-Aşağıdaki bileşen, `Counter` Düğme seçildiğinde uygulamanın bileşenine gider:
+`Startup.cs`:
 
-```razor
-@page "/navigate"
-@inject NavigationManager NavigationManager
+::: moniker range=">= aspnetcore-5.0"
 
-<h1>Navigate in Code Example</h1>
+[!code-csharp[](routing/samples_snapshot/5.x/Startup.cs?highlight=5)]
 
-<button class="btn btn-primary" @onclick="NavigateToCounterComponent">
-    Navigate to the Counter component
-</button>
+::: moniker-end
 
-@code {
-    private void NavigateToCounterComponent()
-    {
-        NavigationManager.NavigateTo("counter");
-    }
-}
-```
+::: moniker range="< aspnetcore-5.0"
 
-Aşağıdaki bileşen öğesine abone olunarak bir konum değiştirme olayını işler <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> . `HandleLocationChanged`Yöntemi, `Dispose` Framework tarafından çağrıldığında yok edilir. Yöntemi kaldırmak, bileşenin çöp toplamasına izin verir.
+[!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-```razor
-@implements IDisposable
-@inject NavigationManager NavigationManager
+::: moniker-end
 
-...
+Tipik yapılandırma tüm istekleri bir sayfaya yönlendirmesidir Razor ve bu, uygulamanın sunucu tarafı bölümü için ana bilgisayar görevi görür Blazor Server . Kural gereği, *ana bilgisayar* sayfası genellikle `_Host.cshtml` `Pages` uygulamanın klasöründe adlandırılır.
 
-protected override void OnInitialized()
-{
-    NavigationManager.LocationChanged += HandleLocationChanged;
-}
+Ana bilgisayar dosyasında belirtilen yol, yol eşleştirilirken düşük bir öncelik ile çalıştığından bir *geri dönüş yolu* olarak adlandırılır. Geri dönüş yolu, diğer yollar eşleşmediğinden kullanılır. Bu, uygulamanın uygulamada bileşen yönlendirme ile kesintiye uğramadan diğer denetleyicileri ve sayfaları kullanmasına izin verir Blazor Server .
 
-private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
-{
-    ...
-}
-
-public void Dispose()
-{
-    NavigationManager.LocationChanged -= HandleLocationChanged;
-}
-```
-
-<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> olayla ilgili aşağıdaki bilgileri sağlar:
-
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: Yeni konumun URL 'SI.
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: Varsa `true` , Blazor Tarayıcıdan gezinme ele geçirilebilir. Varsa `false` , <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> gezintinin oluşmasına neden oldu.
-
-Bileşen elden çıkarma hakkında daha fazla bilgi için bkz <xref:blazor/components/lifecycle#component-disposal-with-idisposable> ..
-
-## <a name="query-string-and-parse-parameters"></a>Sorgu dizesi ve ayrıştırma parametreleri
-
-Bir isteğin sorgu dizesi özelliğinden elde edilebilir <xref:Microsoft.AspNetCore.Components.NavigationManager> <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> :
-
-```razor
-@inject NavigationManager Navigation
-
-...
-
-var query = new Uri(Navigation.Uri).Query;
-```
-
-Bir sorgu dizesinin parametrelerini ayrıştırmak için:
-
-* [Microsoft. AspNetCore. WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities)için bir paket başvurusu ekleyin.
-* İle sorgu dizesini ayrıştırdıktan sonra değeri alın <xref:Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery%2A?displayProperty=nameWithType> .
-
-```razor
-@page "/"
-@using Microsoft.AspNetCore.WebUtilities
-@inject NavigationManager NavigationManager
-
-<h1>Query string parse example</h1>
-
-<p>Value: @queryValue</p>
-
-@code {
-    private string queryValue = "Not set";
-
-    protected override void OnInitialized()
-    {
-        var query = new Uri(NavigationManager.Uri).Query;
-
-        if (QueryHelpers.ParseQuery(query).TryGetValue("{KEY}", out var value))
-        {
-            queryValue = value;
-        }
-    }
-}
-```
-
-`{KEY}`Önceki örnekteki yer tutucu sorgu dizesi parametre anahtarıdır. Örneğin, URL anahtar-değer çifti, `?ship=Tardis` bir anahtarını kullanır `ship` .
+<xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A>Kök olmayan URL sunucusu barındırma için yapılandırma hakkında bilgi için bkz <xref:blazor/host-and-deploy/index#app-base-path> ..

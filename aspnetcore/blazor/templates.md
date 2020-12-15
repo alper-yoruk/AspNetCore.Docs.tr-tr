@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 602ad2908d607703a3b77b2047d51d912645b043
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 6d24e65acd44f98540575a3f3880fb137bfc822f
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94703728"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485920"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor şablonları
 
@@ -54,7 +54,7 @@ Aşağıdaki dosyalar ve klasörler Blazor bir proje şablonundan oluşturulan b
 
   * ASP.NET Core [Host](xref:fundamentals/host/generic-host) ( Blazor Server )
   * WebAssembly Host ( Blazor WebAssembly ): Bu dosyadaki kod, şablondan oluşturulan uygulamalar için benzersizdir Blazor WebAssembly ( `blazorwasm` ).
-    * `App`Bileşen, uygulamanın kök bileşenidir. `App`Bileşen, `app` `<div id="app">Loading...</div>` `wwwroot/index.html` kök bileşen koleksiyonunda () DOM öğesi olarak belirtilir `builder.RootComponents.Add<App>("#app")` .
+    * `App`Bileşen, uygulamanın kök bileşenidir. `App`Bileşen, `div` `id` `app` `<div id="app">Loading...</div>` `wwwroot/index.html` kök bileşen koleksiyonu () ile ( `builder.RootComponents.Add<App>("#app")` ) öğesine sahip DOM öğesi olarak belirtilir.
     * [Hizmetler](xref:blazor/fundamentals/dependency-injection) eklenir ve yapılandırılır (örneğin, `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
 
 ::: moniker-end
@@ -77,12 +77,27 @@ Aşağıdaki dosyalar ve klasörler Blazor bir proje şablonundan oluşturulan b
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> , tarayıcıya gerçek zamanlı bağlantı için bir uç nokta ayarlamak üzere çağırılır. Bağlantı, [SignalR](xref:signalr/introduction) uygulamalarına gerçek zamanlı Web işlevselliği ekleme çerçevesi olan ile oluşturulur.
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) , uygulamanın () kök sayfasını ayarlamak `Pages/_Host.cshtml` ve gezinmeyi etkinleştirmek için çağırılır.
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `wwwroot/index.html` ( Blazor WebAssembly ): BIR HTML sayfası olarak uygulanan uygulamanın kök sayfası:
   * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, Bu sayfa işlenir ve yanıtta döndürülür.
-  * Bu sayfa, kök bileşenin nerede `App` işleneceğini belirtir. Bileşen, `app` DOM öğesinin () konumunda işlenir `<app>...</app>` .
+  * Bu sayfa, kök bileşenin nerede `App` işleneceğini belirtir. Bileşeni, `div` () olan DOM öğesinin konumunda işlenir `id` `app` `<div id="app">Loading...</div>` .
   * `_framework/blazor.webassembly.js`JavaScript dosyası yüklenir ve şunları yapın:
     * .NET çalışma zamanını, uygulamayı ve uygulamanın bağımlılıklarını indirir.
     * Uygulamayı çalıştırmak için çalışma zamanını başlatır.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `wwwroot/index.html` ( Blazor WebAssembly ): BIR HTML sayfası olarak uygulanan uygulamanın kök sayfası:
+  * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, Bu sayfa işlenir ve yanıtta döndürülür.
+  * Bu sayfa, kök bileşenin nerede `App` işleneceğini belirtir. Bileşen, `app` DOM öğesinin () konumunda işlenir `<app>Loading...</app>` .
+  * `_framework/blazor.webassembly.js`JavaScript dosyası yüklenir ve şunları yapın:
+    * .NET çalışma zamanını, uygulamayı ve uygulamanın bağımlılıklarını indirir.
+    * Uygulamayı çalıştırmak için çalışma zamanını başlatır.
+    
+::: moniker-end
 
 * `App.razor`: Bileşeni kullanarak istemci tarafı yönlendirmeyi ayarlayan uygulamanın kök bileşeni <xref:Microsoft.AspNetCore.Components.Routing.Router> . <xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen tarayıcı gezintisini karşılar ve istenen adresle eşleşen sayfayı işler.
 

@@ -4,6 +4,7 @@ author: rick-anderson
 description: Bu, bir serinin ASP.NET Core bir Web uygulaması oluşturma hakkında temel bilgileri öğretir Razor .
 ms.author: riande
 ms.date: 09/15/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 4b8bd9c886e615add6b0d3e372843a8ddb33ae18
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420051"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486232"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
 
@@ -116,7 +117,7 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
     ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-1. Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
+1. Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  . Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
     ![macOS Web uygulaması şablon seçimi](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -257,7 +258,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  . Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
   ![macOS Web uygulaması şablon seçimi](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -403,7 +404,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ![macOS yeni çözüm](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  . Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
 * **Yeni Web uygulamasını Yapılandır** iletişim kutusunda:
 

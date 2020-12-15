@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: d075faa951a34fb3856b54eb9e21593b6616b4f1
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673971"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486141"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -232,7 +232,7 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-Denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini olarak ayarlar `int.MinValue` . Denetleyici düzeyi filtreleri metotlara uygulandıktan sonra çalıştırılacak şekilde ayarlanamaz. **not** Sıra, sonraki bölümde açıklanmaktadır.
+Denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini olarak ayarlar `int.MinValue` . Denetleyici düzeyi filtreleri metotlara uygulandıktan sonra çalıştırılacak şekilde ayarlanamaz.  Sıra, sonraki bölümde açıklanmaktadır.
 
 RazorSayfalar için bkz. [ Razor filtre yöntemlerini geçersiz kılarak sayfa filtrelerini uygulama](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
 
@@ -290,7 +290,7 @@ Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `Som
 
 Bu nedenle, `AddHeader` filtre eylem için hiçbir şekilde çalışmayacaktır `SomeResource` . Bu davranış, her iki filtre de eylem yöntemi düzeyinde uygulanırsa, ilk olarak çalıştırıldığında aynı olur `ShortCircuitingResourceFilter` . İlk olarak, `ShortCircuitingResourceFilter` filtre türü veya açıkça özelliğin kullanımı kullanılarak çalışır `Order` .
 
-[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
+[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet3&highlight=1,15)]
 
 ## <a name="dependency-injection"></a>Bağımlılık ekleme
 
@@ -751,10 +751,10 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 | Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
 | 1 | Genel | `OnActionExecuting` |
-| 2 | Kumandasını | `OnActionExecuting` |
+| 2 | Denetleyici | `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
-| 5 | Kumandasını | `OnActionExecuted` |
+| 5 | Denetleyici | `OnActionExecuted` |
 | 6 | Genel | `OnActionExecuted` |
 
 Bu sıra şunları gösterir:
@@ -811,10 +811,10 @@ Yukarıdaki örnekte gösterilen 3 eylem filtresini göz önünde bulundurun. `O
 | Sequence | Filtre kapsamı | `Order` özelliði | Filter yöntemi |
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Yöntem | 0 | `OnActionExecuting` |
-| 2 | Kumandasını | 1  | `OnActionExecuting` |
+| 2 | Denetleyici | 1  | `OnActionExecuting` |
 | 3 | Genel | 2  | `OnActionExecuting` |
 | 4 | Genel | 2  | `OnActionExecuted` |
-| 5 | Kumandasını | 1  | `OnActionExecuted` |
+| 5 | Denetleyici | 1  | `OnActionExecuted` |
 | 6 | Yöntem | 0  | `OnActionExecuted` |
 
 `Order`Özelliği filtrelerin çalıştırılacağı sıra belirlenirken kapsamı geçersiz kılar. Filtreler sırasıyla sıraya göre sıralanır, ardından kapsam bölmek için kullanılır. Yerleşik filtrelerin hepsi uygular `IOrderedFilter` ve varsayılan `Order` değeri 0 olarak ayarlar. Yerleşik filtreler için kapsam, `Order` sıfır olmayan bir değere ayarlanmadığı takdirde sıralamayı belirler.

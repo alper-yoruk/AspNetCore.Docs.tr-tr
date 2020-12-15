@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 082072d2b70abfe60da8e2cd40daa8b93ebcc9ac
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a23bee120611ee603305a88dabac76566481fa4a
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055821"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485894"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor"></a>ASP.NET Core barındırma ve dağıtma Blazor
 
@@ -37,12 +37,12 @@ Uygulamalar yayın yapılandırmasında dağıtım için yayımlanır.
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Gezinti çubuğundan **Build**  >  **Publish {APPLICATION}** öğesini seçin.
-1. *Yayımla hedefini* seçin. Yerel olarak yayımlamak için **klasör** ' ü seçin.
+1. *Yayımla hedefini* seçin. Yerel olarak yayımlamak için **klasör**' ü seçin.
 1. **Klasör seçin** alanında varsayılan konumu kabul edin veya farklı bir konum belirtin. **`Publish`** düğmesini seçin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Derleme**  >  **yayımlama klasörü** ' nü seçin.
+1. **Derleme**  >  **yayımlama klasörü**' nü seçin.
 1. Yayınlanan varlıkların alınacağı klasörü onaylayın ve öğesini seçin **`Publish`** .
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -79,10 +79,18 @@ Klasördeki varlıklar Web sunucusuna dağıtılır. Dağıtım, kullanımdaki g
 
 İçin ek yapılandırma belirtmeden `CoolApp` , Bu senaryodaki alt uygulama, sunucuda nerede bulunduğu konusunda bilgi sahibi değildir. Örneğin, uygulama ilgili URL yolunda bulunduğunu bilmeden kaynaklarına doğru göreli URL 'Ler oluşturamıyoruz `/CoolApp/` .
 
-Uygulamanın temel yolu için yapılandırma sağlamak üzere Blazor `https://www.contoso.com/CoolApp/` `<base>` etiketinin `href` özniteliği `Pages/_Host.cshtml` dosyadaki ( Blazor Server ) veya `wwwroot/index.html` dosyadaki () göreli kök yoluna ayarlanır Blazor WebAssembly :
+Uygulamanın temel yolu için yapılandırma sağlamak üzere Blazor `https://www.contoso.com/CoolApp/` `<base>` etiketinin `href` özniteliği `wwwroot/index.html` dosyadaki ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyadaki () göreli kök yoluna ayarlanır Blazor Server .
+
+Blazor WebAssembly (`wwwroot/index.html`):
 
 ```html
 <base href="/CoolApp/">
+```
+
+Blazor Server (`Pages/_Host.cshtml`):
+
+```html
+<base href="~/CoolApp/">
 ```
 
 Blazor Server uygulamalar Ayrıca <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> uygulamanın istek ardışık düzeninde çağırarak sunucu tarafı taban yolunu ayarlar `Startup.Configure` :
@@ -95,9 +103,9 @@ Göreli URL yolunu sağlayarak, kök dizinde olmayan bir bileşen, uygulamanın 
 
 Birçok barındırma senaryosunda, uygulamanın göreli URL yolu uygulamanın köküdür. Bu durumlarda, uygulamanın göreli URL taban yolu `<base href="/" />` , bir uygulamanın varsayılan yapılandırması olan bir eğik çizgi () olur Blazor . GitHub sayfaları ve IIS alt uygulamaları gibi diğer barındırma senaryolarında, uygulama temel yolu, sunucunun uygulamanın göreli URL 'SI yolu olarak ayarlanmalıdır.
 
-Uygulamanın temel yolunu ayarlamak için `<base>` `<head>` `Pages/_Host.cshtml` dosyanın ( Blazor Server ) veya `wwwroot/index.html` dosyanın () etiket öğeleri içindeki etiketi güncelleştirin Blazor WebAssembly . `href`Öznitelik değerini olarak ayarlayın `/{RELATIVE URL PATH}/` (sondaki eğik çizgi gereklidir), burada `{RELATIVE URL PATH}` UYGULAMANıN tam göreli URL yoludur.
+Uygulamanın temel yolunu ayarlamak için `<base>` `<head>` `Pages/_Host.cshtml` dosyanın ( Blazor Server ) veya `wwwroot/index.html` dosyanın () etiket öğeleri içindeki etiketi güncelleştirin Blazor WebAssembly . `href`Öznitelik değerini `/{RELATIVE URL PATH}/` ( Blazor WebAssembly ) veya `~/{RELATIVE URL PATH}/` () olarak ayarlayın Blazor Server . **Sondaki eğik çizgi gereklidir.** Yer tutucu, `{RELATIVE URL PATH}` uygulamanın tam GÖRELI URL yoludur.
 
-Blazor WebAssemblyKök olmayan GÖRELI URL yoluna (örneğin,) sahip bir uygulama için `<base href="/CoolApp/">` , uygulama *yerel olarak çalıştırıldığında* kaynaklarını bulamaz. Yerel geliştirme ve test sırasında bu sorunu aşmak için, *path base* `href` `<base>` çalışma zamanında etiketinin değeriyle eşleşen bir yol temel bağımsız değişkeni sağlayabilirsiniz. Sondaki eğik çizgi eklemeyin. Uygulamayı yerel olarak çalıştırırken yol temel bağımsız değişkenini geçirmek için, `dotnet run` komutu uygulamanın dizininden çalıştırın, `--pathbase` seçeneği:
+Blazor WebAssemblyKök olmayan GÖRELI URL yoluna (örneğin,) sahip bir uygulama için `<base href="/CoolApp/">` , uygulama *yerel olarak çalıştırıldığında* kaynaklarını bulamaz. Yerel geliştirme ve test sırasında bu sorunu aşmak için,  `href` `<base>` çalışma zamanında etiketinin değeriyle eşleşen bir yol temel bağımsız değişkeni sağlayabilirsiniz. **Sondaki eğik çizgi eklemeyin.** Uygulamayı yerel olarak çalıştırırken yol temel bağımsız değişkenini geçirmek için, `dotnet run` komutu uygulamanın dizininden çalıştırın, `--pathbase` seçeneği:
 
 ```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}

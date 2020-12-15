@@ -4,6 +4,7 @@ author: rick-anderson
 description: Sayfalardaki eğitim serisinin 3. bölümü Razor .
 ms.author: riande
 ms.date: 09/25/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: a6efbb22f8b6280bd636cd1575d8a4a2bca0bb06
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420038"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486180"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
@@ -158,7 +159,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/_ViewStart.cshtml)]
 
-Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor . *Pages* Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
+Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor .  Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
 
 ### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 
@@ -333,7 +334,7 @@ Diğer bağlantıları test edin (**giriş**, **rpmovie**, **oluşturma**, **dü
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/_ViewStart.cshtml)]
 
-Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor . *Pages* Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
+Yukarıdaki biçimlendirme, düzen dosyasını sayfalar klasörü altındaki tüm dosyalar için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar Razor .  Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
 
 ### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 

@@ -4,6 +4,7 @@ author: rick-anderson
 description: Sayfalardaki eğitim serisinin 5. bölümü Razor .
 ms.author: riande
 ms.date: 09/20/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 46fbfb50afd03f918f9e02bcc8c1dbde9a080ca4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419973"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485946"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>5. bölüm, ASP.NET Core uygulamasında oluşturulan sayfaları güncelleştirme
 
@@ -87,7 +88,7 @@ Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 </td>
 ```
 
-Tamsayı içermeyen yol şablonuna sahip sayfaya yönelik bir istek, `{id:int}` HTTP **not** 404 (bulunamadı) hatası döndürür. Örneğin, `https://localhost:5001/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
+Tamsayı içermeyen yol şablonuna sahip sayfaya yönelik bir istek, `{id:int}` HTTP  404 (bulunamadı) hatası döndürür. Örneğin, `https://localhost:5001/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
 
 ```cshtml
 @page "{id:int?}"
