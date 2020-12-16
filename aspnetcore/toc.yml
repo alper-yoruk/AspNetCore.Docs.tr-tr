@@ -314,8 +314,8 @@
               uid: tutorials/build-a-blazor-app
             - name: Blazor WebAssembly ile SignalR
               uid: tutorials/signalr-blazor-webassembly
-        - name: Şablonlar
-          uid: blazor/templates
+        - name: Proje yapısı
+          uid: blazor/project-structure
         - name: Temeller
           items:
             - name: Yönlendirme
@@ -437,7 +437,7 @@
         - name: Yerleşik bileşenler
           items:
             - name: Uygulama
-              href: blazor/templates.md#blazor-project-structure
+              uid: blazor/project-structure
             - name: Kimlik doğrulaması
               href: blazor/security/webassembly/index.md#authentication-component
             - name: AuthorizeView
