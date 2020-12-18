@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: ecdf4f59aca0fe71bbfcfe61a99109127c8b92df
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 79c225a0714562a01afe67bf8e59f3b3f98a6265
+ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055718"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97666865"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core giriş Blazor
 
@@ -126,7 +126,7 @@ Bir Blazor WebAssembly uygulama bir tarayıcıda oluşturulup çalıştırıldı
 * Derlemeler ve [.NET çalışma zamanı](/dotnet/framework/get-started/overview) tarayıcıya indirilir.
 * Blazor WebAssembly .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır. Blazor WebAssemblyÇalışma zamanı, DOM işleme ve tarayıcı API çağrılarını işlemek Için JavaScript birlikte çalışabilirliği kullanır.
 
-Yayınlanan uygulamanın boyutu, *Yük boyutu* , uygulamanın useyeteneğinin önemli bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:
+Yayınlanan uygulamanın boyutu, *Yük boyutu*, bir uygulamanın kullanılabilirliği için kritik bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -163,7 +163,7 @@ Blazor ServerTarayıcıyla iletişim kurmak için tarafından kullanılan bağla
 
 ## <a name="code-sharing-and-net-standard"></a>Kod paylaşımı ve .NET Standard
 
-Blazor[.NET Standard](/dotnet/standard/net-standard) Blazor projelerin .NET Standard belirtimlerine uygun kitaplıklara başvurmalarını sağlayan .NET Standard uygular. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
+Blazor[](/dotnet/standard/net-standard) Blazor projelerin .NET Standard belirtimlerine uygun kitaplıklara başvurmalarını sağlayan .NET Standard uygular. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
 
 Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistemine erişmek, bir yuva açmak ve iş parçacığı açmak) bir oluşturur <xref:System.PlatformNotSupportedException> .
 
