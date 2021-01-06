@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
 ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94981888"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) grupları, yönetici rolleri ve Kullanıcı tanımlı roller
@@ -518,7 +518,7 @@ Sunucu API 'SI uygulaması tarafından Graph API çağrısı yalnızca Azure por
 
 ### <a name="azure-configuration"></a>Azure yapılandırması
 
-* *Sunucu* **uygulaması kaydına** , **Delegated** `Directory.Read.All` güvenlik grupları için en az ayrıcalıklı erişim düzeyi olan, için Graph API kapsam (temsilci yok) verildiğini doğrulayın. Kapsam atamasını yaptıktan sonra yönetim izninin kapsama uygulandığını doğrulayın.
+* *Sunucu* **uygulaması kaydına** ,  `Directory.Read.All` güvenlik grupları için en az ayrıcalıklı erişim düzeyi olan, için Graph API kapsam (temsilci yok) verildiğini doğrulayın. Kapsam atamasını yaptıktan sonra yönetim izninin kapsama uygulandığını doğrulayın.
 * *Sunucu* uygulamasına yeni bir istemci parolası atayın. Uygulama [ayarları](#app-settings) bölümünde uygulamanın yapılandırmasının gizli anahtarını aklınızda edin.
 
 ### <a name="app-settings"></a>Uygulama ayarları
@@ -535,7 +535,7 @@ Uygulama ayarları dosyasında ( `appsettings.json` veya `appsettings.Production
 },
 ```
 
-Örnek:
+Örneğin:
 
 ```json
 "AzureAd": {
@@ -550,7 +550,7 @@ Uygulama ayarları dosyasında ( `appsettings.json` veya `appsettings.Production
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> Kiracı yayımcısı etki alanı doğrulanmadıysa, Kullanıcı/istemci erişimi için sunucu API kapsamı, `https://` tabanlı BIR URI kullanır. Bu senaryoda, sunucu API uygulaması `Audience` dosyada yapılandırma gerektirir `appsettings.json` . Aşağıdaki yapılandırmada, `Audience` değerin sonu varsayılan kapsamı içermez **not** `/{DEFAULT SCOPE}` , burada yer tutucu `{DEFAULT SCOPE}` varsayılan kapsamdır:
+> Kiracı yayımcısı etki alanı doğrulanmadıysa, Kullanıcı/istemci erişimi için sunucu API kapsamı, `https://` tabanlı BIR URI kullanır. Bu senaryoda, sunucu API uygulaması `Audience` dosyada yapılandırma gerektirir `appsettings.json` . Aşağıdaki yapılandırmada, `Audience` değerin sonu varsayılan kapsamı içermez  `/{DEFAULT SCOPE}` , burada yer tutucu `{DEFAULT SCOPE}` varsayılan kapsamdır:
 >
 > ```json
 > {
@@ -589,7 +589,7 @@ Uygulama ayarları dosyasında ( `appsettings.json` veya `appsettings.Production
 
 ### <a name="authorization-policies"></a>Yetkilendirme ilkeleri
 
-*Server* [authorization policies](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` Grup nesne kimlikleri ve [AAD yönetici rolü nesne KIMLIKLERI](#aad-administrator-role-object-ids)temelinde, sunucu uygulamasının () AAD güvenlik grupları ve AAD yönetici rolleri için yetkilendirme ilkeleri oluşturun.
+ [](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` Grup nesne kimlikleri ve [AAD yönetici rolü nesne KIMLIKLERI](#aad-administrator-role-object-ids)temelinde, sunucu uygulamasının () AAD güvenlik grupları ve AAD yönetici rolleri için yetkilendirme ilkeleri oluşturun.
 
 Örneğin, bir Azure Faturalandırma Yöneticisi rol ilkesi aşağıdaki yapılandırmaya sahiptir:
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: grpc/configuration
 ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417597"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET için gRPC yapılandırması
@@ -32,7 +32,7 @@ ms.locfileid: "95417597"
 
 gRPC Hizmetleri, `AddGrpc` *Startup.cs* içinde ile yapılandırılır. Aşağıdaki tabloda, gRPC hizmetlerini yapılandırma seçenekleri açıklanmaktadır:
 
-| Seçenek | Varsayılan değer | Description |
+| Seçenek | Varsayılan değer | Açıklama |
 | ------ | ------------- | ----------- |
 | MaxSendMessageSize | `null` | Sunucudan gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
 | MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek, bayt olarak en büyük ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
@@ -40,7 +40,7 @@ gRPC Hizmetleri, `AddGrpc` *Startup.cs* içinde ile yapılandırılır. Aşağı
 | CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
 | <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma algoritması. Algoritmanın içindeki bir sıkıştırma sağlayıcısıyla eşleşmesi gerekir `CompressionProviders` . Bir yanıtı sıkıştırmaya yönelik algoritma için, istemci, **GRPC-Accept-Encoding** üstbilgisine göndererek algoritmayı desteklediğini göstermelidir. |
 | ResponseCompressionLevel | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma düzeyi. |
-| Durdurucular | Yok | Her gRPC çağrısıyla çalıştırılan bir dinleyici koleksiyonu. Yakalayıcılar kayıtlı oldukları sırada çalıştırılır. Küresel olarak yapılandırılan yakalayıcılar, tek bir hizmet için yapılandırmadan önce çalıştırılır. GRPC yakalayıcılar hakkında daha fazla bilgi için bkz. [GRPC yakalayıcılar Ile ara yazılım karşılaştırması](xref:grpc/migration#grpc-interceptors-vs-middleware). |
+| Durdurucular | Hiçbiri | Her gRPC çağrısıyla çalıştırılan bir dinleyici koleksiyonu. Yakalayıcılar kayıtlı oldukları sırada çalıştırılır. Küresel olarak yapılandırılan yakalayıcılar, tek bir hizmet için yapılandırmadan önce çalıştırılır. GRPC yakalayıcılar hakkında daha fazla bilgi için bkz. [GRPC yakalayıcılar Ile ara yazılım karşılaştırması](xref:grpc/migration#grpc-interceptors-vs-middleware). |
 | Ignoreunknownservices | `false` | `true`, Bilinmeyen hizmetlere ve yöntemlere yapılan çağrılar **uygulanmayan** bir durum döndürmez ve istek ASP.NET Core sonraki kayıtlı ara yazılıma geçer. |
 
 Seçenekler, içindeki çağrıya bir seçenek temsilcisi sağlayarak tüm hizmetler için yapılandırılabilir `AddGrpc` `Startup.ConfigureServices` :
@@ -55,7 +55,7 @@ Tek bir hizmetin seçenekleri ' de belirtilen genel seçenekleri geçersiz kıla
 
 gRPC istemci yapılandırması üzerinde ayarlanır `GrpcChannelOptions` . Aşağıdaki tabloda, gRPC kanallarını yapılandırma seçenekleri açıklanmaktadır:
 
-| Seçenek | Varsayılan değer | Description |
+| Seçenek | Varsayılan değer | Açıklama |
 | ------ | ------------- | ----------- |
 | HttpHandler | Yeni örnek | `HttpMessageHandler`GRPC çağrısı yapmak için kullanılır. İstemci `HttpClientHandler` , gRPC çağrılarına YÖNELIK http işlem hattına özel bir yapılandırma veya ek işleyiciler ekleme şeklinde ayarlanabilir. Hayır `HttpMessageHandler` belirtilirse `HttpClientHandler` kanal için otomatik elden çıkarmada yeni bir örnek oluşturulur. |
 | HttpClient | `null` | `HttpClient`GRPC çağrısı yapmak için kullanılır. Bu ayar, için bir alternatiftir `HttpHandler` . |

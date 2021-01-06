@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/linux-nginx
 ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94431073"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>NGINX ile Linux üzerinde ana bilgisayar ASP.NET Core
@@ -44,7 +44,7 @@ Bu kılavuz:
 * Web uygulamasının, bir arka plan programı olarak başlangıcında çalışmasını sağlar.
 * Web uygulamasını yeniden başlatmanıza yardımcı olması için bir işlem yönetim aracı yapılandırır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 1. Sudo ayrıcalığına sahip standart bir kullanıcı hesabı ile Ubuntu 16,04 sunucusuna erişim.
 1. .NET Core çalışma zamanını sunucuya yükler.
@@ -306,7 +306,7 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>Veri koruma
 
-[ASP.NET Core veri koruma yığını](xref:security/data-protection/introduction) , kimlik doğrulama ara yazılımı ( [middlewares](xref:fundamentals/middleware/index)Örneğin, cookie Ara yazılım) ve siteler arası istek sahteciliğini önleme (CSRF) korumaları dahil olmak üzere birkaç ASP.NET Core middlewares tarafından kullanılır. Veri koruma API 'Leri Kullanıcı kodu tarafından çağrılmasa bile, veri korumasının kalıcı bir şifreleme [anahtarı deposu](xref:security/data-protection/implementation/key-management)oluşturacak şekilde yapılandırılması gerekir. Veri koruması yapılandırılmamışsa, anahtarlar bellekte tutulur ve uygulama yeniden başlatıldığında atılır.
+[ASP.NET Core veri koruma yığını](xref:security/data-protection/introduction) , kimlik doğrulama ara yazılımı ( [](xref:fundamentals/middleware/index)Örneğin, cookie Ara yazılım) ve siteler arası istek sahteciliğini önleme (CSRF) korumaları dahil olmak üzere birkaç ASP.NET Core middlewares tarafından kullanılır. Veri koruma API 'Leri Kullanıcı kodu tarafından çağrılmasa bile, veri korumasının kalıcı bir şifreleme [anahtarı deposu](xref:security/data-protection/implementation/key-management)oluşturacak şekilde yapılandırılması gerekir. Veri koruması yapılandırılmamışsa, anahtarlar bellekte tutulur ve uygulama yeniden başlatıldığında atılır.
 
 Uygulama yeniden başlatıldığında anahtar halkası bellekte depolanıyorsa:
 
@@ -379,7 +379,7 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 
 Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut veya geliştirme ortamı (<kbd>F5</kbd> veya <kbd>CTRL</kbd> + <kbd>F5</kbd> Visual Studio Code) için geliştirme sürecinde bir sertifika kullanacak şekilde yapılandırın:
 
-* [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel#configuration) ( *önerilir* )
+* [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel#configuration) (*önerilir*)
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
 **Güvenli (HTTPS) istemci bağlantıları için ters proxy 'yi yapılandırma**
@@ -404,7 +404,7 @@ Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut 
 
 [!code-nginx[](linux-nginx/proxy.conf)]
 
-**Replace** `/etc/nginx/nginx.conf` Yapılandırma dosyasının Içeriğini aşağıdaki dosyayla değiştirin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
+ `/etc/nginx/nginx.conf` Yapılandırma dosyasının Içeriğini aşağıdaki dosyayla değiştirin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 

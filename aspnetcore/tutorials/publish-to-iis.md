@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: b3c714ea8e741430df1f70b2df258f1e8f1c7ad5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f70b5f12b9097f8710c9641404b3e085968fc3f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060514"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753159"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS 'de ASP.NET Core uygulaması yayımlama
 
@@ -37,7 +37,7 @@ Bu öğreticide aşağıdaki konular ele alınmaktadır:
 > * IIS Yöneticisi 'nde bir IIS sitesi oluşturun.
 > * ASP.NET Core uygulamasını dağıtın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Geliştirme makinesinde yüklü [.NET Core SDK](/dotnet/core/sdk) .
 * **Web sunucusu (IIS)** sunucu rolüyle yapılandırılmış Windows Server. Sunucunuz Web sitelerini IIS ile barındırmak üzere yapılandırılmamışsa, makalenin *IIS yapılandırması* bölümündeki yönergeleri izleyin <xref:host-and-deploy/iis/index#iis-configuration> ve ardından Bu öğreticiye geri dönün.
@@ -47,8 +47,8 @@ Bu öğreticide aşağıdaki konular ele alınmaktadır:
 >
 > Bu öğreticide kapsanmayan IIS barındırması için önemli senaryolar şunlardır:
 >
-> * [ASP.NET Core veri koruması için bir kayıt defteri kovanı oluşturma](xref:host-and-deploy/iis/index#data-protection)
-> * [Uygulama havuzunun Access Control listesi (ACL) yapılandırması](xref:host-and-deploy/iis/index#application-pool-identity)
+> * [ASP.NET Core veri koruması için bir kayıt defteri kovanı oluşturma](xref:host-and-deploy/iis/advanced#data-protection)
+> * [Uygulama havuzunun Access Control listesi (ACL) yapılandırması](xref:host-and-deploy/iis/advanced#application-pool-identity)
 > * IIS dağıtım kavramlarına odaklanmak için bu öğretici, IIS 'de HTTPS güvenliği olmayan bir uygulama dağıtır. HTTPS protokolü için etkinleştirilmiş bir uygulamayı barındırma hakkında daha fazla bilgi için, bu makalenin [ek kaynaklar](#additional-resources) bölümündeki güvenlik konularına bakın. ASP.NET Core uygulamalar barındırılmasına yönelik daha fazla rehberlik makalesinde sunulmaktadır <xref:host-and-deploy/iis/index> .
 
 ## <a name="install-the-net-core-hosting-bundle"></a>.NET Core barındırma paketi 'ni yükler
@@ -69,14 +69,14 @@ Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
 
 1. IIS Yöneticisi 'nde, **Bağlantılar** panelinde sunucunun düğümünü açın. **Siteler** klasörüne sağ tıklayın. Bağlamsal menüden **Web sitesi Ekle** ' yi seçin.
 
-1. Bir **site adı** belirtin ve **fiziksel yolu** , oluşturduğunuz uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam** ' ı seçerek Web sitesini oluşturun.
+1. Bir **site adı** belirtin ve **fiziksel yolu** , oluşturduğunuz uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam**' ı seçerek Web sitesini oluşturun.
 
    > [!WARNING]
-   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır  . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği ( **işlem modeli**  >  **Identity** ) `ApplicationPoolIdentity` ' den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) `ApplicationPoolIdentity` ' den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 ## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a>ASP.NET Core Razor Pages uygulaması oluşturma
 
@@ -91,11 +91,12 @@ Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Çözüm Gezgini** projede projeye sağ tıklayın ve **Yayımla** ' yı seçin.
+1. **Çözüm Gezgini** projede projeye sağ tıklayın ve **Yayımla**' yı seçin.
 1. **Bir yayımlama hedefi seç** iletişim kutusunda, **klasörü** Yayımla seçeneğini belirleyin.
 1. **Klasör veya dosya paylaşma** yolunu ayarlayın.
    * Geliştirme makinesinde bir ağ paylaşımında bulunan IIS sitesi için bir klasör oluşturduysanız, paylaşımın yolunu belirtin. Geçerli kullanıcının paylaşıma yayımlamak için yazma erişimi olmalıdır.
    * IIS sunucusunda IIS site klasörüne doğrudan dağıtadıysanız, çıkarılabilir medyada bir klasöre yayımlayın ve yayımlanan uygulamayı sunucuda, sitenin **fiziksel yolu** olan sunucudaki IIS site klasörüne fiziksel olarak taşıyın. Klasörün içeriğini, sunucudaki IIS `bin/Release/{TARGET FRAMEWORK}/publish` Yöneticisi 'Ndeki **fiziksel yolu** olan sunucudaki IIS site klasörüne taşıyın.
+1. **Yayımla** düğmesini seçin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -109,10 +110,11 @@ Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Çözümdeki** projeye sağ tıklayın ve Yayımla klasörünü **Yayımla ' yı seçin**  >  **Publish to Folder** .
+1. **Çözümdeki** projeye sağ tıklayın ve Yayımla klasörünü **Yayımla ' yı seçin**  >  .
 1. **Klasör seçin** yolunu ayarlayın.
    * Geliştirme makinesinde bir ağ paylaşımında bulunan IIS sitesi için bir klasör oluşturduysanız, paylaşımın yolunu belirtin. Geçerli kullanıcının paylaşıma yayımlamak için yazma erişimi olmalıdır.
    * IIS sunucusunda IIS site klasörüne doğrudan dağıtım yapadıysanız, kaldırılabilir medyada bir klasöre yayımlayın ve yayımlanan uygulamayı sunucuda, sitenin **fiziksel yolu** olan sunucudaki IIS site klasörüne fiziksel olarak taşıyın. Klasörün içeriğini, sunucudaki IIS `bin/Release/{TARGET FRAMEWORK}/publish` Yöneticisi 'Ndeki **fiziksel yolu** olan sunucudaki IIS site klasörüne taşıyın.
+1. **Yayımla** düğmesini seçin.
 
 ---
 

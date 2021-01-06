@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/model
 ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97485998"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Bölüm 2, Razor ASP.NET Core bir sayfalar uygulamasına bir model ekleyin
@@ -162,7 +162,7 @@ Bu bölümde, film modeli scafkatdır. Diğer bir deyişle, scafkatlama aracı f
    1. **Model sınıfı** açılan kutusunda **Film ( Razor pagesmovie. modeller)** öğesini seçin.
    1. **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
       1. **Veri bağlamı Ekle** iletişim kutusunda, *Razor pagemovie. Data sınıfını adlandırın. Razor PagesMovieContext* oluşturuldu.
-   1. **Ekle**’yi seçin.
+   1. **Add (Ekle)** seçeneğini belirleyin.
 
    ![Önceki yönergelerden görüntü.](model/_static/3/arp.png)
 
@@ -529,7 +529,7 @@ Bu bölümde, film modeli scafkatdır. Diğer bir deyişle, scafkatlama aracı f
 
 * **Model sınıfı** açılan kutusunda **Film ( Razor pagesmovie. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve oluşturulan adı Razor pagesmovie 'den değiştirin.**Modeller**. Razor Pagesmovie 'e PagesMovieContext Razor .**Veri**. Razor PagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanıyla veritabanı bağlamı sınıfını oluşturur.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki yönergelerden görüntü.](model/_static/3/arp.png)
 
@@ -597,7 +597,7 @@ Yeni yapı iskelesi **eklemek** > *Sayfalar/filmler* klasörüne sağ tıklayın
 
 * **Model sınıfı** açılan kutusunda, seçin veya yazın, **Film ( Razor pagesmovie. modeller)**.
 * **Veri bağlamı sınıfı** satırına yeni sınıfın adını yazın, Razor pagesfilmi.**Veri**. Razor PagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanıyla veritabanı bağlamı sınıfını oluşturur.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arpMac.png)
 
@@ -919,7 +919,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 * **Model sınıfı** açılan kutusunda **Film ( Razor pagesmovie. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve oluşturulan **Razor pagesmovie. modeller adlı adı kabul edin. Razor PagesMovieContext**.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arp.png)
 
@@ -981,7 +981,7 @@ Daha fazla bilgi için bkz. [DotNet-ASPNET-CodeGenerator](xref:fundamentals/tool
 
 * **Model sınıfı** açılan kutusunda **film**' ı seçin veya yazın.
 * **Veri bağlamı sınıfı** satırında, **Razor pagesmoviecontext** ' i seçin. Bu, doğru ad alanıyla yeni bir veritabanı bağlamı sınıfı oluşturur. Bu durumda, **Razor pagesmovie. modeller olacaktır. Razor PagesMovieContext**.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arpMac.png)
 

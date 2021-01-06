@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/host/generic-host
 ms.openlocfilehash: 263c7713166005dfdec8ede6bfa9b03b730dede7
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/25/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96035820"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core .NET genel ana bilgisayarı
@@ -171,7 +171,7 @@ Aşağıdaki örnek, `IHostedService` olayları kaydeden bir uygulamasıdır `IH
 * [EnvironmentName](#environmentname)
 * [Contentrootyolu](#contentroot)
 
-Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [WebRootPath](#webroot)
+Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [](#webroot)
 
 ## <a name="host-configuration"></a>Konak yapılandırması
 
@@ -229,7 +229,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Içerik kökü](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -454,7 +454,7 @@ Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `
 webBuilder.UseWebRoot("public");
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Web kökü](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)
@@ -674,7 +674,7 @@ Aşağıdaki örnek, `IHostedService` olayları kaydeden bir uygulamasıdır `IH
 * [EnvironmentName](#environmentname)
 * [Contentrootyolu](#contentroot)
 
-Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [WebRootPath](#webroot)
+Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [](#webroot)
 
 ## <a name="host-configuration"></a>Konak yapılandırması
 
@@ -732,7 +732,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Içerik kökü](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -944,7 +944,7 @@ Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `
 webBuilder.UseWebRoot("public");
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Web kökü](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)

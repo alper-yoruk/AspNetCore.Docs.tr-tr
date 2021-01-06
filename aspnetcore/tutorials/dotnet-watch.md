@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060046"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Dosya İzleyicisi kullanarak ASP.NET Core uygulamalar geliştirme
@@ -131,7 +131,7 @@ Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu d
 1. `Product`Toplamı döndürmek için *MathController.cs* yöntemini geri değiştirin. Dosyayı kaydedin.
 1. Bir komut kabuğunda *Webapptests* klasörüne gidin.
 1. [DotNet restore](/dotnet/core/tools/dotnet-restore)çalıştırın.
-1. Şu komutu çalıştırın: `dotnet watch test`. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
+1. `dotnet watch test` öğesini çalıştırın. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -201,7 +201,7 @@ Hedef her iki projeyi de seyretmek istiyorsanız, her iki projeyi de izlemek iç
 </Project>
 ```
 
-Her iki projede de dosya izlemeye başlamak için, *Test* klasörüne geçin. Şu kodu yürütün:
+Her iki projede de dosya izlemeye başlamak için, *Test* klasörüne geçin. Aşağıdaki komutu yürütün:
 
 ```dotnetcli
 dotnet watch msbuild /t:Test

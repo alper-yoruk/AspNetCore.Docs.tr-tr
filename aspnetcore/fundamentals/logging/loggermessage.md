@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/logging/loggermessage
 ms.openlocfilehash: 0224e768bd0e016eac5165dc4d9745f4b0867094
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060462"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core 'de LoggerMessage ile yüksek performanslı günlüğe kaydetme
@@ -47,7 +47,7 @@ ms.locfileid: "93060462"
 
 Yöntemine girilen dize, <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> enterpolasyonlu bir dize değil, bir şablondur. Yer tutucular, türlerin belirtilme sırasına göre doldurulur. Şablondaki yer tutucu adları, şablonlar genelinde açıklayıcı ve tutarlı olmalıdır. Bunlar, yapılandırılmış günlük verileri içinde özellik adı olarak görev yapar. Yer tutucu adları için [Pascal büyük harfleri](/dotnet/standard/design-guidelines/capitalization-conventions) öneririz. Örneğin,, `{Count}` `{FirstName}` .
 
-Her günlük iletisi, <xref:System.Action> [Loggermessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)tarafından oluşturulan statik bir alanda tutulur. Örneğin, örnek uygulama, Dizin sayfası ( *iç/LoggerExtensions. cs* ) IÇIN bir GET isteğinin günlük iletisini tanımlayacak bir alan oluşturur:
+Her günlük iletisi, <xref:System.Action> [Loggermessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)tarafından oluşturulan statik bir alanda tutulur. Örneğin, örnek uygulama, Dizin sayfası (*iç/LoggerExtensions. cs*) IÇIN bir GET isteğinin günlük iletisini tanımlayacak bir alan oluşturur:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -95,7 +95,7 @@ Tırnak eklemek için statik genişletme yöntemi, `QuoteAdded` quote bağımsı
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-Dizin sayfasının sayfa modelinde ( *Sayfalar/Index. cshtml. cs* ), `QuoteAdded` iletiyi günlüğe kaydetmek için çağrılır:
+Dizin sayfasının sayfa modelinde (*Sayfalar/Index. cshtml. cs*), `QuoteAdded` iletiyi günlüğe kaydetmek için çağrılır:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -108,7 +108,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-Örnek uygulama, teklif silme için bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) kalıbı uygular. Başarılı silme işlemi için bir bilgilendirici ileti günlüğe kaydedilir. Bir özel durum oluştuğunda silme işlemi için bir hata iletisi günlüğe kaydedilir. Başarısız silme işleminin günlük iletisi, özel durum yığın izlemesini içerir ( *iç/LoggerExtensions. cs* ):
+Örnek uygulama, teklif silme için bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) kalıbı uygular. Başarılı silme işlemi için bir bilgilendirici ileti günlüğe kaydedilir. Bir özel durum oluştuğunda silme işlemi için bir hata iletisi günlüğe kaydedilir. Başarısız silme işleminin günlük iletisi, özel durum yığın izlemesini içerir (*iç/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -118,7 +118,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-Dizin sayfasının sayfa modelinde, başarılı bir teklif silme işlemi `QuoteDeleted` günlükçü üzerindeki yöntemi çağırır. Silinmek üzere bir teklif bulunamadığında, bir oluşturulur <xref:System.ArgumentNullException> . Özel durum, [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesiyle `QuoteDeleteFailed` yakalar ve [catch](/dotnet/csharp/language-reference/keywords/try-catch) bloğunda ( *Pages/Index. cshtml. cs* ) günlükçü üzerindeki yöntemi çağırarak günlüğe kaydedilir:
+Dizin sayfasının sayfa modelinde, başarılı bir teklif silme işlemi `QuoteDeleted` günlükçü üzerindeki yöntemi çağırır. Silinmek üzere bir teklif bulunamadığında, bir oluşturulur <xref:System.ArgumentNullException> . Özel durum, [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesiyle `QuoteDeleteFailed` yakalar ve [catch](/dotnet/csharp/language-reference/keywords/try-catch) bloğunda (*Pages/Index. cshtml. cs*) günlükçü üzerindeki yöntemi çağırarak günlüğe kaydedilir:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -159,7 +159,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 [!code-json[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` ( *Iç/LoggerExtensions. cs* ) adlı bir alan oluşturur:
+Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` (*Iç/LoggerExtensions. cs*) adlı bir alan oluşturur:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
@@ -213,7 +213,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 Yöntemine girilen dize, <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> enterpolasyonlu bir dize değil, bir şablondur. Yer tutucular, türlerin belirtilme sırasına göre doldurulur. Şablondaki yer tutucu adları, şablonlar genelinde açıklayıcı ve tutarlı olmalıdır. Bunlar, yapılandırılmış günlük verileri içinde özellik adı olarak görev yapar. Yer tutucu adları için [Pascal büyük harfleri](/dotnet/standard/design-guidelines/capitalization-conventions) öneririz. Örneğin,, `{Count}` `{FirstName}` .
 
-Her günlük iletisi, <xref:System.Action> [Loggermessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)tarafından oluşturulan statik bir alanda tutulur. Örneğin, örnek uygulama, Dizin sayfası ( *iç/LoggerExtensions. cs* ) IÇIN bir GET isteğinin günlük iletisini tanımlayacak bir alan oluşturur:
+Her günlük iletisi, <xref:System.Action> [Loggermessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)tarafından oluşturulan statik bir alanda tutulur. Örneğin, örnek uygulama, Dizin sayfası (*iç/LoggerExtensions. cs*) IÇIN bir GET isteğinin günlük iletisini tanımlayacak bir alan oluşturur:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -261,7 +261,7 @@ Tırnak eklemek için statik genişletme yöntemi, `QuoteAdded` quote bağımsı
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-Dizin sayfasının sayfa modelinde ( *Sayfalar/Index. cshtml. cs* ), `QuoteAdded` iletiyi günlüğe kaydetmek için çağrılır:
+Dizin sayfasının sayfa modelinde (*Sayfalar/Index. cshtml. cs*), `QuoteAdded` iletiyi günlüğe kaydetmek için çağrılır:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -274,7 +274,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-Örnek uygulama, teklif silme için bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) kalıbı uygular. Başarılı silme işlemi için bir bilgilendirici ileti günlüğe kaydedilir. Bir özel durum oluştuğunda silme işlemi için bir hata iletisi günlüğe kaydedilir. Başarısız silme işleminin günlük iletisi, özel durum yığın izlemesini içerir ( *iç/LoggerExtensions. cs* ):
+Örnek uygulama, teklif silme için bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) kalıbı uygular. Başarılı silme işlemi için bir bilgilendirici ileti günlüğe kaydedilir. Bir özel durum oluştuğunda silme işlemi için bir hata iletisi günlüğe kaydedilir. Başarısız silme işleminin günlük iletisi, özel durum yığın izlemesini içerir (*iç/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -284,7 +284,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-Dizin sayfasının sayfa modelinde, başarılı bir teklif silme işlemi `QuoteDeleted` günlükçü üzerindeki yöntemi çağırır. Silinmek üzere bir teklif bulunamadığında, bir oluşturulur <xref:System.ArgumentNullException> . Özel durum, [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesiyle `QuoteDeleteFailed` yakalar ve [catch](/dotnet/csharp/language-reference/keywords/try-catch) bloğunda ( *Pages/Index. cshtml. cs* ) günlükçü üzerindeki yöntemi çağırarak günlüğe kaydedilir:
+Dizin sayfasının sayfa modelinde, başarılı bir teklif silme işlemi `QuoteDeleted` günlükçü üzerindeki yöntemi çağırır. Silinmek üzere bir teklif bulunamadığında, bir oluşturulur <xref:System.ArgumentNullException> . Özel durum, [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesiyle `QuoteDeleteFailed` yakalar ve [catch](/dotnet/csharp/language-reference/keywords/try-catch) bloğunda (*Pages/Index. cshtml. cs*) günlükçü üzerindeki yöntemi çağırarak günlüğe kaydedilir:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -327,7 +327,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 [!code-json[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` ( *Iç/LoggerExtensions. cs* ) adlı bir alan oluşturur:
+Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` (*Iç/LoggerExtensions. cs*) adlı bir alan oluşturur:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 

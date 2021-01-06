@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/progressive-web-app
 ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855449"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
@@ -228,7 +228,7 @@ Tüm uygulamalar çevrimdışı kullanımı desteklemeyi denememelidir. Çevrimd
 
 Çevrimdışı destek genellikle ilgilidir:
 
-* Birincil veri deposu tarayıcıya yereldir. Örneğin, yaklaşım, verileri [IoT](https://en.wikipedia.org/wiki/Internet_of_things) `localStorage` veya [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)'yi depolayan bir IoT cihazına yönelik kullanıcı arabirimine sahip bir uygulama ile ilgilidir.
+* Birincil veri deposu tarayıcıya yereldir. Örneğin, yaklaşım, verileri [](https://en.wikipedia.org/wiki/Internet_of_things) `localStorage` veya [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)'yi depolayan bir IoT cihazına yönelik kullanıcı arabirimine sahip bir uygulama ile ilgilidir.
 * Uygulama, her kullanıcıyla ilgili arka uç API verisini getirmek ve önbelleğe almak için önemli miktarda iş gerçekleştiriyorsa, bu sayede verileri çevrimdışı olarak gezinebilirler. Uygulamanın düzenlemesini desteklemesi gerekiyorsa, değişiklikleri izlemeye yönelik bir sistem, arka uca veri eşitlemesi oluşturulmalıdır.
 * Hedef ise, ağ koşullarından bağımsız olarak uygulamanın hemen yüklendiğini güvence altına almak için kullanılır. İsteklerin ilerlemesini göstermek için arka uç API 'SI isteklerinde uygun bir kullanıcı deneyimi uygulayın ve ağ kullanılamamasından kaynaklanan istekler başarısız olduğunda düzgün bir şekilde davranır.
 

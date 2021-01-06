@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 89aeb20d5566447ff86581dfa1d7946d20b9ed2d
-ms.sourcegitcommit: 94c8cc1a8ce2bdba0ebdd9d37c155bf42d3cc62b
+ms.openlocfilehash: b2f58fb29e451628aead4ad35c7272a1409cf3d8
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96473722"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97797359"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>SignalRBarındırılan bir uygulamayla ASP.NET Core kullanma Blazor WebAssembly
 
@@ -43,7 +43,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -212,6 +212,60 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
+::: moniker range="< aspnetcore-5.0"
+
+## <a name="add-the-systemtextencodingsweb-package"></a>System. Text. kodlamalar. Web paketini ekleme
+
+ASP.NET Core 3,1 uygulamasında 5.0.0 kullanılırken bir paket çözümleme sorunu nedeniyle [`System.Text.Json`](https://www.nuget.org/packages/System.Text.Json) , `BlazorSignalRApp.Server` proje için bir paket başvurusu gerekir [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) . Temel alınan sorun, .NET 5 ' in gelecekteki bir düzeltme eki sürümünde çözümlenir. Daha fazla bilgi için bkz. [System.Text.Jshakkında, hiçbir bağımlılığı olmayan netcoreapp 3.0 'ı tanımlar (DotNet/runtime #45560)](https://github.com/dotnet/runtime/issues/45560).
+
+[`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) `BlazorSignalRApp.Server` ASP.NET Core 3,1 barındırılan çözümünün projesine eklemek için Blazor , araç seçiminiz için yönergeleri izleyin:
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+
+1. **Çözüm Gezgini**, projeye sağ tıklayın `BlazorSignalRApp.Server` ve **NuGet Paketlerini Yönet**' i seçin.
+
+1. **NuGet Paketlerini Yönet** iletişim kutusunda, **paket kaynağının** olarak ayarlandığını doğrulayın `nuget.org` .
+
+1. **Araştır** seçiliyken, `System.Text.Encodings.Web` Arama kutusuna yazın.
+
+1. Arama sonuçlarında, [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) paketi seçin ve ardından **Install**' ı seçin.
+
+1. **Değişiklikleri Önizle** iletişim kutusu görüntülenirse **Tamam**' ı seçin.
+
+1. **Lisans kabulü** iletişim kutusu görüntülenirse, lisans şartlarını kabul ediyorsanız **kabul ediyorum** ' u seçin.
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
+
+**Tümleşik terminalde** (araç çubuğundan **Görünüm** > **terminali** ) aşağıdaki komutları yürütün:
+
+```dotnetcli
+dotnet add Server package System.Text.Encodings.Web
+```
+
+# <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
+
+1. **Çözüm** kenar çubuğunda projeye sağ tıklayın `BlazorSignalRApp.Server` ve **NuGet Paketlerini Yönet**' i seçin.
+
+1. **NuGet Paketlerini Yönet** iletişim kutusunda, kaynak açılan kutusunun olarak ayarlandığını doğrulayın `nuget.org` .
+
+1. **Araştır** seçiliyken, `System.Text.Encodings.Web` Arama kutusuna yazın.
+
+1. Arama sonuçlarında, paketin yanındaki onay kutusunu işaretleyin [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) ve **paket Ekle**' yi seçin.
+
+1. **Lisans kabulü** iletişim kutusu görüntülenirse, lisans şartlarını kabul ediyorsanız **kabul et** ' i seçin.
+
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+Bir komut kabuğunda, aşağıdaki komutu yürütün:
+
+```dotnetcli
+dotnet add Server package System.Text.Encodings.Web
+```
+
+---
+
+::: moniker-end
+
 ## <a name="add-a-no-locsignalr-hub"></a>Hub ekleme SignalR
 
 `BlazorSignalRApp.Server`Projesinde, bir `Hubs` (plural) klasörü oluşturun ve aşağıdaki `ChatHub` sınıfı ( `Hubs/ChatHub.cs` ) ekleyin:
@@ -238,32 +292,31 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. SignalRSıkıştırma ara yazılım hizmetlerini ekleme ve yanıtlama `Startup.ConfigureServices` :
-
 ::: moniker range=">= aspnetcore-5.0"
 
+1. SignalRSıkıştırma ara yazılım hizmetlerini ekleme ve yanıtlama `Startup.ConfigureServices` :
+
    [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,6-10)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
-
-::: moniker-end
-
+   
 1. `Startup.Configure` içinde:
 
    * İşlem ardışık düzeninin yapılandırmasının en üstünde yanıt sıkıştırma ara yazılımı ' nı kullanın.
    * Denetleyiciler ve istemci tarafı geri dönüş uç noktaları arasında merkez için bir uç nokta ekleyin.
-
-::: moniker range=">= aspnetcore-5.0"
 
    [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,26)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+1. SignalRSıkıştırma ara yazılım hizmetlerini ekleme ve yanıtlama `Startup.ConfigureServices` :
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   
+1. `Startup.Configure` içinde:
+
+   * İşlem ardışık düzeninin yapılandırmasının en üstünde yanıt sıkıştırma ara yazılımı ' nı kullanın.
+   * Denetleyiciler ve istemci tarafı geri dönüş uç noktaları arasında merkez için bir uç nokta ekleyin.
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
@@ -273,9 +326,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. `BlazorSignalRApp.Client`Projede `Pages/Index.razor` dosyasını açın.
 
-1. İşaretlemeyi aşağıdaki kodla değiştirin:
-
 ::: moniker range=">= aspnetcore-5.0"
+
+1. İşaretlemeyi aşağıdaki kodla değiştirin:
 
    [!code-razor[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
@@ -283,13 +336,15 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ::: moniker range="< aspnetcore-5.0"
 
+1. İşaretlemeyi aşağıdaki kodla değiştirin:
+
    [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-1. Araç kılavuzunuz için yönergeleri izleyin:
+Araç kılavuzunuz için yönergeleri izleyin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -305,9 +360,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. VS Code, sunucu uygulaması () için bir başlatma profili oluşturmak üzere teklif edildiğinde `.vscode/launch.json` , `program` uygulamanın derlemesini () göstermek için giriş aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
-
 ::: moniker range=">= aspnetcore-5.0"
+
+1. VS Code, sunucu uygulaması () için bir başlatma profili oluşturmak üzere teklif edildiğinde `.vscode/launch.json` , `program` uygulamanın derlemesini () göstermek için giriş aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/net5.0/{APPLICATION NAME}.Server.dll"
@@ -316,6 +371,8 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+1. VS Code, sunucu uygulaması () için bir başlatma profili oluşturmak üzere teklif edildiğinde `.vscode/launch.json` , `program` uygulamanın derlemesini () göstermek için giriş aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
@@ -335,7 +392,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Çözüm** kenar çubuğunda `BlazorSignalRApp.Server` projeyi seçin. Uygulamayı <kbd>⌘</kbd>hata + <kbd>↩</kbd> <kbd>⌥</kbd> + <kbd>⌘</kbd> + ayıklamadan çalıştırmak için hata ayıklama veya ⌥ ⌘<kbd>↩</kbd> ile uygulamayı çalıştırmak için ⌘ ↩ tuşuna basın.
+1. **Çözüm** kenar çubuğunda `BlazorSignalRApp.Server` projeyi seçin. Uygulamayı <kbd></kbd>hata + <kbd></kbd> <kbd></kbd> + <kbd></kbd> + ayıklamadan çalıştırmak için hata ayıklama veya ⌥ ⌘<kbd>↩</kbd> ile uygulamayı çalıştırmak için ⌘ ↩ tuşuna basın.
 
 1. Adres çubuğundan URL 'yi kopyalayın, başka bir tarayıcı örneği veya sekme açın ve adres çubuğuna URL 'YI yapıştırın.
 

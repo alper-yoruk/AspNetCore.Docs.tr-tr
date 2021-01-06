@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97486232"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
@@ -50,7 +50,7 @@ Bu öğreticinin sonunda, Razor sonraki öğreticilerde geliştireceğim bir ça
 
 ![Home veya::: No-Loc (Dizin)::: sayfa](razor-pages-start/_static/5/home5.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -198,7 +198,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ![Home veya::: No-Loc (Dizin)::: sayfa](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -340,7 +340,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ![Home veya::: No-Loc (Dizin)::: sayfa](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

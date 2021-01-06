@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
 ms.openlocfilehash: b009cc61a94e618a48d96ecbd770ef6371308f6a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059851"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core ile Azure App Service ve IIS için ortak hatalar başvurusu
@@ -201,7 +201,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* *processPath* `<aspNetCore>` *web.config* `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
+*  `<aspNetCore>`  `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
 
 * FDD için *dotnet.exe* yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\* dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
 
@@ -231,7 +231,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* Bir *arguments* `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
+* Bir  `<aspNetCore>`  `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
 
 ## <a name="missing-net-core-shared-framework"></a>Eksik .NET Core paylaşılan çerçevesi
 
@@ -477,7 +477,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* *processPath* `<aspNetCore>` *web.config* `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
+*  `<aspNetCore>`  `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
 
 * FDD için *dotnet.exe* yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\* dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
 
@@ -505,7 +505,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* Bir *arguments* `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
+* Bir  `<aspNetCore>`  `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
 
 Sorun Giderme:
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/forms-validation
 ms.openlocfilehash: 979e2615080a4f07b6091f0498fc7efa62ea1563
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96320076"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
@@ -225,7 +225,7 @@ Aşağıdaki form, modelde tanımlanan doğrulamayı kullanarak Kullanıcı giri
 
 , <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> Hangi alanların değiştirildiği ve geçerli doğrulama iletileri de dahil olmak üzere düzenleme işlemiyle ilgili meta verileri izleyen [basamaklı bir değer](xref:blazor/components/cascading-values-and-parameters) olarak oluşturur.
 
-Ya **da** ' a atayın <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **or** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> . Her ikisinin atanması desteklenmez ve bir **çalışma zamanı hatası** oluşturur.
+Ya **da** ' a atayın <xref:Microsoft.AspNetCore.Components.Forms.EditContext>  <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> . Her ikisinin atanması desteklenmez ve bir **çalışma zamanı hatası** oluşturur.
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm>Geçerli ve geçersiz form gönderimi için uygun olaylar sağlar:
 
@@ -1201,7 +1201,7 @@ Yukarıdaki örnekte, şu şekilde ayarlayın `formInvalid` `false` :
 
 > InvalidOperationException: EditForm bir model parametresi veya bir EditContext parametresi gerektiriyor, ancak her ikisini de içermemelidir.
 
-Veya olduğunu doğrulayın <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> **or** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> . Her ikisini de aynı form için kullanmayın.
+Veya olduğunu doğrulayın <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model>  <xref:Microsoft.AspNetCore.Components.Forms.EditContext> . Her ikisini de aynı form için kullanmayın.
 
 Forma atama yaparken <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> , aşağıdaki örnekte gösterildiği gibi model türünün örneği oluşturulmuş olduğunu doğrulayın:
 

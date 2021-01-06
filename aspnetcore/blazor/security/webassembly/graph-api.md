@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 128ba34b1e2a9f8cc2986a8f1cb3fb8beba83b21
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 58c201d6d1172c1ff82521589f988e33d5c984ae
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855397"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854502"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile Graph API kullanma Blazor WebAssembly
 
@@ -107,7 +107,7 @@ internal static class GraphClientExtensions
             var result = await TokenProvider.RequestAccessToken(
                 new AccessTokenRequestOptions()
                 {
-                    Scopes = {STRING ARRAY OF SCOPES}
+                    Scopes = new[] { "{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}" }
                 });
 
             if (result.TryGetToken(out var token))
@@ -150,7 +150,7 @@ internal static class GraphClientExtensions
 }
 ```
 
-Önceki koddaki yer tutucu, `{STRING ARRAY OF SCOPES}` izin verilen kapsamların dize dizisidir. Örneğin, `Scopes` `User.Read` Bu makalenin aşağıdaki bölümlerindeki örneklerin kapsamına ayarlayın:
+Önceki koddaki kapsam yer tutucuları `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` bir veya daha fazla izin verilen kapsamları temsil eder. Örneğin, `Scopes` `User.Read` Bu makalenin aşağıdaki bölümlerindeki örnekler için için bir kapsamın dize dizisine ayarlanır:
 
 ```csharp
 Scopes = new[] { "https://graph.microsoft.com/User.Read" }
@@ -159,10 +159,10 @@ Scopes = new[] { "https://graph.microsoft.com/User.Read" }
 `Program.Main`( `Program.cs` ) Içinde, Graph Client Hizmetleri ve yapılandırmasını `AddGraphClient` uzantı yöntemiyle ekleyin:
 
 ```csharp
-builder.Services.AddGraphClient({STRING ARRAY OF SCOPES});
+builder.Services.AddGraphClient("{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}");
 ```
 
-Önceki koddaki yer tutucu, `{STRING ARRAY OF SCOPES}` izin verilen kapsamların dize dizisidir. Örneğin, `User.Read` `AddGraphClient` Bu makalenin aşağıdaki bölümlerindeki örnekler için kapsamı öğesine geçirin:
+Önceki koddaki kapsam yer tutucuları `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` bir veya daha fazla izin verilen kapsamları temsil eder. Örneğin, `User.Read` `AddGraphClient` Bu makalenin aşağıdaki bölümlerindeki örnekler için kapsamı öğesine geçirin:
 
 ```csharp
 builder.Services.AddGraphClient("https://graph.microsoft.com/User.Read");

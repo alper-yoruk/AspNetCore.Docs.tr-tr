@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/read-related-data
 ms.openlocfilehash: e52e4aefc18b84f85bea28a9724894eed50ca54a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061073"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
@@ -531,7 +531,7 @@ Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
   `http://localhost:1234/Instructors/2`
 
-* Sayfa başlığı **eğitmenler** ' dir.
+* Sayfa başlığı **eğitmenler**' dir.
 * Yalnızca null olmaması halinde görüntülenen bir **Office** sütunu eklendi `item.OfficeAssignment.Location` `item.OfficeAssignment` . Bu bire sıfır veya-bir ilişki olduğundan ilgili bir OfficeAssignment varlığı bulunmayabilir.
 
   ```html
@@ -613,7 +613,7 @@ Bu bölümde, uygulama seçili bir kurs için öğrenci verilerini gösterecek �
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-Güncelleştirme *sayfaları/eğitmenler/Index. cshtml* . Aşağıdaki biçimlendirmeyi dosyanın sonuna ekleyin:
+Güncelleştirme *sayfaları/eğitmenler/Index. cshtml*. Aşağıdaki biçimlendirmeyi dosyanın sonuna ekleyin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c37f0a3c528b6285fbf35f41eed781fb76c68de4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061216"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854606"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR ve ASP.NET Core arasındaki farklar SignalR
 
@@ -203,8 +203,8 @@ JQuery üzerindeki bağımlılık kaldırılmıştır, ancak projeler jQuery kul
 
 ### <a name="internet-explorer-support"></a>Internet Explorer desteği
 
-ASP.NET Core Microsoft SignalR Internet Explorer 11 veya üstünü destekler, ancak ASP.net SignalR Microsoft Internet Explorer 8 veya üstünü destekler.
-Tarayıcı desteği hakkında daha fazla bilgi için [desteklenen platformlarda](xref:signalr/supported-platforms#javascript-client)bulunabilir.
+ASP.NET Core SignalR Microsoft Internet Explorer 'ı desteklemez, ancak ASP.net SignalR Microsoft Internet Explorer 8 veya üstünü destekler.
+Daha fazla bilgi için bkz. <xref:signalr/supported-platforms#javascript-client>.
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript istemci yöntemi sözdizimi
 
@@ -293,7 +293,7 @@ ASP.NET SignalR SQL Server ve redsıs destekler. ASP.NET Core SignalR Azure Sign
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Merkezler](xref:signalr/hubs)
+* [Hub'lar](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)

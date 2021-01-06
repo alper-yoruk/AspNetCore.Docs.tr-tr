@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053533"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878418"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core bölgeler
 
@@ -149,7 +149,7 @@ Uygulama kök klasörü, ASP.NET Core şablonları ile oluşturulan Web uygulama
 
 ### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
- */Views/_ViewImports. cshtml* , MVC için */pages/_ViewImports. cshtml* for Pages, Razor alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
+ */Views/_ViewImports. cshtml*, MVC için */pages/_ViewImports. cshtml* for Pages, Razor alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
 
 * [Uygulama kök klasörüne](#arf) *_ViewImports. cshtml* ekleyin. Uygulama kök klasöründeki bir *_ViewImports. cshtml* uygulamadaki tüm görünümlere uygulanır.
 * *_ViewImports. cshtml* dosyasını, alanlarda uygun görünüm klasörüne kopyalayın.
@@ -211,7 +211,7 @@ Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklene
 
 Önceki biçimlendirmede:
 
-* Modeli belirtmek için tam etki alanı adının kullanılması gerekir ( `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ).
+* Modeli () belirtmek için tam sınıf adının kullanılması gerekir `@model RPareas.Areas.Services.Pages.Manage.AboutModel` .
 * [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) tarafından etkinleştirilir `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 Örnek indirme sırasında, ürünler alanı aşağıdaki *_ViewImports. cshtml* dosyasını içerir:

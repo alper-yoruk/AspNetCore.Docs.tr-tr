@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: d99d5bfd84c8c7e7d0c479964211591be434330c
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: bfda45afeea67a11ad775996d94a06125df08bc6
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855527"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854593"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
@@ -32,7 +32,7 @@ Bu bölümde, bir veritabanında film yönetmeye yönelik sınıflar eklersiniz.
 
 Bu sınıfları bir veritabanıyla çalışmak için [Entity Framework Core](/ef/core) (EF Core) ile birlikte kullanırsınız. EF Core, yazmanız gereken veri erişim kodunu kolaylaştıran bir nesne ilişkisel eşleme (ORM) çerçevesidir.
 
-Oluşturduğunuz model sınıfları, EF Core hiçbir bağımlılığı olmadığından, POCO sınıfları olarak bilinir ( **P** Lain **C** **O**) **O**. Yalnızca veritabanında depolanacak verilerin özelliklerini tanımlar.
+Oluşturduğunuz model sınıfları, EF Core hiçbir bağımlılığı olmadığından, POCO sınıfları olarak bilinir ( **P** Lain  **O**) . Yalnızca veritabanında depolanacak verilerin özelliklerini tanımlar.
 
 Bu öğreticide, önce model sınıflarını yazdığınızda EF Core veritabanını oluşturur.
 
@@ -42,7 +42,7 @@ Bu öğreticide, önce model sınıflarını yazdığınızda EF Core veritaban�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Sınıf Ekle > *modeller* klasörüne sağ tıklayın **Add**  >  **Class**. Dosyayı *Movie.cs* olarak adlandırın.
+Sınıf Ekle > *modeller* klasörüne sağ tıklayın   >  . Dosyayı *Movie.cs* olarak adlandırın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -50,7 +50,7 @@ Sınıf Ekle > *modeller* klasörüne sağ tıklayın **Add**  >  **Class**. Dos
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-*Modeller* klasörüne sağ tıklayıp **Add**  >  **Yeni sınıf**  >  **boş sınıfı** Ekle >. Dosyayı *Movie.cs* olarak adlandırın.
+*Modeller* klasörüne sağ tıklayıp   >  **Yeni sınıf**  >  **boş sınıfı** Ekle >. Dosyayı *Movie.cs* olarak adlandırın.
 
 ---
 
@@ -164,11 +164,11 @@ Dosyaya bir bağlantı dizesi ekleyin *appsettings.json* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
 
 ---
 
@@ -442,7 +442,7 @@ Film denetleyicisi oluşturulduğunda, yapı iskelesi `@model` *Index. cshtml* d
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Sınıf Ekle > *modeller* klasörüne sağ tıklayın **Add**  >  **Class**. Dosyayı *Movie.cs* olarak adlandırın.
+Sınıf Ekle > *modeller* klasörüne sağ tıklayın   >  . Dosyayı *Movie.cs* olarak adlandırın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -450,7 +450,7 @@ Sınıf Ekle > *modeller* klasörüne sağ tıklayın **Add**  >  **Class**. Dos
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-*Modeller* klasörüne sağ tıklayıp **Add**  >  **Yeni sınıf**  >  **boş sınıfı** Ekle >. Dosyayı *Movie.cs* olarak adlandırın.
+*Modeller* klasörüne sağ tıklayıp   >  **Yeni sınıf**  >  **boş sınıfı** Ekle >. Dosyayı *Movie.cs* olarak adlandırın.
 
 ---
 
@@ -828,7 +828,7 @@ Film denetleyicisi oluşturulduğunda, yapı iskelesi `@model` *Index. cshtml* d
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Sınıf Ekle > *modeller* klasörüne sağ tıklayın **Add**  >  **Class**. Sınıf **filmi** olarak adlandırın.
+Sınıf Ekle > *modeller* klasörüne sağ tıklayın   >  . Sınıf **filmi** olarak adlandırın.
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 

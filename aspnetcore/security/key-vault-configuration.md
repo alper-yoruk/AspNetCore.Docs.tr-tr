@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 7f5cd3de38f1e45d9b188c513a0e62ca658b2992
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 4b035fe59b8576eb387ddce67943386ccab55492
+ms.sourcegitcommit: 8dfcd2b4be936950c228b4d98430622a04254cd7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035911"
+ms.lasthandoff: 12/26/2020
+ms.locfileid: "97792087"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core Azure Key Vault yapılandırma sağlayıcısı
 
@@ -41,7 +41,10 @@ Bu belgede, uygulama yapılandırma değerlerini Azure Key Vault gizliliklerden 
 
 ## <a name="packages"></a>Paketler
 
-Azure.Extensions.AspNetCore.Configyönlendirmeye bir paket başvurusu ekleyin [ . Gizli](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/) dizi paketi.
+Aşağıdaki paketler için paket başvuruları ekleyin:
+
+* [Azure.Extensions.AspNetCore.Configurlama. Kaynaklanır](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets)
+* [Mavisi.Identity](https://www.nuget.org/packages/Azure.Identity)
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -138,7 +141,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri**' ni seçin.
+1. **Erişim ilkeleri**'ni seçin.
 1. **Erişim Ilkesi Ekle**' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
@@ -193,7 +196,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 * , Sınıfının bir örneğini oluşturur `DefaultAzureCredential` , kimlik bilgileri Azure kaynakları için ortamdan bir erişim belirteci almaya çalışır.
 * Örnekle yeni bir [`Azure.Security.KeyVault.Secrets.Secrets`](/dotnet/api/azure.security.keyvault.secrets) oluşturulur `DefaultAzureCredential` .
-* `Azure.Security.KeyVault.Secrets.Secrets`Örnek, `Azure.Extensions.Aspnetcore.Configuration.Secrets` tüm gizli değerleri yükleyen ve çift tire ( `--` ) değerini anahtar adlarında iki nokta () ile değiştirir `:` .
+* `Azure.Security.KeyVault.Secrets.Secrets`Örnek, `Azure.Extensions.AspNetCore.Configuration.Secrets` tüm gizli değerleri yükleyen ve çift tire ( `--` ) değerini anahtar adlarında iki nokta () ile değiştirir `:` .
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=12-14)]
 
@@ -227,23 +230,23 @@ config.AddAzureKeyVault(new SecretClient(new URI("Your Key Vault Endpoint"), new
 
 | Özellik         | Açıklama |
 | ---------------- | ----------- |
-| `Manager`        | `Azure.Extensions.Aspnetcore.Configuration.Secrets` gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
+| `Manager`        | `Azure.Extensions.AspNetCore.Configuration.Secrets` gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
 | `ReloadInterval` | `Timespan` anahtar kasasındaki değişiklikleri yoklamaya yönelik denemeler arasında bekleme. Varsayılan değer `null` (yapılandırma yeniden yüklenmez). |
 
 ## <a name="use-a-key-name-prefix"></a>Anahtar adı öneki kullanın
 
-Addavzurekeykasası `Azure.Extensions.Aspnetcore.Configuration.Secrets` , Anahtar Kasası gizli dizilerini yapılandırma anahtarlarına nasıl dönüştürdüğünü denetlemenize olanak tanıyan, uygulamasını kabul eden bir aşırı yükleme sağlar. Örneğin, uygulama başlangıcında sağladığınız önek değerine göre gizli değerleri yüklemek için arabirimini uygulayabilirsiniz. Bu, örneğin, uygulama sürümüne göre gizli dizileri yüklemeyi sağlar.
+Addavzurekeykasası `Azure.Extensions.AspNetCore.Configuration.Secrets` , Anahtar Kasası gizli dizilerini yapılandırma anahtarlarına nasıl dönüştürdüğünü denetlemenize olanak tanıyan, uygulamasını kabul eden bir aşırı yükleme sağlar. Örneğin, uygulama başlangıcında sağladığınız önek değerine göre gizli değerleri yüklemek için arabirimini uygulayabilirsiniz. Bu, örneğin, uygulama sürümüne göre gizli dizileri yüklemeyi sağlar.
 
 > [!WARNING]
 > Birden çok uygulama için gizli dizileri aynı kasaya yerleştirmek veya çevresel gizli dizileri (örneğin, *geliştirme* ve *Üretim* gizlilikleri) aynı kasaya yerleştirmek için Anahtar Kasası gizli dizileri üzerinde ön ekleri kullanmayın. Farklı uygulama ve geliştirme/üretim ortamlarının, uygulama ortamlarını en yüksek düzeyde güvenlik için yalıtmak üzere ayrı anahtar kasaları kullanmasını öneririz.
 
 Aşağıdaki örnekte, için anahtar kasasında (ve geliştirme ortamı için gizli Yönetim Aracı kullanılarak) bir gizli dizi oluşturulur `5000-AppSecret` (Anahtar Kasası gizli adlarında dönemlere izin verilmez). Bu gizli anahtar, uygulamanın 5.0.0.0 sürümü için bir uygulama gizli anahtarı temsil eder. Uygulamanın başka bir sürümü olan 5.1.0.0, anahtar kasasına (ve gizli Yönetici Aracı kullanılarak) bir gizli dizi eklenir `5100-AppSecret` . Her bir uygulama sürümü sürümü sürümlü gizli değerini yapılandırma olarak yükler `AppSecret` , bu, gizli anahtarı yüklerken sürümü de kapatıyor.
 
-Addadzurekeykasası özel bir ile çağırılır `Azure.Extensions.Aspnetcore.Configuration.Secrets` :
+Addadzurekeykasası özel bir ile çağırılır `Azure.Extensions.AspNetCore.Configuration.Secrets` :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
-`Azure.Extensions.Aspnetcore.Configuration.Secrets`Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
+`Azure.Extensions.AspNetCore.Configuration.Secrets`Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
 
 * `Load` adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
 * `GetKey`:
@@ -303,7 +306,7 @@ Anahtarların iki nokta () ayırıcılar içermesine izin veren bir yapılandır
 
 Azure Key Vault anahtarlar ayırıcı olarak iki nokta üst üste kullanamaz. Bu konuda açıklanan yaklaşım, `--` hiyerarşik değerler (bölümler) için bir ayırıcı olarak çift tire () kullanır. Dizi anahtarları çift tireler ve sayısal anahtar kesimleri ( `--0--` ,,) ile birlikte Azure Key Vault `--1--` depolanır &hellip; `--{n}--` .
 
-Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks* vardır:
+Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri vardır:
 
 ```json
 "Serilog": {
@@ -482,7 +485,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri**' ni seçin.
+1. **Erişim ilkeleri**'ni seçin.
 1. **Erişim Ilkesi Ekle**' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
@@ -630,7 +633,7 @@ Anahtarların iki nokta () ayırıcılar içermesine izin veren bir yapılandır
 
 Azure Key Vault anahtarlar ayırıcı olarak iki nokta üst üste kullanamaz. Bu konuda açıklanan yaklaşım, `--` hiyerarşik değerler (bölümler) için bir ayırıcı olarak çift tire () kullanır. Dizi anahtarları çift tireler ve sayısal anahtar kesimleri ( `--0--` ,,) ile birlikte Azure Key Vault `--1--` depolanır &hellip; `--{n}--` .
 
-Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks* vardır:
+Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri vardır:
 
 ```json
 "Serilog": {

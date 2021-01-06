@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/webassembly-performance-best-practices
 ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417389"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
@@ -150,7 +150,7 @@ Daha fazla bilgi için bkz. <xref:blazor/components/virtualization>.
 
 Çoğu Blazor bileşen agresif iyileştirme çabalarına gerek kalmaz. Bunun nedeni çoğu bileşenin kullanıcı arabiriminde genellikle tekrarlanmamasından ve yüksek sıklıkta yeniden oturum etmamamasından kaynaklanır. Örneğin, `@page` iletişim kutuları veya formlar gibi üst düzey kullanıcı arabirimi parçalarını temsil eden bileşenler ve bileşenler, büyük olasılıkla yalnızca bir kez ve Kullanıcı hareketiyle yanıt olarak yalnızca bir kez görünür. Bu bileşenler yüksek bir işleme iş yükü oluşturmaz, bu sayede, işleme performansı hakkında endişelenmeden istediğiniz Framework özelliklerinin herhangi bir birleşimini ücretsiz olarak kullanabilirsiniz.
 
-Ancak, ölçeklendirilmesi gereken bileşenleri oluşturduğunuz yaygın senaryolar da vardır. Örnek:
+Ancak, ölçeklendirilmesi gereken bileşenleri oluşturduğunuz yaygın senaryolar da vardır. Örneğin:
 
  * Büyük iç içe yerleştirilmiş formlarda yüzlerce ayrı giriş, etiket ve diğer öğeler bulunabilir.
  * Kılavuzlarda binlerce hücre olabilir.
@@ -298,7 +298,7 @@ Yukarıdaki örnekte, `Data` her hücre için farklıdır, ancak `Options` tüm�
 `<CascadingValue>`Bileşenin adlı isteğe bağlı bir parametresi vardır `IsFixed` .
 
  * `IsFixed`Değer `false` (varsayılan) ise, basamaklı değerin her alıcısı değişiklik bildirimlerini almak için bir abonelik ayarlar. Bu durumda, `[CascadingParameter]` abonelik izlemenin nedeni, her biri düzenli olarak **oldukça yüksektir** `[Parameter]` .
- * `IsFixed`Değer `true` (örneğin, `<CascadingValue Value="@someValue" IsFixed="true">` ) ise, alıcı başlangıç değerini alır, ancak güncelleştirmeleri almak için herhangi bir abonelik ayarlamayın *not* . Bu durumda, her biri `[CascadingParameter]` hafif ve sıradan **daha pahalı** değildir `[Parameter]` .
+ * `IsFixed`Değer `true` (örneğin, `<CascadingValue Value="@someValue" IsFixed="true">` ) ise, alıcı başlangıç değerini alır, ancak güncelleştirmeleri almak için herhangi bir abonelik ayarlamayın  . Bu durumda, her biri `[CascadingParameter]` hafif ve sıradan **daha pahalı** değildir `[Parameter]` .
 
 Mümkün olan yerlerde, `IsFixed="true"` basamaklı değerler üzerinde kullanmanız gerekir. Bunu, sağlanan değer zaman içinde değişmeyen her seferinde yapabilirsiniz. Bir bileşenin `this` basamaklı bir değer olarak geçtiği ortak düzende şunu kullanmanız gerekir `IsFixed="true"` :
 

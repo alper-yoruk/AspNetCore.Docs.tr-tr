@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mongo-app
 ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060748"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core ve MongoDB ile Web API 'SI oluşturma
@@ -34,7 +34,7 @@ By [pratik Khandelwal](https://twitter.com/K2Prk) ve [Scott Ade](https://twitter
 
 Bu öğretici, bir [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL veritabanında oluşturma, okuma, güncelleştirme ve SILME (CRUD) işlemlerini gerçekleştiren BIR Web API 'si oluşturur.
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * MongoDB 'yi yapılandırma
@@ -45,7 +45,7 @@ Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -161,10 +161,10 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Dosya** > **Yeni** > **Proje** ' ye gidin.
-1. **ASP.NET Core Web uygulaması** proje türünü seçin ve **İleri** ' yi seçin.
-1. Projeyi *Booksapı* olarak adlandırın ve **Oluştur** ' u seçin.
-1. **.NET Core** hedef çerçevesini ve **3,0 ASP.NET Core** seçin. **API** proje şablonunu seçin ve **Oluştur** ' u seçin.
+1. **Dosya** > **Yeni** > **Proje**' ye gidin.
+1. **ASP.NET Core Web uygulaması** proje türünü seçin ve **İleri**' yi seçin.
+1. Projeyi *Booksapı* olarak adlandırın ve **Oluştur**' u seçin.
+1. **.NET Core** hedef çerçevesini ve **3,0 ASP.NET Core** seçin. **API** proje şablonunu seçin ve **Oluştur**' u seçin.
 1. MongoDB için .NET sürücüsünün en son kararlı sürümünü öğrenmek üzere [NuGet galerisini ziyaret edin: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) . **Paket Yöneticisi konsol** penceresinde, proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek üzere aşağıdaki komutu çalıştırın:
 
    ```powershell
@@ -182,7 +182,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Yeni bir ASP.NET Core Web API projesi hedefleme .NET Core Visual Studio Code oluşturulur ve açılır.
 
-1. Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' booksapı ' içinde eksik bir iletişim kutusu yok. Bunları ekleyin mi?** . **Evet** ’i seçin.
+1. Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' booksapı ' içinde eksik bir iletişim kutusu yok. Bunları ekleyin mi?**. **Evet**’i seçin.
 1. MongoDB için .NET sürücüsünün en son kararlı sürümünü öğrenmek üzere [NuGet galerisini ziyaret edin: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) . **Tümleşik Terminal** ' i açın ve proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek üzere aşağıdaki komutu çalıştırın:
 
    ```dotnetcli
@@ -191,12 +191,12 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. Sürüm 8,6 ' den önceki Mac için Visual Studio, **File**  >  kenar çubuğundan Dosya **yeni çözüm**  >  **.NET Core**  >  **App** ' i seçin. Sürüm 8,6 veya sonraki sürümlerde **File**  >  kenar çubuğundan Dosya **yeni çözüm**  >  **Web ve konsol**  >  **uygulaması** ' nı seçin.
-1. **ASP.NET Core** > **API** C# proje şablonunu seçin ve **İleri** ' yi seçin.
-1. **Hedef çerçeve** açılır listesinden **.NET Core 3,1** ' i seçin ve **İleri** ' yi seçin.
-1. **Proje adı** Için *booksapı* girin ve **Oluştur** ' u seçin.
-1. **Çözüm** panelinde, projenin **Bağımlılıklar** düğümünü sağ tıklatın ve **paket Ekle** ' yi seçin.
-1. Arama kutusuna *MongoDB. Driver* girin, *MongoDB. Driver* paketini seçin ve **paket Ekle** ' yi seçin.
+1. Sürüm 8,6 ' den önceki Mac için Visual Studio,   >  kenar çubuğundan Dosya **yeni çözüm**  >  **.NET Core**  >  **App** ' i seçin. Sürüm 8,6 veya sonraki sürümlerde   >  kenar çubuğundan Dosya **yeni çözüm**  >  **Web ve konsol**  >  **uygulaması** ' nı seçin.
+1. **ASP.NET Core** > **API** C# proje şablonunu seçin ve **İleri**' yi seçin.
+1. **Hedef çerçeve** açılır listesinden **.NET Core 3,1** ' i seçin ve **İleri**' yi seçin.
+1. **Proje adı** Için *booksapı* girin ve **Oluştur**' u seçin.
+1. **Çözüm** panelinde, projenin **Bağımlılıklar** düğümünü sağ tıklatın ve **paket Ekle**' yi seçin.
+1. Arama kutusuna *MongoDB. Driver* girin, *MongoDB. Driver* paketini seçin ve **paket Ekle**' yi seçin.
 1. **Lisans kabulü** Iletişim kutusunda **kabul et** düğmesini seçin.
 
 ---
@@ -366,7 +366,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Önceki değişiklik ile, Web API 'sinin seri hale getirilmiş JSON yanıtındaki Özellik adları CLR nesne türündeki ilgili özellik adlarıyla eşleşir. Örneğin, `Book` sınıfın `Author` özelliği olarak serileştirir `Author` .
 
-1. *Modeller/Book. cs* ' de, `BookName` aşağıdaki özniteliğiyle özelliğe not ekleyin [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) :
+1. *Modeller/Book. cs*' de, `BookName` aşağıdaki özniteliğiyle özelliğe not ekleyin [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) :
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 
@@ -384,7 +384,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 Bu öğretici, bir [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL veritabanında oluşturma, okuma, güncelleştirme ve SILME (CRUD) işlemlerini gerçekleştiren BIR Web API 'si oluşturur.
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * MongoDB 'yi yapılandırma
@@ -395,7 +395,7 @@ Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -511,10 +511,10 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Dosya** > **Yeni** > **Proje** ' ye gidin.
-1. **ASP.NET Core Web uygulaması** proje türünü seçin ve **İleri** ' yi seçin.
-1. Projeyi *Booksapı* olarak adlandırın ve **Oluştur** ' u seçin.
-1. **.NET Core** hedef çerçevesini ve **2,2 ASP.NET Core** seçin. **API** proje şablonunu seçin ve **Oluştur** ' u seçin.
+1. **Dosya** > **Yeni** > **Proje**' ye gidin.
+1. **ASP.NET Core Web uygulaması** proje türünü seçin ve **İleri**' yi seçin.
+1. Projeyi *Booksapı* olarak adlandırın ve **Oluştur**' u seçin.
+1. **.NET Core** hedef çerçevesini ve **2,2 ASP.NET Core** seçin. **API** proje şablonunu seçin ve **Oluştur**' u seçin.
 1. MongoDB için .NET sürücüsünün en son kararlı sürümünü öğrenmek üzere [NuGet galerisini ziyaret edin: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) . **Paket Yöneticisi konsol** penceresinde, proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek üzere aşağıdaki komutu çalıştırın:
 
    ```powershell
@@ -532,7 +532,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Yeni bir ASP.NET Core Web API projesi hedefleme .NET Core Visual Studio Code oluşturulur ve açılır.
 
-1. Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' booksapı ' içinde eksik bir iletişim kutusu yok. Bunları ekleyin mi?** . **Evet** ’i seçin.
+1. Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' booksapı ' içinde eksik bir iletişim kutusu yok. Bunları ekleyin mi?**. **Evet**’i seçin.
 1. MongoDB için .NET sürücüsünün en son kararlı sürümünü öğrenmek üzere [NuGet galerisini ziyaret edin: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) . **Tümleşik Terminal** ' i açın ve proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek üzere aşağıdaki komutu çalıştırın:
 
    ```dotnetcli
@@ -541,12 +541,12 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. Sürüm 8,6 ' den önceki Mac için Visual Studio, **File**  >  kenar çubuğundan Dosya **yeni çözüm**  >  **.NET Core**  >  **App** ' i seçin. Sürüm 8,6 veya sonraki sürümlerde **File**  >  kenar çubuğundan Dosya **yeni çözüm**  >  **Web ve konsol**  >  **uygulaması** ' nı seçin.
-1. **ASP.NET Core Web API** C# proje şablonunu seçin ve **İleri** ' yi seçin.
-1. **Hedef çerçeve** açılır listesinden **.NET Core 2,2** ' i seçin ve **İleri** ' yi seçin.
-1. **Proje adı** Için *booksapı* girin ve **Oluştur** ' u seçin.
-1. **Çözüm** panelinde, projenin **Bağımlılıklar** düğümünü sağ tıklatın ve **paket Ekle** ' yi seçin.
-1. Arama kutusuna *MongoDB. Driver* girin, *MongoDB. Driver* paketini seçin ve **paket Ekle** ' yi seçin.
+1. Sürüm 8,6 ' den önceki Mac için Visual Studio,   >  kenar çubuğundan Dosya **yeni çözüm**  >  **.NET Core**  >  **App** ' i seçin. Sürüm 8,6 veya sonraki sürümlerde   >  kenar çubuğundan Dosya **yeni çözüm**  >  **Web ve konsol**  >  **uygulaması** ' nı seçin.
+1. **ASP.NET Core Web API** C# proje şablonunu seçin ve **İleri**' yi seçin.
+1. **Hedef çerçeve** açılır listesinden **.NET Core 2,2** ' i seçin ve **İleri**' yi seçin.
+1. **Proje adı** Için *booksapı* girin ve **Oluştur**' u seçin.
+1. **Çözüm** panelinde, projenin **Bağımlılıklar** düğümünü sağ tıklatın ve **paket Ekle**' yi seçin.
+1. Arama kutusuna *MongoDB. Driver* girin, *MongoDB. Driver* paketini seçin ve **paket Ekle**' yi seçin.
 1. **Lisans kabulü** Iletişim kutusunda **kabul et** düğmesini seçin.
 
 ---
@@ -714,7 +714,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Önceki değişiklik ile, Web API 'sinin seri hale getirilmiş JSON yanıtındaki Özellik adları CLR nesne türündeki ilgili özellik adlarıyla eşleşir. Örneğin, `Book` sınıfın `Author` özelliği olarak serileştirir `Author` .
 
-1. *Modeller/Book. cs* ' de, `BookName` aşağıdaki özniteliğiyle özelliğe not ekleyin [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) :
+1. *Modeller/Book. cs*' de, `BookName` aşağıdaki özniteliğiyle özelliğe not ekleyin [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) :
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 

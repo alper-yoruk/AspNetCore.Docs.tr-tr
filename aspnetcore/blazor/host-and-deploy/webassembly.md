@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
-ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
+ms.openlocfilehash: 55289dd7048c08ac61432c7cc062e74d2e69ee24
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97011877"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753133"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -135,9 +135,17 @@ Azure App Service dağıtma hakkında daha fazla bilgi için bkz <xref:tutorials
 
 ### <a name="app-configuration"></a>Uygulama yapılandırması
 
-Barındırılan bir Blazor çözümü birden çok uygulamaya yönelik olarak yapılandırmak için Blazor WebAssembly :
+Barındırılan Blazor çözümler birden çok Blazor WebAssembly uygulamayı kullanabilir.
 
-* BlazorBarındırılan proje şablonundan mevcut bir barındırılan çözümü kullanın veya yeni bir çözüm oluşturun Blazor .
+> [!NOTE]
+> Bu bölümdeki örnek, bir Visual Studio *çözümünün* kullanımına başvurur, ancak birden fazla istemci uygulamasının barındırılan uygulamalar senaryosunda çalışması Için Visual Studio ve Visual Studio çözümünün kullanımı gerekli değildir Blazor WebAssembly . Visual Studio kullanmıyorsanız, `{SOLUTION NAME}.sln` dosyayı ve Visual Studio için oluşturulan diğer dosyaları yoksayın.
+
+Aşağıdaki örnekte:
+
+* İlk (ilk) istemci uygulaması, proje şablonundan oluşturulan bir çözümün varsayılan istemci projem Blazor WebAssembly . İlk istemci uygulamasına, `/FirstApp` bağlantı noktası 5001 ya da bir KONAĞıNDAN URL 'den bir tarayıcıda erişilebilir `firstapp.com` .
+* Çözüme ikinci bir istemci uygulaması eklenir `SecondBlazorApp.Client` . İkinci istemci uygulamasına, `/SecondApp` bağlantı noktası 5002 ya da bir KONAĞıNDAN URL 'den bir tarayıcıda erişilebilir `secondapp.com` .
+
+BlazorBarındırılan proje şablonundan mevcut bir barındırılan çözümü kullanın veya yeni bir çözüm oluşturun Blazor :
 
 * İstemci uygulamasının proje dosyasında, `<StaticWebAssetBasePath>` `<PropertyGroup>` `FirstApp` projenin statik varlıkların temel yolunu ayarlamak için değeri ile öğesine bir özelliği ekleyin:
 
@@ -150,9 +158,19 @@ Barındırılan bir Blazor çözümü birden çok uygulamaya yönelik olarak yap
 
 * Çözüme ikinci bir istemci uygulaması ekleyin:
 
-  * Çözümün klasörüne adlı bir klasör ekleyin `SecondClient` .
+  * Çözümün klasörüne adlı bir klasör ekleyin `SecondClient` . Proje şablonundan oluşturulan çözüm klasörü, klasör eklendikten sonra aşağıdaki çözüm dosya ve klasörlerini içerir `SecondClient` :
+  
+    * `Client` klasörde
+    * `SecondClient` klasörde
+    * `Server` klasörde
+    * `Shared` klasörde
+    * `{SOLUTION NAME}.sln` dosyasýný
+    
+    Yer tutucu `{SOLUTION NAME}` çözümün adıdır.
+
   * Blazor WebAssembly `SecondBlazorApp.Client` `SecondClient` Proje şablonundan klasöründe adlı bir uygulama oluşturun Blazor WebAssembly .
-  * Uygulamanın proje dosyasında:
+
+  * `SecondBlazorApp.Client`Uygulamanın proje dosyasında:
 
     * `<StaticWebAssetBasePath>`Değerine sahip öğesine bir özelliği ekleyin `<PropertyGroup>` `SecondApp` :
 
@@ -173,14 +191,17 @@ Barındırılan bir Blazor çözümü birden çok uygulamaya yönelik olarak yap
 
       Yer tutucu `{SOLUTION NAME}` çözümün adıdır.
 
-* Sunucu uygulamasının proje dosyasında, eklenen istemci uygulaması için bir proje başvurusu oluşturun:
+* Sunucu uygulamasının proje dosyasında, eklenen istemci uygulaması için bir proje başvurusu oluşturun `SecondBlazorApp.Client` :
 
   ```xml
   <ItemGroup>
-    ...
+    <ProjectReference Include="..\Client\{SOLUTION NAME}.Client.csproj" />
     <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+    <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
   </ItemGroup>
   ```
+  
+  Yer tutucu `{SOLUTION NAME}` çözümün adıdır.
 
 * Sunucu uygulamasının `Properties/launchSettings.json` dosyasında, `applicationUrl` `{SOLUTION NAME}.Server` 5001 ve 5002 bağlantı noktalarında istemci uygulamalarına erişmek için Kestrel profili () öğesini yapılandırın:
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/host-and-deploy/server
 ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
-ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/13/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94595447"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Barındırma ve dağıtma Blazor Server
@@ -100,7 +100,7 @@ Azure hizmeti için bir uygulamayı yapılandırmak üzere SignalR , uygulamanı
        "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * App Service 'in **Configuration**  >  Azure Portal ( **ad** :, değer:) yapılandırma **uygulaması ayarları** `Azure__SignalR__StickyServerMode` **Value** `Required` . Bu yaklaşım, [Azure SignalR hizmetini temin](#provision-the-azure-signalr-service)ediyorsanız uygulama için otomatik olarak benimsenmiştir.
+     * App Service 'in   >  Azure Portal (**ad**:, değer:) yapılandırma **uygulaması ayarları** `Azure__SignalR__StickyServerMode`  `Required` . Bu yaklaşım, [Azure SignalR hizmetini temin](#provision-the-azure-signalr-service)ediyorsanız uygulama için otomatik olarak benimsenmiştir.
 
 ### <a name="provision-the-azure-no-locsignalr-service"></a>Azure hizmetini sağlama SignalR
 
@@ -166,7 +166,7 @@ http {
 }
 ```
 
-Daha fazla bilgi için aşağıdaki makalelere bakın:
+Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 * [WebSocket proxy 'Si olarak NGıNX](https://www.nginx.com/blog/websocket-nginx/)
 * [WebSocket proxy](http://nginx.org/docs/http/websocket.html)

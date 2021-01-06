@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/cicd
 ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901216"
 ---
 # <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
@@ -111,7 +111,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Kaynak seçin-GitHub](media/cicd/vsts-select-source.png)
 
-1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örnek:
+1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örneğin:
 
     ![GitHub bağlantı adı](media/cicd/vsts-repo-authz.png)
 
@@ -204,7 +204,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
 1. Visual Studio 'da *Simplefeedreader. sln* ' i açın.
 1. Çözüm Gezgini, *Pages\ındex.cshtml* dosyasını açın. `<h2>Simple Feed Reader - V3</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V4</h2>` .
-1. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
+1.  +  + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
 1. Dosyayı GitHub deposuna yürütün. Visual Studio 'nun *Takım Gezgini* sekmesindeki **değişiklikler** sayfasını kullanın veya yerel makinenin komut kabuğunu kullanarak aşağıdakini yürütün:
 
     ```console
@@ -225,7 +225,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Sürekli tümleştirmeyi etkinleştir](media/cicd/enable-ci.png)
 
-1. Azure DevOps Services **Azure Pipelines** yapılar sayfasının **sıraya alınmış** sekmesine gidin  >  **Builds** . Sıraya alınan yapı, derlemeyi tetikleyen dalı ve yürütmeyi gösterir:
+1. Azure DevOps Services **Azure Pipelines** yapılar sayfasının **sıraya alınmış** sekmesine gidin  >   . Sıraya alınan yapı, derlemeyi tetikleyen dalı ve yürütmeyi gösterir:
 
     ![Kuyruğa Alınan derleme](media/cicd/build-queued.png)
 

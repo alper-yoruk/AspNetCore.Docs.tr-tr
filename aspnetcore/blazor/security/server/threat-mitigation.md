@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/server/threat-mitigation
 ms.openlocfilehash: d0ed36731d78d3e98aa294aca50492f0a3ac8174
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506701"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core için tehdit azaltma Kılavuzu Blazor Server
@@ -165,7 +165,7 @@ JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript '
 
 Olaylar bir uygulamaya giriş noktası sağlar Blazor Server . Web Apps 'teki uç noktaları koruma için aynı kurallar, uygulamalardaki olay işleme için geçerlidir Blazor Server . Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
 
-Örnek:
+Örneğin:
 
 * Bir için değişiklik olayı `<select>` , uygulamanın istemciye sunulan seçenekler içinde olmayan bir değer gönderebilir.
 * `<input>`Sunucu, istemci tarafı doğrulamayı atlayarak herhangi bir metin verisi gönderebilir.

@@ -21,10 +21,10 @@ no-loc:
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506987"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>PreRender ve ASP.NET Core Razor bileşenleri tümleştirme
@@ -343,7 +343,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
+1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
@@ -422,7 +422,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    });
    ```
 
-1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
+1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
 
    ```razor
    @page "/counter"

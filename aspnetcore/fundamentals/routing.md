@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/routing
 ms.openlocfilehash: e134832ad00b10bb01239afa06acc74d86707af1
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94422567"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
@@ -149,7 +149,7 @@ ASP.NET Core uç noktası:
 * Yürütülebilir dosya: öğesine sahip <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> .
 * Genişletilebilir: [meta veri](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*) koleksiyonu vardır.
 * Seçilebilir: Isteğe bağlı olarak [yönlendirme bilgileri](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*)vardır.
-* Numaralandırılabilir: bitiş noktaları koleksiyonu, kimden kaynağından alma yoluyla listelenebilir <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . [DI](xref:fundamentals/dependency-injection)
+* Numaralandırılabilir: bitiş noktaları koleksiyonu, kimden kaynağından alma yoluyla listelenebilir <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . [](xref:fundamentals/dependency-injection)
 
 Aşağıdaki kod, geçerli istekle eşleşen uç noktanın nasıl alınacağını ve inceleneceği gösterilmektedir:
 
@@ -371,7 +371,7 @@ URL oluşturma:
 * , Yönlendirmenin bir yol değerleri kümesine göre bir URL yolu oluşturmalarına yönelik işlemdir.
 * Uç noktalar ve bunlara erişen URL 'Ler arasında bir mantıksal ayrım sağlar.
 
-Endpoint Routing <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API 'yi içerir. `LinkGenerator` , [dı](xref:fundamentals/dependency-injection)tarafından kullanılabilen bir tek hizmettir. `LinkGenerator`API, yürütülen bir istek bağlamı dışında kullanılabilir. Etiket Yardımcıları, HTML Yardımcıları ve eylem sonuçları gibi ' i kullanan [Mvc. ıurlhelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) ve senaryoları <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> , [Action Results](xref:mvc/controllers/actions) [Tag Helpers](xref:mvc/views/tag-helpers/intro) `LinkGenerator` bağlantı oluşturma yetenekleri sağlamak için API 'yi dahili olarak kullanır.
+Endpoint Routing <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API 'yi içerir. `LinkGenerator` , [dı](xref:fundamentals/dependency-injection)tarafından kullanılabilen bir tek hizmettir. `LinkGenerator`API, yürütülen bir istek bağlamı dışında kullanılabilir. Etiket Yardımcıları, HTML Yardımcıları ve eylem sonuçları gibi ' i kullanan [Mvc. ıurlhelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) ve senaryoları <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> , [](xref:mvc/controllers/actions) [](xref:mvc/views/tag-helpers/intro) `LinkGenerator` bağlantı oluşturma yetenekleri sağlamak için API 'yi dahili olarak kullanır.
 
 Bağlantı Oluşturucu, bir **Adres** ve **Adres şemaları** kavramıyla desteklenir. Adres şeması, bağlantı oluşturma için göz önünde bulundurmanız gereken uç noktaları belirlemenin bir yoludur. Örneğin, yol adı ve yol değerleri senaryoları birçok kullanıcı, denetleyicilerden ve Razor sayfalardan bir adres düzeni olarak uygulanır.
 
@@ -569,10 +569,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -945,7 +945,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**CONSIDER** Kendinizinkini yazmayı düşünün <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . `EndpointDataSource` , uç nokta koleksiyonunu bildirmek ve güncelleştirmek için alt düzey temel değer. `EndpointDataSource` , denetleyiciler ve sayfalar tarafından kullanılan güçlü bir API 'dir Razor .
+ Kendinizinkini yazmayı düşünün <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . `EndpointDataSource` , uç nokta koleksiyonunu bildirmek ve güncelleştirmek için alt düzey temel değer. `EndpointDataSource` , denetleyiciler ve sayfalar tarafından kullanılan güçlü bir API 'dir Razor .
 
 Yönlendirme testlerinin, güncelleştirme olmayan bir veri kaynağına ilişkin [temel bir örneği](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) vardır.
 
@@ -1046,7 +1046,7 @@ Razor Sayfalar uygulamalar, bir uygulamanın *Sayfalar* klasöründe adlandırı
 
 URL oluşturma desteği, uygulamanın, uygulamayı birbirine bağlamak için sabit kodlama URL 'Leri olmadan geliştirilebilmesine izin verir. Bu destek, temel bir yönlendirme yapılandırmasıyla başlayıp uygulamanın kaynak düzeni belirlendikten sonra yolların değiştirilmesini sağlar.
 
-Yönlendirme *endpoints* `Endpoint` , bir uygulamadaki mantıksal uç noktaları temsil etmek için uç noktaları () kullanır.
+Yönlendirme  `Endpoint` , bir uygulamadaki mantıksal uç noktaları temsil etmek için uç noktaları () kullanır.
 
 Bir uç nokta, istekleri işlemek için bir temsilci ve rastgele meta veri koleksiyonunu tanımlar. Meta veriler, her bir uç noktaya eklenen ilkelere ve yapılandırmaya bağlı olarak çapraz kesme sorunları uygulamak için kullanılır.
 
@@ -1178,7 +1178,7 @@ ASP.NET Core 2,2 veya üzeri ve daha önceki yönlendirme sürümlerindeki ASP.N
 
   ASP.NET Core 2,1 veya önceki sürümlerde aşağıdaki örneği göz önünde bulundurun. Başka bir eyleme (veya başka bir sayfaya) bağlanırken, yol değerleri istenmeyen yollarla yeniden kullanılabilir.
 
-  */Pages/Store/Product.exe* :
+  */Pages/Store/Product.exe*:
 
   ```cshtml
   @page "{id}"
@@ -1490,10 +1490,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -1934,10 +1934,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 

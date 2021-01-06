@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/crud
 ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901177"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
@@ -367,7 +367,7 @@ Bu öğreticide, scafkatan CRUD (oluşturma, okuma, güncelleştirme, silme) kod
 
 Karmaşıklığı en aza indirmek ve bu öğreticilerin EF Core odaklanmasını sağlamak için, EF Core kod sayfa modellerinde kullanılır. Bazı geliştiriciler, Kullanıcı arabirimi ( Razor Sayfalar) ve veri erişim katmanı arasında bir soyutlama katmanı oluşturmak için ' de bir hizmet katmanı veya depo deseninin kullanılmasını sağlar.
 
-Bu öğreticide, öğrenciler klasöründeki oluştur, Düzenle, Sil ve Ayrıntılar Razor sayfaları incelenir. *Students*
+Bu öğreticide, öğrenciler klasöründeki oluştur, Düzenle, Sil ve Ayrıntılar Razor sayfaları incelenir. 
 
 Scafkatlanmış kod, sayfa oluşturma, düzenleme ve silme için aşağıdaki kalıbı kullanır:
 
@@ -579,7 +579,7 @@ Test silme.
 
 Öğrenciler/dizin veya diğer bağlantılar çalışmaz:
 
-RazorSayfanın doğru yönergeyi içerdiğini doğrulayın `@page` . Örneğin, öğrenciler/Dizin Razor sayfası bir yol şablonu **not** içermemelidir:
+RazorSayfanın doğru yönergeyi içerdiğini doğrulayın `@page` . Örneğin, öğrenciler/Dizin Razor sayfası bir yol şablonu  içermemelidir:
 
 ```cshtml
 @page "{id:int}"

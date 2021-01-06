@@ -19,10 +19,10 @@ no-loc:
 - Kestrel
 uid: aspnetcore-5.0
 ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855501"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
@@ -390,7 +390,7 @@ Bkz. [Kerberos kimlik doğrulaması ve rol tabanlı erişim denetimi (RBAC)](xre
 
 JSON verileri, ve ' dan ' a okunabilir ve yazılabilir ve `HttpRequest` `HttpResponse` Yeni <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> ve `WriteAsJsonAsync` genişletme yöntemleri kullanılarak yapılabilir. Bu uzantı yöntemleri JSON verilerini işlemek için serileştiricide [System.Text.Js](xref:System.Text.Json) kullanır. Yeni `HasJsonContentType` genişletme yöntemi bir ISTEĞIN JSON içerik türüne sahip olup olmadığını da denetleyebilir.
 
-JSON uzantısı yöntemleri, JSON API 'Leri bir [endpoint routing](xref:fundamentals/routing) programlama stilinde, * *.**koda yol*** çağırıyoruz. Basit bir şekilde temel JSON API 'Leri oluşturmak isteyen geliştiriciler için yeni bir seçenektir. Örneğin, yalnızca birkaç uç nokta içeren bir Web uygulaması, ASP.NET Core MVC 'nin tüm işlevleri yerine kod yolunu kullanmayı seçebilir:
+JSON uzantısı yöntemleri, JSON API 'Leri bir [](xref:fundamentals/routing) programlama stilinde, * *.**koda yol*** çağırıyoruz. Basit bir şekilde temel JSON API 'Leri oluşturmak isteyen geliştiriciler için yeni bir seçenektir. Örneğin, yalnızca birkaç uç nokta içeren bir Web uygulaması, ASP.NET Core MVC 'nin tüm işlevleri yerine kod yolunu kullanmayı seçebilir:
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>
@@ -451,7 +451,7 @@ public class Program
 .NET 5 ' te, bir ASP.NET Core projesi üzerinde [DotNet izleme](xref:tutorials/dotnet-watch) çalıştırmak, her ikisi de varsayılan tarayıcıyı başlatır ve kodda değişiklik yapıldığında tarayıcıyı otomatik olarak yeniler. Yani şunları yapabilirsiniz:
 
 _ Metin düzenleyicisinde bir ASP.NET Core projesi açın.
-* Şu komutu çalıştırın: `dotnet watch`.
+* `dotnet watch` öğesini çalıştırın.
 * Araç, uygulamayı yeniden oluşturma, yeniden başlatma ve yeniden yükleme işlemini gerçekleştirirken kod değişikliğine odaklanırsınız.
 
 ### <a name="console-logger-formatter"></a>Konsol günlükçü biçimlendiricisi

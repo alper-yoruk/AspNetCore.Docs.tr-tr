@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 98dfd539171807cbf94d4ac8746458152c809495
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: eae4a19042efded03f10e9ebd17122232f0323eb
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057576"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854645"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
 
@@ -73,7 +73,7 @@ Yayınlama listesine açıkça bir dosya eklemek için, dosyayı, [dosyaları da
 Visual Studio 'da veya komut satırından yayımlarken **Yayımla** düğmesini seçerken:
 
 * Özellikler/öğeler hesaplanır (oluşturmak için gereken dosyalar).
-* **Yalnızca Visual Studio** : NuGet paketleri geri yüklendi. (Geri yüklemenin CLı üzerinde kullanıcı tarafından açık olması gerekir.)
+* **Yalnızca Visual Studio**: NuGet paketleri geri yüklendi. (Geri yüklemenin CLı üzerinde kullanıcı tarafından açık olması gerekir.)
 * Proje oluşturulur.
 * Yayımlama öğeleri hesaplanır (yayımlamak için gereken dosyalar).
 * Proje yayımlandı (hesaplanan dosyalar yayımlama hedefine kopyalanır).
@@ -108,7 +108,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   Web1 -> C:\Webs\Web1\bin\Debug\{TARGET FRAMEWORK MONIKER}\publish\
 ```
 
-Varsayılan yayımlama klasörü biçimi *bin\Debug \\ {Target Framework bilinen ad} \publish \\* şeklindedir. Örneğin, *Bin\debug\netcoreapp2,2\publish \\* .
+Varsayılan yayımlama klasörü biçimi *bin\Debug \\ {Target Framework bilinen ad} \publish \\* şeklindedir. Örneğin, *Bin\debug\netcoreapp2,2\publish \\*.
 
 Aşağıdaki komut bir `Release` derlemeyi ve yayımlama dizinini belirtir:
 
@@ -123,7 +123,7 @@ MSBuild özellikleri aşağıdaki biçimlerden birini kullanarak geçirilebilir:
 * `-p:<NAME>=<VALUE>`
 * `/p:<NAME>=<VALUE>`
 
-Örneğin, aşağıdaki komut bir `Release` ağ paylaşımında bir derlemeyi yayımlar. Ağ paylaşma, eğik çizgiler (/ *saat* ) ile belirtilir ve tüm .NET Core desteklenen platformlarda çalışmaktadır.
+Örneğin, aşağıdaki komut bir `Release` ağ paylaşımında bir derlemeyi yayımlar. Ağ paylaşma, eğik çizgiler (/*saat*) ile belirtilir ve tüm .NET Core desteklenen platformlarda çalışmaktadır.
 
 ```dotnetcli
 dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb
@@ -137,7 +137,7 @@ Bu bölüm, bir yayımlama profili oluşturmak için Visual Studio 2019 veya üs
 
 Aşağıdaki yollardan birini seçerek Visual Studio 'da bir yayımlama profili oluşturun:
 
-* **Çözüm Gezgini** projeye sağ tıklayın ve **Yayımla** ' yı seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **Yayımla**' yı seçin.
 * **Build** menüsünden **{Project Name} Yayımla** ' yı seçin.
 
 Uygulama özellikleri sayfasının **Yayımla** sekmesi görüntülenir. Projenin bir yayımlama profili yoksa, **bir yayımlama hedefi seçin** sayfası görüntülenir. Aşağıdaki yayımlama hedeflerinden birini seçmeniz istenir:
@@ -151,7 +151,7 @@ Uygulama özellikleri sayfasının **Yayımla** sekmesi görüntülenir. Projeni
 
 En uygun yayımlama hedefini belirlemek için, [hangi yayımlama seçeneklerinin benim için](/visualstudio/ide/not-in-toc/web-publish-options)uygun olduğunu öğrenin.
 
-Hedef Yayımla **klasörü** seçildiğinde, yayımlanmış varlıkları depolamak için bir klasör yolu belirtin. Varsayılan klasör yolu, *bin \\ {Project CONFIGURATION} \\ {Target Framework bilinen adı} \publish \\* şeklindedir. Örneğin, *Bin\release\netcoreapp2,2\publish \\* . Tamamlanacak **Profil oluştur** düğmesini seçin.
+Hedef Yayımla **klasörü** seçildiğinde, yayımlanmış varlıkları depolamak için bir klasör yolu belirtin. Varsayılan klasör yolu, *bin \\ {Project CONFIGURATION} \\ {Target Framework bilinen adı} \publish \\* şeklindedir. Örneğin, *Bin\release\netcoreapp2,2\publish \\*. Tamamlanacak **Profil oluştur** düğmesini seçin.
 
 Bir yayımlama profili oluşturulduktan sonra, **Yayımla** sekmesinin içeriği değişir. Yeni oluşturulan profil bir açılan listede görüntülenir. Aşağı açılan listenin altında **Yeni profil** oluştur ' u seçerek yeni bir profil oluşturun.
 
@@ -223,7 +223,7 @@ Projenin *Properties/PublishProfiles* klasörüne aşağıdaki içeriğe sahip b
 *Folderprofile* adlı bir profille yayımlarken, aşağıdaki komutlardan birini kullanın:
 
 ```dotnetcli
-dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
+dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
 ```
 
 ```dotnetcli
@@ -307,7 +307,7 @@ msbuild {PATH}
 * `{PROFILE}`: Yayımlama profilinin adı.
 * `{USERNAME}`: MSDeploy Kullanıcı adı. , `{USERNAME}` Yayımlama profilinde bulunabilir.
 * `{PASSWORD}`: MSDeploy parolası. `{PASSWORD}` *{PROFILE} öğesinden alın. PublishSettings* dosyası. ' Nı indirin *. PublishSettings* dosyası şunlardan biri:
-  * **Çözüm Gezgini** : **View**  >  **bulut Gezginini** görüntüle ' yi seçin. Azure aboneliğinize bağlanın. **Uygulama hizmetleri** 'ni açın. Uygulamaya sağ tıklayın. **Yayımlama profilini indir** ' i seçin.
+  * **Çözüm Gezgini**:   >  **bulut Gezginini** görüntüle ' yi seçin. Azure aboneliğinize bağlanın. **Uygulama hizmetleri**'ni açın. Uygulamaya sağ tıklayın. **Yayımlama profilini indir**' i seçin.
   * Azure portal: Web uygulamasının **genel bakış** panelinde **Yayımlama profilini al** ' ı seçin.
 
 Aşağıdaki örnek, *AzureWebApp-Web dağıtımı* adlı bir yayımlama profili kullanır:
@@ -335,7 +335,7 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="set-the-environment"></a>Ortamı ayarlama
 
-`<EnvironmentName>`Uygulamanın [ortamını](xref:fundamentals/environments)ayarlamak için Publish profile ( *. pubxml* ) veya proje dosyasına özelliği ekleyin:
+`<EnvironmentName>`Uygulamanın [ortamını](xref:fundamentals/environments)ayarlamak için Publish profile (*. pubxml*) veya proje dosyasına özelliği ekleyin:
 
 ```xml
 <PropertyGroup>
@@ -351,11 +351,11 @@ ASP.NET Core Web Apps yayımlandığında, aşağıdaki varlıklar dahil edilmi�
 
 * Yapı yapıtları
 * Aşağıdaki glob desenleriyle eşleşen klasörler ve dosyalar:
-  * `**\*.config` (örneğin, *web.config* )
+  * `**\*.config` (örneğin, *web.config*)
   * `**\*.json` (örneğin, *appsettings.json* )
   * `wwwroot\**`
 
-MSBuild, [Glob desenlerini](https://gruntjs.com/configuring-tasks#globbing-patterns)destekler. Örneğin, aşağıdaki öğe, `<Content>` metin ( *. txt* ) dosyalarının *wwwroot\content* klasörü ve alt klasörlerinde kopyalanmasını bastırır:
+MSBuild, [Glob desenlerini](https://gruntjs.com/configuring-tasks#globbing-patterns)destekler. Örneğin, aşağıdaki öğe, `<Content>` metin (*. txt*) dosyalarının *wwwroot\content* klasörü ve alt klasörlerinde kopyalanmasını bastırır:
 
 ```xml
 <ItemGroup>

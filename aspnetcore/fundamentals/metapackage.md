@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/metapackage
 ms.openlocfilehash: b739398c2a440f21c8bdfdc1f4d8e25412358a6a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060696"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2,0 için Microsoft. AspNetCore. All metapackage
@@ -39,7 +39,7 @@ ms.locfileid: "93060696"
 
 Bu özellik, .NET Core 2. x 'i hedefleyen ASP.NET Core 2. x gerektirir.
 
-[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) , paylaşılan bir çerçeveye başvuran bir metapackage. *Paylaşılan çerçeve* , uygulamanın klasörlerinde olmayan derlemelerin ( *. dll* dosyaları) bir kümesidir. Uygulamayı çalıştırmak için makinede paylaşılan çerçeve yüklü olmalıdır. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) , paylaşılan bir çerçeveye başvuran bir metapackage. *Paylaşılan çerçeve* , uygulamanın klasörlerinde olmayan derlemelerin (*. dll* dosyaları) bir kümesidir. Uygulamayı çalıştırmak için makinede paylaşılan çerçeve yüklü olmalıdır. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Öğesine başvuran paylaşılan çerçeve şunları `Microsoft.AspNetCore.All` içerir:
 

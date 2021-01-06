@@ -5,7 +5,7 @@ description: BlazorUygulamaların bileşenlere nasıl hizmet ekleyebileceğinizi
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/11/2020
+ms.date: 12/19/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: af6b645fc3c398414c85c78e1cfeb213e538c2a6
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 3f2b4eff5422acbec80b2fd9b801101271cc3f75
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506805"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808731"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
 
@@ -98,7 +98,7 @@ Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
 
 | Ömür | Açıklama |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` .</p><p>Blazor ServerBarındırma modeli, `Scoped` http istekleri genelinde yaşam süresini destekler, ancak istemciye yüklenen bileşenler arasında Maalr bağlantısı/devre iletileri arasında değildir. RazorUygulamanın sayfaları veya MVC bölümü, kapsamlı hizmetleri normal şekilde ele alır ve sayfalar veya görünümler veya bir sayfa ya da bir bileşen görünümü arasında gezinilirken *her bir http isteğindeki* hizmetleri yeniden oluşturur. Kapsamdaki hizmetler, istemci üzerindeki bileşenler arasında gezinilirken, sunucu SignalR BAĞLANTıSıNıN http istekleri aracılığıyla değil Kullanıcı devresi bağlantısı üzerinden gerçekleştiği sırada yeniden yapılandırılmadı. İstemci üzerindeki aşağıdaki bileşen senaryolarında, Kullanıcı için yeni bir devre oluşturulması nedeniyle kapsamlı hizmetler yeniden yapılandırılır:</p><ul><li>Kullanıcı tarayıcının penceresini kapatır. Kullanıcı yeni bir pencere açar ve uygulamaya geri gider.</li><li>Kullanıcı, bir tarayıcı penceresinde uygulamanın son sekmesini kapatır. Kullanıcı yeni bir sekme açar ve uygulamaya geri gider.</li><li>Kullanıcı tarayıcının yeniden yükleme/yenileme düğmesini seçer.</li></ul><p>Uygulamalarda kapsamlı hizmetler genelinde Kullanıcı durumunu koruma hakkında daha fazla bilgi için Blazor Server bkz <xref:blazor/hosting-models?pivots=server> ..</p> |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` .</p><p>Blazor ServerBarındırma modeli, `Scoped` http istekleri genelinde yaşam süresini destekler, ancak SignalR istemciye yüklenen bileşenler arasında bağlantı/devre iletileri arasında değildir. RazorUygulamanın sayfaları veya MVC bölümü, kapsamlı hizmetleri normal şekilde ele alır ve sayfalar veya görünümler veya bir sayfa ya da bir bileşen görünümü arasında gezinilirken *her bir http isteğindeki* hizmetleri yeniden oluşturur. Kapsamdaki hizmetler, istemci üzerindeki bileşenler arasında gezinilirken, sunucu SignalR BAĞLANTıSıNıN http istekleri aracılığıyla değil Kullanıcı devresi bağlantısı üzerinden gerçekleştiği sırada yeniden yapılandırılmadı. İstemci üzerindeki aşağıdaki bileşen senaryolarında, Kullanıcı için yeni bir devre oluşturulması nedeniyle kapsamlı hizmetler yeniden yapılandırılır:</p><ul><li>Kullanıcı tarayıcının penceresini kapatır. Kullanıcı yeni bir pencere açar ve uygulamaya geri gider.</li><li>Kullanıcı, bir tarayıcı penceresinde uygulamanın son sekmesini kapatır. Kullanıcı yeni bir sekme açar ve uygulamaya geri gider.</li><li>Kullanıcı tarayıcının yeniden yükleme/yenileme düğmesini seçer.</li></ul><p>Uygulamalarda kapsamlı hizmetler genelinde Kullanıcı durumunu koruma hakkında daha fazla bilgi için Blazor Server bkz <xref:blazor/hosting-models?pivots=server> ..</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Dı, hizmetin *tek bir örneğini* oluşturur. Hizmet gerektiren tüm bileşenler `Singleton` aynı hizmetin bir örneğini alır. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Bir bileşen hizmet kapsayıcısından bir hizmetin örneğini edindiğinde `Transient` , hizmetin *Yeni bir örneğini* alır. |
 
@@ -106,7 +106,7 @@ Dı sistemi ASP.NET Core içindeki DI sistemini temel alır. Daha fazla bilgi i�
 
 ## <a name="request-a-service-in-a-component"></a>Bir bileşende hizmet isteme
 
-Hizmetler hizmet koleksiyonuna eklendikten sonra, [ \@ ekleme](xref:mvc/views/razor#inject) yönergesini kullanarak hizmetleri bileşenlere ekleyin Razor . [`@inject`](xref:mvc/views/razor#inject) iki parametreye sahiptir:
+Hizmetler hizmet koleksiyonuna eklendikten sonra, [`@inject`](xref:mvc/views/razor#inject) Razor iki parametreye sahip olan yönergesini kullanarak hizmetleri bileşenlere ekleyin:
 
 * Tür: eklenecek hizmetin türü.
 * Özellik: eklenen App Service 'i alan özelliğin adı. Özelliği el ile oluşturma gerektirmez. Derleyici özelliği oluşturur.
@@ -192,8 +192,6 @@ Türün iki sürümü <xref:Microsoft.AspNetCore.Components.OwningComponentBase>
 
 Daha fazla bilgi için bkz. <xref:blazor/blazor-server-ef-core>.
 
-::: moniker range="< aspnetcore-5.0"
-
 ## <a name="detect-transient-disposables"></a>Geçici disposleri Algıla
 
 Aşağıdaki örneklerde, kullanması gereken bir uygulamada atılabilir geçici hizmetlerinin nasıl algılanacağı gösterilmektedir <xref:Microsoft.AspNetCore.Components.OwningComponentBase> . Daha fazla bilgi için bkz. [BIR dı kapsamı bölümünü yönetmek Için yardımcı program temel bileşen sınıfları](#utility-base-component-classes-to-manage-a-di-scope) .
@@ -206,17 +204,17 @@ Aşağıdaki örneklerde, kullanması gereken bir uygulamada atılabilir geçici
 
 `TransientDisposable`Aşağıdaki örnekte algılandı ( `Program.cs` ):
 
-<!-- moniker range=">= aspnetcore-5.0"
+::: moniker range=">= aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/5.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-moniker-end 
+::: moniker-end 
 
-moniker range="< aspnetcore-5.0" -->
+::: moniker range="< aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-<!-- moniker-end -->
+::: moniker-end
 
 ::: zone-end
 
@@ -242,7 +240,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 ::: zone-end
 
-::: moniker-end
+Uygulama, özel durum oluşturmadan geçici disposana kaydedebilir. Ancak, aşağıdaki örnekte gösterildiği gibi geçici bir atılabilir, bir olarak çözümlenmeye çalışıldığında bir <xref:System.InvalidOperationException> ile sonuçlanır.
+
+`Pages/TransientDisposable.razor`:
+
+```razor
+@page "/transient-disposable"
+@inject TransientDisposable TransientDisposable
+
+<h1>Transient Disposable Detection</h1>
+```
+
+İçindeki bileşene gidin `TransientDisposable` `/transient-disposable` ve <xref:System.InvalidOperationException> Framework bir örneğini oluşturmaya çalıştığında oluşur `TransientDisposable` :
+
+> System. InvalidOperationException: yanlış kapsamdaki geçici atılabilir hizmeti TransientDisposable çözümlenmeye çalışılıyor. \<T>Çözmeye çalıştığınız ' 't ' hizmeti için ' OwningComponentBase ' bileşen temel sınıfını kullanın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

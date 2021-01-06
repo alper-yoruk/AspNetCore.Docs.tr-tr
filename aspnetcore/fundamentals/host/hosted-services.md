@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/host/hosted-services
 ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061086"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core içinde barındırılan hizmetlerle arka plan görevleri
@@ -54,7 +54,7 @@ ASP.NET Core Worker hizmeti şablonu, uzun süre çalışan hizmet uygulamaları
 
 ## <a name="package"></a>Paket
 
-Çalışan hizmeti şablonunu temel alan bir uygulama `Microsoft.NET.Sdk.Worker` SDK kullanır ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine açık bir paket başvurusu içerir. Örneğin, örnek uygulamanın proje dosyasına ( *Backgroundtaskssample. csproj* ) bakın.
+Çalışan hizmeti şablonunu temel alan bir uygulama `Microsoft.NET.Sdk.Worker` SDK kullanır ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine açık bir paket başvurusu içerir. Örneğin, örnek uygulamanın proje dosyasına (*Backgroundtaskssample. csproj*) bakın.
 
 SDK kullanan Web uygulamaları için `Microsoft.NET.Sdk.Web` , [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine, paylaşılan çerçeveden dolaylı olarak başvurulur. Uygulamanın proje dosyasındaki açık bir paket başvurusu gerekli değildir.
 
@@ -128,7 +128,7 @@ Zamanlanmış bir arka plan görevi, [System. Threading. Timer](xref:System.Thre
 
 , <xref:System.Threading.Timer> Önceki yürütmelerin bitmesini beklemez, bu `DoWork` nedenle gösterilen yaklaşım her senaryo için uygun olmayabilir. [Interkilitlendi. Increment](xref:System.Threading.Interlocked.Increment*) , yürütme sayacını bir atomik işlem olarak artırmak için kullanılır, bu da birden çok iş parçacığının eşzamanlı olarak güncelleştirilmesini sağlar `executionCount` .
 
-Hizmet, `IHostBuilder.ConfigureServices` ( *program.cs* ) `AddHostedService` öğesine uzantı yöntemiyle kaydedilir:
+Hizmet, `IHostBuilder.ConfigureServices` (*program.cs*) `AddHostedService` öğesine uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -147,7 +147,7 @@ Barındırılan hizmet, yöntemini çağırmak için kapsamlı arka plan görev 
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` ( *program.cs* ). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
+Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -175,7 +175,7 @@ Bir `MonitorLoop` hizmet, giriş cihazında anahtar her seçildiğinde barındı
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` ( *program.cs* ). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
+Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 

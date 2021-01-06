@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: ae8fb47e58924d559f1c2c4ed7c9545c37141209
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1678f1b4af2c65e3b10c66f7ccdbecf19156a834
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061346"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97865570"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core basit yetkilendirme
 
@@ -92,18 +92,18 @@ Bu, `AccountController` `Login` kimliği doğrulanmış veya kimliği doğrulanm
 
 ## <a name="authorize-attribute-and-no-locrazor-pages"></a>Özniteliği ve Razor sayfaları yetkilendir
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Sayfa işleyicilerine * **Not** \ ' a uygulanamaz Razor . Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz. Farklı işleyiciler için farklı yetkilendirme gereksinimlerine sahip sayfalar için ASP.NET Core MVC denetleyicisi kullanmayı göz önünde bulundurun.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Sayfa işleyicilerine ***Not**\ ' a uygulanamaz Razor . Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz. Farklı işleyiciler için farklı yetkilendirme gereksinimlerine sahip sayfalar için ASP.NET Core MVC denetleyicisi kullanmayı göz önünde bulundurun.
 
 Aşağıdaki iki yaklaşım, sayfa işleyici yöntemlerine yetkilendirme uygulamak için kullanılabilir Razor :
 
-_ Farklı yetkilendirme gerektiren sayfa işleyicileri için ayrı sayfalar kullanın. Paylaşılan içeriği bir veya daha fazla [kısmi görünüme](xref:mvc/views/partial)taşıdı. Mümkün olduğunda önerilen yaklaşım budur.
+_ Farklı yetkilendirme gerektiren sayfa işleyicileri için ayrı sayfalar kullanın. Paylaşılan içeriği bir veya daha fazla [kısmi görünüme](xref:mvc/views/partial)taşıyın. Mümkün olduğunda önerilen yaklaşım budur.
 * Ortak bir sayfa paylaşması gereken içerikler için, [ıasyncpagefilter. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)öğesinin bir parçası olarak yetkilendirme gerçekleştiren bir filtre yazın. [Pagehandlerauth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub projesinde bu yaklaşım gösterilmektedir:
   * [Authorizeındexpagehandlerfilter](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs) yetkilendirme filtresini uygular:[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]
 
   * [[Authorizepagehandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16) özniteliği `OnGet` sayfa işleyicisine uygulandı:[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]
 
 > [!WARNING]
-> [Pagehandlerauth](https://github.com/pranavkm/PageHandlerAuth) örnek yaklaşımı, sayfa, sayfa modeli veya küresel olarak bir yetkilendirme özniteliği uygulanmış * **değil** _: _ Compose. Bir sayfada daha fazla veya örnek varsa, yetkilendirme özniteliklerinin oluşturulması, kimlik doğrulama ve yetkilendirme ile birden çok kez yürütülen sonuçlara neden olur `AuthorizeAttribute` `AuthorizeFilter` .
+> [Pagehandlerauth](https://github.com/pranavkm/PageHandlerAuth) örnek yaklaşımı, sayfa, sayfa modeli veya küresel olarak bir yetkilendirme özniteliği uygulanmış ***değil** _: _ Compose. Bir sayfada daha fazla veya örnek varsa, yetkilendirme özniteliklerinin oluşturulması, kimlik doğrulama ve yetkilendirme ile birden çok kez yürütülen sonuçlara neden olur `AuthorizeAttribute` `AuthorizeFilter` .
 > * ASP.NET Core kimlik doğrulaması ve yetkilendirme sisteminin geri kalanı ile birlikte çalışın. Uygulamanız için bu yaklaşımı kullanarak doğru şekilde çalıştığını doğrulamanız gerekir.
 
 `AuthorizeAttribute`On sayfa işleyicilerini desteklemeye yönelik bir plan yoktur Razor . 

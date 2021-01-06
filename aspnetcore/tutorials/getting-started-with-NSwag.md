@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/get-started-with-nswag
 ms.openlocfilehash: 78d58d4d544c33862cf502ce63e83560e8009c65
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060579"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag ve ASP.NET Core kullanmaya başlayın
@@ -62,9 +62,9 @@ NSwag NuGet paketini yüklemek için aşağıdaki yaklaşımlardan birini kullan
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Paket Yöneticisi konsol** penceresinde:
-  * **View**  >  **Diğer Windows**  >  **Paket Yöneticisi konsolunu** görüntüle ' ye git
+  *   >  **Diğer Windows**  >  **Paket Yöneticisi konsolunu** görüntüle ' ye git
   * *TodoApi. csproj* dosyasının bulunduğu dizine gidin
-  * Şu kodu yürütün:
+  * Aşağıdaki komutu yürütün:
 
     ```powershell
     Install-Package NSwag.AspNetCore
@@ -78,7 +78,7 @@ NSwag NuGet paketini yüklemek için aşağıdaki yaklaşımlardan birini kullan
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* *Packages* **Çözüm bölmesi**  >  **paket Ekle...** ' da paketler klasörüne sağ tıklayın.
+*  **Çözüm bölmesi**  >  **paket Ekle...** ' da paketler klasörüne sağ tıklayın.
 * **Paket Ekle** penceresinin **kaynak** açılan penceresini "NuGet.org" olarak ayarlayın
 * Arama kutusuna "NSwag. AspNetCore" yazın
 * Sonuçlar bölmesinden "NSwag. AspNetCore" paketini seçin ve **paket Ekle** ' ye tıklayın.
@@ -122,12 +122,12 @@ Aşağıdaki seçeneklerden birini seçerek NSwag 'nin kod oluşturma özelliği
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio ile kod oluşturma
 
 * [NSwagStudio GitHub deposundaki](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)yönergeleri izleyerek NSwagStudio 'i yükler. NSwag Release sayfasında, yükleme ve yönetici ayrıcalıkları olmadan başlatılabilen bir Xcopy sürümü indirebilirsiniz.
-* NSwagStudio başlatın ve **Swagger belirtim URL 'si** metin kutusunda dosya URL *'sindekiswagger.js* girin. Örneğin, *http://localhost:44354/swagger/v1/swagger.json* .
+* NSwagStudio başlatın ve **Swagger belirtim URL 'si** metin kutusunda dosya URL *'sindekiswagger.js* girin. Örneğin, *http://localhost:44354/swagger/v1/swagger.json*.
 * Swagger belirtimin bir JSON gösterimini oluşturmak için **Yerel kopya oluştur** düğmesine tıklayın.
 
   ![Swagger belirtiminin yerel kopyasını oluştur](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)
 
-* **Çıktılar** alanında, **CSharp Client** onay kutusuna tıklayın. Projenize bağlı olarak, **TypeScript Client** veya **CSharp Web API Controller** ' ı da seçebilirsiniz. **CSharp Web API denetleyicisi** ' ni seçerseniz, bir hizmet belirtimi hizmeti yeniden oluşturur ve bu da ters bir oluşturma görevi görür.
+* **Çıktılar** alanında, **CSharp Client** onay kutusuna tıklayın. Projenize bağlı olarak, **TypeScript Client** veya **CSharp Web API Controller**' ı da seçebilirsiniz. **CSharp Web API denetleyicisi**' ni seçerseniz, bir hizmet belirtimi hizmeti yeniden oluşturur ve bu da ters bir oluşturma görevi görür.
 * *TodoApi. NSwag* projesinin tüm C# istemci uygulamasını oluşturmak Için **çıkış oluştur** ' a tıklayın. Oluşturulan istemci kodunu görmek için **CSharp istemci** sekmesine tıklayın:
 
 ```csharp
@@ -209,7 +209,7 @@ XML açıklamalarını etkinleştirmek için aşağıdaki adımları uygulayın:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle** ' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle**' yi seçin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -227,7 +227,7 @@ XML açıklamalarını etkinleştirmek için aşağıdaki adımları uygulayın:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* *Çözüm bölmesi* , **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme** sayfasına gidin.
+* *Çözüm bölmesi*, **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme** sayfasına gidin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -236,7 +236,7 @@ XML açıklamalarını etkinleştirmek için aşağıdaki adımları uygulayın:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **Derleme** derleyicisi > **Proje seçenekleri** iletişim kutusunu açın > **Compiler**
+* **Derleme** derleyicisi > **Proje seçenekleri** iletişim kutusunu açın > 
 * **Genel Seçenekler** bölümünün altındaki **XML oluştur belge** kutusunu işaretleyin
 
 ::: moniker-end

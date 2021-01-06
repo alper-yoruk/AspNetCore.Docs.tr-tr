@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/migrations
 ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061112"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Bölüm 4, Razor ASP.NET Core EF Core geçişleri olan sayfalar
@@ -251,7 +251,7 @@ Daha önce VERITABANı bırakılmıştı ve mevcut olmadığından geçişler ye
 
 ### <a name="the-data-model-snapshot"></a>Veri modeli anlık görüntüsü
 
-Geçişler *geçişlerde/SchoolContextModelSnapshot. cs* ' de geçerli veritabanı şemasının *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde EF, veri modeli Snapshot dosyası ile karşılaştırılarak nelerin değiştirildiğini belirler.
+Geçişler *geçişlerde/SchoolContextModelSnapshot. cs*' de geçerli veritabanı şemasının *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde EF, veri modeli Snapshot dosyası ile karşılaştırılarak nelerin değiştirildiğini belirler.
 
 Bir geçişi silmek için aşağıdaki komutu kullanın:
 

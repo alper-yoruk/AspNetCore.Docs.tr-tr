@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/deploy-to-app-service
 ms.openlocfilehash: f1c7acba0b7fb7dc07da576b188e580328ff4b89
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901164"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service için uygulama dağıtma
@@ -79,7 +79,7 @@ Bir komut kabuğundan kodu indirin, projeyi derleyin ve aşağıdaki gibi çalı
 
      ![RSS akışı içeriğini görüntüleyen uygulama](./media/deploying-to-app-service/app-in-browser.png)
 
-6. Uygulamanın doğru şekilde çalışmaya başladıktan sonra **Ctrl** + komut kabuğu 'nda CTRL **C** tuşuna basarak kapatın.
+6. Uygulamanın doğru şekilde çalışmaya başladıktan sonra  + komut kabuğu 'nda CTRL **C** tuşuna basarak kapatın.
 
 ## <a name="create-the-azure-app-service-web-app"></a>Azure App Service Web uygulaması oluşturma
 
@@ -159,13 +159,13 @@ Uygulama, komut kabuğundan zaten dağıtıldı. Uygulamaya bir güncelleştirme
 
 1. Visual Studio 'da *Simplefeedreader. sln* ' i açın.
 2. Çözüm Gezgini, *Pages\ındex.cshtml* dosyasını açın. `<h2>Simple Feed Reader</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V2</h2>` .
-3. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
+3.  +  + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
 4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla**' ya tıklayın.
 
     ![Sağ tıklama, yayımlamayı gösteren ekran görüntüsü](./media/deploying-to-app-service/publish.png)
 5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ya tıklayın.
 6. **App Service** iletişim kutusunda, Azure aboneliğinizi oluşturmak Için kullanılan Microsoft veya kuruluş hesabının sağ üst köşede görüntülendiğini doğrulayın. Aksi takdirde, açılan eklentiye tıklayın ve ekleyin.
-7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm** Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** düğmesine tıklayın.
+7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm** Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam**’a tıklayın.
 
     ![Yayımla App Service iletişim kutusunu gösteren ekran görüntüsü](./media/deploying-to-app-service/publish-dialog.png)
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr
 ms.openlocfilehash: 1dad2264250bf43ec6c1df679b8754a82a5addfd
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417675"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Öğretici: ASP.NET Core kullanmaya başlayın SignalR
@@ -42,7 +42,7 @@ Sonunda, çalışan bir sohbet uygulamanız olacaktır:
 
 ![::: No-Loc (SignalR)::: örnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -104,7 +104,7 @@ SignalRSunucu kitaplığı ASP.NET Core 3,1 Paylaşılan çerçevesine dahildir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-* **Çözüm Gezgini**' de projeye sağ tıklayın ve **Add** > **istemci tarafı kitaplığı** Ekle ' yi seçin.
+* **Çözüm Gezgini**' de projeye sağ tıklayın ve  > **istemci tarafı kitaplığı** Ekle ' yi seçin.
 
 * **Client-Side kitaplığı Ekle** Iletişim kutusunda **sağlayıcı** için **unpkg** öğesini seçin.
 
@@ -274,7 +274,7 @@ Bu öğreticide, kullanarak gerçek zamanlı bir uygulama oluşturmanın temelle
 > * Herhangi bir istemciden tüm bağlı istemcilere ileti gönderen kodu ekleyin.  
 Sonunda, çalışan bir sohbet uygulamasına sahipsiniz::: ![ : No-Loc (SignalR)::: örnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png)   
 
-## <a name="prerequisites"></a>Önkoşullar    
+## <a name="prerequisites"></a>Ön koşullar    
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
@@ -335,7 +335,7 @@ SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
-* **Çözüm Gezgini**' de projeye sağ tıklayın ve **Add** > **istemci tarafı kitaplığı** Ekle ' yi seçin.  
+* **Çözüm Gezgini**' de projeye sağ tıklayın ve  > **istemci tarafı kitaplığı** Ekle ' yi seçin.  
 
 * **Client-Side kitaplığı Ekle** Iletişim kutusunda **sağlayıcı** için **unpkg** öğesini seçin. 
 

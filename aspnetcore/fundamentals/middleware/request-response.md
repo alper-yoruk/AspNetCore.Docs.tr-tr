@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/middleware/request-response
 ms.openlocfilehash: 5ad39821778ea58097169def85a940a06f1d036e
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/02/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96513115"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core 'de istek ve yanıt işlemleri
@@ -34,7 +34,7 @@ Bu makalede, istek gövdesinden okuma ve yanıt gövdesine yazma işlemleri aç�
 
 İstek ve yanıt gövdelerinin iki soyutlamaları vardır: <xref:System.IO.Stream> ve <xref:System.IO.Pipelines.Pipe> . İstek okuma için <xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> bir <xref:System.IO.Stream> , ve `HttpRequest.BodyReader` olur <xref:System.IO.Pipelines.PipeReader> . Yanıt yazma için <xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> bir <xref:System.IO.Stream> , ve `HttpResponse.BodyWriter` olur <xref:System.IO.Pipelines.PipeWriter> .
 
-İşlem [hatları](/dotnet/standard/io/pipelines) akışlar üzerinde önerilir. Akışlar bazı basit işlemler için daha kolay olabilir, ancak işlem hatları performans avantajına sahiptir ve çoğu senaryoda daha kolay kullanılır. ASP.NET Core dahili akışlar yerine işlem hatlarını kullanmaya başlıyor. Örneklere şunlar dahildir:
+İşlem [hatları](/dotnet/standard/io/pipelines) akışlar üzerinde önerilir. Akışlar bazı basit işlemler için daha kolay olabilir, ancak işlem hatları performans avantajına sahiptir ve çoğu senaryoda daha kolay kullanılır. ASP.NET Core dahili akışlar yerine işlem hatlarını kullanmaya başlıyor. Örnekler arasında şunlar yer almaktadır:
 
 * `FormReader`
 * `TextReader`

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: 8844b0014cac58f414d79df4c64bc0efac75bfe1
-ms.sourcegitcommit: d29535ea0b4197443fd884aaa6e5b4b763d04fc7
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/19/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94920709"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>DotNet ASPNET-CodeGenerator
@@ -65,7 +65,7 @@ dotnet aspnet-codegenerator [arguments] [-p|--project] [-n|--nuget-package-dir] 
 dotnet aspnet-codegenerator [-h|--help]
 ```
 
-## <a name="description"></a>Description
+## <a name="description"></a>Açıklama
 
 `dotnet aspnet-codegenerator`Genel komut ASP.NET Core kod Oluşturucu ve yapı iskelesi altyapısını çalıştırır.
 
@@ -75,7 +75,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 Çalıştırılacak kod Oluşturucu. Aşağıdaki oluşturucular kullanılabilir:
 
-| Oluşturucu  | İşlem                                                            |
+| Oluşturucu  | Çalışma                                                            |
 | ---------- | -------------------------------------------------------------------- |
 | alan       | [Bir alanı dolandırın](xref:mvc/controllers/areas)                      |
 | denetleyici | [Bir denetleyiciyi yapı iskelesi](xref:tutorials/first-mvc-app/adding-model)  |
@@ -118,9 +118,9 @@ Komut için kısa bir yardım yazdırır.
 Aşağıdaki bölümler, desteklenen oluşturucular için kullanılabilen seçenekleri ayrıntılandırır:
 
 * Alan
-* Kumandasını
+* Denetleyici
 * Identity  
-* Razorpage (sayfa) 
+* Razorsayfasında
 * Görüntüle
 
 <a name="area"></a>
@@ -166,7 +166,7 @@ dotnet aspnet-codegenerator controller -h
 
 Bir örneği için bkz. [film modelini yapı iskelesi](xref:tutorials/first-mvc-app/adding-model) `dotnet aspnet-codegenerator controller` .
 
-### <a name="no-locrazorpage"></a>Razorpage (sayfa) 
+### <a name="no-locrazorpage"></a>Razorsayfasında
 
 <a name="rp"></a>
 

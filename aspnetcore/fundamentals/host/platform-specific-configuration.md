@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
 ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061060"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core 'de barındırma başlangıç derlemelerini kullanın
@@ -113,13 +113,13 @@ Bir barındırma başlatma geliştirmesi, bir sınıf kitaplığında bulunabili
 
 `ServiceKeyInjection`Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır.
 
-*Hostingstartuplibrary/ServiceKeyInjection. cs* :
+*Hostingstartuplibrary/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç derlemesi tarafından ayarlanan iki anahtarın yapılandırma değerlerini okur ve işler:
 
-*Hostingstartupapp/Pages/Index. cshtml. cs* :
+*Hostingstartupapp/Pages/Index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
@@ -128,13 +128,13 @@ Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç 
 * Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * Bir `HostingStartup` özniteliği içerir.
 
-*Hostingstartuppackage/ServiceKeyInjection. cs* :
+*Hostingstartuppackage/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 Uygulamanın dizin sayfası, paketin barındırma başlangıç derlemesi tarafından ayarlanan iki anahtarın yapılandırma değerlerini okur ve işler:
 
-*Hostingstartupapp/Pages/Index. cshtml. cs* :
+*Hostingstartupapp/Pages/Index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -170,7 +170,7 @@ Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Ho
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-Bir proje oluştururken `IHostingStartup` , bağımlılıklar dosyası ( *.deps.js* ), `runtime` derlemenin konumunu *bin* klasörüne ayarlar:
+Bir proje oluştururken `IHostingStartup` , bağımlılıklar dosyası (*.deps.js*), `runtime` derlemenin konumunu *bin* klasörüne ayarlar:
 
 [!code-json[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -263,7 +263,7 @@ Barındırma başlatma oluşturulduktan sonra, bildirim proje dosyası ve [DotNe
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-Örnek uygulamada ( *Runtimesstore* Projesi) aşağıdaki komut kullanılır:
+Örnek uygulamada (*Runtimesstore* Projesi) aşağıdaki komut kullanılır:
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -340,7 +340,7 @@ Ek bağımlılıklar dosyası oluşturmak için önerilen yaklaşım şunlardır
 * `{SHARED FRAMEWORK VERSION}`: En düşük paylaşılan çerçeve sürümü.
 * `{ENHANCEMENT ASSEMBLY NAME}`: Geliştirmesinin derleme adı.
 
-Örnek uygulamada ( *Runtimesbir* proje), ek bağımlılıklar dosyası aşağıdaki konuma yerleştirilir:
+Örnek uygulamada (*Runtimesbir* proje), ek bağımlılıklar dosyası aşağıdaki konuma yerleştirilir:
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnostics.deps.json
@@ -348,7 +348,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 Çalışma zamanı depo konumunu bulması için, ek bağımlılıklar dosya konumu `DOTNET_ADDITIONAL_DEPS` ortam değişkenine eklenir.
 
-Örnek uygulamada ( *Runtimesbir* proje), çalışma zamanı deposunun oluşturulması ve ek bağımlılıklar dosyası oluşturulması bir [PowerShell](/powershell/scripting/powershell-scripting) betiği kullanılarak gerçekleştirilir.
+Örnek uygulamada (*Runtimesbir* proje), çalışma zamanı deposunun oluşturulması ve ek bağımlılıklar dosyası oluşturulması bir [PowerShell](/powershell/scripting/powershell-scripting) betiği kullanılarak gerçekleştirilir.
 
 Çeşitli işletim sistemleri için ortam değişkenlerinin nasıl ayarlanbileceğine ilişkin örnekler için, bkz. [birden çok ortam kullanma](xref:fundamentals/environments).
 
@@ -364,7 +364,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 Bir NuGet paketinde barındırma başlatma geliştirmesi sağlayabilirsiniz. Pakette bir öznitelik vardır `HostingStartup` . Paket tarafından sağlanan barındırma başlangıç türleri, aşağıdaki yaklaşımlardan biri kullanılarak uygulama için kullanılabilir hale getirilir:
 
-* Gelişmiş uygulamanın proje dosyası, uygulamanın proje dosyasında (derleme zamanı başvurusu) barındırma başlatması için bir paket başvurusu yapar. Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına ( *.deps.js* ) eklenir. Bu yaklaşım, [NuGet.org](https://www.nuget.org/)'e yayınlanan bir barındırma başlangıç derleme paketi için geçerlidir.
+* Gelişmiş uygulamanın proje dosyası, uygulamanın proje dosyasında (derleme zamanı başvurusu) barındırma başlatması için bir paket başvurusu yapar. Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına (*.deps.js*) eklenir. Bu yaklaşım, [NuGet.org](https://www.nuget.org/)'e yayınlanan bir barındırma başlangıç derleme paketi için geçerlidir.
 * Barındırma başlatmasının bağımlılıklar dosyası, [çalışma zamanı deposu](#runtime-store) bölümünde açıklandığı gibi gelişmiş uygulama için kullanılabilir hale getirilir (derleme zamanı başvurusu olmadan).
 
 NuGet paketleri ve çalışma zamanı deposu hakkında daha fazla bilgi için aşağıdaki konulara bakın:
@@ -377,12 +377,12 @@ NuGet paketleri ve çalışma zamanı deposu hakkında daha fazla bilgi için a�
 
 Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağıtılan bir derleme tarafından sağlanıyor. Derleme tarafından sağlanan barındırma başlangıç türleri, aşağıdaki yaklaşımlardan biri kullanılarak uygulama için kullanılabilir hale getirilir:
 
-* Gelişmiş uygulamanın proje dosyası, barındırma başlatmaya bir derleme başvurusu yapar (derleme zamanı başvurusu). Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına ( *.deps.js* ) eklenir. Bu yaklaşım, dağıtım senaryosu barındırma başlatmasının derlemesine ( *. dll* dosyası) bir derleme zamanı başvurusu yapmak ve derlemeyi şu şekilde taşımak için çağırdığında geçerlidir:
+* Gelişmiş uygulamanın proje dosyası, barındırma başlatmaya bir derleme başvurusu yapar (derleme zamanı başvurusu). Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına (*.deps.js*) eklenir. Bu yaklaşım, dağıtım senaryosu barındırma başlatmasının derlemesine (*. dll* dosyası) bir derleme zamanı başvurusu yapmak ve derlemeyi şu şekilde taşımak için çağırdığında geçerlidir:
   * Tüketen proje.
   * Tüketim Projesi tarafından erişilebilen bir konum.
 * Barındırma başlatmasının bağımlılıklar dosyası, [çalışma zamanı deposu](#runtime-store) bölümünde açıklandığı gibi gelişmiş uygulama için kullanılabilir hale getirilir (derleme zamanı başvurusu olmadan).
 * .NET Framework hedeflenirken, derleme varsayılan yükleme bağlamında yüklenebilir olur; bu, .NET Framework, derlemenin aşağıdaki konumlardan birinde bulunduğu anlamına gelir:
-  * Uygulama temel yolu: uygulamanın yürütülebilir dosyasının ( *. exe* ) bulunduğu *bin* klasörü.
+  * Uygulama temel yolu: uygulamanın yürütülebilir dosyasının (*. exe*) bulunduğu *bin* klasörü.
   * Genel bütünleştirilmiş kod önbelleği (GAC): GAC, birkaç .NET Framework uygulamanın paylaştığı derlemeleri depolar. Daha fazla bilgi için, bkz. [nasıl yapılır: bir derlemeyi genel derleme önbelleğine yüklemek](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) .NET Framework belgeleri.
 
 ## <a name="sample-code"></a>Örnek kod
@@ -390,9 +390,9 @@ Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağ�
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample)), başlangıç uygulama senaryolarını barındırma gösterir:
 
 * İki barındırma başlangıç derlemesi (sınıf kitaplıkları) her biri bellek içi yapılandırma anahtar-değer çiftleri çiftini ayarlar:
-  * NuGet paketi ( *Hostingstartuppackage* )
-  * Sınıf kitaplığı ( *Hostingstartuplibrary* )
-* Bir barındırma başlatması, çalışma zamanı deposu tarafından dağıtılan bir derlemeden ( *Startupdiagnostics* ) etkinleştirilir. Derleme, üzerinde tanılama bilgileri sağlayan, başlangıçta uygulamaya iki middlewares ekler:
+  * NuGet paketi (*Hostingstartuppackage*)
+  * Sınıf kitaplığı (*Hostingstartuplibrary*)
+* Bir barındırma başlatması, çalışma zamanı deposu tarafından dağıtılan bir derlemeden (*Startupdiagnostics*) etkinleştirilir. Derleme, üzerinde tanılama bilgileri sağlayan, başlangıçta uygulamaya iki middlewares ekler:
   * Kayıtlı hizmetler
   * Adres (düzen, ana bilgisayar, yol tabanı, yol, sorgu dizesi)
   * Bağlantı (uzak IP, uzak bağlantı noktası, yerel IP, yerel bağlantı noktası, istemci sertifikası)
@@ -405,7 +405,7 @@ Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağ�
 
 1. ,, [DotNet paketi](/dotnet/core/tools/dotnet-pack) komutuyla *hostingstartuppackage* paketini derleyin.
 1. Paketin *Hostingstartuppackage* derleme adını `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` ortam değişkenine ekleyin.
-1. Uygulamayı derleyin ve çalıştırın. Gelişmiş uygulamada bir paket başvurusu vardır (derleme zamanı başvurusu). `<PropertyGroup>`Uygulamanın proje dosyasındaki bir paket projenin çıkışını belirtir ( *.. /HostingStartupPackage/bin/Debug* ) bir paket kaynağı olarak. Bu, uygulamanın paketi [NuGet.org](https://www.nuget.org/)'e yüklemeden paketi kullanmasına izin verir. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
+1. Uygulamayı derleyin ve çalıştırın. Gelişmiş uygulamada bir paket başvurusu vardır (derleme zamanı başvurusu). `<PropertyGroup>`Uygulamanın proje dosyasındaki bir paket projenin çıkışını belirtir (*.. /HostingStartupPackage/bin/Debug*) bir paket kaynağı olarak. Bu, uygulamanın paketi [NuGet.org](https://www.nuget.org/)'e yüklemeden paketi kullanmasına izin verir. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
 
    ```xml
    <PropertyGroup>
@@ -425,8 +425,8 @@ dotnet nuget locals all --clear
 
 1. , [DotNet Build](/dotnet/core/tools/dotnet-build) komutuyla *hostingstartuplibrary* sınıf kitaplığını derleyin.
 1. Sınıf kitaplığının *Hostingstartuplibrary* derleme adını `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` ortam değişkenine ekleyin.
-1. *bin* - *HostingStartupLibrary.dll* dosyasını sınıf kitaplığının derlenmiş çıktısından uygulamanın *bin/Debug* klasörüne kopyalayarak, sınıf kitaplığının derlemesini uygulamaya dağıtın.
-1. Uygulamayı derleyin ve çalıştırın. `<ItemGroup>`Uygulamanın proje dosyasındaki bir, sınıf kitaplığının derlemesine ( *.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll* ) (derleme zamanı başvurusu) başvurur. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
+1. *bin*- *HostingStartupLibrary.dll* dosyasını sınıf kitaplığının derlenmiş çıktısından uygulamanın *bin/Debug* klasörüne kopyalayarak, sınıf kitaplığının derlemesini uygulamaya dağıtın.
+1. Uygulamayı derleyin ve çalıştırın. `<ItemGroup>`Uygulamanın proje dosyasındaki bir, sınıf kitaplığının derlemesine (*.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*) (derleme zamanı başvurusu) başvurur. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
 
    ```xml
    <ItemGroup>
@@ -444,8 +444,8 @@ dotnet nuget locals all --clear
 1. *Startupdiagnostics* projesi dosyada *StartupDiagnostics.deps.js* değiştirmek için [PowerShell](/powershell/scripting/powershell-scripting) kullanır. PowerShell, Windows 7 SP1 ve Windows Server 2008 R2 SP1 ile başlayarak varsayılan olarak yüklüdür. Diğer platformlarda PowerShell 'i almak için bkz. [PowerShell 'in çeşitli sürümlerini yükleme](/powershell/scripting/install/installing-powershell).
 1. *Runtimesyürüme* klasöründe *build.ps1* betiğini yürütün. Betik şunları yapar:
    * , `StartupDiagnostics` *Obj\packages* klasöründe paketi oluşturur.
-   * İçin çalışma zamanı deposunu `StartupDiagnostics` *Mağaza* klasöründe oluşturur. `dotnet store`Betikteki komut, `win7-x64` Windows 'a dağıtılan bir barındırma başlatması için [çalışma zamanı tanımlayıcısı 'nı (RID)](/dotnet/core/rid-catalog) kullanır. Farklı bir çalışma zamanı için barındırma başlangıcını sağlarken, betiğin 37. satırındaki doğru RID 'yi yerine koyun. Çalışma zamanı deposu `StartupDiagnostics` daha sonra derlemenin tüketilebileceği makinede kullanıcının veya sisteminin çalışma zamanı deposuna taşınır. Derlemenin Kullanıcı çalışma zamanı deposu yüklemesi konumu `StartupDiagnostics` *. DotNet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll* .
-   * , `additionalDeps` `StartupDiagnostics` *Additionaldeps* klasöründe için öğesini oluşturur. Ek bağımlılıklar daha sonra kullanıcının veya sistem ek bağımlılıklarına taşınır. Kullanıcı `StartupDiagnostics` ek bağımlılıkları yüklemesi konumu *. DotNet/x64/additionalDeps/startupdiagnostics/Shared/Microsoft. netcore. app/3.0.0/StartupDiagnostics.deps.json* .
+   * İçin çalışma zamanı deposunu `StartupDiagnostics` *Mağaza* klasöründe oluşturur. `dotnet store`Betikteki komut, `win7-x64` Windows 'a dağıtılan bir barındırma başlatması için [çalışma zamanı tanımlayıcısı 'nı (RID)](/dotnet/core/rid-catalog) kullanır. Farklı bir çalışma zamanı için barındırma başlangıcını sağlarken, betiğin 37. satırındaki doğru RID 'yi yerine koyun. Çalışma zamanı deposu `StartupDiagnostics` daha sonra derlemenin tüketilebileceği makinede kullanıcının veya sisteminin çalışma zamanı deposuna taşınır. Derlemenin Kullanıcı çalışma zamanı deposu yüklemesi konumu `StartupDiagnostics` *. DotNet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll*.
+   * , `additionalDeps` `StartupDiagnostics` *Additionaldeps* klasöründe için öğesini oluşturur. Ek bağımlılıklar daha sonra kullanıcının veya sistem ek bağımlılıklarına taşınır. Kullanıcı `StartupDiagnostics` ek bağımlılıkları yüklemesi konumu *. DotNet/x64/additionalDeps/startupdiagnostics/Shared/Microsoft. netcore. app/3.0.0/StartupDiagnostics.deps.json*.
    * *deploy.ps1* dosyasını *dağıtım* klasörüne koyar.
 1. *Dağıtım* klasöründe *deploy.ps1* betiğini çalıştırın. Betik şunu ekler:
    * `StartupDiagnostics``ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`ortam değişkenine.
@@ -511,13 +511,13 @@ Bir barındırma başlatma geliştirmesi, bir sınıf kitaplığında bulunabili
 
 `ServiceKeyInjection`Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır.
 
-*Hostingstartuplibrary/ServiceKeyInjection. cs* :
+*Hostingstartuplibrary/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç derlemesi tarafından ayarlanan iki anahtarın yapılandırma değerlerini okur ve işler:
 
-*Hostingstartupapp/Pages/Index. cshtml. cs* :
+*Hostingstartupapp/Pages/Index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
@@ -526,13 +526,13 @@ Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç 
 * Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * Bir `HostingStartup` özniteliği içerir.
 
-*Hostingstartuppackage/ServiceKeyInjection. cs* :
+*Hostingstartuppackage/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 Uygulamanın dizin sayfası, paketin barındırma başlangıç derlemesi tarafından ayarlanan iki anahtarın yapılandırma değerlerini okur ve işler:
 
-*Hostingstartupapp/Pages/Index. cshtml. cs* :
+*Hostingstartupapp/Pages/Index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -568,7 +568,7 @@ Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Ho
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-Bir proje oluştururken `IHostingStartup` , bağımlılıklar dosyası ( *.deps.js* ), `runtime` derlemenin konumunu *bin* klasörüne ayarlar:
+Bir proje oluştururken `IHostingStartup` , bağımlılıklar dosyası (*.deps.js*), `runtime` derlemenin konumunu *bin* klasörüne ayarlar:
 
 [!code-json[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -649,7 +649,7 @@ Barındırma başlatma oluşturulduktan sonra, bildirim proje dosyası ve [DotNe
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-Örnek uygulamada ( *Runtimesstore* Projesi) aşağıdaki komut kullanılır:
+Örnek uygulamada (*Runtimesstore* Projesi) aşağıdaki komut kullanılır:
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -726,7 +726,7 @@ Ek bağımlılıklar dosyası oluşturmak için önerilen yaklaşım şunlardır
 * `{SHARED FRAMEWORK VERSION}`: En düşük paylaşılan çerçeve sürümü.
 * `{ENHANCEMENT ASSEMBLY NAME}`: Geliştirmesinin derleme adı.
 
-Örnek uygulamada ( *Runtimesbir* proje), ek bağımlılıklar dosyası aşağıdaki konuma yerleştirilir:
+Örnek uygulamada (*Runtimesbir* proje), ek bağımlılıklar dosyası aşağıdaki konuma yerleştirilir:
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnostics.deps.json
@@ -734,7 +734,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 Çalışma zamanı depo konumunu bulması için, ek bağımlılıklar dosya konumu `DOTNET_ADDITIONAL_DEPS` ortam değişkenine eklenir.
 
-Örnek uygulamada ( *Runtimesbir* proje), çalışma zamanı deposunun oluşturulması ve ek bağımlılıklar dosyası oluşturulması bir [PowerShell](/powershell/scripting/powershell-scripting) betiği kullanılarak gerçekleştirilir.
+Örnek uygulamada (*Runtimesbir* proje), çalışma zamanı deposunun oluşturulması ve ek bağımlılıklar dosyası oluşturulması bir [PowerShell](/powershell/scripting/powershell-scripting) betiği kullanılarak gerçekleştirilir.
 
 Çeşitli işletim sistemleri için ortam değişkenlerinin nasıl ayarlanbileceğine ilişkin örnekler için, bkz. [birden çok ortam kullanma](xref:fundamentals/environments).
 
@@ -750,7 +750,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 Bir NuGet paketinde barındırma başlatma geliştirmesi sağlayabilirsiniz. Pakette bir öznitelik vardır `HostingStartup` . Paket tarafından sağlanan barındırma başlangıç türleri, aşağıdaki yaklaşımlardan biri kullanılarak uygulama için kullanılabilir hale getirilir:
 
-* Gelişmiş uygulamanın proje dosyası, uygulamanın proje dosyasında (derleme zamanı başvurusu) barındırma başlatması için bir paket başvurusu yapar. Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına ( *.deps.js* ) eklenir. Bu yaklaşım, [NuGet.org](https://www.nuget.org/)'e yayınlanan bir barındırma başlangıç derleme paketi için geçerlidir.
+* Gelişmiş uygulamanın proje dosyası, uygulamanın proje dosyasında (derleme zamanı başvurusu) barındırma başlatması için bir paket başvurusu yapar. Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına (*.deps.js*) eklenir. Bu yaklaşım, [NuGet.org](https://www.nuget.org/)'e yayınlanan bir barındırma başlangıç derleme paketi için geçerlidir.
 * Barındırma başlatmasının bağımlılıklar dosyası, [çalışma zamanı deposu](#runtime-store) bölümünde açıklandığı gibi gelişmiş uygulama için kullanılabilir hale getirilir (derleme zamanı başvurusu olmadan).
 
 NuGet paketleri ve çalışma zamanı deposu hakkında daha fazla bilgi için aşağıdaki konulara bakın:
@@ -763,12 +763,12 @@ NuGet paketleri ve çalışma zamanı deposu hakkında daha fazla bilgi için a�
 
 Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağıtılan bir derleme tarafından sağlanıyor. Derleme tarafından sağlanan barındırma başlangıç türleri, aşağıdaki yaklaşımlardan biri kullanılarak uygulama için kullanılabilir hale getirilir:
 
-* Gelişmiş uygulamanın proje dosyası, barındırma başlatmaya bir derleme başvurusu yapar (derleme zamanı başvurusu). Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına ( *.deps.js* ) eklenir. Bu yaklaşım, dağıtım senaryosu barındırma başlatmasının derlemesine ( *. dll* dosyası) bir derleme zamanı başvurusu yapmak ve derlemeyi şu şekilde taşımak için çağırdığında geçerlidir:
+* Gelişmiş uygulamanın proje dosyası, barındırma başlatmaya bir derleme başvurusu yapar (derleme zamanı başvurusu). Derleme zamanı başvurusuyla birlikte, barındırma başlangıç derlemesi ve tüm bağımlılıkları uygulamanın bağımlılık dosyasına (*.deps.js*) eklenir. Bu yaklaşım, dağıtım senaryosu barındırma başlatmasının derlemesine (*. dll* dosyası) bir derleme zamanı başvurusu yapmak ve derlemeyi şu şekilde taşımak için çağırdığında geçerlidir:
   * Tüketen proje.
   * Tüketim Projesi tarafından erişilebilen bir konum.
 * Barındırma başlatmasının bağımlılıklar dosyası, [çalışma zamanı deposu](#runtime-store) bölümünde açıklandığı gibi gelişmiş uygulama için kullanılabilir hale getirilir (derleme zamanı başvurusu olmadan).
 * .NET Framework hedeflenirken, derleme varsayılan yükleme bağlamında yüklenebilir olur; bu, .NET Framework, derlemenin aşağıdaki konumlardan birinde bulunduğu anlamına gelir:
-  * Uygulama temel yolu: uygulamanın yürütülebilir dosyasının ( *. exe* ) bulunduğu *bin* klasörü.
+  * Uygulama temel yolu: uygulamanın yürütülebilir dosyasının (*. exe*) bulunduğu *bin* klasörü.
   * Genel bütünleştirilmiş kod önbelleği (GAC): GAC, birkaç .NET Framework uygulamanın paylaştığı derlemeleri depolar. Daha fazla bilgi için, bkz. [nasıl yapılır: bir derlemeyi genel derleme önbelleğine yüklemek](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) .NET Framework belgeleri.
 
 ## <a name="sample-code"></a>Örnek kod
@@ -776,9 +776,9 @@ Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağ�
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample)), başlangıç uygulama senaryolarını barındırma gösterir:
 
 * İki barındırma başlangıç derlemesi (sınıf kitaplıkları) her biri bellek içi yapılandırma anahtar-değer çiftleri çiftini ayarlar:
-  * NuGet paketi ( *Hostingstartuppackage* )
-  * Sınıf kitaplığı ( *Hostingstartuplibrary* )
-* Bir barındırma başlatması, çalışma zamanı deposu tarafından dağıtılan bir derlemeden ( *Startupdiagnostics* ) etkinleştirilir. Derleme, üzerinde tanılama bilgileri sağlayan, başlangıçta uygulamaya iki middlewares ekler:
+  * NuGet paketi (*Hostingstartuppackage*)
+  * Sınıf kitaplığı (*Hostingstartuplibrary*)
+* Bir barındırma başlatması, çalışma zamanı deposu tarafından dağıtılan bir derlemeden (*Startupdiagnostics*) etkinleştirilir. Derleme, üzerinde tanılama bilgileri sağlayan, başlangıçta uygulamaya iki middlewares ekler:
   * Kayıtlı hizmetler
   * Adres (düzen, ana bilgisayar, yol tabanı, yol, sorgu dizesi)
   * Bağlantı (uzak IP, uzak bağlantı noktası, yerel IP, yerel bağlantı noktası, istemci sertifikası)
@@ -791,7 +791,7 @@ Bir barındırma başlatma geliştirmesi, gelişmiş uygulamada, *bin* ile dağ�
 
 1. ,, [DotNet paketi](/dotnet/core/tools/dotnet-pack) komutuyla *hostingstartuppackage* paketini derleyin.
 1. Paketin *Hostingstartuppackage* derleme adını `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` ortam değişkenine ekleyin.
-1. Uygulamayı derleyin ve çalıştırın. Gelişmiş uygulamada bir paket başvurusu vardır (derleme zamanı başvurusu). `<PropertyGroup>`Uygulamanın proje dosyasındaki bir paket projenin çıkışını belirtir ( *.. /HostingStartupPackage/bin/Debug* ) bir paket kaynağı olarak. Bu, uygulamanın paketi [NuGet.org](https://www.nuget.org/)'e yüklemeden paketi kullanmasına izin verir. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
+1. Uygulamayı derleyin ve çalıştırın. Gelişmiş uygulamada bir paket başvurusu vardır (derleme zamanı başvurusu). `<PropertyGroup>`Uygulamanın proje dosyasındaki bir paket projenin çıkışını belirtir (*.. /HostingStartupPackage/bin/Debug*) bir paket kaynağı olarak. Bu, uygulamanın paketi [NuGet.org](https://www.nuget.org/)'e yüklemeden paketi kullanmasına izin verir. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
 
    ```xml
    <PropertyGroup>
@@ -811,8 +811,8 @@ dotnet nuget locals all --clear
 
 1. , [DotNet Build](/dotnet/core/tools/dotnet-build) komutuyla *hostingstartuplibrary* sınıf kitaplığını derleyin.
 1. Sınıf kitaplığının *Hostingstartuplibrary* derleme adını `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` ortam değişkenine ekleyin.
-1. *bin* - *HostingStartupLibrary.dll* dosyasını sınıf kitaplığının derlenmiş çıktısından uygulamanın *bin/Debug* klasörüne kopyalayarak, sınıf kitaplığının derlemesini uygulamaya dağıtın.
-1. Uygulamayı derleyin ve çalıştırın. `<ItemGroup>`Uygulamanın proje dosyasındaki bir, sınıf kitaplığının derlemesine ( *.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll* ) (derleme zamanı başvurusu) başvurur. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
+1. *bin*- *HostingStartupLibrary.dll* dosyasını sınıf kitaplığının derlenmiş çıktısından uygulamanın *bin/Debug* klasörüne kopyalayarak, sınıf kitaplığının derlemesini uygulamaya dağıtın.
+1. Uygulamayı derleyin ve çalıştırın. `<ItemGroup>`Uygulamanın proje dosyasındaki bir, sınıf kitaplığının derlemesine (*.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll*) (derleme zamanı başvurusu) başvurur. Daha fazla bilgi için HostingStartupApp öğesinin proje dosyasındaki notlara bakın.
 
    ```xml
    <ItemGroup>
@@ -830,8 +830,8 @@ dotnet nuget locals all --clear
 1. *Startupdiagnostics* projesi dosyada *StartupDiagnostics.deps.js* değiştirmek için [PowerShell](/powershell/scripting/powershell-scripting) kullanır. PowerShell, Windows 7 SP1 ve Windows Server 2008 R2 SP1 ile başlayarak varsayılan olarak yüklüdür. Diğer platformlarda PowerShell 'i almak için bkz. [PowerShell 'in çeşitli sürümlerini yükleme](/powershell/scripting/install/installing-powershell).
 1. *Runtimesyürüme* klasöründe *build.ps1* betiğini yürütün. Betik şunları yapar:
    * , `StartupDiagnostics` *Obj\packages* klasöründe paketi oluşturur.
-   * İçin çalışma zamanı deposunu `StartupDiagnostics` *Mağaza* klasöründe oluşturur. `dotnet store`Betikteki komut, `win7-x64` Windows 'a dağıtılan bir barındırma başlatması için [çalışma zamanı tanımlayıcısı 'nı (RID)](/dotnet/core/rid-catalog) kullanır. Farklı bir çalışma zamanı için barındırma başlangıcını sağlarken, betiğin 37. satırındaki doğru RID 'yi yerine koyun. Çalışma zamanı deposu `StartupDiagnostics` daha sonra derlemenin tüketilebileceği makinede kullanıcının veya sisteminin çalışma zamanı deposuna taşınır. Derlemenin Kullanıcı çalışma zamanı deposu yüklemesi konumu `StartupDiagnostics` *. DotNet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll* .
-   * , `additionalDeps` `StartupDiagnostics` *Additionaldeps* klasöründe için öğesini oluşturur. Ek bağımlılıklar daha sonra kullanıcının veya sistem ek bağımlılıklarına taşınır. Kullanıcı `StartupDiagnostics` ek bağımlılıkları yüklemesi konumu *. DotNet/x64/additionalDeps/startupdiagnostics/Shared/Microsoft. netcore. App/2.2.0/StartupDiagnostics.deps.json* .
+   * İçin çalışma zamanı deposunu `StartupDiagnostics` *Mağaza* klasöründe oluşturur. `dotnet store`Betikteki komut, `win7-x64` Windows 'a dağıtılan bir barındırma başlatması için [çalışma zamanı tanımlayıcısı 'nı (RID)](/dotnet/core/rid-catalog) kullanır. Farklı bir çalışma zamanı için barındırma başlangıcını sağlarken, betiğin 37. satırındaki doğru RID 'yi yerine koyun. Çalışma zamanı deposu `StartupDiagnostics` daha sonra derlemenin tüketilebileceği makinede kullanıcının veya sisteminin çalışma zamanı deposuna taşınır. Derlemenin Kullanıcı çalışma zamanı deposu yüklemesi konumu `StartupDiagnostics` *. DotNet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll*.
+   * , `additionalDeps` `StartupDiagnostics` *Additionaldeps* klasöründe için öğesini oluşturur. Ek bağımlılıklar daha sonra kullanıcının veya sistem ek bağımlılıklarına taşınır. Kullanıcı `StartupDiagnostics` ek bağımlılıkları yüklemesi konumu *. DotNet/x64/additionalDeps/startupdiagnostics/Shared/Microsoft. netcore. App/2.2.0/StartupDiagnostics.deps.json*.
    * *deploy.ps1* dosyasını *dağıtım* klasörüne koyar.
 1. *Dağıtım* klasöründe *deploy.ps1* betiğini çalıştırın. Betik şunu ekler:
    * `StartupDiagnostics``ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`ortam değişkenine.

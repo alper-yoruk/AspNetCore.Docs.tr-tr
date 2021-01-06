@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 87626ff30589de82a04c95634fc0dcbcf2eeac18
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 6659b075f54292d9546466919f6842b920e6ece1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97507013"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808744"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>BlazorYapılacaklar listesi uygulaması oluşturma
 
@@ -40,7 +40,7 @@ Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğ
 
 Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olacak.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -83,7 +83,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo0.razor?highlight=1)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo0.razor?highlight=1)]
 
    `Pages/Todo.razor` dosyasını kaydedin.
 
@@ -116,11 +116,11 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    `Pages/Todo.razor`:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo2.razor?highlight=5-10,13)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo2.razor?highlight=5-10,13)]
 
 1. Uygulama, listeye Todo öğeleri eklemek için Kullanıcı arabirimi öğeleri gerektirir. Sıralanmamış listenin () altına bir metin girişi ( `<input>` ) ve bir düğme () ekleyin `<button>` `<ul>...</ul>` :
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo3.razor?highlight=12-13)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo3.razor?highlight=12-13)]
 
 1. `TodoItem.cs`Dosyayı ve güncelleştirilmiş `Pages/Todo.razor` dosyayı kaydedin. Komut kabuğunda, dosyalar kaydedildiğinde uygulama otomatik olarak yeniden oluşturulur. Tarayıcı, uygulamanın bağlantısını geçici olarak kaybeder ve bağlantı yeniden oluşturulduğunda sayfayı yeniden yükler.
 
@@ -128,11 +128,11 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
 1. Bileşene bir `AddTodo` Yöntem ekleyin `Todo` ve özniteliği kullanarak düğmenin metodunu kaydedin `@onclick` . `AddTodo`C# yöntemi, düğme seçildiğinde çağrılır:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo4.razor?highlight=2,7-10)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo4.razor?highlight=2,7-10)]
 
 1. Yeni Todo öğesinin başlığını almak için, `newTodo` bloğun üst kısmına bir dize alanı ekleyin `@code` :
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo5.razor?highlight=3)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo5.razor?highlight=3)]
 
    `<input>`Özniteliği ile bağlanacak metin öğesini değiştirin `newTodo` `@bind` :
 
@@ -142,13 +142,13 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
 1. `AddTodo`Belirtilen başlığa sahip öğesini listeye eklemek için yöntemini güncelleştirin `TodoItem` . Metin girişinin değerini `newTodo` boş bir dizeye ayarlayarak temizleyin:
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo6.razor?highlight=19-26)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo6.razor?highlight=19-26)]
 
-1. `Pages/ToDo.razor` dosyasını kaydedin. Uygulama, komut kabuğu 'nda otomatik olarak yeniden oluşturulur. Tarayıcı uygulamaya yeniden bağlandığında sayfa tarayıcıya yeniden yüklenir.
+1. `Pages/Todo.razor` dosyasını kaydedin. Uygulama, komut kabuğu 'nda otomatik olarak yeniden oluşturulur. Tarayıcı uygulamaya yeniden bağlandığında sayfa tarayıcıya yeniden yüklenir.
 
 1. Her Todo öğesi için başlık metni düzenlenebilir hale getirilebilir ve bir onay kutusu kullanıcının tamamlanmış öğeleri izlemesine yardımcı olabilir. Her Todo öğesi için bir onay kutusu girişi ekleyin ve değerini `IsDone` özelliğine bağlayın. `@todo.Title` `<input>` İle bağlantılı bir öğeye geçin `todo.Title` `@bind` :
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo7.razor?highlight=4-7)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/Todo7.razor?highlight=4-7)]
 
 1. `<h3>`Üst bilgiyi, tamamlanmamış olan Todo öğelerinin sayısının (yani) sayısını gösterecek şekilde güncelleştirin `IsDone` `false` .
 
@@ -160,7 +160,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/Todo1.razor)]
 
-1. `Pages/ToDo.razor` dosyasını kaydedin. Uygulama, komut kabuğu 'nda otomatik olarak yeniden oluşturulur. Tarayıcı uygulamaya yeniden bağlandığında sayfa tarayıcıya yeniden yüklenir.
+1. `Pages/Todo.razor` dosyasını kaydedin. Uygulama, komut kabuğu 'nda otomatik olarak yeniden oluşturulur. Tarayıcı uygulamaya yeniden bağlandığında sayfa tarayıcıya yeniden yüklenir.
 
 1. Bileşeni test etmek için öğe ekleyin, öğeleri düzenleyin ve Todo öğelerini işaretleyin.
 

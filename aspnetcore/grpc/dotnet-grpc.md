@@ -19,17 +19,17 @@ no-loc:
 - SignalR
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: f34e1543d9695e138a85db3b79e013cf5fb6d138
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059916"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc ile Protobuf başvurularını yönetme
 
 [John Luo](https://github.com/juntaoluo) tarafından
 
-`dotnet-grpc` , bir .NET gRPC projesindeki [prototip ( *. proto* )](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
+`dotnet-grpc` , bir .NET gRPC projesindeki [prototip (*. proto*)](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
 
 ## <a name="installation"></a>Yükleme
 

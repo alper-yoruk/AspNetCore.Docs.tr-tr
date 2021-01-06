@@ -1,9 +1,9 @@
 ---
 title: ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
-author: anurse
+author: bradygaster
 description: ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR .
 monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
+ms.author: bradyg
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 23ebd61d9931f9cd83afbdcc5a718e42cc565317
+ms.sourcegitcommit: b23fed8c1a1d2aec2f9b5e09041442ecfafedd56
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506636"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97797346"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
 
@@ -106,9 +106,19 @@ Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük d�
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
-Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örnek:
+Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örneğin:
 
-[!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-typescript[](diagnostics/3.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-typescript[](diagnostics/2.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
 
 ## <a name="net-client-logging"></a>.NET istemci günlüğü
 
@@ -236,7 +246,7 @@ SignalR Sunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay ka
 
 ### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
 
-[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örnek:
+[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örneğin:
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections

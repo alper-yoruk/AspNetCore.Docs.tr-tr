@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/web-api-javascript
 ms.openlocfilehash: c32c5befe0be3b1ad4bd87649d3cc74b0296a134
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94703715"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma
@@ -39,7 +39,7 @@ ASP.NET Core 2,2 için, [JavaScript ile Web API 'Sini çağırma](xref:tutorials
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Tüm [öğreticiyi: Web API 'Si oluşturma](xref:tutorials/first-web-api)
 * CSS, HTML ve JavaScript ile benzerlik

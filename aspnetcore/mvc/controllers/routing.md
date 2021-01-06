@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 59ad373cefaa12370aa7c02a367125c7a94f59a6
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422606"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854541"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -172,7 +172,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 
 ### <a name="multiple-conventional-routes"></a>Birden çok geleneksel yollar
 
-[conventional routes](#cr) `UseEndpoints` Ve ' ye daha fazla çağrı eklenerek, içine birden çok geleneksel yol eklenebilir <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> . Bunun yapılması, birden çok kural tanımlamayı veya belirli bir [eyleme](#action)adanmış geleneksel yollar eklemeyi sağlar; örneğin:
+[](#cr) `UseEndpoints` Ve ' ye daha fazla çağrı eklenerek, içine birden çok geleneksel yol eklenebilir <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> . Bunun yapılması, birden çok kural tanımlamayı veya belirli bir [eyleme](#action)adanmış geleneksel yollar eklemeyi sağlar; örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
@@ -207,7 +207,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 ### <a name="conventional-routing-order"></a>Geleneksel yönlendirme sırası
 
 Geleneksel yönlendirme yalnızca uygulama tarafından tanımlanan eylem ve denetleyicinin bir bileşimiyle eşleşir. Bu, geleneksel yolların çakıştığı durumları basitleştirmek için tasarlanmıştır.
-,, Ve kullanarak yollar ekleme, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Catch-all yol parametrelerine sahip [adanmış geleneksel yollar](#dcr) `{*article}` , bir yol çok uzun sürebilir [greedy](xref:fundamentals/routing#greedy), yani diğer yollarla eşleştirmek istediğiniz URL 'lerle eşleşir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
+,, Ve kullanarak yollar ekleme, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Catch-all yol parametrelerine sahip [adanmış geleneksel yollar](#dcr) `{*article}` , bir yol çok uzun sürebilir [](xref:fundamentals/routing#greedy), yani diğer yollarla eşleştirmek istediğiniz URL 'lerle eşleşir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
 
 [!INCLUDE[](~/includes/catchall.md)]
 
@@ -260,7 +260,7 @@ Yol adları:
 * İsteklerin URL 'siyle eşleşmesi veya işlenmesi üzerinde hiçbir etkisi yoktur.
 * Yalnızca URL oluşturmak için kullanılır.
 
-Yol adı kavramı [ıendpointnamemetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata)olarak yönlendirme ile temsil edilir. Terimler **yol adı** ve **uç nokta adı** :
+Yol adı kavramı [ıendpointnamemetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata)olarak yönlendirme ile temsil edilir. Terimler **yol adı** ve **uç nokta adı**:
 
 * Değiştirilebilir.
 * Belgede kullanılan ve kod, açıklanan API 'ye bağlıdır.
@@ -432,10 +432,10 @@ Aşağıdaki tabloda `[Route]` önceki koddaki öznitelikler açıklanmaktadır:
 
 | Öznitelik               | İle birleştirir `[Route("Home")]` | Rota şablonunu tanımlar |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | Evet | `"Home"` |
-| `[Route("Index")]` | Evet | `"Home/Index"` |
+| `[Route("")]` | Yes | `"Home"` |
+| `[Route("Index")]` | Yes | `"Home/Index"` |
 | `[Route("/")]` | **Hayır** | `""` |
-| `[Route("About")]` | Evet | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -451,7 +451,7 @@ Yönlendirme bir ağaç oluşturur ve aynı anda tüm uç noktaları eşleştiri
 
 Öznitelik yolları özelliği kullanarak bir sıra yapılandırabilir <xref:Microsoft.AspNetCore.Mvc.RouteAttribute.Order> . Tüm Framework 'ün [yol öznitelikleri](xref:Microsoft.AspNetCore.Mvc.RouteAttribute) dahil edilmiştir `Order` . Yollar, özelliğin artan sıralamasına göre işlenir `Order` . Varsayılan sıra `0` . Bir `Order = -1` siparişi ayarlamadığı rotalardan önce çalıştırmaları kullanarak bir rota ayarlama. `Order = 1`Varsayılan yol sıralaması sonrasında çalıştırmaları kullanarak bir rota ayarlama.
 
-**Avoid** Uygulamasına bağlı kaçının `Order` . Bir uygulamanın URL 'SI alanı, doğru şekilde yönlendirmek için açık sıra değerleri gerektiriyorsa, bu durumda istemciler de kafa karıştırıcı olabilir. Genel olarak, öznitelik yönlendirme URL ile eşleşen doğru yolu seçer. URL oluşturma için kullanılan varsayılan sıra çalışmıyorsa, geçersiz kılma olarak bir yol adı kullanılması, özelliği uygulamadan daha basittir `Order` .
+ Uygulamasına bağlı kaçının `Order` . Bir uygulamanın URL 'SI alanı, doğru şekilde yönlendirmek için açık sıra değerleri gerektiriyorsa, bu durumda istemciler de kafa karıştırıcı olabilir. Genel olarak, öznitelik yönlendirme URL ile eşleşen doğru yolu seçer. URL oluşturma için kullanılan varsayılan sıra çalışmıyorsa, geçersiz kılma olarak bir yol adı kullanılması, özelliği uygulamadan daha basittir `Order` .
 
 Her ikisi de eşleşen yolu tanımlayan aşağıdaki iki denetleyicisi göz önünde bulundurun `/home` :
 
@@ -472,7 +472,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo3Controller.cs?name=snippet3& highlight=2)]
 
-Yukarıdaki kodla `/home` `HomeController.Index` bitiş noktasını çalıştırır. Öğesine ulaşmak için `MyDemoController.MyIndex` `/home/MyIndex` . **Note** :
+Yukarıdaki kodla `/home` `HomeController.Index` bitiş noktasını çalıştırır. Öğesine ulaşmak için `MyDemoController.MyIndex` `/home/MyIndex` . **Note**:
 
 * Yukarıdaki kod bir örnek veya kötü yönlendirme tasarımdır. Özelliği göstermek için kullanılmıştı `Order` .
 * `Order`Özelliği yalnızca belirsizlik çözümleniyor, bu şablon eşleştirilemez. Şablonu kaldırmak daha iyi olacaktır `[Route("Home")]` .
@@ -485,12 +485,7 @@ Bazı durumlarda, belirsiz yollarla bir HTTP 500 hatası döndürülür. Hangi u
 
 ## <a name="token-replacement-in-route-templates-controller-action-area"></a>Yönlendirme şablonlarında belirteç değiştirme [denetleyici], [eylem], [alan]
 
-Daha kolay olması için, öznitelik rotaları, aşağıdakilerden birine bir belirteç ekleyerek ayrılmış yol parametrelerine yönelik belirteç değişimini destekler:
-
-* Köşeli ayraçlar: `[]`
-* Küme ayraçları: `{}`
-
-, Ve belirteçleri, `[action]` `[area]` `[controller]` yolun tanımlandığı eylemden eylem adı, alan adı ve denetleyici adı değerleriyle değiştirilmiştir:
+Daha kolay olması için, öznitelik rotaları bir belirteci köşeli ayraç (,) içine alarak *belirteç değiştirmeyi* destekler `[` `]` . , Ve belirteçleri, `[action]` `[area]` `[controller]` yolun tanımlandığı eylemden eylem adı, alan adı ve denetleyici adı değerleriyle değiştirilmiştir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet)]
 
@@ -717,7 +712,7 @@ Değer `{ d = Donovan }` eklenirse:
 * Değer `{ d = David }` yok sayılır.
 * Oluşturulan URL yolu `Alice/Bob/Carol/Donovan` .
 
-**Uyarı** : URL yolları hiyerarşiktir. Yukarıdaki örnekte, değer `{ c = Cheryl }` eklenirse:
+**Uyarı**: URL yolları hiyerarşiktir. Yukarıdaki örnekte, değer `{ c = Cheryl }` eklenirse:
 
 * Her iki değer de `{ c = Carol, d = David }` yok sayılır.
 * Artık bir değer yoktur `d` ve URL oluşturma başarısız olur.
@@ -823,7 +818,7 @@ Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rota
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
-[[Area]](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği, bir alanın parçası olarak denetleyiciyi belirtir. Bu denetleyici `Blog` alanında bulunur. Özniteliği olmayan denetleyiciler `[Area]` hiçbir alanın üyesi değildir ve **not** `area` Rota değeri yönlendirme tarafından sağlandığında eşleşmez. Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle eşleştirebilir `{ area = Blog, controller = Users, action = AddUser }` .
+[[Area]](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği, bir alanın parçası olarak denetleyiciyi belirtir. Bu denetleyici `Blog` alanında bulunur. Özniteliği olmayan denetleyiciler `[Area]` hiçbir alanın üyesi değildir ve  `area` Rota değeri yönlendirme tarafından sağlandığında eşleşmez. Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle eşleştirebilir `{ area = Blog, controller = Users, action = AddUser }` .
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
@@ -1548,7 +1543,7 @@ Yukarıdaki örneği kullanarak, yol değerleri aşağıdaki eylemle eşleşir:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
-, Bir `AreaAttribute` alanın parçası olarak denetleyiciyi belirtir, bu denetleyicinin alanında olduğunu varsayalım `Blog` . Özniteliği olmayan denetleyiciler `[Area]` hiçbir alanın üyesi değildir **not** ve `area` Rota değeri yönlendirme tarafından sağlandığında eşleşmeyecektir. Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle eşleştirebilir `{ area = Blog, controller = Users, action = AddUser }` .
+, Bir `AreaAttribute` alanın parçası olarak denetleyiciyi belirtir, bu denetleyicinin alanında olduğunu varsayalım `Blog` . Özniteliği olmayan denetleyiciler `[Area]` hiçbir alanın üyesi değildir  ve `area` Rota değeri yönlendirme tarafından sağlandığında eşleşmeyecektir. Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle eşleştirebilir `{ area = Blog, controller = Users, action = AddUser }` .
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 

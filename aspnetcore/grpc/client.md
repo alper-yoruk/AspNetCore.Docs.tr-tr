@@ -4,7 +4,7 @@ author: jamesnk
 description: .NET gRPC istemcisiyle gRPC hizmetlerini çağırmayı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/27/2020
+ms.date: 12/18/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 39f9b3fde19e31ca970668552e5829308705f513
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060969"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97699136"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
 
@@ -201,11 +201,33 @@ En iyi performans için ve istemci ve hizmette gereksiz hatalardan kaçınmak i�
 
 Çift yönlü bir akış araması sırasında, istemci ve hizmet herhangi bir zamanda iletileri birbirlerine gönderebilir. Çift yönlü bir çağrı ile etkileşimde bulunmak için en iyi istemci mantığı, hizmet mantığına bağlı olarak farklılık gösterir.
 
+## <a name="access-grpc-headers"></a>GRPC üst bilgilerine erişin
+
+gRPC çağrıları yanıt üst bilgilerini döndürür. HTTP yanıt üstbilgileri döndürülen iletiyle ilgili olmayan bir çağrı hakkında ad/değer meta verilerini iletir.
+
+Üst bilgileri kullanılarak erişilebilir `ResponseHeadersAsync` ve bu, meta veri koleksiyonu döndürür. Üstbilgiler genellikle yanıt iletisiyle birlikte döndürülür; Bu nedenle, onları beklemelidir.
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+
+var headers = await call.ResponseHeadersAsync;
+var myValue = headers.GetValue("my-trailer-name");
+
+var response = await call.ResponseAsync;
+```
+
+`ResponseHeadersAsync` kullanımıyla
+
+* , `ResponseHeadersAsync` Üst bilgi toplamayı almak için sonucunu beklemelidir.
+* Öğesinden önce erişilmesi gerekmez `ResponseAsync` (veya akış sırasında yanıt akışı). Yanıt döndürülürse, `ResponseHeadersAsync` üstbilgileri anında geri döndürür.
+* , Bir bağlantı veya sunucu hatası varsa ve gRPC çağrısı için üst bilgiler döndürülmediğinde bir özel durum oluşturur.
+
 ## <a name="access-grpc-trailers"></a>GRPC tanıtımlarına erişim
 
-gRPC çağrıları gRPC fragme döndürebilir. gRPC fragmanları, bir çağrı hakkında ad/değer meta verileri sağlamak için kullanılır. Treylik, HTTP üst bilgilerine benzer işlevler sağlar, ancak çağrının sonunda alınır.
+gRPC çağrıları, yanıt fragmanları döndürebilir. Treyi, bir çağrı hakkında ad/değer meta verileri sağlamak için kullanılır. Treylik, HTTP üst bilgilerine benzer işlevler sağlar, ancak çağrının sonunda alınır.
 
-gRPC tanıtımlarına kullanılarak erişilebilir `GetTrailers()` ve bu, meta veri koleksiyonu döndürür. Yanıt tamamlandıktan sonra tanıtımları döndürülür, bu nedenle, tanıtıma erişmeden önce tüm yanıt iletilerini beklemelidir.
+Treyler `GetTrailers()` , meta veri koleksiyonu döndüren kullanılarak erişilebilir. Yanıt tamamlandıktan sonra Treyi döndürülür. Bu nedenle, treyleri erişmeden önce tüm yanıt iletilerini beklemelidir.
 
 Tek birli ve istemci akış çağrıları `ResponseAsync` çağrılmadan önce await olmalıdır `GetTrailers()` :
 
@@ -237,7 +259,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.GetValue("my-trailer-name");
 ```
 
-gRPC tanıtımlarına da adresinden erişilebilir `RpcException` . Bir hizmet, tamam olmayan bir gRPC durumuyla birlikte Treyi döndürebilir. Bu durumda, daha sonra gRPC istemcisi tarafından oluşturulan özel durumdan tanıtımları alınır:
+Tanıtımlardan de adresinden erişilebilir `RpcException` . Bir hizmet, tamam olmayan bir gRPC durumuyla birlikte Treyi döndürebilir. Bu durumda, tanıtımları gRPC istemcisi tarafından oluşturulan özel durumdan alınmıştır:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);

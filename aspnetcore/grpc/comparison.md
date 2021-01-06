@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059955"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
@@ -37,12 +37,12 @@ Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde
 
 | Özellik          | gRPC                                               | JSON ile HTTP API 'Leri           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
-| Anlaşma         | Gerekli ( *. proto* )                                | İsteğe bağlı (Openapı)            |
+| Anlaşma         | Gerekli (*. proto*)                                | İsteğe bağlı (Openapı)            |
 | Protokol         | HTTP/2                                             | HTTP                          |
 | Te          | [Prototip (küçük, ikili)](#performance)           | JSON (büyük, insan tarafından okunabilir)  |
 | Dikkatli olun | [Katı belirtim](#strict-specification)      | Miş. Herhangi bir HTTP geçerlidir.     |
 | Akış        | [İstemci, sunucu, iki yönlü](#streaming)       | İstemci, sunucu                |
-| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Evet                           |
+| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Yes                           |
 | Güvenlik         | Taşıma (TLS)                                    | Taşıma (TLS)               |
 | İstemci kod oluşturma | [Evet](#code-generation)                      | Openapı + üçüncü taraf araçları |
 
@@ -92,11 +92,11 @@ Son tarihi ve iptali alt gRPC çağrıları aracılığıyla yayın, kaynak kull
 
 gRPC aşağıdaki senaryolara uygundur:
 
-* **Mikro hizmetler** : GRPC, düşük gecikme süresi ve yüksek işleme iletişimi için tasarlanmıştır. gRPC, verimlilik açısından kritik olan hafif mikro hizmetler için harika.
-* **Noktadan noktaya gerçek zamanlı iletişim** : GRPC, iki yönlü akış için harika desteğe sahiptir. gRPC Hizmetleri, yoklama yapmadan iletileri gerçek zamanlı olarak gönderebilir.
-* **Çok yönlü ortamları** : GRPC araçları, tüm popüler geliştirme dillerini destekler ve bu da GRPC 'yi çok dilli ortamlar için iyi bir seçenek yapar.
-* **Ağ kısıtlamalı ortamlar** : GRPC iletileri, hafif bir ileti biçimi olan protoarabellek ile serileştirilir. GRPC iletisi her zaman denk bir JSON iletisinden daha küçüktür.
-* İşlemler **arası iletişim (IPC)** : UNIX etki alanı yuvaları ve adlandırılmış kanallar gibi IPC aktarımları, aynı makinede bulunan uygulamalar arasında iletişim kurmak Için GRPC ile birlikte kullanılabilir. Daha fazla bilgi için bkz. <xref:grpc/interprocess>.
+* **Mikro hizmetler**: GRPC, düşük gecikme süresi ve yüksek işleme iletişimi için tasarlanmıştır. gRPC, verimlilik açısından kritik olan hafif mikro hizmetler için harika.
+* **Noktadan noktaya gerçek zamanlı iletişim**: GRPC, iki yönlü akış için harika desteğe sahiptir. gRPC Hizmetleri, yoklama yapmadan iletileri gerçek zamanlı olarak gönderebilir.
+* **Çok yönlü ortamları**: GRPC araçları, tüm popüler geliştirme dillerini destekler ve bu da GRPC 'yi çok dilli ortamlar için iyi bir seçenek yapar.
+* **Ağ kısıtlamalı ortamlar**: GRPC iletileri, hafif bir ileti biçimi olan protoarabellek ile serileştirilir. GRPC iletisi her zaman denk bir JSON iletisinden daha küçüktür.
+* İşlemler **arası iletişim (IPC)**: UNIX etki alanı yuvaları ve adlandırılmış kanallar gibi IPC aktarımları, aynı makinede bulunan uygulamalar arasında iletişim kurmak Için GRPC ile birlikte kullanılabilir. Daha fazla bilgi için bkz. <xref:grpc/interprocess>.
 
 ## <a name="grpc-weaknesses"></a>gRPC zayıflığı
 
@@ -126,8 +126,8 @@ gRPC iletileri varsayılan olarak Protodeğer ile kodlanır. Protoarabellek gön
 
 Aşağıdaki senaryolarda gRPC üzerinden diğer çerçeveler önerilir:
 
-* **Tarayıcıda erişilebilen API 'ler** : GRPC tarayıcıda tam olarak desteklenmez. gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.
-* **Gerçek zamanlı Iletişim yayınlama** : GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir. Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir. [SignalR](xref:signalr/introduction) Bu senaryo için kullanışlı bir çerçevedir. SignalR , sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.
+* **Tarayıcıda erişilebilen API 'ler**: GRPC tarayıcıda tam olarak desteklenmez. gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.
+* **Gerçek zamanlı Iletişim yayınlama**: GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir. Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir. [SignalR](xref:signalr/introduction) Bu senaryo için kullanışlı bir çerçevedir. SignalR , sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

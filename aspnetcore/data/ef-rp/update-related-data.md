@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060540"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
@@ -108,7 +108,7 @@ Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 * Bölüm açılan başlığını **DepartmentID** ' dan **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet** ' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Kurs ayrıntılarını güncelleştirme ve sayfaları silme
 
@@ -323,7 +323,7 @@ Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 * **DepartmentID** etiketini **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet** ' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 Güncelleştirilmiş kodu test edin. Kurs oluşturun, düzenleyin ve silin.
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/configuration/options
 ms.openlocfilehash: dedc17d7d793a6fd2eac1c8017b704d98a86f1cb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061099"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core'da seçenek deseni
@@ -55,7 +55,7 @@ Bu konu, ASP.NET Core seçenekler düzeniyle ilgili bilgiler sağlar. Konsol uyg
 
 <xref:Microsoft.Extensions.Options.IOptions%601>:
 
-* * **Not** _ support: _ uygulama başladıktan sonra yapılandırma verilerinin okunması.
+* ***Not** _ support: _ uygulama başladıktan sonra yapılandırma verilerinin okunması.
   * [Adlandırılmış seçenekler](#named)
 * [Tek](xref:fundamentals/dependency-injection#singleton) bir olarak kaydedilir ve herhangi bir [hizmet ömrüne](xref:fundamentals/dependency-injection#service-lifetimes)eklenebilir.
 
@@ -293,7 +293,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 
@@ -320,7 +320,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 Genel Seçenekler yapılandırması örnek uygulamada 1 olarak gösterilmiştir.
 
-Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdır. Aşağıdaki sınıfının, `MyOptions` , ve iki özelliği vardır `Option1` `Option2` . Varsayılan değerleri ayarlama isteğe bağlıdır, ancak aşağıdaki örnekteki sınıf Oluşturucusu varsayılan değerini ayarlar `Option1` . `Option2` , özelliği doğrudan başlatarak ayarlanmış varsayılan bir değere sahiptir ( *modeller/MyOptions. cs* ):
+Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdır. Aşağıdaki sınıfının, `MyOptions` , ve iki özelliği vardır `Option1` `Option2` . Varsayılan değerleri ayarlama isteğe bağlıdır, ancak aşağıdaki örnekteki sınıf Oluşturucusu varsayılan değerini ayarlar `Option1` . `Option2` , özelliği doğrudan başlatarak ayarlanmış varsayılan bir değere sahiptir (*modeller/MyOptions. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptions.cs?name=snippet1)]
 
@@ -328,7 +328,7 @@ Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdı
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılığı ekleme](xref:mvc/controllers/dependency-injection) işlemini kullanır <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ( *Pages/Index. cshtml. cs* ):
+Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılığı ekleme](xref:mvc/controllers/dependency-injection) işlemini kullanır <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> (*Pages/Index. cshtml. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -364,7 +364,7 @@ option1 = value1_from_json, option2 = -1
 
 Basit seçenekleri bir temsilciyle yapılandırmak örnek uygulamada 2 örnek olarak gösterilmiştir.
 
-Seçenek değerlerini ayarlamak için bir temsilci kullanın. Örnek uygulama, `MyOptionsWithDelegateConfig` sınıfını ( *modeller/MyOptionsWithDelegateConfig. cs* ) kullanır:
+Seçenek değerlerini ayarlamak için bir temsilci kullanın. Örnek uygulama, `MyOptionsWithDelegateConfig` sınıfını (*modeller/MyOptionsWithDelegateConfig. cs*) kullanır:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptionsWithDelegateConfig.cs?name=snippet1)]
 
@@ -372,7 +372,7 @@ Aşağıdaki kodda, hizmet kapsayıcısına ikinci bir <xref:Microsoft.Extension
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example2)]
 
-*Index.cshtml.cs* :
+*Index.cshtml.cs*:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=10)]
 
@@ -408,11 +408,11 @@ Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Exten
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
-`MySubOptions`Sınıfı özellikleri tanımlar `SubOption1` ve `SubOption2` Seçenekler değerlerini tutmak için ( *modeller/myalt seçenekler. cs* ):
+`MySubOptions`Sınıfı özellikleri tanımlar `SubOption1` ve `SubOption2` Seçenekler değerlerini tutmak için (*modeller/myalt seçenekler. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MySubOptions.cs?name=snippet1)]
 
-Sayfa modelinin `OnGet` metodu, Seçenekler değerleriyle ( *Pages/Index. cshtml. cs* ) bir dize döndürür:
+Sayfa modelinin `OnGet` metodu, Seçenekler değerleriyle (*Pages/Index. cshtml. cs*) bir dize döndürür:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=11)]
 
@@ -435,7 +435,7 @@ Ekle <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> :
 * RazorYönergeyle bir sayfa veya MVC görünümü [`@inject`](xref:mvc/views/razor#inject) Razor .
 * Bir sayfa veya görünüm modeli.
 
-Örnek uygulamadan alınan aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> bir sayfa modeline ( *Sayfalar/Index. cshtml. cs* ) sahiptir:
+Örnek uygulamadan alınan aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> bir sayfa modeline (*Sayfalar/Index. cshtml. cs*) sahiptir:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -462,7 +462,7 @@ Ve arasındaki fark `IOptionsMonitor` `IOptionsSnapshot` şudur:
 * `IOptionsMonitor` , özellikle tek bağımlılıklarda yararlı olan herhangi bir zamanda geçerli seçenek değerlerini alan bir [tek hizmettir](xref:fundamentals/dependency-injection#singleton) .
 * `IOptionsSnapshot` kapsamlı bir [hizmettir](xref:fundamentals/dependency-injection#scoped) ve nesnenin oluşturulduğu sırada seçeneklerin anlık görüntüsünü sağlar `IOptionsSnapshot<T>` . Seçenekler anlık görüntüleri geçici ve kapsamlı bağımlılıklarla kullanılmak üzere tasarlanmıştır.
 
-Aşağıdaki örnek, değişikliklerden sonra yeni bir <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> oluşturma işlemi gösterir *appsettings.json* ( *Pages/Index. cshtml. cs* ). *appsettings.json* Dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar sunucuya yönelik birden çok istek dosya tarafından belirtilen sabit değerler döndürüyor.
+Aşağıdaki örnek, değişikliklerden sonra yeni bir <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> oluşturma işlemi gösterir *appsettings.json* (*Pages/Index. cshtml. cs*). *appsettings.json* Dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar sunucuya yönelik birden çok istek dosya tarafından belirtilen sabit değerler döndürüyor.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -490,7 +490,7 @@ Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek 
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
-Örnek uygulama, adlandırılan seçeneklere <xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> ( *Pages/Index. cshtml. cs* ) erişir:
+Örnek uygulama, adlandırılan seçeneklere <xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> (*Pages/Index. cshtml. cs*) erişir:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=13-14)]
 
@@ -715,7 +715,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 
@@ -742,7 +742,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 Genel Seçenekler yapılandırması örnek uygulamada 1 olarak gösterilmiştir.
 
-Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdır. Aşağıdaki sınıfının, `MyOptions` , ve iki özelliği vardır `Option1` `Option2` . Varsayılan değerleri ayarlama isteğe bağlıdır, ancak aşağıdaki örnekteki sınıf Oluşturucusu varsayılan değerini ayarlar `Option1` . `Option2` , özelliği doğrudan başlatarak ayarlanmış varsayılan bir değere sahiptir ( *modeller/MyOptions. cs* ):
+Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdır. Aşağıdaki sınıfının, `MyOptions` , ve iki özelliği vardır `Option1` `Option2` . Varsayılan değerleri ayarlama isteğe bağlıdır, ancak aşağıdaki örnekteki sınıf Oluşturucusu varsayılan değerini ayarlar `Option1` . `Option2` , özelliği doğrudan başlatarak ayarlanmış varsayılan bir değere sahiptir (*modeller/MyOptions. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptions.cs?name=snippet1)]
 
@@ -750,7 +750,7 @@ Bir seçenek sınıfı ortak parametresiz bir Oluşturucu ile soyut olmamalıdı
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılığı ekleme](xref:mvc/controllers/dependency-injection) işlemini kullanır <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ( *Pages/Index. cshtml. cs* ):
+Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılığı ekleme](xref:mvc/controllers/dependency-injection) işlemini kullanır <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> (*Pages/Index. cshtml. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -786,7 +786,7 @@ option1 = value1_from_json, option2 = -1
 
 Basit seçenekleri bir temsilciyle yapılandırmak örnek uygulamada 2 örnek olarak gösterilmiştir.
 
-Seçenek değerlerini ayarlamak için bir temsilci kullanın. Örnek uygulama, `MyOptionsWithDelegateConfig` sınıfını ( *modeller/MyOptionsWithDelegateConfig. cs* ) kullanır:
+Seçenek değerlerini ayarlamak için bir temsilci kullanın. Örnek uygulama, `MyOptionsWithDelegateConfig` sınıfını (*modeller/MyOptionsWithDelegateConfig. cs*) kullanır:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MyOptionsWithDelegateConfig.cs?name=snippet1)]
 
@@ -794,7 +794,7 @@ Aşağıdaki kodda, hizmet kapsayıcısına ikinci bir <xref:Microsoft.Extension
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example2)]
 
-*Index.cshtml.cs* :
+*Index.cshtml.cs*:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=10)]
 
@@ -830,11 +830,11 @@ Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Exten
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
-`MySubOptions`Sınıfı özellikleri tanımlar `SubOption1` ve `SubOption2` Seçenekler değerlerini tutmak için ( *modeller/myalt seçenekler. cs* ):
+`MySubOptions`Sınıfı özellikleri tanımlar `SubOption1` ve `SubOption2` Seçenekler değerlerini tutmak için (*modeller/myalt seçenekler. cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Models/MySubOptions.cs?name=snippet1)]
 
-Sayfa modelinin `OnGet` metodu, Seçenekler değerleriyle ( *Pages/Index. cshtml. cs* ) bir dize döndürür:
+Sayfa modelinin `OnGet` metodu, Seçenekler değerleriyle (*Pages/Index. cshtml. cs*) bir dize döndürür:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=11)]
 
@@ -852,7 +852,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 Bir görünüm modeli veya doğrudan görünüm ekleme ile sunulan seçenekler örnek uygulamada 4 olarak gösterilmiştir.
 
-Seçenekler bir görünüm modelinde veya ekleme <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> doğrudan bir görünüme ( *Sayfalar/Index. cshtml. cs* ) sağlanabilir:
+Seçenekler bir görünüm modelinde veya ekleme <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> doğrudan bir görünüme (*Sayfalar/Index. cshtml. cs*) sağlanabilir:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -876,7 +876,7 @@ Yapılandırma verilerini ile <xref:Microsoft.Extensions.Options.IOptionsSnapsho
 
 Seçenekler erişildiğinde ve isteğin ömrü boyunca önbelleğe alındığında her istek için bir kez hesaplanır.
 
-Aşağıdaki örnek, değişikliklerden sonra yeni bir <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> oluşturma işlemi gösterir *appsettings.json* ( *Pages/Index. cshtml. cs* ). *appsettings.json* Dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar sunucuya yönelik birden çok istek dosya tarafından belirtilen sabit değerler döndürüyor.
+Aşağıdaki örnek, değişikliklerden sonra yeni bir <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> oluşturma işlemi gösterir *appsettings.json* (*Pages/Index. cshtml. cs*). *appsettings.json* Dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar sunucuya yönelik birden çok istek dosya tarafından belirtilen sabit değerler döndürüyor.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -904,7 +904,7 @@ Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek 
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
-Örnek uygulama, adlandırılan seçeneklere <xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> ( *Pages/Index. cshtml. cs* ) erişir:
+Örnek uygulama, adlandırılan seçeneklere <xref:Microsoft.Extensions.Options.IOptionsSnapshot`1.Get*> (*Pages/Index. cshtml. cs*) erişir:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=13-14)]
 

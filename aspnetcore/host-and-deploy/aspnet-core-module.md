@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/aspnet-core-module
 ms.openlocfilehash: d0e6c0c31890c58aaca936fc6f1e92cb9a1ab456
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901242"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core Modülü
@@ -75,7 +75,7 @@ Uygulamalar, işlem içi barındırma modelinde varsayılan olarak ASP.NET Core.
 
 İşlem içi barındırma sırasında aşağıdaki özellikler geçerlidir:
 
-* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [Kestrel](xref:fundamentals/servers/kestrel) . İşlem içi için [Createdefaultbuilder](xref:fundamentals/host/generic-host#default-builder-settings) aşağıdakileri öğesine çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> :
+* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [](xref:fundamentals/servers/kestrel) . İşlem içi için [Createdefaultbuilder](xref:fundamentals/host/generic-host#default-builder-settings) aşağıdakileri öğesine çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> :
 
   * Kaydolun `IISHttpServer` .
   * ASP.NET Core modülünün arkasında çalışırken sunucunun dinlemesi gereken bağlantı noktasını ve temel yolu yapılandırın.
@@ -491,7 +491,7 @@ Değeri `<AspNetCoreHostingModel>` büyük/küçük harfe duyarlıdır `inproces
 
 İşlem içi barındırma sırasında aşağıdaki özellikler geçerlidir:
 
-* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [Kestrel](xref:fundamentals/servers/kestrel) . İşlem içi için [Createdefaultbuilder](xref:fundamentals/host/web-host#set-up-a-host) aşağıdakileri öğesine çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> :
+* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [](xref:fundamentals/servers/kestrel) . İşlem içi için [Createdefaultbuilder](xref:fundamentals/host/web-host#set-up-a-host) aşağıdakileri öğesine çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> :
 
   * Kaydolun `IISHttpServer` .
   * ASP.NET Core modülünün arkasında çalışırken sunucunun dinlemesi gereken bağlantı noktasını ve temel yolu yapılandırın.
@@ -632,7 +632,7 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 | `rapidFailsPerMinute` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>İçinde belirtilen işlemin `processPath` dakika başına kilitlenme için izin verileceğini belirtir. Bu sınır aşılırsa modül, dakika geri kalanı için işlemi başlatmayı durduruyor.</p><p>İşlem içi barındırma ile desteklenmez.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `100` |
 | `requestTimeout` | <p>İsteğe bağlı TimeSpan özniteliği.</p><p>ASP.NET Core modülünün% ASPNETCORE_PORT% üzerinde dinleme işleminden yanıt beklediği süreyi belirtir.</p><p>ASP.NET Core 2,1 veya üzeri sürümü ile birlikte gelen ASP.NET Core modülünün sürümlerinde, `requestTimeout` saat, dakika ve saniye cinsinden belirtilir.</p><p>İşlem içi barındırma için uygulanmaz. İşlem içi barındırma için modül, uygulamanın isteği işlemesini bekler.</p><p>Dizenin dakika ve saniye kesimleri için geçerli değerler 0-59 aralığındadır. Dakika veya saniye değerindeki **60** kullanımı, *500-iç sunucu hatasına* neden olur.</p> | Varsayılanını `00:02:00`<br>Min `00:00:00`<br>Biçimlendir `360:00:00` |
 | `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Dosya algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre `app_offline.htm` .</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
-| `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider.</p><p>*İşlem içi* barındırma sırasında: **işlem yeniden başlatılmaz** ve ayarı kullanılmaz **not** `rapidFailsPerMinute` .</p><p>*İşlem dışı* barındırma sırasında, modül yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın `rapidFailsPerMinute` son geçen dakikada bir kez başlamamaya devam etmediği sürece sonraki gelen isteklerde işlemi yeniden başlatmaya çalışır.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
+| `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider.</p><p>*İşlem içi* barındırma sırasında: **işlem yeniden başlatılmaz** ve ayarı kullanılmaz  `rapidFailsPerMinute` .</p><p>*İşlem dışı* barındırma sırasında, modül yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın `rapidFailsPerMinute` son geçen dakikada bir kez başlamamaya devam etmediği sürece sonraki gelen isteklerde işlemi yeniden başlatmaya çalışır.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
 | `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, içinde belirtilen işlem için **stdout** ve **stderr** , `processPath` **stdoutLogFile** içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
 | `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>`stdout` `stderr` İçinde belirtilen işlemden ve bu işlemin günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir `processPath` . Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Yolda sunulan klasörler, günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Alt çizgi sınırlayıcılarını kullanma, zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( `.log` ) yolun son kesimine eklenir `stdoutLogFile` . `.\logs\stdout`Değer olarak sağlandıysa, `stdout_20180205194132_1934.log` `logs` 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de kaydedildiğinde, bir örnek stdout günlüğü klasöre kaydedilir.</p> | `aspnetcore-stdout` |
 
@@ -940,7 +940,7 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 | `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>*app_offline.htm* dosyası algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
 | `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider. Modül, yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın son geçen dakikada **rapidFailsPerMinute** kez başlayamadığı sürece sonraki gelen isteklerde işlemi yeniden başlatmayı dener.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
 | `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, **processPath** içinde belirtilen işlem için **stdout** ve **stderr** , **stdoutLogFile** içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
-| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Modülün günlük dosyasını oluşturması için yolda sunulan klasörlerin bulunması gerekir. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı (*. log*) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük *logs* dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
+| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Modülün günlük dosyasını oluşturması için yolda sunulan klasörlerin bulunması gerekir. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı (*. log*) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük  dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ortam değişkenlerini ayarlama
 
@@ -986,7 +986,7 @@ Stdout günlüğünün kullanılması yalnızca IIS 'de barındırırken veya [V
 
 Genel uygulama günlüğü amaçları için stdout günlüğünü kullanmayın. ASP.NET Core uygulamasında rutin günlük kaydı için, günlük dosyası boyutunu sınırlayan ve günlükleri döndüren bir günlüğe kaydetme kitaplığı kullanın. Daha fazla bilgi için bkz. [üçüncü taraf günlüğü sağlayıcıları](xref:fundamentals/logging/index#third-party-logging-providers).
 
-Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt *.log* `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout*) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout* ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934* dosya adı vardır.
+Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout*) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout* ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934* dosya adı vardır.
 
 Aşağıdaki örnek `aspNetCore` öğesi, göreli yoldaki stdout günlüğünü yapılandırır `.\log\` . AppPool Kullanıcı kimliğinin, belirtilen yola yazma izni olduğunu doğrulayın.
 

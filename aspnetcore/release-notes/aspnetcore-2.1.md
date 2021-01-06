@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 199ca62f71df5c0ee5ca2f78caf53ad8d6be1179
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059721"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854567"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2,1 ' deki yenilikler
 
@@ -93,7 +93,7 @@ ASP.NET Core, bazı [ab genel veri koruma yönetmeliği (GDPR)](https://www.eugd
 
 Test oluşturma ve yürütmeyi kolaylaştıran yeni bir paket tanıtılmıştır. [Microsoft. AspNetCore. Mvc. Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) paketi aşağıdaki görevleri gerçekleştirir:
 
-* Bağımlılık dosyasını ( *\* . Deps* ) test projesinin *bin* klasörüne kopyalar.
+* Bağımlılık dosyasını (*\* . Deps*) test projesinin *bin* klasörüne kopyalar.
 * Testler yürütüldüğünde statik dosya ve sayfa/görünümlerin bulunması için, içerik kökünü test edilen uygulamanın proje köküne ayarlar.
 * [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)ile sınanan uygulamayı daha kolay hale getirmek Için [webapplicationfactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) sınıfını sağlar.
 
@@ -141,9 +141,9 @@ ASP.NET Core 2,1 `IHttpClientFactory` , uygulamalarda örneklerini yapılandırm
 
 Daha fazla bilgi için bkz. [http Isteklerini başlatma](xref:fundamentals/http-requests).
 
-## <a name="kestrel-transport-configuration"></a>Kestrel aktarma yapılandırması
+## <a name="kestrel-libuv-transport-configuration"></a>Kestrel libuv aktarım yapılandırması
 
-ASP.NET Core 2,1 sürümü ile Kestrel 'in varsayılan taşıması artık libuv ' d i temel değildir ancak bunun yerine yönetilen yuvaları temel alır. Daha fazla bilgi için bkz. [Kestrel Web sunucusu uygulama: aktarım yapılandırması](xref:fundamentals/servers/kestrel#transport-configuration).
+ASP.NET Core 2,1 sürümü ile Kestrel 'in varsayılan taşıması artık libuv ' d i temel değildir ancak bunun yerine yönetilen yuvaları temel alır. Daha fazla bilgi için bkz. [Kestrel Web sunucusu uygulama: libuv aktarım yapılandırması](xref:fundamentals/servers/kestrel#libuv-transport-configuration).
 
 ## <a name="generic-host-builder"></a>Genel konak Oluşturucu
 
@@ -157,7 +157,7 @@ Redux ile ilgili angular, tepki verme ve tepki verme için tek sayfalı uygulama
 
 Angular şablonu angular CLı 'yı temel alır ve yanıt verme şablonları Create-tepki-App ' i temel alır.
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * <xref:spa/angular>
 * <xref:spa/react>

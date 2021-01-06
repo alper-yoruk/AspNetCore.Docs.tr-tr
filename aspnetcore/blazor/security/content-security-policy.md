@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/content-security-policy
 ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94570126"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>ASP.NET Core için bir Içerik Güvenlik Ilkesi zorla Blazor
@@ -36,7 +36,7 @@ ms.locfileid: "94570126"
 * Formun izin verilen URL hedeflerini belirten bir sayfa tarafından gerçekleştirilen eylemler.
 * Yüklenebilen eklentiler.
 
-Bir CSP 'yi bir uygulamaya uygulamak için, geliştirici bir veya daha fazla *directives* `Content-Security-Policy` üst bilgi veya ETIKET içinde çeşitli CSP içerik güvenliği yönergeleri belirler `<meta>` .
+Bir CSP 'yi bir uygulamaya uygulamak için, geliştirici bir veya daha fazla  `Content-Security-Policy` üst bilgi veya ETIKET içinde çeşitli CSP içerik güvenliği yönergeleri belirler `<meta>` .
 
 İlkeler, bir sayfa yüklenirken tarayıcı tarafından değerlendirilir. Tarayıcı, sayfanın kaynaklarını inceler ve içerik güvenliği yönergelerinin gereksinimlerini karşılayıp karşılamadığını belirler. Bir kaynak için ilke yönergeleri karşılanmazsa, tarayıcı kaynağı yüklemez. Örneğin, üçüncü taraf betiklerine izin veren bir ilkeyi göz önünde bulundurun. Bir sayfa, `<script>` özniteliğinde üçüncü taraf kaynağına sahip bir etiket içerdiğinde `src` , tarayıcı betiğin yüklenmesini engeller.
 

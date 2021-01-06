@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/css-isolation
 ms.openlocfilehash: 92545eab4004f6b67080f79d64b94bb424d5a102
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96320089"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorCSS yalıtımı ASP.NET Core
@@ -86,7 +86,7 @@ NuGet paketleri veya [ Razor sınıf kitaplıkları](xref:blazor/components/clas
 
 ## <a name="child-component-support"></a>Alt bileşen desteği
 
-Varsayılan olarak, CSS yalıtımı yalnızca biçimiyle ilişkilendirdiğiniz bileşen için geçerlidir `{COMPONENT NAME}.razor.css` ; burada yer tutucu `{COMPONENT NAME}` genellikle bileşen adıdır. Bir alt bileşene değişiklikler uygulamak için, `::deep` Combinator üst bileşenin dosyasındaki tüm alt öğeleri kullanın `.razor.css` . `::deep`Combinator, bir öğenin oluşturulan kapsam *descendants* tanımlayıcısının alt öğeleri olan öğeleri seçer. 
+Varsayılan olarak, CSS yalıtımı yalnızca biçimiyle ilişkilendirdiğiniz bileşen için geçerlidir `{COMPONENT NAME}.razor.css` ; burada yer tutucu `{COMPONENT NAME}` genellikle bileşen adıdır. Bir alt bileşene değişiklikler uygulamak için, `::deep` Combinator üst bileşenin dosyasındaki tüm alt öğeleri kullanın `.razor.css` . `::deep`Combinator, bir öğenin oluşturulan kapsam  tanımlayıcısının alt öğeleri olan öğeleri seçer. 
 
 Aşağıdaki örnek, `Parent` adlı bir alt bileşen ile çağrılan bir üst bileşeni gösterir `Child` .
 
@@ -131,7 +131,7 @@ Aşağıdaki örnek, `Parent` adlı bir alt bileşen ile çağrılan bir üst bi
 >
 > Bu senaryoda ASP.NET Core üst bileşenin kapsam tanımlayıcısını `div` öğesine uygular, böylece tarayıcı üst bileşenden stil devralmayı bilir.
 >
-> Ancak, öğesinin hariç tutulması `div` alt ilişkiyi kaldırır ve stil alt bileşene uygulanmaz: **not**
+> Ancak, öğesinin hariç tutulması `div` alt ilişkiyi kaldırır ve stil alt bileşene uygulanmaz: 
 >
 > ```razor
 > <h1>Parent</h1>

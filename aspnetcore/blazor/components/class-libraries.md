@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/class-libraries
 ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94570165"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
@@ -43,16 +43,16 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Yeni bir proje oluşturma.
-1. **Razor Sınıf kitaplığı** ' nı seçin. **İleri** ’yi seçin.
-1. **Yeni Razor sınıf kitaplığı oluştur** iletişim kutusunda **Oluştur** ' u seçin.
-1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. Bu konudaki örneklerde proje adı kullanılır `ComponentLibrary` . **Oluştur** ’u seçin.
+1. **Razor Sınıf kitaplığı**' nı seçin. **İleri**’yi seçin.
+1. **Yeni Razor sınıf kitaplığı oluştur** iletişim kutusunda **Oluştur**' u seçin.
+1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. Bu konudaki örneklerde proje adı kullanılır `ComponentLibrary` . **Oluştur**’u seçin.
 1. RCL 'yi bir çözüme ekleyin:
-   1. Çözüme sağ tıklayın. **Add**  >  **Varolan proje** Ekle ' yi seçin.
+   1. Çözüme sağ tıklayın.   >  **Varolan proje** Ekle ' yi seçin.
    1. RCL 'nin proje dosyasına gidin.
    1. RCL 'nin proje dosyasını () seçin `.csproj` .
 1. Uygulamadan RCL 'ye bir başvuru ekleyin:
-   1. Uygulama projesine sağ tıklayın. Başvuru **Ekle** ' yi seçin  >  **Reference**.
-   1. RCL projesini seçin. **Tamam** ’ı seçin.
+   1. Uygulama projesine sağ tıklayın. Başvuru **Ekle**' yi seçin  >  .
+   1. RCL projesini seçin. **Tamam**’ı seçin.
 
 > [!NOTE]
 > Şablondan RCL oluşturulurken **destek sayfaları ve görünümler** onay kutusu işaretliyse, `_Imports.razor` bileşen yazmayı etkinleştirmek için aşağıdaki içeriğe sahip oluşturulan projenin köküne da bir dosya ekleyin Razor :
@@ -186,7 +186,7 @@ Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#static-asse
 
 Blazor WebAssembly uygulamalar tam .NET API yüzey alanını hedefletir, ancak tüm .NET API 'Leri, tarayıcı korumalı alan kısıtlamaları nedeniyle WebAssembly üzerinde desteklenmez. <xref:System.PlatformNotSupportedException>WebAssembly üzerinde çalışırken desteklenmeyen API 'ler oluşturur. Uygulama, uygulamanın hedef platformları tarafından desteklenmeyen API 'Ler kullandığında, bir platform uyumluluğu Çözümleyicisi geliştiriciyi uyarır. Blazor WebAssemblyUygulamalar için bu, API 'lerin tarayıcılarda desteklendiği anlamına gelir. Uyumluluk Çözümleyicisi için .NET Framework API 'Lerine açıklama ekleme işlemi devam eder, bu nedenle tüm .NET Framework API 'SI Şu anda açıklanmamaktadır.
 
-Blazor WebAssemblyve Razor sınıf kitaplığı projeleri *automatically* `browser` , MSBuild öğesiyle desteklenen bir platform olarak ekleyerek tarayıcı uyumluluk denetimlerini otomatik olarak etkinleştirir `SupportedPlatform` . Kitaplık geliştiricileri, `SupportedPlatform` özelliği etkinleştirmek için öğeyi bir kitaplığın proje dosyasına el ile ekleyebilir:
+Blazor WebAssemblyve Razor sınıf kitaplığı projeleri  `browser` , MSBuild öğesiyle desteklenen bir platform olarak ekleyerek tarayıcı uyumluluk denetimlerini otomatik olarak etkinleştirir `SupportedPlatform` . Kitaplık geliştiricileri, `SupportedPlatform` özelliği etkinleştirmek için öğeyi bir kitaplığın proje dosyasına el ile ekleyebilir:
 
 ```xml
 <ItemGroup>

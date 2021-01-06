@@ -20,10 +20,10 @@ no-loc:
 - Models
 uid: tutorials/first-web-api
 ms.openlocfilehash: ccbfc27eb89e23938a69f0ab4cb306d6a4136889
-ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/26/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96175058"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
@@ -34,7 +34,7 @@ Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretil
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -51,11 +51,11 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
-|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
+|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
+|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Hiçbiri |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Hiçbiri | Hiçbiri|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -229,9 +229,9 @@ Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu aşağıdaki kodla değiştirin:
 
@@ -243,11 +243,11 @@ Swagger kaldırıldığından, yukarıdaki biçimlendirme, başlatılan URL 'YI 
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* Projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
+* Klasöre sağ tıklayın *Models* ve  > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
 * Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
@@ -281,7 +281,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -313,7 +313,7 @@ Yukarıdaki kod:
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Denetleyiciler* klasörüne sağ tıklayın.
-* **Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
+*  > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
 * **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
 * **API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:
 
@@ -558,7 +558,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -575,11 +575,11 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
-|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
+|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
+|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Hiçbiri |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Hiçbiri | Hiçbiri|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -723,9 +723,9 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -737,11 +737,11 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* Projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
+* Klasöre sağ tıklayın *Models* ve  > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
 * Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
@@ -773,7 +773,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -804,7 +804,7 @@ Yukarıdaki kod:
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Denetleyiciler* klasörüne sağ tıklayın.
-* **Add** > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
+*  > **Yeni yapı iskelesi öğesi Ekle öğesini** seçin.
 * **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
 * **API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:
 
@@ -1046,7 +1046,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -1066,11 +1066,11 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
-|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
+|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
+|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
 |POST/api/TodoItems | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
-|/Api/TodoItems/{id} &nbsp; Sil &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
+|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Hiçbiri |
+|/Api/TodoItems/{id} &nbsp; Sil &nbsp; | Öğe &nbsp; silme &nbsp; | Hiçbiri | Hiçbiri|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -1166,9 +1166,9 @@ Aşağıdaki JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* **Çözüm Gezgini**, projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
@@ -1180,11 +1180,11 @@ Aşağıdaki JSON döndürülür:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Projeye sağ tıklayın. **Add**  >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
+* Projeye sağ tıklayın.   >  **Yeni klasör** Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
+* Klasöre sağ tıklayın *Models* ve  > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
 * Sınıfı *TodoItem* olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
@@ -1204,7 +1204,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör k
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  . Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1235,7 +1235,7 @@ Yukarıdaki kod:
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Denetleyiciler* klasörüne sağ tıklayın.
-* **Add** > **Yeni öğe** Ekle ' yi seçin.
+*  > **Yeni öğe** Ekle ' yi seçin.
 * **Yeni öğe Ekle** iletişim kutusunda, **API denetleyici sınıfı** şablonunu seçin.
 * Sınıfı *TodoController* olarak adlandırın ve **Ekle**' yi seçin.
 

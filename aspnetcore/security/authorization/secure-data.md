@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051947"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854658"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturma
 
@@ -45,7 +45,7 @@ Bu öğreticide, yetkilendirme tarafından korunan kullanıcı verileriyle ASP.N
 
 Bu belgedeki görüntüler en son şablonlarla tam olarak eşleşmez.
 
-Aşağıdaki görüntüde, User Rick ( `rick@example.com` ) oturum açtı. Rick, onaylanan kişileri görüntüleyebilir ve **Düzenle** / **Delete** ' e / ait kişiler için **yeni bağlantılar oluştur** ' a bakın. Yalnızca Rick tarafından oluşturulan son kayıt, **Düzenle** ve **Sil** bağlantılarını görüntüler. Yönetici veya yönetici durumu "Onaylandı" olarak değiştirene kadar diğer kullanıcılar son kaydı görmez.
+Aşağıdaki görüntüde, User Rick ( `rick@example.com` ) oturum açtı. Rick, onaylanan kişileri görüntüleyebilir ve **Düzenle** / **Delete**' e / ait kişiler için **yeni bağlantılar oluştur** ' a bakın. Yalnızca Rick tarafından oluşturulan son kayıt, **Düzenle** ve **Sil** bağlantılarını görüntüler. Yönetici veya yönetici durumu "Onaylandı" olarak değiştirene kadar diğer kullanıcılar son kaydı görmez.
 
 ![Rick oturum açmış olduğunu gösteren ekran görüntüsü](secure-data/_static/rick.png)
 
@@ -75,7 +75,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -93,7 +93,7 @@ Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
 [Başlangıç](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) uygulamasını [indirin](xref:index#how-to-download-a-sample) .
 
-Uygulamayı çalıştırın, **ContactManager** bağlantısına dokunun ve bir kişi oluşturup silemdiğinizi doğrulayın.
+Uygulamayı çalıştırın, **ContactManager** bağlantısına dokunun ve bir kişi oluşturup silemdiğinizi doğrulayın. Başlangıç uygulamasını oluşturmak için bkz. [Başlangıç uygulamasını oluşturma](#create-the-starter-app).
 
 ## <a name="secure-user-data"></a>Güvenli Kullanıcı verileri
 
@@ -128,7 +128,7 @@ Kullanıcıların kimliklerinin doğrulanmasını gerektirmek için geri dönü�
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-Önceki vurgulanmış kod, [geri dönüş kimlik doğrulama ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlar. Geri dönüş kimlik doğrulama ilkesi, *_all_* Razor bir kimlik doğrulama özniteliğine sahip sayfalar, denetleyiciler veya eylem yöntemleri dışında * tüm _ kullanıcıların kimliğinin doğrulanmasını gerektirir. Örneğin, Razor Sayfalar, denetleyiciler veya eylem yöntemleri, `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş kimlik doğrulama ilkesi yerine uygulanan kimlik doğrulama özniteliğini kullanır.
+Önceki vurgulanmış kod, [geri dönüş kimlik doğrulama ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlar. Geri dönüş kimlik doğrulama ilkesi,** Razor bir kimlik doğrulama özniteliğine sahip sayfalar, denetleyiciler veya eylem yöntemleri dışında * tüm _ kullanıcıların kimliğinin doğrulanmasını gerektirir. Örneğin, Razor Sayfalar, denetleyiciler veya eylem yöntemleri, `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş kimlik doğrulama ilkesi yerine uygulanan kimlik doğrulama özniteliğini kullanır.
 
 Geri dönüş kimlik doğrulama ilkesi:
 
@@ -146,7 +146,7 @@ MVC denetleyicilerinin ve Razor sayfaların tüm kullanıcıların kimliğinin d
 
 Yukarıdaki kod, bir yetkilendirme filtresi kullanır ve geri dönüş ilkesini ayarlama Endpoint Routing kullanır. Geri dönüş ilkesini ayarlamak, tüm kullanıcıların kimliğinin doğrulanmasını gerektirmek için tercih edilen yoldur.
 
-[AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` Anonim kullanıcıların, kaydolmadan önce site hakkında bilgi alması Için ve sayfalarına AllowAnonymous ekleyin:
+[](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` Anonim kullanıcıların, kaydolmadan önce site hakkında bilgi alması Için ve sayfalarına AllowAnonymous ekleyin:
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -335,8 +335,8 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
-| manager@contoso.com | Evet               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
-| admin@contoso.com   | Evet               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
+| manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
+| admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
 Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusundan silme ve düzenleme için URL 'YI kopyalayın. Bu bağlantıları test kullanıcısının bu işlemleri gerçekleştiremediğinizi doğrulamak için test kullanıcısının tarayıcısına yapıştırın.
 
@@ -351,7 +351,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* *Modeller/Ilgili kişi ekle. cs* :
+* *Modeller/Ilgili kişi ekle. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -399,7 +399,7 @@ Bu öğreticide, yetkilendirme tarafından korunan kullanıcı verileriyle ASP.N
 * **Yöneticiler** , kişi verilerini onaylayabilir veya reddedebilir. Yalnızca onaylanan kişiler kullanıcılara görünür.
 * **Yöneticiler** , verileri onaylayabilir/reddedebilir ve düzenleyebilir/silebilir.
 
-Aşağıdaki görüntüde, User Rick ( `rick@example.com` ) oturum açtı. Rick, onaylanan kişileri görüntüleyebilir ve **Düzenle** / **Delete** ' e / ait kişiler için **yeni bağlantılar oluştur** ' a bakın. Yalnızca Rick tarafından oluşturulan son kayıt, **Düzenle** ve **Sil** bağlantılarını görüntüler. Yönetici veya yönetici durumu "Onaylandı" olarak değiştirene kadar diğer kullanıcılar son kaydı görmez.
+Aşağıdaki görüntüde, User Rick ( `rick@example.com` ) oturum açtı. Rick, onaylanan kişileri görüntüleyebilir ve **Düzenle** / **Delete**' e / ait kişiler için **yeni bağlantılar oluştur** ' a bakın. Yalnızca Rick tarafından oluşturulan son kayıt, **Düzenle** ve **Sil** bağlantılarını görüntüler. Yönetici veya yönetici durumu "Onaylandı" olarak değiştirene kadar diğer kullanıcılar son kaydı görmez.
 
 ![Rick oturum açmış olduğunu gösteren ekran görüntüsü](secure-data/_static/rick.png)
 
@@ -429,7 +429,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -662,8 +662,8 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
-| manager@contoso.com | Evet               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
-| admin@contoso.com   | Evet               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
+| manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
+| admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
 Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusundan silme ve düzenleme için URL 'YI kopyalayın. Bu bağlantıları test kullanıcısının bu işlemleri gerçekleştiremediğinizi doğrulamak için test kullanıcısının tarayıcısına yapıştırın.
 
@@ -678,7 +678,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* *Modeller/Ilgili kişi ekle. cs* :
+* *Modeller/Ilgili kişi ekle. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 

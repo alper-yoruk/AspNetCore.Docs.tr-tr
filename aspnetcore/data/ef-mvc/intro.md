@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/intro
 ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94703741"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
@@ -38,7 +38,7 @@ Contoso Üniversitesi örnek Web uygulaması, Entity Framework (EF) Core ve Visu
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * ASP.NET Core MVC 'yi yeni kullanmaya başladıysanız, bunu başlatmadan önce [ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc) öğreticisini kullanmaya başlayın.
 
@@ -80,7 +80,7 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
     1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
     1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
-    1. **Create** 
+    1.  
        Oluştur ![ Yeni ASP.NET Core projesi iletişim kutusu](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
@@ -402,7 +402,7 @@ Bu öğretici ASP.NET Core 3,1 için güncelleştirilmedi. [ASP.NET Core 5,0](xr
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :

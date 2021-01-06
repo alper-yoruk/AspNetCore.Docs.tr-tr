@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/security/server/additional-scenarios
 ms.openlocfilehash: 56b226f8e4a10aa996b0344f10c76dad2ae32b51
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/03/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93234445"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server ek güvenlik senaryoları
@@ -55,7 +55,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =
 
 İsteğe bağlı olarak, ek kapsamlar ile eklenir `options.Scope.Add("{SCOPE}");` , burada yer tutucu `{SCOPE}` Eklenecek ek kapsamdır.
 
-**scoped** Blazor [Bağımlılık ekleme (dı)](xref:blazor/fundamentals/dependency-injection)içindeki belirteçleri çözümlemek için uygulama içinde kullanılabilecek bir kapsamlı belirteç sağlayıcısı hizmeti tanımlayın:
+ Blazor [Bağımlılık ekleme (dı)](xref:blazor/fundamentals/dependency-injection)içindeki belirteçleri çözümlemek için uygulama içinde kullanılabilecek bir kapsamlı belirteç sağlayıcısı hizmeti tanımlayın:
 
 ```csharp
 public class TokenProvider
@@ -215,7 +215,7 @@ public class InitialApplicationState
 }
 ```
 
-**scoped** Blazor [Bağımlılık ekleme (dı)](xref:blazor/fundamentals/dependency-injection)içindeki belirteçleri çözümlemek için uygulama içinde kullanılabilecek bir kapsamlı belirteç sağlayıcısı hizmeti tanımlayın:
+ Blazor [Bağımlılık ekleme (dı)](xref:blazor/fundamentals/dependency-injection)içindeki belirteçleri çözümlemek için uygulama içinde kullanılabilecek bir kapsamlı belirteç sağlayıcısı hizmeti tanımlayın:
 
 ```csharp
 public class TokenProvider
