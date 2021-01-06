@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/complex-data-model
 ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054482"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile karmaşık veri modeli oluşturma-ASP.NET MVC
@@ -50,7 +50,7 @@ Bu öğreticide şunları yaptınız:
 > * Bağlantı dizesini değiştirme
 > * Veritabanını güncelleştirme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [EF Core geçişleri kullanma](migrations.md)
 
@@ -62,7 +62,7 @@ Bu bölümde, biçimlendirme, doğrulama ve veritabanı eşleme kurallarını be
 
 Öğrenci kayıt tarihleri için tüm Web sayfaları Şu anda tarihle birlikte görüntülenir, ancak bu alan için tüm önemli bir tarih olması gerekir. Veri ek açıklaması özniteliklerini kullanarak, verileri gösteren her görünümde görüntü biçimini giderecek bir kod değişikliği yapabilirsiniz. Bunun nasıl yapılacağını gösteren bir örnek görmek için, sınıfındaki özelliğine bir özniteliği ekleyeceksiniz `EnrollmentDate` `Student` .
 
-*Modeller/öğrenci. cs* ' de, `using` ad alanı için bir ifade ekleyin `System.ComponentModel.DataAnnotations` ve `DataType` `DisplayFormat` `EnrollmentDate` Aşağıdaki örnekte gösterildiği gibi özelliğe ve özniteliklerini ekleyin:
+*Modeller/öğrenci. cs*' de, `using` ad alanı için bir ifade ekleyin `System.ComponentModel.DataAnnotations` ve `DataType` `DisplayFormat` `EnrollmentDate` Aşağıdaki örnekte gösterildiği gibi özelliğe ve özniteliklerini ekleyin:
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
@@ -122,7 +122,7 @@ dotnet ef database update
 
 Geçiş dosyası adının ön eki olan zaman damgası, geçişleri sıralamak için Entity Framework tarafından kullanılır. Update-database komutunu çalıştırmadan önce birden çok geçiş oluşturabilirsiniz ve sonra tüm geçişler oluşturuldukları sırada uygulanır.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin, **Yeni oluştur** ' a tıklayın ve 50 karakterden daha uzun bir ad girmeyi deneyin. Uygulamanın bunu yapmasını önleyebilmelidir. 
+Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin, **Yeni oluştur**' a tıklayın ve 50 karakterden daha uzun bir ad girmeyi deneyin. Uygulamanın bunu yapmasını önleyebilmelidir. 
 
 ### <a name="the-column-attribute"></a>Column özniteliği
 
@@ -159,7 +159,7 @@ dotnet ef database update
 
 ![Öğrenci varlığı](complex-data-model/_static/student-entity.png)
 
-*Modeller/öğrenci. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Modeller/öğrenci. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_BeforeInheritance&highlight=11,13,15,18,22,24-31)]
 
@@ -251,7 +251,7 @@ Eğitmen varlığı, null yapılabilir bir `OfficeAssignment` gezinti özelliği
 
 ![Kurs varlığı](complex-data-model/_static/course-entity.png)
 
-*Modeller/kurs. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Modeller/kurs. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
@@ -346,7 +346,7 @@ public ICollection<Course> Courses { get; set; }
 
 ![Kayıt varlığı](complex-data-model/_static/enrollment-entity.png)
 
-*Modeller/kayıt. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin:
+*Modeller/kayıt. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Final&highlight=1-2,16)]
 

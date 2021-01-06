@@ -1,3 +1,3 @@
-# <a name="aspnet-core-configuration-sample"></a>ASP.NET Çekirdek Yapılandırma Örneği
+# <a name="aspnet-core-configuration-sample"></a>ASP.NET Core yapılandırma örneği
 
-Bu örnek, Yapılandırma API'sinin kullanımını göstermektedir. Bu örnek, ASP.NET Temel konusu [yapılandırmada](https://docs.microsoft.com/aspnet/core/fundamentals/configuration) açıklanan senaryoları gösterir.
+Bu örnek, yapılandırma API 'sinin kullanımını gösterir. Bu örnek, [ASP.NET Core konusundaki yapılandırma](https://docs.microsoft.com/aspnet/core/fundamentals/configuration) bölümünde açıklanan senaryoları gösterir.

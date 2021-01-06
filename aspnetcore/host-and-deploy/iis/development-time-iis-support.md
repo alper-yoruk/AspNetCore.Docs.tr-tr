@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
 ms.openlocfilehash: ab892b2cdfa61378ac7328c0380c8a6cffc6d376
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058460"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core için Visual Studio'da geliştirme zamanı IIS desteği
@@ -34,7 +34,7 @@ ms.locfileid: "93058460"
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -44,7 +44,7 @@ Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama i
 ## <a name="enable-iis"></a>IIS 'yi etkinleştirme
 
 1. Windows 'ta, **Denetim Masası** > **programları** > **Programlar ve Özellikler** > **Windows özelliklerini aç veya kapat** (ekranın sol tarafı) bölümüne gidin.
-1. **Internet Information Services** onay kutusunu seçin. **Tamam** ’ı seçin.
+1. **Internet Information Services** onay kutusunu seçin. **Tamam**’ı seçin.
 
 IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
@@ -52,7 +52,7 @@ IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
 IIS 'nin aşağıdaki ile yapılandırılmış bir Web sitesine sahip olması gerekir:
 
-* **Ana bilgisayar adı** : genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
+* **Ana bilgisayar adı**: genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
 * **Site bağlama**
   * HTTPS gerektiren uygulamalar için, sertifika ile 443 numaralı bağlantı noktasına bir bağlama oluşturun. Genellikle **IIS Express geliştirme sertifikası** kullanılır, ancak geçerli bir sertifika çalışıyor olur.
   * HTTP kullanan uygulamalar için, 80 veya yeni bir site için bağlantı noktası 80 ' e bir bağlama oluşturmak için bir bağlamanın mevcut olduğunu onaylayın.
@@ -80,7 +80,7 @@ HTTP kullanan bir proje için, [https yeniden yönlendirme ve HSTS ara yazılım
 
 Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşturun:
 
-1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler** ’i seçin. **Hata Ayıkla** sekmesini açın.
+1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler**’i seçin. **Hata Ayıkla** sekmesini açın.
 1. **Profil** için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
 1. **Başlatma** ayarı Için listeden **IIS** ' yi seçin.
 1. **Başlat tarayıcısı** onay kutusunu seçin ve uç nokta URL 'sini sağlayın.
@@ -92,7 +92,7 @@ Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşt
    URL 'nin sonundaki uygulamanın adını belirtin.
 
    Örneğin, `https://localhost/WebApplication1` (https) veya `http://localhost/WebApplication1` (http) geçerli uç nokta URL 'lardır.
-1. **Ortam değişkenleri** bölümünde **Ekle** düğmesini seçin. **Adı** ve değeri olan bir ortam değişkeni sağlayın `ASPNETCORE_ENVIRONMENT` **Value** `Development` .
+1. **Ortam değişkenleri** bölümünde **Ekle** düğmesini seçin. **Adı** ve değeri olan bir ortam değişkeni sağlayın `ASPNETCORE_ENVIRONMENT`  `Development` .
 1. **Web sunucusu ayarları** alanında, **Uygulama URL** 'sini **başlatma tarayıcısı** uç noktası URL 'si için kullanılan aynı değere ayarlayın.
 1. Visual Studio 2019 veya sonraki sürümlerde **barındırma modeli** ayarı için, proje tarafından kullanılan barındırma modelini kullanmak üzere **varsayılan** ' ı seçin. Proje, `<AspNetCoreHostingModel>` Proje dosyasında özelliği ayarlarsa, özelliğin değeri ( `InProcess` veya `OutOfProcess` ) kullanılır. Özellik mevcut değilse, uygulamanın varsayılan barındırma modeli, işlem içi kullanılır. Uygulama, uygulamanın normal barındırma modelinden farklı bir açık barındırma modeli ayarı gerektiriyorsa, **barındırma modelini** gereken ya da gerektiği şekilde ayarlayın `In Process` `Out Of Process` .
 1. Profili kaydedin.
@@ -149,7 +149,7 @@ Güvenilmeyen bir geliştirme sertifikası kullanılırsa, tarayıcı güvenilme
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -159,7 +159,7 @@ Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama i
 ## <a name="enable-iis"></a>IIS 'yi etkinleştirme
 
 1. Windows 'ta, **Denetim Masası** > **programları** > **Programlar ve Özellikler** > **Windows özelliklerini aç veya kapat** (ekranın sol tarafı) bölümüne gidin.
-1. **Internet Information Services** onay kutusunu seçin. **Tamam** ’ı seçin.
+1. **Internet Information Services** onay kutusunu seçin. **Tamam**’ı seçin.
 
 IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
@@ -167,7 +167,7 @@ IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
 IIS 'nin aşağıdaki ile yapılandırılmış bir Web sitesine sahip olması gerekir:
 
-* **Ana bilgisayar adı** : genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
+* **Ana bilgisayar adı**: genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
 * **Site bağlama**
   * HTTPS gerektiren uygulamalar için, sertifika ile 443 numaralı bağlantı noktasına bir bağlama oluşturun. Genellikle **IIS Express geliştirme sertifikası** kullanılır, ancak geçerli bir sertifika çalışıyor olur.
   * HTTP kullanan uygulamalar için, 80 veya yeni bir site için bağlantı noktası 80 ' e bir bağlama oluşturmak için bir bağlamanın mevcut olduğunu onaylayın.
@@ -195,7 +195,7 @@ HTTP kullanan bir proje için, [https yeniden yönlendirme ve HSTS ara yazılım
 
 Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşturun:
 
-1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler** ’i seçin. **Hata Ayıkla** sekmesini açın.
+1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler**’i seçin. **Hata Ayıkla** sekmesini açın.
 1. **Profil** için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
 1. **Başlatma** ayarı Için listeden **IIS** ' yi seçin.
 1. **Başlat tarayıcısı** onay kutusunu seçin ve uç nokta URL 'sini sağlayın.
@@ -207,7 +207,7 @@ Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşt
    URL 'nin sonundaki uygulamanın adını belirtin.
 
    Örneğin, `https://localhost/WebApplication1` (https) veya `http://localhost/WebApplication1` (http) geçerli uç nokta URL 'lardır.
-1. **Ortam değişkenleri** bölümünde **Ekle** düğmesini seçin. **Adı** ve değeri olan bir ortam değişkeni sağlayın `ASPNETCORE_ENVIRONMENT` **Value** `Development` .
+1. **Ortam değişkenleri** bölümünde **Ekle** düğmesini seçin. **Adı** ve değeri olan bir ortam değişkeni sağlayın `ASPNETCORE_ENVIRONMENT`  `Development` .
 1. **Web sunucusu ayarları** alanında, **Uygulama URL** 'sini **başlatma tarayıcısı** uç noktası URL 'si için kullanılan aynı değere ayarlayın.
 1. Visual Studio 2019 veya sonraki sürümlerde **barındırma modeli** ayarı için, proje tarafından kullanılan barındırma modelini kullanmak üzere **varsayılan** ' ı seçin. Proje, `<AspNetCoreHostingModel>` Proje dosyasında özelliği ayarlarsa, özelliğin değeri ( `InProcess` veya `OutOfProcess` ) kullanılır. Özellik mevcut değilse, uygulamanın varsayılan barındırma modeli kullanılır ve bu işlem, işlem dışı olur. Uygulama, uygulamanın normal barındırma modelinden farklı bir açık barındırma modeli ayarı gerektiriyorsa, **barındırma modelini** gereken ya da gerektiği şekilde ayarlayın `In Process` `Out Of Process` .
 1. Profili kaydedin.

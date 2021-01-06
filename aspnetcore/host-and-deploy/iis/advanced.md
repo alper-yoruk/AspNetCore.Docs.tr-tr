@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/advanced
 ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058625"
 ---
 # <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>ASP.NET Core modülünün ve IIS 'nin gelişmiş yapılandırması
@@ -132,10 +132,10 @@ Anahtar halkasını sürdürmek için IIS altındaki veri korumasını yapıland
    ![Rol hizmetlerini seçin adımında varsayılan rol hizmetleri seçilidir.](index/_static/role-services-ws2016.png)
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. Web sunucusu rolü ve hizmetlerini yüklemek için **onay** adımına ilerleyin. **Web sunucusu (IIS)** rolü yüklendikten sonra sunucu/IIS yeniden başlatması gerekli değildir.
 
@@ -154,10 +154,10 @@ Anahtar halkasını sürdürmek için IIS altındaki veri korumasını yapıland
 1. **World Wide Web Hizmetleri** için varsayılan özellikleri kabul edın veya IIS özelliklerini özelleştirin.
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. IIS yüklemesi için yeniden başlatma gerekiyorsa, sistemi yeniden başlatın.
 
@@ -181,9 +181,9 @@ Bir ASP.NET Core uygulamasını başka bir ASP.NET Core uygulaması altında alt
 
 1. Kök siteyi, kök sitenin altındaki bir klasörde bulunan alt uygulamayla IIS Yöneticisi 'ne ekleyin.
 
-1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür** ' ü seçin.
+1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür**' ü seçin.
 
-1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam** ’ı seçin.
+1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam**’ı seçin.
 
 Ayrı bir uygulama havuzunun alt uygulamaya atanması, işlem içi barındırma modelinin kullanıldığı bir gereksinimdir.
 
@@ -210,7 +210,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. Windows Gezgini 'ni açın ve dizine gidin.
 
-1. Dizine sağ tıklayıp **Özellikler** ' i seçin.
+1. Dizine sağ tıklayıp **Özellikler**' i seçin.
 
 1. **Güvenlik** sekmesinde, **Düzenle** düğmesini ve ardından **Ekle** düğmesini seçin.
 
@@ -220,7 +220,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "ad denetle" seçmeden önce "DefaultAppPool" uygulama havuzu adı, nesne adları alanında "IIS AppPool" öğesine eklenir \" .](index/_static/select-users-or-groups-1.png)
 
-1. **Tamam** ’ı seçin.
+1. **Tamam**’ı seçin.
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "adları denetle" seçeneğini belirledikten sonra, nesne adları alanında "DefaultAppPool" nesne adı gösterilir.](index/_static/select-users-or-groups-2.png)
 
@@ -290,11 +290,11 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 * IIS Yöneticisi 'Ni kullanma:
 
   1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-  1. Varsayılan **Başlangıç modu** `OnDemand` . **Başlangıç modunu** olarak ayarlayın `AlwaysRunning` . **Tamam** ’ı seçin.
+  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+  1. Varsayılan **Başlangıç modu** `OnDemand` . **Başlangıç modunu** olarak ayarlayın `AlwaysRunning` . **Tamam**’ı seçin.
   1. **Bağlantılar** panelinde **siteler** düğümünü açın.
   1. Uygulamaya sağ tıklayın ve **Web sitesi**  >  **Gelişmiş ayarlarını** Yönet ' i seçin.
-  1. Varsayılan **önyükleme etkin** ayarı `False` . **Önyüklemeyi etkin** olarak ayarlayın `True` . **Tamam** ’ı seçin.
+  1. Varsayılan **önyükleme etkin** ayarı `False` . **Önyüklemeyi etkin** olarak ayarlayın `True` . **Tamam**’ı seçin.
 
 * Kullanarak `web.config` , `<applicationInitialization>` öğesini `doAppInitAfterRestart` olarak ayarlanmış öğesini `true` `<system.webServer>` uygulamanın dosyasındaki öğelerine ekleyin `web.config` :
 
@@ -316,8 +316,8 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 Uygulamanın çalışmasını engellemek için, IIS Yöneticisi 'Ni kullanarak uygulama havuzunun boşta kalma zaman aşımını ayarlayın:
 
 1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-1. Varsayılan **boşta kalma zaman aşımı (dakika)** `20` dakikadır. **Boşta kalma süresi (dakika)** `0` değerini (sıfır) olarak ayarlayın. **Tamam** ’ı seçin.
+1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+1. Varsayılan **boşta kalma zaman aşımı (dakika)** `20` dakikadır. **Boşta kalma süresi (dakika)** `0` değerini (sıfır) olarak ayarlayın. **Tamam**’ı seçin.
 1. Çalışan işlemini geri dönüştür.
 
 [İşlem dışı](xref:host-and-deploy/iis/out-of-process-hosting) barındırılan uygulamaların zaman aşımına uğramasını engellemek için aşağıdaki yaklaşımlardan birini kullanın:
@@ -335,7 +335,7 @@ Uygulamanın çalışmasını engellemek için, IIS Yöneticisi 'Ni kullanarak u
 
 ### <a name="module"></a>Modül
 
-**IIS (X86/AMD64)** :
+**IIS (X86/AMD64)**:
 
 * `%windir%\System32\inetsrv\aspnetcore.dll`
 
@@ -345,7 +345,7 @@ Uygulamanın çalışmasını engellemek için, IIS Yöneticisi 'Ni kullanarak u
 
 * `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (X86/AMD64)** :
+**IIS Express (X86/AMD64)**:
 
 * `%ProgramFiles%\IIS Express\aspnetcore.dll`
 

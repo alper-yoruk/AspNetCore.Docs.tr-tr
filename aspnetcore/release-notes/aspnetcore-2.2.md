@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-2.2
 ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059708"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2,2 ' deki yenilikler
@@ -87,7 +87,7 @@ ASP.NET Core önceki sürümlerinde, Kestrel seçenekleri çağırarak yapıland
 
 ## <a name="iis-in-process-hosting"></a>IIS işlem içi barındırma
 
-ASP.NET Core önceki sürümlerinde IIS, ters proxy işlevi görür. 2,2 ' de ASP.NET Core modülü CoreCLR 'yi önyükleyebilir ve bir uygulamayı IIS çalışan işleminin içinde barındırabilir ( *w3wp.exe* ). İşlem içi barındırma, IIS ile çalışırken performans ve tanılama kazançları sağlar.
+ASP.NET Core önceki sürümlerinde IIS, ters proxy işlevi görür. 2,2 ' de ASP.NET Core modülü CoreCLR 'yi önyükleyebilir ve bir uygulamayı IIS çalışan işleminin içinde barındırabilir (*w3wp.exe*). İşlem içi barındırma, IIS ile çalışırken performans ve tanılama kazançları sağlar.
 
 Daha fazla bilgi için bkz. [IIS için işlem içi barındırma](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 

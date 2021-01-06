@@ -1,4 +1,4 @@
 # <a name="code-of-conduct"></a>Kullanım Kuralları
 
-Bu proje, topluluğumuzda beklenen davranışları netleştirmek için Katılımcı Sözleşmesi tarafından tanımlanan davranış kurallarını benimsemiştir.
-Daha fazla bilgi için [.NET Foundation Code of Conduct bölümüne](https://dotnetfoundation.org/code-of-conduct)bakın.
+Bu proje, topluluğumuza beklenen davranışı açıklığa kavuşturmak için katkıda bulunan Covenant tarafından tanımlanan kullanım kodunu benimsemiştir.
+Daha fazla bilgi için bkz. [.net Foundation kullanım kuralları](https://dotnetfoundation.org/code-of-conduct).

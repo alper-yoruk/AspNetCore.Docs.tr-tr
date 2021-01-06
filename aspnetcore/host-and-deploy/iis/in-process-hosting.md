@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/in-process-hosting
 ms.openlocfilehash: 47dc6f65f398ecce45c563c359dfde6e17d1dc1b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058486"
 ---
 # <a name="in-process-hosting-with-iis-and-aspnet-core"></a>IIS ve ASP.NET Core ile işlem içi barındırma 
@@ -87,7 +87,7 @@ services.Configure<IISServerOptions>(options =>
 
 İşlem içi barındırma sırasında aşağıdaki özellikler geçerlidir:
 
-* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [Kestrel](xref:fundamentals/servers/kestrel) . İşlem içi için şunu [`CreateDefaultBuilder`](xref:fundamentals/host/generic-host#default-builder-settings) çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> :
+* Kestrel Server yerine IIS HTTP sunucusu ( `IISHttpServer` ) kullanılır [](xref:fundamentals/servers/kestrel) . İşlem içi için şunu [`CreateDefaultBuilder`](xref:fundamentals/host/generic-host#default-builder-settings) çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> :
 
   * Kaydolun `IISHttpServer` .
   * ASP.NET Core modülünün arkasında çalışırken sunucunun dinlemesi gereken bağlantı noktasını ve temel yolu yapılandırın.

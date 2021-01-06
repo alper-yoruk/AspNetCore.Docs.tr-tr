@@ -1,3 +1,3 @@
-# <a name="blazor-server-sample-app"></a>Blazor Server Örnek Uygulaması
+# <a name="blazor-server-sample-app"></a>Blazor sunucusu örnek uygulaması
 
-Bu örnek, Blazor belgelerinde açıklanan Blazor senaryolarının kullanımını göstermektedir.
+Bu örnek, Blazor belgelerinde açıklanan Blazor senaryolarının kullanımını gösterir.

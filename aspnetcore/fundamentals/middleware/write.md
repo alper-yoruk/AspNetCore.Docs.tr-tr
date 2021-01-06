@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/middleware/write
 ms.openlocfilehash: 5f33691cbcc00f407fff907ca62547fd80f2aa3c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057472"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Özel ASP.NET Core ara yazılımı yaz
@@ -101,7 +101,7 @@ Aşağıdaki kod, içindeki ara yazılımı çağırır `Startup.Configure` :
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı* , *geçici* ve *tek* bir yaşam süresi Hizmetleri olan bir ara yazılım örneği içerir.
+* [Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı*, *geçici* ve *tek* bir yaşam süresi Hizmetleri olan bir ara yazılım örneği içerir.
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

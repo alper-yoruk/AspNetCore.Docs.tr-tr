@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
 ms.openlocfilehash: b4850821317b6907452793ef09194844c90c0137
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93050777"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core Bölüm 6, denetleyici yöntemleri ve görünümleri
@@ -44,7 +44,7 @@ Sonraki öğreticide [veri ek açıklamalarını](/aspnet/mvc/overview/older-ver
 
 ![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si https://localhost:5001/Movies/Edit/5 gösteriliyor](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-**Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Görünümler/fılmler/Index. cshtml* dosyasındaki Core MVC bağlayıcı etiketi Yardımcısı tarafından oluşturulur.
+**Düzenle**, **Ayrıntılar** ve **Sil** bağlantıları, *Görünümler/fılmler/Index. cshtml* dosyasındaki Core MVC bağlayıcı etiketi Yardımcısı tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -108,7 +108,7 @@ Aşağıdaki kod, `HTTP POST Edit` postalanan film değerlerini işleyen yöntem
 
 `HttpPost`Öznitelik, bu `Edit` yöntemin *yalnızca* istekler için çağrılabilecek olduğunu belirtir `POST` . `[HttpGet]`Özniteliği ilk düzenleme yöntemine uygulayabilirsiniz, ancak bu gerekli değildir çünkü `[HttpGet]` varsayılan.
 
-`ValidateAntiForgeryToken`Özniteliği, [bir isteğin bir kısmını engellemek](xref:security/anti-request-forgery) için kullanılır ve düzenleme görünümü dosyasında ( *Görünümler/filmler/Düzenle. cshtml* ) oluşturulan bir güvenlik yumuşatma belirteci ile eşleştirilmiş olur. Düzenleme görünümü dosyası, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms)ile karşı koruma belirteci oluşturur.
+`ValidateAntiForgeryToken`Özniteliği, [bir isteğin bir kısmını engellemek](xref:security/anti-request-forgery) için kullanılır ve düzenleme görünümü dosyasında (*Görünümler/filmler/Düzenle. cshtml*) oluşturulan bir güvenlik yumuşatma belirteci ile eşleştirilmiş olur. Düzenleme görünümü dosyası, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms)ile karşı koruma belirteci oluşturur.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 

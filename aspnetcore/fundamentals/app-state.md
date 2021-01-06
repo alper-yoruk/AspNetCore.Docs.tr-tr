@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/app-state
 ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051414"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core’da oturum ve durum yönetimi
@@ -201,7 +201,7 @@ Aşağıdaki sayfa görüntülenir `TempData["Message"]` :
 
 [!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexPeek.cshtml?range=1-14)]
 
-Önceki İşaretlemede, isteğin sonunda, `TempData["Message"]` kullanıldığı için **not** silinmez `Peek` . Sayfanın yenilenmesi, içeriğini görüntüler `TempData["Message"]` .
+Önceki İşaretlemede, isteğin sonunda, `TempData["Message"]` kullanıldığı için  silinmez `Peek` . Sayfanın yenilenmesi, içeriğini görüntüler `TempData["Message"]` .
 
 Aşağıdaki biçimlendirme önceki koda benzerdir, ancak `Keep` isteğin sonundaki verileri korumak için kullanır:
 
@@ -458,7 +458,7 @@ Aşağıdaki sayfa görüntülenir `TempData["Message"]` :
 
 [!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexPeek.cshtml?range=1-14)]
 
-Önceki İşaretlemede, isteğin sonunda, `TempData["Message"]` kullanıldığı için **not** silinmez `Peek` . Sayfayı yenileme sayfası görüntülenir `TempData["Message"]` .
+Önceki İşaretlemede, isteğin sonunda, `TempData["Message"]` kullanıldığı için  silinmez `Peek` . Sayfayı yenileme sayfası görüntülenir `TempData["Message"]` .
 
 Aşağıdaki biçimlendirme önceki koda benzerdir, ancak `Keep` isteğin sonundaki verileri korumak için kullanır:
 

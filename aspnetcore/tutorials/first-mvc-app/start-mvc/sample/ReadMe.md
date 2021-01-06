@@ -1,1 +1,1 @@
-Tamamlanan örnek *2.2-tamamlanmış* klasöründe. *MvcMovie22* örneği dokümantasyon için kullanılır ve kullanımı zordur.
+Tamamlanan örnek, *2,2-Completed* klasöründedir. *MvcMovie22* örneği belgeler için kullanılır ve kullanılması zordur.

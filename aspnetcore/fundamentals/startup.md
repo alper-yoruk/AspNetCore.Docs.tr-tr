@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/startup
 ms.openlocfilehash: 747b13abb0ce3fed2d1dc018c6dbf82db1ae7130
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93052246"
 ---
 # <a name="app-startup-in-aspnet-core"></a>ASP.NET Core 'de uygulama başlatma
@@ -38,7 +38,7 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://githu
 
 ASP.NET Core uygulamalar `Startup` , kural tarafından adlandırılan bir sınıfı kullanır `Startup` . `Startup` sınıfı:
 
-* İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini* yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler *registered* `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
+* İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini* yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler  `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Uygulamanın istek işleme ardışık düzenini oluşturmak için bir yöntem içerir.
 
 `ConfigureServices` ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
@@ -80,7 +80,7 @@ Konak hakkında daha fazla bilgi için [konağa](xref:fundamentals/index#host) b
 
 Konak, Yöntemler çağrılmadan önce bazı hizmetleri yapılandırabilir `Startup` . Daha fazla bilgi için bkz. [ana bilgisayar](xref:fundamentals/index#host).
 
-Önemli kurulum gerektiren özellikler için `Add{Service}` üzerinde uzantı yöntemleri vardır <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Örneğin, DbContext **ekleyin** , varsayılan **ekleyin** Identity , entityframeworkmağazalarını **ekleyin** ve sayfa **ekleyin** Razor :
+Önemli kurulum gerektiren özellikler için `Add{Service}` üzerinde uzantı yöntemleri vardır <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Örneğin, DbContext **ekleyin**, varsayılan **ekleyin** Identity , entityframeworkmağazalarını **ekleyin** ve sayfa **ekleyin** Razor :
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
@@ -173,7 +173,7 @@ Uygulama <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> , uygulamanın sın
 
 ASP.NET Core uygulamalar `Startup` , kural tarafından adlandırılan bir sınıfı kullanır `Startup` . `Startup` sınıfı:
 
-* İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini* yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler *registered* `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
+* İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini* yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler  `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Uygulamanın istek işleme ardışık düzenini oluşturmak için bir yöntem içerir.
 
 `ConfigureServices` ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
@@ -212,7 +212,7 @@ Konak hakkında daha fazla bilgi için [konağa](xref:fundamentals/index#host) b
 
 Konak, Yöntemler çağrılmadan önce bazı hizmetleri yapılandırabilir `Startup` . Daha fazla bilgi için bkz. [ana bilgisayar](xref:fundamentals/index#host).
 
-Önemli kurulum gerektiren özellikler için `Add{Service}` üzerinde uzantı yöntemleri vardır <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Örneğin, DbContext **ekleyin** , varsayılan **ekleyin** Identity , entityframeworkmağazalarını **ekleyin** ve sayfa **ekleyin** Razor :
+Önemli kurulum gerektiren özellikler için `Add{Service}` üzerinde uzantı yöntemleri vardır <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Örneğin, DbContext **ekleyin**, varsayılan **ekleyin** Identity , entityframeworkmağazalarını **ekleyin** ve sayfa **ekleyin** Razor :
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 

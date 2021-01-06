@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054716"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio 'da ASP.NET Core LibMan kullanma
@@ -34,11 +34,11 @@ Visual Studio, aşağıdakiler dahil olmak üzere ASP.NET Core projelerinde [Lib
 * Derlemede LibMan geri yükleme işlemlerini yapılandırma ve çalıştırma desteği.
 * LibMan geri yükleme ve temizleme işlemlerini tetikleyen menü öğeleri.
 * Kitaplıkları bulmak ve dosyaları bir projeye eklemek için arama iletişim kutusu.
-* *libman.json* &mdash; Libman bildirim dosyasındalibman.jsiçin destek düzenlemesi.
+*  &mdash; Libman bildirim dosyasındalibman.jsiçin destek düzenlemesi.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
@@ -53,7 +53,7 @@ Kitaplık dosyaları, ASP.NET Core projesine iki farklı şekilde eklenebilir:
 
 İstemci tarafı kitaplığı yüklemek için şu adımları izleyin:
 
-* **Çözüm Gezgini** , dosyaların eklenmesi gereken proje klasörüne sağ tıklayın. **Add**  >  **İstemci tarafı kitaplığı** Ekle ' yi seçin. **Client-Side kitaplığı Ekle** iletişim kutusu görünür:
+* **Çözüm Gezgini**, dosyaların eklenmesi gereken proje klasörüne sağ tıklayın.   >  **İstemci tarafı kitaplığı** Ekle ' yi seçin. **Client-Side kitaplığı Ekle** iletişim kutusu görünür:
 
   ![Client-Side kitaplığı Ekle iletişim kutusu](_static/add-library-dialog.png)
 
@@ -96,12 +96,12 @@ Kitaplık dosyaları, ASP.NET Core projesine iki farklı şekilde eklenebilir:
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>LibMan bildirim dosyası girişlerini el ile yapılandır
 
-Visual Studio 'daki tüm LibMan işlemleri, proje kökünün LibMan bildiriminin içeriğine dayalıdır ( *libman.js* ). Projenin kitaplık dosyalarını yapılandırmak için *üzerindelibman.js* el ile düzenleyebilirsiniz. *libman.json* kaydedildiğinde, Visual Studio tüm kitaplık dosyalarını geri yükler.
+Visual Studio 'daki tüm LibMan işlemleri, proje kökünün LibMan bildiriminin içeriğine dayalıdır (*libman.js*). Projenin kitaplık dosyalarını yapılandırmak için *üzerindelibman.js* el ile düzenleyebilirsiniz. *libman.json* kaydedildiğinde, Visual Studio tüm kitaplık dosyalarını geri yükler.
 
 Düzenlenmek üzere *libman.js* açmak için aşağıdaki seçenekler mevcuttur:
 
 * **Çözüm Gezgini** dosyasında *libman.js* çift tıklayın.
-* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Client-Side kitaplıklarını yönet** ' i seçin. **&#8224;**
+* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Client-Side kitaplıklarını yönet**' i seçin. **&#8224;**
 * Visual Studio **Proje** menüsünden **Client-Side kitaplıklarını yönet** ' i seçin. **&#8224;**
 
 **&#8224;** Dosya *üzerindelibman.js* proje kökünde zaten yoksa, varsayılan öğe şablonu içeriğiyle oluşturulur.
@@ -110,7 +110,7 @@ Visual Studio, renklendirme, biçimlendirme, IntelliSense ve şema doğrulaması
 
 Aşağıdaki bildirim dosyası ile LibMan, özelliğinde tanımlanan yapılandırma başına dosya alır `libraries` . Aşağıdaki içinde tanımlanan nesne sabit değerlerinin açıklaması `libraries` :
 
-* [JQuery](https://jquery.com/) sürüm 3.3.1 'nin bir alt kümesi CDNJS sağlayıcısından alınmıştır. Alt küme `files` &mdash; *jquery.min.js* , *jquery.js* ve *jQuery. min. Map* özelliğinde tanımlanmıştır. Dosyalar projenin *Wwwroot/lib/jQuery* klasörüne yerleştirilir.
+* [JQuery](https://jquery.com/) sürüm 3.3.1 'nin bir alt kümesi CDNJS sağlayıcısından alınmıştır. Alt küme `files` &mdash; *jquery.min.js*, *jquery.js* ve *jQuery. min. Map* özelliğinde tanımlanmıştır. Dosyalar projenin *Wwwroot/lib/jQuery* klasörüne yerleştirilir.
 * [Önyükleme](https://getbootstrap.com/) sürümü 4.1.3 tamamen alınır ve bir *Wwwroot/LIB/Bootstrap* klasörüne yerleştirilir. Nesne sabit değerinin `provider` özelliği `defaultProvider` özellik değerini geçersiz kılar. LibMan, önyükleme dosyalarını unpkg sağlayıcısından alır.
 * [Lodash](https://lodash.com/) alt kümesi, kuruluş içindeki bir yöneten gövde tarafından onaylandı. *lodash.js* ve *lodash.min.js* dosyaları, *C: \\ Temp \\ lodash \\* konumundaki yerel dosya sisteminden alınır. Dosyalar projenin *Wwwroot/LIB/lodash* klasörüne kopyalanır.
 
@@ -171,7 +171,7 @@ Kitaplık dosyalarını el ile geri yüklemek için:
 
 Geri yükleme işlemi çalışırken:
 
-* Visual Studio durum çubuğundaki Görev Durumu Merkezi (TSC) simgesi canlandırılır ve *geri yükleme işlemi başlatılır* . Simgeye tıkladığınızda bilinen arka plan görevlerinin listelendiği bir araç ipucu açılır.
+* Visual Studio durum çubuğundaki Görev Durumu Merkezi (TSC) simgesi canlandırılır ve *geri yükleme işlemi başlatılır*. Simgeye tıkladığınızda bilinen arka plan görevlerinin listelendiği bir araç ipucu açılır.
 * İletiler durum çubuğuna ve **Çıkış** penceresinin **Kitaplık Yöneticisi** akışına gönderilir. Örneğin:
 
   ```console
@@ -213,11 +213,11 @@ Kitaplık dosyalarını kaldırmak için:
 
 * *Üzerindelibman.js* açın.
 * Giriş işaretini karşılık gelen `libraries` nesne değişmez değerinin içine konumlandırın.
-* Sol kenar boşluğunda görünen ampul simgesine tıklayın ve **Kaldır \<library_name> @ \<library_version>** ' ı seçin:
+* Sol kenar boşluğunda görünen ampul simgesine tıklayın ve **Kaldır \<library_name> @ \<library_version>**' ı seçin:
 
   ![Kitaplığı Kaldır bağlam menü seçeneği](_static/uninstall-menu-option.png)
 
-Alternatif olarak, LibMan bildirimini ( *libman.js* ) el ile düzenleyebilir ve kaydedebilirsiniz. [Geri yükleme işlemi](#restore-library-files) dosya kaydedildiğinde çalışır. *libman.jsüzerinde* artık tanımlı olmayan kitaplık dosyaları projeden kaldırılır.
+Alternatif olarak, LibMan bildirimini (*libman.js*) el ile düzenleyebilir ve kaydedebilirsiniz. [Geri yükleme işlemi](#restore-library-files) dosya kaydedildiğinde çalışır. *libman.jsüzerinde* artık tanımlı olmayan kitaplık dosyaları projeden kaldırılır.
 
 ## <a name="update-library-version"></a>Kitaplık sürümünü Güncelleştir
 

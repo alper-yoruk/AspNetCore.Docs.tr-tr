@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: spa/angular
 ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054573"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Angular proje şablonunu ASP.NET Core ile kullanma
@@ -66,7 +66,7 @@ Now listening on: http://localhost:<port>
 Bu URL 'yi bir tarayıcıda gezin.
 
 > [!WARNING]
-> Uygulama arka planda angular CLı sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *ng Live Development Server, localhost: &lt; otherport &gt; , için bir tarayıcı açın, http://localhost:&lt diğer bir deyişle, diğer bağlantı &gt; / noktası* . Bu iletiyi yoksay &mdash; birleşik ASP.NET Core ve angular CLI uygulamasının URL 'si **değildir** .
+> Uygulama arka planda angular CLı sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *ng Live Development Server, localhost: &lt; otherport &gt; , için bir tarayıcı açın, http://localhost:&lt diğer bir deyişle, diğer bağlantı &gt; / noktası*. Bu iletiyi yoksay &mdash; birleşik ASP.NET Core ve angular CLI uygulamasının URL 'si **değildir** .
 
 ---
 

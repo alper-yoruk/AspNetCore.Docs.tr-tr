@@ -15,7 +15,7 @@ ASP.NET Core aşağıdaki avantajları sağlar:
   * [Kestrel](xref:fundamentals/servers/kestrel)
   * [IIS](xref:host-and-deploy/iis/index)
   * [HTTP.sys](xref:fundamentals/servers/httpsys)
-  * [NGINX](xref:host-and-deploy/linux-nginx)
+  * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
   * [Docker](xref:host-and-deploy/docker/index)
 * [Yan yana sürüm oluşturma](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).

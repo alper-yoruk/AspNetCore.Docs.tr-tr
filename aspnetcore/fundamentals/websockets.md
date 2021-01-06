@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/websockets
 ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057784"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core desteği WebSockets
@@ -42,7 +42,7 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 
 Bazı uygulamalarda, [.net 'Teki GRPC](xref:grpc/index) , WebSockets için bir alternatif sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * ASP.NET Core destekleyen herhangi bir işletim sistemi:  
   * Windows 7/Windows Server 2008 veya üzeri
@@ -128,7 +128,7 @@ Döngüye başlamadan önce WebSocket bağlantısı kabul edildiğinde, ara yaz�
 
 ## <a name="websocket-origin-restriction"></a>WebSocket kaynak kısıtlaması
 
-CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez** :
+CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez**:
 
 * CORS ön uçuş istekleri gerçekleştirin.
 * `Access-Control`WebSocket istekleri yapılırken üst bilgilerde belirtilen kısıtlamalara saygı.
@@ -159,12 +159,12 @@ Windows Server 2012 veya sonraki sürümlerde WebSocket protokolü desteğini et
 > IIS Express kullanılırken bu adımlar gerekli değildir
 
 1. **Yönet** menüsündeki **rol ve özellik ekleme** sihirbazı ' nı veya **Sunucu Yöneticisi** bağlantısındaki bağlantıyı kullanın.
-1. **Rol tabanlı veya özellik tabanlı yükleme** ' yi seçin. **İleri** ’yi seçin.
-1. Uygun sunucuyu seçin (yerel sunucu varsayılan olarak seçilidir). **İleri** ’yi seçin.
-1. **Roller** ağacında **Web sunucusu (IIS)** öğesini genişletin, **Web sunucusu** ' nu genişletin ve ardından **uygulama geliştirme** ' yi genişletin.
-1. **WebSocket protokolünü** seçin. **İleri** ’yi seçin.
-1. Ek özellikler gerekmiyorsa, **İleri** ' yi seçin.
-1. **Yükle** 'yi seçin.
+1. **Rol tabanlı veya özellik tabanlı yükleme**' yi seçin. **İleri**’yi seçin.
+1. Uygun sunucuyu seçin (yerel sunucu varsayılan olarak seçilidir). **İleri**’yi seçin.
+1. **Roller** ağacında **Web sunucusu (IIS)** öğesini genişletin, **Web sunucusu**' nu genişletin ve ardından **uygulama geliştirme**' yi genişletin.
+1. **WebSocket protokolünü** seçin. **İleri**’yi seçin.
+1. Ek özellikler gerekmiyorsa, **İleri**' yi seçin.
+1. **Yükle**'yi seçin.
 1. Yükleme tamamlandığında sihirbazdan çıkmak için **Kapat** ' ı seçin.
 
 Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştirmek için:
@@ -173,8 +173,8 @@ Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştir
 > IIS Express kullanılırken bu adımlar gerekli değildir
 
 1. **Denetim Masası**  >  **programları**  >  **Programlar ve Özellikler**  >  **Windows özelliklerini aç veya kapat** (ekranın sol tarafında).
-1. Şu düğümleri açın: **Internet Information Services**  >  **World Wide Web Services**  >  **uygulama geliştirme özellikleri** .
-1. **WebSocket protokolü** özelliğini seçin. **Tamam** ’ı seçin.
+1. Şu düğümleri açın: **Internet Information Services**  >  **World Wide Web Services**  >  **uygulama geliştirme özellikleri**.
+1. **WebSocket protokolü** özelliğini seçin. **Tamam**’ı seçin.
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Node.js üzerinde socket.io kullanırken WebSocket 'i devre dışı bırak
 
@@ -192,7 +192,7 @@ Bu makaleye eşlik eden [örnek uygulama](https://github.com/dotnet/AspNetCore.D
 
 ![Web sayfasının ilk durumu](websockets/_static/start.png)
 
-Gösterilen URL 'ye WebSocket isteği göndermek için **Bağlan** ' ı seçin. Bir sınama iletisi girin ve **Gönder** ' i seçin. İşiniz bittiğinde **yuvayı kapat** ' ı seçin. **Iletişim günlüğü** bölümünde her açık, gönder ve Kapat eylemi gerçekleşir.
+Gösterilen URL 'ye WebSocket isteği göndermek için **Bağlan** ' ı seçin. Bir sınama iletisi girin ve **Gönder**' i seçin. İşiniz bittiğinde **yuvayı kapat**' ı seçin. **Iletişim günlüğü** bölümünde her açık, gönder ve Kapat eylemi gerçekleşir.
 
 ![Web sayfasının ilk durumu](websockets/_static/end.png)
 

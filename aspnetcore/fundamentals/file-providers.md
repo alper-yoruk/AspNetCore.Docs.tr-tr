@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/file-providers
 ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059448"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core dosya sağlayıcıları
@@ -115,7 +115,7 @@ Derlemeye eklemek üzere bir veya daha fazla dosya belirtmek için [Glob desenle
 
 *Fileprovidersample* örnek uygulaması bir oluşturur `ManifestEmbeddedFileProvider` ve şu anda yürütülmekte olan derlemeyi oluşturucusuna geçirir.
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -262,7 +262,7 @@ Derlemeye eklemek üzere bir veya daha fazla dosya belirtmek için [Glob desenle
 
 Örnek uygulama bir oluşturur `ManifestEmbeddedFileProvider` ve şu anda yürütülmekte olan derlemeyi oluşturucusuna geçirir.
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 

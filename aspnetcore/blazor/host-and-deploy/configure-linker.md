@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
 ms.openlocfilehash: 0c99056053356133e901d6cf468fec8034dfb845
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93055834"
 ---
 # <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>ASP.NET Core için bağlayıcı yapılandırma Blazor
@@ -126,7 +126,7 @@ Hangi I18N derlemelerinin korunacağını denetlemek için, `<BlazorWebAssemblyI
 | `all`            | Tüm derlemeler dahil |
 | `cjk`            | `I18N.CJK.dll`          |
 | `mideast`        | `I18N.MidEast.dll`      |
-| `none` varsayılanını | Yok                    |
+| `none` varsayılanını | Hiçbiri                    |
 | `other`          | `I18N.Other.dll`        |
 | `rare`           | `I18N.Rare.dll`         |
 | `west`           | `I18N.West.dll`         |

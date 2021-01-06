@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
 ms.openlocfilehash: 2cfd200c44290a0931cdeb2f68e99b90c11aa612
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059825"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
@@ -31,7 +31,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core platformlar arası geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -40,7 +40,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 Docker yüklemesi için öncelikle [Docker for Windows: yüklemeden önce bilmeniz](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)gereken bilgileri gözden geçirin. Ardından, [Windows Için Docker](https://docs.docker.com/docker-for-windows/install/)'ı yüklersiniz.
 
-Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar** ' ı seçin ve **paylaşılan sürücüler** ' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula** 'ya tıklayın.
+Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar**' ı seçin ve **paylaşılan sürücüler**' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula**’ya tıklayın.
 
 ![Kapsayıcılar için yerel C sürücüsü paylaşımını seçme iletişim kutusu](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
@@ -51,7 +51,7 @@ Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.c
 
 ASP.NET Core bir projeyi Kapsayıcılı hale getirmek için, projenin .NET Core 'u hedeflemesi gerekir. Hem Linux hem de Windows kapsayıcıları desteklenir.
 
-Bir projeye Docker desteği eklerken, bir Windows veya Linux kapsayıcısı seçin. Docker ana bilgisayarı aynı kapsayıcı türünü çalıştırıyor olmalıdır. Çalışan Docker örneğindeki kapsayıcı türünü değiştirmek için, sistem tepsisinin Docker simgesine sağ tıklayın ve **Windows kapsayıcılarına geç...** ' i seçin veya **Linux kapsayıcılarına geç..** ..
+Bir projeye Docker desteği eklerken, bir Windows veya Linux kapsayıcısı seçin. Docker ana bilgisayarı aynı kapsayıcı türünü çalıştırıyor olmalıdır. Çalışan Docker örneğindeki kapsayıcı türünü değiştirmek için, sistem tepsisinin Docker simgesine sağ tıklayın ve **Windows kapsayıcılarına geç...** ' i seçin veya **Linux kapsayıcılarına geç..**..
 
 ### <a name="new-app"></a>Yeni uygulama
 
@@ -66,13 +66,13 @@ Hedef çerçeve .NET Core ise, **Işletim sistemi** açılır listesi bir kapsay
 .NET Core 'u hedefleyen ASP.NET Core projeleri için, araç aracılığıyla Docker desteği eklemenin iki seçeneği vardır. Visual Studio 'da projeyi açın ve aşağıdaki seçeneklerden birini belirleyin:
 
 * **Proje** menüsünden **Docker desteği** ' ni seçin.
-* **Çözüm Gezgini** projeye sağ tıklayın ve **Add**  >  **Docker desteği** Ekle ' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve   >  **Docker desteği** Ekle ' yi seçin.
 
 Visual Studio kapsayıcı araçları, .NET Framework hedefleme ASP.NET Core var olan bir projeye Docker eklemeyi desteklemez.
 
 ## <a name="dockerfile-overview"></a>Dockerfile genel bakış
 
-Bir *Dockerfile* , son bir Docker görüntüsü oluşturmak için tarif, proje köküne eklenir. İçindeki komutları anlamak için [Dockerfile başvurusuna](https://docs.docker.com/engine/reference/builder/) bakın. Bu belirli *Dockerfile* , dört farklı, adlandırılmış derleme aşamaları ile [çok aşamalı bir yapı](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır:
+Bir *Dockerfile*, son bir Docker görüntüsü oluşturmak için tarif, proje köküne eklenir. İçindeki komutları anlamak için [Dockerfile başvurusuna](https://docs.docker.com/engine/reference/builder/) bakın. Bu belirli *Dockerfile* , dört farklı, adlandırılmış derleme aşamaları ile [çok aşamalı bir yapı](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır:
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -94,9 +94,9 @@ Yukarıdaki *Dockerfile* , [Microsoft/aspnetcore](https://hub.docker.com/r/micro
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Bir uygulamaya kapsayıcı Orchestrator desteği ekleme
 
-Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar, **Add**  >  **Docker desteği** Ekle aracılığıyla eklenir.
+Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar,   >  **Docker desteği** Ekle aracılığıyla eklenir.
 
-Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Add**  >  **kapsayıcı Orchestrator desteği** Ekle ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
+Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve   >  **kapsayıcı Orchestrator desteği** Ekle ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
@@ -106,10 +106,10 @@ Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yal
 
 Visual Studio kapsayıcı araçları, aşağıdaki dosyalarla çözüme bir *Docker-Compose* projesi ekler:
 
-* *Docker-Compose. dcproj* : projeyi temsil eden dosya. `<DockerTargetOS>`Kullanılacak işletim sistemini belirleyen bir öğesi içerir.
-* *. dockerıgnore* : derleme bağlamı oluşturulurken dışlanacak dosya ve Dizin düzenlerini listeler.
-* *Docker-Compose. yml* : sırasıyla ve ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel [Docker Compose](https://docs.docker.com/compose/overview/) dosyası `docker-compose build` `docker-compose run` .
-* *Docker-Compose. override. yml* : isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` Bu dosyaları birleştirmek için yürütülür.
+* *Docker-Compose. dcproj*: projeyi temsil eden dosya. `<DockerTargetOS>`Kullanılacak işletim sistemini belirleyen bir öğesi içerir.
+* *. dockerıgnore*: derleme bağlamı oluşturulurken dışlanacak dosya ve Dizin düzenlerini listeler.
+* *Docker-Compose. yml*: sırasıyla ve ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel [Docker Compose](https://docs.docker.com/compose/overview/) dosyası `docker-compose build` `docker-compose run` .
+* *Docker-Compose. override. yml*: isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` Bu dosyaları birleştirmek için yürütülür.
 
 *Docker-Compose. yml* dosyası, proje çalışırken oluşturulan görüntünün adına başvurur:
 
@@ -119,7 +119,7 @@ Yukarıdaki örnekte, `image: hellodockertools` `hellodockertools:dev` uygulama 
 
 Görüntü kayıt defterine itilse, görüntü adını [Docker Hub](https://hub.docker.com/) Kullanıcı adı (örneğin,) ile önek yapın `dockerhubusername/hellodockertools` . Alternatif olarak, yapılandırmaya bağlı olarak, görüntü adını özel kayıt defteri URL 'sini (örneğin,) içerecek şekilde değiştirin `privateregistry.domain.com/hellodockertools` .
 
-Yapı yapılandırmasına (örneğin, hata ayıklama veya sürüm) göre farklı davranışlar istiyorsanız, yapılandırmaya özgü *Docker-Compose* dosyaları ekleyin. Dosyalar derleme yapılandırmasına göre adlandırılmalıdır (örneğin, *Docker-Compose. vs. Debug. yıml* ve *Docker-Compose. vs. Release. yıml* ) ve *Docker-Compose-override. yıml* dosyasıyla aynı konuma yerleştirildi. 
+Yapı yapılandırmasına (örneğin, hata ayıklama veya sürüm) göre farklı davranışlar istiyorsanız, yapılandırmaya özgü *Docker-Compose* dosyaları ekleyin. Dosyalar derleme yapılandırmasına göre adlandırılmalıdır (örneğin, *Docker-Compose. vs. Debug. yıml* ve *Docker-Compose. vs. Release. yıml*) ve *Docker-Compose-override. yıml* dosyasıyla aynı konuma yerleştirildi. 
 
 Yapılandırmaya özgü geçersiz kılma dosyalarını kullanarak, hata ayıklama ve yayın derleme yapılandırmaları için farklı yapılandırma ayarları (ortam değişkenleri veya giriş noktaları gibi) belirtebilirsiniz.
 

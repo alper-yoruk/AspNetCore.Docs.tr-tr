@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054066"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile ilgili verileri okuma-ASP.NET MVC
@@ -43,7 +43,7 @@ Bu öğreticide şunları yaptınız:
 > * Eğitmenler sayfası oluşturma
 > * Açık yükleme hakkında bilgi edinin
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Karmaşık veri modeli oluşturma](complex-data-model.md)
 
@@ -245,7 +245,7 @@ Sayfayı yeniden yenileyip bir eğitmen seçin. Ardından, kayıtlı öğrencile
 
 ## <a name="about-explicit-loading"></a>Açık yükleme hakkında
 
-*InstructorsController.cs* ' de eğitmenler listesini aldığınızda, gezinti özelliği için bir Eager yüklemesi belirttiniz `CourseAssignments` .
+*InstructorsController.cs*' de eğitmenler listesini aldığınızda, gezinti özelliği için bir Eager yüklemesi belirttiniz `CourseAssignments` .
 
 Kullanıcılardan yalnızca, seçili bir eğitmenin ve kursla kayıtlarını yalnızca nadiren görmek istediğini varsayalım. Bu durumda, kayıt verilerini yalnızca istenirse yüklemek isteyebilirsiniz. Açık yüklemenin nasıl yapılacağını gösteren bir örnek görmek için, `Index` yöntemini aşağıdaki kodla değiştirin, bu da kayıtları için Eager yüklemeyi kaldırır ve bu özelliği açıkça yükler. Kod değişiklikleri vurgulanır.
 

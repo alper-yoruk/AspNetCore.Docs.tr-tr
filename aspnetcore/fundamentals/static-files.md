@@ -17,10 +17,10 @@ no-loc:
 - SignalR
 uid: fundamentals/static-files
 ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057862"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
@@ -285,7 +285,7 @@ HTML, CSS, resim ve JavaScript gibi statik dosyalar, ASP.NET Core bir uygulaman�
 
 ## <a name="serve-static-files"></a>Statik dosyaları sunma
 
-Statik dosyalar projenin [Web kök](xref:fundamentals/index#web-root) dizininde depolanır. Varsayılan dizin *{Content root}/Wwwroot* ' dır, ancak yöntemi aracılığıyla değiştirilebilir <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> . Daha fazla bilgi için bkz. [içerik kökü](xref:fundamentals/index#content-root) ve [Web kök](xref:fundamentals/index#web-root) .
+Statik dosyalar projenin [Web kök](xref:fundamentals/index#web-root) dizininde depolanır. Varsayılan dizin *{Content root}/Wwwroot*' dır, ancak yöntemi aracılığıyla değiştirilebilir <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> . Daha fazla bilgi için bkz. [içerik kökü](xref:fundamentals/index#content-root) ve [Web kök](xref:fundamentals/index#web-root) .
 
 Uygulamanın Web ana bilgisayarı, içerik kök dizininden haberdar olmalıdır.
 
@@ -300,7 +300,7 @@ Statik dosyalara, [Web köküne](xref:fundamentals/index#web-root)göre bir yol 
   * `images`
   * `js`
 
-*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name>* olur. Örneğin, *http://localhost:9189/images/banner3.svg* .
+*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name>* olur. Örneğin, *http://localhost:9189/images/banner3.svg*.
 
 .NET Framework hedefliyorsanız, [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) paketini projeye ekleyin. .NET Core hedefleniyorsa, [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) bu paketi içerir.
 
@@ -336,7 +336,7 @@ Bir istek statik dosya ara yazılımını aşağıdaki şekilde yapılandırarak
 
 Yukarıdaki kodda, *mystaticfiles* dizin hiyerarşisi, *staticfiles* URI segmenti aracılığıyla herkese açıktır. *Http:// \<server_address> /StaticFiles/images/banner1.SVG* için bir istek *banner1. SVG* dosyasına hizmet verir.
 
-Aşağıdaki biçimlendirme *Mystaticfiles/Images/banner1. SVG* ' ye başvurur:
+Aşağıdaki biçimlendirme *Mystaticfiles/Images/banner1. SVG*' ye başvurur:
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_outside)]
 
@@ -478,7 +478,7 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 
 ## <a name="serve-files-from-multiple-locations"></a>Birden çok konumdan dosyaları sunma
 
-`UseStaticFiles` ve `UseFileServer` Varsayılan olarak *Wwwroot* ' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
+`UseStaticFiles` ve `UseFileServer` Varsayılan olarak *Wwwroot*' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
 
 ### <a name="considerations"></a>Dikkat edilmesi gerekenler
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/test
 ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054872"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>ASP.NET Core 'de test bileşenleri Blazor
@@ -42,7 +42,7 @@ Bir bileşeni test etmek için Blazor , test (kes) *altındaki bileşen* :
 
 Bileşenleri test etmek için iki yaygın yaklaşım Blazor , uçtan uca (e2e) test ve birim sınamalardır:
 
-* **Birim testi** : [birim testleri](/dotnet/core/testing/) şunları sağlayan bir birim testi kitaplığıyla yazılır:
+* **Birim testi**: [birim testleri](/dotnet/core/testing/) şunları sağlayan bir birim testi kitaplığıyla yazılır:
   * Bileşen işleme.
   * Bileşen çıkışının ve durumunun incelemesi.
   * Olay işleyicileri ve yaşam döngüsü yöntemlerinin tetiklenmesi.
@@ -64,7 +64,7 @@ E2E testi, genellikle zayıf test güvenilirliğini sağlayan birden çok işlem
 
 Aşağıdaki tabloda iki test yaklaşımının farkı özetlenmektedir.
 
-| Yetenek                       | Birim testi                     | E2E testi                             |
+| Özellik                       | Birim testi                     | E2E testi                             |
 | -------------------------------- | -------------------------------- | --------------------------------------- |
 | Test kapsamı                       | Blazor yalnızca bileşen ( Razor /c #) | BlazorRazorCSS/JS ile bileşen (/c #) |
 | Test yürütme süresi              | Mayacak                     | Saniye                                 |
@@ -86,7 +86,7 @@ Gerçekleştirilecek test türünü seçerken senaryoyu göz önünde bulundurun
 
 ## <a name="test-components-with-bunit"></a>BUnit ile bileşenleri test etme
 
-İçin resmi Microsoft Test çerçevesi yoktur Blazor , ancak topluluk odaklı proje, birim test bileşenlerine [bUnit](https://github.com/egil/bUnit) kolay bir yol sağlar Blazor .
+İçin resmi Microsoft Test çerçevesi yoktur Blazor , ancak topluluk odaklı proje, birim test bileşenlerine [](https://github.com/egil/bUnit) kolay bir yol sağlar Blazor .
 
 > [!NOTE]
 > Bu, üçüncü taraf bir test Kitaplığı olduğundan Microsoft tarafından desteklenmez veya korunmaz.
@@ -143,11 +143,11 @@ public void CounterShouldIncrementWhenSelected()
 
 Testin her adımında aşağıdaki eylemler gerçekleşir:
 
-* *Düzenle* : `Counter` Bileşen, bunit ' i kullanılarak işlenir `TestContext` . KESILEN paragraf öğesi ( `<p>` ) bulunur ve öğesine atanır `paraElm` .
+* *Düzenle*: `Counter` Bileşen, bunit ' i kullanılarak işlenir `TestContext` . KESILEN paragraf öğesi ( `<p>` ) bulunur ve öğesine atanır `paraElm` .
 
-* *Sahne* : düğmenin öğesi ( `<button>` ) bulunur ve sonra öğesini çağırarak seçilir ve bu da `Click` sayacı artırmanız ve paragraf etiketinin () içeriğini güncelleştirmelidir `<p>` . Paragraf öğesi metin içeriği çağırarak elde edilir `TextContent` .
+* *Sahne*: düğmenin öğesi ( `<button>` ) bulunur ve sonra öğesini çağırarak seçilir ve bu da `Click` sayacı artırmanız ve paragraf etiketinin () içeriğini güncelleştirmelidir `<p>` . Paragraf öğesi metin içeriği çağırarak elde edilir `TextContent` .
 
-* *Assert* Onay: `MarkupMatches` metin içeriğinde, bir olan beklenen dizeyle eşleştiğini doğrulamak için çağrılır `Current count: 1` .
+* Onay: `MarkupMatches` metin içeriğinde, bir olan beklenen dizeyle eşleştiğini doğrulamak için çağrılır `Current count: 1` .
 
 > [!NOTE]
 > `MarkupMatches`Onaylama yöntemi bir normal dize karşılaştırma onaylamadan farklıdır (örneğin, `Assert.Equal("Current count: 1", paraElmText);` ) `MarkupMatches` girişin anlam KARŞıLAŞTıRMASıNı ve beklenen HTML işaretlemesini gerçekleştirir. Anlamsal bir karşılaştırma, HTML semantiğinin farkındadır, yani çok önemli boşluk gibi şeyler yok sayılır. Bu, daha kararlı testlere neden olur. Daha fazla bilgi için bkz. [anlam HTML karşılaştırmasını özelleştirme](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison).

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/using-browserlink
 ms.openlocfilehash: 80f05acab55af973faf08b5db79ea4cbaf896b14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054495"
 ---
 # <a name="browser-link-in-aspnet-core"></a>ASP.NET Core tarayıcı bağlantısı
@@ -35,7 +35,7 @@ Tarayıcı bağlantısı, bir Visual Studio özelliğidir. Geliştirme ortamı i
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. ASP.NET Core Razor sayfaları veya MVC projeleri için, Razor ' de açıklandığı gibi ( *. cshtml* ) dosyaları için çalışma zamanı derlemesini de etkinleştirin <xref:mvc/views/view-compilation> . Razor söz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
+[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. ASP.NET Core Razor sayfaları veya MVC projeleri için, Razor ' de açıklandığı gibi (*. cshtml*) dosyaları için çalışma zamanı derlemesini de etkinleştirin <xref:mvc/views/view-compilation> . Razor söz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
 
 ::: moniker-end
 
@@ -47,7 +47,7 @@ ASP.NET Core 2,0 projesi ASP.NET Core 2,1 ' e dönüştürülürken ve [Microsof
 
 ::: moniker range="= aspnetcore-2.0"
 
-ASP.NET Core 2,0 **Web uygulaması** , **Empty** ve **Web API** proje şablonları, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)Için bir paket başvurusu içeren [Microsoft. aspnetcore. All meta paketini](xref:fundamentals/metapackage)kullanır. Bu nedenle, `Microsoft.AspNetCore.All` metapackage 'in kullanılması tarayıcı bağlantısının kullanılabilir olmasını sağlamak için başka bir eylem gerektirmez.
+ASP.NET Core 2,0 **Web uygulaması**, **Empty** ve **Web API** proje şablonları, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)Için bir paket başvurusu içeren [Microsoft. aspnetcore. All meta paketini](xref:fundamentals/metapackage)kullanır. Bu nedenle, `Microsoft.AspNetCore.All` metapackage 'in kullanılması tarayıcı bağlantısının kullanılabilir olmasını sağlamak için başka bir eylem gerektirmez.
 
 ::: moniker-end
 
@@ -96,7 +96,7 @@ Projeyi başlatırken başlatılacak tek bir Web tarayıcısı seçmek için, **
 
 ![F5 açılır menüsü](using-browserlink/_static/debug-target-dropdown-menu.png)
 
-Aynı anda birden çok tarayıcı açmak için, aynı açılan listeden **... öğesine gidin** ' i seçin. İstediğiniz tarayıcıları seçmek için <kbd>CTRL</kbd> tuşunu basılı tutarak, ardından da **Araştır** ' a tıklayın:
+Aynı anda birden çok tarayıcı açmak için, aynı açılan listeden **... öğesine gidin** ' i seçin. İstediğiniz tarayıcıları seçmek için <kbd>CTRL</kbd> tuşunu basılı tutarak, ardından da **Araştır**' a tıklayın:
 
 ![Birçok tarayıcıyı aynı anda aç](using-browserlink/_static/open-many-browsers-at-once.png)
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/crud
 ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054300"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile CRUD Işlevselliği uygulama-ASP.NET MVC
@@ -42,7 +42,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Veritabanı bağlantılarını kapat
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [EF Core ve ASP.NET Core MVC ile çalışmaya başlama](intro.md)
 
@@ -122,7 +122,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir öğrenci 
 
 ## <a name="update-the-create-page"></a>Oluştur sayfasını Güncelleştir
 
-*StudentsController.cs* ' de, HttpPost `Create` yöntemini bir try-catch bloğu ekleyerek ve öznitelikten ID 'yi kaldırarak değiştirin `Bind` .
+*StudentsController.cs*' de, HttpPost `Create` yöntemini bir try-catch bloğu ekleyerek ve öznitelikten ID 'yi kaldırarak değiştirin `Bind` .
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Create&highlight=4,6-7,14-21)]
 
@@ -165,7 +165,7 @@ Birçok geliştirici tarafından tercih edilen aşırı nakletmeyi önlemenin al
 
 *Views/öğrenciler/Create. cshtml* içindeki kod her bir `label` `input` `span` alan için, ve (doğrulama iletileri için) etiket yardımcıları kullanır.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve **Yeni oluştur** ' a tıklayın.
+Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve **Yeni oluştur**' a tıklayın.
 
 Ad ve tarih girin. Tarayıcınız bunu yapmanızı sağlar, geçersiz bir tarih girmeyi deneyin. (Bazı tarayıcılar bir tarih seçici kullanmanıza zorlar.) Hata iletisini görmek için **Oluştur** ' a tıklayın.
 
@@ -179,7 +179,7 @@ Tarihi geçerli bir değer olarak değiştirin ve yeni öğrencinin **Dizin** sa
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*StudentController.cs* ' de, HttpGet `Edit` Yöntemi (özniteliği olmayan), `HttpPost` `SingleOrDefaultAsync` yönteminde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır `Details` . Bu yöntemi değiştirmeniz gerekmez.
+*StudentController.cs*' de, HttpGet `Edit` Yöntemi (özniteliği olmayan), `HttpPost` `SingleOrDefaultAsync` yönteminde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır `Details` . Bu yöntemi değiştirmeniz gerekmez.
 
 ### <a name="recommended-httppost-edit-code-read-and-update"></a>Önerilen HttpPost düzenleme kodu: okuma ve güncelleştirme
 
@@ -235,11 +235,11 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve köprü **Düz
 
 ![Öğrenciler düzenleme sayfası](crud/_static/student-edit.png)
 
-Bazı verileri değiştirin ve **Kaydet** ' e tıklayın. **Dizin** sayfası açılır ve değiştirilen verileri görürsünüz.
+Bazı verileri değiştirin ve **Kaydet**' e tıklayın. **Dizin** sayfası açılır ve değiştirilen verileri görürsünüz.
 
 ## <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
-*StudentController.cs* ' de, HttpGet yönteminin şablon kodu, `Delete` `SingleOrDefaultAsync` Ayrıntılar ve düzenleme yöntemlerinde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır. Ancak, çağrı başarısız olursa özel bir hata iletisi uygulamak için `SaveChanges` Bu yönteme ve buna karşılık gelen görünüme bazı işlevler eklersiniz.
+*StudentController.cs*' de, HttpGet yönteminin şablon kodu, `Delete` `SingleOrDefaultAsync` Ayrıntılar ve düzenleme yöntemlerinde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır. Ancak, çağrı başarısız olursa özel bir hata iletisi uygulamak için `SaveChanges` Bu yönteme ve buna karşılık gelen görünüme bazı işlevler eklersiniz.
 
 Güncelleştirme ve oluşturma işlemleri için gördüğünüz gibi silme işlemleri için iki eylem yöntemi gerekir. GET isteğine yanıt olarak çağrılan yöntem, kullanıcıya silme işlemini onaylama veya iptal etme şansı veren bir görünüm görüntüler. Kullanıcı onu onayladığında, bir POST isteği oluşturulur. Bu durumda, HttpPost `Delete` yöntemi çağrılır ve bu yöntem aslında silme işlemini gerçekleştirir.
 
@@ -269,7 +269,7 @@ Varlığın de silinmesi gereken ilgili veriler varsa, veritabanında Cascade si
 
 ### <a name="update-the-delete-view"></a>Silme görünümünü Güncelleştir
 
-*Görünümler/öğrenci/delete. cshtml* ' de, aşağıdaki örnekte gösterildiği gibi, H2 başlığı ve H3 başlığı arasına bir hata iletisi ekleyin:
+*Görünümler/öğrenci/delete. cshtml*' de, aşağıdaki örnekte gösterildiği gibi, H2 başlığı ve H3 başlığı arasına bir hata iletisi ekleyin:
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
@@ -277,13 +277,13 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir **Delete**
 
 ![Onay sayfasını Sil](crud/_static/student-delete.png)
 
-**Sil** 'e tıklayın. Dizin sayfası, silinen öğrenci olmadan görüntülenir. (Eşzamanlılık öğreticisinde işlem içinde kodu işleme hatası hakkında bir örnek görürsünüz.)
+**Sil**'e tıklayın. Dizin sayfası, silinen öğrenci olmadan görüntülenir. (Eşzamanlılık öğreticisinde işlem içinde kodu işleme hatası hakkında bir örnek görürsünüz.)
 
 ## <a name="close-database-connections"></a>Veritabanı bağlantılarını kapat
 
 Bir veritabanı bağlantısının tuttuğu kaynakları boşaltmak için bağlam örneği, bununla işiniz bittiğinde en kısa sürede atılmalıdır. ASP.NET Core yerleşik [bağımlılık ekleme](../../fundamentals/dependency-injection.md) , sizin için bu görevi gerçekleştirir.
 
-*Startup.cs* ' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped` , Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
+*Startup.cs*' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped` , Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
 
 ## <a name="handle-transactions"></a>İşlemleri işle
 

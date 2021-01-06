@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/windows-service
 ms.openlocfilehash: 31a738e7aa8779171dfa09a5678d7240b8f62343
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057238"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows hizmetinde konak ASP.NET Core
@@ -34,7 +34,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -58,11 +58,11 @@ Uygulama, [Microsoft. Extensions. Hosting. WindowsServices](https://www.nuget.or
 * [İçerik kökünü](xref:fundamentals/index#content-root) [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlar. Daha fazla bilgi için [geçerli dizin ve içerik kökü](#current-directory-and-content-root) bölümüne bakın.
 * Olay günlüğüne kaydetmeyi sağlar:
   * Uygulama adı varsayılan kaynak adı olarak kullanılır.
-  * Varsayılan günlük düzeyi, *Warning* `CreateDefaultBuilder` ana bilgisayarı oluşturmak için çağıran ASP.NET Core şablonuna dayalı bir uygulama için uyarı veya daha yüksek bir uygulamadır.
+  * Varsayılan günlük düzeyi,  `CreateDefaultBuilder` ana bilgisayarı oluşturmak için çağıran ASP.NET Core şablonuna dayalı bir uygulama için uyarı veya daha yüksek bir uygulamadır.
   * Varsayılan günlük düzeyini `Logging:EventLog:LogLevel:Default` appSettings içindeki anahtarla geçersiz kılın *appsettings.json* / *. { Environment}. JSON* veya diğer yapılandırma sağlayıcısı.
   * Yeni olay kaynakları yalnızca yöneticiler tarafından oluşturulabilir. Uygulama adı kullanılarak bir olay kaynağı oluşturuoluşturumadığında, *uygulama* kaynağına bir uyarı kaydedilir ve olay günlükleri devre dışı bırakılır.
 
-`CreateHostBuilder` *Program.cs* ' de:
+`CreateHostBuilder` *Program.cs*' de:
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -97,7 +97,7 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya ( *. exe* ) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya (*. exe*) oluşturur.
 
 [Web SDK 'sını](#sdk)kullanıyorsanız, normalde bir ASP.NET Core uygulaması yayımlarken üretilen bir *web.config* dosyası Windows Hizmetleri uygulaması için gereksizdir. *web.config* dosyasının oluşturulmasını devre dışı bırakmak için, `<IsTransformWebConfigDisabled>` özelliği öğesine ekleyin `true` .
 
@@ -153,13 +153,13 @@ Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bi
 
 Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc* ' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması** ' nı seçin.
+1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
+1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
 1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle** ' yi seçin.
+1. **Kullanıcı veya Grup Ekle**' yi seçin.
 1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
    1. Kullanıcı hesabını ( `{DOMAIN OR COMPUTER NAME\USER}` ) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek Için **Tamam** ' ı seçin.
-   1. **Gelişmiş** 'i seçin. **Şimdi bul** ' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam** ’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
 1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
 
 ## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
@@ -254,7 +254,7 @@ Windows hizmeti için çağırarak döndürülen geçerli çalışma dizini <xre
 
 Uygulama bir hizmet olarak çalıştırıldığında, <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlanır.
 
-Uygulamanın varsayılan ayar dosyaları *appsettings.json* ve *appSettings. { '. JSON ortamı* , [konak oluşturma sırasında Createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)' ı çağırarak uygulamanın içerik kökünden yüklenir.
+Uygulamanın varsayılan ayar dosyaları *appsettings.json* ve *appSettings. { '. JSON ortamı*, [konak oluşturma sırasında Createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)' ı çağırarak uygulamanın içerik kökünden yüklenir.
 
 İçindeki geliştirici kodu tarafından yüklenen diğer ayar dosyaları için <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> , çağrısına gerek yoktur <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> . Aşağıdaki örnekte, dosyadaki *custom_settings.js* uygulamanın içerik kökünde bulunur ve açıkça bir temel yolu ayarlamadan yüklenir:
 
@@ -277,7 +277,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
 * Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32* ' dir.
+* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32*' dir.
 * Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
 * PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi `New-Service` .
 * Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
@@ -288,7 +288,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
 Sistem ve uygulama olay günlüklerine erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın.
 
@@ -357,7 +357,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -399,9 +399,9 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya ( *. exe* ) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya (*. exe*) oluşturur.
 
-Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) hedef Framework 'ü içerir. Aşağıdaki örnekte, RID olarak ayarlanır `win7-x64` . `<SelfContained>` özelliği `false` olarak ayarlanmıştır. Bu özellikler SDK 'nın Windows için bir yürütülebilir ( *. exe* ) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
+Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) hedef Framework 'ü içerir. Aşağıdaki örnekte, RID olarak ayarlanır `win7-x64` . `<SelfContained>` özelliği `false` olarak ayarlanmıştır. Bu özellikler SDK 'nın Windows için bir yürütülebilir (*. exe*) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
 
 Bir ASP.NET Core uygulaması yayımlandığında normalde oluşturulan *web.config* dosyası, Windows Hizmetleri uygulaması için gereksizdir. *web.config* dosyasının oluşturulmasını devre dışı bırakmak için, `<IsTransformWebConfigDisabled>` özelliği öğesine ekleyin `true` .
 
@@ -465,13 +465,13 @@ Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bi
 
 Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc* ' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması** ' nı seçin.
+1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
+1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
 1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle** ' yi seçin.
+1. **Kullanıcı veya Grup Ekle**' yi seçin.
 1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
    1. Kullanıcı hesabını ( `{DOMAIN OR COMPUTER NAME\USER}` ) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek Için **Tamam** ' ı seçin.
-   1. **Gelişmiş** 'i seçin. **Şimdi bul** ' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam** ’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
 1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
 
 ## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
@@ -611,7 +611,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
 * Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32* ' dir.
+* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32*' dir.
 * Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
 * PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi `New-Service` .
 * Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
@@ -622,7 +622,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
 Sistem ve uygulama olay günlüklerine erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın.
 
@@ -691,7 +691,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -733,11 +733,11 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya ( *. exe* ) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya* olarak adlandırılan yürütülebilir bir dosya (*. exe*) oluşturur.
 
-Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) hedef Framework 'ü içerir. Aşağıdaki örnekte, RID olarak ayarlanır `win7-x64` . `<SelfContained>` özelliği `false` olarak ayarlanmıştır. Bu özellikler SDK 'nın Windows için bir yürütülebilir ( *. exe* ) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
+Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) hedef Framework 'ü içerir. Aşağıdaki örnekte, RID olarak ayarlanır `win7-x64` . `<SelfContained>` özelliği `false` olarak ayarlanmıştır. Bu özellikler SDK 'nın Windows için bir yürütülebilir (*. exe*) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
 
-`<UseAppHost>` özelliği `true` olarak ayarlanmıştır. Bu özellik, bir FDD için bir etkinleştirme yolu (yürütülebilir, *. exe* ) ile hizmeti sağlar.
+`<UseAppHost>` özelliği `true` olarak ayarlanmıştır. Bu özellik, bir FDD için bir etkinleştirme yolu (yürütülebilir, *. exe*) ile hizmeti sağlar.
 
 Bir ASP.NET Core uygulaması yayımlandığında normalde oluşturulan *web.config* dosyası, Windows Hizmetleri uygulaması için gereksizdir. *web.config* dosyasının oluşturulmasını devre dışı bırakmak için, `<IsTransformWebConfigDisabled>` özelliği öğesine ekleyin `true` .
 
@@ -802,13 +802,13 @@ Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bi
 
 Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc* ' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması** ' nı seçin.
+1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
+1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
 1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle** ' yi seçin.
+1. **Kullanıcı veya Grup Ekle**' yi seçin.
 1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
    1. Kullanıcı hesabını ( `{DOMAIN OR COMPUTER NAME\USER}` ) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek Için **Tamam** ' ı seçin.
-   1. **Gelişmiş** 'i seçin. **Şimdi bul** ' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam** ’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
 1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
 
 ## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
@@ -948,7 +948,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
 * Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32* ' dir.
+* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Bir Windows hizmetinin temel yolu *c: \\ Windows \\ System32*' dir.
 * Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
 * PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi `New-Service` .
 * Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
@@ -959,7 +959,7 @@ Bir Windows hizmet uygulaması sorunlarını gidermek için bkz <xref:test/troub
 Sistem ve uygulama olay günlüklerine erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın.
 

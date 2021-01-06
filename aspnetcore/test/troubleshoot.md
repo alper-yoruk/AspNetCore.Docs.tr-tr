@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: test/troubleshoot
 ms.openlocfilehash: 8e6c640cd775e5d4cbe6e34c1cecc391baf57344
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059578"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core projelerinde sorun giderme ve hata ayıklama
@@ -50,7 +50,7 @@ Bu uyarı, [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) he
 * 32 bit .NET Core SDK başka bir uygulama tarafından yüklendi.
 * Yanlış sürüm indirildi ve yüklendi.
 
-Bu uyarıyı engellemek için 32 bit .NET Core SDK kaldırın. **Denetim Masası**  >  **Programlar ve Özellikler** 'den Kaldır  >  **bir programı kaldırma veya değiştirme** . Uyarının neden oluştuğunu ve etkilerini anladıysanız, uyarıyı yoksayabilirsiniz.
+Bu uyarıyı engellemek için 32 bit .NET Core SDK kaldırın. **Denetim Masası**  >  **Programlar ve Özellikler**'den Kaldır  >  **bir programı kaldırma veya değiştirme**. Uyarının neden oluştuğunu ve etkilerini anladıysanız, uyarıyı yoksayabilirsiniz.
 
 ### <a name="the-net-core-sdk-is-installed-in-multiple-locations"></a>.NET Core SDK birden çok konuma yüklendi
 
@@ -60,7 +60,7 @@ Bu uyarıyı engellemek için 32 bit .NET Core SDK kaldırın. **Denetim Masası
 
 *C: \\ Program Files \\ DotNet \\ SDK \\* dışında bir dizinde en az bir .NET Core SDK yüklemeniz olduğunda bu iletiyi görürsünüz. Genellikle bu, .NET Core SDK MSI yükleyicisi yerine Kopyala/Yapıştır kullanılarak bir makineye dağıtıldığında meydana gelir.
 
-Bu uyarıyı engellemek için tüm 32-bit .NET Core SDK 'larını ve çalışma zamanlarını kaldırın. **Denetim Masası**  >  **Programlar ve Özellikler** 'den Kaldır  >  **bir programı kaldırma veya değiştirme** . Uyarının neden oluştuğunu ve etkilerini anladıysanız, uyarıyı yoksayabilirsiniz.
+Bu uyarıyı engellemek için tüm 32-bit .NET Core SDK 'larını ve çalışma zamanlarını kaldırın. **Denetim Masası**  >  **Programlar ve Özellikler**'den Kaldır  >  **bir programı kaldırma veya değiştirme**. Uyarının neden oluştuğunu ve etkilerini anladıysanız, uyarıyı yoksayabilirsiniz.
 
 ### <a name="no-net-core-sdks-were-detected"></a>.NET Core SDK 'Ları algılanmadı
 

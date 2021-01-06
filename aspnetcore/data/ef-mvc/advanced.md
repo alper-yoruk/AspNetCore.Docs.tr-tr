@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054391"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Öğretici: Gelişmiş senaryolar hakkında bilgi edinin-EF Core ASP.NET MVC
@@ -43,7 +43,7 @@ Bu öğreticide şunları yaptınız:
 > * EF Core kaynak kodu ve geliştirme planları hakkında bilgi edinin
 > * Kodu basitleştirmek için dinamik LINQ kullanmayı öğrenin
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Devralmayı Uygula](inheritance.md)
 
@@ -63,7 +63,7 @@ Her zaman doğru olduğu gibi, bir Web uygulamasında SQL komutları yürüttü�
 
 `DbSet<TEntity>`Sınıfı, türünde bir varlık döndüren bir sorguyu yürütmek için kullanabileceğiniz bir yöntem sağlar `TEntity` . Bunun nasıl çalıştığını görmek için, `Details` bölüm denetleyicisinin yöntemindeki kodu değiştirirsiniz.
 
-*DepartmentsController.cs* ' de, `Details` yönteminde, `FromSql` aşağıdaki vurgulanmış kodda gösterildiği gibi, bir departmanı alan kodu bir yöntem çağrısıyla değiştirin:
+*DepartmentsController.cs*' de, `Details` yönteminde, `FromSql` aşağıdaki vurgulanmış kodda gösterildiği gibi, bir departmanı alan kodu bir yöntem çağrısıyla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_RawSQL&highlight=8,9,10)]
 
@@ -93,7 +93,7 @@ Contoso Üniversitesi yöneticilerinin veritabanında, her kurs için kredi say�
 
 ![Kurs kredileri sayfasını Güncelleştir](advanced/_static/update-credits.png)
 
-*CoursesController.cs* ' de, HttpGet ve HttpPost için UpdateCourseCredits yöntemleri ekleyin:
+*CoursesController.cs*' de, HttpGet ve HttpPost için UpdateCourseCredits yöntemleri ekleyin:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_UpdateGet)]
 
@@ -103,9 +103,9 @@ Denetleyici bir HttpGet isteğini işlediğinde, içinde hiçbir şey döndürü
 
 **Update** düğmesine tıklandığında, HttpPost yöntemi çağırılır ve Multiplier metin kutusuna girilen değer vardır. Kod daha sonra, kursu güncelleştiren SQL 'i yürütür ve etkilenen satır sayısını içinde görünüme döndürür `ViewData` . Görünüm bir `RowsAffected` değer aldığında, güncelleştirilmiş satır sayısını görüntüler.
 
-**Çözüm Gezgini** , *Görünümler/kurslar* klasörüne sağ tıklayın ve ardından **> yeni öğe Ekle** ' ye tıklayın.
+**Çözüm Gezgini**, *Görünümler/kurslar* klasörüne sağ tıklayın ve ardından **> yeni öğe Ekle**' ye tıklayın.
 
-**Yeni öğe Ekle** iletişim kutusunda sol bölmede yüklü **ASP.NET Core** ' **Installed** a tıklayın, **Razor görüntüle** ' ye tıklayın ve yeni görünüm *UpdateCourseCredits. cshtml* olarak adlandırın.
+**Yeni öğe Ekle** iletişim kutusunda sol bölmede yüklü **ASP.NET Core** '  a tıklayın, **Razor görüntüle**' ye tıklayın ve yeni görünüm *UpdateCourseCredits. cshtml* olarak adlandırın.
 
 *Views/kurslar/UpdateCourseCredits. cshtml* içinde, şablon kodunu şu kodla değiştirin:
 
@@ -115,7 +115,7 @@ Denetleyici bir HttpGet isteğini işlediğinde, içinde hiçbir şey döndürü
 
 ![Kurs kredileri sayfasını Güncelleştir](advanced/_static/update-credits.png)
 
-**Güncelleştir** ’e tıklayın. Etkilenen satır sayısını görürsünüz:
+**Güncelleştir**’e tıklayın. Etkilenen satır sayısını görürsünüz:
 
 ![Güncelleştirme kursu kredileri sayfa satırları etkilendi](advanced/_static/update-credits-rows-affected.png)
 
@@ -225,7 +225,7 @@ Hata iletisi:
 
 Çözüm:
 
-IIS Express sitesini durdurun. Windows sistemi tepsisine IIS Express bulun ve simgesine sağ tıklayın, Contoso Üniversitesi sitesini seçin ve ardından **siteyi durdur** ' a tıklayın.
+IIS Express sitesini durdurun. Windows sistemi tepsisine IIS Express bulun ve simgesine sağ tıklayın, Contoso Üniversitesi sitesini seçin ve ardından **siteyi durdur**' a tıklayın.
 
 ### <a name="migration-scaffolded-with-no-code-in-up-and-down-methods"></a>Yukarı ve aşağı metotlarda kod olmadan geçiş yapı iskelesi
 
@@ -243,7 +243,7 @@ Varolan verileri içeren bir veritabanında şema değişiklikleri yaparken baş
 
 En basit yaklaşım, içindeki veritabanını yeniden adlandırmalıdır *appsettings.json* . Bir sonraki sefer çalıştırdığınızda `database update` Yeni bir veritabanı oluşturulur.
 
-SSOX 'te bir veritabanını silmek için veritabanına sağ tıklayın, **Sil** ' e tıklayın ve ardından **veritabanını sil** Iletişim kutusunda **varolan bağlantıları kapat** ' ı seçin ve **Tamam** ' a tıklayın.
+SSOX 'te bir veritabanını silmek için veritabanına sağ tıklayın, **Sil**' e tıklayın ve ardından **veritabanını sil** Iletişim kutusunda **varolan bağlantıları kapat** ' ı seçin ve **Tamam**' a tıklayın.
 
 CLı kullanarak bir veritabanını silmek için `database drop` CLI komutunu çalıştırın:
 

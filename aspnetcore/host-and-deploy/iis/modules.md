@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 6936071339786262fa8eeb669a59225a695d7488
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 47ba04f199f9b77cf6032de9f80f2410f5c69424
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722812"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "93057407"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core ile IIS modülleri
 
@@ -38,17 +39,17 @@ Tablo, ASP.NET Core uygulamalar ve ASP.NET Core modülü ile işlevsel yerel IIS
 | **Anonim Kimlik Doğrulaması**<br>`AnonymousAuthenticationModule`                                  | Yes | |
 | **Temel kimlik doğrulaması**<br>`BasicAuthenticationModule`                                          | Yes | |
 | **İstemci sertifikası eşleme kimlik doğrulaması**<br>`CertificateMappingAuthenticationModule`      | Yes | |
-| **CGI**<br>`CgiModule`                                                                           | No  | |
+| **CGI**<br>`CgiModule`                                                                           | Hayır  | |
 | **Yapılandırma doğrulaması**<br>`ConfigurationValidationModule`                                  | Yes | |
-| **HTTP Hataları**<br>`CustomErrorModule`                                                           | No  | [Durum kodu sayfaları ara yazılımı](xref:fundamentals/error-handling#usestatuscodepages) |
+| **HTTP Hataları**<br>`CustomErrorModule`                                                           | Hayır  | [Durum kodu sayfaları ara yazılımı](xref:fundamentals/error-handling#usestatuscodepages) |
 | **Özel günlüğe kaydetme**<br>`CustomLoggingModule`                                                      | Yes | |
-| **Varsayılan Belge**<br>`DefaultDocumentModule`                                                  | No  | [Varsayılan dosyalar ara yazılımı](xref:fundamentals/static-files#serve-a-default-document) |
+| **Varsayılan Belge**<br>`DefaultDocumentModule`                                                  | Hayır  | [Varsayılan dosyalar ara yazılımı](xref:fundamentals/static-files#serve-a-default-document) |
 | **Özet kimlik doğrulaması**<br>`DigestAuthenticationModule`                                        | Yes | |
-| **Dizin Tarama**<br>`DirectoryListingModule`                                               | No  | [Dizin tarama ara yazılımı](xref:fundamentals/static-files#enable-directory-browsing) |
+| **Dizin Tarama**<br>`DirectoryListingModule`                                               | Hayır  | [Dizin tarama ara yazılımı](xref:fundamentals/static-files#enable-directory-browsing) |
 | **Dinamik sıkıştırma**<br>`DynamicCompressionModule`                                            | Yes | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
 | **Başarısız Istek Izleme**<br>`FailedRequestsTracingModule`                                     | Yes | [Günlüğe kaydetme ASP.NET Core](xref:fundamentals/logging/index#tracesource-provider) |
-| **Dosya önbelleğe alma**<br>`FileCacheModule`                                                            | No  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
-| **HTTP önbelleği**<br>`HttpCacheModule`                                                            | No  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
+| **Dosya önbelleğe alma**<br>`FileCacheModule`                                                            | Hayır  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
+| **HTTP önbelleği**<br>`HttpCacheModule`                                                            | Hayır  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
 | **HTTP Günlüğe Kaydetme**<br>`HttpLoggingModule`                                                          | Yes | [Günlüğe kaydetme ASP.NET Core](xref:fundamentals/logging/index) |
 | **HTTP Yeniden Yönlendirme**<br>`HttpRedirectionModule`                                                  | Yes | [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting) |
 | **HTTP Izleme**<br>`TracingModule`                                                              | Yes | |
@@ -60,9 +61,9 @@ Tablo, ASP.NET Core uygulamalar ve ASP.NET Core modülü ile işlevsel yerel IIS
 | **İstek Filtreleme**<br>`RequestFilteringModule`                                                | Yes | [URL yeniden yazma ara yazılımı `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **İstek İzleyicisi**<br>`RequestMonitorModule`                                                    | Yes | |
 | **URL yeniden yazma**&#8224;<br>`RewriteModule`                                                      | Yes | [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting) |
-| **Sunucu tarafı eklemeleri**<br>`ServerSideIncludeModule`                                            | No  | |
-| **Statik sıkıştırma**<br>`StaticCompressionModule`                                              | No  | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
-| **Statik İçerik**<br>`StaticFileModule`                                                         | No  | [Statik dosya ara yazılımı](xref:fundamentals/static-files) |
+| **Sunucu tarafı eklemeleri**<br>`ServerSideIncludeModule`                                            | Hayır  | |
+| **Statik sıkıştırma**<br>`StaticCompressionModule`                                              | Hayır  | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
+| **Statik İçerik**<br>`StaticFileModule`                                                         | Hayır  | [Statik dosya ara yazılımı](xref:fundamentals/static-files) |
 | **Belirteç önbelleğe alma**<br>`TokenCacheModule`                                                          | Yes | |
 | **URI önbelleğe alma**<br>`UriCacheModule`                                                              | Yes | |
 | **URL Yetkilendirmesi**<br>`UrlAuthorizationModule`                                                | Yes | [ASP.NET Core Identity](xref:security/authentication/identity) |
@@ -72,7 +73,7 @@ Tablo, ASP.NET Core uygulamalar ve ASP.NET Core modülü ile işlevsel yerel IIS
 
 ## <a name="managed-modules"></a>Yönetilen modüller
 
-Yönetilen modüller, uygulama havuzunun .NET CLR sürümü **yönetilen kod olmadan**ayarlandığında barındırılan ASP.NET Core uygulamalarıyla işlevsel *değildir* . ASP.NET Core çeşitli durumlarda ara yazılım alternatifleri sunmaktadır.
+Yönetilen modüller, uygulama havuzunun .NET CLR sürümü **yönetilen kod olmadan** ayarlandığında barındırılan ASP.NET Core uygulamalarıyla işlevsel *değildir* . ASP.NET Core çeşitli durumlarda ara yazılım alternatifleri sunmaktadır.
 
 | Modül                  | ASP.NET Core seçeneği |
 | ----------------------- | ------------------- |
@@ -92,7 +93,7 @@ Yönetilen modüller, uygulama havuzunun .NET CLR sürümü **yönetilen kod olm
 
 ## <a name="iis-manager-application-changes"></a>IIS Yöneticisi uygulama değişiklikleri
 
-Ayarları yapılandırmak için IIS Yöneticisi kullanılırken, uygulamanın *web.config* dosyası değiştirilir. Bir uygulamayı dağıtırken ve *web.config*dahil olmak üzere, IIS Yöneticisi ile yapılan tüm değişiklikler dağıtılan *web.config* dosyası tarafından üzerine yazılır. Sunucunun *web.config* dosyasında değişiklik yapılırsa, sunucudaki güncelleştirilmiş *web.config* dosyasını hemen yerel projeye kopyalayın.
+Ayarları yapılandırmak için IIS Yöneticisi kullanılırken, uygulamanın *web.config* dosyası değiştirilir. Bir uygulamayı dağıtırken ve *web.config* dahil olmak üzere, IIS Yöneticisi ile yapılan tüm değişiklikler dağıtılan *web.config* dosyası tarafından üzerine yazılır. Sunucunun *web.config* dosyasında değişiklik yapılırsa, sunucudaki güncelleştirilmiş *web.config* dosyasını hemen yerel projeye kopyalayın.
 
 ## <a name="disabling-iis-modules"></a>IIS modüllerini devre dışı bırakma
 
@@ -100,7 +101,7 @@ Bir uygulama için devre dışı bırakılması gereken sunucu düzeyinde bir II
 
 ### <a name="module-deactivation"></a>Modül devre dışı bırakma
 
-Birçok modül, uygulamanın modül uygulamadan kaldırılmadan devre dışı olmasına izin veren bir yapılandırma ayarı sunar. Bu, bir modülün devre dışı bırakılması için en basit ve en hızlı yoldur. Örneğin, HTTP yeniden yönlendirme modülüweb.configöğesi ile devre dışı bırakılabilir `<httpRedirect>` : * *
+Birçok modül, uygulamanın modül uygulamadan kaldırılmadan devre dışı olmasına izin veren bir yapılandırma ayarı sunar. Bu, bir modülün devre dışı bırakılması için en basit ve en hızlı yoldur. Örneğin, HTTP yeniden yönlendirme modülüweb.configöğesi ile devre dışı bırakılabilir `<httpRedirect>` : **
 
 ```xml
 <configuration>
@@ -110,17 +111,17 @@ Birçok modül, uygulamanın modül uygulamadan kaldırılmadan devre dışı ol
 </configuration>
 ```
 
-Yapılandırma ayarları ile modülleri devre dışı bırakma hakkında daha fazla bilgi için, [ \<system.webServer> IIS ](/iis/configuration/system.webServer/)'nin *alt öğeler* bölümündeki bağlantıları izleyin.
+Yapılandırma ayarları ile modülleri devre dışı bırakma hakkında daha fazla bilgi için, [ \<system.webServer> IIS](/iis/configuration/system.webServer/)'nin *alt öğeler* bölümündeki bağlantıları izleyin.
 
 ### <a name="module-removal"></a>Modül kaldırma
 
-*web.config*bir ayarı olan bir modülü kaldırmak istiyorsanız modülün kilidini açın ve `<modules>` önce *web.config* bölümünün kilidini açın:
+*web.config* bir ayarı olan bir modülü kaldırmak istiyorsanız modülün kilidini açın ve `<modules>` önce *web.config* bölümünün kilidini açın:
 
-1. Modülün kilidini sunucu düzeyinde açın. IIS Yöneticisi **bağlantıları** kenar çubuğundan IIS sunucusunu seçin. **IIS** alanında **modüller** ' i açın. Listeden modülü seçin. Sağdaki **Eylemler** kenar çubuğunda, **Aç**' ı seçin. Modülün eylem girdisi **kilit**olarak görünürse, modülün kilidi zaten açık olur ve herhangi bir eylem gerekmez. *web.config* daha sonra kaldırmayı planladığınız sayıda modülün kilidini açın.
+1. Modülün kilidini sunucu düzeyinde açın. IIS Yöneticisi **bağlantıları** kenar çubuğundan IIS sunucusunu seçin. **IIS** alanında **modüller** ' i açın. Listeden modülü seçin. Sağdaki **Eylemler** kenar çubuğunda, **Aç**' ı seçin. Modülün eylem girdisi **kilit** olarak görünürse, modülün kilidi zaten açık olur ve herhangi bir eylem gerekmez. *web.config* daha sonra kaldırmayı planladığınız sayıda modülün kilidini açın.
 
-2. Uygulamayıweb.configbir bölüm olmadan dağıtın `<modules>` . * * Bir uygulama, IIS Yöneticisi 'nde ilk olarak bölümün kilidini açmadan bölüm içeren bir *web.config* dağıtılırsa `<modules>` , Configuration Manager bölümün kilidini açmaya çalışırken bir özel durum oluşturur. Bu nedenle, uygulamayı bir bölüm olmadan dağıtın `<modules>` .
+2. Uygulamayıweb.configbir bölüm olmadan dağıtın `<modules>` . ** Bir uygulama, IIS Yöneticisi 'nde ilk olarak bölümün kilidini açmadan bölüm içeren bir *web.config* dağıtılırsa `<modules>` , Configuration Manager bölümün kilidini açmaya çalışırken bir özel durum oluşturur. Bu nedenle, uygulamayı bir bölüm olmadan dağıtın `<modules>` .
 
-3. `<modules>` *web.config*bölümünün kilidini açın. **Bağlantılar** kenar çubuğunda **sitelerde**Web sitesini seçin. **Yönetim** alanında, **yapılandırma düzenleyicisini**açın. Bölümü seçmek için gezinti denetimlerini kullanın `system.webServer/modules` . Sağdaki **Eylemler** kenar çubuğunda, bölümün **kilidini açmak** için öğesini seçin. Modül bölümü için eylem girişi **kilit bölümü**olarak görünürse modül bölümünün kilidi zaten açık olur ve herhangi bir eylem gerekmez.
+3. `<modules>` *web.config* bölümünün kilidini açın. **Bağlantılar** kenar çubuğunda **sitelerde** Web sitesini seçin. **Yönetim** alanında, **yapılandırma düzenleyicisini** açın. Bölümü seçmek için gezinti denetimlerini kullanın `system.webServer/modules` . Sağdaki **Eylemler** kenar çubuğunda, bölümün **kilidini açmak** için öğesini seçin. Modül bölümü için eylem girişi **kilit bölümü** olarak görünürse modül bölümünün kilidi zaten açık olur ve herhangi bir eylem gerekmez.
 
 4. `<modules>`Modülün uygulamadan kaldırılması için, bir öğesi ile uygulamanın yerel *web.config* dosyasına bir bölüm ekleyin `<remove>` . Birden çok `<remove>` modülü kaldırmak için birden çok öğe ekleyin. Sunucuda *web.config* değişiklik yapılırsa, projenin *web.config* dosyasında aynı değişiklikleri hemen yerel olarak yapın. Bu yaklaşımı kullanarak bir modülün kaldırılması, modülün sunucu üzerindeki diğer uygulamalarla kullanımını etkilemez.
 
@@ -134,9 +135,9 @@ Yapılandırma ayarları ile modülleri devre dışı bırakma hakkında daha fa
    </configuration>
    ```
 
-*web.config*kullanarak IIS Express modül eklemek veya kaldırmak için, bölümün kilidini açmak üzere *applicationHost.config* değiştirin `<modules>` :
+*web.config* kullanarak IIS Express modül eklemek veya kaldırmak için, bölümün kilidini açmak üzere *applicationHost.config* değiştirin `<modules>` :
 
-1. *{APPLICATION root} \\.vs\config\applicationhost.config*açın.
+1. *{APPLICATION root} \\.vs\config\applicationhost.config* açın.
 
 1. `<section>`IIS modülleri için öğesini bulun ve ' `overrideModeDefault` den ' `Deny` ye geçin `Allow` :
 
@@ -154,7 +155,7 @@ Yapılandırma ayarları ile modülleri devre dışı bırakma hakkında daha fa
 
 1. `<modules>`Bölüm ve bağımsız modüllerin kilidi açıldıktan sonra, uygulamayı IIS Express çalıştırmak için uygulamanın *web.config* dosyasını kullanarak IIS modüllerini ekleme veya kaldırma ücretsizdir.
 
-Ayrıca, *Appcmd.exe*Ile bir IIS modülü de kaldırılabilir. `MODULE_NAME`Komutuna ve komutuna şunu girin `APPLICATION_NAME` :
+Ayrıca, *Appcmd.exe* Ile bir IIS modülü de kaldırılabilir. `MODULE_NAME`Komutuna ve komutuna şunu girin `APPLICATION_NAME` :
 
 ```console
 Appcmd.exe delete module MODULE_NAME /app.name:APPLICATION_NAME

@@ -4,7 +4,7 @@
 >
 > Bu öğretici, mümkün olduğunda Entity Framework Core *geçişleri* özelliğini kullanır. Geçişler, veritabanı şemasını veri modelindeki değişikliklerle eşleşecek şekilde güncelleştirir. Bununla birlikte, geçişler yalnızca veritabanı altyapısının desteklediği değişiklik türlerini ve SQLite 'un şema değiştirme özellikleri sınırlıdır. Örneğin, bir sütun ekleme desteklenir, ancak bir sütunu kaldırmak desteklenmez. Bir sütunu kaldırmak için bir geçiş oluşturulduysa, `ef migrations add` komut başarılı olur ancak `ef database update` komut başarısız olur. 
 >
-> SQLite sınırlamalarına yönelik geçici çözüm, tablodaki bir şeyler değiştiğinde tablo yeniden oluşturmak için geçiş kodunu el ile yazmak için kullanılır. Kod, `Up` bir geçiş için ve `Down` yöntemlerine gidip şunları içerir:
+> SQLite sınırlamalarına yönelik geçici çözüm, tablodaki bir şeyler değiştiğinde tablo yeniden oluşturmak için geçiş kodunu el ile yazmak için kullanılır. Kod, `Up` `Down` bir geçiş için ve yöntemlerine gidip şunları içerir:
 >
 > * Yeni bir tablo oluşturuluyor.
 > * Eski tablodaki veriler yeni tabloya kopyalanıyor.

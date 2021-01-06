@@ -1,3 +1,3 @@
-# <a name="aspnet-core-hosting-startup-sample"></a>ASP.NET Çekirdek Hosting Başlangıç Örneği
+# <a name="aspnet-core-hosting-startup-sample"></a>ASP.NET Core barındırma başlangıç örneği
 
-Bu örnek [IHostingStartup](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup)kullanımını göstermektedir. Bu örnek, harici bir [derlemeden bir uygulamayı geliştir'de](https://docs.microsoft.com/aspnet/core/fundamentals/host/platform-specific-configuration)açıklanan senaryoları gösterir.
+Bu örnek, [ıhostingstartup](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup)öğesinin kullanımını gösterir. Bu örnek, bir [dış derlemeden bir uygulamayı geliştirme](https://docs.microsoft.com/aspnet/core/fundamentals/host/platform-specific-configuration)bölümünde açıklanan senaryoları gösterir.

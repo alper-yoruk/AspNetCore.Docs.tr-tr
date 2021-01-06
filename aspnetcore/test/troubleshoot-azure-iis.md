@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/troubleshoot-azure-iis
 ms.openlocfilehash: d51a4a43f585b0a0b7e3aab2c5de1b2d215de494
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059604"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service ve IIS 'de ASP.NET Core sorunlarını giderme
@@ -90,7 +90,7 @@ Bu hata, başlangıç sırasında veya Yanıt oluştururken uygulamanın kodunda
 
 [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) bileşenleri yüklenirken bilinmeyen bir hata oluştu. Aşağıdaki eylemlerden birini uygulayın:
 
-* [Microsoft desteği](https://support.microsoft.com/oas/default.aspx?prid=15832) iletişim kurun ( **Geliştirici Araçları** ve **ASP.NET Core** ' i seçin).
+* [Microsoft desteği](https://support.microsoft.com/oas/default.aspx?prid=15832) iletişim kurun ( **Geliştirici Araçları** ve **ASP.NET Core**' i seçin).
 * Stack Overflow soru sorun.
 * [GitHub deponuzda](https://github.com/dotnet/AspNetCore)bir sorun yapın.
 
@@ -162,7 +162,7 @@ Bu hatayı onarmak için uygulamaları ayrı IIS uygulama havuzlarında çalış
 
 ### <a name="50036-ancm-out-of-process-handler-load-failure"></a>500,36 ANCM Işlem dışı Işleyici yükleme hatası
 
-İşlem dışı istek işleyicisi *aspnetcorev2_outofprocess.dll* , *aspnetcorev2.dll* dosyasının yanında değildir. Bu, [ASP.NET Core modülünün](xref:host-and-deploy/aspnet-core-module)bozuk bir yüklemesini gösterir.
+İşlem dışı istek işleyicisi *aspnetcorev2_outofprocess.dll*, *aspnetcorev2.dll* dosyasının yanında değildir. Bu, [ASP.NET Core modülünün](xref:host-and-deploy/aspnet-core-module)bozuk bir yüklemesini gösterir.
 
 Bu hatayı gidermek için [.NET Core barındırma paketi](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle) (IIS için) veya Visual Studio (IIS Express için) yüklemesini onarın.
 
@@ -187,7 +187,7 @@ Bu hata, işlem içi barındırma modelini kullanarak [tek dosya yürütülebili
 
 [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) çalışan işlemini başlatmaya çalışır, ancak başlatılamıyor. İşlem başlatma hatasının nedeni genellikle uygulama olay günlüğündeki girişlerden ve ASP.NET Core modülü stdout günlüğünde belirlenebilir.
 
-Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme ( *. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme (*. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Bir barındırma veya uygulamanın yanlış yapılandırılması, çalışan işleminin başarısız olmasına neden olduğunda, *502,5 Işlem hata* hatası sayfası döndürülür:
 
@@ -199,7 +199,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-Uygulamanın derlemesi ( *. dll* ) yüklenemediğinden uygulama başlatılamadı.
+Uygulamanın derlemesi (*. dll*) yüklenemediğinden uygulama başlatılamadı.
 
 Bu hata, yayımlanan uygulama ile W3wp/iisexpress işlemi arasında bir bit durumu uyuşmazlığı olduğunda oluşur.
 
@@ -229,16 +229,16 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
-1. Azure portal uygulama **Hizmetleri** ' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** ’yi seçin.
+1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
-1. **Destek Araçları** ' nın altında, **uygulama olayları** düğmesini seçin.
+1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
 
 **Sorunları Tanıla ve çöz** dikey penceresini kullanmanın bir alternatifi, uygulama olay günlüğü dosyasını doğrudan [kudu](https://github.com/projectkudu/kudu/wiki)kullanarak incelemektir:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü açın.
 1. *eventlog.xml* dosyasının yanındaki kurşun kalem simgesini seçin.
 1. Günlüğü inceleyin. En son olayları görmek için günlüğün en altına gidin.
@@ -248,7 +248,7 @@ Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve 
 Birçok başlatma hatası, uygulama olay günlüğünde yararlı bilgiler oluşturmaz. Bu hatayı saptamak için, uygulamayı [kudu](https://github.com/projectkudu/kudu/wiki) uzaktan yürütme konsolu 'nda çalıştırabilirsiniz:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 
 #### <a name="test-a-32-bit-x86-app"></a>32 bit (x86) uygulamayı test etme
 
@@ -312,11 +312,11 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 
 1. Azure portalında Web uygulamasına gidin.
 1. **App Service** dikey penceresinde, arama kutusuna **kudu** girin.
-1. **Gelişmiş Araçlar** > **Git** ' i seçin.
+1. **Gelişmiş Araçlar** > **Git**' i seçin.
 1. **CMD > hata ayıklama konsolunu** seçin.
 1. *Site/Wwwroot* 'a git
 1. *web.config* dosyasını düzenlemek için kurşun kalem simgesini seçin.
-1. `<aspNetCore />`Öğesinde, öğesini ayarlayın `stdoutLogEnabled="true"` ve **Kaydet** ' i seçin.
+1. `<aspNetCore />`Öğesinde, öğesini ayarlayın `stdoutLogEnabled="true"` ve **Kaydet**' i seçin.
 
 Ayar ile sorun giderme tamamlandığında stdout günlüğünü devre dışı bırakın `stdoutLogEnabled="false"` .
 
@@ -330,11 +330,11 @@ ASP.NET Core Module hata ayıklama günlüğü, ASP.NET Core modülünden daha a
    * Uygulamayı gelişmiş tanılama günlüğü için yapılandırmak üzere [Gelişmiş tanılama günlükleri](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) bölümündeki yönergeleri izleyin. Uygulamayı yeniden dağıtın.
    * `<handlerSettings>` [Gelişmiş tanılama günlüklerini](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) gösterilen, kudu konsolunu kullanarak canlı uygulamanın *web.config* dosyasına ekleyin:
      1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-     1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-     1. Klasörü Wwwroot **yoluna açın**  >  **wwwroot** . *web.config* dosyasını, kurşun kalem düğmesini seçerek düzenleyin. Bölümü, `<handlerSettings>` [Gelişmiş tanılama günlüklerinde](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)gösterildiği gibi ekleyin. **Kaydet** düğmesini seçin.
+     1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+     1. Klasörü Wwwroot **yoluna açın**  >  . *web.config* dosyasını, kurşun kalem düğmesini seçerek düzenleyin. Bölümü, `<handlerSettings>` [Gelişmiş tanılama günlüklerinde](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)gösterildiği gibi ekleyin. **Kaydet** düğmesini seçin.
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-1. Klasörü Wwwroot **yoluna açın**  >  **wwwroot** . *Aspnetcore-Debug. log* dosyası için bir yol sağlamadıysanız dosya listede görüntülenir. Bir yol sağladıysanız, günlük dosyasının konumuna gidin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+1. Klasörü Wwwroot **yoluna açın**  >  . *Aspnetcore-Debug. log* dosyası için bir yol sağlamadıysanız dosya listede görüntülenir. Bir yol sağladıysanız, günlük dosyasının konumuna gidin.
 1. Dosya adının yanındaki kurşun kalem düğmesiyle günlük dosyasını açın.
 
 Sorun giderme tamamlandığında hata ayıklama günlüğünü devre dışı bırak:
@@ -375,8 +375,8 @@ ASP.NET Core uzantılarının yüklü olduğunu doğrulayın. Uzantılar yüklü
 Stdout günlüğü etkinleştirilmemişse, şu adımları izleyin:
 
 1. Azure portal, **GELIŞTIRME araçları** alanındaki **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-1. Klasörü Wwwroot **yoluna açın** > **wwwroot** ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+1. Klasörü Wwwroot **yoluna açın** >  ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
 1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
@@ -413,7 +413,7 @@ Daha fazla bilgi için bkz. [Azure App Service Web Apps için tanılama günlü�
 Uygulama olay günlüğüne erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın. Hataların, *kaynak* sütununda *IIS aspnetcore modülünün* veya *IIS Express aspnetcore modülünün* bir değeri vardır.
 
@@ -653,7 +653,7 @@ Bu hata, başlangıç sırasında veya Yanıt oluştururken uygulamanın kodunda
 
 Çalışan işlemi başarısız olur. Uygulama başlamıyor.
 
-[ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) .NET Core CLR 'yi bulamıyor ve işlem içi istek işleyicisini ( *aspnetcorev2_inprocess.dll* ) bulamıyor. Şunları denetleyin:
+[ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) .NET Core CLR 'yi bulamıyor ve işlem içi istek işleyicisini (*aspnetcorev2_inprocess.dll*) bulamıyor. Şunları denetleyin:
 
 * Uygulama [Microsoft. AspNetCore. Server. IIS](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IIS) NuGet paketini ya da [Microsoft. Aspnetcore. app metapackage](xref:fundamentals/metapackage-app)'i hedefler.
 * Uygulamanın hedeflediği ASP.NET Core paylaşılan çerçevenin sürümü hedef makineye yüklendi.
@@ -670,7 +670,7 @@ Bu hata, başlangıç sırasında veya Yanıt oluştururken uygulamanın kodunda
 
 [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) çalışan işlemini başlatmaya çalışır, ancak başlatılamıyor. İşlem başlatma hatasının nedeni genellikle uygulama olay günlüğündeki girişlerden ve ASP.NET Core modülü stdout günlüğünde belirlenebilir.
 
-Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme ( *. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme (*. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Bir barındırma veya uygulamanın yanlış yapılandırılması, çalışan işleminin başarısız olmasına neden olduğunda, *502,5 Işlem hata* hatası sayfası döndürülür:
 
@@ -682,7 +682,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-Uygulamanın derlemesi ( *. dll* ) yüklenemediğinden uygulama başlatılamadı.
+Uygulamanın derlemesi (*. dll*) yüklenemediğinden uygulama başlatılamadı.
 
 Bu hata, yayımlanan uygulama ile W3wp/iisexpress işlemi arasında bir bit durumu uyuşmazlığı olduğunda oluşur.
 
@@ -712,16 +712,16 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
-1. Azure portal uygulama **Hizmetleri** ' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** ’yi seçin.
+1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
-1. **Destek Araçları** ' nın altında, **uygulama olayları** düğmesini seçin.
+1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
 
 **Sorunları Tanıla ve çöz** dikey penceresini kullanmanın bir alternatifi, uygulama olay günlüğü dosyasını doğrudan [kudu](https://github.com/projectkudu/kudu/wiki)kullanarak incelemektir:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü açın.
 1. *eventlog.xml* dosyasının yanındaki kurşun kalem simgesini seçin.
 1. Günlüğü inceleyin. En son olayları görmek için günlüğün en altına gidin.
@@ -731,7 +731,7 @@ Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve 
 Birçok başlatma hatası, uygulama olay günlüğünde yararlı bilgiler oluşturmaz. Bu hatayı saptamak için, uygulamayı [kudu](https://github.com/projectkudu/kudu/wiki) uzaktan yürütme konsolu 'nda çalıştırabilirsiniz:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 
 #### <a name="test-a-32-bit-x86-app"></a>32 bit (x86) uygulamayı test etme
 
@@ -791,20 +791,20 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. Azure portal **sorunları Tanıla ve çöz** dikey penceresine gidin.
 1. **Sorun kategorisini seçin** altında **Web uygulaması aşağı** düğmesini seçin.
 1. **Önerilen çözümler** > **stdout günlük yeniden yönlendirmeyi etkinleştirmek** için, **Web.Configdüzenlemek üzere kudu konsolunu açmak** için düğmeyi seçin.
-1. Kudu **Tanılama konsolunda** , klasör Wwwroot **yolunu açın**  >  **wwwroot** . Listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
+1. Kudu **Tanılama konsolunda**, klasör Wwwroot **yolunu açın**  >  . Listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
 1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
 1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.
 1. Günlük dosyası açıldığında hata görüntülenir.
 
 Sorun giderme tamamlandığında stdout günlüğünü devre dışı bırak:
 
-1. Kudu **Tanılama Konsolu** 'nda, **site**  >  *web.config* dosyasını açığa çıkarmak için **Wwwroot** yolu sitesine dönün. Kalem simgesini seçerek **web.config** dosyasını tekrar açın.
+1. Kudu **Tanılama Konsolu**'nda,   >  *web.config* dosyasını açığa çıkarmak için **Wwwroot** yolu sitesine dönün. Kalem simgesini seçerek **web.config** dosyasını tekrar açın.
 1. **StdoutLogEnabled** olarak ayarlayın `false` .
 1. Dosyayı kaydetmek için **Kaydet** ' i seçin.
 
@@ -823,11 +823,11 @@ ASP.NET Core Module hata ayıklama günlüğü, ASP.NET Core modülünden daha a
    * Uygulamayı gelişmiş tanılama günlüğü için yapılandırmak üzere [Gelişmiş tanılama günlükleri](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) bölümündeki yönergeleri izleyin. Uygulamayı yeniden dağıtın.
    * `<handlerSettings>` [Gelişmiş tanılama günlüklerini](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) gösterilen, kudu konsolunu kullanarak canlı uygulamanın *web.config* dosyasına ekleyin:
      1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-     1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-     1. Klasörü Wwwroot **yoluna açın**  >  **wwwroot** . *web.config* dosyasını, kurşun kalem düğmesini seçerek düzenleyin. Bölümü, `<handlerSettings>` [Gelişmiş tanılama günlüklerinde](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)gösterildiği gibi ekleyin. **Kaydet** düğmesini seçin.
+     1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+     1. Klasörü Wwwroot **yoluna açın**  >  . *web.config* dosyasını, kurşun kalem düğmesini seçerek düzenleyin. Bölümü, `<handlerSettings>` [Gelişmiş tanılama günlüklerinde](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)gösterildiği gibi ekleyin. **Kaydet** düğmesini seçin.
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-1. Klasörü Wwwroot **yoluna açın**  >  **wwwroot** . *Aspnetcore-Debug. log* dosyası için bir yol sağlamadıysanız dosya listede görüntülenir. Bir yol sağladıysanız, günlük dosyasının konumuna gidin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+1. Klasörü Wwwroot **yoluna açın**  >  . *Aspnetcore-Debug. log* dosyası için bir yol sağlamadıysanız dosya listede görüntülenir. Bir yol sağladıysanız, günlük dosyasının konumuna gidin.
 1. Dosya adının yanındaki kurşun kalem düğmesiyle günlük dosyasını açın.
 
 Sorun giderme tamamlandığında hata ayıklama günlüğünü devre dışı bırak:
@@ -868,8 +868,8 @@ ASP.NET Core uzantılarının yüklü olduğunu doğrulayın. Uzantılar yüklü
 Stdout günlüğü etkinleştirilmemişse, şu adımları izleyin:
 
 1. Azure portal, **GELIŞTIRME araçları** alanındaki **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-1. Klasörü Wwwroot **yoluna açın** > **wwwroot** ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+1. Klasörü Wwwroot **yoluna açın** >  ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
 1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
@@ -906,7 +906,7 @@ Daha fazla bilgi için bkz. [Azure App Service Web Apps için tanılama günlü�
 Uygulama olay günlüğüne erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın. Hataların, *kaynak* sütununda *IIS aspnetcore modülünün* veya *IIS Express aspnetcore modülünün* bir değeri vardır.
 
@@ -1148,7 +1148,7 @@ Bu hata, başlangıç sırasında veya Yanıt oluştururken uygulamanın kodunda
 
 [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) çalışan işlemini başlatmaya çalışır, ancak başlatılamıyor. İşlem başlatma hatasının nedeni genellikle uygulama olay günlüğündeki girişlerden ve ASP.NET Core modülü stdout günlüğünde belirlenebilir.
 
-Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme ( *. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+Yaygın bir hata durumu, ASP.NET Core paylaşılan bir Framework 'ün mevcut olmayan bir sürümünü hedeflediğinden, uygulamanın yanlış yapılandırılmış olmasından kaynaklanır. ASP.NET Core paylaşılan Framework 'ün hangi sürümlerinin hedef makinede yüklü olduğunu denetleyin. *Paylaşılan çerçeve* , makinede yüklü olan ve bir metapackage tarafından başvurulan derleme (*. dll* dosyaları) kümesidir `Microsoft.AspNetCore.App` . Metapackage başvurusu, gerekli en düşük sürümü belirtebilir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Bir barındırma veya uygulamanın yanlış yapılandırılması, çalışan işleminin başarısız olmasına neden olduğunda, *502,5 Işlem hata* hatası sayfası döndürülür:
 
@@ -1160,7 +1160,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-Uygulamanın derlemesi ( *. dll* ) yüklenemediğinden uygulama başlatılamadı.
+Uygulamanın derlemesi (*. dll*) yüklenemediğinden uygulama başlatılamadı.
 
 Bu hata, yayımlanan uygulama ile W3wp/iisexpress işlemi arasında bir bit durumu uyuşmazlığı olduğunda oluşur.
 
@@ -1190,16 +1190,16 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
-1. Azure portal uygulama **Hizmetleri** ' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** ’yi seçin.
+1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
-1. **Destek Araçları** ' nın altında, **uygulama olayları** düğmesini seçin.
+1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
 
 **Sorunları Tanıla ve çöz** dikey penceresini kullanmanın bir alternatifi, uygulama olay günlüğü dosyasını doğrudan [kudu](https://github.com/projectkudu/kudu/wiki)kullanarak incelemektir:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü açın.
 1. *eventlog.xml* dosyasının yanındaki kurşun kalem simgesini seçin.
 1. Günlüğü inceleyin. En son olayları görmek için günlüğün en altına gidin.
@@ -1209,7 +1209,7 @@ Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve 
 Birçok başlatma hatası, uygulama olay günlüğünde yararlı bilgiler oluşturmaz. Bu hatayı saptamak için, uygulamayı [kudu](https://github.com/projectkudu/kudu/wiki) uzaktan yürütme konsolu 'nda çalıştırabilirsiniz:
 
 1. **Gelişmiş araçları** **geliştirme araçları** alanında açın. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 
 #### <a name="test-a-32-bit-x86-app"></a>32 bit (x86) uygulamayı test etme
 
@@ -1269,20 +1269,20 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. Azure portal **sorunları Tanıla ve çöz** dikey penceresine gidin.
 1. **Sorun kategorisini seçin** altında **Web uygulaması aşağı** düğmesini seçin.
 1. **Önerilen çözümler** > **stdout günlük yeniden yönlendirmeyi etkinleştirmek** için, **Web.Configdüzenlemek üzere kudu konsolunu açmak** için düğmeyi seçin.
-1. Kudu **Tanılama konsolunda** , klasör Wwwroot **yolunu açın**  >  **wwwroot** . Listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
+1. Kudu **Tanılama konsolunda**, klasör Wwwroot **yolunu açın**  >  . Listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
 1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
 1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.
 1. Günlük dosyası açıldığında hata görüntülenir.
 
 Sorun giderme tamamlandığında stdout günlüğünü devre dışı bırak:
 
-1. Kudu **Tanılama Konsolu** 'nda, **site**  >  *web.config* dosyasını açığa çıkarmak için **Wwwroot** yolu sitesine dönün. Kalem simgesini seçerek **web.config** dosyasını tekrar açın.
+1. Kudu **Tanılama Konsolu**'nda,   >  *web.config* dosyasını açığa çıkarmak için **Wwwroot** yolu sitesine dönün. Kalem simgesini seçerek **web.config** dosyasını tekrar açın.
 1. **StdoutLogEnabled** olarak ayarlayın `false` .
 1. Dosyayı kaydetmek için **Kaydet** ' i seçin.
 
@@ -1317,8 +1317,8 @@ ASP.NET Core uzantılarının yüklü olduğunu doğrulayın. Uzantılar yüklü
 Stdout günlüğü etkinleştirilmemişse, şu adımları izleyin:
 
 1. Azure portal, **GELIŞTIRME araçları** alanındaki **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr;** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd** ' yi seçin.
-1. Klasörü Wwwroot **yoluna açın** > **wwwroot** ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
+1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
+1. Klasörü Wwwroot **yoluna açın** >  ve listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
 1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
@@ -1355,7 +1355,7 @@ Daha fazla bilgi için bkz. [Azure App Service Web Apps için tanılama günlü�
 Uygulama olay günlüğüne erişin:
 
 1. Başlat menüsünü açın, *Olay Görüntüleyicisi* araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi** , **Windows günlükleri** düğümünü açın.
+1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
 1. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
 1. Hatalı uygulamayla ilişkili hataları arayın. Hataların, *kaynak* sütununda *IIS aspnetcore modülünün* veya *IIS Express aspnetcore modülünün* bir değeri vardır.
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
 ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057615"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle ve ASP.NET Core kullanmaya başlayın
@@ -46,9 +46,9 @@ Aşağıdaki yaklaşımlar ile swashbuckle eklenebilir:
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Paket Yöneticisi konsol** penceresinde:
-  * **View**  >  **Diğer Windows**  >  **Paket Yöneticisi konsolunu** görüntüle ' ye git
+  *   >  **Diğer Windows**  >  **Paket Yöneticisi konsolunu** görüntüle ' ye git
   * *TodoApi. csproj* dosyasının bulunduğu dizine gidin
-  * Şu kodu yürütün:
+  * Aşağıdaki komutu yürütün:
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -63,7 +63,7 @@ Aşağıdaki yaklaşımlar ile swashbuckle eklenebilir:
 
 ### <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* *Packages* **Çözüm bölmesi**  >  **paket Ekle...** ' da paketler klasörüne sağ tıklayın.
+*  **Çözüm bölmesi**  >  **paket Ekle...** ' da paketler klasörüne sağ tıklayın.
 * **Paket Ekle** penceresinin **kaynak** açılan penceresini "NuGet.org" olarak ayarlayın
 * "Yayın öncesi paketleri göster" seçeneğinin etkin olduğundan emin olun
 * Arama kutusuna "swashbuckle. AspNetCore" yazın
@@ -180,7 +180,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle** ' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle**' yi seçin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -189,7 +189,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Özellikler** ' i seçin.
+* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Özellikler**' i seçin.
 * **Build** sekmesinin **output** bölümünün altındaki **XML belge dosyası** kutusunu işaretleyin.
 
 ::: moniker-end
@@ -198,7 +198,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* *Çözüm bölmesi* , **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme** sayfasına gidin.
+* *Çözüm bölmesi*, **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme** sayfasına gidin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -207,7 +207,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **Derleme** derleyicisi > **Proje seçenekleri** iletişim kutusunu açın > **Compiler**
+* **Derleme** derleyicisi > **Proje seçenekleri** iletişim kutusunu açın > 
 * **Genel Seçenekler** bölümünün altındaki **XML oluştur belge** kutusunu işaretleyin
 
 ::: moniker-end

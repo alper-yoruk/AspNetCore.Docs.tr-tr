@@ -1,1 +1,1 @@
-Bu [proje, EF MVC Core öğretici serisine](https://docs.microsoft.com/aspnet/core/data/ef-mvc/intro)parçacık sağlamak için kullanılır. Öğreticileri izleyerek oluşturulmuş örnek proje . https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final
+Bu proje, [EF MVC Core öğretici serisine](https://docs.microsoft.com/aspnet/core/data/ef-mvc/intro)kod parçacıkları sağlamak için kullanılır. Öğreticileri izleyerek oluşturulan örnek proje, ' dir https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final .

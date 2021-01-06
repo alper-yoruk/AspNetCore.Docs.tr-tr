@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056003"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
@@ -220,7 +220,7 @@ Benzer şekilde, JavaScript kodu özniteliği tarafından gösterilen .NET yönt
 
 .NET tarafında ya da yöntem çağrısının JavaScript tarafında hata işleme kodu kullanma seçeneğiniz vardır.
 
-Daha fazla bilgi için aşağıdaki makalelere bakın:
+Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>

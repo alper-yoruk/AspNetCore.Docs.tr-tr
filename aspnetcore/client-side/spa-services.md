@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: client-side/spa-services
 ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054651"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core içinde tek sayfalı uygulamalar oluşturmak için JavaScript hizmetlerini kullanın
@@ -195,7 +195,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 [Web paketi geliştirme ara yazılımı](#webpack-dev-middleware)ile doğru olduğu için, genişletme yönteminin `UseWebpackDevMiddleware` uzantı yönteminden önce çağrılması gerekir `UseStaticFiles` . Güvenlik nedenleriyle, yalnızca uygulama geliştirme modunda çalışırken ara yazılımı kaydedin.
 
-*webpack.config.js* `plugins` Boş bırakılmış olsa bilewebpack.config.jsdosyası bir dizi tanımlamalıdır:
+ `plugins` Boş bırakılmış olsa bilewebpack.config.jsdosyası bir dizi tanımlamalıdır:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,25)]
 
@@ -225,7 +225,7 @@ Yönteminde adlı uzantı yöntemi `MapSpaFallbackRoute` kullanılır `Configure
 
 Yollar yapılandırıldıkları sırayla değerlendirilir. Sonuç olarak, `default` önceki kod örneğinde yol, önce model eşleştirme için kullanılır.
 
-## <a name="create-a-new-project"></a>Yeni bir proje oluşturma
+## <a name="create-a-new-project"></a>Yeni proje oluşturma
 
 JavaScript Hizmetleri önceden yapılandırılmış uygulama şablonları sağlar. Istenmeyen hizmetler, bu şablonlarda, angular, tepki ve Redux gibi farklı çerçeveler ve kitaplıklarla birlikte kullanılır.
 
@@ -253,10 +253,10 @@ dotnet new angular
 
 İki birincil çalışma zamanı yapılandırma modu var:
 
-* **Geliştirme** :
+* **Geliştirme**:
   * Hata ayıklamayı kolaylaştırmak için kaynak haritaları içerir.
   * , Performans için istemci tarafı kodunu iyileştirmez.
-* **Üretim** :
+* **Üretim**:
   * Kaynak eşlemelerini dışlar.
   * Paketleme ve küçültmeye göre istemci tarafı kodunu iyileştirir.
 

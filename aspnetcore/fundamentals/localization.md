@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/localization
 ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059526"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
@@ -140,7 +140,7 @@ ASP.NET Core iki kültür değeri belirtmenize olanak tanır `SupportedCultures`
 
 Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeler *. resx* kaynak dosyalarında yalıtılmıştır. Örneğin, çevrilmiş dizeleri içeren *Welcome. es. resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es", Ispanyolca için dil kodudur. Bu kaynak dosyasını Visual Studio 'da oluşturmak için:
 
-1. **Çözüm Gezgini** ' de, **Add** > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
+1. **Çözüm Gezgini**' de,  > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
@@ -213,11 +213,11 @@ Sitenizin "fr-CA" kültürünü kullanarak "hoş geldiniz" kaynağı için bir i
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio ile kaynak dosyaları oluşturma
 
-Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx* ), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx* ) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
+Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx*), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx*) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
 
 ### <a name="add-other-cultures"></a>Diğer kültürleri Ekle
 
-Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US** , **fr-CA** ve **en-GB** ). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
+Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US**, **fr-CA** ve **en-GB**). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
@@ -281,19 +281,19 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>IE 'de Accept-Language HTTP üst bilgisini ayarlama
 
-1. Dişli simgesinden **Internet seçenekleri** ' ne dokunun.
+1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-1. **Diller** ' e dokunun.
+1. **Diller**' e dokunun.
 
    ![Internet seçenekleri](localization/_static/lang.png)
 
-1. **Dil tercihlerini ayarla** ' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-1. **Dil ekle** ' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
 1. Dilini ekleyin.
 
-1. Dile dokunun ve ardından **Yukarı taşı** ' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullan
 
@@ -494,7 +494,7 @@ ASP.NET Core iki kültür değeri belirtmenize olanak tanır `SupportedCultures`
 
 Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeler *. resx* kaynak dosyalarında yalıtılmıştır. Örneğin, çevrilmiş dizeleri içeren *Welcome. es. resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es", Ispanyolca için dil kodudur. Bu kaynak dosyasını Visual Studio 'da oluşturmak için:
 
-1. **Çözüm Gezgini** ' de, **Add** > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
+1. **Çözüm Gezgini**' de,  > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
@@ -567,11 +567,11 @@ Sitenizin "fr-CA" kültürünü kullanarak "hoş geldiniz" kaynağı için bir i
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio ile kaynak dosyaları oluşturma
 
-Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx* ), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx* ) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
+Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx*), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx*) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
 
 ### <a name="add-other-cultures"></a>Diğer kültürleri Ekle
 
-Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US** , **fr-CA** ve **en-GB** ). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
+Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US**, **fr-CA** ve **en-GB**). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
@@ -637,19 +637,19 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>IE 'de Accept-Language HTTP üst bilgisini ayarlama
 
-1. Dişli simgesinden **Internet seçenekleri** ' ne dokunun.
+1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-1. **Diller** ' e dokunun.
+1. **Diller**' e dokunun.
 
    ![Internet seçenekleri](localization/_static/lang.png)
 
-1. **Dil tercihlerini ayarla** ' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-1. **Dil ekle** ' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
 1. Dilini ekleyin.
 
-1. Dile dokunun ve ardından **Yukarı taşı** ' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullan
 
@@ -849,7 +849,7 @@ ASP.NET Core iki kültür değeri belirtmenize olanak tanır `SupportedCultures`
 
 Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeler *. resx* kaynak dosyalarında yalıtılmıştır. Örneğin, çevrilmiş dizeleri içeren *Welcome. es. resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es", Ispanyolca için dil kodudur. Bu kaynak dosyasını Visual Studio 'da oluşturmak için:
 
-1. **Çözüm Gezgini** ' de, **Add** > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
+1. **Çözüm Gezgini**' de,  > **Yeni öğe** Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
@@ -922,11 +922,11 @@ Sitenizin "fr-CA" kültürünü kullanarak "hoş geldiniz" kaynağı için bir i
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio ile kaynak dosyaları oluşturma
 
-Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx* ), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx* ) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
+Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx*), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx*) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
 
 ### <a name="add-other-cultures"></a>Diğer kültürleri Ekle
 
-Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US** , **fr-CA** ve **en-GB** ). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
+Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US**, **fr-CA** ve **en-GB**). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
@@ -992,19 +992,19 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>IE 'de Accept-Language HTTP üst bilgisini ayarlama
 
-1. Dişli simgesinden **Internet seçenekleri** ' ne dokunun.
+1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-1. **Diller** ' e dokunun.
+1. **Diller**' e dokunun.
 
    ![Internet seçenekleri](localization/_static/lang.png)
 
-1. **Dil tercihlerini ayarla** ' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-1. **Dil ekle** ' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
 1. Dilini ekleyin.
 
-1. Dile dokunun ve ardından **Yukarı taşı** ' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="the-content-language-http-header"></a>Content-Language HTTP üst bilgisi
 

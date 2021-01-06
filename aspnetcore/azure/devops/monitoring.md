@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/monitor
 ms.openlocfilehash: 74e789828bf5d54e3457f235657f8ed7086df80d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056757"
 ---
 # <a name="monitor-and-debug"></a>İzleme ve hata ayıklama
@@ -49,11 +49,11 @@ App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölç
 
     ![Genel bakış panelini gösteren ekran görüntüsü](./media/monitoring/overview.png)
 
-    * **Http 5xx** : sunucu tarafı hatalarının sayısı, genellikle ASP.NET Core kodundaki özel durumlar.
-    * **Veri girişi** : Web uygulamanıza gelen veri girişi.
-    * **Giden veri** : Web uygulamanızdan istemcilere giden veri çıkışı.
-    * **İstekler** : http isteklerinin sayısı.
-    * **Ortalama yanıt süresi** : Web uygulamasının http isteklerine yanıt vermesi için geçen ortalama süre.
+    * **Http 5xx**: sunucu tarafı hatalarının sayısı, genellikle ASP.NET Core kodundaki özel durumlar.
+    * **Veri girişi**: Web uygulamanıza gelen veri girişi.
+    * **Giden veri**: Web uygulamanızdan istemcilere giden veri çıkışı.
+    * **İstekler**: http isteklerinin sayısı.
+    * **Ortalama yanıt süresi**: Web uygulamasının http isteklerine yanıt vermesi için geçen ortalama süre.
 
     Sorun giderme ve iyileştirme için birkaç self servis aracı da bu sayfada bulunur.
 
@@ -81,7 +81,7 @@ App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölç
     ![Application Insights kurulum](./media/monitoring/new-app-insights.png)
 
 1. **Çalışma zamanı/çerçeve** için **ASP.NET Core** seçin. Varsayılan ayarları kabul edin.
-1. **Tamam** ’ı seçin. Onaylamanız istenirse **devam** ' ı seçin.
+1. **Tamam**’ı seçin. Onaylamanız istenirse **devam**' ı seçin.
 1. Kaynak oluşturulduktan sonra, Application Insights sayfasına doğrudan gitmek için Application Insights kaynak adına tıklayın.
 
     ![Yeni Application Insights kaynak hazırlanıyor](./media/monitoring/new-app-insights-done.png)
@@ -92,19 +92,19 @@ Uygulama kullanıldığında, veriler birikir. Yeni verilerle dikey pencereyi ye
 
 Application Insights, ek yapılandırma olmadan yararlı sunucu tarafı bilgileri sağlar. Application Insights en fazla değeri almak için [uygulamanızı APPLICATION INSIGHTS SDK ile işaretleyin](/azure/application-insights/app-insights-asp-net-core). Düzgün yapılandırıldığında, hizmet, istemci tarafı performansı dahil olmak üzere Web sunucusu ve tarayıcı genelinde uçtan uca izleme sağlar. Daha fazla bilgi için [Application Insights belgelerine](/azure/application-insights/app-insights-overview)bakın.
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 Web sunucusu ve uygulama günlükleri Azure App Service ' de varsayılan olarak devre dışıdır. Aşağıdaki adımlarla günlükleri etkinleştirin:
 
 1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\>* App Service gidin.
-1. Soldaki menüde, **izleme** bölümüne gidin. **Tanılama günlükleri** ' ni seçin.
+1. Soldaki menüde, **izleme** bölümüne gidin. **Tanılama günlükleri**' ni seçin.
 
     ![Tanılama günlükleri bağlantısı](./media/monitoring/logging.png)
 
-1. **Uygulama günlüğünü açın (dosya sistemi)** . İstenirse, Web uygulamasında uygulama günlüğünü etkinleştirmek için uzantıları yüklemek üzere kutuya tıklayın.
+1. **Uygulama günlüğünü açın (dosya sistemi)**. İstenirse, Web uygulamasında uygulama günlüğünü etkinleştirmek için uzantıları yüklemek üzere kutuya tıklayın.
 1. **Web sunucusu günlüğünü** **dosya sistemine** ayarlayın.
 1. **Saklama süresini** gün olarak girin. Örneğin, 30.
-1. **Kaydet** ’e tıklayın.
+1. **Kaydet**’e tıklayın.
 
 Web uygulaması için ASP.NET Core ve Web sunucusu (App Service) günlükleri oluşturulur. Bunlar, görüntülendikleri FTP/FTPS bilgileri kullanılarak indirilebilirler. Parola, bu kılavuzda daha önce oluşturulan dağıtım kimlik bilgileri ile aynıdır. Günlükler [doğrudan PowerShell veya Azure CLI ile yerel makinenize akışla](/azure/app-service/web-sites-enable-diagnostic-log#download)eklenebilir. Günlükler, Application Insights de [görüntülenebilir](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights).
 
@@ -113,7 +113,7 @@ Web uygulaması için ASP.NET Core ve Web sunucusu (App Service) günlükleri ol
 Uygulama ve Web sunucusu günlükleri, Portal aracılığıyla gerçek zamanlı olarak akışla eklenebilir.
 
 1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\>* App Service gidin.
-1. Soldaki menüde, **izleme** bölümüne gidin ve **günlük akışı** ' nı seçin.
+1. Soldaki menüde, **izleme** bölümüne gidin ve **günlük akışı**' nı seçin.
 
     ![Günlük akışı bağlantısını gösteren ekran görüntüsü](./media/monitoring/log-stream.png)
 

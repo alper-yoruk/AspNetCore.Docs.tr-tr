@@ -1,3 +1,3 @@
-# <a name="aspnet-core-generic-host-sample"></a>ASP.NET Çekirdek Genel Ana Bilgisayar Örneği
+# <a name="aspnet-core-generic-host-sample"></a>ASP.NET Core genel konak örneği
 
-Bu örnek ASP.NET Core Generic [HostHostBuilder](https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice)göstermektedir. Bu örnek, ASP.NET Core [Genel Ana Bilgisayar](https://docs.microsoft.com/aspnet/core/fundamentals/host/generic-host) konusunda açıklanan özellikleri gösterir.
+Bu örnekte, ASP.NET Core Genel Host [Hostbuilder](https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice)gösterilmektedir. Bu örnek [ASP.NET Core genel ana bilgisayar](https://docs.microsoft.com/aspnet/core/fundamentals/host/generic-host) konusunda açıklanan özellikleri gösterir.

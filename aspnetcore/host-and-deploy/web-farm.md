@@ -20,21 +20,21 @@ no-loc:
 - SignalR
 uid: host-and-deploy/web-farm
 ms.openlocfilehash: ee78e80a4eda3089943765700aa6bb62c6c1e07d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057524"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
 [Chris](https://github.com/Tratcher) 'e göre
 
-Bir *Web grubu* , bir uygulamanın birden çok örneğini barındıran iki veya daha fazla Web sunucusu (veya *düğüm* ) grubudur. Kullanıcılardan gelen istekler bir Web grubuna ulaştığında, *yük dengeleyici* istekleri Web grubunun düğümlerine dağıtır. Web gruplarının geliştirilmesi:
+Bir *Web grubu* , bir uygulamanın birden çok örneğini barındıran iki veya daha fazla Web sunucusu (veya *düğüm*) grubudur. Kullanıcılardan gelen istekler bir Web grubuna ulaştığında, *yük dengeleyici* istekleri Web grubunun düğümlerine dağıtır. Web gruplarının geliştirilmesi:
 
-* **Güvenilirlik/kullanılabilirlik** : bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
-* **Kapasite/performans** : birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
-* **Ölçeklenebilirlik** : daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artılarak iş yüküne uyacak şekilde artırılabilir veya azaltılabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
+* **Güvenilirlik/kullanılabilirlik**: bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
+* **Kapasite/performans**: birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
+* **Ölçeklenebilirlik**: daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artılarak iş yüküne uyacak şekilde artırılabilir veya azaltılabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
 * Bakım **: bir** Web grubunun düğümleri, daha kolay sistem yönetimi ile sonuçlanan bir dizi paylaşılan hizmete bağlı olabilir. Örneğin, bir Web grubunun düğümleri tek bir veritabanı sunucusunu ve görüntüler ve indirilebilir dosyalar gibi statik kaynaklar için ortak bir ağ konumunu temel alabilir.
 
 Bu konuda, paylaşılan kaynaklara bağlı bir Web çiftliğinde barındırılan ASP.NET Core uygulamaları için yapılandırma ve bağımlılıklar açıklanmaktadır.

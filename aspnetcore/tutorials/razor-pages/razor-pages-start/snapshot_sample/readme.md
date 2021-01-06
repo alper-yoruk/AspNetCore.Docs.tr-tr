@@ -1,1 +1,1 @@
-Bu klasördeki kod, Razor Pages serisinden anlık görüntülerdir.
+Bu klasördeki kod, Razor Pages serisinde zaman içindeki anlık görüntüleridir.

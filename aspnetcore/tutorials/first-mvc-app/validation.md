@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/validation
 ms.openlocfilehash: 340a66c4a561c6e00bf6f38bcf51abc795aa649c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059097"
 ---
 # <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>9. bölüm, ASP.NET Core MVC uygulamasına doğrulama ekleme
@@ -97,7 +97,7 @@ Doğrulama mantığını değiştirmeniz gerektiğinde, modele doğrulama öznit
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve `<a href="mailto:EmailAddress.com">` e-posta için gibi öğeleri/öznitelikleri sağlar. `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanabilirsiniz. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır, bunlar doğrulama öznitelikleri değildir. Bu durumda, zamanı değil yalnızca tarihi izlemek istiyoruz. `DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi ve daha fazlası gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` ve HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlaneklenebilir `DataType.Date` . Öznitelikler HTML 5 `DataType` `data-` tarayıcılarının ANLAYABILMESI için HTML 5 (bir veri Dash) öznitelikleri yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
+`DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve `<a href="mailto:EmailAddress.com">` e-posta için gibi öğeleri/öznitelikleri sağlar. `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanabilirsiniz. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır, bunlar doğrulama öznitelikleri değildir. Bu durumda, zamanı değil yalnızca tarihi izlemek istiyoruz. `DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi ve daha fazlası gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` ve HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlaneklenebilir `DataType.Date` . Öznitelikler HTML 5 `DataType` `data-` tarayıcılarının ANLAYABILMESI için HTML 5 (bir veri Dash) öznitelikleri yayar. `DataType`Öznitelikler herhangi bir  doğrulama sağlamaz.
 
 `DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
 

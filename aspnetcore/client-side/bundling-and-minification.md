@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054846"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core statik varlıkları paketleyin ve azın
@@ -96,19 +96,19 @@ ASP.NET Core 2,1 veya üzeri sürümlerde, MVC veya Pages proje köküne *bundle
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-Dosyadaki *bundleconfig.js* her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript ( *Wwwroot/js/site.js* ) ve stil sayfası ( *Wwwroot/CSS/site. css* ) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
+Dosyadaki *bundleconfig.js* her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript (*Wwwroot/js/site.js*) ve stil sayfası (*Wwwroot/CSS/site. css*) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
 
 Yapılandırma seçenekleri şunlardır:
 
 * `outputFileName`: Çıkış yapılacak paket dosyasının adı. Dosyadaki *bundleconfig.js* göreli bir yol içerebilir. **Gerekli**
-* `inputFiles`: Birlikte paketedilecek dosya dizisi. Bunlar yapılandırma dosyasına yönelik göreli yollardır. **isteğe bağlı** * boş bir değer boş bir çıktı dosyasıyla sonuçlanır. [Glob](https://www.tldp.org/LDP/abs/html/globbingref.html) desenleri desteklenir.
-* `minify`: Çıkış türü için minbirleşme seçenekleri. **isteğe bağlı** , *varsayılan `minify: { enabled: true }` -*
+* `inputFiles`: Birlikte paketedilecek dosya dizisi. Bunlar yapılandırma dosyasına yönelik göreli yollardır. **isteğe bağlı*** boş bir değer boş bir çıktı dosyasıyla sonuçlanır. [Glob](https://www.tldp.org/LDP/abs/html/globbingref.html) desenleri desteklenir.
+* `minify`: Çıkış türü için minbirleşme seçenekleri. **isteğe bağlı**, *varsayılan `minify: { enabled: true }` -*
   * Yapılandırma seçenekleri çıkış dosyası türü başına kullanılabilir.
     * [CSS minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: Oluşturulan dosyalar proje dosyasına eklenip eklenmeyeceğini belirten bayrak. **isteğe bağlı** , *Varsayılan-yanlış*
-* `sourceMap`: Paketlenmiş dosya için bir kaynak eşlemesi oluşturulup oluşturulmayacağını belirten bayrak. **isteğe bağlı** , *Varsayılan-yanlış*
+* `includeInProject`: Oluşturulan dosyalar proje dosyasına eklenip eklenmeyeceğini belirten bayrak. **isteğe bağlı**, *Varsayılan-yanlış*
+* `sourceMap`: Paketlenmiş dosya için bir kaynak eşlemesi oluşturulup oluşturulmayacağını belirten bayrak. **isteğe bağlı**, *Varsayılan-yanlış*
 * `sourceMapRootPath`: Oluşturulan kaynak eşleme dosyasını depolamak için kök yolu.
 
 ## <a name="add-files-to-workflow"></a>İş akışına dosya ekleme

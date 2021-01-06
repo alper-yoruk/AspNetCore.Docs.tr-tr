@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-3.0
 ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051245"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
@@ -219,7 +219,7 @@ public class ChatHub : Hub
 
 İlkeyi oluşturmak `DomainRestricted` şunları içerebilir:
 
-* *Startup.cs* ' de, yeni ilkeyi ekleme.
+* *Startup.cs*' de, yeni ilkeyi ekleme.
 * Özel `DomainRestrictedRequirement` gereksinimi parametre olarak belirtin.
 * `DomainRestricted`Yetkilendirme ara yazılımı ile kaydetme.
 
@@ -482,7 +482,7 @@ Durum denetimleri uç noktaları şunları yapabilir:
 * Yetkilendirme gerektir.
 * CORS gerektir.
 
-Daha fazla bilgi için aşağıdaki makalelere bakın:
+Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 * <xref:migration/22-to-30#health-checks>
 * <xref:host-and-deploy/health-checks>
@@ -501,7 +501,7 @@ IIS 'de ASP.NET Core uygulamalar barındırırken başlatma hataları artık dah
 
 .NET Core 3,0 yeni çalışan hizmeti uygulama şablonunu tanıtır. Bu şablon, .NET Core 'da uzun süre çalışan hizmetler yazmak için bir başlangıç noktası sağlar.
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Windows Hizmetleri olarak .NET Core çalışanları](https://devblogs.microsoft.com/aspnet/net-core-workers-as-windows-services/)
 * <xref:fundamentals/host/hosted-services>
@@ -513,7 +513,7 @@ Daha fazla bilgi için bkz.
 
 Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED` , `true` kapsayıcı görüntülerimizde olarak ayarlanır.
 
-## <a name="performance-improvements"></a>Performans iyileştirmeleri
+## <a name="performance-improvements"></a>Performans geliştirmeleri
 
 ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 

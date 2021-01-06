@@ -1,3 +1,3 @@
-# <a name="aspnet-core-logging-sample-application"></a>ASP.NET Çekirdek günlük örnek uygulaması
+# <a name="aspnet-core-logging-sample-application"></a>Günlüğe kaydetme örnek uygulama ASP.NET Core
 
-Bu örnek uygulama [ASP.NET Çekirdek Günlük](https://docs.microsoft.com/aspnet/core/fundamentals/logging/index) makale içindir ve [ASP.NET core MVC](https://docs.microsoft.com/aspnet/core/tutorials/first-web-api) öğretici ile İlk Web API için oluşturulan örnek dayanmaktadır.
+Bu örnek uygulama, [ASP.NET Core günlük oluşturma](https://docs.microsoft.com/aspnet/core/fundamentals/logging/index) makalesine yöneliktir ve [ASP.NET Core MVC öğreticisiyle Ilk Web API 'si](https://docs.microsoft.com/aspnet/core/tutorials/first-web-api) için oluşturulan örneğe dayalıdır.

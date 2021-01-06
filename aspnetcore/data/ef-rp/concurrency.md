@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/concurrency
 ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054001"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık
@@ -56,7 +56,7 @@ Kilitleri yönetmek dezavantajlara sahiptir. Program, karmaşık olabilir ve Kul
 
 ![Bütçeyi 0 olarak değiştirme](concurrency/_static/change-budget30.png)
 
-Kemal, **Kaydet** ' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
+Kemal, **Kaydet**' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
 
 ![Başlangıç tarihini 2013 olarak değiştirme](concurrency/_static/change-date30.png)
 
@@ -98,7 +98,7 @@ EF Core, `DbConcurrencyException` Çakışmalar algıladığında özel durum ol
 
 ## <a name="add-a-tracking-property"></a>İzleme özelliği Ekle
 
-*Modeller/departman. cs* ' de, rowversion adlı bir izleme özelliği ekleyin:
+*Modeller/departman. cs*' de, rowversion adlı bir izleme özelliği ekleyin:
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
@@ -280,7 +280,7 @@ Aşağıdaki kod, ' a gönderilen değerden farklı veritabanı değerleri olan 
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_Error)]
 
-Aşağıdaki vurgulanan kod, `RowVersion` değeri veritabanından alınan yeni değer olarak ayarlar. Kullanıcının bir dahaki sefer **Kaydet** ' i tıklatması durumunda, yalnızca düzenleme sayfasının son görüntüsü bu yana gerçekleşen eşzamanlılık hataları yakalanacaktır.
+Aşağıdaki vurgulanan kod, `RowVersion` değeri veritabanından alınan yeni değer olarak ayarlar. Kullanıcının bir dahaki sefer **Kaydet**' i tıklatması durumunda, yalnızca düzenleme sayfasının son görüntüsü bu yana gerçekleşen eşzamanlılık hataları yakalanacaktır.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
@@ -304,12 +304,12 @@ Yukarıdaki kod:
 Ingilizce bölümünde düzenleme öğesinin iki tarayıcı örneğini açın:
 
 * Uygulamayı çalıştırın ve Departmanlar ' ı seçin.
-* Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmede aç** ' ı seçin.
+* Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmede aç**' ı seçin.
 * İlk sekmede, Ingilizce bölümünün **düzenleme** Köprüsü ' ne tıklayın.
 
 İki tarayıcı sekmesi aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde adı değiştirin ve **Kaydet** ' e tıklayın.
+İlk tarayıcı sekmesinde adı değiştirin ve **Kaydet**' e tıklayın.
 
 ![Bölüm Düzenle sayfa 1 değişiklikten sonra](concurrency/_static/edit-after-change-130.png)
 
@@ -319,7 +319,7 @@ Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersio
 
 ![Değişiklik sonrasında bölüm düzenleme sayfası 2](concurrency/_static/edit-after-change-230.png)
 
-**Kaydet** ’e tıklayın. Veritabanı değerleriyle eşleşmeyen tüm alanlar için hata iletileri görürsünüz:
+**Kaydet**’e tıklayın. Veritabanı değerleriyle eşleşmeyen tüm alanlar için hata iletileri görürsünüz:
 
 ![Bölüm düzenleme sayfası hata iletisi](concurrency/_static/edit-error30.png)
 
@@ -360,12 +360,12 @@ Test departmanı oluşturun.
 Test departmanı üzerinde silmenin iki tarayıcı örneğini açın:
 
 * Uygulamayı çalıştırın ve Departmanlar ' ı seçin.
-* Test departmanı için **silme** köprüsünü sağ tıklayın ve **Yeni sekmede aç** ' ı seçin.
+* Test departmanı için **silme** köprüsünü sağ tıklayın ve **Yeni sekmede aç**' ı seçin.
 * Test departmanı için **düzenleme** köprüsüne tıklayın.
 
 İki tarayıcı sekmesi aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde bütçeyi değiştirin ve **Kaydet** ' e tıklayın.
+İlk tarayıcı sekmesinde bütçeyi değiştirin ve **Kaydet**' e tıklayın.
 
 Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersion göstergesi güncellenir. Güncelleştirilmiş ROWVERSION göstergesinin, diğer sekmede ikinci geri göndermede görüntülendiğini aklınızda edin.
 
@@ -408,7 +408,7 @@ Eşzamanlılık algılama etkin değilse, eşzamanlı güncelleştirmeler gerçe
 
 ![Bütçeyi 0 olarak değiştirme](concurrency/_static/change-budget.png)
 
-Kemal, **Kaydet** ' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
+Kemal, **Kaydet**' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
 
 ![Başlangıç tarihini 2013 olarak değiştirme](concurrency/_static/change-date.png)
 
@@ -472,7 +472,7 @@ EF Core, bir veya komutu tarafından hiçbir satır güncellenmemişse `Update` 
 
 ### <a name="add-a-tracking-property-to-the-department-entity"></a>Bölüm varlığına bir izleme özelliği ekleyin
 
-*Modeller/departman. cs* ' de, rowversion adlı bir izleme özelliği ekleyin:
+*Modeller/departman. cs*' de, rowversion adlı bir izleme özelliği ekleyin:
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
@@ -576,7 +576,7 @@ Aşağıdaki kod, ' den postalandıklarından farklı olarak DB değerleri olan 
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_err)]
 
-Aşağıdaki vurgulanan kod, `RowVersion` değeri, veritabanından alınan yeni değer olarak ayarlar. Kullanıcının bir dahaki sefer **Kaydet** ' i tıklatması durumunda, yalnızca düzenleme sayfasının son görüntüsü bu yana gerçekleşen eşzamanlılık hataları yakalanacaktır.
+Aşağıdaki vurgulanan kod, `RowVersion` değeri, veritabanından alınan yeni değer olarak ayarlar. Kullanıcının bir dahaki sefer **Kaydet**' i tıklatması durumunda, yalnızca düzenleme sayfasının son görüntüsü bu yana gerçekleşen eşzamanlılık hataları yakalanacaktır.
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
@@ -600,12 +600,12 @@ Yukarıdaki biçimlendirme:
 Ingilizce bölümünde düzenleme öğesinin iki tarayıcı örneğini açın:
 
 * Uygulamayı çalıştırın ve Departmanlar ' ı seçin.
-* Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmede aç** ' ı seçin.
+* Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmede aç**' ı seçin.
 * İlk sekmede, Ingilizce bölümünün **düzenleme** Köprüsü ' ne tıklayın.
 
 İki tarayıcı sekmesi aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde adı değiştirin ve **Kaydet** ' e tıklayın.
+İlk tarayıcı sekmesinde adı değiştirin ve **Kaydet**' e tıklayın.
 
 ![Bölüm Düzenle sayfa 1 değişiklikten sonra](concurrency/_static/edit-after-change-1.png)
 
@@ -615,7 +615,7 @@ Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersio
 
 ![Değişiklik sonrasında bölüm düzenleme sayfası 2](concurrency/_static/edit-after-change-2.png)
 
-**Kaydet** ’e tıklayın. DB değerleriyle eşleşmeyen tüm alanlar için hata iletileri görürsünüz:
+**Kaydet**’e tıklayın. DB değerleriyle eşleşmeyen tüm alanlar için hata iletileri görürsünüz:
 
 ![Bölüm düzenleme sayfası hata iletisi](concurrency/_static/edit-error.png)
 
@@ -658,12 +658,12 @@ Test departmanı oluşturun.
 Test departmanı üzerinde silmenin iki tarayıcı örneğini açın:
 
 * Uygulamayı çalıştırın ve Departmanlar ' ı seçin.
-* Test departmanı için **silme** köprüsünü sağ tıklayın ve **Yeni sekmede aç** ' ı seçin.
+* Test departmanı için **silme** köprüsünü sağ tıklayın ve **Yeni sekmede aç**' ı seçin.
 * Test departmanı için **düzenleme** köprüsüne tıklayın.
 
 İki tarayıcı sekmesi aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde bütçeyi değiştirin ve **Kaydet** ' e tıklayın.
+İlk tarayıcı sekmesinde bütçeyi değiştirin ve **Kaydet**' e tıklayın.
 
 Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersion göstergesi güncellenir. Güncelleştirilmiş ROWVERSION göstergesinin, diğer sekmede ikinci geri göndermede görüntülendiğini aklınızda edin.
 
