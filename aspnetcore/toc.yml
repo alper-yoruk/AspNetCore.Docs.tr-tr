@@ -766,6 +766,8 @@
       uid: grpc/interprocess
     - name: gRPC'den JSON Web API'leri oluşturma
       uid: grpc/httpapi
+    - name: Kod öncelikli gRPC hizmetleri ve istemcileri
+      uid: grpc/code-first
     - name: dotnet-grpc ile Protobuf başvurularını yönetme
       uid: grpc/dotnet-grpc
     - name: gRPCurl ile gRPC hizmetlerini test etme
