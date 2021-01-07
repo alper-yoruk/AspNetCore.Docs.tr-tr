@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 920a23aee0d0555e93c829142700709d5881afd2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 051721b62397b582f1ffdaba08ffefe5d0c9ae03
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97753107"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972021"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor bileşen Sanallaştırması
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
-Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Sanallaştırma, UI işlemesini yalnızca şu anda görünür olan bölümlerle sınırlamak için bir tekniktir. Örneğin sanallaştırma, uygulamanın uzun bir öğe listesini işlemesi gerektiğinde ve belirli bir zamanda bir öğe alt kümesinin görünür olması gerektiğinde faydalıdır. Blazor`Virtualize`uygulamanın bileşenlerine sanallaştırma eklemek için kullanılabilecek bileşeni sağlar.
+Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Sanallaştırma, UI işlemesini yalnızca şu anda görünür olan bölümlerle sınırlamak için bir tekniktir. Örneğin sanallaştırma, uygulamanın uzun bir öğe listesini işlemesi gerektiğinde ve belirli bir zamanda bir öğe alt kümesinin görünür olması gerektiğinde faydalıdır. Blazoruygulamanın bileşenlerine sanallaştırma eklemek için kullanılabilecek [ `Virtualize` bileşeni](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601) sağlar.
 
 Sanallaştırma olmadan tipik bir liste, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) listedeki her öğeyi işlemek için bir C# döngüsü kullanabilir:
 
@@ -46,7 +46,7 @@ Sanallaştırma olmadan tipik bir liste, [`foreach`](/dotnet/csharp/language-ref
 
 Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı, fark edilebilir bir UI gecikmesi yaşayabilir.
 
-Listedeki her öğeyi tek seferde işlemek yerine, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngüsünü `Virtualize` bileşeniyle değiştirin ve ile birlikte bir sabit öğe kaynağı belirtin `Items` . Yalnızca şu anda görünür olan öğeler işlenir:
+Listedeki her öğeyi tek seferde işlemek yerine, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngüsünü `Virtualize` bileşeniyle değiştirin ve ile birlikte bir sabit öğe kaynağı belirtin <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> . Yalnızca şu anda görünür olan öğeler işlenir:
 
 ```razor
 <Virtualize Context="employee" Items="@employees">
@@ -78,7 +78,7 @@ Bileşen için öğe içeriği `Virtualize` şunları içerebilir:
 
 ## <a name="item-provider-delegate"></a>Öğe sağlayıcısı temsilcisi
 
-Tüm öğeleri belleğe yüklemek istemiyorsanız, `ItemsProvider` istenen öğeleri istek üzerine zaman uyumsuz olarak alan bileşenin parametresine bir öğe sağlayıcısı temsilci yöntemi belirtebilirsiniz:
+Tüm öğeleri belleğe yüklemek istemiyorsanız, <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> istenen öğeleri istek üzerine zaman uyumsuz olarak alan bileşenin parametresine bir öğe sağlayıcısı temsilci yöntemi belirtebilirsiniz:
 
 ```razor
 <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
@@ -89,7 +89,7 @@ Tüm öğeleri belleğe yüklemek istemiyorsanız, `ItemsProvider` istenen öğe
 </Virtualize>
 ```
 
-Öğe sağlayıcısı `ItemsProviderRequest` , belirli bir başlangıç dizininden başlayarak gereken sayıda öğeyi belirten bir alır. Daha sonra öğe sağlayıcısı, istenen öğeleri bir veritabanından veya başka bir hizmetten alır ve bunları `ItemsProviderResult<TItem>` Toplam öğe sayısı ile birlikte döndürür. Öğe sağlayıcısı her bir istek ile öğeleri almayı seçebilir veya bunları hazır olmaları için önbelleğe alabilir.
+Öğe sağlayıcısı <xref:Microsoft.AspNetCore.Components.Web.Virtualization.ItemsProviderRequest> , belirli bir başlangıç dizininden başlayarak gereken sayıda öğeyi belirten bir alır. Daha sonra öğe sağlayıcısı, istenen öğeleri bir veritabanından veya başka bir hizmetten alır ve bunları <xref:Microsoft.AspNetCore.Components.Web.Virtualization.ItemsProviderResult%601> Toplam öğe sayısı ile birlikte döndürür. Öğe sağlayıcısı her bir istek ile öğeleri almayı seçebilir veya bunları hazır olmaları için önbelleğe alabilir.
 
 Bir `Virtualize` bileşen parametrelerden yalnızca **bir öğe kaynağını** kabul edebilir, bu nedenle bir öğe sağlayıcısını eşzamanlı olarak kullanmayı ve ' a bir koleksiyon atamayı denemeyin `Items` . Her ikisi de atanırsa, <xref:System.InvalidOperationException> bileşen parametreleri çalışma zamanında ayarlandığında bir oluşturulur.
 
@@ -107,9 +107,14 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 }
 ```
 
+<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.RefreshDataAsync%2A?displayProperty=nameWithType> bileşene verileri yeniden yönlendirme izni verir <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A> . Bu, dış veriler değiştiğinde yararlıdır. Kullanırken bunu çağırmanız gerekmez <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A> .
+
 ## <a name="placeholder"></a>Yer tutucu
 
-Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, `<Placeholder>...</Placeholder>` öğe verileri kullanılabilir olana kadar bir yer tutucu () işleme seçeneğiniz vardır:
+Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, öğe içeriğiyle bir yer tutucu oluşturma seçeneğiniz vardır:
+
+* <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Placeholder%2A> `<Placeholder>...</Placeholder>` Öğe verileri kullanılabilir olana kadar içeriği göstermek için () kullanın.
+* <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemContent%2A?displayProperty=nameWithType>Listenin öğe şablonunu ayarlamak için kullanın.
 
 ```razor
 <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
@@ -129,7 +134,7 @@ Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, `<Pla
 
 ## <a name="item-size"></a>Öğe boyutu
 
-Her öğenin piksel cinsinden boyutu ayarlanabilir `ItemSize` (varsayılan: 50px):
+Her öğenin piksel cinsinden boyutu ayarlanabilir <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (varsayılan: 50px):
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">
@@ -139,7 +144,7 @@ Her öğenin piksel cinsinden boyutu ayarlanabilir `ItemSize` (varsayılan: 50px
 
 ## <a name="overscan-count"></a>Fazla tarama sayısı
 
-`OverscanCount` görünen bölgeden önce ve sonra kaç tane ek öğenin işleneceğini belirler. Bu ayar, kaydırma sırasında işleme sıklığını azaltmaya yardımcı olur. Ancak, daha yüksek değerler sayfada işlenen daha fazla öğenin oluşmasına neden olur (varsayılan: 3):
+<xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.OverscanCount%2A?displayProperty=nameWithType> görünen bölgeden önce ve sonra kaç tane ek öğenin işleneceğini belirler. Bu ayar, kaydırma sırasında işleme sıklığını azaltmaya yardımcı olur. Ancak, daha yüksek değerler sayfada işlenen daha fazla öğenin oluşmasına neden olur (varsayılan: 3):
 
 ```razor
 <Virtualize Context="employee" Items="@employees" OverscanCount="4">

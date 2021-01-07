@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 28a71c7040667c7544cc17c1184c09b5b39959b9
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5d9f1684aa333c38c73673138a703b04d318c6df
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052558"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972034"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Openapı araçlarını kullanarak ASP.NET Core uygulamaları geliştirme
 
@@ -88,7 +88,7 @@ Uygulamanın oluşturulan istemci kodunu çağırması için önceki başvuru ge
 |-------|------|-------------|---------|
 | -p|--updateProject | Üzerinde çalışılacak proje. |DotNet openapı Add URL *--updateproject .\Ref.exe*`https://contoso.com/openapi.json` |
 | -o|--Çıkış-dosya | Openapı dosyasının yerel kopyasının yerleştirileceği yer. |DotNet openapı Add URL `https://contoso.com/openapi.json` *--Çıkış-dosya myclient.js* |
-| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler `NSwagCSharp` ve ' dir `NSwagTypeScript` . |DotNet openapı dosya ekleme .\OpenApi.js--Code-Generator
+| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler `NSwagCSharp` ve ' dir `NSwagTypeScript` . |DotNet openapı Add URL `https://contoso.com/openapi.json` --Code-Generator
 | -h|--yardım|Yardım bilgilerini göster|DotNet openapı URL ekleme--Yardım|
 
 #### <a name="arguments"></a>Arguments

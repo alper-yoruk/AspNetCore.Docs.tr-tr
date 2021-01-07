@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 7dac8c84683553a52e07ecc61c8bcf8616e77dc6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cef05b32731e0930d7a3cfc6fe4502236b07a236
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061242"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972073"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR yapılandırması
 
@@ -203,8 +203,8 @@ Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağl
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ya da**`information` | `LogLevel.Information` |
-| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
+| `info` **veya** `information` | `LogLevel.Information` |
+| `warn` **veya** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -293,7 +293,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
+SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -343,7 +343,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -362,7 +362,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `headers` | `null` | Her HTTP isteğiyle gönderilen üstbilgilerin sözlüğü. Üst bilgilerin tarayıcıda gönderilmesi WebSockets veya Stream için çalışmaz <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> . |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withCredentials` | `true` | CORS isteğiyle kimlik bilgilerinin gönderilip gönderilmeyeceğini belirtir. Azure App Service cookie , yapışkan oturum için s kullanır ve bu seçeneğin doğru şekilde çalışmasını gerektirir. CORS hakkında daha fazla bilgi için SignalR bkz <xref:signalr/security#cross-origin-resource-sharing> .. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -370,7 +370,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -595,8 +595,8 @@ Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağl
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ya da**`information` | `LogLevel.Information` |
-| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
+| `info` **veya** `information` | `LogLevel.Information` |
+| `warn` **veya** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -685,7 +685,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
+SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -735,7 +735,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -753,14 +753,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -981,8 +981,8 @@ Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağl
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ya da**`information` | `LogLevel.Information` |
-| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
+| `info` **veya** `information` | `LogLevel.Information` |
+| `warn` **veya** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1071,7 +1071,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
+SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1121,7 +1121,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1139,14 +1139,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -1421,7 +1421,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
+SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1471,7 +1471,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1489,14 +1489,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -1768,7 +1768,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
+SignalRJava istemcisinde, [Httphubconnectionbuilder](/java/api/com.microsoft.signalr.httphubconnectionbuilder?view=aspnet-signalr-java)'a bir erişim belirteci fabrikası sağlayarak kimlik doğrulaması için kullanılacak bir taşıyıcı belirteç yapılandırabilirsiniz. Bir [Rxjava](https://github.com/ReactiveX/RxJava) [Single \<String> ](https://reactivex.io/documentation/single.html)sağlamak Için [withaccesstokenfactory](/java/api/com.microsoft.signalr.httphubconnectionbuilder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) kullanın. [Tek. ertele](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)çağrısıyla, istemciniz için erişim belirteçleri oluşturmak üzere mantık yazabilirsiniz.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1815,7 +1815,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1833,14 +1833,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
