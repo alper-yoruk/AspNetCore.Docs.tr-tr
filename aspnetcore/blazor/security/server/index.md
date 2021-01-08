@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 108fb3a8a24295cad43fd8c83303abd95a7ecd33
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa24def1a003a2c2608691e6168066c740f47205
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055483"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024632"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
@@ -45,7 +45,7 @@ Proje Blazor Server oluşturulduğunda proje şablonu kimlik doğrulaması için
 Diğer ASP.NET Core projelerine yönelik aynı kimlik doğrulama mekanizması kümesini sunmak için bir iletişim kutusu açılır:
 
 * **Kimlik doğrulaması yok**
-* **Bireysel kullanıcı hesapları** : Kullanıcı hesapları depolanabilir:
+* **Bireysel kullanıcı hesapları**: Kullanıcı hesapları depolanabilir:
   * ASP.NET Core sistemi kullanılarak uygulama içinde [Identity](xref:security/authentication/identity) .
   * [Azure AD B2C](xref:security/authentication/azure-ad-b2c).
 * **İş veya okul hesapları**
@@ -131,3 +131,6 @@ IdentityBir projeye yapı iskelesi Blazor Server :
 
 * [Hızlı başlangıç: Microsoft 'a ASP.NET Core Web uygulamasına oturum açma ekleme](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
 * [Hızlı başlangıç: ASP.NET Core Web API 'sini Microsoft Identity platformu ile koruma](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)
+* <xref:host-and-deploy/proxy-load-balancer>: Üzerine yönergeler içerir:
+  * WAN sunucularında ve iç ağlarda HTTPS şema bilgilerini korumak için Iletilen üstbilgiler ara yazılımı kullanma.
+  * El ile düzen yapılandırması, doğru istek yönlendirme için istek yolu değişiklikleri ve Linux ve IIS olmayan ters proxy 'ler için istek düzenini iletme dahil ek senaryolar ve kullanım örnekleri.

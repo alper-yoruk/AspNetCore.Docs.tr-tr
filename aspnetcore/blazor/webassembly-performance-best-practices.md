@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0753ef0f1cde7bbb45ecc09b97fecb5ce364811c
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95417389"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024658"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 
@@ -43,16 +43,16 @@ Aşağıdaki bölümler, işleme iş yükünü en aza indirmek ve UI yanıt hız
 
 Çalışma zamanında, bileşenler hiyerarşi olarak mevcuttur. Kök bileşenin alt bileşenleri vardır. Sırasıyla, kök alt bileşenleri kendi alt bileşenlerine sahiptir ve bu şekilde devam eder. Kullanıcı bir düğme seçen bir olay gerçekleştiğinde, bu, Blazor Hangi bileşenlere yeniden değer vermek için bu şekilde çalışır:
 
- 1. Olayın kendisi, olayın işleyicisini işlenmiş olan bileşene gönderilir. Olay işleyicisini yürüttükten sonra, bu bileşen yeniden kullanılır.
- 1. Herhangi bir bileşen yeniden her eklendiğinde, her bir alt bileşeninin parametre değerlerinin yeni bir kopyasını sağlar.
- 1. Yeni bir parametre değerleri kümesi alınırken, her bileşen yeniden tekrar olup olmayacağını seçer. Varsayılan olarak, parametre değerleri değişmiş olabilir (örneğin, değişebilir nesnelerse), bileşenler yeniden işlenir.
+1. Olayın kendisi, olayın işleyicisini işlenmiş olan bileşene gönderilir. Olay işleyicisini yürüttükten sonra, bu bileşen yeniden kullanılır.
+1. Herhangi bir bileşen yeniden her eklendiğinde, her bir alt bileşeninin parametre değerlerinin yeni bir kopyasını sağlar.
+1. Yeni bir parametre değerleri kümesi alınırken, her bileşen yeniden tekrar olup olmayacağını seçer. Varsayılan olarak, parametre değerleri değişmiş olabilir (örneğin, değişebilir nesnelerse), bileşenler yeniden işlenir.
 
 Bu dizinin son iki adımı, bileşen hiyerarşisinde yinelemeli olarak devam eder. Çoğu durumda, tüm alt ağaç yeniden kullanılır. Bu, üst düzey bileşenleri hedefleyen olayların pahalı rerendering işlemlerine neden olabileceği anlamına gelir, çünkü bu noktanın altındaki her şey yeniden alınmalıdır.
 
 Bu işlemi kesintiye uğratmak ve belirli bir alt ağaçta işleme özyinelemeyi engellemek istiyorsanız şunlardan birini yapabilirsiniz:
 
- * Belirli bir bileşene yönelik tüm parametrelerin temel sabit türlerde (örneğin,,,, `string` `int` `bool` `DateTime` ve diğerleri) olduğundan emin olun. Bu parametre değerlerinden hiçbiri değişmediği takdirde değişiklikleri tespit etmek için yerleşik mantık rerendering öğesini otomatik olarak atlar. Bir alt bileşeni ile oluşturduysanız `<Customer CustomerId="@item.CustomerId" />` , burada `CustomerId` bir değer olduğunda, `int` değişiklik ne zaman haricinde yeniden verilmez `item.CustomerId` .
- * Özel model türleri, olay geri çağırmaları veya değerler gibi temel olmayan parametre değerlerini kabul etmeniz gerekirse, <xref:Microsoft.AspNetCore.Components.RenderFragment> <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> oluşturma bölümünde açıklanan [ `ShouldRender` ](#use-of-shouldrender) kararı denetlemek için geçersiz kılabilirsiniz.
+* Belirli bir bileşene yönelik tüm parametrelerin temel sabit türlerde (örneğin,,,, `string` `int` `bool` `DateTime` ve diğerleri) olduğundan emin olun. Bu parametre değerlerinden hiçbiri değişmediği takdirde değişiklikleri tespit etmek için yerleşik mantık rerendering öğesini otomatik olarak atlar. Bir alt bileşeni ile oluşturduysanız `<Customer CustomerId="@item.CustomerId" />` , burada `CustomerId` bir değer olduğunda, `int` değişiklik ne zaman haricinde yeniden verilmez `item.CustomerId` .
+* Özel model türleri, olay geri çağırmaları veya değerler gibi temel olmayan parametre değerlerini kabul etmeniz gerekirse, <xref:Microsoft.AspNetCore.Components.RenderFragment> <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> oluşturma bölümünde açıklanan [ `ShouldRender` ](#use-of-shouldrender) kararı denetlemek için geçersiz kılabilirsiniz.
 
 Tüm alt ağaçlar rerendering atlanarak, bir olay gerçekleştiğinde işleme maliyetinin büyük çoğunluğunu kaldırabilirsiniz.
 
@@ -109,38 +109,7 @@ Daha fazla bilgi için bkz. <xref:blazor/components/lifecycle>.
 
 Bir döngüde büyük miktarlarda Kullanıcı arabirimini işlerken (örneğin, binlerce girişi olan bir liste veya kılavuz), işleme işlemlerinin birlikte işlenmesi, kullanıcı ARABIRIMI oluşturma işlemlerindeki bir gecikme süresine neden olabilir ve bu nedenle kötü bir kullanıcı deneyimi sağlar. Kullanıcının aynı anda yalnızca küçük sayıda öğeyi kaydırma yapmadan görebildiğinden, bu durumda, o anda görünür olmayan öğeleri çok fazla işlemek çok zaman harcayabilir.
 
-Bunu çözmek için, rastgele Blazor büyük bir listenin Görünüm ve kaydırma davranışlarını oluşturan, ancak gerçekte yalnızca geçerli kaydırma görünüm penceresinin içindeki liste öğelerini işleyen yerleşik bir [ `<Virtualize>` bileşen](xref:blazor/components/virtualization) sağlar. Örneğin, bu, uygulamanın 100.000 girişi olan bir listesi olabileceği, ancak yalnızca herhangi bir zamanda görünür olan 20 öğenin işleme maliyetini ödeme anlamına gelir. Bileşenin kullanımı, `<Virtualize>` Kullanıcı arabirimi performansını büyüklük siparişlerine göre ölçeklendirebilir.
-
-`<Virtualize>` Şu durumlarda kullanılabilir:
-
- * Bir döngüde veri öğeleri kümesi işleme.
- * Öğelerin çoğu kaydırma nedeniyle görünür değil.
- * İşlenen öğeler tam olarak aynı boyutta. Kullanıcı rastgele bir noktaya kaydığında, bileşen gösterilecek görünür öğeleri hesaplayabilir.
-
-Aşağıda, sanallaştırılmış olmayan bir liste örneği gösterilmektedir:
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    @foreach (var flight in allFlights)
-    {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    }
-</div>
-```
-
-`allFlights`Koleksiyonda 10.000 öğe varsa, bu, 10.000 bileşen örneklerini oluşturur ve işler `<FlightSummary>` . Buna karşılık aşağıda, sanallaştırılmış bir liste örneği gösterilmektedir:
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    <Virtualize Items="@allFlights" Context="flight">
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    </Virtualize>
-</div>
-```
-
-Sonuçta elde edilen kullanıcı ARABIRIMI bir kullanıcıya aynı olsa da, arka planda bileşen yalnızca başlatılır ve `<FlightSummary>` kaydırılabilir bölgeyi dolduracak kadar birçok örnek oluşturur. `<FlightSummary>`Görünen örnek kümesi, Kullanıcı kaydırıldığında yeniden hesaplanır ve işlenir.
-
-`<Virtualize>` diğer avantajları da vardır. Örneğin, bir bileşen bir dış API 'den veri istediğinde, `<Virtualize>` bileşenin tüm verileri koleksiyondan indirmek yerine yalnızca geçerli görünür bölgeye karşılık gelen kayıt dilimini getirme izni verir.
+Bunu çözmek için, rastgele Blazor `Virtualize` büyük bir listenin Görünüm ve kaydırma davranışlarını oluşturan, ancak yalnızca geçerli kaydırma görünüm penceresinin içindeki liste öğelerini işleyen bileşeni sağlar. Örneğin, bu, uygulamanın 100.000 girişi olan bir listesi olabileceği, ancak yalnızca herhangi bir zamanda görünür olan 20 öğenin işleme maliyetini ödeme anlamına gelir. Bileşenin kullanımı, `Virtualize` Kullanıcı arabirimi performansını büyüklük siparişlerine göre ölçeklendirebilir.
 
 Daha fazla bilgi için bkz. <xref:blazor/components/virtualization>.
 
@@ -152,9 +121,9 @@ Daha fazla bilgi için bkz. <xref:blazor/components/virtualization>.
 
 Ancak, ölçeklendirilmesi gereken bileşenleri oluşturduğunuz yaygın senaryolar da vardır. Örneğin:
 
- * Büyük iç içe yerleştirilmiş formlarda yüzlerce ayrı giriş, etiket ve diğer öğeler bulunabilir.
- * Kılavuzlarda binlerce hücre olabilir.
- * Dağılım çizimleri milyonlarca veri noktasına sahip olabilir.
+* Büyük iç içe yerleştirilmiş formlarda yüzlerce ayrı giriş, etiket ve diğer öğeler bulunabilir.
+* Kılavuzlarda binlerce hücre olabilir.
+* Dağılım çizimleri milyonlarca veri noktasına sahip olabilir.
 
 Her birimi ayrı bileşen örnekleri olarak modelliyorsa, bunların çoğu, işleme performansının kritik hale gelebilmesini sağlayacak. Bu bölümde, Kullanıcı arabiriminin hızlı ve hızlı bir şekilde kalması için bu tür bileşenleri basit hale getirme önerileri sunulmaktadır.
 
@@ -162,8 +131,8 @@ Her birimi ayrı bileşen örnekleri olarak modelliyorsa, bunların çoğu, işl
 
 Her bileşen, üst ve alt öğelerinden bağımsız olarak işleyebilen ayrı bir adadır. Kullanıcı arabiriminin bir bileşen hiyerarşisine nasıl bölüneceği seçerek, Kullanıcı arabirimi işleme ayrıntı düzeyi üzerinde denetim elde edersiniz. Bu, performans için iyi veya hatalı olabilir.
 
- * Kullanıcı arabirimini daha fazla bileşene bölerek, olaylar gerçekleştiğinde UI 'nin daha küçük bir bölümünü kullanabilirsiniz. Örneğin, bir Kullanıcı bir tablo satırındaki bir düğmeye tıkladığında, tüm sayfa veya tablo yerine yalnızca bu tek satıra yeniden oturum açabiliyor olabilirsiniz.
- * Ancak, her ek bileşen bağımsız durum ve işleme yaşam döngüsü ile başa çıkmak için bazı ek bellek ve CPU ek yükü içerir.
+* Kullanıcı arabirimini daha fazla bileşene bölerek, olaylar gerçekleştiğinde UI 'nin daha küçük bir bölümünü kullanabilirsiniz. Örneğin, bir Kullanıcı bir tablo satırındaki bir düğmeye tıkladığında, tüm sayfa veya tablo yerine yalnızca bu tek satıra yeniden oturum açabiliyor olabilirsiniz.
+* Ancak, her ek bileşen bağımsız durum ve işleme yaşam döngüsü ile başa çıkmak için bazı ek bellek ve CPU ek yükü içerir.
 
 Blazor WebAssembly.NET 5 ' te performansını ayarlamamız, bileşen örneği başına 0,06 MS 'nin bir işleme ek yükünü ölçyoruz. Bu, tipik bir dizüstü bilgisayarda çalışan üç parametre kabul eden basit bir bileşeni temel alır. Dahili olarak, ek yükün büyük ölçüde sözlüklerden bileşen başına durumunun alınması ve parametrelerin geçirilmesi ve alınması gerekir. Çarpma ile, 2.000 ek bileşen örneği eklemenin işleme zamanına 0,12 saniye ekleymesinin ve Kullanıcı arabiriminin kullanıcılara ağır bir şekilde yavaşladığı hakkında bilgi alabilirsiniz.
 
@@ -297,8 +266,8 @@ Yukarıdaki örnekte, `Data` her hücre için farklıdır, ancak `Options` tüm�
 
 `<CascadingValue>`Bileşenin adlı isteğe bağlı bir parametresi vardır `IsFixed` .
 
- * `IsFixed`Değer `false` (varsayılan) ise, basamaklı değerin her alıcısı değişiklik bildirimlerini almak için bir abonelik ayarlar. Bu durumda, `[CascadingParameter]` abonelik izlemenin nedeni, her biri düzenli olarak **oldukça yüksektir** `[Parameter]` .
- * `IsFixed`Değer `true` (örneğin, `<CascadingValue Value="@someValue" IsFixed="true">` ) ise, alıcı başlangıç değerini alır, ancak güncelleştirmeleri almak için herhangi bir abonelik ayarlamayın  . Bu durumda, her biri `[CascadingParameter]` hafif ve sıradan **daha pahalı** değildir `[Parameter]` .
+* `IsFixed`Değer `false` (varsayılan) ise, basamaklı değerin her alıcısı değişiklik bildirimlerini almak için bir abonelik ayarlar. Bu durumda, `[CascadingParameter]` abonelik izlemenin nedeni, her biri düzenli olarak **oldukça yüksektir** `[Parameter]` .
+* `IsFixed`Değer `true` (örneğin, `<CascadingValue Value="@someValue" IsFixed="true">` ) ise, alıcı başlangıç değerini alır, ancak güncelleştirmeleri almak için herhangi bir abonelik ayarlamayın  . Bu durumda, her biri `[CascadingParameter]` hafif ve sıradan **daha pahalı** değildir `[Parameter]` .
 
 Mümkün olan yerlerde, `IsFixed="true"` basamaklı değerler üzerinde kullanmanız gerekir. Bunu, sağlanan değer zaman içinde değişmeyen her seferinde yapabilirsiniz. Bir bileşenin `this` basamaklı bir değer olarak geçtiği ortak düzende şunu kullanmanız gerekir `IsFixed="true"` :
 
@@ -338,9 +307,9 @@ Bileşen başına işleme ek yükünün ana yönlerinden biri, özelliklere gele
 
 Bazı olağanüstü durumlarda, yansıma kullanmaktan kaçınmak ve kendi parametre ayarı mantığınızı el ile uygulamak isteyebilirsiniz. Bu, şu durumlarda uygulanabilir:
 
- * Çok sık işleyen bir bileşeniniz var (örneğin, Kullanıcı arabiriminde yüzlerce veya binlerce kopyası vardır).
- * Birçok parametre kabul eder.
- * Parametre alma yükünün Kullanıcı arabirimi yanıtlama hızı üzerinde bir observable etkisi olduğunu fark edersiniz.
+* Çok sık işleyen bir bileşeniniz var (örneğin, Kullanıcı arabiriminde yüzlerce veya binlerce kopyası vardır).
+* Birçok parametre kabul eder.
+* Parametre alma yükünün Kullanıcı arabirimi yanıtlama hızı üzerinde bir observable etkisi olduğunu fark edersiniz.
 
 Bu durumlarda, bileşenin sanal yöntemini geçersiz kılabilir <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> ve kendi bileşenine özgü mantığınızı uygulayabilirsiniz. Aşağıdaki örnek, tüm sözlük aramalarını kasıtlı olarak engeller:
 
@@ -452,8 +421,8 @@ Blazor ServerHer olay çağrısı ağ üzerinden bir ileti teslimi içerdiğinde
 
 .NET ve JavaScript arasındaki çağrılar bazı ek yük içerir, çünkü:
 
- * Varsayılan olarak, çağrılar zaman uyumsuzdur.
- * Varsayılan olarak, parametreler ve dönüş değerleri JSON serileştirilir. Bu, .NET ve JavaScript türleri arasında kolay anlaşılır bir dönüştürme mekanizması sağlamaktır.
+* Varsayılan olarak, çağrılar zaman uyumsuzdur.
+* Varsayılan olarak, parametreler ve dönüş değerleri JSON serileştirilir. Bu, .NET ve JavaScript türleri arasında kolay anlaşılır bir dönüştürme mekanizması sağlamaktır.
 
 Ayrıca Blazor Server , bu çağrılar ağ üzerinden geçirilir.
 

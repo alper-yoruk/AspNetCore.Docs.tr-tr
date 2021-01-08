@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fc6fa075faa4fed1c2bf938d82c4dbfe631c31d3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c4d1095d3c3b457ca4d94cb1a573c3dc49548ff3
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055080"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024645"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Güvenli ASP.NET Core Blazor WebAssembly
 
@@ -92,7 +92,7 @@ Aşağıdaki yaklaşımlardan birini kullanarak, [ `[Authorize]` özniteliği](x
 * Özniteliği klasöründeki her bileşene ekleyin Razor `Pages` .
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>İle ilke olarak ayarlanması <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> desteklenmez. **not**
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>İle ilke olarak ayarlanması <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> desteklenmez. 
 
 ## <a name="refresh-tokens"></a>Belirteçleri Yenile
 
@@ -138,3 +138,9 @@ Aşağıdaki makalelerde daha fazla yapılandırma kılavuzu bulunur:
 Daha fazla yapılandırma kılavuzu için bkz <xref:blazor/security/webassembly/additional-scenarios> ..
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* <xref:host-and-deploy/proxy-load-balancer>: Üzerine yönergeler içerir:
+  * WAN sunucularında ve iç ağlarda HTTPS şema bilgilerini korumak için Iletilen üstbilgiler ara yazılımı kullanma.
+  * El ile düzen yapılandırması, doğru istek yönlendirme için istek yolu değişiklikleri ve Linux ve IIS olmayan ters proxy 'ler için istek düzenini iletme dahil ek senaryolar ve kullanım örnekleri.

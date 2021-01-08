@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 65ad619bb943a0e5ffbaec7ec80243972dafc49f
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050985"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024671"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR istemcileri
 
@@ -41,7 +41,7 @@ SignalR2,1 ve 2,2 .NET Core yayınlarına eşlenecek ve aynı yaşam süresine s
 | 1.1. x | 2.2. x | Yaşam sonu | 23 Aralık 2019 |
 | 3. x veya üzeri | *sürümle aynı SignalR* | Bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) |
 
-**Note:** ASP.NET Core 3,0 ' de, JavaScript istemcisi *moved* `@microsoft/signalr` NPM paketine taşınır.
+**Note:** ASP.NET Core 3,0 ' de, JavaScript istemcisi  `@microsoft/signalr` NPM paketine taşınır.
 
 ## <a name="feature-distribution"></a>Özellik dağıtımı
 
@@ -57,7 +57,7 @@ Aşağıdaki tabloda, gerçek zamanlı destek sunan istemciler için özellikler
 | Server-Sent olay aktarımı |2.1.0|1.0.0|1.0.0|❌|
 | Uzun yoklama taşıması |2.1.0|1.0.0|1.0.0|3.0.0|
 | JSON hub 'ı Protokolü |2.1.0|1.0.0|1.0.0|1.0.0|
-| MessagePack Hub Protokolü |2.1.0|1.0.0|1.0.0|❌|
+| MessagePack Hub Protokolü |2.1.0|1.0.0|1.0.0|5.0.0|
 
 [Sorun izleyici](https://github.com/dotnet/AspNetCore/issues)'de ek istemci özelliklerinin etkinleştirilmesi için destek izlenir.
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7c3640e9cd2c5d392400a115813584861f789554
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058175"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024697"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core için ' de MessagePack hub protokolünü kullanın SignalR
 
@@ -120,6 +120,26 @@ const connection = new signalR.HubConnectionBuilder()
 > [!NOTE]
 > Şu anda JavaScript istemcisinde MessagePack protokolü için yapılandırma seçeneği yoktur.
 
+### <a name="java-client"></a>Java istemcisi
+
+Bir Java ile MessagePack 'i etkinleştirmek için paketini yükledikten sonra `com.microsoft.signalr.messagepack` . Gradle kullanırken, `dependencies` *Build. Gradle* dosyasının bölümüne aşağıdaki satırı ekleyin:
+
+```gradle
+implementation 'com.microsoft.signalr.messagepack:signalr-messagepack:5.0.0'
+```
+
+Maven kullanırken, `<dependencies>` *pom.xml* dosyanın öğesinin içine aşağıdaki satırları ekleyin:
+
+[!code-xml[pom.xml dependency element messagePack](java-client/sample/pom.xml?name=snippet_dependencyElement_messagePack)]
+
+Üzerinde arama yapın `withHubProtocol(new MessagePackHubProtocol())` `HubConnectionBuilder` .
+
+```java
+HubConnection messagePackConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
+    .withHubProtocol(new MessagePackHubProtocol())
+    .build();
+```
+
 ## <a name="messagepack-quirks"></a>MessagePack süslemeler
 
 MessagePack hub protokolünü kullanırken dikkat etmeniz birkaç sorun vardır.
@@ -187,6 +207,10 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 ```
 
 Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
+
+### <a name="chars-and-strings-in-java"></a>Java 'daki karakterler ve dizeler
+
+Java istemcisinde `char` nesneler tek karakterli nesneler olarak serileştirilir `String` . Bu, C# ve JavaScript istemcisiyle aynı şekilde, nesneleri nesneler olarak serileştirilir `short` . MessagePack spec 'in kendisi nesneler için davranış tanımlamıyor `char` , bu nedenle, bunların serileştirilme biçimini belirlemek için kitaplık yazarına kadar. İstemcilerimiz arasındaki davranış farkı, uygulamalarımız için kullandığımız kitaplıkların bir sonucudur.
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: da6876e0540579dac5fb9e92362b38a398bca4d5
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: 92941d21820de90eb2ae8fb76c21c588ed9f1ffb
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972086"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024762"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>ASP.NET Core SignalR Java istemcisi
 
@@ -108,12 +108,43 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
     })).build();
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="passing-class-information-in-java"></a>Java 'da sınıf bilgilerini geçirme
+
+`on` `invoke` Java istemcisindeki, veya yöntemlerini çağırırken, `stream` `HubConnection` Kullanıcılar `Type` `Class<?>` yöntemine geçirilen herhangi bir genel açıklama için bir nesne yerine bir nesne iletmelidir `Object` . Bir bir, `Type` belirtilen sınıf kullanılarak elde edilebilir `TypeReference` . Örneğin, adlı özel bir genel sınıf kullanarak `Foo<T>` Aşağıdaki kod şunu alır `Type` :
+
+```java
+Type fooType = new TypeReference<Foo<String>>() { }).getType();
+```
+
+Gibi temel olmayan türler veya gibi parametreli olmayan türler için `String` , yerleşik olarak kullanmanız yeterlidir `.class` .
+
+Bir veya daha fazla nesne türüyle bu yöntemlerden birini çağırırken, yöntemi çağırırken genel türler sözdizimini kullanın. Örneğin, `on` `func` bir dize ve bir nesne olarak bağımsız değişken olarak alan adlı bir yöntem için bir işleyici kaydedilirken `Foo<String>` , bağımsız değişkenleri yazdırmak üzere bir eylem ayarlamak için aşağıdaki kodu kullanın:
+
+```java
+hubConnection.<String, Foo<String>>on("func", (param1, param2) ->{
+    System.out.println(param1);
+    System.out.println(param2);
+}, String.class, fooType);
+```
+
+`Object.getClass`Java 'da silinme türü nedeniyle yöntemi ile karmaşık türlerle ilgili tüm bilgileri alamadığımız için bu kural gereklidir. Örneğin, `getClass` bir üzerinde çağırmak `ArrayList<String>` döndürmez `Class<ArrayList<String>>` , ancak `Class<ArrayList>` seri hale getirici tarafından gelen bir iletiyi doğru bir şekilde seri durumdan çıkarmak için yeterli bilgi vermemez. Aynı, özel nesneler için de geçerlidir.
+
+::: moniker-end
+
 ## <a name="known-limitations"></a>Bilinen sınırlamalar
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-* Yalnızca JSON Protokolü destekleniyor.
 * Taşıma geri dönüşü ve sunucu gönderme olayları aktarımı desteklenmez.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+* Taşıma geri dönüşü ve sunucu gönderme olayları aktarımı desteklenmez.
+* Yalnızca JSON Protokolü destekleniyor.
 
 ::: moniker-end
 

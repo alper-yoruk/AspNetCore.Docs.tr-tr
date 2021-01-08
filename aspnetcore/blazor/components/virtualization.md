@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 051721b62397b582f1ffdaba08ffefe5d0c9ae03
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: 706564bb8607d0bb25c092c31a72e5790c825ee4
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972021"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024684"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor bileşen Sanallaştırması
 
@@ -32,16 +32,21 @@ ms.locfileid: "97972021"
 
 Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Sanallaştırma, UI işlemesini yalnızca şu anda görünür olan bölümlerle sınırlamak için bir tekniktir. Örneğin sanallaştırma, uygulamanın uzun bir öğe listesini işlemesi gerektiğinde ve belirli bir zamanda bir öğe alt kümesinin görünür olması gerektiğinde faydalıdır. Blazoruygulamanın bileşenlerine sanallaştırma eklemek için kullanılabilecek [ `Virtualize` bileşeni](xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601) sağlar.
 
+`Virtualize`Bileşen şu durumlarda kullanılabilir:
+
+* Bir döngüde veri öğeleri kümesi işleme.
+* Öğelerin çoğu kaydırma nedeniyle görünür değil.
+* İşlenen öğeler tam olarak aynı boyutta. Kullanıcı rastgele bir noktaya kaydığında, bileşen gösterilecek görünür öğeleri hesaplayabilir.
+
 Sanallaştırma olmadan tipik bir liste, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) listedeki her öğeyi işlemek için bir C# döngüsü kullanabilir:
 
 ```razor
-@foreach (var employee in employees)
-{
-    <p>
-        @employee.FirstName @employee.LastName has the 
-        job title of @employee.JobTitle.
-    </p>
-}
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    @foreach (var flight in allFlights)
+    {
+        <FlightSummary @key="flight.FlightId" Flight="@flight" />
+    }
+</div>
 ```
 
 Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı, fark edilebilir bir UI gecikmesi yaşayabilir.
@@ -49,26 +54,36 @@ Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı,
 Listedeki her öğeyi tek seferde işlemek yerine, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngüsünü `Virtualize` bileşeniyle değiştirin ve ile birlikte bir sabit öğe kaynağı belirtin <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> . Yalnızca şu anda görünür olan öğeler işlenir:
 
 ```razor
-<Virtualize Context="employee" Items="@employees">
-    <p>
-        @employee.FirstName @employee.LastName has the 
-        job title of @employee.JobTitle.
-    </p>
-</Virtualize>
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    <Virtualize Items="@allFlights" Context="flight">
+        <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
+    </Virtualize>
+</div>
 ```
 
-Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` `@context.{PROPERTY}` öğe içerik şablonunda () değerini kullanın:
+Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` `context.{PROPERTY}` / `@context.{PROPERTY}` öğe içerik şablonunda () değerini kullanın:
 
 ```razor
-<Virtualize Items="@employees">
-    <p>
-        @context.FirstName @context.LastName has the 
-        job title of @context.JobTitle.
-    </p>
-</Virtualize>
+<div class="all-flights" style="height:500px;overflow-y:scroll">
+    <Virtualize Items="@allFlights">
+        <FlightSummary @key="context.FlightId" Details="@context.Summary" />
+    </Virtualize>
+</div>
 ```
 
-`Virtualize`Bileşen kapsayıcının yüksekliğine ve işlenmiş öğelerin boyutuna göre işlenecek öğe sayısını hesaplar.
+> [!NOTE]
+> Nesneler ve bileşenler için model nesnelerinin eşleme işlemi [ `@key` ] [XREF: MVC/views/Razor # key] yönergesi özniteliğiyle denetlenebilir. `@key` , anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için dağıtılmış algoritmaya neden olur.
+>
+> Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
+>
+> <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
+> <xref:mvc/views/razor#key>
+
+`Virtualize`Bileşen:
+
+* Kapsayıcının yüksekliğine ve işlenmiş öğelerin boyutuna göre işlenecek öğe sayısını hesaplar.
+* Kullanıcı kaydırılırken öğeleri yeniden hesaplar ve tekrar kaydeder.
+* Yalnızca geçerli görünür bölgeye karşılık gelen bir dış API 'den kayıt dilimini, koleksiyondaki tüm verileri indirmek yerine getirir.
 
 Bileşen için öğe içeriği `Virtualize` şunları içerebilir:
 
