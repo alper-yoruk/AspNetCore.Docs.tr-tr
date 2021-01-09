@@ -5,7 +5,7 @@ description: ASP.NET Core Web API 'Leri ile hata işleme hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 07/23/2020
+ms.date: 1/11/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: 0efcf1bbeeb65cf7f4420f8c50fb4adf7d1d016d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 92e9350a7892f8f38f64d4ebd68d54a97ec7e994
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052532"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058382"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API 'Lerinde hataları işleme
 
@@ -127,7 +127,9 @@ HTML biçimli yanıt Postman gibi araçlar aracılığıyla test edilirken yarar
 ::: moniker-end
 
 > [!WARNING]
-> Geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken** etkinleştirin. Uygulama üretimde çalıştırıldığında ayrıntılı özel durum bilgilerini herkese açık bir şekilde paylaşmak istemezsiniz. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
+> Geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken** etkinleştirin. Uygulama üretimde çalıştırıldığında ayrıntılı özel durum bilgilerini herkese açık bir şekilde paylaşmayın. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
+>
+> Hata işleyicisi eylem yöntemini, gibi HTTP yöntemi öznitelikleriyle işaretlemeyin `HttpGet` . Açık fiiller bazı isteklerin eylem yöntemine ulaşmasını önler. Kimliği doğrulanmamış kullanıcılar hatayı görebilmelidir yönteme anonim erişime izin verin.
 
 ## <a name="exception-handler"></a>Özel durum işleyicisi
 
@@ -222,6 +224,8 @@ Yukarıdaki `Error` eylem Istemciye [RFC 7807](https://tools.ietf.org/html/rfc78
 
     ::: moniker-end
 
+    Yukarıdaki kod, bir yanıt oluşturmak için [ControllerBase. sorun](xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A) ' yı çağırır <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> .
+
 ## <a name="use-exceptions-to-modify-the-response"></a>Yanıtı değiştirmek için özel durumları kullanın
 
 Yanıtın içeriği, denetleyicinin dışından değiştirilebilir. ASP.NET 4. x Web API 'sinde, bunu yapmanın bir yolu <xref:System.Web.Http.HttpResponseException> türünü kullanmaktır. ASP.NET Core eşdeğer bir tür içermez. İçin destek `HttpResponseException` aşağıdaki adımlarla eklenebilir:
@@ -234,7 +238,7 @@ Yanıtın içeriği, denetleyicinin dışından değiştirilebilir. ASP.NET 4. x
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
-    Yukarıdaki filtrede, sihirli sayı 10 en büyük tamsayı değerinden çıkarılır. Bu numarayı çıkarmak, diğer filtrelerin işlem hattının çok sonunda çalışmasına izin verir.
+    Önceki filtre, `Order` en büyük tamsayı değeri olan eksi 10 ' u belirtir. Bu, diğer filtrelerin işlem hattının sonunda çalışmasına izin verir.
 
 1. İçinde `Startup.ConfigureServices` , filtre koleksiyonuna eylem filtresini ekleyin:
 
@@ -337,3 +341,7 @@ Hata yanıtı, [Use ApiBehaviorOptions. ClientErrorMapping](#use-apibehavioropti
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
 
 ::: moniker-end
+
+## <a name="custom-middleware-to-handle-exceptions"></a>Özel durumları işlemek için özel ara yazılım
+
+Özel durum işleme ara yazılım içindeki varsayılanlar çoğu uygulama için iyi sonuç verir. Özel durum işleme gerektiren uygulamalar için [özel durum işleme ara yazılımını özelleştirmeyi](xref:fundamentals/error-handling#exception-handler-lambda)düşünün.

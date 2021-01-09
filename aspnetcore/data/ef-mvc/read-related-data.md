@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b1adca435b48db22a176d33a216c07d6647a6695
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054066"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058317"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile ilgili verileri okuma-ASP.NET MVC
 
@@ -43,7 +43,7 @@ Bu öğreticide şunları yaptınız:
 > * Eğitmenler sayfası oluşturma
 > * Açık yükleme hakkında bilgi edinin
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Karmaşık veri modeli oluşturma](complex-data-model.md)
 
@@ -183,7 +183,17 @@ Ardından, bir kurs seçilmişse, seçilen kurs, görünüm modelindeki kurslar 
 
 *Views/eğitmenler/Index. cshtml* içinde, şablon kodunu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
-[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+::: moniker range=">= aspnetcore-2.2"
+
+[!code-cshtml[](intro/samples/5cu-snap/Views/Instructors/Index.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.1"
+
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
 
 Varolan koda aşağıdaki değişiklikleri yaptınız:
 
@@ -193,7 +203,7 @@ Varolan koda aşağıdaki değişiklikleri yaptınız:
 
 * Yalnızca null olmaması halinde görüntülenen bir **Office** sütunu eklendi `item.OfficeAssignment.Location` `item.OfficeAssignment` . (Bu bire sıfır veya-bir ilişki olduğundan ilgili bir OfficeAssignment varlığı bulunmayabilir.)
 
-  ```html
+  ```cshtml
   @if (item.OfficeAssignment != null)
   {
       @item.OfficeAssignment.Location
@@ -202,20 +212,11 @@ Varolan koda aşağıdaki değişiklikleri yaptınız:
 
 * Her bir eğitmen tarafından taders kurslarını görüntüleyen bir **Kurslar** sütunu eklendi. Daha fazla bilgi için, söz dizimi makalesindeki [açık satır geçişi](xref:mvc/views/razor#explicit-line-transition) bölümüne bakın Razor .
 
-* `class="success"`Seçilen eğitmenin öğesine dinamik olarak ekleyen kod eklendi `tr` . Bu, bir önyükleme sınıfı kullanarak seçili satır için bir arka plan rengi ayarlar.
-
-  ```html
-  string selectedRow = "";
-  if (item.ID == (int?)ViewData["InstructorID"])
-  {
-      selectedRow = "success";
-  }
-  <tr class="@selectedRow">
-  ```
+* Seçilen eğitmenin öğesine koşullu bir önyükleme CSS sınıfı ekleyen kod eklendi `tr` . Bu sınıf seçili satır için bir arka plan rengi ayarlar.
 
 * Her satırdaki diğer bağlantılardan hemen önce **Seç** etiketli yeni bir köprü eklendiğinde, SEÇILEN eğitmenin kimliğinin yönteme gönderilmesine neden olur `Index` .
 
-  ```html
+  ```cshtml
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 

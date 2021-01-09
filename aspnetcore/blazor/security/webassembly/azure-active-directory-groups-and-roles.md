@@ -19,19 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 96a7dde9a5a756e40125ffda4c54fbf24fdc616a
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94981888"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058265"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) grupları, yönetici rolleri ve Kullanıcı tanımlı roller
 
 Sağlayan, [Luke Latham](https://github.com/guardrex) ve [Javier Calvarro Nelson](https://github.com/javiercn)
 
 > [!NOTE]
-> Bu makale Blazor , Microsoft v 1.0 ile ASP.NET Core Apps sürüm 3,1 için geçerlidir Identity ve v 2.0 ile 5,0 sürümüne güncelleştirme için zamanlanır Identity . Daha fazla bilgi için bkz. [ Blazor AAD/B2C grupları ve rolleriyle birlikte bulunan (dotnet/AspNetCore.Docs #17683)](https://github.com/dotnet/AspNetCore.Docs/issues/17683).
+> Bu makale, Blazor Microsoft 1,0 ile ASP.NET Core Apps sürüm 3,1 için geçerlidir Identity ve Identity kısa bir süre içinde 2,0 ile 5,0 güncelleştirilir. Daha fazla bilgi için, aşağıdaki GitHub sorununa ve çekme isteğine bakın. Çekme isteğinin **dosyalar değişti** sekmesi, taslak metnini ve bu makaledeki güncelleştirmelere yönelik örnekleri içerir. İnceleme ve son güncelleştirmeler sonrasında, çekme isteği canlı belge kümesiyle birleştirilir.
+>
+> * Sorun: [ Blazor AAD grupları ve rolleri ile ilgili (dotnet/AspNetCore.Docs #17683)](https://github.com/dotnet/AspNetCore.Docs/issues/17683)
+> * Çekme Isteği: [ Blazor AAD grupları ve rolleri konu 5,0 (dotnet/AspNetCore.Docs #20856)](https://github.com/dotnet/AspNetCore.Docs/pull/20856)
 
 Azure Active Directory (AAD), ile birleştirilebilir çeşitli yetkilendirme yaklaşımları sağlar ASP.NET Core Identity :
 

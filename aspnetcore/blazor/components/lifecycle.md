@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: b01b1c70be010ba0ad9bbd2c1114e5d8341b3261
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e5f9a07db742ce2e26f03c0b6e1caa1904e4e0d9
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506870"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058239"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -53,7 +53,9 @@ Belge Nesne Modeli (DOM) olay işleme:
 
 `Render`Yaşam döngüsü:
 
-1. Bu bileşen ilk işleme değilse veya [`ShouldRender`](#suppress-ui-refreshing) olarak değerlendiriliyorsa `false` , bileşende başka işlemler yapmayın.
+1. Bileşendeki işleme işlemlerini Durdur:
+   * İlk işleme sonra.
+   * Ne [`ShouldRender`](#suppress-ui-refreshing) zaman `false` .
 1. İşleme ağacı farkı (fark) oluşturun ve bileşeni oluşturun.
 1. DOM 'ı güncelleştirmek için Await.
 1. Çağrısı yapın [`OnAfterRender{Async}`](#after-component-render) .

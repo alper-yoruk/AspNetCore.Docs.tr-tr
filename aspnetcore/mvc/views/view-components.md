@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: e0ff97b53d12fbf6c6a89e94704de1aee9d7f9e6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 61fcc07aeb30db15014fb716194328d366f27859
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060592"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058343"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core bileşenleri görüntüleme
 
@@ -54,7 +54,7 @@ Görünüm bileşenleri, kısmi bir görünüm için çok karmaşık olan işlem
 
 Bir görünüm bileşeni iki bölümden oluşur: Sınıf (genellikle [Viewcomponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)öğesinden türetilir) ve döndürdüğü sonuç (genellikle bir görünüm). Denetleyiciler gibi bir görünüm bileşeni de bir POCO olabilir, ancak çoğu geliştirici, ' den türeterek kullanılabilir yöntemler ve özelliklerden faydalanmak ister `ViewComponent` .
 
-Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, Razor bunun yerine bileşenleri kullanmayı düşünün. Razor Bileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir. Razor Bileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır. Daha fazla bilgi için bkz. <xref:blazor/components/index>.
+Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, Razor bunun yerine bileşenleri kullanmayı düşünün. Razor bileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir. Razor bileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır. Daha fazla bilgi için bkz. <xref:blazor/components/index>. RazorBIR MVC veya sayfalar uygulamasına bileşen ekleme hakkında daha fazla bilgi için Razor bkz <xref:blazor/components/prerendering-and-integration?pivots=server> ..
 
 ## <a name="creating-a-view-component"></a>Görünüm bileşeni oluşturma
 
@@ -96,7 +96,7 @@ Bir görünüm bileşeni, bir `InvokeAsync` `Task<IViewComponentResult>` veya d�
 
 Arama yolu, denetleyiciler + görünümler ve sayfalar kullanan projeler için geçerlidir Razor .
 
-Bir görünüm bileşeni için varsayılan görünüm adı *varsayılandır* , yani görünüm dosyanız genellikle *default. cshtml* olarak adlandırılır. Görünüm bileşeni sonucunu oluştururken veya yöntemini çağırırken farklı bir görünüm adı belirtebilirsiniz `View` .
+Bir görünüm bileşeni için varsayılan görünüm adı *varsayılandır*, yani görünüm dosyanız genellikle *default. cshtml* olarak adlandırılır. Görünüm bileşeni sonucunu oluştururken veya yöntemini çağırırken farklı bir görünüm adı belirtebilirsiniz `View` .
 
 Görünüm dosyasını *default. cshtml* olarak yazmanız ve *görünümleri/paylaşılan/bileşenler/{görünüm bileşen adı}/{View Name}* yolunu kullanmanız önerilir. `PriorityList`Bu örnekte kullanılan görünüm bileşeni görünüm bileşeni görünümü Için *Görünümler/paylaşılan/bileşenler/PriorityList/default. cshtml* kullanır.
 
@@ -204,9 +204,9 @@ Koda notlar:
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   RazorGörünüm bir listesini alır `TodoItem` ve görüntüler. Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır. Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz. Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)* .
+   RazorGörünüm bir listesini alır `TodoItem` ve görüntüler. Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır. Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz. Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)*.
 
-    Görünüm bileşeni denetleyiciye özgü ise, denetleyiciyi denetleyiciye özgü klasöre ekleyebilirsiniz ( *Görünümler/Todo/bileşenler/PriorityList/default. cshtml* ).
+    Görünüm bileşeni denetleyiciye özgü ise, denetleyiciyi denetleyiciye özgü klasöre ekleyebilirsiniz (*Görünümler/Todo/bileşenler/PriorityList/default. cshtml*).
 
 * `div`Priority listesi bileşenine, *Görünümler/Todo/index. cshtml* dosyasının altına bir çağrı içeren bir çağrı ekleyin:
 
@@ -234,7 +234,7 @@ Karmaşık bir görünüm bileşeninin bazı koşullarda varsayılan olmayan bir
 
 [!code-cshtml[](../../mvc/views/view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/PVC.cshtml?highlight=3)]
 
-Güncelleştirme *görünümleri/Todo/Index. cshtml* :
+Güncelleştirme *görünümleri/Todo/Index. cshtml*:
 
 <!-- Views/ToDo/Index.cshtml is never imported, so change to test tutorial -->
 
@@ -291,7 +291,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Invoke` ( *Görünümler/Home/Components/Prioritylist/default. cshtml* ):
+Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Invoke` (*Görünümler/Home/Components/Prioritylist/default. cshtml*):
 
 ```cshtml
 @model List<string>
@@ -307,7 +307,7 @@ Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Inv
 
 ::: moniker range=">= aspnetcore-1.1"
 
-Görünüm bileşeni, Razor aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır:
+Görünüm bileşeni, Razor aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml*) çağrılır:
 
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [Etiket Yardımcısı](xref:mvc/views/tag-helpers/intro)
@@ -318,7 +318,7 @@ Yaklaşımı kullanmak için <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper
 
 ::: moniker range="< aspnetcore-1.1"
 
-Görünüm bileşeni Razor ile bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
+Görünüm bileşeni Razor ile bir dosyada (örneğin, *views/Home/Index. cshtml*) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
 
 Çağrı `Component.InvokeAsync` :
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6edf2017cc889321cfb484e643b75711fd66004d
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057784"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058356"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core desteği WebSockets
 
@@ -42,7 +42,7 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 
 Bazı uygulamalarda, [.net 'Teki GRPC](xref:grpc/index) , WebSockets için bir alternatif sağlar.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * ASP.NET Core destekleyen herhangi bir işletim sistemi:  
   * Windows 7/Windows Server 2008 veya üzeri
@@ -67,7 +67,6 @@ WebSockets ara yazılımını `Configure` sınıfının yöntemine ekleyin `Star
 Aşağıdaki ayarlar yapılandırılabilir:
 
 * `KeepAliveInterval` -Proxy 'lerin bağlantının açık kalmasını sağlamak için istemciye "ping" çerçeveleri gönderme sıklığı. Varsayılan değer iki dakikadır.
-* `ReceiveBufferSize` -Verileri almak için kullanılan arabelleğin boyutu. Gelişmiş kullanıcıların, verilerin boyutuna bağlı olarak performans ayarlaması için bunu değiştirmesi gerekebilir. Varsayılan değer 4 KB 'tır.
 
 ::: moniker-end
 
@@ -76,7 +75,6 @@ Aşağıdaki ayarlar yapılandırılabilir:
 Aşağıdaki ayarlar yapılandırılabilir:
 
 * `KeepAliveInterval` -Proxy 'lerin bağlantının açık kalmasını sağlamak için istemciye "ping" çerçeveleri gönderme sıklığı. Varsayılan değer iki dakikadır.
-* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize> -Verileri almak için kullanılan arabelleğin boyutu. Gelişmiş kullanıcıların, verilerin boyutuna bağlı olarak performans ayarlaması için bunu değiştirmesi gerekebilir. Varsayılan değer 4 KB 'tır.
 * `AllowedOrigins` -WebSocket istekleri için izin verilen kaynak üst bilgi değerleri listesi. Varsayılan olarak, tüm kaynaklardan izin verilir. Ayrıntılar için aşağıdaki "WebSocket kaynak kısıtlaması" başlığına bakın.
 
 ::: moniker-end
@@ -188,11 +186,10 @@ Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştir
 
 ## <a name="sample-app"></a>Örnek uygulama
 
-Bu makaleye eşlik eden [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) bir Echo uygulamasıdır. WebSocket bağlantısı yapan bir Web sayfasına sahiptir ve sunucu istemciye geri aldığı tüm iletileri daha sonra sonlandırır. Uygulamayı bir komut isteminden çalıştırın (IIS Express ile Visual Studio 'dan çalışacak şekilde ayarlanmamış) ve adresine gidin http://localhost:5000 . Web sayfası, sol üstteki bağlantı durumunu gösterir:
+Bu makaleye eşlik eden [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) bir Echo uygulamasıdır. WebSocket bağlantısı yapan bir Web sayfasına sahiptir ve sunucu istemciye geri aldığı tüm iletileri daha sonra sonlandırır. Örnek uygulama, IIS Express ile Visual Studio 'dan çalışacak şekilde yapılandırılmamış, bu nedenle uygulamayı ile bir komut kabuğunda çalıştırın ve ' [`dotnet run`](/dotnet/core/tools/dotnet-run) a bir tarayıcıda gidin `http://localhost:5000` . Web sayfası bağlantı durumunu gösterir:
 
-![Web sayfasının ilk durumu](websockets/_static/start.png)
+![WebSockets bağlantısından önce Web sayfasının ilk durumu](websockets/_static/start.png)
 
 Gösterilen URL 'ye WebSocket isteği göndermek için **Bağlan** ' ı seçin. Bir sınama iletisi girin ve **Gönder**' i seçin. İşiniz bittiğinde **yuvayı kapat**' ı seçin. **Iletişim günlüğü** bölümünde her açık, gönder ve Kapat eylemi gerçekleşir.
 
-![Web sayfasının ilk durumu](websockets/_static/end.png)
-
+![WebSockets bağlantısı ve test iletileri gönderildikten ve alındıktan sonra Web sayfasının son durumu](websockets/_static/end.png)

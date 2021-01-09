@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 417f69e797296cdcd01fc4ce326388512a406368
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506909"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058278"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -32,7 +32,7 @@ Tarafından [Rainer Stropek](https://www.timecockpit.com) ve [Luke Latham](https
 
 Menüler, telif hakkı iletileri ve şirket logoları gibi bazı uygulama öğeleri genellikle uygulamanın genel düzeninin parçasıdır ve uygulamadaki her bileşen tarafından kullanılır. Bu öğelerin kodunu bir uygulamanın tüm bileşenlerine kopyalamak etkili bir yaklaşım değildir. Öğelerden biri bir güncelleştirme gerektirdiğinde her bileşenin güncelleştirilmesi gerekir. Bu tür çoğaltmaya devam etmek zordur ve zaman içinde tutarsız içeriğe yol açabilir. *Düzenler* bu sorunu çözüyor.
 
-Teknik olarak, düzen yalnızca başka bir bileşendir. Düzen bir Razor şablonda veya C# kodunda tanımlanır ve [veri bağlama](xref:blazor/components/data-binding), [bağımlılık ekleme](xref:blazor/fundamentals/dependency-injection)ve diğer bileşen senaryolarını kullanabilir.
+Teknik olarak, düzen yalnızca başka bir bileşendir. Düzen bir Razor şablonda veya C# kodunda tanımlanır ve [veri bağlama](xref:blazor/components/data-binding), [bağımlılık ekleme](xref:blazor/fundamentals/dependency-injection)ve diğer bileşen senaryolarını kullanabilir. Düzenler yalnızca yönergeleri olan yönlendirilebilir Razor bileşenler için geçerlidir [`@page`](xref:mvc/views/razor#page) .
 
 Bir bileşeni düzene dönüştürmek için:
 
@@ -79,7 +79,7 @@ Düzen bir varsayılan düzen olarak belirtildiğinde, bileşen başına veya kl
 
 ## <a name="specify-a-layout-in-a-component"></a>Bir bileşende düzen belirtme
 
-Razor `@layout` Bir bileşene düzen uygulamak için yönergesini kullanın. Derleyici, `@layout` <xref:Microsoft.AspNetCore.Components.LayoutAttribute> bileşen sınıfına uygulanan öğesine dönüştürür.
+Yönergesini [`@layout`](xref:mvc/views/razor#layout) Razor de içeren yönlendirilebilir bir bileşene düzen uygulamak için yönergesini kullanın Razor [`@page`](xref:mvc/views/razor#page) . Derleyici, `@layout` <xref:Microsoft.AspNetCore.Components.LayoutAttribute> bileşen sınıfına uygulanan öğesine dönüştürür.
 
 Aşağıdaki `MasterList` bileşenin içeriği konumuna öğesine eklenir `MasterLayout` `@Body` :
 
@@ -105,6 +105,9 @@ Aşağıdaki `_Imports.razor` Dosya içeri aktarmalar:
 
 > [!WARNING]
 >  Razor `@layout` Kök dosyasına bir yönerge eklemeyin `_Imports.razor` ve bu, uygulamadaki sınırsız bir düzen döngüsüne neden olur. Varsayılan uygulama yerleşimini denetlemek için, bileşenin yerleşimini belirtin `Router` . Daha fazla bilgi için [varsayılan düzen](#default-layout) bölümüne bakın.
+
+> [!NOTE]
+> [`@layout`](xref:mvc/views/razor#layout) Razor Yönergesi yalnızca yönergeleriyle yönlendirilebilir bileşenlere bir düzen uygular Razor [`@page`](xref:mvc/views/razor#page) .
 
 ## <a name="nested-layouts"></a>İç içe düzenleri
 

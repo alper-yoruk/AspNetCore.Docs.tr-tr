@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035716"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058291"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core için sözdizimi başvurusu
 
@@ -73,7 +73,7 @@ C# `await` anahtar sözcüğünün dışında, örtük ifadeler boşluk içermem
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-Parantez ( **cannot** ) içindeki karakterler `<>` bir HTML etiketi olarak yorumlandığından örtük ifadeler C# generics içeremez. Aşağıdaki kod geçerli **değil** :
+Parantez (  ) içindeki karakterler `<>` bir HTML etiketi olarak yorumlandığından örtük ifadeler C# generics içeremez. Aşağıdaki kod geçerli **değil** :
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -497,7 +497,7 @@ RazorBileşenler için `@code` bir diğer addır [`@functions`](#functions) ve �
 
 ::: moniker-end
 
-Örnek:
+Örneğin:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -611,7 +611,7 @@ Aşağıdaki kod, türü kesin belirlenmiş bir görünümün örneğidir:
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@layout`Yönergesi bir bileşenin yerleşimini belirtir Razor . Düzen bileşenleri kod yinelemeyi ve tutarsızlığın önüne geçmek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/layouts>.
+`@layout`Yönergesi, yönergesi olan yönlendirilebilir bileşenlere yönelik bir düzen belirtir Razor [`@page`](#page) . Düzen bileşenleri kod yinelemeyi ve tutarsızlığın önüne geçmek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/layouts>.
 
 ::: moniker-end
 

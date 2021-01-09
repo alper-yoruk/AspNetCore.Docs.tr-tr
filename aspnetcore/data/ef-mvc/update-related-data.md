@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 9ad0de9984b42c2b14dfaf48c74660915de93be1
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053949"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058330"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
@@ -34,7 +34,7 @@ Aşağıdaki çizimlerde, üzerinde çalıştığınız sayfaların bazıları g
 
 ![Kurs düzenleme sayfası](update-related-data/_static/course-edit.png)
 
-![Eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
+![Eğitmen sayfasını Düzenle](update-related-data/_static/instructor-edit-courses.png)
 
 Bu öğreticide şunları yaptınız:
 
@@ -45,7 +45,7 @@ Bu öğreticide şunları yaptınız:
 > * Güncelleştirme silme sayfası
 > * Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [İlgili verileri okuma](read-related-data.md)
 
@@ -91,7 +91,7 @@ Kurs ayrıntılarının ve sayfa silmenin performansını iyileştirmek için, `
 
 *Görünümler/kurslar/oluşturma. cshtml*'de, **Departman** açılan listesine bir "Departman Seç" seçeneği ekleyin, **DepartmentID** etiketini **bölüm** olarak değiştirin ve bir doğrulama iletisi ekleyin.
 
-[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-35)]
 
 *Görünümler/kurslar/Düzenle. cshtml*'de, *Create. cshtml* içinde yaptığınız departman alanı için aynı değişikliği yapın.
 
