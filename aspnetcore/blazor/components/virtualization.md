@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 706564bb8607d0bb25c092c31a72e5790c825ee4
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
+ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024684"
+ms.lasthandoff: 01/11/2021
+ms.locfileid: "98065538"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor bileşen Sanallaştırması
 
@@ -41,10 +41,10 @@ Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemen
 Sanallaştırma olmadan tipik bir liste, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) listedeki her öğeyi işlemek için bir C# döngüsü kullanabilir:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     @foreach (var flight in allFlights)
     {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
+        <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     }
 </div>
 ```
@@ -54,17 +54,17 @@ Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı,
 Listedeki her öğeyi tek seferde işlemek yerine, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngüsünü `Virtualize` bileşeniyle değiştirin ve ile birlikte bir sabit öğe kaynağı belirtin <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> . Yalnızca şu anda görünür olan öğeler işlenir:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights" Context="flight">
         <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     </Virtualize>
 </div>
 ```
 
-Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` `context.{PROPERTY}` / `@context.{PROPERTY}` öğe içerik şablonunda () değerini kullanın:
+Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` öğe içerik şablonundaki değeri kullanın:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights">
         <FlightSummary @key="context.FlightId" Details="@context.Summary" />
     </Virtualize>
@@ -72,12 +72,12 @@ Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` `context.{PRO
 ```
 
 > [!NOTE]
-> Nesneler ve bileşenler için model nesnelerinin eşleme işlemi [ `@key` ] [XREF: MVC/views/Razor # key] yönergesi özniteliğiyle denetlenebilir. `@key` , anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için dağıtılmış algoritmaya neden olur.
+> Öğelerin ve bileşenlerin model nesnelerinin eşleme süreci, [`@key`](xref:mvc/views/razor#key) Directive özniteliğiyle denetlenebilir. `@key` , anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için dağıtılmış algoritmaya neden olur.
 >
 > Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 >
-> <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> <xref:mvc/views/razor#key>
+> * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
+> * <xref:mvc/views/razor#key>
 
 `Virtualize`Bileşen:
 
@@ -93,7 +93,7 @@ Bileşen için öğe içeriği `Virtualize` şunları içerebilir:
 
 ## <a name="item-provider-delegate"></a>Öğe sağlayıcısı temsilcisi
 
-Tüm öğeleri belleğe yüklemek istemiyorsanız, <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> istenen öğeleri istek üzerine zaman uyumsuz olarak alan bileşenin parametresine bir öğe sağlayıcısı temsilci yöntemi belirtebilirsiniz:
+Tüm öğeleri belleğe yüklemek istemiyorsanız, <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> istenen öğeleri istek üzerine zaman uyumsuz olarak alan bileşenin parametresine bir öğe sağlayıcısı temsilci yöntemi belirtebilirsiniz. Aşağıdaki örnekte, `LoadEmployees` yöntemi bileşene öğeleri sağlar `Virtualize` :
 
 ```razor
 <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
@@ -108,7 +108,7 @@ Tüm öğeleri belleğe yüklemek istemiyorsanız, <xref:Microsoft.AspNetCore.Co
 
 Bir `Virtualize` bileşen parametrelerden yalnızca **bir öğe kaynağını** kabul edebilir, bu nedenle bir öğe sağlayıcısını eşzamanlı olarak kullanmayı ve ' a bir koleksiyon atamayı denemeyin `Items` . Her ikisi de atanırsa, <xref:System.InvalidOperationException> bileşen parametreleri çalışma zamanında ayarlandığında bir oluşturulur.
 
-Aşağıdaki örnek, çalışanları bir ile yükler `EmployeeService` :
+Aşağıdaki `LoadEmployees` Yöntem örneği çalışanları bir öğesinden `EmployeeService` (gösterilmez) yükler:
 
 ```csharp
 private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
@@ -149,7 +149,7 @@ Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, öğe
 
 ## <a name="item-size"></a>Öğe boyutu
 
-Her öğenin piksel cinsinden boyutu ayarlanabilir <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (varsayılan: 50px):
+Her öğenin piksel cinsinden boyutu ayarlanabilir <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (varsayılan: 50):
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">
