@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: 44c507fb5e0ff4477a84bfc1e4d0c62180c8dd37
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854541"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252844"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -30,7 +30,7 @@ ms.locfileid: "97854541"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core denetleyicileri, gelen isteklerin URL 'Leriyle eşleştirmek ve bunları [eylemlerle](#action)eşlemek için yönlendirme [Ara yazılımını](xref:fundamentals/middleware/index) kullanır.  Rota şablonları:
+ASP.NET Core denetleyicileri, gelen isteklerin URL 'Leriyle eşleştirmek ve bunları [eylemlerle](#action)eşlemek için yönlendirme [Ara yazılımını](xref:fundamentals/middleware/index) kullanır.  Yol şablonları:
 
 * , Başlangıç kodunda veya özniteliklerde tanımlanmıştır.
 * URL yollarının [eylemlerle](#action)nasıl eşleştiğini betimleyen.
@@ -43,7 +43,7 @@ Bu belge:
 * MVC ve yönlendirme arasındaki etkileşimleri açıklar:
   * Tipik MVC uygulamalarının yönlendirme özelliklerini kullanma şekli.
   * Her ikisini de içerir:
-    * Genellikle denetleyiciler ve görünümlerle kullanılan [genel olarak yönlendirme](#cr) .
+    * [Geleneksel yönlendirme](#cr) genellikle denetleyiciler ve görünümlerle kullanılır.
     * REST API 'Leri ile kullanılan *öznitelik yönlendirme* . Birincil olarak REST API 'Leri için yönlendirme ile ilgileniyorsanız, [REST API 'leri Için öznitelik yönlendirme](#ar) bölümüne atlayın.
   * Bkz. Gelişmiş yönlendirme ayrıntıları için [yönlendirme](xref:fundamentals/routing) .
 * ASP.NET Core 3,0 ' de eklenen varsayılan yönlendirme sisteminin Endpoint Routing olarak adlandırıldığını gösterir. Uyumluluk amaçlarıyla önceki yönlendirme sürümü ile denetleyicileri kullanmak mümkündür. Yönergeler için [2.2-3.0 geçiş kılavuzuna](xref:migration/22-to-30) bakın. Eski yönlendirme sistemindeki başvuru malzemeleri için [Bu belgenin 2,2 sürümüne](xref:mvc/controllers/routing?view=aspnetcore-2.2) bakın.
@@ -570,7 +570,7 @@ Eylemlerde birden çok yolun kullanılması yararlı ve güçlü görünebilir, 
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
-Yukarıdaki kodda, `[HttpPost("product/{id:int}")]` bir yol kısıtlaması uygular. `ProductsController.ShowProduct`Eylem yalnızca, gıbı URL yollarıyla eşleştirilir `/product/3` . Yol şablonu bölümü, `{id:int}` Bu segmenti yalnızca tamsayılarla kısıtlar.
+Yukarıdaki kodda, `[HttpPost("product14/{id:int}")]` bir yol kısıtlaması uygular. `Products14Controller.ShowProduct`Eylem yalnızca, gıbı URL yollarıyla eşleştirilir `/product14/3` . Yol şablonu bölümü, `{id:int}` Bu segmenti yalnızca tamsayılarla kısıtlar.
 
 Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
 

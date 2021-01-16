@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: bc5f3c85d7ace120dec8369f4550a097b4f258ce
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: f8cdbbffae9b291923a6d425fef5526b0ec88f61
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417649"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253195"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
 
@@ -36,7 +36,7 @@ Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
@@ -127,7 +127,7 @@ URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindek
 
 Notlar:
 
-* Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak *Pages* arar.
+* Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak  arar.
 * `Index` , URL bir sayfa içermiyorsa varsayılan sayfasıdır.
 
 ## <a name="write-a-basic-form"></a>Temel form yazma
@@ -352,7 +352,7 @@ Model için Oluştur sayfasında, `Movie` geçersiz değerlere sahip hatalar gö
 
 ![Birden çok jQuery istemci tarafı doğrulama hatası içeren film görünümü formu](~/tutorials/razor-pages/validation/_static/val.png)
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Film uygulamasına doğrulama ekleme](xref:tutorials/razor-pages/validation)
 * [ASP.NET Core 'de model doğrulaması](xref:mvc/models/validation).
@@ -467,13 +467,13 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örnek:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örneğin:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örnek:
+Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örneğin:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -632,7 +632,7 @@ Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. <
 * [Özniteliği ve Razor sayfaları yetkilendir](xref:security/authorization/simple#aarp)
 * [Örnek kodu indirme veya görüntüleme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor)
 * <xref:mvc/controllers/areas>
 * <xref:tutorials/razor-pages/razor-pages-start>
 * <xref:security/authorization/razor-pages-authorization>
@@ -712,7 +712,7 @@ URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindek
 
 Notlar:
 
-* Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak *Pages* arar.
+* Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak  arar.
 * `Index` , URL bir sayfa içermiyorsa varsayılan sayfasıdır.
 
 ## <a name="write-a-basic-form"></a>Temel form yazma
@@ -973,7 +973,7 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örnek:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örneğin:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -1115,7 +1115,7 @@ Bu giriş hakkında daha fazla bilgi için bkz. [ Razor sayfalarla çalışmaya 
 
 ### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>RazorSayfaların içerik kökünde olduğunu belirtin
 
-Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. Sayfalarınızın uygulamanın içerik kökünde (contentrootpath) olduğunu belirtmek için [ Razor pagesatcontentroot Ile](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) [addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ' ye ekleyin Razor : [content root](xref:fundamentals/index#content-root) [ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)
+Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. Sayfalarınızın uygulamanın içerik kökünde (contentrootpath) olduğunu belirtmek için [ Razor pagesatcontentroot Ile](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) [addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ' ye ekleyin Razor : [](xref:fundamentals/index#content-root) [](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)
 
 ```csharp
 services.AddMvc()
@@ -1143,7 +1143,7 @@ services.AddMvc()
 
 * [Özniteliği ve Razor sayfaları yetkilendir](xref:security/authorization/simple#aarp)
 * <xref:index>
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor)
 * <xref:mvc/controllers/areas>
 * <xref:tutorials/razor-pages/razor-pages-start>
 * <xref:security/authorization/razor-pages-authorization>

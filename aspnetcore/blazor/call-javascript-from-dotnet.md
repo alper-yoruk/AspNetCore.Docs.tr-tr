@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 2502f43f4eaf245996827f704462ec340bbb8e07
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97592848"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252545"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -527,7 +527,7 @@ var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
-`import`Önceki örnekteki tanımlayıcı, özellikle bir JavaScript modülünü içeri aktarmak için kullanılan özel bir tanıtıcıdır. Sabit statik Web varlık yolunu kullanarak modülü belirtin: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` . Yer tutucu, `{LIBRARY NAME}` kitaplık adıdır. Yer tutucu, `{PATH UNDER WWWROOT}` altında betiğin yoludur `wwwroot` .
+`import`Önceki örnekteki tanımlayıcı, özellikle bir JavaScript modülünü içeri aktarmak için kullanılan özel bir tanıtıcıdır. Sabit statik Web varlık yolunu kullanarak modülü belirtin: `./_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` . `./`JavaScript dosyasına doğru statik varlık yolunu oluşturmak için geçerli dizin () için yol segmenti gereklidir. Yer tutucu, `{LIBRARY NAME}` kitaplık adıdır. Yer tutucu, `{PATH UNDER WWWROOT}` altında betiğin yoludur `wwwroot` .
 
 <xref:Microsoft.JSInterop.IJSRuntime> modülünü `IJSObjectReference` .NET kodundan bir JavaScript nesnesine başvuruyu temsil eden bir olarak içeri aktarır. Modülünden, `IJSObjectReference` içe aktarılmış JavaScript işlevlerini çağırmak için kullanın:
 
@@ -655,29 +655,9 @@ Ayrıca, önceki örnekte, JavaScript mantığını ve bağımlılıklarını bi
 
 ## <a name="size-limits-on-js-interop-calls"></a>JS birlikte çalışma çağrılarında boyut sınırları
 
-' De Blazor WebAssembly , çerçeve, JS birlikte çalışma çağrılarının giriş ve çıkışları için sınır vermez.
+Blazor WebAssembly' De, Framework, JS birlikte çalışma girişleri ve çıkışları için bir sınır vermez.
 
-Blazor Server' De, BIR js birlikte çalışma çağrısının sonucu, varsayılan olarak SignalR <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 32 KB olan () tarafından zorlanan en fazla yük boyutu ile sınırlıdır. Bir hatayla daha büyük bir yük ile bir JS birlikte çalışma çağrısına yanıt vermeye çalışacak uygulamalar <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . Daha büyük bir sınır, değiştirilerek yapılandırılabilir <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . Aşağıdaki örnek, en fazla alma iletisi boyutunu 64 KB (64 * 1024 * 1024) olarak ayarlar:
-
-```csharp
-services.AddServerSideBlazor()
-   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
-```
-
-Sınırın artırılması SignalR , daha fazla sunucu kaynağı kullanımını isteme maliyetine gelir ve sunucuyu kötü amaçlı bir kullanıcıdan daha fazla risk artışı için kullanıma sunar. Ayrıca, dizeler veya bayt dizileri olarak bellekte büyük miktarda içeriği okumak, çöp toplayıcıyla kötü olarak çalışan ve ek performans cezaları elde eden ayırmaya neden olabilir. Büyük yükleri okumak için bir seçenek, içeriğin daha küçük parçalara gönderilmesini ve yükün bir olarak işlenmesini düşünmelidir <xref:System.IO.Stream> . Bu, büyük JSON yüklerini okurken veya veriler JavaScript 'te ham bayt olarak kullanılabilir olduğunda kullanılabilir. İçinde, bileşene benzer teknikleri kullanan büyük ikili yükleri göndermeyi gösteren bir örnek için Blazor Server `InputFile` bkz. [ikili gönderme örnek uygulaması](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).
-
-JavaScript arasında büyük miktarda veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor :
-
-* Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri segmentlerini sırayla gönderin.
-* JavaScript ve C# kodunda büyük nesneler ayırmayın.
-* Veri gönderirken veya alırken uzun süreler için ana UI iş parçacığını engellemez.
-* İşlem tamamlandığında veya iptal edildiğinde tüketilen tüm belleği boşaltın.
-* Güvenlik amaçları için aşağıdaki ek gereksinimleri uygulayın:
-  * Geçirilebilen en büyük dosya veya veri boyutunu bildirin.
-  * İstemciden sunucuya en düşük karşıya yükleme hızını bildirin.
-* Veriler, sunucu tarafından alındıktan sonra şu olabilir:
-  * Tüm segmentler toplanana kadar bir bellek arabelleğinde geçici olarak depolanır.
-  * Hemen tüketildi. Örneğin, veriler bir veritabanında hemen depolanabilir veya her bir segment alındığında diske yazılabilir.
+Blazor Server' De, JS birlikte çalışabilirlik çağrıları SignalR , tarafından zorlanan hub yöntemleri için izin verilen en büyük gelen ileti boyutuna göre boyut olarak sınırlandırılır <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> (varsayılan: 32 KB). JS SignalR 'den büyük <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> bir hata oluşturur. Framework, SignalR hub 'dan istemciye bir ileti boyutuna sınır vermez. Daha fazla bilgi için bkz. <xref:blazor/call-dotnet-from-javascript#size-limits-on-js-interop-calls>.
   
 ## <a name="js-modules"></a>JS modülleri
 

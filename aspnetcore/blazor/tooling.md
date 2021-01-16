@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 4813668f5278473fbaae36d572e69700b3fe771a
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5901a1cb693dfe8e34e62ce2a28456bcf584221c
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97764243"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252272"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core için araç oluşturma Blazor
 
@@ -129,7 +129,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
 
 ## <a name="use-visual-studio-code-for-cross-platform-no-locblazor-development"></a>Platformlar arası geliştirme için Visual Studio Code kullanma Blazor
 
-[Visual Studio Code](https://code.visualstudio.com/) , uygulama geliştirmek için kullanılabilen, açık kaynaklı, platformlar arası tümleşik geliştirme ORTAMıDıR (IDE) Blazor . Visual Studio Code ile geliştirme için yeni bir uygulama oluşturmak üzere .NET CLı 'yi kullanın Blazor . Daha fazla bilgi için [Bu makalenin Linux sürümüne](/aspnet/core/blazor/tooling?pivots=linux)bakın.
+[Visual Studio Code](https://code.visualstudio.com/) , uygulama geliştirmek için kullanılabilen, açık kaynaklı, platformlar arası tümleşik geliştirme ORTAMıDıR (IDE) Blazor . Visual Studio Code ile geliştirme için yeni bir uygulama oluşturmak üzere .NET CLı 'yi kullanın Blazor . Daha fazla bilgi için [Bu makalenin Linux sürümüne](?pivots=linux)bakın.
 
 ## <a name="no-locblazor-template-options"></a>Blazor Şablon seçenekleri
 

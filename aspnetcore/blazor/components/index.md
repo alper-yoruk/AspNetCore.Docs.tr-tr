@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a2738ab40e2a463a0166ce8916ed6f1b05ea1d08
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 12a1f528bdff0230bbf17075284d27de654a423e
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855384"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252428"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -40,7 +40,7 @@ Bileşenler, [Razor](xref:mvc/views/razor) `.razor` C# ve HTML biçimlendirmesin
 
 ### <a name="no-locrazor-syntax"></a>Razor sözdizimi
 
-Razor uygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır. RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .
+Razor uygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır. RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce [ Razor ASP.NET Core için sözdizimi başvurusunu](xref:mvc/views/razor) okumanızı öneririz.
 
 Söz dizimi üzerindeki içeriğe erişirken Razor , aşağıdaki bölümlere özel bir dikkat ödeyin:
 
@@ -81,7 +81,7 @@ Bileşen üyeleri, ile başlayan C# ifadeleri kullanılarak bileşenin işleme m
 }
 ```
 
-Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur. Blazor ardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular.
+Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur. Blazor ardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular. Ek ayrıntı içinde sunulmaktadır <xref:blazor/components/rendering> .
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
@@ -293,7 +293,7 @@ Kural gereği, C# kodundan oluşan bir öznitelik değeri, [ Razor ayrılmış `
 * Bir yöntemin sonucu: `Title="@{METHOD}"` yer tutucunun, `{METHOD}` üst bileşenin C# yöntemi olduğu yerdir.
 * [Örtük veya açık ifade](xref:mvc/views/razor#implicit-razor-expressions): `Title="@({EXPRESSION})"` , yer tutucu `{EXPRESSION}` bir C# ifadesi.
   
-Daha fazla bilgi için bkz. <xref:mvc/views/razor>.
+Daha fazla bilgi için bkz. [ Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor).
 
 > [!WARNING]
 > Kendi *bileşen parametrelerine* yazan bileşenler oluşturmayın, bunun yerine özel bir alan kullanın. Daha fazla bilgi için, [üzerine yazılan parametreler](#overwritten-parameters) bölümüne bakın.
@@ -579,7 +579,7 @@ public class NotifierService
 }
 ```
 
-Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu Blazor eşitleme bağlamı dışında çağırır. `InvokeAsync` doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır.
+Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu Blazor eşitleme bağlamı dışında çağırır. `InvokeAsync` doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/components/rendering>.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>\@Öğe ve bileşenlerin korunmasını denetlemek için anahtar kullanın
 
@@ -727,7 +727,7 @@ Başlangıçta, `Expander` bileşenleri özellikleri bir kez değiştiğinde ba�
 Aşağıdaki düzeltilen `Expander` bileşen:
 
 * Üst öğeden `Expanded` bileşen parametre değerini kabul eder.
-* *private field* `expanded` [OnInitialized olaydaki](xref:blazor/components/lifecycle#component-initialization-methods)bir özel alana () bileşen parametre değerini atar.
+*  `expanded` [OnInitialized olaydaki](xref:blazor/components/lifecycle#component-initialization-methods)bir özel alana () bileşen parametre değerini atar.
 * Kendi iç geçiş durumunu korumak için özel alanını kullanır, bu da doğrudan bir parametreye yazmayı nasıl önleyeceğinizi gösterir.
 
 ```razor
@@ -801,7 +801,7 @@ Aşağıdaki örnekte, `IsCompleted` `checked` öğesinin biçimlendirmesinde i�
 <input type="checkbox" />
 ```
 
-Daha fazla bilgi için bkz. <xref:mvc/views/razor>.
+Daha fazla bilgi için bkz. [ Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor).
 
 > [!WARNING]
 > [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons).NET türü bir olduğunda, gibi bazı HTML öznitelikleri düzgün şekilde çalışmaz `bool` . Bu durumlarda, `string` yerine bir tür kullanın `bool` .
@@ -868,7 +868,7 @@ BlazorProjenin [ `web root (wwwroot)` klasörü](xref:fundamentals/index#web-roo
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razorbileşenler, **not** tilde işareti gösterimini ( `~/` ) desteklemez.
+Razorbileşenler,  tilde işareti gösterimini ( `~/` ) desteklemez.
 
 Uygulamanın temel yolunu ayarlama hakkında daha fazla bilgi için bkz <xref:blazor/host-and-deploy/index#app-base-path> ..
 
@@ -957,13 +957,13 @@ Yukarıdaki biçimlendirmeden boşluk korunmaz Razor :
 * <xref:blazor/security/server/threat-mitigation>: Blazor Server Kaynak tükenmesi ile Çekişmek zorunda olan uygulamalar oluşturmaya yönelik yönergeler içerir.
 
 <!--Reference links in article-->
-[1]: <xref:mvc/views/razor#code>
-[2]: <xref:mvc/views/razor#using>
-[3]: <xref:mvc/views/razor#attributes>
-[4]: <xref:mvc/views/razor#ref>
-[5]: <xref:mvc/views/razor#key>
-[6]: <xref:mvc/views/razor#inherits>
-[7]: <xref:mvc/views/razor#attribute>
-[8]: <xref:mvc/views/razor#namespace>
-[9]: <xref:mvc/views/razor#page>
-[10]: <xref:mvc/views/razor#bind>
+[1]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#code)
+[2]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#using)
+[3]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attributes)
+[4]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#ref)
+[5]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#key)
+[6]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#inherits)
+[7]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#attribute)
+[8]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#namespace)
+[9]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#page)
+[10]: [Razor syntax reference for ASP.NET Core](xref:mvc/views/razor#bind)

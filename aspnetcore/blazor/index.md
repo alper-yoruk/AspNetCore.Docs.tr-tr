@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 79c225a0714562a01afe67bf8e59f3b3f98a6265
-ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
+ms.openlocfilehash: 840cc87103447db2b4686994701a0e4543d11fde
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/18/2020
-ms.locfileid: "97666865"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252467"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core giriş Blazor
 
@@ -175,6 +175,6 @@ Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistem
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 * [C# Kılavuzu](/dotnet/csharp/)
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor)
 * [HTML](https://www.w3.org/html/)
 * [Başar Blazor ](https://github.com/AdrienTorris/awesome-blazor) Topluluk bağlantıları

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: e4a94ca9e3607868f3eb25d88338e8156f7f5206
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e0354859b08dc5d8a3e1f4b8a8530d61de2e78cf
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061528"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253169"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -69,6 +69,10 @@ Azure Uygulama Hizmetleri 'nde bir Web sitesi barındırmaya başlamak için bkz
 * <xref:host-and-deploy/iis/modules>
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
+
+## <a name="overlapped-recycle"></a>Çakışan geri dönüşüm
+
+Genel olarak, sıfır kesinti dağıtımları için [mavi yeşil dağıtımlar](https://www.martinfowler.com/bliki/BlueGreenDeployment.html) gibi bir model kullanmanızı öneririz. Çakışan geri dönüşüm yardımı gibi özellikler, ancak sıfır kapalı kalma süresi ile ilgili bir dağıtım gerçekleştirebileceğinizi garanti etmez. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/aspnetcore/issues/10117)bakın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -280,10 +284,10 @@ Gizli dosyalar, uygulamanın fiziksel yolunda `{ASSEMBLY}.runtimeconfig.json` `{
    ![Rol hizmetlerini seçin adımında varsayılan rol hizmetleri seçilidir.](index/_static/role-services-ws2016.png)
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. Web sunucusu rolü ve hizmetlerini yüklemek için **onay** adımına ilerleyin. **Web sunucusu (IIS)** rolü yüklendikten sonra sunucu/IIS yeniden başlatması gerekli değildir.
 
@@ -302,10 +306,10 @@ Gizli dosyalar, uygulamanın fiziksel yolunda `{ASSEMBLY}.runtimeconfig.json` `{
 1. **World Wide Web Hizmetleri** için varsayılan özellikleri kabul edın veya IIS özelliklerini özelleştirin.
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. IIS yüklemesi için yeniden başlatma gerekiyorsa, sistemi yeniden başlatın.
 
@@ -375,14 +379,14 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. IIS Yöneticisi 'nde, **Bağlantılar** panelinde sunucunun düğümünü açın. **Siteler** klasörüne sağ tıklayın. Bağlamsal menüden **Web sitesi Ekle** ' yi seçin.
 
-1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam** ' ı seçerek Web sitesini oluşturun:
+1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam**' ı seçerek Web sitesini oluşturun:
 
    ![Web sitesi Ekle adımında site adı, fiziksel yol ve ana bilgisayar adını sağlayın.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
-   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır  . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. Sunucu düğümünün altında **uygulama havuzları** ' nı seçin.
+1. Sunucu düğümünün altında **uygulama havuzları**' nı seçin.
 
 1. Sitenin uygulama havuzuna sağ tıklayın ve bağlam menüsünden **temel ayarlar** ' ı seçin.
 
@@ -392,15 +396,15 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
     ASP.NET Core ayrı bir işlemde çalışır ve çalışma zamanını yönetir. ASP.NET Core, masaüstü CLR 'yi (.NET CLR) yüklemeye bağlı değildir. .NET Core için çekirdek ortak dil çalışma zamanı (CoreCLR), uygulamayı çalışan işlemde barındırmak için önyüklenir. **.NET CLR sürümünün** **yönetilen kod olmadan** ayarlanması isteğe bağlıdır, ancak önerilir.
 
-1. *ASP.NET Core 2,2 veya üzeri* :
+1. *ASP.NET Core 2,2 veya üzeri*:
 
-   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 32 bit SDK ile yayımlanmış 32-bit (x86) bir [dağıtımı](/dotnet/core/deploying/#self-contained-deployments-scd) için, uygulama havuzunu 32 bit olarak etkinleştirin. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar** ' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak ayarlayın `True` . 
+   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 32 bit SDK ile yayımlanmış 32-bit (x86) bir [dağıtımı](/dotnet/core/deploying/#self-contained-deployments-scd) için, uygulama havuzunu 32 bit olarak etkinleştirin. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar**' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak ayarlayın `True` . 
 
-   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bitlik (x64) bir [dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32 bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar** ' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak ayarlayın `False` . 
+   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bitlik (x64) bir [dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32 bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar**' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak ayarlayın `False` . 
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği ( **işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -429,7 +433,7 @@ IIS 'ye dağıtım ASP.NET Core hakkında daha fazla bilgi için, [IIS yönetici
 
 Uygulama barındırma sistemine dağıtıldıktan sonra, uygulamanın genel uç noktalarından birine bir istek oluşturun.
 
-Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com` **Port** `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
+Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com`  `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
 
 ![Microsoft Edge tarayıcısı, IIS başlangıç sayfasını yükledi.](index/_static/browsewebsite.png)
 
@@ -515,9 +519,9 @@ Bir ASP.NET Core uygulamasını başka bir ASP.NET Core uygulaması altında alt
 
 1. Kök siteyi, kök sitenin altındaki bir klasörde bulunan alt uygulamayla IIS Yöneticisi 'ne ekleyin.
 
-1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür** ' ü seçin.
+1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür**' ü seçin.
 
-1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam** ’ı seçin.
+1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam**’ı seçin.
 
 Ayrı bir uygulama havuzunun alt uygulamaya atanması, işlem içi barındırma modelinin kullanıldığı bir gereksinimdir.
 
@@ -567,7 +571,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. Windows Gezgini 'ni açın ve dizine gidin.
 
-1. Dizine sağ tıklayıp **Özellikler** ' i seçin.
+1. Dizine sağ tıklayıp **Özellikler**' i seçin.
 
 1. **Güvenlik** sekmesinde, **Düzenle** düğmesini ve ardından **Ekle** düğmesini seçin.
 
@@ -577,7 +581,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "ad denetle" seçmeden önce "DefaultAppPool" uygulama havuzu adı, nesne adları alanında "IIS AppPool" öğesine eklenir \" .](index/_static/select-users-or-groups-1.png)
 
-1. **Tamam** ’ı seçin.
+1. **Tamam**’ı seçin.
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "adları denetle" seçeneğini belirledikten sonra, nesne adları alanında "DefaultAppPool" nesne adı gösterilir.](index/_static/select-users-or-groups-2.png)
 
@@ -647,11 +651,11 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 * IIS Yöneticisi 'Ni kullanma:
 
   1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-  1. Varsayılan **Başlangıç modu** **OnDemand** ' dir. **Başlangıç modunu** **AlwaysRunning** olarak ayarlayın. **Tamam** ’ı seçin.
+  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+  1. Varsayılan **Başlangıç modu** **OnDemand**' dir. **Başlangıç modunu** **AlwaysRunning** olarak ayarlayın. **Tamam**’ı seçin.
   1. **Bağlantılar** panelinde **siteler** düğümünü açın.
   1. Uygulamaya sağ tıklayın ve **Web sitesi** > **Gelişmiş ayarlarını** Yönet ' i seçin.
-  1. Varsayılan **önyükleme etkin** ayarı **false** şeklindedir. **Önyükleme etkin** ' i **true** olarak ayarlayın. **Tamam** ’ı seçin.
+  1. Varsayılan **önyükleme etkin** ayarı **false** şeklindedir. **Önyükleme etkin** ' i **true** olarak ayarlayın. **Tamam**’ı seçin.
 
 * Kullanarak `web.config` , `<applicationInitialization>` öğesini `doAppInitAfterRestart` `true` `<system.webServer>` uygulamasının web.config' dosyasındaki öğelerine ayarlı öğesine ekleyin:
 
@@ -673,8 +677,8 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 Uygulamanın çalışmasını engellemek için, IIS Yöneticisi 'Ni kullanarak uygulama havuzunun boşta kalma zaman aşımını ayarlayın:
 
 1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-1. Varsayılan **boşta kalma süresi (dakika)** **20** dakikadır. **Boşta kalma zaman aşımını (dakika)** **0** (sıfır) olarak ayarlayın. **Tamam** ’ı seçin.
+1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+1. Varsayılan **boşta kalma süresi (dakika)** **20** dakikadır. **Boşta kalma zaman aşımını (dakika)** **0** (sıfır) olarak ayarlayın. **Tamam**’ı seçin.
 1. Çalışan işlemini geri dönüştür.
 
 [İşlem dışı](#out-of-process-hosting-model) barındırılan uygulamaların zaman aşımına uğramasını engellemek için aşağıdaki yaklaşımlardan birini kullanın:
@@ -768,7 +772,7 @@ IIS HTTP sunucusu isteği işlediğinde, istek ASP.NET Core ara yazılım ardı�
 
 İşlem içi barındırma, mevcut uygulamalar için kabul ediyor, ancak tüm IIS ve IIS Express senaryoları için varsayılan [DotNet yeni](/dotnet/core/tools/dotnet-new) şablonlar, işlem içi barındırma modeli için varsayılan olarak kullanılır.
 
-`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin içinde barındırmak için yöntemini çağırarak bir örnek ekler ( *w3wp.exe* veya *iisexpress.exe* ). Performans testleri, bir .NET Core uygulamasını işlem içinde barındıran uygulamanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel) sunucusuna proxy alma isteklerinin barındırılmasına kıyasla önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
+`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin içinde barındırmak için yöntemini çağırarak bir örnek ekler (*w3wp.exe* veya *iisexpress.exe*). Performans testleri, bir .NET Core uygulamasını işlem içinde barındıran uygulamanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel) sunucusuna proxy alma isteklerinin barındırılmasına kıyasla önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
 
 ### <a name="out-of-process-hosting-model"></a>İşlem dışı barındırma modeli
 
@@ -792,7 +796,7 @@ Barındırma hakkında daha fazla bilgi için bkz. [ASP.NET Core ana bilgisayar]
 
 ### <a name="enable-the-iisintegration-components"></a>Iısıntegration bileşenlerini etkinleştirin
 
-`CreateWebHostBuilder`( *Program.cs* ) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
+`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -869,7 +873,7 @@ Web SDK 'sının dosyayı dönüştürmesiyle devre dışı bırakıldığında,
 
 [ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module) doğru bir şekilde ayarlamak için, dağıtılan uygulamanın [içerik kök](xref:fundamentals/index#content-root) yolunda (genellikle uygulama temel yolu) *web.config* dosyasının mevcut olması gerekir. Bu, IIS 'ye sunulan Web sitesi fiziksel yoluyla aynı konumdadır. *web.config* dosyası, Web dağıtımı kullanarak birden çok uygulamanın yayımlanmasını sağlamak için uygulamanın kökünde gereklidir.
 
-Önemli dosyalar uygulamanın fiziksel yolunda bulunur (örneğin, *\<assembly>.runtimeconfig.json* , *\<assembly> . xml* (XML belge açıklamaları) ve *\<assembly>.deps.js* . *web.config* dosyası mevcut olduğunda ve site normal olarak başlatıldığında, istenirse IIS bu hassas dosyaları sunmaz. *web.config* dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
+Önemli dosyalar uygulamanın fiziksel yolunda bulunur (örneğin, *\<assembly>.runtimeconfig.json*, *\<assembly> . xml* (XML belge açıklamaları) ve *\<assembly>.deps.js*. *web.config* dosyası mevcut olduğunda ve site normal olarak başlatıldığında, istenirse IIS bu hassas dosyaları sunmaz. *web.config* dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
 
 ***web.config* dosyasının her zaman dağıtımda mevcut olması gerekir, doğru şekilde adlandırılmış ve siteyi normal başlangıç için yapılandırabiliyor. *web.config* dosyasını bir üretim dağıtımından hiçbir şekilde kaldırmayın.**
 
@@ -892,10 +896,10 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
    ![Rol hizmetlerini seçin adımında varsayılan rol hizmetleri seçilidir.](index/_static/role-services-ws2016.png)
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. Web sunucusu rolü ve hizmetlerini yüklemek için **onay** adımına ilerleyin. **Web sunucusu (IIS)** rolü yüklendikten sonra sunucu/IIS yeniden başlatması gerekli değildir.
 
@@ -914,10 +918,10 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
 1. **World Wide Web Hizmetleri** için varsayılan özellikleri kabul edın veya IIS özelliklerini özelleştirin.
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. IIS yüklemesi için yeniden başlatma gerekiyorsa, sistemi yeniden başlatın.
 
@@ -950,7 +954,7 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
    * `OPT_NO_RUNTIME=1`: .NET Core çalışma zamanını yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_SHAREDFX=1`: ASP.NET paylaşılan çerçevesini (ASP.NET çalışma zamanı) yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_X86=1`: X86 çalışma zamanlarını yüklemeyi atlayın. 32 bitlik uygulamalar barındırmayabildiğinizi bildiğiniz durumlarda bu parametreyi kullanın. Gelecekte 32-bit ve 64 bit uygulamaları barındırabilmeniz gereken herhangi bir şansınız varsa, bu parametreyi kullanmayın ve her iki çalışma zamanını da yüklemeyin.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma ( *applicationHost.config* ), IIS yüklemesiyle aynı makinada olduğunda, IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma (*applicationHost.config*), IIS yüklemesiyle aynı makinada olduğunda, IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Sistemi yeniden başlatın veya komut kabuğu 'nda aşağıdaki komutları yürütün:
 
    ```console
@@ -976,14 +980,14 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. IIS Yöneticisi 'nde, **Bağlantılar** panelinde sunucunun düğümünü açın. **Siteler** klasörüne sağ tıklayın. Bağlamsal menüden **Web sitesi Ekle** ' yi seçin.
 
-1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam** ' ı seçerek Web sitesini oluşturun:
+1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam**' ı seçerek Web sitesini oluşturun:
 
    ![Web sitesi Ekle adımında site adı, fiziksel yol ve ana bilgisayar adını sağlayın.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
-   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır  . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. Sunucu düğümünün altında **uygulama havuzları** ' nı seçin.
+1. Sunucu düğümünün altında **uygulama havuzları**' nı seçin.
 
 1. Sitenin uygulama havuzuna sağ tıklayın ve bağlam menüsünden **temel ayarlar** ' ı seçin.
 
@@ -993,13 +997,13 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
     ASP.NET Core ayrı bir işlemde çalışır ve çalışma zamanını yönetir. ASP.NET Core, masaüstü CLR 'nin (.NET CLR) yüklenmemesine bağlı değildir &mdash; . .NET Core Için çekirdek ortak dil çalışma zamanı (CoreCLR), uygulamayı çalışan işlemde barındırmak için önyüklenir. **.NET CLR sürümünün** **yönetilen kod olmadan** ayarlanması isteğe bağlıdır, ancak önerilir.
 
-1. *ASP.NET Core 2,2 veya üzeri* : [işlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bit (x64) [tabanlı bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32-bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın.
+1. *ASP.NET Core 2,2 veya üzeri*: [işlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bit (x64) [tabanlı bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32-bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın.
 
    IIS Yöneticisi > **uygulama havuzlarının** **Eylemler** kenar çubuğunda, **uygulama havuzu varsayılanlarını** veya **Gelişmiş ayarları** ayarla ' yı seçin. **32 bitlik uygulamaları etkinleştir** ' i bulun ve değerini olarak ayarlayın `False` . Bu ayar [, işlem dışı barındırma](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model)için dağıtılan uygulamaları etkilemez.
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği ( **işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -1028,7 +1032,7 @@ IIS 'ye dağıtım ASP.NET Core hakkında daha fazla bilgi için, [IIS yönetici
 
 Uygulama barındırma sistemine dağıtıldıktan sonra, uygulamanın genel uç noktalarından birine bir istek oluşturun.
 
-Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com` **Port** `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
+Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com`  `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
 
 ![Microsoft Edge tarayıcısı, IIS başlangıç sayfasını yükledi.](index/_static/browsewebsite.png)
 
@@ -1115,9 +1119,9 @@ Bir ASP.NET Core uygulamasını başka bir ASP.NET Core uygulaması altında alt
 
 1. Kök siteyi, kök sitenin altındaki bir klasörde bulunan alt uygulamayla IIS Yöneticisi 'ne ekleyin.
 
-1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür** ' ü seçin.
+1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür**' ü seçin.
 
-1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam** ’ı seçin.
+1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam**’ı seçin.
 
 Ayrı bir uygulama havuzunun alt uygulamaya atanması, işlem içi barındırma modelinin kullanıldığı bir gereksinimdir.
 
@@ -1167,7 +1171,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. Windows Gezgini 'ni açın ve dizine gidin.
 
-1. Dizine sağ tıklayıp **Özellikler** ' i seçin.
+1. Dizine sağ tıklayıp **Özellikler**' i seçin.
 
 1. **Güvenlik** sekmesinde, **Düzenle** düğmesini ve ardından **Ekle** düğmesini seçin.
 
@@ -1177,7 +1181,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "ad denetle" seçmeden önce "DefaultAppPool" uygulama havuzu adı, nesne adları alanında "IIS AppPool" öğesine eklenir \" .](index/_static/select-users-or-groups-1.png)
 
-1. **Tamam** ’ı seçin.
+1. **Tamam**’ı seçin.
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "adları denetle" seçeneğini belirledikten sonra, nesne adları alanında "DefaultAppPool" nesne adı gösterilir.](index/_static/select-users-or-groups-2.png)
 
@@ -1247,11 +1251,11 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 * IIS Yöneticisi 'Ni kullanma:
 
   1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-  1. Varsayılan **Başlangıç modu** **OnDemand** ' dir. **Başlangıç modunu** **AlwaysRunning** olarak ayarlayın. **Tamam** ’ı seçin.
+  1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+  1. Varsayılan **Başlangıç modu** **OnDemand**' dir. **Başlangıç modunu** **AlwaysRunning** olarak ayarlayın. **Tamam**’ı seçin.
   1. **Bağlantılar** panelinde **siteler** düğümünü açın.
   1. Uygulamaya sağ tıklayın ve **Web sitesi** > **Gelişmiş ayarlarını** Yönet ' i seçin.
-  1. Varsayılan **önyükleme etkin** ayarı **false** şeklindedir. **Önyükleme etkin** ' i **true** olarak ayarlayın. **Tamam** ’ı seçin.
+  1. Varsayılan **önyükleme etkin** ayarı **false** şeklindedir. **Önyükleme etkin** ' i **true** olarak ayarlayın. **Tamam**’ı seçin.
 
 * *web.config* kullanarak, `<applicationInitialization>` öğesini `doAppInitAfterRestart` `true` `<system.webServer>` uygulamasının *web.config* dosyasındaki öğelerine ayarlı olarak ekleyin:
 
@@ -1273,8 +1277,8 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
 Uygulamanın çalışmasını engellemek için, IIS Yöneticisi 'Ni kullanarak uygulama havuzunun boşta kalma zaman aşımını ayarlayın:
 
 1. **Bağlantılar** panelinde **uygulama havuzları** ' nı seçin.
-1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar** ' ı seçin.
-1. Varsayılan **boşta kalma süresi (dakika)** **20** dakikadır. **Boşta kalma zaman aşımını (dakika)** **0** (sıfır) olarak ayarlayın. **Tamam** ’ı seçin.
+1. Listedeki uygulamanın uygulama havuzuna sağ tıklayın ve **Gelişmiş ayarlar**' ı seçin.
+1. Varsayılan **boşta kalma süresi (dakika)** **20** dakikadır. **Boşta kalma zaman aşımını (dakika)** **0** (sıfır) olarak ayarlayın. **Tamam**’ı seçin.
 1. Çalışan işlemini geri dönüştür.
 
 [İşlem dışı](#out-of-process-hosting-model) barındırılan uygulamaların zaman aşımına uğramasını engellemek için aşağıdaki yaklaşımlardan birini kullanın:
@@ -1341,7 +1345,7 @@ Sorun giderme kılavuzu için bkz <xref:test/troubleshoot> ..
 
 ASP.NET Core, varsayılan, platformlar arası bir HTTP sunucusu olan [Kestrel Server](xref:fundamentals/servers/kestrel)ile birlikte gönderilir.
 
-[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) veya [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)kullanırken, uygulama IIS çalışan işleminden ( *işlem dışı* ) [Kestrel sunucusu](xref:fundamentals/servers/index#kestrel)ile ayrı bir işlemde çalışır.
+[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) veya [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)kullanırken, uygulama IIS çalışan işleminden (*işlem dışı*) [Kestrel sunucusu](xref:fundamentals/servers/index#kestrel)ile ayrı bir işlemde çalışır.
 
 ASP.NET Core uygulamalar IIS çalışan işleminden ayrı bir işlemde çalıştığından, modül işlem yönetimini işler. Modül, ilk istek ulaştığında ASP.NET Core uygulama için işlemi başlatır ve kapanırsa veya kilitlenirse uygulamayı yeniden başlatır. Bu aslında, [Windows Işlem etkinleştirme hizmeti (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)tarafından yönetilen işlem içi uygulamalarla birlikte görülen davranışdır.
 
@@ -1373,7 +1377,7 @@ Barındırma hakkında daha fazla bilgi için bkz. [ASP.NET Core ana bilgisayar]
 
 ### <a name="enable-the-iisintegration-components"></a>Iısıntegration bileşenlerini etkinleştirin
 
-`CreateWebHostBuilder`( *Program.cs* ) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
+`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1437,7 +1441,7 @@ Web SDK 'sının dosyayı dönüştürmesiyle devre dışı bırakıldığında,
 
 [ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module) doğru bir şekilde ayarlamak için, dağıtılan uygulamanın [içerik kök](xref:fundamentals/index#content-root) yolunda (genellikle uygulama temel yolu) *web.config* dosyasının mevcut olması gerekir. Bu, IIS 'ye sunulan Web sitesi fiziksel yoluyla aynı konumdadır. *web.config* dosyası, Web dağıtımı kullanarak birden çok uygulamanın yayımlanmasını sağlamak için uygulamanın kökünde gereklidir.
 
-Önemli dosyalar uygulamanın fiziksel yolunda bulunur (örneğin, *\<assembly>.runtimeconfig.json* , *\<assembly> . xml* (XML belge açıklamaları) ve *\<assembly>.deps.js* . *web.config* dosyası mevcut olduğunda ve site normal olarak başlatıldığında, istenirse IIS bu hassas dosyaları sunmaz. *web.config* dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
+Önemli dosyalar uygulamanın fiziksel yolunda bulunur (örneğin, *\<assembly>.runtimeconfig.json*, *\<assembly> . xml* (XML belge açıklamaları) ve *\<assembly>.deps.js*. *web.config* dosyası mevcut olduğunda ve site normal olarak başlatıldığında, istenirse IIS bu hassas dosyaları sunmaz. *web.config* dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
 
 ***web.config* dosyasının her zaman dağıtımda mevcut olması gerekir, doğru şekilde adlandırılmış ve siteyi normal başlangıç için yapılandırabiliyor. *web.config* dosyasını bir üretim dağıtımından hiçbir şekilde kaldırmayın.**
 
@@ -1460,10 +1464,10 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
    ![Rol hizmetlerini seçin adımında varsayılan rol hizmetleri seçilidir.](index/_static/role-services-ws2016.png)
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. Web sunucusu rolü ve hizmetlerini yüklemek için **onay** adımına ilerleyin. **Web sunucusu (IIS)** rolü yüklendikten sonra sunucu/IIS yeniden başlatması gerekli değildir.
 
@@ -1482,10 +1486,10 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
 1. **World Wide Web Hizmetleri** için varsayılan özellikleri kabul edın veya IIS özelliklerini özelleştirin.
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği** . **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **World Wide Web Hizmetleri**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
-   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri** . **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
+   WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **World Wide Web Services**  >  **uygulaması geliştirme özellikleri**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
 
 1. IIS yüklemesi için yeniden başlatma gerekiyorsa, sistemi yeniden başlatın.
 
@@ -1518,7 +1522,7 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, 
    * `OPT_NO_RUNTIME=1`: .NET Core çalışma zamanını yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_SHAREDFX=1`: ASP.NET paylaşılan çerçevesini (ASP.NET çalışma zamanı) yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_X86=1`: X86 çalışma zamanlarını yüklemeyi atlayın. 32 bitlik uygulamalar barındırmayabildiğinizi bildiğiniz durumlarda bu parametreyi kullanın. Gelecekte 32-bit ve 64 bit uygulamaları barındırabilmeniz gereken herhangi bir şansınız varsa, bu parametreyi kullanmayın ve her iki çalışma zamanını da yüklemeyin.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma ( *applicationHost.config* ), IIS yüklemesiyle aynı makinada olduğunda, IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma (*applicationHost.config*), IIS yüklemesiyle aynı makinada olduğunda, IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Sistemi yeniden başlatın veya komut kabuğu 'nda aşağıdaki komutları yürütün:
 
    ```console
@@ -1544,14 +1548,14 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. IIS Yöneticisi 'nde, **Bağlantılar** panelinde sunucunun düğümünü açın. **Siteler** klasörüne sağ tıklayın. Bağlamsal menüden **Web sitesi Ekle** ' yi seçin.
 
-1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam** ' ı seçerek Web sitesini oluşturun:
+1. Bir **site adı** belirtin ve **fiziksel yolu** uygulamanın dağıtım klasörüne ayarlayın. **Bağlama** yapılandırmasını sağlayın ve **Tamam**' ı seçerek Web sitesini oluşturun:
 
    ![Web sitesi Ekle adımında site adı, fiziksel yol ve ana bilgisayar adını sağlayın.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
-   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+   > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır  . Üst düzey joker karakter bağlamaları, uygulamanızı güvenlik açıklarına açabilir. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık ana bilgisayar adları kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskine sahip değildir `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. Sunucu düğümünün altında **uygulama havuzları** ' nı seçin.
+1. Sunucu düğümünün altında **uygulama havuzları**' nı seçin.
 
 1. Sitenin uygulama havuzuna sağ tıklayın ve bağlam menüsünden **temel ayarlar** ' ı seçin.
 
@@ -1561,13 +1565,13 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
     ASP.NET Core ayrı bir işlemde çalışır ve çalışma zamanını yönetir. ASP.NET Core, masaüstü CLR 'nin (.NET CLR) yüklenmemesine bağlı değildir &mdash; . .NET Core Için çekirdek ortak dil çalışma zamanı (CoreCLR), uygulamayı çalışan işlemde barındırmak için önyüklenir. **.NET CLR sürümünün** **yönetilen kod olmadan** ayarlanması isteğe bağlıdır, ancak önerilir.
 
-1. *ASP.NET Core 2,2 veya üzeri* : [işlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bit (x64) [tabanlı bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32-bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın.
+1. *ASP.NET Core 2,2 veya üzeri*: [işlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bit (x64) [tabanlı bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32-bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın.
 
    IIS Yöneticisi > **uygulama havuzlarının** **Eylemler** kenar çubuğunda, **uygulama havuzu varsayılanlarını** veya **Gelişmiş ayarları** ayarla ' yı seçin. **32 bitlik uygulamaları etkinleştir** ' i bulun ve değerini olarak ayarlayın `False` . Bu ayar [, işlem dışı barındırma](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model)için dağıtılan uygulamaları etkilemez.
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği ( **işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -1596,7 +1600,7 @@ IIS 'ye dağıtım ASP.NET Core hakkında daha fazla bilgi için, [IIS yönetici
 
 Uygulama barındırma sistemine dağıtıldıktan sonra, uygulamanın genel uç noktalarından birine bir istek oluşturun.
 
-Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com` **Port** `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
+Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına** bağlıdır `www.mysite.com`  `80` . Bir istek şu şekilde yapılır `http://www.mysite.com` :
 
 ![Microsoft Edge tarayıcısı, IIS başlangıç sayfasını yükledi.](index/_static/browsewebsite.png)
 
@@ -1716,9 +1720,9 @@ Bir ASP.NET Core uygulamasını başka bir ASP.NET Core uygulaması altında alt
 
 1. Kök siteyi, kök sitenin altındaki bir klasörde bulunan alt uygulamayla IIS Yöneticisi 'ne ekleyin.
 
-1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür** ' ü seçin.
+1. IIS Yöneticisi 'ndeki alt uygulama klasörüne sağ tıklayın ve **uygulamaya Dönüştür**' ü seçin.
 
-1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam** ’ı seçin.
+1. **Uygulama Ekle** iletişim kutusunda, alt uygulama için oluşturduğunuz uygulama havuzunu atamak üzere **uygulama havuzunun** **Seç** düğmesini kullanın. **Tamam**’ı seçin.
 
 Ayrı bir uygulama havuzunun alt uygulamaya atanması, işlem içi barındırma modelinin kullanıldığı bir gereksinimdir.
 
@@ -1763,7 +1767,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. Windows Gezgini 'ni açın ve dizine gidin.
 
-1. Dizine sağ tıklayıp **Özellikler** ' i seçin.
+1. Dizine sağ tıklayıp **Özellikler**' i seçin.
 
 1. **Güvenlik** sekmesinde, **Düzenle** düğmesini ve ardından **Ekle** düğmesini seçin.
 
@@ -1773,7 +1777,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "ad denetle" seçmeden önce "DefaultAppPool" uygulama havuzu adı, nesne adları alanında "IIS AppPool" öğesine eklenir \" .](index/_static/select-users-or-groups-1.png)
 
-1. **Tamam** ’ı seçin.
+1. **Tamam**’ı seçin.
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "adları denetle" seçeneğini belirledikten sonra, nesne adları alanında "DefaultAppPool" nesne adı gösterilir.](index/_static/select-users-or-groups-2.png)
 

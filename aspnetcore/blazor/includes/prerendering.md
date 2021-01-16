@@ -37,7 +37,7 @@ Aşağıdaki bileşen, prerendering ile uyumlu bir şekilde bileşenin başlatma
 
 Burada <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> çağrılır, `ElementRef` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> bileşen Işlenene kadar JavaScript öğesi olmadığından, yalnızca ' de ' de kullanılır.
 
-JavaScript birlikte çalışma çağrısından alınan yeni durumla birlikte bileşeni yeniden sağlamak için [Statehaschanged](xref:blazor/components/lifecycle#state-changes) çağrılır. Kod sonsuz döngü oluşturmaz çünkü `StateHasChanged` yalnızca olduğu zaman çağrılır `infoFromJs` `null` .
+Bileşenin JavaScript birlikte çalışma çağrısından alınan yeni durumla yeniden çalışması için [Statehaschanged](xref:blazor/components/lifecycle#state-changes) çağrılır (daha fazla bilgi için bkz <xref:blazor/components/rendering> .). Kod sonsuz döngü oluşturmaz çünkü `StateHasChanged` yalnızca olduğu zaman çağrılır `infoFromJs` `null` .
 
 ```cshtml
 @page "/prerendered-interop"

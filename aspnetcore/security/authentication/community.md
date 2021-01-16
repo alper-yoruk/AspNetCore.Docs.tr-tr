@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/community
-ms.openlocfilehash: fcea5384b9f1d9f7e4c5a210dd2ceb7cf2e957ca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9bb9848398ecc0c0909f93798a56061a8e57b782
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061372"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252987"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>ASP.NET Core için topluluk OSS kimlik doğrulama seçenekleri
 
@@ -34,9 +34,8 @@ Aşağıdaki liste alfabetik olarak sıralanır.
 
 | Ad | Açıklama |
 | ---- | ----------- |
-| [AspNet. Security. Openıdconnect. Server (ASOS)](https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Server) | ASOS, ASP.NET Core ve OWıN/Katana için düşük düzey, protokol-ilk OpenID Connect sunucu çerçevesidir. |
 | [Gluu sunucusu](https://gluu.org/) | Kimlik, erişim yönetimi (ıAM) ve çoklu oturum açma (SSO) için kurumsal özellikli, açık kaynaklı yazılım. Daha fazla bilgi için bkz. [Gluu ürün belgeleri](https://gluu.org/docs/). |
 | [IdentitySunucu](https://identityserver.io/) | IdentitySunucu, ASP.NET Core için bir OpenID Connect ve OAuth 2,0 çerçevesidir, OpenID Foundation ve .NET Foundation yönetimi altında. Daha fazla bilgi için bkz. [Server4 to Welcome Identity (belgeler)](https://identityserver4.readthedocs.io/en/latest/). |
-| [Openıddict](https://github.com/openiddict/openiddict-core) | Openıddict, ASP.NET Core için kullanımı kolay bir OpenID Connect sunucusudur. |
+| [Openıddict](https://github.com/openiddict/openiddict-core) | ASP.NET Core 2.1/3.1/5.0 ve Microsoft. Owin 4,1 (ASP.NET 4.6.1 ile uyumlu) için çok yönlü OpenID Connect Stack. |
 
 Bir sağlayıcı eklemek için [Bu sayfayı düzenleyin](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Faspnet%2FDocs%2Fedit%2Fmaster%2Faspnetcore%2Fsecurity%2Fauthentication%2Fcommunity.md).

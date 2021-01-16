@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: 8f54f2e4894328f8471d5f80c8184839ce47add6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0d43bbbc44015aff040b12dfacb260fe50492e54
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059695"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253000"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>Kimlik doğrulamasını cookie ASP.NET uygulamalar arasında paylaşma
 
@@ -37,7 +37,7 @@ Aşağıdaki örneklerde:
 * Kimlik doğrulama cookie adı, ortak bir değerine ayarlanır `.AspNet.SharedCookie` .
 * , `AuthenticationType` `Identity.Application` Açıkça ya da varsayılan olarak ayarlanır.
 * Veri koruma sisteminin veri koruma anahtarlarını () paylaşmasını sağlamak için ortak bir uygulama adı kullanılır `SharedCookieApp` .
-* `Identity.Application` , kimlik doğrulama düzeni olarak kullanılır. Hangi düzenin kullanıldığı, her ne kadar paylaşılan uygulamalar için *within and across* cookie varsayılan düzen olarak, ya da açıkça ayarlanarak kullanılması gerekir. Şema, şifreleme ve şifre çözme sırasında kullanılır cookie , bu nedenle uygulamalarda tutarlı bir düzenin kullanılması gerekir.
+* `Identity.Application` , kimlik doğrulama düzeni olarak kullanılır. Hangi düzenin kullanıldığı, her ne kadar paylaşılan uygulamalar için  cookie varsayılan düzen olarak, ya da açıkça ayarlanarak kullanılması gerekir. Şema, şifreleme ve şifre çözme sırasında kullanılır cookie , bu nedenle uygulamalarda tutarlı bir düzenin kullanılması gerekir.
 * Ortak bir [veri koruma anahtarı](xref:security/data-protection/implementation/key-management) depolama konumu kullanılır.
   * ASP.NET Core uygulamalarda, <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> anahtar depolama konumunu ayarlamak için kullanılır.
   * .NET Framework uygulamalarda, Cookie kimlik doğrulama ara yazılımı bir uygulamasını kullanır <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider` , kimlik doğrulaması yük verilerinin şifrelenmesi ve şifresinin çözülmesi için veri koruma hizmetleri sağlar cookie . `DataProtectionProvider`Örnek, uygulamanın diğer bölümleri tarafından kullanılan veri koruma sisteminden yalıtılmıştır. [Dataprotectionprovider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> ),](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) <xref:System.IO.DirectoryInfo> veri koruma anahtar depolaması konumunu belirtmek için bir değerini kabul eder.
@@ -65,6 +65,8 @@ services.ConfigureApplicationCookie(options => {
     options.Cookie.Name = ".AspNet.SharedCookie";
 });
 ```
+
+**Note:** Yukarıdaki yönergeler () ile birlikte `ITicketStore` çalışmaz `CookieAuthenticationOptions.SessionStore` .  Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/21163)bakın.
 
 ## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>Kimlik doğrulama cookie 'leri paylaşma ASP.NET Core Identity
 
@@ -135,7 +137,7 @@ Uygulamanın paketlerinin en son sürümlere güncelleştirildiğinden emin olun
 
 Ve ayarlamadıysanız `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider` , <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> benzersiz kullanıcıları ayırt eden bir talep olarak ayarlayın.
 
-*App_Start/Startup.auth.cs* :
+*App_Start/Startup.auth.cs*:
 
 ```csharp
 app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -170,7 +172,7 @@ System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
 
 Bir kullanıcı kimliği oluştururken, kimlik doğrulama türü (), içinde `Identity.Application` tanımlı `AuthenticationType` `UseCookieAuthentication` *App_Start/Startup.auth.cs* içinde tanımlanan türle eşleşmelidir.
 
-*Modeller/ Identity Models.cs* :
+*Modeller/ Identity Models.cs*:
 
 ```csharp
 public class ApplicationUser : IdentityUser

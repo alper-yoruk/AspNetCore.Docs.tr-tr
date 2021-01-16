@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: a27fdd70963830d22b3501972d6150dde5e1ea54
-ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
+ms.openlocfilehash: 49e299ed00ea0e5d54c1ba795971da379cd5b695
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/26/2020
-ms.locfileid: "96174603"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253143"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamaları
 
@@ -176,7 +176,30 @@ Dosyadaki bir *launchSettings.js* `dotnet run` , Visual Studio gibi araç ile ye
 
 [Http/2](https://httpwg.org/specs/rfc7540.html) aşağıdaki dağıtım senaryolarında ASP.NET Core desteklenir:
 
-::: moniker range=">= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-5.0"
+
+* [Kestrel](xref:fundamentals/servers/kestrel/http2)
+  * İşletim sistemi
+    * Windows Server 2016/Windows 10 veya üzeri&dagger;
+    * OpenSSL 1.0.2 veya üzerini içeren Linux (örneğin, Ubuntu 16,04 veya üzeri)
+    * HTTP/2, gelecek sürümlerde macOS 'ta desteklenecektir.
+  * Hedef Framework: .NET Core 2,2 veya üzeri
+* [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
+  * Windows Server 2016/Windows 10 veya üzeri
+  * Hedef Framework: HTTP.sys dağıtımlar için geçerli değildir.
+* [IIS (işlem içi)](xref:host-and-deploy/iis/index#http2-support)
+  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
+  * Hedef Framework: .NET Core 2,2 veya üzeri
+* [IIS (işlem dışı)](xref:host-and-deploy/iis/index#http2-support)
+  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
+  * Herkese açık uç sunucu bağlantıları HTTP/2 kullanır, ancak Kestrel ile ters proxy bağlantısı HTTP/1.1 kullanır.
+  * Hedef Framework: IIS işlem dışı dağıtımlar için geçerli değildir.
+
+&dagger;Kestrel, Windows Server 2012 R2 ve Windows 8.1 'de HTTP/2 için sınırlı destek içerir. Bu işletim sistemlerinde kullanılabilir olan desteklenen TLS şifre paketlerinin listesi sınırlı olduğundan destek sınırlıdır. TLS bağlantılarının güvenliğini sağlamak için Eliptik Eğri dijital Imza algoritması (ECDSA) kullanılarak oluşturulan bir sertifika gerekli olabilir.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2 < aspnetcore-5.0"
 
 * [Kestrel](xref:fundamentals/servers/kestrel#http2-support)
   * İşletim sistemi

@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5caa412773bf9c8e3bed5ebc529d48b886de6956
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855501"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253078"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5,0 ' deki yenilikler
 
@@ -333,7 +333,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 ### <a name="http2"></a>HTTP/2
 
 * HTTP/2 kod yolundaki ayırmalarda önemli indirimler.
-* İçindeki HTTP/2 yanıt üst bilgilerinin [HPack dinamik sıkıştırması](https://tools.ietf.org/html/rfc7541) desteği [Kestrel](xref:fundamentals/servers/kestrel) . Daha fazla bilgi için bkz. [üst bilgi tablosu boyutu](xref:fundamentals/servers/kestrel#header-table-size) ve [HPack: http/2 sessiz Killer (özellik)](https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/).
+* İçindeki HTTP/2 yanıt üst bilgilerinin [HPack dinamik sıkıştırması](https://tools.ietf.org/html/rfc7541) desteği [Kestrel](xref:fundamentals/servers/kestrel) . Daha fazla bilgi için bkz. [üst bilgi tablosu boyutu](xref:fundamentals/servers/kestrel/options#header-table-size) ve [HPack: http/2 sessiz Killer (özellik)](https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/).
 * HTTP/2 PING çerçeveleri gönderme: HTTP/2, boşta bağlantının hala çalışır durumda olduğundan emin olmak için PING çerçeveleri göndermeye yönelik bir mekanizmaya sahiptir. Uygun bir bağlantının, genellikle boşta olan uzun süreli akışlar ile çalışırken yararlı olması, ancak örneğin gRPC akışları gibi yalnızca zaman aralıklı etkinlik olması durumunda faydalıdır. Uygulamalar, ' de sınırları ayarlayarak düzenli olarak PING çerçeveleri gönderebilir [Kestrel](xref:fundamentals/servers/kestrel) <xref:Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions> :
 
    ```csharp
@@ -357,7 +357,7 @@ Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki
 
 .NET 5,0 ' den önce, bir ASP.NET Core uygulaması için bir *Dockerfile* oluşturup yayımlarken, tüm .NET Core SDK ve ASP.NET Core görüntüsünün çekmesini sağlar. Bu sürümle birlikte, SDK görüntüleri baytları çekililerek ASP.NET Core görüntü için çekilen baytlar büyük ölçüde ortadan kalkar. Daha fazla bilgi için bkz. [Bu GitHub sorun açıklaması](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750).
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft ile kimlik doğrulaması Azure Active Directory. Identity . Web
 

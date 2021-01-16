@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
-ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
+ms.openlocfilehash: c2b16f4bc8e69265b1d59082c3f029541f277d8b
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/11/2021
-ms.locfileid: "98065538"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252295"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor bileşen Sanallaştırması
 
@@ -77,7 +77,7 @@ Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` öğe içerik
 > Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 >
 > * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> * <xref:mvc/views/razor#key>
+> * [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor#key)
 
 `Virtualize`Bileşen:
 
@@ -169,4 +169,4 @@ Her öğenin piksel cinsinden boyutu ayarlanabilir <xref:Microsoft.AspNetCore.Co
 
 ## <a name="state-changes"></a>Durum değişiklikleri
 
-Bileşen tarafından işlenen öğelerde değişiklik yaparken `Virtualize` , <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> bileşenin yeniden değerlendirilmesini ve rerendering için çağrı yapın.
+Bileşen tarafından işlenen öğelerde değişiklik yaparken `Virtualize` , <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> bileşenin yeniden değerlendirilmesini ve rerendering için çağrı yapın. Daha fazla bilgi için bkz. <xref:blazor/components/rendering>.

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e134832ad00b10bb01239afa06acc74d86707af1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1355fdaeae58b6f4e0cf8d41a74b1c28aee0e8fe
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94422567"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253091"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -393,7 +393,7 @@ Bu yöntemlerin aşırı yüklemeleri, içeren bağımsız değişkenleri kabul 
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir:
 
-| Genişletme yöntemi | Açıklama |
+| Genişletme yöntemi | Description |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -573,8 +573,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -663,7 +663,7 @@ URL oluşturma işlemi [Linkgenerator. GetPathByAddress](xref:Microsoft.AspNetCo
 
 İlk adım, adresin türüyle eşleşen bir aday uç nokta kümesini çözümlemek için adresi kullanmaktır [`IEndpointAddressScheme<TAddress>`](xref:Microsoft.AspNetCore.Routing.IEndpointAddressScheme`1) .
 
-Adres kümesi tarafından bir aday kümesini bulduktan sonra, uç noktalar bir URL oluşturma işlemi başarılı olana kadar sıralanır ve işlenir. URL oluşturma belirsizlikleri için Denetim **yapmaz** , döndürülen ilk sonuç son sonuçdur.
+Aday kümesi adres şeması tarafından bulunduğunda, uç noktalar bir URL oluşturma işlemi başarılı olana kadar sıralanır ve işlenir. URL oluşturma belirsizlikleri için Denetim **yapmaz** , döndürülen ilk sonuç son sonuçdur.
 
 ### <a name="troubleshooting-url-generation-with-logging"></a>Günlüğe kaydetme ile URL oluşturma sorunlarını giderme
 
@@ -1112,7 +1112,7 @@ Bu yöntemlerin aşırı yüklemesi, içeren bağımsız değişkenleri kabul ed
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir.
 
-| Genişletme yöntemi   | Açıklama                                                         |
+| Genişletme yöntemi   | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -1494,8 +1494,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1938,8 +1938,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 

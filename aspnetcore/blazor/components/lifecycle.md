@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: e5f9a07db742ce2e26f03c0b6e1caa1904e4e0d9
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: acaa276efda9fb4d09a5c1b1ca59c6abde1b64ec
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058239"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252402"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -53,7 +53,7 @@ Belge Nesne Modeli (DOM) olay işleme:
 
 `Render`Yaşam döngüsü:
 
-1. Bileşendeki işleme işlemlerini Durdur:
+1. Bileşende daha fazla işleme işlemi yapmaktan kaçının:
    * İlk işleme sonra.
    * Ne [`ShouldRender`](#suppress-ui-refreshing) zaman `false` .
 1. İşleme ağacı farkı (fark) oluşturun ve bileşeni oluşturun.
@@ -62,7 +62,7 @@ Belge Nesne Modeli (DOM) olay işleme:
 
 ![İşleme yaşam döngüsü](lifecycle/_static/lifecycle3.png)
 
-Geliştirici [`StateHasChanged`](#state-changes) bir işleme yol açacak şekilde çağırır.
+Geliştirici [`StateHasChanged`](#state-changes) bir işleme yol açacak şekilde çağırır. Daha fazla bilgi için bkz. <xref:blazor/components/rendering>.
 
 ## <a name="lifecycle-methods"></a>Yaşam döngüsü yöntemleri
 
@@ -215,6 +215,8 @@ Daha fazla bilgi için bkz. <xref:blazor/webassembly-performance-best-practices#
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> bileşene durumunun değiştiğini bildirir. Uygun olduğunda, çağırma <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> bileşenin yeniden yönlendirilmesine neden olur.
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> yöntemler için otomatik olarak çağırılır <xref:Microsoft.AspNetCore.Components.EventCallback> . Daha fazla bilgi için bkz. <xref:blazor/components/event-handling#eventcallback>.
+
+Daha fazla bilgi için bkz. <xref:blazor/components/rendering>.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>İşleme sırasında tamamlanmamış zaman uyumsuz eylemleri işle
 

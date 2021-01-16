@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 71f05163c075a2ef88d5c606814925cdcef879d2
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061385"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253052"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -152,37 +152,37 @@ Bu mümkün değildir. Sertifika değişimi 'nin HTTPS konuşması başlangıcı
   * Sertifikanın hizmetlerinize göre bilinip tanınmadığını belirleme.
   * Kendi sorumlunuzu oluşturma. İçinde aşağıdaki örneği göz önünde bulundurun `Startup.ConfigureServices` :
 
-```csharp
-services.AddAuthentication(
-    CertificateAuthenticationDefaults.AuthenticationScheme)
-    .AddCertificate(options =>
-    {
-        options.Events = new CertificateAuthenticationEvents
+    ```csharp
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate(options =>
         {
-            OnCertificateValidated = context =>
+            options.Events = new CertificateAuthenticationEvents
             {
-                var claims = new[]
+                OnCertificateValidated = context =>
                 {
-                    new Claim(
-                        ClaimTypes.NameIdentifier, 
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer),
-                    new Claim(ClaimTypes.Name,
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer)
-                };
-
-                context.Principal = new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, context.Scheme.Name));
-                context.Success();
-
-                return Task.CompletedTask;
-            }
-        };
-    });
-```
+                    var claims = new[]
+                    {
+                        new Claim(
+                            ClaimTypes.NameIdentifier, 
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer),
+                        new Claim(ClaimTypes.Name,
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer)
+                    };
+    
+                    context.Principal = new ClaimsPrincipal(
+                        new ClaimsIdentity(claims, context.Scheme.Name));
+                    context.Success();
+    
+                    return Task.CompletedTask;
+                }
+            };
+        });
+    ```
 
 Gelen sertifikayı, ek doğrulamadan uymadığını fark ederseniz `context.Fail("failure reason")` bir hata nedeniyle çağırın.
 
@@ -235,7 +235,7 @@ Kavramsal olarak, sertifikanın doğrulanması bir yetkilendirme konusudur. Örn
 
 ### <a name="kestrel"></a>Kestrel
 
-*Program.cs* ' de, Kestrel ' yi aşağıdaki şekilde yapılandırın:
+*Program.cs*' de, Kestrel ' yi aşağıdaki şekilde yapılandırın:
 
 ```csharp
 public static void Main(string[] args)
@@ -260,7 +260,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> Çağrılmadan önce çağırarak oluşturulan uç noktalara <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> varsayılan değer uygulanmaz.
+> Çağrılmadan önce çağırarak oluşturulan uç noktalara <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>  <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> varsayılan değer uygulanmaz.
 
 ### <a name="iis"></a>IIS
 
@@ -301,7 +301,7 @@ public void ConfigureServices(IServiceCollection services)
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
-        
+
             if(!string.IsNullOrWhiteSpace(headerValue))
             {
                 byte[] bytes = StringToByteArray(headerValue);
@@ -638,9 +638,27 @@ ASP.NET Core 5 Preview 7 ve üzeri, isteğe bağlı istemci sertifikaları için
 
 Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
 
+::: moniker range=">= aspnetcore-5.0"
+
 * Etki alanı ve alt etki alanı için bağlamayı ayarlama:
   * Örneğin, ve üzerinde bağlamaları ayarlayın `contoso.com` `myClient.contoso.com` . `contoso.com`Konakta istemci sertifikası gerekmez `myClient.contoso.com` , ancak bunu yapar.
-  * Daha fazla bilgi için bkz.
+  * Daha fazla bilgi için bkz:
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel/endpoints#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bkz. https://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* Etki alanı ve alt etki alanı için bağlamayı ayarlama:
+  * Örneğin, ve üzerinde bağlamaları ayarlayın `contoso.com` `myClient.contoso.com` . `contoso.com`Konakta istemci sertifikası gerekmez `myClient.contoso.com` , ancak bunu yapar.
+  * Daha fazla bilgi için bkz:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -649,6 +667,9 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
     * Http.Sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
 * İstemci sertifikası gerektiren ve bir tane olmayan Web uygulamasına yönelik istekler için:
   * İstemci sertifikası korumalı alt etki alanını kullanarak aynı sayfaya yönlendirin.
   * Örneğin, öğesine yönlendirin `myClient.contoso.com/requestedPage` . İsteği `myClient.contoso.com/requestedPage` öğesinden farklı bir ana bilgisayar adı olduğundan `contoso.com/requestedPage` , istemci farklı bir bağlantı oluşturur ve istemci sertifikası sağlanır.

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6a8fd8e3498dda9b7c10834791e64df6276e2823
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94431073"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253026"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>NGINX ile Linux üzerinde ana bilgisayar ASP.NET Core
 
@@ -97,7 +97,7 @@ Bu kılavuzun amaçları doğrultusunda, tek bir NGINX örneği kullanılmışt�
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> `Startup.Configure` Diğer ara yazılım çağrılmadan önce yönteminin en üstünde yöntemi çağırın. Ara yazılımı, `X-Forwarded-For` ve üst bilgilerini iletecek şekilde yapılandırın `X-Forwarded-Proto` :
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders%2A> `Startup.Configure` Diğer ara yazılım çağrılmadan önce yönteminin en üstünde yöntemi çağırın. Ara yazılımı, `X-Forwarded-For` ve üst bilgilerini iletecek şekilde yapılandırın `X-Forwarded-Proto` :
 
 ```csharp
 using Microsoft.AspNetCore.HttpOverrides;
@@ -114,7 +114,7 @@ app.UseAuthentication();
 
 Hayır <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> , ara yazılım için belirtilmemişse, iletmek için varsayılan üstbilgiler şunlardır `None` .
 
-`127.0.0.0/8` `[::1]` Standart localhost adresi () de dahil olmak üzere geri döngü adreslerinde çalışan proxy 'ler, `127.0.0.1` Varsayılan olarak güvenilirdir. Kuruluş içindeki diğer güvenilir proxy 'ler veya ağlar, Internet ve Web sunucusu arasında istekleri ele alıyorsa, bunları <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> veya ile listesine ekleyin <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Aşağıdaki örnek, içindeki Iletilen üstbilgiler ara sunucusuna alana 10.0.0.100 IP adresinde bir güvenilen ara sunucu ekler `KnownProxies` `Startup.ConfigureServices` :
+`127.0.0.0/8` `[::1]` Standart localhost adresi () de dahil olmak üzere geri döngü adreslerinde çalışan proxy 'ler, `127.0.0.1` Varsayılan olarak güvenilirdir. Kuruluş içindeki diğer güvenilir proxy 'ler veya ağlar, Internet ve Web sunucusu arasında istekleri ele alıyorsa, bunları <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies%2A> veya ile listesine ekleyin <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks%2A> <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Aşağıdaki örnek, içindeki Iletilen üstbilgiler ara sunucusuna alana 10.0.0.100 IP adresinde bir güvenilen ara sunucu ekler `KnownProxies` `Startup.ConfigureServices` :
 
 ```csharp
 using System.Net;
@@ -146,7 +146,7 @@ Bir tarayıcının NGINX için varsayılan giriş sayfasını görüntülediğin
 
 ### <a name="configure-nginx"></a>Nginx hizmetini yapılandırma
 
-HTTP isteklerini ASP.NET Core uygulamanıza iletmek için NGINX 'i ters proxy olarak yapılandırmak için değiştirin `/etc/nginx/sites-available/default` . Bu dosyayı bir metin düzenleyicisinde açın ve içeriği şu şekilde değiştirin:
+HTTP isteklerini ASP.NET Core uygulamanıza iletmek için NGINX 'i ters proxy olarak yapılandırmak için değiştirin `/etc/nginx/sites-available/default` . Bu dosyayı bir metin düzenleyicisinde açın ve içeriğini aşağıdaki kod parçacığıyla değiştirin:
 
 ```nginx
 server {
@@ -165,7 +165,7 @@ server {
 }
 ```
 
-Uygulama bir SignalR veya Blazor Server uygulama ise <xref:signalr/scale#linux-with-nginx> <xref:blazor/host-and-deploy/server#linux-with-nginx> daha fazla bilgi için bkz..
+Uygulama bir SignalR veya Blazor Server uygulama ise, <xref:signalr/scale#linux-with-nginx> <xref:blazor/host-and-deploy/server#linux-with-nginx> daha fazla bilgi için bkz. ve.
 
 Hiçbir `server_name` eşleşme olmadığında NGINX varsayılan sunucuyu kullanır. Varsayılan sunucu tanımlanmazsa, yapılandırma dosyasındaki ilk sunucu varsayılan sunucusudur. En iyi uygulama olarak, yapılandırma dosyanızda 444 durum kodunu döndüren belirli bir varsayılan sunucu ekleyin. Varsayılan bir sunucu yapılandırma örneği:
 
@@ -177,10 +177,20 @@ server {
 }
 ```
 
-Önceki yapılandırma dosyası ve varsayılan sunucu ile NGINX, bağlantı noktası 80 üzerinde ana bilgisayar üst bilgisi veya olan genel trafiği kabul eder `example.com` `*.example.com` . Bu konaklarla eşleşmeyen istekler Kestrel 'e iletilemiyor. NGINX eşleşen istekleri şurada Kestrel 'e iletir `http://localhost:5000` . Daha fazla bilgi için [NGINX 'in Isteği nasıl işliyorsa öğrenin](https://nginx.org/docs/http/request_processing.html) . Kestrel 'in IP/bağlantı noktasını değiştirmek için bkz. [Kestrel: Endpoint Configuration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+::: moniker range=">= aspnetcore-5.0"
+
+Önceki yapılandırma dosyası ve varsayılan sunucu ile NGINX, bağlantı noktası 80 üzerinde ana bilgisayar üst bilgisi veya olan genel trafiği kabul eder `example.com` `*.example.com` . Bu konaklarla eşleşmeyen istekler Kestrel 'e iletilemiyor. NGINX eşleşen istekleri şurada Kestrel 'e iletir `http://localhost:5000` . Daha fazla bilgi için bkz. [NGINX isteği işleme](https://nginx.org/docs/http/request_processing.html). Kestrel 'in IP/bağlantı noktasını değiştirmek için bkz. [Kestrel: Endpoint Configuration](xref:fundamentals/servers/kestrel/endpoints).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Önceki yapılandırma dosyası ve varsayılan sunucu ile NGINX, bağlantı noktası 80 üzerinde ana bilgisayar üst bilgisi veya olan genel trafiği kabul eder `example.com` `*.example.com` . Bu konaklarla eşleşmeyen istekler Kestrel 'e iletilemiyor. NGINX eşleşen istekleri şurada Kestrel 'e iletir `http://localhost:5000` . Daha fazla bilgi için bkz. [NGINX isteği işleme](https://nginx.org/docs/http/request_processing.html). Kestrel 'in IP/bağlantı noktasını değiştirmek için bkz. [Kestrel: Endpoint Configuration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+
+::: moniker-end
 
 > [!WARNING]
-> Uygun bir [SERVER_NAME yönergesi](https://nginx.org/docs/http/server_names.html) belirtmemesi, uygulamanızı güvenlik açıklarına karşı kullanıma sunar. Alt etki alanı joker karakteri bağlama (örneğin, `*.example.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskini ortadan yapmaz `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+> Uygun bir [SERVER_NAME yönergesi](https://nginx.org/docs/http/server_names.html) belirtmemesi, uygulamanızı güvenlik açıklarına karşı kullanıma sunar. Alt etki alanı joker karakteri bağlama (örneğin, `*.example.com` ), tüm üst etki alanını (Bu güvenlik açığı olan aksine) kontrol ediyorsanız bu güvenlik riskini ortadan yapmaz `*.com` . Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 NGINX yapılandırması kurulduktan sonra, `sudo nginx -t` yapılandırma dosyalarının söz dizimini doğrulamak için ' i çalıştırın. Yapılandırma dosyası testi başarılıysa, NGINX ' i çalıştırarak değişiklikleri çekmeye zorlayın `sudo nginx -s reload` .
 
@@ -189,9 +199,9 @@ Uygulamayı sunucuda doğrudan çalıştırmak için:
 1. Uygulamanın dizinine gidin.
 1. Uygulamayı çalıştırın: `dotnet <app_assembly.dll>` , burada `app_assembly.dll` uygulamanın derleme dosyası adıdır.
 
-Uygulama sunucuda çalışır, ancak Internet üzerinden yanıt vermezse, sunucunun güvenlik duvarını denetleyin ve 80 bağlantı noktasının açık olduğunu doğrulayın. Azure Ubuntu VM kullanıyorsanız, gelen bağlantı noktası 80 trafiğine izin veren bir ağ güvenlik grubu (NSG) kuralı ekleyin. Giden trafik, gelen kuralı etkinleştirildiğinde otomatik olarak verildiği için, giden bağlantı noktası 80 kuralını etkinleştirmeniz gerekmez.
+Uygulama sunucuda çalışır, ancak Internet üzerinden yanıt vermezse, sunucunun güvenlik duvarını denetleyin ve 80 bağlantı noktasının açık olduğundan emin olun. Azure Ubuntu VM kullanıyorsanız, gelen bağlantı noktası 80 trafiğine izin veren bir ağ güvenlik grubu (NSG) kuralı ekleyin. Giden trafik, gelen kuralı etkinleştirildiğinde otomatik olarak verildiği için, giden bağlantı noktası 80 kuralını etkinleştirmeniz gerekmez.
 
-Uygulamayı test etmeyi tamamladıktan sonra komut isteminde uygulamayı ile kapatın `Ctrl+C` .
+Uygulamayı test tamamladıktan sonra komut isteminde <kbd>CTRL</kbd>  +  <kbd>C</kbd> ile uygulamayı kapatın.
 
 ## <a name="monitor-the-app"></a>Uygulamayı izleme
 
@@ -205,7 +215,7 @@ Hizmet tanımı dosyasını oluşturun:
 sudo nano /etc/systemd/system/kestrel-helloapp.service
 ```
 
-Aşağıda, uygulama için örnek bir hizmet dosyası verilmiştir:
+Aşağıdaki örnek, uygulama için bir hizmet dosyasıdır:
 
 ```ini
 [Unit]
@@ -298,7 +308,7 @@ Kestrel kullanan Web uygulaması kullanılarak yönetildiğinden `systemd` , tü
 sudo journalctl -fu kestrel-helloapp.service
 ```
 
-Daha fazla filtreleme için, gibi zaman seçenekleri `--since today` `--until 1 hour ago` veya bunların bir birleşimi döndürülen girdi miktarını azaltabilir.
+Daha fazla filtreleme için,,, veya gibi zaman seçenekleri `--since today` `--until 1 hour ago` döndürülen girdi sayısını azaltabilir.
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
@@ -375,18 +385,29 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 
 **Uygulamayı güvenli (HTTPS) yerel bağlantılar için yapılandırma**
 
-[DotNet Run](/dotnet/core/tools/dotnet-run) komutu, uygulamayı `Properties/launchSettings.json` özelliği tarafından belirtilen URL 'lerde dinlemek üzere yapılandıran uygulamanın dosyasını kullanır `applicationUrl` (örneğin, `https://localhost:5001;http://localhost:5000` ).
+[DotNet Run](/dotnet/core/tools/dotnet-run) komutu, uygulamanın Özellikler tarafından belirtilen URL 'lerde dinlemek üzere uygulamayı yapılandıran dosya *üzerinde uygulama özellikleri/launchSettings.js* kullanır `applicationUrl` . Örneğin, `https://localhost:5001;http://localhost:5000`.
 
 Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut veya geliştirme ortamı (<kbd>F5</kbd> veya <kbd>CTRL</kbd> + <kbd>F5</kbd> Visual Studio Code) için geliştirme sürecinde bir sertifika kullanacak şekilde yapılandırın:
+
+::: moniker range=">= aspnetcore-5.0"
+
+* [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel/endpoints#configuration) (*önerilir*)
+* [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel/endpoints#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 * [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel#configuration) (*önerilir*)
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
+::: moniker-end
+
 **Güvenli (HTTPS) istemci bağlantıları için ters proxy 'yi yapılandırma**
 
-* `443`Güvenilen bir sertifika yetkilisi (CA) tarafından verilen geçerli bir sertifika belirterek, sunucu bağlantı NOKTASıNDA HTTPS trafiğini dinleyecek şekilde yapılandırın.
+* Güvenilen bir sertifika yetkilisi (CA) tarafından verilen geçerli bir sertifika belirterek, sunucuyu 443 numaralı bağlantı noktasında HTTPS trafiğini dinleyecek şekilde yapılandırın.
 
-* Aşağıdaki dosyada gösterilen bazı uygulamalardan yararlanarak güvenliği sağlamlaştırın `/etc/nginx/nginx.conf` . Daha güçlü bir şifre seçme ve HTTP üzerinden tüm trafiği HTTPS 'ye yeniden yönlendirme örnekleri içerir.
+* Aşağıdaki */etc/nginx/nginx.conf* dosyasında gösterilen bazı uygulamalardan yararlanarak güvenliği en iyi şekilde yapın. Daha güçlü bir şifre seçme ve HTTP üzerinden tüm trafiği HTTPS 'ye yeniden yönlendirme örnekleri içerir.
 
   > [!NOTE]
   > Geliştirme ortamları için kalıcı yeniden yönlendirmeler (301) yerine geçici yeniden yönlendirmeleri (302) kullanmanızı öneririz. Bağlantıyı önbelleğe alma, geliştirme ortamlarında kararsız davranışa neden olabilir.
@@ -400,11 +421,11 @@ Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut 
   * HSTS üst bilgisini eklemeyin.
   * Kısa bir `max-age` değer seçin.
 
-`/etc/nginx/proxy.conf`Yapılandırma dosyasını ekleyin:
+*/Etc/nginx/proxy.conf* yapılandırma dosyasını ekleyin:
 
 [!code-nginx[](linux-nginx/proxy.conf)]
 
- `/etc/nginx/nginx.conf` Yapılandırma dosyasının Içeriğini aşağıdaki dosyayla değiştirin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
+*/Etc/nginx/nginx.conf* yapılandırma dosyasının içeriğini aşağıdaki dosya ile **değiştirin** . Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
@@ -417,7 +438,7 @@ Uygulamayı, `dotnet run` aşağıdaki yaklaşımlardan birini kullanarak komut 
 
 Tıklama saldırılarını azaltmak için:
 
-1. Dosyayı düzenleyin `nginx.conf` :
+1. *NGINX. conf* dosyasını düzenleyin:
 
    ```bash
    sudo nano /etc/nginx/nginx.conf
@@ -432,7 +453,7 @@ Tıklama saldırılarını azaltmak için:
 
 Bu üst bilgi, tarayıcının, yanıt içerik türünü geçersiz kılmamasını bildiren, büyük bir olasılıkla, MIME tarafından yapılan bir yanıtın bir yanıt olarak bildirimde bulunmasını engeller. `nosniff`Seçeneğiyle, sunucu içeriği olduğunu `text/html` söyliyorsa, tarayıcı onu olarak işler `text/html` .
 
-1. Dosyayı düzenleyin `nginx.conf` :
+1. *NGINX. conf* dosyasını düzenleyin:
 
    ```bash
    sudo nano /etc/nginx/nginx.conf

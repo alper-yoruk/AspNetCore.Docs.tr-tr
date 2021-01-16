@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: c1a97919cb41f42a93f28d9b5f1ecf6bd3e64da0
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5a00bfb87b8cfe0fb3e2a832a553b8a4cd45ee6d
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97592862"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252506"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın Blazor
 
@@ -456,6 +456,60 @@ Daha fazla bilgi için aşağıdaki konulara bakın:
 
 * [Döngüsel başvurular desteklenmez, iki alma (DotNet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Teklif: serileştirilirken döngüsel başvuruları işlemek için mekanizma ekleyin (DotNet/Runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
+
+## <a name="size-limits-on-js-interop-calls"></a>JS birlikte çalışma çağrılarında boyut sınırları
+
+Blazor WebAssembly' De, Framework, JS birlikte çalışma girişleri ve çıkışları için bir sınır vermez.
+
+Blazor Server' De, JS birlikte çalışabilirlik çağrıları SignalR , tarafından zorlanan hub yöntemleri için izin verilen en büyük gelen ileti boyutuna göre boyut olarak sınırlandırılır <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> (varsayılan: 32 KB). JS SignalR 'den büyük <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> bir hata oluşturur. Framework, SignalR hub 'dan istemciye bir ileti boyutuna sınır vermez.
+
+SignalRGünlüğe kaydetme, [hata ayıklama](xref:Microsoft.Extensions.Logging.LogLevel) veya [izleme](xref:Microsoft.Extensions.Logging.LogLevel)olarak ayarlanmadıysa, yalnızca tarayıcının geliştirici araçları konsolunda bir ileti boyutu hatası görüntülenir:
+
+> Hata: bağlantı bağlantısı kesik ' hata: sunucu kapanmamış bir hata döndürdü: bağlantı bir hata ile kapatıldı. '.
+
+[ SignalR Sunucu tarafında günlüğe kaydetme](xref:signalr/diagnostics#server-side-logging) , [hata ayıklama](xref:Microsoft.Extensions.Logging.LogLevel) veya [izleme](xref:Microsoft.Extensions.Logging.LogLevel)olarak ayarlandığında, sunucu tarafında günlüğe kaydetme bir <xref:System.IO.InvalidDataException> ileti boyutu hatası için bir yüzey sağlar.
+
+`appsettings.Development.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "Microsoft.AspNetCore.SignalR": "Debug"
+    }
+  }
+}
+```
+
+> System. ıO. InvalidDataException: 32768B 'nin en büyük ileti boyutu aşıldı. İleti boyutu Addhuboseçenekler içinde yapılandırılabilir.
+
+Sınırı ' de ayarına göre <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> artırın `Startup.ConfigureServices` . Aşağıdaki örnek, en fazla alma iletisi boyutunu 64 KB (64 * 1024) olarak ayarlar:
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024);
+```
+
+SignalRGelen ileti boyutu sınırının artırılması, daha fazla sunucu kaynağı gerektirme maliyetinden gelir ve sunucuyu kötü niyetli bir kullanıcıdan riskleri artırmak üzere kullanıma sunar. Ayrıca, dizeler veya bayt dizileri olarak bellekte büyük miktarda içeriği okumak, çöp toplayıcıyla kötü olarak çalışan ve ek performans cezaları elde eden ayırmaya neden olabilir.
+
+Büyük yükleri okumak için bir seçenek, içeriği daha küçük parçalara göndermek ve yükü bir olarak işlemektir <xref:System.IO.Stream> . Bu, büyük JSON yüklerini okurken veya veriler JavaScript 'te ham bayt olarak kullanılabilir olduğunda kullanılabilir. İçinde, bileşene benzer teknikleri kullanan büyük ikili yükleri göndermeyi gösteren bir örnek için Blazor Server `InputFile` bkz. [ikili gönderme örnek uygulaması](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).
+
+JavaScript arasında büyük miktarda veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor :
+
+* Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri segmentlerini sırayla gönderin.
+* JavaScript ve C# kodunda büyük nesneler ayırmayın.
+* Veri gönderirken veya alırken uzun süreler için ana UI iş parçacığını engellemez.
+* İşlem tamamlandığında veya iptal edildiğinde tüketilen tüm belleği boşaltın.
+* Güvenlik amaçları için aşağıdaki ek gereksinimleri uygulayın:
+  * Geçirilebilen en büyük dosya veya veri boyutunu bildirin.
+  * İstemciden sunucuya en düşük karşıya yükleme hızını bildirin.
+* Veriler, sunucu tarafından alındıktan sonra şu olabilir:
+  * Tüm segmentler toplanana kadar bir bellek arabelleğinde geçici olarak depolanır.
+  * Hemen tüketildi. Örneğin, veriler bir veritabanında hemen depolanabilir veya her bir segment alındığında diske yazılabilir.
 
 ## <a name="js-modules"></a>JS modülleri
 

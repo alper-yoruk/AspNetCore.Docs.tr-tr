@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 01fb87205f7855f0995cbcd135b6b01f15835e3b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3a7b054adc50be57028dfa0364f80ae8733b02f7
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060605"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252714"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core kısmi görünümler
 
 [Steve Smith](https://ardalis.com/), [Maa jendoubi](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Scott Sauber](https://twitter.com/scottsauber)
 
-Kısmi görünüm, başka bir [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](xref:mvc/views/razor#page) işaretleme dosyasının işlenmiş çıktısındaki HTML çıkışını işleyen bir yönerge olmadan bir işaretleme *within* dosyasıdır (. cshtml).
+Kısmi görünüm, başka bir [Razor](xref:mvc/views/razor)  [`@page`](xref:mvc/views/razor#page) işaretleme dosyasının işlenmiş çıktısındaki HTML çıkışını işleyen bir yönerge olmadan bir işaretleme  dosyasıdır (. cshtml).
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -58,7 +58,7 @@ Biçimlendirmeyi işlemek için karmaşık işleme mantığının veya kod yür�
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Kısmi görünüm, *.cshtml* [`@page`](xref:mvc/views/razor#page) *Görünümler* klasörü (MVC) veya *Sayfalar* klasörü (sayfalar) içinde bir yönerge olmadan bir. cshtml biçimlendirme dosyasıdır Razor .
+Kısmi görünüm,  [`@page`](xref:mvc/views/razor#page) *Görünümler* klasörü (MVC) veya *Sayfalar* klasörü (sayfalar) içinde bir yönerge olmadan bir. cshtml biçimlendirme dosyasıdır Razor .
 
 ASP.NET Core MVC 'de, denetleyici <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir görünüm veya kısmi görünüm döndürmektedir. RazorSayfalarda, bir <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> nesne olarak temsil edilen kısmi bir görünüm döndürebilir <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> . Kısmi görünümlere başvurmak ve işlemek [kısmi görünüm başvurusu](#reference-a-partial-view) bölümünde açıklanmaktadır.
 
@@ -353,7 +353,7 @@ Bir modeli kısmi bir görünüme geçirebilirsiniz. Model özel bir nesne olabi
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor)
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>
 * <xref:mvc/views/view-components>
@@ -363,7 +363,7 @@ Bir modeli kısmi bir görünüme geçirebilirsiniz. Model özel bir nesne olabi
 
 ::: moniker range="< aspnetcore-2.1"
 
-* <xref:mvc/views/razor>
+* [Razor ASP.NET Core için sözdizimi başvurusu](xref:mvc/views/razor)
 * <xref:mvc/views/view-components>
 * <xref:mvc/controllers/areas>
 
