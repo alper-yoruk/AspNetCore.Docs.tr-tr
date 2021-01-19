@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 268a6e71d3bd290ed614e70d963d653924cdcc43
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: d53cafb605939fd85bdbb71b2fbf13e7bd7a9b7b
+ms.sourcegitcommit: cb984e0d7dc23a88c3a4121f23acfaea0acbfe1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252740"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98570995"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını Kestrel
 
@@ -55,7 +55,7 @@ ASP.NET Core proje şablonları varsayılan olarak Kestrel kullanır. *Program.c
 
 Konak oluşturma hakkında daha fazla bilgi için, uygulamasının konak ve *Varsayılan Oluşturucu ayarlarını* *ayarlama* bölümüne bakın <xref:fundamentals/host/generic-host#set-up-a-host> .
 
-## <a name="additional-resournces"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Ek kaynaklar
 
 <a name="endpoint-configuration"></a>
 * <xref:fundamentals/servers/kestrel/endpoints>

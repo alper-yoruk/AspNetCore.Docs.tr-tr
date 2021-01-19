@@ -3,7 +3,7 @@ title: RazorASP.NET Core ile sınıf kitaplıklarında yeniden kullanılabilir k
 author: Rick-Anderson
 description: RazorASP.NET Core bir sınıf kitaplığında kısmi görünümler kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturmayı açıklar.
 ms.author: riande
-ms.date: 01/25/2020
+ms.date: 01/19/2021
 ms.custom: mvc, seodec18
 no-loc:
 - appsettings.json
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 0bfdb1932d829ec00c9de1bd38b7920cb1f40c51
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: a878a3485ecee0782b21ac69c5ec6ff832b9f06c
+ms.sourcegitcommit: cb984e0d7dc23a88c3a4121f23acfaea0acbfe1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94570178"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98571007"
 ---
 # <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>RazorASP.NET Core içindeki sınıf kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma
 
@@ -48,7 +48,7 @@ RazorSınıf kitaplığı (RCL) şablonu Razor Varsayılan olarak varsayılan ol
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örneğin:
+Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örnek:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -94,6 +94,14 @@ RCL içeriğine, Web uygulamasının *Sayfalar* klasörünün bir parçası olma
   @RenderBody()
   <partial name="_Footer">
 </body>
+```
+
+Konak Web uygulamasındaki *_Layout. cshtml* dosyasını kullanmak için, *_ViewStart. cshtml* dosyasını RCL projesinin *Pages* klasörüne ekleyin:
+
+```cshtml
+@{
+    Layout = "_Layout";
+}
 ```
 
 ## <a name="create-an-rcl-with-static-assets"></a>Statik varlıklar içeren bir RCL oluşturma
@@ -218,7 +226,7 @@ RCL aşağıdaki proje dosyasına sahiptir:
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örneğin:
+Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örnek:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -314,7 +322,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örneğin:
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örnek:
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages

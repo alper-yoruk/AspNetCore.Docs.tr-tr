@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 77e4efe0ac2e87458558dabc78d47099b5698edc
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 2b464c2b6ca434ce4c3b559480da69945266ff69
+ms.sourcegitcommit: cb984e0d7dc23a88c3a4121f23acfaea0acbfe1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252454"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98570979"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -52,15 +52,12 @@ Blazor , uygun sıkıştırılmış dosyaları sunacak ana bilgisayarı kullanı
 * IIS `web.config` sıkıştırma yapılandırması Için [IIS: Brotli ve gzip sıkıştırma](#brotli-and-gzip-compression) bölümüne bakın. 
 * GitHub sayfaları gibi statik olarak sıkıştırılmış dosya içeriği anlaşmasını desteklemeyen statik barındırma çözümlerinde barındırırken, Brotli sıkıştırılan dosyaları getirmek ve kodunu çözmek üzere uygulamayı yapılandırmayı düşünün:
 
-  * [Google/Brotli GitHub deposundan](https://github.com/google/brotli)JavaScript Brotli kod çözücüsünü edinin. 2020 Eylül itibariyle, kod çözücü dosyasının adı `decode.js` ve deponun [ `js` klasöründe](https://github.com/google/brotli/tree/master/js)bulunur.
-  
-    > [!NOTE]
-    > `decode.js` `decode.min.js` [Google/brotli GitHub deposundaki](https://github.com/google/brotli)betiğin () küçültülmüş sürümünde bir gerileme bulunur. Betiği kendinize göre küçültün veya sorun penceresi ne kadar [NPM paketini](https://www.npmjs.com/package/brotli) kullanın [. Brotlişifre çözme decode.min.js (google/brotli #844) çözümlenmez](https://github.com/google/brotli/issues/844) . Bu bölümdeki örnek kod, betiğin **küçültülmüş** sürümünü kullanır.
+  * [Google/Brotli GitHub deposundan](https://github.com/google/brotli)JavaScript Brotli kod çözücüsünü edinin. Kod çözücü dosyasının adı `decode.min.js` ve deponun [ `js` klasöründe](https://github.com/google/brotli/tree/master/js)bulunur.
 
   * Kod çözücüyü kullanmak için uygulamayı güncelleştirin. İçindeki kapanış etiketinin içindeki biçimlendirmeyi `<body>` aşağıdaki gibi değiştirin `wwwroot/index.html` :
   
     ```html
-    <script src="decode.js"></script>
+    <script src="decode.min.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -561,7 +558,7 @@ IIS, `web.config` Blazor tek başına uygulamalar için Brotli veya gzip ile sı
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Depolama
+### <a name="azure-storage"></a>Azure Storage
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 
