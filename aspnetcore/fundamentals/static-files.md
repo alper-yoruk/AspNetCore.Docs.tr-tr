@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d97caeffc6e8beebddb01a5bd126d61ba988de65
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057862"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689298"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -54,7 +54,7 @@ Statik dosyalara, [Web köküne](xref:fundamentals/index#web-root)göre bir yol 
 
 ### <a name="serve-files-in-web-root"></a>Web kökündeki dosyaları sunma
 
-Varsayılan Web uygulaması şablonları <xref:Owin.StaticFileExtensions.UseStaticFiles%2A> içindeki yöntemini çağırır `Startup.Configure` , bu da statik dosyaların sunulmasını sağlar:
+Varsayılan Web uygulaması şablonları <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> içindeki yöntemini çağırır `Startup.Configure` , bu da statik dosyaların sunulmasını sağlar:
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -104,23 +104,31 @@ Statik dosyalar 600 saniye boyunca genel olarak önbelleklenebilir:
 
 ## <a name="static-file-authorization"></a>Statik dosya yetkilendirmesi
 
-Statik dosya ara yazılımı yetkilendirme denetimleri sağlamıyor. Tarafından sunulan tüm dosyalar, altında olanlar da dahil `wwwroot` herkese açık bir şekilde erişilebilir. Dosyalara yetkilendirme temelinde hizmeti sağlamak için:
+Çağrılmadan önce ASP.NET Core şablonlar çağrısı <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> . Çoğu uygulama bu düzene uyar. Statik dosya ara yazılımı, yetkilendirme ara yazılımı öncesinde çağrıldığında:
 
-* Bunları `wwwroot` ve varsayılan statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizini dışında saklayın.
-* Sonra çağrısı yapın `UseStaticFiles` `UseAuthorization` ve yolu belirtin:
-
-  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  * Statik dosyalarda yetkilendirme denetimi yapılmaz.
+  * Altında olanlar gibi statik dosya ara yazılımı tarafından sunulan statik dosyalar `wwwroot` herkese açık olarak erişilebilir.
   
-  Yukarıdaki yaklaşım kullanıcıların kimliklerinin doğrulanmasını gerektirir:
+Yetkilendirme tabanlı statik dosyalara hizmeti sağlamak için:
 
-  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+  * Bunları dışında saklayın `wwwroot` .
+  * `UseStaticFiles`Çağrıldıktan sonra bir yol belirterek çağırın `UseAuthorization` .
+  * [Geri dönüş yetkilendirme ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlayın.
 
-   [!INCLUDE[](~/includes/requireAuth.md)]
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2&highlight=24-29)]
+  
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-25)]
 
-Yetkilendirmeyi temel alarak dosyaları sunmaya yönelik alternatif bir yaklaşım:
+  Yukarıdaki kodda, geri dönüş yetkilendirme ilkesi ***Tüm** _ kullanıcıların kimliğinin doğrulanmasını gerektirir. RazorKendi yetkilendirme gereksinimlerini belirten denetleyiciler, sayfalar gibi uç noktalar geri dönüş yetkilendirme ilkesini kullanmaz. Örneğin, Razor Sayfalar, denetleyiciler veya eylem yöntemleri ile `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş yetkilendirme ilkesi yerine uygulanan yetkilendirme özniteliğini kullanın.
 
-* Onları `wwwroot` ve statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizini dışında saklayın.
-* Onlara yetkilendirme uygulanmış bir eylem yöntemiyle ve bir nesne döndüren bir eylem yöntemi aracılığıyla sunar <xref:Microsoft.AspNetCore.Mvc.FileResult> :
+  <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> geçerli <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> kullanıcının kimliğinin doğrulanmasını zorlayan geçerli örneğe ekler.
+
+  `wwwroot`Varsayılan statik dosya ara yazılımı () daha önce çağrıldığından, altında statik varlıklar herkese açık şekilde erişilebilir `app.UseStaticFiles();` `UseAuthentication` . _MyStaticFiles * klasöründeki statik varlıkların kimlik doğrulaması gerekir. [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) bunu gösterir.
+
+Yetkilendirme tabanlı dosyaları sunmaya yönelik alternatif bir yaklaşım şunlardır:
+
+  * Onları `wwwroot` ve statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizini dışında saklayın.
+  * Onlara yetkilendirme uygulanmış bir eylem yöntemiyle ve bir nesne döndüren bir eylem yöntemi aracılığıyla sunar <xref:Microsoft.AspNetCore.Mvc.FileResult> :
 
   [!code-csharp[](static-files/samples/3.x/StaticFilesSample/Controllers/HomeController.cs?name=snippet_BannerImage)]
 

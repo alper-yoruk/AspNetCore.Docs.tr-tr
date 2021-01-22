@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f9c0ecd32f0e5c05782c2db76eff92bb64845db7
-ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
+ms.openlocfilehash: 175614c426c564ce91068e18035ce05311432698
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/05/2021
-ms.locfileid: "97878405"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689246"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
 
@@ -81,7 +81,7 @@ Bu örnek, Visual Studio 2017 proje şablonundan oluşturulan ASP.NET Core MVC u
 
 ### <a name="referencing-the-package"></a>Pakete başvurma
 
-`OrchardCore.Localization.Core`NuGet paketine başvuru ekleyin. Aşağıdaki paket kaynağında [Myget](https://www.myget.org/) üzerinde kullanılabilir: https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+`OrchardCore.Localization.Core`NuGet paketine başvuru ekleyin.
 
 *. Csproj* dosyası artık aşağıdakine benzer bir satır içerir (sürüm numarası farklılık gösterebilir):
 
@@ -296,7 +296,7 @@ Bu örnek, Visual Studio 2017 proje şablonundan oluşturulan ASP.NET Core MVC u
 
 ### <a name="referencing-the-package"></a>Pakete başvurma
 
-`OrchardCore.Localization.Core`NuGet paketine başvuru ekleyin. Aşağıdaki paket kaynağında [Myget](https://www.myget.org/) üzerinde kullanılabilir: https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+`OrchardCore.Localization.Core`NuGet paketine başvuru ekleyin.
 
 *. Csproj* dosyası artık aşağıdakine benzer bir satır içerir (sürüm numarası farklılık gösterebilir):
 

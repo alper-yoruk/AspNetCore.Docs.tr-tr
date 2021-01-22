@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: ebd3c0dc9baa63b30f142773d7a3d621ce4082d9
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854658"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689311"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturma
 
@@ -75,7 +75,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -129,6 +129,8 @@ Kullanıcıların kimliklerinin doğrulanmasını gerektirmek için geri dönü�
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
 Önceki vurgulanmış kod, [geri dönüş kimlik doğrulama ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlar. Geri dönüş kimlik doğrulama ilkesi,** Razor bir kimlik doğrulama özniteliğine sahip sayfalar, denetleyiciler veya eylem yöntemleri dışında * tüm _ kullanıcıların kimliğinin doğrulanmasını gerektirir. Örneğin, Razor Sayfalar, denetleyiciler veya eylem yöntemleri, `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş kimlik doğrulama ilkesi yerine uygulanan kimlik doğrulama özniteliğini kullanır.
+
+<xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> geçerli <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> kullanıcının kimliğinin doğrulanmasını zorlayan geçerli örneğe ekler.
 
 Geri dönüş kimlik doğrulama ilkesi:
 
@@ -334,7 +336,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
@@ -429,7 +431,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -661,7 +663,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 

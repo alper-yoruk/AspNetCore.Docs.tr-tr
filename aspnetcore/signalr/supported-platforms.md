@@ -5,7 +5,7 @@ description: ASP.NET Core için desteklenen platformlar hakkında bilgi edinin S
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc, devx-track-js
-ms.date: 01/16/2020
+ms.date: 01/21/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: ee6e263fb5bef7bfb84587c3b0f04175eb8073cd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0a858de44f4a87b182a43a776154b782c7e96288
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051024"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689233"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>SignalRDesteklenen platformları ASP.NET Core
 
@@ -44,6 +44,8 @@ SignalR ASP.NET Core için ASP.NET Core desteklediği tüm sunucu platformunu de
 | Mozilla Firefox                  | Geçerli&dagger; |
 
 &dagger;*Geçerli* , tarayıcının en son sürümünü ifade eder.
+
+JavaScript istemcisi Internet Explorer 'ı ve diğer eski tarayıcıları desteklemez. İstemci desteklenmeyen tarayıcılarda beklenmedik davranış ve hatalara sahip olabilir.
 
 ## <a name="net-client"></a>.NET istemcisi
 
