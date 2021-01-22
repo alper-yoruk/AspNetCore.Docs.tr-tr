@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 196e19528341e98ac06cefb08ba92f9e47d265ea
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 1706d3502dc68f1c25e0c35ba8f5dd44b55ce690
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252480"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658657"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 
@@ -272,10 +272,20 @@ Kodu aşağıdaki şekilde değiştirin:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate'
-    && !event.request.url.includes('/Identity/');
+  && !event.request.url.includes('/Identity/');
 ```
 
 Bunu yapmazsanız, ağ bağlantısından bağımsız olarak, hizmet çalışanı bu tür URL 'Ler için istekleri karşılar ve bunları kullanarak çözer `/index.html` .
+
+Onay için dış kimlik doğrulama sağlayıcıları için ek uç noktalar ekleyin. Aşağıdaki örnekte, `/signin-google` Google kimlik doğrulaması için denetim 'e eklenir:
+
+```javascript
+const shouldServeIndexHtml = event.request.mode === 'navigate'
+  && !event.request.url.includes('/Identity/')
+  && !event.request.url.includes('/signin-google');
+```
+
+İçerik her zaman ağdan getirilen geliştirme ortamı için herhangi bir eylem gerekmez.
 
 ### <a name="control-asset-caching"></a>Varlık önbelleğe alma denetimi
 

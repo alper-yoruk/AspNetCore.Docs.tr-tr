@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: aa24def1a003a2c2608691e6168066c740f47205
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: 5031273c3395be4365b3a6d239ebce7aaf9b66ac
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024632"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658644"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
@@ -61,7 +61,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None` varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | Uygulamada depolanan kullanıcılar ASP.NET Core Identity |
@@ -95,7 +95,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None` varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | Uygulamada depolanan kullanıcılar ASP.NET Core Identity |
@@ -126,6 +126,10 @@ IdentityBir projeye yapı iskelesi Blazor Server :
 
 * [Mevcut yetkilendirme olmadan](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [Yetkilendirme ile](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).
+
+## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>Sunucu ile Linux üzerinde Azure App Service Identity
+
+Sunucu ile Linux üzerinde Azure App Service dağıtım sırasında sertifikayı vereni açıkça belirtin Identity . Daha fazla bilgi için bkz. <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

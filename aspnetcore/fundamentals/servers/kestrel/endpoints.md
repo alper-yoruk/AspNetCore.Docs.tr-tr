@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: 780250feab456fa3eedee4e023c9bc774e748291
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 5fec573013da5bcb5039b7a189fd84d964349b3a
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253986"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658748"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>ASP.NET Core Kestrel Web sunucusu için uç noktaları yapılandırma
 
@@ -169,7 +169,7 @@ Varsayılan bir HTTPS uygulama ayarları yapılandırma şeması Kestrel için k
 Aşağıdaki *appsettings.json* örnekte:
 
 * `AllowInvalid` `true` Geçersiz sertifikaların kullanılmasına (örneğin, otomatik olarak imzalanan sertifikalar) izin vermek için olarak ayarlayın.
-* Bir sertifika belirtmeyen herhangi bir HTTPS uç noktası ( `HttpsDefaultCert` Aşağıdaki örnekte), altında `Certificates`  >  `Default` veya geliştirme sertifikasıyla tanımlanan sertifikaya geri döner.
+* Bir sertifika belirtmeyen herhangi bir HTTPS uç noktası ( `HttpsDefaultCert` Aşağıdaki örnekte), altında veya geliştirme sertifikasıyla tanımlanan sertifikaya geri döner `Certificates:Default` .
 
 ```json
 {
@@ -185,8 +185,16 @@ Aşağıdaki *appsettings.json* örnekte:
           "Password": "<certificate password>"
         }
       },
-      "HttpsInlineCertStore": {
+      "HttpsInlineCertAndKeyFile": {
         "Url": "https://localhost:5002",
+        "Certificate": {
+          "Path": "<path to .pem/.crt file>",
+          "KeyPath": "<path to .key file>",
+          "Password": "<certificate password>"
+        }
+      },
+      "HttpsInlineCertStore": {
+        "Url": "https://localhost:5003",
         "Certificate": {
           "Subject": "<subject; required>",
           "Store": "<certificate store; required>",
@@ -195,14 +203,7 @@ Aşağıdaki *appsettings.json* örnekte:
         }
       },
       "HttpsDefaultCert": {
-        "Url": "https://localhost:5003"
-      },
-      "Https": {
-        "Url": "https://*:5004",
-        "Certificate": {
-          "Path": "<path to .pfx file>",
-          "Password": "<certificate password>"
-        }
+        "Url": "https://localhost:5004"
       }
     },
     "Certificates": {
@@ -215,7 +216,24 @@ Aşağıdaki *appsettings.json* örnekte:
 }
 ```
 
-`Path` `Password` Tüm sertifika düğümleri için ve kullanmanın alternatifi sertifika depolama alanlarını kullanarak sertifikayı belirtmektir. Örneğin, sertifika şu `Certificates`  >  `Default` şekilde belirtilebilir:
+Şema notları:
+
+* Uç nokta adları [büyük/küçük harfe duyarlıdır](xref:fundamentals/configuration/index#configuration-keys-and-values). Örneğin, `HTTPS` ve `Https` eşdeğerdir.
+* `Url`Her uç nokta için parametresi gereklidir. Bu parametrenin biçimi, en üst düzey `Urls` yapılandırma parametresiyle aynıdır, ancak tek bir değerle sınırlı olur.
+* Bu uç noktalar, üst düzey yapılandırmada tanımlananlar yerine `Urls` bunlara ekleme yerine bunların yerini alır. Kullanılarak kodda tanımlanan uç noktalar `Listen` yapılandırma bölümünde tanımlanan uç noktalar ile birikimlidir.
+* Bu `Certificate` bölüm isteğe bağlıdır. `Certificate`Bölüm belirtilmemişse, içinde tanımlanan varsayılanlar `Certificates:Default` kullanılır. Kullanılabilir varsayılan değer yoksa, geliştirme sertifikası kullanılır. Varsayılan değer yoksa ve geliştirme sertifikası yoksa, sunucu bir özel durum oluşturur ve başlayamaz.
+* `Certificate`Bölüm birden çok [sertifika kaynağını](#certificate-sources)destekler.
+* Bağlantı noktası çakışmalarına neden olmadıkları sürece [yapılandırma](xref:fundamentals/configuration/index) bölümünde herhangi bir sayıda uç nokta tanımlanabilir.
+
+#### <a name="certificate-sources"></a>Sertifika Kaynakları
+
+Sertifika düğümleri, sertifikaları bir dizi kaynaktan yüklemek için yapılandırılabilir:
+
+* `Path``Password` *. pfx* dosyalarını yüklemek için.
+* `Path``KeyPath`ve `Password` *. pek* / *. CRT* ve *. Key* dosyalarını yüklemek için.
+* `Subject` ve `Store` sertifika deposundan yüklemek için.
+
+Örneğin, sertifika şu `Certificates:Default` şekilde belirtilebilir:
 
 ```json
 "Default": {
@@ -226,15 +244,9 @@ Aşağıdaki *appsettings.json* örnekte:
 }
 ```
 
-Şema notları:
+#### <a name="configurationloader"></a>ConfigurationLoader
 
-* Uç nokta adları büyük/küçük harfe duyarlıdır. Örneğin, `HTTPS` ve `Https` geçerlidir.
-* `Url`Her uç nokta için parametresi gereklidir. Bu parametrenin biçimi, en üst düzey `Urls` yapılandırma parametresiyle aynıdır, ancak tek bir değerle sınırlı olur.
-* Bu uç noktalar, üst düzey yapılandırmada tanımlananlar yerine `Urls` bunlara ekleme yerine bunların yerini alır. Kullanılarak kodda tanımlanan uç noktalar `Listen` yapılandırma bölümünde tanımlanan uç noktalar ile birikimlidir.
-* Bu `Certificate` bölüm isteğe bağlıdır. `Certificate`Bölüm belirtilmemişse, önceki senaryolarda tanımlanan varsayılanlar kullanılır. Kullanılabilir varsayılan değer yoksa, sunucu bir özel durum oluşturur ve başlayamaz.
-* Bu `Certificate` bölüm hem `Path` &ndash; `Password` hem de `Subject` &ndash; `Store` sertifikalarını destekler.
-* Herhangi bir sayıda uç nokta, bağlantı noktası çakışmalarına neden olmadıkları sürece bu şekilde tanımlanabilir.
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))` yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
+`options.Configure(context.Configuration.GetSection("{SECTION}"))` yapılandırılmış bir <xref:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader> `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
 
 ```csharp
 webBuilder.UseKestrel((context, serverOptions) =>

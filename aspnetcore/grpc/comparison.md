@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1ec553d54a9cad170cb322bc186bb67ac8bbded4
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059955"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658735"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
 
@@ -35,7 +35,7 @@ Bu makalede, [GRPC HIZMETLERININ](https://grpc.io/docs/guides/) JSON Ile HTTP AP
 
 Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde bir karşılaştırma sunulmaktadır.
 
-| Özellik          | gRPC                                               | JSON ile HTTP API 'Leri           |
+| Öne çıkan özelliği          | gRPC                                               | JSON ile HTTP API 'Leri           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
 | Anlaşma         | Gerekli (*. proto*)                                | İsteğe bağlı (Openapı)            |
 | Protokol         | HTTP/2                                             | HTTP                          |
@@ -61,7 +61,7 @@ HTTP/2, gRPC 'ye özel değildir. JSON ile HTTP API 'Leri de dahil olmak üzere 
 
 ### <a name="code-generation"></a>Kod oluşturma
 
-Tüm gRPC çerçeveleri, kod oluşturma için birinci sınıf destek sağlar. GRPC geliştirmeye yönelik bir çekirdek dosya, gRPC Hizmetleri ve iletilerinin sözleşmesini tanımlayan [. proto dosyasıdır](https://developers.google.com/protocol-buffers/docs/proto3). Bu dosya gRPC çerçevelerinden kod, bir hizmet temel sınıfı, iletiler ve tüm istemci oluşturur.
+Tüm gRPC çerçeveleri, kod oluşturma için birinci sınıf destek sağlar. GRPC geliştirmeye yönelik bir çekirdek dosya, gRPC Hizmetleri ve iletilerinin sözleşmesini tanımlayan [ `.proto` dosyadır](https://developers.google.com/protocol-buffers/docs/proto3). GRPC çerçeveleri bu dosyadan bir hizmet temel sınıfı, iletiler ve bir istemci oluşturur.
 
 Sunucu ile istemci arasında *. proto* dosyasını paylaşarak iletiler ve istemci kodu uçtan uca oluşturulabilir. İstemcinin kod üretimi, istemci ve sunucudaki iletilerin çoğaltılmasını ortadan kaldırır ve sizin için kesin olarak belirlenmiş bir istemci oluşturur. İstemci yazmak gerekmez, birçok hizmet içeren uygulamalarda önemli geliştirme süresini kaydeder.
 

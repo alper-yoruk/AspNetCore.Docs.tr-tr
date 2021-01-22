@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: fdd7eb3c4a3b07022760a43cbde80838bfaf7c84
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: d35dd0acf626a6305f00e295e7918c82c7d6a912
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024801"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658709"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -129,6 +129,10 @@ Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projeni
     app.UseAuthentication();
     app.UseAuthorization();
     ```
+
+### <a name="azure-app-service-on-linux"></a>Linux üzerinde Azure App Service
+
+Sertifikayı Linux üzerinde Azure App Service dağıtım sırasında açıkça belirtin. Daha fazla bilgi için bkz. <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
 
 ### <a name="addapiauthorization"></a>Addadpiauthorization
 
@@ -468,9 +472,12 @@ services.AddTransient<IProfileService, ProfileService>();
 
 [!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
-## <a name="host-in-azure-app-service-with-a-custom-domain"></a>Özel bir etki alanı ile Azure App Service barındırın
+## <a name="host-in-azure-app-service-with-a-custom-domain-and-certificate"></a>Özel bir etki alanı ve sertifikayla Azure App Service barındırın
 
-Aşağıdaki kılavuzda, Blazor WebAssembly Identity özel bir etki alanı ile [Azure App Service](https://azure.microsoft.com/services/app-service/) üzere barındırılan bir uygulamanın sunucu ile nasıl dağıtılacağı açıklanmaktadır.
+Aşağıdaki kılavuzda açıklanmaktadır:
+
+* Blazor WebAssembly Identity Özel bir etki alanı ile [Azure App Service](https://azure.microsoft.com/services/app-service/) için barındırılan bir uygulamayı sunucuyla dağıtma.
+* Tarayıcılar ile HTTPS protokol iletişimi için bir TLS sertifikası oluşturma ve kullanma. Kılavuz, sertifikayı özel bir etki alanıyla kullanmaya odaklansa da, bu kılavuz, örneğin varsayılan bir Azure Apps etki alanını kullanmaya uygun şekilde uygulanabilir `contoso.azurewebsites.net` .
 
 Bu barındırma senaryosunda, [ Identity sunucunun belirteç imzalama anahtarı](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) için aynı SERTIFIKAYı ve sitenin https güvenli iletişimini tarayıcılarla **birlikte kullanmayın:**
 

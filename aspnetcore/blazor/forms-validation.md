@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 979e2615080a4f07b6091f0498fc7efa62ea1563
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1287ab5ce61e58848329c96393c3ee8c37610245
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96320076"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658696"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -294,7 +294,7 @@ Aşağıdaki `InputDate` bileşen örneğinde:
 * Bileşen, `BirthDate` bir tür olarak özelliğe bağlanır `DateTime` .
 
 ```razor
-<InputDate @bind-Value="@BirthDate" DisplayName="birthday" />
+<InputDate @bind-Value="BirthDate" DisplayName="birthday" />
 
 @code {
     public DateTime BirthDate { get; set; }
