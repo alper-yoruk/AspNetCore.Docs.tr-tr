@@ -57,8 +57,6 @@
         - name: MVC
           displayName: tutorial
           items:
-            - name: Genel Bakış
-              uid: tutorials/first-mvc-app/index
             - name: Kullanmaya başlayın
               uid: tutorials/first-mvc-app/start-mvc
             - name: Denetleyici ekleme
@@ -260,10 +258,8 @@
       items:
         - name: Genel Bakış
           uid: mvc/overview
-        - name: Eğitmen
+        - name: Öğretici
           items:
-            - name: Genel Bakış
-              uid: tutorials/first-mvc-app/index
             - name: Kullanmaya başlayın
               uid: tutorials/first-mvc-app/start-mvc
             - name: Denetleyici ekleme
