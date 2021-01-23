@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 49f15e3e0d68ec475bb4c9a047d6c5e37d314a42
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 268debd51b6828aad0bcfe917bdf95b691ac7365
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97854463"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710533"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Blazor WebAssemblyMicrosoft hesaplarıyla ASP.NET Core tek başına uygulamayı güvenli hale getirme
 
@@ -101,7 +101,7 @@ Seçeneğiyle belirtilen çıktı konumu, `-o|--output` mevcut değilse bir proj
 Uygulamayı oluşturduktan sonra şunları yapmanız gerekir:
 
 * Microsoft hesabı kullanarak uygulamada oturum açın.
-* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz:
+* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz.
   * [Erişim belirteci kapsamları](#access-token-scopes)
   * [Hızlı başlangıç: Web API 'lerini kullanıma sunmak için bir uygulama yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
@@ -225,6 +225,7 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/security/webassembly/additional-scenarios>
+* [Authentication. MSAL JavaScript kitaplığının özel bir sürümünü oluşturun](xref:blazor/security/webassembly/additional-scenarios#build-a-custom-version-of-the-authenticationmsal-javascript-library)
 * [Güvenli bir varsayılan istemciyle bir uygulamada kimliği doğrulanmamış veya yetkilendirilmemiş Web API istekleri](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 * [Hızlı başlangıç: Microsoft Identity platformu ile uygulama kaydetme](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)

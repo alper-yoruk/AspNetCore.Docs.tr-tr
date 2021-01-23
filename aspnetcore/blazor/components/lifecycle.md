@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: acaa276efda9fb4d09a5c1b1ca59c6abde1b64ec
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 7152f45cd799128b668ec5002fb20b4f30e69585
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252402"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710665"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -296,9 +296,9 @@ Hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Mvc.TagHelpers.Compo
 
 [!INCLUDE[](~/blazor/includes/prerendering.md)]
 
-## <a name="component-disposal-with-idisposable"></a>IDisposable ile bileşen atma
+## <a name="component-disposal-with-idisposable"></a>İle bileşen aktiften çıkarma `IDisposable`
 
-Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabiriminden kaldırıldığında [ `Dispose` yöntemi](/dotnet/standard/garbage-collection/implementing-dispose) çağrılır. Bırakma işlemi, [Bileşen başlatma](#component-initialization-methods)sırasında da dahil olmak üzere herhangi bir zamanda gerçekleşebilir. Aşağıdaki bileşen `@implements IDisposable` ve `Dispose` yöntemini kullanır:
+Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabiriminden kaldırıldığında, yönetilmeyen kaynaklar yayımlanamadığında, çerçeve [çıkarma yöntemini](/dotnet/standard/garbage-collection/implementing-dispose) çağırır. Bırakma işlemi, [Bileşen başlatma](#component-initialization-methods)sırasında da dahil olmak üzere herhangi bir zamanda gerçekleşebilir. Aşağıdaki bileşen <xref:System.IDisposable> yönergesi ile birlikte uygular [`@implements`](xref:mvc/views/razor#implements) Razor :
 
 ```razor
 @using System
@@ -314,6 +314,15 @@ Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabirim
 }
 ```
 
+Zaman uyumsuz çıkarma görevleri için, `DisposeAsync` `Dispose` Önceki örnekte yerine kullanın:
+
+```csharp
+public async ValueTask DisposeAsync()
+{
+    ...
+}
+```
+
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>' In çağrılması `Dispose` desteklenmez. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> oluşturucuyu aşağı doğru olarak çağrılabilir, bu nedenle bu noktada UI güncelleştirmelerinin kullanılması desteklenmez.
 
@@ -326,6 +335,8 @@ Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabirim
 * Özel yöntem yaklaşımı
 
   [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
+  
+Daha fazla bilgi için, ve yöntemlerini uygulamak üzere [yönetilmeyen kaynakları](/dotnet/standard/garbage-collection/unmanaged) ve bunu Izleyen konuları temizleme bölümüne bakın `Dispose` `DisposeAsync` .
 
 ## <a name="cancelable-background-work"></a>İptal edilebilen arka plan çalışması
 

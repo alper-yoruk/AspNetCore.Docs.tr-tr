@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 679f14642f4a611a5e65a7f472c68663fc1fb16b
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 68b1162ea35b401c47f89b7a930b6f0d5c3ab6c5
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97764715"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710543"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Blazor WebAssemblyAzure Active Directory B2C ile ASP.NET Core tek başına uygulamanın güvenliğini sağlama
 
@@ -121,7 +121,7 @@ Seçeneğiyle belirtilen çıktı konumu, `-o|--output` mevcut değilse bir proj
 Uygulamayı oluşturduktan sonra şunları yapmanız gerekir:
 
 * AAD Kullanıcı hesabını kullanarak uygulamada oturum açın.
-* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz:
+* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz.
   * [Erişim belirteci kapsamları](#access-token-scopes)
   * [Hızlı başlangıç: Web API 'lerini kullanıma sunmak için bir uygulama yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
@@ -241,6 +241,7 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/security/webassembly/additional-scenarios>
+* [Authentication. MSAL JavaScript kitaplığının özel bir sürümünü oluşturun](xref:blazor/security/webassembly/additional-scenarios#build-a-custom-version-of-the-authenticationmsal-javascript-library)
 * [Güvenli bir varsayılan istemciyle bir uygulamada kimliği doğrulanmamış veya yetkilendirilmemiş Web API istekleri](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:security/authentication/azure-ad-b2c>
 * [Öğretici: Azure Active Directory B2C kiracısı oluşturma](/azure/active-directory-b2c/tutorial-create-tenant)

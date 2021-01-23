@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 557c700ffd24d4d6c85848ad360690d583e05321
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: eb5bdb046c4360d1cd33a81c569c86b991e7729d
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97854488"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710548"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core tek başına uygulamanın güvenliğini sağlama
 
@@ -117,7 +117,7 @@ Seçeneğiyle belirtilen çıktı konumu, `-o|--output` mevcut değilse bir proj
 Uygulamayı oluşturduktan sonra şunları yapmanız gerekir:
 
 * AAD Kullanıcı hesabını kullanarak uygulamada oturum açın.
-* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz:
+* Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz.
   * [Erişim belirteci kapsamları](#access-token-scopes)
   * [Hızlı başlangıç: Web API 'lerini kullanıma sunmak için bir uygulama yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
@@ -241,6 +241,7 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/security/webassembly/additional-scenarios>
+* [Authentication. MSAL JavaScript kitaplığının özel bir sürümünü oluşturun](xref:blazor/security/webassembly/additional-scenarios#build-a-custom-version-of-the-authenticationmsal-javascript-library)
 * [Güvenli bir varsayılan istemciyle bir uygulamada kimliği doğrulanmamış veya yetkilendirilmemiş Web API istekleri](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>

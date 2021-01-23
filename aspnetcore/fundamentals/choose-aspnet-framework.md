@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 95ac4784634d38add5e28644d42b0182e15c6de9
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 192784b4f2cb3b80511814de4f777c4a49fc594b
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060033"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710743"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4. x ve ASP.NET Core arasında seçim yapın
 
@@ -56,7 +56,7 @@ Aşağıdaki tabloda ASP.NET Core ASP.NET 4. x ile karşılaştırılır.
 
 ## <a name="aspnet-core-scenarios"></a>ASP.NET Core senaryolar
 
-* [Web Siteleri](xref:tutorials/first-mvc-app/index)
+* [Web Siteleri](xref:tutorials/first-mvc-app/start-mvc)
 * [API'ler](xref:tutorials/first-web-api)
 * [Gerçek zamanlı](xref:signalr/introduction)
 * [Azure’a ASP.NET Core uygulaması dağıtma](/azure/app-service/app-service-web-get-started-dotnet)

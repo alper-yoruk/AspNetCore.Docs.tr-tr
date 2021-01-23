@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: fb5b6f75959d9933e228b0288e70498ef05efc4a
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95870392"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710639"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -1077,6 +1077,17 @@ Server response: <strong>@serverResponse</strong>
 Yer tutucu, `{APP ASSEMBLY}` uygulamanın derleme adıdır (örneğin, `BlazorSample` ). Özelliğini kullanmak için `Status.DebugException` , [GRPC .net. Client](https://www.nuget.org/packages/Grpc.Net.Client) Version 2.30.0 veya üstünü kullanın.
 
 Daha fazla bilgi için bkz. <xref:grpc/browser>.
+
+## <a name="build-a-custom-version-of-the-authenticationmsal-javascript-library"></a>Authentication. MSAL JavaScript kitaplığının özel bir sürümünü oluşturun
+
+Uygulama, [JavaScript (MSAL.js) Için Microsoft kimlik doğrulama kitaplığı](https://www.npmjs.com/package/@azure/msal-browser)'nın özel bir sürümünü gerektiriyorsa, aşağıdaki adımları uygulayın:
+
+1. Sistemin en son geliştirici .NET SDK 'sı olduğunu onaylayın veya [.NET Core SDK: yükleyiciler ve Ikili dosyaları](https://github.com/dotnet/installer#installers-and-binaries)en son geliştirici SDK 'sını edinin ve yükleme. Bu senaryo için iç NuGet beslemelerini yapılandırma gerekli değildir.
+1. `dotnet/aspnetcore` [Kaynaktaki derleme ASP.NET Core](https://github.com/dotnet/aspnetcore/blob/main/docs/BuildFromSource.md)konumundaki belgeler için GitHub deposunu ayarlayın. [DotNet/aspnetcore GitHub deposunun](https://github.com/dotnet/aspnetcore)bir ZIP arşivini çatalla ve kopyalayın veya indirin.
+1. `src/Components/WebAssembly/Authentication.Msal/src/Interop/package.json`Dosyasını açın ve istediğiniz sürümünü ayarlayın `@azure/msal-browser` . Yayınlanan sürümlerin bir listesi için [ `@azure/msal-browser` NPM Web sitesini](https://www.npmjs.com/package/@azure/msal-browser) ziyaret edin ve **sürümler** sekmesini seçin.
+1. `Authentication.Msal` `src/Components/WebAssembly/Authentication.Msal/src` `yarn build` Bir komut kabuğunda komutuyla projeyi klasörde oluşturun.
+1. Uygulama [Sıkıştırılmış varlıklar (Brotli/gzip)](xref:blazor/host-and-deploy/webassembly#compression)kullanıyorsa `Interop/dist/Release/AuthenticationService.js` dosyayı sıkıştırın.
+1. Dosyası, `AuthenticationService.js` üretildiyse, dosyanın uygulamanın `.br` / `.gz` `Interop/dist/Release` `publish/wwwroot/_content/Microsoft.Authentication.WebAssembly.Msal` yayımlanan varlıklarında uygulamanın klasörüne kopyalayın ve dosyanın sıkıştırılmış sürümlerini () kopyalayın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
