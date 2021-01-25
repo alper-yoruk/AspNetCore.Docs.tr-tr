@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: d0ed36731d78d3e98aa294aca50492f0a3ac8174
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 4256e90ca5f185992a73d1e43460ca5d27159d6f
+ms.sourcegitcommit: d4836f9b7c508f51c6c4ee6d0cc719b38c1729c4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506701"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98758283"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core için tehdit azaltma Kılavuzu Blazor Server
 
@@ -306,12 +306,7 @@ ASP.NET Core uygulamalarının güvenliğini sağlamaya yönelik rehberlik, uygu
 
 Sunucuda bir hata oluştuğunda, çerçeve istemciye bildirir ve oturumu kapatır. Varsayılan olarak, istemci tarayıcının geliştirici araçlarında görünebileceğini belirten genel bir hata iletisi alır.
 
-İstemci tarafı hatası, çağrı yığınını içermez ve hatanın nedeni hakkında ayrıntı sağlamaz, ancak sunucu günlükleri bu gibi bilgileri içerir. Geliştirme amacıyla, önemli hata bilgileri, ayrıntılı hataları etkinleştirerek istemciye kullanılabilir hale getirilebilir.
-
-JavaScript 'te ayrıntılı hataları etkinleştir:
-
-* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
-* `DetailedErrors`Olarak ayarlanan yapılandırma anahtarı `true` , uygulama ayarları dosyasında ( `appsettings.json` ) ayarlanabilir. Anahtar, `ASPNETCORE_DETAILEDERRORS` bir değeri olan ortam değişkeni kullanılarak da ayarlanabilir `true` .
+İstemci tarafı hatası, çağrı yığınını içermez ve hatanın nedeni hakkında ayrıntı sağlamaz, ancak sunucu günlükleri bu gibi bilgileri içerir. Geliştirme amacıyla, önemli hata bilgileri, [ayrıntılı hataları etkinleştirerek](xref:blazor/fundamentals/handle-errors#blazor-server-detailed-circuit-errors)istemciye kullanılabilir hale getirilebilir.
 
 > [!WARNING]
 > Internet 'teki istemcilere hata bilgilerini ortaya çıkarmak her zaman kaçınılması gereken bir güvenlik riskidir.

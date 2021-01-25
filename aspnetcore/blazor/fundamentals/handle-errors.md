@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5a255c2d3535311cecd6b7219447e80d1ae78877
+ms.sourcegitcommit: d4836f9b7c508f51c6c4ee6d0cc719b38c1729c4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93056003"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98758251"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
 
@@ -88,6 +88,35 @@ Bir Blazor Server uygulamada, dosyadaki deneyimi özelleştirin `Pages/_Host.csh
     top: 0.5rem;
 }
 ```
+
+## <a name="no-locblazor-server-detailed-circuit-errors"></a>Blazor Server ayrıntılı devre hataları
+
+İstemci tarafı hataları, çağrı yığınını içermez ve hatanın nedeni hakkında ayrıntı sağlamaz, ancak sunucu günlükleri bu gibi bilgileri içerir. Geliştirme amacıyla, önemli devre hata bilgileri, ayrıntılı hata etkinleştirilerek istemci tarafından kullanılabilir hale getirilebilir.
+
+Blazor ServerAşağıdaki yaklaşımlardan yararlanarak ayrıntılı hataları etkinleştirin:
+
+* <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
+* `DetailedErrors` `true` Uygulamasının geliştirme ayarları dosyasında () ayarlanabilir yapılandırma anahtarı olarak ayarlanır `appsettings.Development.json` . Anahtar, `ASPNETCORE_DETAILEDERRORS` bir değeri olan ortam değişkeni kullanılarak da ayarlanabilir `true` .
+* [ SignalR sunucu tarafı günlüğü](xref:signalr/diagnostics#server-side-logging) ( `Microsoft.AspNetCore.SignalR` ), ayrıntılı günlük kaydı Için [hata ayıklama](xref:Microsoft.Extensions.Logging.LogLevel) veya [izleme](xref:Microsoft.Extensions.Logging.LogLevel) olarak ayarlanabilir SignalR .
+
+`appsettings.Development.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "Microsoft.AspNetCore.SignalR": "Debug"
+    }
+  }
+}
+```
+
+> [!WARNING]
+> Internet 'teki istemcilere hata bilgilerini ortaya çıkarmak her zaman kaçınılması gereken bir güvenlik riskidir.
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Bir Blazor Server uygulamanın işlenmemiş özel durumlara nasıl yeniden davranması
 
