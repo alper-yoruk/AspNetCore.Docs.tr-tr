@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a00bfb87b8cfe0fb3e2a832a553b8a4cd45ee6d
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: e602f29e6932280f4625ade64201ff232e02150d
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252506"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751629"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın Blazor
 
@@ -35,6 +35,9 @@ Bir Blazor uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yönteml
 Bu makalede, JavaScript 'ten .NET yöntemlerini çağırma ele alınmaktadır. .NET JavaScript işlevlerinin nasıl çağrılacağını öğrenmek için bkz <xref:blazor/call-javascript-from-dotnet> ..
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+
+> [!NOTE]
+> `<script>` `</body>` `wwwroot/index.html` Dosya ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyadaki ( Blazor Server ) kapanış etiketinden önce js dosyaları (Etiketler) ekleyin. JS birlikte çalışma yöntemlerine sahip JS dosyalarının Framework JS dosyalarından önce eklendiğinden emin olun Blazor .
 
 ## <a name="static-net-method-call"></a>Statik .NET yöntemi çağrısı
 

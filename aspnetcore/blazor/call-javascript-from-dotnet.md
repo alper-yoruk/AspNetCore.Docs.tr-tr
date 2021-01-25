@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 2502f43f4eaf245996827f704462ec340bbb8e07
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 53b702cddca778e06e617df3798bffb21677d36b
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252545"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751643"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -35,6 +35,9 @@ Bir Blazor uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yönteml
 Bu makalede, .NET 'ten JavaScript işlevlerini çağırma ele alınmaktadır. JavaScript 'ten .NET yöntemlerini çağırma hakkında daha fazla bilgi için bkz <xref:blazor/call-dotnet-from-javascript> ..
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+
+> [!NOTE]
+> `<script>` `</body>` `wwwroot/index.html` Dosya ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyadaki ( Blazor Server ) kapanış etiketinden önce js dosyaları (Etiketler) ekleyin. JS birlikte çalışma yöntemlerine sahip JS dosyalarının Framework JS dosyalarından önce eklendiğinden emin olun Blazor .
 
 .NET 'ten JavaScript 'e çağrı yapmak için <xref:Microsoft.JSInterop.IJSRuntime> soyutlamayı kullanın. JS birlikte çalışma çağrıları vermek için, bu <xref:Microsoft.JSInterop.IJSRuntime> soyutlamayı bileşeninizdeki ekler. <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> herhangi bir sayıda JSON seri hale getirilebilir bağımsız değişkenle birlikte çağırmak istediğiniz JavaScript işlevi için bir tanımlayıcı alır. İşlev tanımlayıcısı genel kapsama ( `window` ) göredir. Çağırmak isterseniz `window.someScope.someFunction` , tanımlayıcı olur `someScope.someFunction` . Çağrılmadan önce işlevi kaydetmeniz gerekmez. Dönüş türünün `T` de JSON seri hale getirilebilir olması gerekir. `T` döndürülen JSON türüyle en iyi eşleşen .NET türüyle eşleşmelidir.
 

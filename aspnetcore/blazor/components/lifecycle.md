@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 7152f45cd799128b668ec5002fb20b4f30e69585
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 3591ba18351b89e2d5dfaef796777273c97ce98b
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710665"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751616"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -68,14 +68,38 @@ Geliştirici [`StateHasChanged`](#state-changes) bir işleme yol açacak şekild
 
 ### <a name="before-parameters-are-set"></a>Parametreler ayarlanmadan önce
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> işleme ağacındaki bileşenin üst öğesi tarafından sağlanan parametreleri ayarlar:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> işleme ağacındaki veya yol parametrelerinden bileşenin üst öğesi tarafından sağlanan parametreleri ayarlar. Yöntemi geçersiz kılarak, geliştirici kodu doğrudan parametreleriyle etkileşim kurabilir <xref:Microsoft.AspNetCore.Components.ParameterView> .
 
-```csharp
-public override async Task SetParametersAsync(ParameterView parameters)
-{
-    await ...
+Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> `Param` `value` için bir Route parametresinin ayrıştırılması başarılı olursa parametresinin değerini ' a atar `Param` . Olmadığında `value` `null` , değer bileşen tarafından görüntülenir `SetParametersAsyncExample` .
 
-    await base.SetParametersAsync(parameters);
+`Pages/SetParametersAsyncExample.razor`:
+
+```razor
+@page "/setparametersasync-example/{Param?}"
+
+<h1>SetParametersAsync Example</h1>
+
+<p>@message</p>
+
+@code {
+    private string message;
+
+    [Parameter]
+    public string Param { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<string>(nameof(Param), out var value))
+        {
+            message = $"The value of 'Param' is {value}.";
+        }
+        else 
+        {
+            message = "The value of 'Param' is null.";
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
 }
 ```
 

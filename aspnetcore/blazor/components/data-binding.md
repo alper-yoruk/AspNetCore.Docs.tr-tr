@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 1f22468c2c9bfb5c3c184e8686f1a8d1b486536d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e873fdd201cf0cdc809030fde30c6a8da2899861
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486076"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751561"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -426,7 +426,7 @@ Aşağıdaki bileşenler önceki kavramları göstermektedir:
 }
 ```
 
-İç içe geçmiş olmayan bileşenlerde verileri bellek içinde paylaşmaya yönelik alternatif bir yaklaşım için, ' ın *bellek içi durum kapsayıcısı hizmeti* bölümüne bakın  <xref:blazor/state-management> .
+İç içe geçmiş olmayan bileşenler arasında bellek içi veri paylaşımına uygun alternatif bir yaklaşım için, makalenin *bellek içi durum kapsayıcısı hizmeti* bölümüne bakın <xref:blazor/state-management> .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

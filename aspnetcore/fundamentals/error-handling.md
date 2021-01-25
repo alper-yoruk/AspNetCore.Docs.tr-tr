@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: ad9920ccd830b93d083f3c5ede03702164842b6e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e65983fb1a440057283111ea5a79a79b765607b7
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97753120"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751684"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core hataları işleme
 
@@ -68,7 +68,14 @@ Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtens
 
 RazorSayfalar uygulama şablonu, sayfalar klasöründe bir hata sayfası (*. cshtml*) ve <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Sınıf ( `ErrorModel` ) sağlar  . MVC uygulaması için proje şablonu, `Error` giriş denetleyicisi için bir eylem yöntemi ve bir hata görünümü içerir.
 
-Hata işleyicisi eylem yöntemini, gibi HTTP yöntemi öznitelikleriyle işaretlemeyin `HttpGet` . Açık fiiller bazı isteklerin eylem yöntemine ulaşmasını önler. Kimliği doğrulanmamış kullanıcılar hata görünümünü görüyse, metoda anonim erişime izin verin.
+Özel durum işleme ara yazılımı, *özgün* http yöntemini kullanarak isteği yeniden yürütür. Bir hata işleyicisi uç noktası belirli bir HTTP yöntemleri kümesiyle sınırlı ise, yalnızca bu HTTP yöntemleri için çalışır. Örneğin, özniteliğini kullanan bir MVC denetleyici eylemi `[HttpGet]` yalnızca get istekleri için çalışır. *Tüm* isteklerin özel hata işleme sayfasına ulaşmasını sağlamak için bunları belırlı bir http yöntemleri kümesiyle kısıtlamayın.
+
+Özgün HTTP yöntemine göre özel durumları farklı şekilde işlemek için:
+
+* RazorSayfalar için birden çok işleyici yöntemi oluşturun. Örneğin, özel durum `OnGet` Al işlemini idare etmek ve `OnPost` özel durumları işlemek için kullanmak üzere kullanın.
+* MVC için, HTTP fiili özniteliklerini birden çok eyleme uygulayın. Örneğin, özel durum `[HttpGet]` Al işlemini idare etmek ve `[HttpPost]` özel durumları işlemek için kullanmak üzere kullanın.
+
+Kimliği doğrulanmamış kullanıcıların özel hata işleme sayfasını görüntülemesine izin vermek için, anonim erişimi desteklediğinden emin olun.
 
 ### <a name="access-the-exception"></a>Özel duruma erişin
 

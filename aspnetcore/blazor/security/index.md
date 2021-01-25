@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f8b31c617ef71003042d31690de49d48946ac3d5
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 35620299b1138ca45a6ebf1d789a9f4aa9b29518
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710652"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751609"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
 
@@ -299,7 +299,7 @@ Yetkilendirme koşulları belirtilmemişse, <xref:Microsoft.AspNetCore.Component
 * Kimliği doğrulanmış (oturum açmış) kullanıcılar yetkili olarak.
 * Kimliği doğrulanmamış (oturumu açılmış) kullanıcılar yetkilendirilmemiş.
 
-Bileşen, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> `NavMenu` `Shared/NavMenu.razor` bir bileşen () için bir liste öğesi () göstermek üzere bileşende () kullanılabilir `<li>...</li>` [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> , ancak bu yaklaşımın yalnızca liste öğesini işlenen çıktıdan kaldırdığına unutmayın. Kullanıcının bileşene gitmesini engellemez.
+Bileşen, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> `NavMenu` `Shared/NavMenu.razor` bir bileşen () için bir liste öğesi () göstermek üzere bileşende () kullanılabilir `<li>...</li>` [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> , ancak bu yaklaşımın yalnızca liste öğesini işlenen çıktıdan kaldırdığına unutmayın. Kullanıcının bileşene gitmesini engellemez.
 
 ### <a name="role-based-and-policy-based-authorization"></a>Rol tabanlı ve ilke tabanlı yetkilendirme
 

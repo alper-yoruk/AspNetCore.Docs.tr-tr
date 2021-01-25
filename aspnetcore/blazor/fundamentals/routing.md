@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: ec183f4aadc6bafd8e77f9d97291ba3d47bd92f5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 74886eae7431045e56de535b5221040bd56cdc2d
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506935"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751574"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -326,11 +326,11 @@ Bileşen elden çıkarma hakkında daha fazla bilgi için bkz <xref:blazor/compo
 Bir isteğin sorgu dizesi özelliğinden elde edilir <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri?displayProperty=nameWithType> :
 
 ```razor
-@inject NavigationManager Navigation
+@inject NavigationManager NavigationManager
 
 ...
 
-var query = new Uri(Navigation.Uri).Query;
+var query = new Uri(NavigationManager.Uri).Query;
 ```
 
 Bir sorgu dizesinin parametrelerini ayrıştırmak için:
@@ -354,7 +354,7 @@ Aşağıdaki `ParseQueryString` bileşen örneği adlı bir sorgu dizesi paramet
 
 ::: moniker-end
 
-## <a name="navlink-component"></a>`NavLink` bileşeni
+## <a name="navlink-and-navmenu-components"></a>`NavLink` ve `NavMenu` bileşenleri
 
 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Gezinti bağlantıları oluştururken, HTML köprü öğelerinin () yerine bir bileşen kullanın `<a>` . Bir <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşen `<a>` , `active` `href` geçerli URL ile eşleşip eşleşmediğini temel alarak bir CSS sınıfına geçiş yaptığı sürece bir öğesi gibi davranır. `active`Sınıfı, bir kullanıcının hangi sayfanın etkin sayfa olduğunu anladığı gezinti bağlantıları arasında yardımcı olur. İsteğe bağlı olarak, <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> geçerli yol ile eşleştiğinde işlenen bağlantıya özel bır CSS sınıfı uygulamak için BIR CSS sınıfı adı atayın `href` .
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: a6ef5a547e6ccba6771cdf892a9636f83d6796b1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c41ebc0506a565666963d9b4c70ed73df389c826
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053741"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751654"
 ---
 # <a name="localization-extensibility"></a>Yerelleştirme genişletilebilirliği
 
@@ -151,7 +151,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ASP.NET Core yerelleştirme sağlar <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> , <xref:Microsoft.Extensions.Localization.IStringLocalizer> `resx` Yerelleştirme kaynaklarını depolamak için kullanılan bir uygulamasıdır.
 
-Dosya kullanma sınırlı değilsiniz `resx` . Uygulama `IStringLocalized` , herhangi bir veri kaynağı kullanılabilir.
+Dosya kullanma sınırlı değilsiniz `resx` . Uygulama `IStringLocalizer` , herhangi bir veri kaynağı kullanılabilir.
 
 Aşağıdaki örnek projeler şunları uygular <xref:Microsoft.Extensions.Localization.IStringLocalizer> : 
 

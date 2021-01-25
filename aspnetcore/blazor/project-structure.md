@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: ae41d096c50d350b7fcde52da59382614e62c109
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 958fa23a1befac3696d850d5409d4021dd109c22
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658631"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751548"
 ---
 # <a name="aspnet-core-no-locblazor-project-structure"></a>ASP.NET Core Blazor proje yapısı
 
@@ -48,7 +48,7 @@ Blazor WebAssemblyŞablon ( `blazorwasm` ) bir uygulama için başlangıç dosya
 * `Shared` klasör: aşağıdaki paylaşılan bileşenleri ve stil sayfalarını Içerir:
   * `MainLayout` Component ( `MainLayout.razor` ): uygulamanın [Düzen bileşeni](xref:blazor/layouts).
   * `MainLayout.razor.css`: Uygulamanın ana düzeni için stil sayfası.
-  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
   * `NavMenu.razor.css`: Uygulamanın gezinti menüsünün stil sayfası.
   * `SurveyPrompt` Component ( `SurveyPrompt.razor` ): Blazor anket bileşeni.
 
@@ -58,7 +58,7 @@ Blazor WebAssemblyŞablon ( `blazorwasm` ) bir uygulama için başlangıç dosya
 
 * `Shared` klasör: aşağıdaki paylaşılan bileşenleri Içerir:
   * `MainLayout` Component ( `MainLayout.razor` ): uygulamanın [Düzen bileşeni](xref:blazor/layouts).
-  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
   * `SurveyPrompt` Component ( `SurveyPrompt.razor` ): Blazor anket bileşeni.
   
 ::: moniker-end
@@ -78,6 +78,9 @@ Blazor WebAssemblyŞablon ( `blazorwasm` ) bir uygulama için başlangıç dosya
   * Bu sayfa, kök bileşenin nerede `App` işleneceğini belirtir. Bileşen, `app` DOM öğesinin () konumunda işlenir `<app>Loading...</app>` .
 
 ::: moniker-end
+
+> [!NOTE]
+> Dosyaya eklenen JavaScript (JS) dosyaları `wwwroot/index.html` , kapanış etiketinden önce gelmelidir `</body>` . Özel JS kodunun, JS dosyalarından yüklendiği sıra, bazı senaryolarda önemlidir. Örneğin, birlikte çalışma yöntemlerine sahip JS dosyalarının Framework JS dosyalarından önce eklendiğinden emin olun Blazor .
 
 * `_Imports.razor`: Razor `.razor` [`@using`](xref:mvc/views/razor#using) Ad alanları için yönergeler gibi uygulamanın bileşenlerine () dahil etmek için ortak yönergeleri içerir.
 
@@ -115,7 +118,10 @@ Blazor ServerŞablon ( `blazorserver` ) bir uygulama için başlangıç dosyalar
   * `Error` Component ( `Error.razor` ): uygulamada işlenmeyen bir özel durum oluştuğunda işlenir.
   * `FetchData` Component ( `FetchData.razor` ): veri getirme sayfasını uygular.
   * `Index` Component ( `Index.razor` ): giriş sayfasını uygular.
-  
+
+> [!NOTE]
+> Dosyaya eklenen JavaScript (JS) dosyaları `Pages/_Host.cshtml` , kapanış etiketinden önce gelmelidir `</body>` . Özel JS kodunun, JS dosyalarından yüklendiği sıra, bazı senaryolarda önemlidir. Örneğin, birlikte çalışma yöntemlerine sahip JS dosyalarının Framework JS dosyalarından önce eklendiğinden emin olun Blazor .
+
 * `Properties/launchSettings.json`: [Geliştirme ortamı yapılandırmasını](xref:fundamentals/environments#development-and-launchsettingsjson)barındırır.
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -123,7 +129,7 @@ Blazor ServerŞablon ( `blazorserver` ) bir uygulama için başlangıç dosyalar
 * `Shared` klasör: aşağıdaki paylaşılan bileşenleri ve stil sayfalarını Içerir:
   * `MainLayout` Component ( `MainLayout.razor` ): uygulamanın [Düzen bileşeni](xref:blazor/layouts).
   * `MainLayout.razor.css`: Uygulamanın ana düzeni için stil sayfası.
-  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
   * `NavMenu.razor.css`: Uygulamanın gezinti menüsünün stil sayfası.
   * `SurveyPrompt` Component ( `SurveyPrompt.razor` ): Blazor anket bileşeni.
 
@@ -133,7 +139,7 @@ Blazor ServerŞablon ( `blazorserver` ) bir uygulama için başlangıç dosyalar
 
 * `Shared` klasör: aşağıdaki paylaşılan bileşenleri Içerir:
   * `MainLayout` Component ( `MainLayout.razor` ): uygulamanın [Düzen bileşeni](xref:blazor/layouts).
-  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu` Component ( `NavMenu.razor` ): kenar çubuğu gezintisini uygular. [ `NavLink` ](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Diğer bileşenlere gezinti bağlantılarını işleyen bileşeni () içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
   * `SurveyPrompt` Component ( `SurveyPrompt.razor` ): Blazor anket bileşeni.
   
 ::: moniker-end
