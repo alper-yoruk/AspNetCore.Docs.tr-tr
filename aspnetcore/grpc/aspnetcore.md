@@ -4,7 +4,7 @@ author: juntaoluo
 description: ASP.NET Core ile gRPC hizmetlerini yazarken temel kavramları öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 01/14/2021
+ms.date: 01/29/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 44a6f1d2a25314460fa4bce469f697a2fa4c0825
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 57edfa31079cb3fca6e9e8d0fa55bcbb8bbfefca
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252857"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057492"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core içeren gRPC Hizmetleri
 
@@ -31,7 +31,7 @@ Bu belgede, ASP.NET Core kullanarak gRPC Hizmetleri ile çalışmaya başlama g�
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -77,22 +77,39 @@ gRPC, [GRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) paketin
 
 ASP.NET Core, işlem hattı ve Özellikler yönlendirme işlem hattını paylaşır, bu nedenle uygulama ek istek işleyicileri sunacak şekilde yapılandırılabilir. MVC denetleyicileri gibi ek istek işleyicileri, yapılandırılmış gRPC hizmetleriyle paralel olarak çalışır.
 
+## <a name="server-options"></a>Sunucu seçenekleri
+
+gRPC Hizmetleri, tüm yerleşik ASP.NET Core sunucularıyla barındırılabilir.
+
+> [!div class="checklist"]
+>
+> * Kestrel
+> * TestServer
+> * IIS&dagger;
+> * HTTP.sys&dagger;
+
+&dagger;IIS ve HTTP.sys .NET 5 ve Windows 10 derleme 20241 veya üstünü gerektirir.
+
+ASP.NET Core uygulamasının doğru sunucusunu seçme hakkında daha fazla bilgi için, bkz <xref:fundamentals/servers/index> ..
+
 ::: moniker range=">= aspnetcore-5.0"
 
-### <a name="configure-kestrel"></a>Kestrel yapılandırma
+## <a name="kestrel"></a>Kestrel
+
+[Kestrel](xref:fundamentals/servers/kestrel) , ASP.NET Core için platformlar arası Web sunucusudur. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak bağlantı noktası Paylaşımı gibi HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir.
 
 Kestrel gRPC uç noktaları:
 
 * HTTP/2 gerektir.
 * [Aktarım Katmanı Güvenliği (TLS)](https://tools.ietf.org/html/rfc5246)ile güvenli hale getirilmesi gerekir.
 
-#### <a name="http2"></a>HTTP/2
+### <a name="http2"></a>HTTP/2
 
 gRPC, HTTP/2 gerektirir. ASP.NET Core için gRPC, [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol%2A) olduğunu `HTTP/2` doğrular.
 
 Kestrel çoğu modern işletim sisteminde [http/2 destekler](xref:fundamentals/servers/kestrel/http2) . Kestrel uç noktaları, varsayılan olarak HTTP/1.1 ve HTTP/2 bağlantılarını destekleyecek şekilde yapılandırılmıştır.
 
-#### <a name="tls"></a>TLS
+### <a name="tls"></a>TLS
 
 GRPC için kullanılan Kestrel uç noktaları TLS ile güvenli hale gelmelidir. Geliştirme aşamasında, `https://localhost:5001` ASP.NET Core geliştirme sertifikası mevcut olduğunda, TLS ile güvenli bir uç nokta otomatik olarak oluşturulur. Yapılandırma gerekmez. `https`Ön ek, Kestrel uç NOKTASıNıN TLS kullandığını doğrular.
 
@@ -104,7 +121,7 @@ Alternatif olarak, Kestrel uç noktaları *program.cs* içinde yapılandırılab
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-#### <a name="protocol-negotiation"></a>Protokol anlaşması
+### <a name="protocol-negotiation"></a>Protokol anlaşması
 
 TLS, iletişimin güvenliğinin daha fazlası için kullanılır. TLS [uygulama katmanı protokol anlaşması (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) el sıkışması, bir uç nokta birden çok protokolü desteklediğinde istemci ile sunucu arasındaki bağlantı protokolünü anlaşmak için kullanılır. Bu anlaşma, bağlantının HTTP/1.1 veya HTTP/2 kullanıp kullanmadığını belirler.
 
@@ -115,24 +132,38 @@ HTTP/2 ve TLS 'yi Kestrel ile etkinleştirme hakkında daha fazla bilgi için bk
 > [!NOTE]
 > macOS, TLS ile ASP.NET Core gRPC 'yi desteklemez. MacOS 'ta gRPC hizmetlerini başarıyla çalıştırmak için ek yapılandırma gerekir. Daha fazla bilgi için bkz. [macOS üzerinde gRPC uygulaması ASP.NET Core başlatılamıyor](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos).
 
+## <a name="iis"></a>IIS
+
+[Internet Information Services (IIS)](xref:host-and-deploy/iis/index) , Web uygulamalarını barındırmak için ASP.NET Core dahil esnek, güvenli ve yönetilebilir bir Web sunucusudur. .NET 5 ve Windows 10 Build 20241 veya sonraki sürümleri, gRPC hizmetlerini IIS ile barındırmak için gereklidir.
+
+IIS, TLS ve HTTP/2 kullanacak şekilde yapılandırılmalıdır. Daha fazla bilgi için bkz. <xref:host-and-deploy/iis/protocols>.
+
+## <a name="httpsys"></a>HTTP.sys
+
+[HTTP.sys](xref:fundamentals/servers/httpsys) , yalnızca Windows üzerinde çalışan ASP.NET Core için bir Web sunucusudur. HTTP.sys ile gRPC hizmetlerini barındırmak için .NET 5 ve Windows 10 Build 20241 veya üzeri gereklidir.
+
+HTTP.sys TLS ve HTTP/2 kullanacak şekilde yapılandırılmalıdır. Daha fazla bilgi için bkz.  [ Web sunucusu http/2 desteğiHTTP.sys](xref:fundamentals/servers/httpsys#http2-support).
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-### <a name="configure-kestrel"></a>Kestrel yapılandırma
+## <a name="kestrel"></a>Kestrel
+
+[Kestrel](xref:fundamentals/servers/kestrel) , ASP.NET Core için platformlar arası Web sunucusudur. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak bağlantı noktası Paylaşımı gibi HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir.
 
 Kestrel gRPC uç noktaları:
 
 * HTTP/2 gerektir.
 * [Aktarım Katmanı Güvenliği (TLS)](https://tools.ietf.org/html/rfc5246)ile güvenli hale getirilmesi gerekir.
 
-#### <a name="http2"></a>HTTP/2
+### <a name="http2"></a>HTTP/2
 
 gRPC, HTTP/2 gerektirir. ASP.NET Core için gRPC, [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol%2A) olduğunu `HTTP/2` doğrular.
 
 Kestrel çoğu modern işletim sisteminde [http/2 destekler](xref:fundamentals/servers/kestrel#http2-support) . Kestrel uç noktaları, varsayılan olarak HTTP/1.1 ve HTTP/2 bağlantılarını destekleyecek şekilde yapılandırılmıştır.
 
-#### <a name="tls"></a>TLS
+### <a name="tls"></a>TLS
 
 GRPC için kullanılan Kestrel uç noktaları TLS ile güvenli hale gelmelidir. Geliştirme aşamasında, `https://localhost:5001` ASP.NET Core geliştirme sertifikası mevcut olduğunda, TLS ile güvenli bir uç nokta otomatik olarak oluşturulur. Yapılandırma gerekmez. `https`Ön ek, Kestrel uç NOKTASıNıN TLS kullandığını doğrular.
 
@@ -144,7 +175,7 @@ Alternatif olarak, Kestrel uç noktaları *program.cs* içinde yapılandırılab
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-#### <a name="protocol-negotiation"></a>Protokol anlaşması
+### <a name="protocol-negotiation"></a>Protokol anlaşması
 
 TLS, iletişimin güvenliğinin daha fazlası için kullanılır. TLS [uygulama katmanı protokol anlaşması (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) el sıkışması, bir uç nokta birden çok protokolü desteklediğinde istemci ile sunucu arasındaki bağlantı protokolünü anlaşmak için kullanılır. Bu anlaşma, bağlantının HTTP/1.1 veya HTTP/2 kullanıp kullanmadığını belirler.
 

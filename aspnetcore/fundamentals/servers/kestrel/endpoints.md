@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: 5fec573013da5bcb5039b7a189fd84d964349b3a
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: f9d82409f4b31a5564c7cdfa48beb303d784e213
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658748"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057154"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>ASP.NET Core Kestrel Web sunucusu için uç noktaları yapılandırma
 
@@ -76,24 +76,6 @@ webBuilder.ConfigureKestrel(serverOptions =>
 > [!NOTE]
 > Çağrılmadan önce çağırarak oluşturulan uç noktalara <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A>  <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults%2A> varsayılan değer uygulanmaz.
 
-## <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (eylem \<HttpsConnectionAdapterOptions> )
-
-`Action`Her HTTPS uç noktası için çalıştırılacak bir yapılandırma belirtir. `ConfigureHttpsDefaults`Birden çok kez çağırma önceki `Action` s 'yi son belirtilen ile değiştirir `Action` .
-
-```csharp
-webBuilder.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ConfigureHttpsDefaults(listenOptions =>
-    {
-        // certificate is an X509Certificate2
-        listenOptions.ServerCertificate = certificate;
-    });
-});
-```
-
-> [!NOTE]
-> Çağrılmadan önce çağırarak oluşturulan uç noktalara <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A>  <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults%2A> varsayılan değer uygulanmaz.
-
 ## <a name="configureiconfiguration"></a>Yapılandırma (Iconation)
 
 Bir as girişi alan Kestrel ayarlamak için bir yapılandırma yükleyicisi oluşturur <xref:Microsoft.Extensions.Configuration.IConfiguration> . Yapılandırma, Kestrel için yapılandırma bölümünün kapsamına alınmalıdır.
@@ -118,6 +100,24 @@ Bir as girişi alan Kestrel ayarlamak için bir yapılandırma yükleyicisi olu�
   }
 }
 ```
+
+## <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (eylem \<HttpsConnectionAdapterOptions> )
+
+`Action`Her HTTPS uç noktası için çalıştırılacak bir yapılandırma belirtir. `ConfigureHttpsDefaults`Birden çok kez çağırma önceki `Action` s 'yi son belirtilen ile değiştirir `Action` .
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        // certificate is an X509Certificate2
+        listenOptions.ServerCertificate = certificate;
+    });
+});
+```
+
+> [!NOTE]
+> Çağrılmadan önce çağırarak oluşturulan uç noktalara <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A>  <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults%2A> varsayılan değer uygulanmaz.
 
 ## <a name="listenoptionsusehttps"></a>ListenOptions. UseHttps
 
@@ -335,6 +335,21 @@ SNı desteği şunları gerektirir:
 * Hedef Framework `netcoreapp2.1` veya sonraki sürümlerde çalışıyor. `net461`Veya sonraki sürümlerde, geri çağırma çağrılır, ancak `name` her zaman olur `null` . `name`Ayrıca, `null` ISTEMCI, TLS el sıkışmasının ana bilgisayar adı parametresini sağlamıyorsa de olur.
 * Tüm Web siteleri aynı Kestrel örneğinde çalışır. Kestrel, bir IP adresi ve bağlantı noktasının bir ters proxy olmadan birden çok örnek arasında paylaşılmasını desteklemez.
 
+## <a name="ssltls-protocols"></a>SSL/TLS protokolleri
+
+SSL protokolleri iki eş arasındaki trafiği şifrelemek ve şifresini çözmek için kullanılan protokollerdir, geleneksel olarak bir istemci ve sunucu.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        listenOptions.SslProtocols = SslProtocols.Tls13;
+    });
+});
+```
+
+Varsayılan değer, `SslProtocols.None` Kestrel 'un en iyi Protokolü seçmesini sağlamak için işletim sistemi varsayılanlarını kullanmasına neden olur. Bir protokol seçmek için özel bir nedeniniz yoksa, Varsayılanı kullanın.
 ## <a name="connection-logging"></a>Bağlantı günlüğü
 
 <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging%2A>Bir bağlantıda bayt düzeyinde iletişim Için hata ayıklama düzeyi günlüklerini yayma çağrısı. Bağlantı günlüğü, TLS şifreleme ve proxy 'nin arkasındaki gibi alt düzey iletişimde sorunları gidermeye yardımcı olur. `UseConnectionLogging`Daha önce yerleştirilmişse `UseHttps` , şifrelenmiş trafik günlüğe kaydedilir. `UseConnectionLogging`Öğesinden sonra yerleştirilmişse `UseHttps` , şifresi çözülmüş trafik günlüğe kaydedilir. Bu yerleşik [bağlantı ara yazılımı](#connection-middleware).

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 4f0e98057c03769a672ef350cc3ec724a4f7e721
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 642a7b26a3ba0a79a35437a5c19ee0be63a367af
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431075"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057323"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC’ye Genel Bakış
 
@@ -88,7 +88,7 @@ ASP.NET Core MVC şunları içerir:
 
 ASP.NET Core MVC, gelişmiş ve aranabilir URL 'Ler içeren uygulamalar oluşturmanıza olanak tanıyan güçlü bir URL eşleme bileşeni olan [ASP.NET Core yönlendirmenin](../fundamentals/routing.md)üzerine kurulmuştur. Bu, uygulamanızın URL adlandırma düzenlerini, Web sunucunuzdaki dosyaların nasıl düzenleneceğine bakılmaksızın, arama motoru iyileştirmesi (SEO) ve bağlantı oluşturma için iyi bir şekilde tanımlamanıza olanak sağlar. Yol değer kısıtlamalarını, Varsayılanları ve isteğe bağlı değerleri destekleyen uygun bir yol şablonu sözdizimi kullanarak rotalarınızı tanımlayabilirsiniz.
 
-*Kural tabanlı yönlendirme* , uygulamanızın kabul ettiği URL biçimlerini ve bu biçimlerin her birinin verilen denetleyicide belirli bir eylem yöntemiyle nasıl eşlendiğini genel olarak tanımlamanızı sağlar. Gelen bir istek alındığında, yönlendirme altyapısı URL 'YI ayrıştırır ve tanımlanan URL biçimlerinden biriyle eşleştirir ve ardından ilişkili denetleyicinin eylem yöntemini çağırır.
+*Kural tabanlı yönlendirme* , uygulamanızın kabul ettiği URL biçimlerini ve bu biçimlerin her birinin belirli bir denetleyicide belirli bir eylem yöntemiyle nasıl eşlendiğini genel olarak tanımlamanızı sağlar. Gelen bir istek alındığında, yönlendirme altyapısı URL 'YI ayrıştırır ve tanımlanan URL biçimlerinden biriyle eşleştirir ve ardından ilişkili denetleyicinin eylem yöntemini çağırır.
 
 ```csharp
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
@@ -269,5 +269,5 @@ Daha fazla bilgi için bkz. <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [ASP.NET Core MVC Için Mysınanan. AspNetCore. Mvc-Floent test Kitaplığı](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): MVC ve Web API uygulamalarını test etmek için akıcı bir arabirim sağlayan, türü kesin belirlenmiş birim testi kitaplığı. ( *Microsoft tarafından korunmaz veya desteklenmez.* )
+* [ASP.NET Core MVC Için Mysınanan. AspNetCore. Mvc-Floent test Kitaplığı](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): MVC ve Web API uygulamalarını test etmek için akıcı bir arabirim sağlayan, türü kesin belirlenmiş birim testi kitaplığı. (*Microsoft tarafından korunmaz veya desteklenmez.*)
 * <xref:blazor/components/prerendering-and-integration>

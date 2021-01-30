@@ -18,14 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: a5f2dff7b0e0d4f209ba445b2efb6fb261cbaab1
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: c4cbec1b829fb8fd47f7b6924b6870bd5dd7097d
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94464022"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057310"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core belirli bir şemayla yetkilendir
+
+ASP.NET Core kimlik doğrulama şemalarına giriş için, bkz. [kimlik doğrulama düzeni](xref:security/authentication/index#authentication-scheme).
 
 Tek sayfalı uygulamalar (maça 'Lar) gibi bazı senaryolarda, birden çok kimlik doğrulama yöntemi kullanılması yaygındır. Örneğin, uygulama, cookie JavaScript istekleri için oturum açma ve JWT taşıyıcı kimlik doğrulaması için tabanlı kimlik doğrulaması kullanabilir. Bazı durumlarda, uygulamanın bir kimlik doğrulama işleyicisinin birden çok örneği olabilir. Örneğin, cookie biri temel kimlik içeren iki işleyici ve bir Multi-Factor Authentication (MFA) tetiklendiğinde bir tane oluşturulur. Kullanıcı ek güvenlik gerektiren bir işlem istediği için MFA tetiklenebilir. Kullanıcı MFA gerektiren bir kaynak istediğinde MFA zorlama hakkında daha fazla bilgi için [MFA Ile GitHub sorun koruması bölümüne](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)bakın.
 

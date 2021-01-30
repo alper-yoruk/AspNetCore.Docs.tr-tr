@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 6a70183ce4b1a129ef213300473b233a5ef822f9
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: e4cf10d09c1629afb298aef0c2b86ad3bf7b646c
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94463892"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057375"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 'de anahtar depolama sağlayıcıları
 
@@ -45,7 +45,7 @@ public void ConfigureServices(IServiceCollection services)
 
 `DirectoryInfo`Yerel makinedeki bir dizine işaret edebilir veya ağ paylaşımındaki bir klasöre işaret edebilir. Yerel makinedeki bir dizine işaret ediyorsanız (ve senaryo yalnızca yerel makinedeki uygulamaların bu depoyu kullanmak için erişim gerektirmesidir), bekleyen anahtarları şifrelemek için [WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (Windows üzerinde) kullanmayı göz önünde bulundurun. Aksi takdirde, bekleyen anahtarları şifrelemek için bir [X. 509.952 sertifikası](xref:security/data-protection/implementation/key-encryption-at-rest) kullanmayı düşünün.
 
-## <a name="azure-storage"></a>Azure Depolama
+## <a name="azure-storage"></a>Azure Storage
 
 [Azure. Extensions. AspNetCore. DataProtection. Blobları](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) , Azure Blob depolamada veri koruma anahtarlarının depolanmasını sağlar. Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir. Uygulamalar, kimlik doğrulama cookie veya CSRF korumasını birden çok sunucu arasında paylaşabilir.
 
@@ -139,7 +139,7 @@ Bazen uygulamanın dosya sistemine yazma erişimi olmayabilir. Bir uygulamanın 
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDataProtection()
-        .PersistKeysToRegistry(Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Sample\keys"));
+        .PersistKeysToRegistry(Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Sample\keys", true));
 }
 ```
 

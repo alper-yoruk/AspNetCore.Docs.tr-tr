@@ -1,10 +1,10 @@
 ---
 title: ASP.NET Core Web API 'sindeki yanıt verilerini biçimlendirme
-author: ardalis
+author: rick-anderson
 description: ASP.NET Core Web API 'sindeki yanıt verilerini biçimlendirmeyi öğrenin.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 04/17/2020
+ms.date: 1/28/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 89e3e51373db5f7cff974b7a8c69d06bedf856ca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5d228af00ee34e7f8ca60a5085872fdb93842367
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052519"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057505"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sindeki yanıt verilerini biçimlendirme
 
@@ -81,14 +81,14 @@ Nesne türü döndürülüyor:
 
 ### <a name="the-accept-header"></a>Accept üst bilgisi
 
-İstekte *negotiation* bir `Accept` üst bilgi göründüğünde içerik anlaşması gerçekleşir. Bir istek bir Accept üst bilgisi içerdiğinde ASP.NET Core:
+İstekte  bir `Accept` üst bilgi göründüğünde içerik anlaşması gerçekleşir. Bir istek bir Accept üst bilgisi içerdiğinde ASP.NET Core:
 
 * Kabul üst bilgisindeki medya türlerini tercih sırasına göre numaralandırır.
 * Belirtilen biçimlerden birinde yanıt üretemeyen bir biçimlendirici bulmaya çalışır.
 
 İstemcinin isteğini karşılayabilen bir biçimlendirici bulunmazsa ASP.NET Core:
 
-* `406 Not Acceptable`Ayarlanmışsa döndürür <xref:Microsoft.AspNetCore.Mvc.MvcOptions> veya-
+* `406 Not Acceptable` <xref:Microsoft.AspNetCore.Mvc.MvcOptions.ReturnHttpNotAcceptable?displayProperty=nameWithType> , Veya olarak ayarlandıysa döndürür `true`
 * Yanıt üreten ilk biçimlendirici bulmayı dener.
 
 İstenen biçim için bir biçimlendirici yapılandırılmamışsa, nesneyi biçimlendirebileceğini ilk biçimlendirici kullanılır. İstekte hiçbir `Accept` başlık görünürse:
@@ -132,9 +132,22 @@ Yukarıdaki kod, kullanılarak sonuçları seri hale getirir `XmlSerializer` .
 
 Önceki kodu kullanırken, denetleyici yöntemleri isteğin üstbilgisine göre uygun biçimi döndürür `Accept` .
 
-### <a name="configure-systemtextjson-based-formatters"></a>System.Text.Jstabanlı formatlayıcıları yapılandırma
+### <a name="configure-systemtextjson-based-formatters"></a>Tabanlı formatlayıcıları System.Text.Jsyapılandırma
 
-`System.Text.Json`Tabanlı formatlayıcılar için özellikler kullanılarak yapılandırılabilir `Microsoft.AspNetCore.Mvc.JsonOptions.SerializerOptions` .
+`System.Text.Json`Tabanlı formatlayıcılar için özellikler kullanılarak yapılandırılabilir <xref:Microsoft.AspNetCore.Mvc.JsonOptions.JsonSerializerOptions?displayProperty=fullName> . Varsayılan biçimlendirme camelCase ' dir. Aşağıdaki vurgulanan kod, PascalCase biçimlendirmesini ayarlar:
+
+[!code-csharp[](./formatting/5.0samples/WebAPI5PascalCase/Startup.cs?name=snippet&highlight=4-5)]
+
+Aşağıdaki eylem yöntemi [ControllerBase.](xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A) bir yanıt oluşturmak için sorunu çağırır <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> :
+
+[!code-csharp[](formatting/5.0samples/WebAPI5PascalCase/Controllers/WeatherForecastController.cs?name=snippet&highlight=4)]
+
+Önceki kodla:
+
+  * `https://localhost:5001/WeatherForecast/temperature` PascalCase döndürür.
+  * `https://localhost:5001/WeatherForecast/error` camelCase döndürür. Uygulama biçimi PascalCase olarak ayarlasa bile hata yanıtı her zaman camelCase olur. `ProblemDetails` küçük harf belirten [RFC 7807](https://tools.ietf.org/html/rfc7807#appendix-A)' i izler
+
+Aşağıdaki kod, PascalCase ' i ayarlar ve özel bir dönüştürücü ekler:
 
 ```csharp
 services.AddControllers().AddJsonOptions(options =>

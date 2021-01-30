@@ -5,7 +5,7 @@ description: ASP.NET Core içindeki mantıksal HttpClient örneklerini yönetmek
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/09/2020
+ms.date: 1/21/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1cf3029452f87a396847f969f0f3136a75874752
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059500"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057336"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Glenn CONDRON](https://github.com/glennc), [Ryan şimdi ak](https://github.com/rynowak), [Steve Gordon](https://github.com/stevejgordon), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Kirk larkabağı](https://github.com/serpent5)
+[Kirk Larkabağı](https://github.com/serpent5), [Steve Gordon](https://github.com/stevejgordon), [Glenn CONDRON](https://github.com/glennc)ve [Ryan şimdi ak](https://github.com/rynowak).
 
 Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak için kayıt yapılabilir ve kullanılabilir <xref:System.Net.Http.HttpClient> . `IHttpClientFactory` aşağıdaki avantajları sunar:
 
@@ -58,7 +58,7 @@ En iyi yaklaşım, uygulamanın gereksinimlerine bağlı olarak değişir.
 
 `IHttpClientFactory` , çağırarak kaydedilebilir `AddHttpClient` :
 
-[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
+[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1&highlight=13)]
 
 `IHttpClientFactory` [Bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)kullanılarak bir istek yapılabilir. Aşağıdaki kod `IHttpClientFactory` bir örnek oluşturmak için kullanır `HttpClient` :
 
@@ -238,16 +238,15 @@ Yukarıdaki kodda, `DeleteItemAsync` yöntemi çağırır <xref:System.Net.Http.
 
 `HttpClient` , giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramıdır. `IHttpClientFactory`:
 
-* Her bir adlandırılmış istemci için uygulanacak işleyiciler tanımlamayı basitleştirir.
-* Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydedilmesini ve zincirleme kullanımını destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu model:
-
-  * ASP.NET Core gelen ara yazılım ardışık düzenine benzerdir.
-  * , HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar, örneğin:
-
-    * önbelleği
-    * hata işleme
-    * getir
-    * günlüğe kaydetme
+  * Her bir adlandırılmış istemci için uygulanacak işleyiciler tanımlamayı basitleştirir.
+  * Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydedilmesini ve zincirleme kullanımını destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu model:
+  
+    * ASP.NET Core gelen ara yazılım ardışık düzenine benzerdir.
+    * , HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar, örneğin:
+      * önbelleği
+      * hata işleme
+      * getir
+      * günlüğe kaydetme
 
 Temsilci seçme işleyicisi oluşturmak için:
 
@@ -262,13 +261,31 @@ Yukarıdaki kod, üstbilginin istekte olup olmadığını denetler `X-API-KEY` .
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup2.cs?name=snippet1)]
 
-Yukarıdaki kodda,, `ValidateHeaderHandler` dı ile kaydedilir. `IHttpClientFactory`Her işleyici için ayrı bır dı kapsamı oluşturur. İşleyiciler herhangi bir kapsamın hizmetlerine bağlı olabilir. İşleyicilerin bağımlı olduğu hizmetler, işleyicinin elden çıkarılmasıyla kaldırılır.
-
-Kaydedildikten sonra, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> işleyicinin türü geçirerek, çağrılabilir.
+Yukarıdaki kodda,, `ValidateHeaderHandler` dı ile kaydedilir. Kaydedildikten sonra, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> işleyicinin türü geçirerek, çağrılabilir.
 
 Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işleyici, son isteği çalıştırana kadar sonraki işleyiciyi sarmalar `HttpClientHandler` :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
+
+### <a name="use-di-in-outgoing-request-middleware"></a>Giden istek ara ortamında DI kullanma
+
+`IHttpClientFactory`Yeni bir temsilci seçme işleyicisi oluşturduğunda, işleyicinin Oluşturucu parametrelerini karşılamak IÇIN dı kullanır. `IHttpClientFactory` Her işleyici için **ayrı** bir dı kapsamı oluşturur ve bu, bir işleyici *kapsamlı* bir hizmeti tükettiği zaman ortaya çıkmasına neden olabilir.
+
+Örneğin, bir görevi tanımlayıcı ile bir işlem olarak temsil eden aşağıdaki arabirimi ve uygulamasını göz önünde bulundurun `OperationId` :
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/OperationScoped.cs?name=snippet_Types)]
+
+Adından da anlaşılacağı gibi, `IOperationScoped` *kapsamlı* bir yaşam süresi kullanılarak dı ile kaydedilir:
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Startup.cs?name=snippet_IOperationScoped&highlight=18,26)]
+
+Aşağıdaki temsilci işleyicisi, `IOperationScoped` `X-OPERATION-ID` giden istek için üst bilgiyi ayarlamak için kullanır ve kullanır:
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Handlers/OperationHandler.cs?name=snippet_Class&highlight=13)]
+
+[ `HttpRequestsSample` İndir](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] `/Operation` sayfasında, sayfasına gidin ve sayfayı yenileyin. İstek kapsamı değeri her istek için değişir, ancak işleyici kapsam değeri yalnızca her 5 saniyede bir değişir.
+
+İşleyiciler herhangi bir kapsamın hizmetlerine bağlı olabilir. İşleyicilerin bağımlı olduğu hizmetler, işleyicinin elden çıkarılmasıyla kaldırılır.
 
 İleti işleyicileriyle istek başına durumu paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
 
@@ -374,7 +391,7 @@ Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmasında uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -692,7 +709,7 @@ Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -748,7 +765,7 @@ Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapıland�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 .NET Framework hedefleyen projeler [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketinin yüklenmesini gerektirir. .NET Core ile hedeflenen ve [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvuran projeler zaten paketi içeriyor `Microsoft.Extensions.Http` .
 
@@ -1000,7 +1017,7 @@ Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 

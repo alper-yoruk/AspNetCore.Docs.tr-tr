@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 2df938f3ace47472536020f9848e954fc4446f15
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 0b555ad7befe882c4ffd06e2505a9edc1263eee2
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658592"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057089"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Güvenli ASP.NET Core Blazor WebAssembly
 
@@ -110,6 +110,14 @@ Uygulamalar, genellikle bir sunucuya bir Web API çağrısını temel alan kulla
 ## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>Sunucu ile Linux üzerinde Azure App Service Identity
 
 Sunucu ile Linux üzerinde Azure App Service dağıtım sırasında sertifikayı vereni açıkça belirtin Identity . Daha fazla bilgi için bkz. <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
+
+## <a name="windows-authentication"></a>Windows Kimlik Doğrulaması
+
+BlazorWebassembly ile veya başka BIR Spa çerçevesiyle Windows kimlik doğrulamasının kullanılmasını önermiyoruz. Active Directory Federasyon Hizmetleri (AD FS) (ADFS) ile OıDC gibi Windows kimlik doğrulaması yerine belirteç tabanlı protokoller kullanmanızı öneririz.
+
+Windows kimlik doğrulaması, Blazor webassembly ile veya başka bir spa çerçevesiyle kullanılıyorsa, uygulamayı siteler arası istek sahteciliğini önleme (CSRF) belirteçlerinden korumak için ek ölçüler gerekir. Windows kimlik doğrulamasının, kaynaklar cookie arasında kimlik doğrulama bağlamı paylaşımını engellemek için herhangi bir mekanizma sunamayacağı ek Ile Windows kimlik doğrulaması için de geçerlidir. CSRF 'den ek koruma olmadan Windows kimlik doğrulaması kullanan uygulamalar, en azından bir kuruluşun intraneti ile sınırlandırılmalıdır ve Internet 'te kullanılmamalıdır.
+
+Bilgi için, bkz <xref:security/anti-request-forgery> ..
 
 ## <a name="implementation-guidance"></a>Uygulama Kılavuzu
 

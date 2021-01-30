@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 197954965ee57b2a44ad0217d79ba142114e7df6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3bb3c059eafa8e948fe2e719207927c009902e59
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060852"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057453"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core siteler arası Istek sahteciliği (XSRF/CSRF) saldırılarını önle
 
@@ -87,11 +87,11 @@ Cookietabanlı kimlik doğrulaması, popüler bir kimlik doğrulama biçimidir. 
 
 ### <a name="no-loccookie-based-authentication"></a>Cookietabanlı kimlik doğrulaması
 
-Bir Kullanıcı Kullanıcı adını ve parolasını kullanarak kimliğini doğruladığında, kimlik doğrulama ve yetkilendirme için kullanılabilecek bir kimlik doğrulama bileti içeren bir belirteç verilirler. Belirteç, cookie istemcinin yaptığı her istekte eşlik eden bir olarak depolanır. Bu işlemi oluşturmak ve doğrulamak cookie , Cookie kimlik doğrulama ara yazılımı tarafından gerçekleştirilir. [Ara yazılım](xref:fundamentals/middleware/index) , bir Kullanıcı sorumlusunu şifreli olarak serileştirir cookie . Sonraki isteklerde, ara yazılım öğesini doğrular cookie , sorumluyu yeniden [HttpContext](/dotnet/api/microsoft.aspnetcore.http.httpcontext)oluşturur ve sorumluyu [Kullanıcı](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user) özelliğine atar.
+Bir Kullanıcı Kullanıcı adını ve parolasını kullanarak kimliğini doğruladığında, kimlik doğrulama ve yetkilendirme için kullanılabilecek bir kimlik doğrulama bileti içeren bir belirteç verilirler. Belirteç, cookie istemcinin yaptığı her istekte eşlik eden bir olarak depolanır. Bu işlemi oluşturmak ve doğrulamak cookie , Cookie kimlik doğrulama ara yazılımı tarafından gerçekleştirilir. [Ara yazılım](xref:fundamentals/middleware/index) , bir Kullanıcı sorumlusunu şifreli olarak serileştirir cookie . Sonraki isteklerde, ara yazılım öğesini doğrular cookie , sorumluyu yeniden [](/dotnet/api/microsoft.aspnetcore.http.httpcontext)oluşturur ve sorumluyu [Kullanıcı](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user) özelliğine atar.
 
 ### <a name="token-based-authentication"></a>Belirteç tabanlı kimlik doğrulaması
 
-Bir kullanıcının kimliği doğrulandığında, bunlar bir belirteç (antibir belirteç değil) olarak verilirler. Belirteç, [talepler](/dotnet/framework/security/claims-based-identity-model) formundaki Kullanıcı bilgilerini veya uygulamayı uygulamada tutulan Kullanıcı durumuna işaret eden bir başvuru belirtecini içerir. Bir kullanıcı kimlik doğrulaması gerektiren bir kaynağa erişmeyi denediğinde, belirteç, taşıyıcı belirteç biçiminde ek bir yetkilendirme üstbilgisiyle uygulamaya gönderilir. Bu, uygulamanın durum bilgisiz olmasını sağlar. Sonraki her istekte, belirteç sunucu tarafı doğrulama isteğine geçirilir. Bu belirteç *şifrelenmez* ; *kodlandı* . Sunucusunda, bilgilerine erişmek için belirtecin kodu çözülür. Sonraki isteklere belirteç göndermek için, belirteci tarayıcının yerel deposunda depolayın. Belirteç tarayıcının yerel deposunda depolanıyorsa, CSRF güvenlik açığıyla ilgilenmeyin. CSRF, belirteç bir içinde depolandığında sorun teşkil ediyor cookie . Daha fazla bilgi için bkz. GitHub sorunu [Spa kodu örneği iki cookie s ekler](https://github.com/dotnet/AspNetCore.Docs/issues/13369).
+Bir kullanıcının kimliği doğrulandığında, bunlar bir belirteç (antibir belirteç değil) olarak verilirler. Belirteç, [talepler](/dotnet/framework/security/claims-based-identity-model) formundaki Kullanıcı bilgilerini veya uygulamayı uygulamada tutulan Kullanıcı durumuna işaret eden bir başvuru belirtecini içerir. Bir kullanıcı kimlik doğrulaması gerektiren bir kaynağa erişmeyi denediğinde, belirteç, taşıyıcı belirteç biçiminde ek bir yetkilendirme üstbilgisiyle uygulamaya gönderilir. Bu, uygulamanın durum bilgisiz olmasını sağlar. Sonraki her istekte, belirteç sunucu tarafı doğrulama isteğine geçirilir. Bu belirteç *şifrelenmez*; *kodlandı*. Sunucusunda, bilgilerine erişmek için belirtecin kodu çözülür. Sonraki isteklere belirteç göndermek için, belirteci tarayıcının yerel deposunda depolayın. Belirteç tarayıcının yerel deposunda depolanıyorsa, CSRF güvenlik açığıyla ilgilenmeyin. CSRF, belirteç bir içinde depolandığında sorun teşkil ediyor cookie . Daha fazla bilgi için bkz. GitHub sorunu [Spa kodu örneği iki cookie s ekler](https://github.com/dotnet/AspNetCore.Docs/issues/13369).
 
 ### <a name="multiple-apps-hosted-at-one-domain"></a>Tek bir etki alanında barındırılan birden çok uygulama
 
@@ -250,7 +250,7 @@ services.AddAntiforgery(options =>
 | ------ | ----------- |
 | [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Antiforgery 'leri oluşturmak için kullanılan ayarları belirler cookie . |
 | [CookieEtki alanı](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Öğesinin etki alanı cookie . Varsayılan olarak olur `null` . Bu özellik artık kullanılmıyor ve gelecek bir sürümde kaldırılacak. Önerilen alternatif şunlardır Cookie . Alanını. |
-| [CookieAd](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie öğesinin adı. Ayarlanmamışsa, sistem [varsayılan Cookie ön eki](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) (") ile başlayan benzersiz bir ad oluşturur. AspNetCore. Antiforgery. "). Bu özellik artık kullanılmıyor ve gelecek bir sürümde kaldırılacak. Önerilen alternatif şunlardır Cookie . Ada. |
+| [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | cookie öğesinin adı. Ayarlanmamışsa, sistem [varsayılan Cookie ön eki](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) (") ile başlayan benzersiz bir ad oluşturur. AspNetCore. Antiforgery. "). Bu özellik artık kullanılmıyor ve gelecek bir sürümde kaldırılacak. Önerilen alternatif şunlardır Cookie . Ada. |
 | [CookieYol](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | Üzerinde ayarlanan yol cookie . Bu özellik artık kullanılmıyor ve gelecek bir sürümde kaldırılacak. Önerilen alternatif şunlardır Cookie . Yolun. |
 | [Form alanadı](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Görünümlerde antiforgery belirteçlerini işlemek için antiforgery sistemi tarafından kullanılan gizli form alanının adı. |
 | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Antiforgery sistemi tarafından kullanılan üstbilginin adı. Varsa `null` , sistem yalnızca form verilerini dikkate alır. |
@@ -488,6 +488,10 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/anti-request-forgery/sample/AngularSample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+
+## <a name="windows-authentication-and-antiforgery-no-loccookies"></a>Windows kimlik doğrulaması ve cookie antiforlik s
+
+Windows kimlik doğrulaması kullanılırken, uygulama uç noktaları, s için yapılan şekilde CSRF saldırılarına karşı korunmalıdır cookie .  Tarayıcı kimlik doğrulama bağlamını örtülü olarak sunucusuna gönderir, bu nedenle uç noktaların CSRF saldırılarına karşı korunması gerekir.
 
 ## <a name="extend-antiforgery"></a>Antiforgery 'yi uzat
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: e873fdd201cf0cdc809030fde30c6a8da2899861
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 67a63f1b4f705a4857dea2e6d1a942d4f21469f5
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751561"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057102"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -146,7 +146,7 @@ Yukarıdaki kodda, `<input>` öğesinin alan türü ( `type` ) varsayılan olara
 
 Yaygın bir senaryo, alt bileşendeki bir özelliği üst öğesinde bir özelliğe bağlamadır. Birden çok bağlama düzeyi aynı anda gerçekleştiğinden, bu senaryoya *zincirleme bağlama* denir.
 
-[Bileşen parametreleri](xref:blazor/components/index#component-parameters) bir üst bileşenin sözdizimi ile bağlama özelliklerine ve alanlarına izin verir `@bind-{PROPERTY OR FIELD}` .
+[Bileşen parametreleri](xref:blazor/components/index#component-parameters) bir üst bileşenin sözdizimi ile bağlama özelliklerine izin verir `@bind-{PROPERTY}` .
 
 Zincirli bağlamalar [`@bind`](xref:mvc/views/razor#bind) alt bileşendeki sözdizimiyle uygulanamaz. Alt bileşenden üst öğe içindeki özelliği güncelleştirmeyi desteklemek için bir olay işleyicisi ve değeri ayrı olarak belirtilmelidir.
 

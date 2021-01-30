@@ -4,7 +4,7 @@ author: mjrousos
 description: ASP.NET Core kimlik doğrulaması hakkında bilgi edinin.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/03/2020
+ms.date: 1/24/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: e9e4ca11d20557666c75b84e56af825d002df0f1
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: 72036e9c4c92ee5dd82ac4a67e766fb0e5c8f924
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94464009"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057297"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core kimlik doğrulamasına genel bakış
 
@@ -62,7 +62,19 @@ Kimlik doğrulama ara yazılımı, uygulamasının ' de `Startup.Configure` <xre
 
 ## <a name="authentication-concepts"></a>Kimlik doğrulama kavramları
 
+Kimlik doğrulama, <xref:System.Security.Claims.ClaimsPrincipal> izin kararlarını sağlamak için yetkilendirme sağlamaktan sorumludur. Doğru talepler kümesini oluşturmaktan sorumlu olan kimlik doğrulama işleyicisinin hangisi olduğunu seçmek için birden çok kimlik doğrulama düzeni yaklaşımına sahiptir:
+
+  * Bir sonraki bölümde ele alınan [kimlik doğrulama düzeni](xref:security/authorization/limitingidentitybyscheme).
+  * Sonraki bölümde ele alınan varsayılan kimlik doğrulama düzeni.
+  * Doğrudan [HttpContext. User](xref:Microsoft.AspNetCore.Http.HttpContext.User)öğesini ayarlayın.
+
+Şemaları otomatik olarak yoklama yoktur. Varsayılan düzen belirtilmemişse, düzen Yetkilendir özniteliğinde belirtilmelidir, aksi takdirde aşağıdaki hata oluşur:
+
+  InvalidOperationException: authenticationScheme belirtilmedi ve hiçbir Defaultano planı bulunamadı. Varsayılan düzenler Addaduthentication (dize defaultScheme) veya Addaduthentication (eylem &lt; authenticationoptions &gt; configureoptions) kullanılarak ayarlanabilir.
+
 ### <a name="authentication-scheme"></a>Kimlik doğrulama düzeni
+
+[Kimlik doğrulama düzeni](xref:security/authorization/limitingidentitybyscheme) , doğru talep kümesini oluşturmadan sorumlu olan kimlik doğrulama işleyicisini seçebilir. Daha fazla bilgi için bkz. [belirli bir şemayla yetkilendirme](xref:security/authorization/limitingidentitybyscheme).
 
 Kimlik doğrulama düzeni, öğesine karşılık gelen bir addır:
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 44c507fb5e0ff4477a84bfc1e4d0c62180c8dd37
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 04ece9628265135efd0dd92d29c8b14fc897329e
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252844"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057362"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -120,7 +120,7 @@ Geleneksel yönlendirme, denetleyiciler ve görünümlerle kullanılır. `defaul
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet2)]
 
-, *geleneksel yönlendirmeye* bir örnektir. Bu, URL yolları için bir *kural* oluşturduğundan *geleneksel yönlendirme* olarak adlandırılır:
+Yukarıdaki, *geleneksel bir yolun* örneğidir. Bu, URL yolları için bir *kural* oluşturduğundan *geleneksel yönlendirme* olarak adlandırılır:
 
 * İlk yol segmenti, `{controller=Home}` , denetleyici adıyla eşlenir.
 * İkinci kesim, `{action=Index}` , [eylem](#action) adıyla eşlenir.

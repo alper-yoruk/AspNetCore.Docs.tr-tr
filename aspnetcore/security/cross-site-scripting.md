@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a7a0c0ff44de5b04d7fa9a8f2f16f7c9f786f64b
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053091"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057076"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core siteler arası komut dosyası (XSS) engelle
 
@@ -162,9 +162,9 @@ Yukarıdaki kod aşağıdaki çıktıyı üretir:
 ```
 
 >[!WARNING]
-> DOM öğeleri **NOT** oluşturmak veya `document.write()` dinamik olarak oluşturulan Içerikte kullanmak için JavaScript 'te güvenilmeyen girişi birleştirme.
+> DOM öğelerioluşturmak veya `document.write()` dinamik olarak oluşturulan Içerikte kullanmak için JavaScript 'te güvenilmeyen girişi birleştirme.
 >
-> Kodun DOM tabanlı XSS: _ ' e gösterilmesini engellemek için aşağıdaki yaklaşımlardan birini kullanın `createElement()` ve uygun yöntemlerle ya da düğüm gibi özelliklerle özellik değerleri atayın `node.textContent=` . InnerText = '.
+> Kodun DOM tabanlı XSS: _ ' e gösterilmesini engellemek için aşağıdaki yaklaşımlardan birini kullanın `createElement()` ve uygun yöntemlerle ya da özelliklerine sahip özellik değerlerini atayın `node.textContent=` `node.InnerText=` .
 > * `document.CreateTextNode()` ve uygun DOM konumuna ekleyin.
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ Yukarıdaki kod aşağıdaki çıktıyı üretir:
 
 HTML, JavaScript ve URL kodlayıcıları kodunuzda iki şekilde kullanılabilir, bunları [bağımlılık ekleme](xref:fundamentals/dependency-injection) yoluyla ekleyebilir veya ad alanında bulunan varsayılan kodlayıcıları kullanabilirsiniz `System.Text.Encodings.Web` . Varsayılan kodlayıcıları kullanırsanız, güvenli olarak değerlendirilecek karakter aralıklarına uyguladığınız her türlü, varsayılan kodlayıcılar mümkün olan en güvenli kodlama kurallarını kullanır.
 
-Yapılandırıcılar aracılığıyla yapılandırılabilir kodlayıcıları kullanmak için, kurucularınız uygun şekilde bir *Htmlencoder* , *javascriptencoder* ve *URLEncoder* parametresi almalıdır. Örneğin;
+Yapılandırıcılar aracılığıyla yapılandırılabilir kodlayıcıları kullanmak için, kurucularınız uygun şekilde bir *Htmlencoder*, *javascriptencoder* ve *URLEncoder* parametresi almalıdır. Örneğin;
 
 ```csharp
 public class HomeController : Controller
