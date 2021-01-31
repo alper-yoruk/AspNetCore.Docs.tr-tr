@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 04ece9628265135efd0dd92d29c8b14fc897329e
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 0863b5758f33b720636f3b927fcb9014cd106c21
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057362"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217550"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -826,7 +826,7 @@ Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rota
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Controllers/UsersController.cs)]
 
-Her denetleyicinin ad alanı, tamamlanma açısından burada gösterilmiştir. Yukarıdaki denetleyiciler aynı ad alanını kullanıyorsa, bir derleyici hatası oluşturulur. Sınıf ad alanlarının MVC 'nin yönlendirme üzerinde hiçbir etkisi yoktur.
+Her denetleyicinin ad alanı, tamamlanma açısından burada gösterilmiştir. Yukarıdaki denetleyiciler aynı ad alanını kullansaydı bir derleyici hatası oluşturulur. Sınıf ad alanlarının MVC 'nin yönlendirme üzerinde hiçbir etkisi yoktur.
 
 İlk iki denetleyici alanların üyeleridir ve yalnızca ilgili alan adı rota değeri tarafından sağlandığında eşleşir `area` . Üçüncü denetleyici hiçbir alanın üyesi değildir ve yalnızca Yönlendirme tarafından hiçbir değer sağlanmamışsa eşleşemez `area` .
 

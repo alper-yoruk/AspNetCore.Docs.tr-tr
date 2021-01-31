@@ -1,4 +1,4 @@
-HTTP tanıtımları, yanıt gövdesi gönderildikten sonra gönderilmeleri dışında HTTP üst bilgilerine benzer. IIS ve HTTP.SYS için yalnızca HTTP/2 yanıt tanıtımları desteklenir.
+HTTP tanıtımları, yanıt gövdesi gönderildikten sonra gönderilmeleri dışında HTTP üst bilgilerine benzer. IIS ve HTTP.sys için yalnızca HTTP/2 yanıt tanıtımları desteklenir.
 
 ```csharp
 if (httpContext.Response.SupportsTrailers())

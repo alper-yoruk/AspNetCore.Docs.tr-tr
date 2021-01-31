@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 6456707620ae1c1f4d23f3562c78d1bf05d4844f
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0967a70b498156d9c4ea8818ee1c80b37d9f2d87
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058915"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217485"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -66,9 +66,9 @@ Alternatif olarak, gRPC-Web ara yazılımı, tüm hizmetlerin varsayılan olarak
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
-> .NET Core 3. x içinde [Http.systarafından barındırılırken ](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
+> .NET Core 3. x içinde [HTTP.systarafından barındırılırken ](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
 >
-> GRPC 'yi (Http.sys Web üzerinde çalışmaya yönelik bir geçici çözüm) [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)edinebilirsiniz.
+> GRPC 'yi (HTTP.sys Web üzerinde çalışmaya yönelik bir geçici çözüm) [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)edinebilirsiniz.
 
 ### <a name="grpc-web-and-cors"></a>gRPC-Web ve CORS
 

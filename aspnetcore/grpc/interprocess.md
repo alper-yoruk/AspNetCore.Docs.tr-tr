@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/interprocess
-ms.openlocfilehash: d806a340d8540fce8af6ccc6ff68325e4b733922
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 8c0f8fb1468e61d5aa2e7f42cb5da33c01819124
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059890"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217472"
 ---
 # <a name="inter-process-communication-with-grpc"></a>gRPC ile işlemler arası iletişim
 
@@ -64,9 +64,6 @@ Kestrel, UDS uç noktaları için yerleşik desteğe sahiptir. UıDS, Linux, mac
 ## <a name="client-configuration"></a>İstemci yapılandırması
 
 `GrpcChannel` Özel aktarımlar üzerinde gRPC çağrıları yapmayı destekler. Bir kanal oluşturulduğunda, özel bir içeren ile yapılandırılabilir `SocketsHttpHandler` `ConnectCallback` . Geri arama, istemcinin özel aktarımlar üzerinden bağlantı yapmasına ve ardından bu aktarım üzerinden HTTP istekleri göndermesini sağlar.
-
-> [!IMPORTANT]
-> `SocketsHttpHandler.ConnectCallback` , .NET 5 sürüm adayı 2 ' de yeni bir API 'dir.
 
 UNIX etki alanı yuvaları bağlantı fabrikası örneği:
 

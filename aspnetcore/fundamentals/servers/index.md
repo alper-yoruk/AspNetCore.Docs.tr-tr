@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 91d1373d764644820d1fac6064ee503e1ef4455c
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 2acddd212639ac0a82b3c46f2225ff66d0999dd0
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057349"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217563"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamaları
 
@@ -38,7 +38,7 @@ ASP.NET Core bir uygulama, işlem içi HTTP sunucu uygulamasıyla çalışır. S
 
 ASP.NET Core aşağıdakiler ile birlikte gelir:
 
-* [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak bağlantı noktası Paylaşımı gibi bazı gelişmiş özelliklere sahip değildir `Http.Sys` .
+* [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir. Daha fazla bilgi için bu belgedeki [Kestrel vs. HTTP.sys](#korh) bölümüne bakın.
 * IIS HTTP sunucusu, IIS için bir [işlem içi sunucusudur](#hosting-models) .
 * [HTTP.sys sunucusu](xref:fundamentals/servers/httpsys) , [HTTP.sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
 
@@ -48,6 +48,26 @@ ASP.NET Core aşağıdakiler ile birlikte gelir:
 * Bir işlemde, IIS çalışan işleminden ( [işlem dışı barındırma modeli](#hosting-models)) [Kestrel sunucusuyla](#kestrel)ayırın.
 
 [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module) , IIS ile Işlem ıçı IIS HTTP sunucusu ya da Kestrel arasında yerel IIS isteklerini işleyen yerel bir IIS modülüdür. Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module>.
+
+<a name="korh"></a>
+
+## <a name="kestrel-vs-httpsys"></a>Kestrel vs. HTTP.sys
+
+Kestrel HTTP.sys aşağıdaki avantajları içerir:
+
+  * Daha iyi performans ve bellek kullanımı.
+  * Platformlar arası
+  * Çeviklik, işletim sisteminden bağımsız olarak geliştirilmiştir ve düzeltme eki yüklenmiş.
+  * Programlı bağlantı noktası ve TLS yapılandırması
+  * [PPv2](https://github.com/aspnet/AspLabs/blob/master/src/ProxyProtocol/ProxyProtocol.Sample/ProxyProtocol.cs) ve alternatif aktarımlar gibi protokollere izin veren genişletilebilirlik.
+
+Http.Sys, Kestrel sahip olmadığı aşağıdaki özelliklerle paylaşılan bir çekirdek modu bileşeni olarak çalışır:
+
+  * Bağlantı noktası Paylaşımı
+  * Çekirdek modu Windows kimlik doğrulaması. [Kestrel yalnızca Kullanıcı modu kimlik doğrulamasını destekler](xref:security/authentication/windowsauth#kestrel).
+  * Kuyruk aktarımları aracılığıyla hızlı proxy
+  * Doğrudan dosya iletimi
+  * Yanıtları Önbelleğe Alma
 
 ## <a name="hosting-models"></a>Barındırma modelleri
 
@@ -74,8 +94,8 @@ ASP.NET Core, varsayılan, platformlar arası HTTP sunucusu olan [Kestrel Server
 
 ## <a name="kestrel"></a>Kestrel
 
- [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak bağlantı noktası Paylaşımı gibi bazı gelişmiş özelliklere sahip değildir `Http.Sys` .
- 
+ [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir. Daha fazla bilgi için bu belgedeki [Kestrel vs. HTTP.sys](#korh) bölümüne bakın.
+
 Kestrel kullanın:
 
 * Kendi başına bir uç sunucu olarak, Internet dahil olmak üzere istekleri doğrudan bir ağdan işleme.

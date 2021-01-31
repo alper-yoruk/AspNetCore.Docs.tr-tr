@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 67f245b7f4e4aa97b30c5318c73732617aea44c7
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059526"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217576"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
@@ -134,7 +134,7 @@ Yukarıdaki kodda, `SharedResource` doğrulama iletilerinizin depolandığı res
 
 ### <a name="supportedcultures-and-supporteduicultures"></a>Supportedkültürleri ve SupportedUICultures
 
-ASP.NET Core iki kültür değeri belirtmenize olanak tanır `SupportedCultures` `SupportedUICultures` . İçin [CultureInfo](/dotnet/api/system.globalization.cultureinfo) nesnesi, `SupportedCultures` Tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures` Ayrıca metnin, büyük/küçük harf kurallarının ve dize karşılaştırmalarının sıralama sırasını belirler. Sunucunun kültürü nasıl aldığı hakkında daha fazla bilgi için bkz [. CultureInfo. CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) . , `SupportedUICultures` Hangi çevrilmiş dizelerin ( *. resx* dosyalarından) [ResourceManager](/dotnet/api/system.resources.resourcemanager)tarafından arandığını belirler. `ResourceManager`Yalnızca tarafından belirlenen kültüre özgü dizeleri arar `CurrentUICulture` . .NET 'teki her iş parçacığında `CurrentCulture` ve `CurrentUICulture` nesneler bulunur. ASP.NET Core kültüre bağımlı işlevleri işlerken bu değerleri inceler. Örneğin, geçerli iş parçacığının kültürü "en-US" (Ingilizce, Birleşik Devletler) olarak ayarlandıysa, `DateTime.Now.ToLongDateString()` "Perşembe, 18 şubat 2016" görüntüler, ancak `CurrentCulture` "ES-es" (Ispanyolca, İspanya) olarak ayarlandıysa çıkış "Jueves, 18 de febrero de 2016" olacaktır.
+ASP.NET Core iki kültür değeri belirtmenize olanak tanır <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedCultures> <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedUICultures> . <xref:System.Globalization.CultureInfo>Nesnesi, `SupportedCultures` Tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures` Ayrıca metnin, büyük/küçük harf kurallarının ve dize karşılaştırmalarının sıralama sırasını belirler. Sunucunun kültürü nasıl aldığı hakkında daha fazla bilgi için bkz <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=nameWithType> <xref:System.Globalization.CultureInfo.CurrentUICulture?displayProperty=nameWithType> . ve. , `SupportedUICultures` Tarafından hangi çevrilmiş dizelerin ( `.resx` dosyalarından) arandığını belirler <xref:System.Resources.ResourceManager> . , `ResourceManager` Tarafından belirlenen kültüre özgü dizeleri arar `CurrentUICulture` . .NET 'teki her iş parçacığında `CurrentCulture` ve `CurrentUICulture` nesneler bulunur. Framework, kültüre bağımlı işlevleri işlerken bu değerleri inceler. Geçerli iş parçacığının kültürü `en-US` (İngilizce, Birleşik Devletler) olarak ayarlandıysa, `DateTime.Now.ToLongDateString()` görüntüler `Thursday, February 18, 2016` ; ancak `CurrentCulture` `es-ES` (İspanyolca, İspanya) olarak ayarlandıysa çıkış olur `jueves, 18 de febrero de 2016` .
 
 ## <a name="resource-files"></a>Kaynak dosyalar
 
@@ -177,7 +177,7 @@ Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor ben
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda bir derlemenin kök ad alanını sağlar. 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>Özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda, bir derlemenin kök ad alanını sağlar. 
 
 > [!WARNING]
 > Bu durum, projenin adı geçerli bir .NET tanımlayıcısı olmadığında ortaya çıkabilir. Örneğin, `my-project-name.csproj` `my_project_name` Bu hata için kök ad alanını ve derleme adını kullanır `my-project-name` . 
@@ -531,7 +531,7 @@ Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor ben
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda bir derlemenin kök ad alanını sağlar. 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>Özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda, bir derlemenin kök ad alanını sağlar. 
 
 > [!WARNING]
 > Bu durum, projenin adı geçerli bir .NET tanımlayıcısı olmadığında ortaya çıkabilir. Örneğin, `my-project-name.csproj` `my_project_name` Bu hata için kök ad alanını ve derleme adını kullanır `my-project-name` . 
@@ -886,7 +886,7 @@ Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor ben
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-[RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda bir derlemenin kök ad alanını sağlar. 
+<xref:Microsoft.Extensions.Localization.RootNamespaceAttribute>Özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda, bir derlemenin kök ad alanını sağlar. 
 
 > [!WARNING]
 > Bu durum, projenin adı geçerli bir .NET tanımlayıcısı olmadığında ortaya çıkabilir. Örneğin, `my-project-name.csproj` `my_project_name` Bu hata için kök ad alanını ve derleme adını kullanır `my-project-name` . 

@@ -1,5 +1,5 @@
 ---
-title: .NET tarafından desteklenen platformlar için gRPC
+title: .NET destekli platformlar üzerinde gRPC
 author: jamesnk
 description: .NET üzerinde gRPC için desteklenen platformlar hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.0'
@@ -18,29 +18,29 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/supported-platforms
-ms.openlocfilehash: 92ca38875c6618c8630a66af16548d32bc469a62
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 88d371f460839261b618a32564a723c257b0b119
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057717"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217498"
 ---
-# <a name="grpc-for-net-supported-platforms"></a>.NET tarafından desteklenen platformlar için gRPC
+# <a name="grpc-on-net-supported-platforms"></a>.NET destekli platformlar üzerinde gRPC
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
 Bu makalede, .NET ile gRPC kullanmaya yönelik gereksinimler ve desteklenen platformlar açıklanmaktadır.
 
-gRPC, daha gelişmiş özelliklerden bazıları için HTTP/2 kullanmak üzere tasarlanmıştır. GRPC kullanımını engelleyebilen her yerde HTTP/2 desteklenmez. Bu nedenle, istemciler ve sunucular arasında gRPC çağrıları göndermek için HTTP/1.1 ile uyumlu ikinci bir hat biçimi vardır:
+gRPC, HTTP/2 ' de bulunan gelişmiş özelliklerden yararlanır. HTTP/2 her yerde desteklenmez, ancak gRPC için HTTP/1.1 kullanan ikinci bir hat biçimi mevcuttur:
 
 * [`application/grpc`](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) -HTTP/2 üzerinden gRPC, gRPC 'nin genellikle kullanıldığı bir şekilde yapılır.
 * [`application/grpc-web`](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) -gRPC-Web, gRPC protokolünü HTTP/1.1 ile uyumlu olacak şekilde değiştirir. gRPC-Web daha fazla yerde kullanılabilir, özellikle de tarayıcı uygulamaları tarafından çağrılabilir. İki gelişmiş gRPC özelliği artık desteklenmiyor: istemci akışı ve çift yönlü akış.
 
-.NET için gRPC, her iki kablo biçimini destekler. GRPC-Web ' i ayarlama hakkında daha fazla bilgi için bkz <xref:grpc/browser> ..
+.NET üzerinde gRPC, her iki kablo biçimini destekler. HTTP/2 üzerinden gRPC varsayılan olarak kullanılır. GRPC-Web ' i ayarlama hakkında daha fazla bilgi için bkz <xref:grpc/browser> ..
 
 ## <a name="device-requirements"></a>Cihaz gereksinimleri
 
-.NET için gRPC, .NET Core 'un desteklediği tüm cihazları destekler.
+.NET üzerinde gRPC, .NET Core 'un desteklediği tüm cihazları destekler.
 
 > [!div class="checklist"]
 >
@@ -49,7 +49,7 @@ gRPC, daha gelişmiş özelliklerden bazıları için HTTP/2 kullanmak üzere ta
 > * macOS&dagger;
 > * Browsers (Tarayıcılar)&Dagger;
 
-&dagger;MacOS 'ta barındırılan ASP.NET Core uygulamalar HTTPS 'yi desteklemez. macOS üzerinde gRPC istemcileri, uzak hizmetleri çağırırken HTTPS kullanmaya devam edebilir.
+&dagger;[MacOS, https ile ASP.NET Core uygulamalarının barındırılmasını desteklemez](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos). macOS üzerinde gRPC istemcileri, HTTPS kullanan uzak hizmetleri çağırabilir.
 
 &Dagger;Blazor WebAssembly uygulamalar, GRPC hizmetlerini gRPC-Web ile çağırabilir.
 
@@ -70,14 +70,14 @@ Daha fazla bilgi için bkz. <xref:grpc/aspnetcore>.
 
 ## <a name="net-version-requirements"></a>.NET sürüm gereksinimleri
 
-.NET için gRPC, .NET Core 3 ve .NET 5 veya üstünü destekler.
+.NET üzerinde gRPC .NET Core 3 ve .NET 5 veya üstünü destekler.
 
 > [!div class="checklist"]
 >
 > * .NET 5 veya üzeri
 > * .NET Core 3
 
-.NET için gRPC .NET Framework ve Xamarin üzerinde çalışmayı desteklemez. [GRPC C# Core-Library](https://grpc.io/docs/languages/csharp/quickstart/) , .NET Framework ve Xamarin 'i destekleyen üçüncü taraf bir kitaplıktır. gRPC C-Core, Microsoft tarafından desteklenmez.
+.NET üzerinde gRPC .NET Framework ve Xamarin üzerinde çalışmayı desteklemez. [GRPC C# Core-Library](https://grpc.io/docs/languages/csharp/quickstart/) , .NET Framework ve Xamarin 'i destekleyen üçüncü taraf bir kitaplıktır. gRPC C-Core, Microsoft tarafından desteklenmez.
 
 ## <a name="azure-services"></a>Azure hizmetleri
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 71f05163c075a2ef88d5c606814925cdcef879d2
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: c862bc8bff6c4cc80696d92067e814889d6e7782
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253052"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217537"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -642,7 +642,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
 
 * Etki alanı ve alt etki alanı için bağlamayı ayarlama:
   * Örneğin, ve üzerinde bağlamaları ayarlayın `contoso.com` `myClient.contoso.com` . `contoso.com`Konakta istemci sertifikası gerekmez `myClient.contoso.com` , ancak bunu yapar.
-  * Daha fazla bilgi için bkz:
+  * Daha fazla bilgi için bkz.
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel/endpoints#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -650,7 +650,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
     * IIS
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
-    * Http.Sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
+    * HTTP.sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
 
 ::: moniker-end
 
@@ -658,7 +658,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
 
 * Etki alanı ve alt etki alanı için bağlamayı ayarlama:
   * Örneğin, ve üzerinde bağlamaları ayarlayın `contoso.com` `myClient.contoso.com` . `contoso.com`Konakta istemci sertifikası gerekmez `myClient.contoso.com` , ancak bunu yapar.
-  * Daha fazla bilgi için bkz:
+  * Daha fazla bilgi için bkz.
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -666,7 +666,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
     * IIS
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
-    * Http.Sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
+    * HTTP.sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
 
 ::: moniker-end
 
