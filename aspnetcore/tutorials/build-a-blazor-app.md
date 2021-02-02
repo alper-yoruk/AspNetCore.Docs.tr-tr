@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 6659b075f54292d9546466919f6842b920e6ece1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 106e1119db777074b5eae24f5d7e216e6127ca13
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97808744"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238302"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>BlazorYapılacaklar listesi uygulaması oluşturma
 
@@ -40,7 +40,7 @@ Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğ
 
 Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olacak.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -108,6 +108,12 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
    `TodoItem.cs`:
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/TodoItem.cs)]
+   
+   > [!NOTE]
+   > Dosyayı ve sınıfı oluşturmak için Visual Studio kullanıyorsanız `ToDoItem.cs` `ToDoItem` aşağıdaki yaklaşımlardan birini kullanın:
+   >
+   > * Sınıf için Visual Studio 'Nun oluşturduğu ad alanını kaldırın.
+   > * Yukarıdaki kod bloğundaki **Kopyala** düğmesini kullanın ve Visual Studio 'nun oluşturduğu dosyanın tüm içeriğini değiştirin.
 
 1. `Todo`Bileşene dönün ve aşağıdaki görevleri gerçekleştirin:
 

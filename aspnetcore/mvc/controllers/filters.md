@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.openlocfilehash: ee30ef89c5d7aeae83f23a81eb02235397c89ac2
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97486141"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238313"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -565,7 +565,8 @@ ASP.NET Core çalışma zamanı garanti etmez:
 _ Filtrenin tek bir örneğinin oluşturulacaktır.
 * Filtre, sonraki bir noktada dı kapsayıcısından yeniden istenmeyecek.
 
-[!WARNING] Yalnızca `IFilterFactory.IsReusable` `true` filtrelerin kaynağı belirsiz ise, filtrelerin durum bilgisiz olup olmadığını ve bırden çok http isteği genelinde kullanımı güvenli olduğunu döndürecek şekilde yapılandırın. Örneğin, döndürülürse, kapsamdaki veya geçici olarak kaydedilen bir filtre döndürme `IFilterFactory.IsReusable``true`
+> [!WARNING] 
+> Yalnızca <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable?displayProperty=nameWithType> `true` filtrelerin kaynağı belirsiz ise, filtre durum bilgisiz olduğunda ve filtrelerin bırden çok http isteği genelinde kullanımı güvenli olduğunda döndürülecek şekilde yapılandırın. Örneğin, döndürülürse, kapsamdaki veya geçici olarak kaydedilen bir filtre döndürmeyin `IFilterFactory.IsReusable` `true` .
 
 `IFilterFactory` , filtre oluşturmaya yönelik başka bir yaklaşım olarak özel öznitelik uygulamaları kullanılarak uygulanabilir:
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 2acddd212639ac0a82b3c46f2225ff66d0999dd0
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: a49388c73f2ec0ea03b35dbba1575ce70a4e1512
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217563"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238326"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamaları
 
@@ -38,7 +38,7 @@ ASP.NET Core bir uygulama, işlem içi HTTP sunucu uygulamasıyla çalışır. S
 
 ASP.NET Core aşağıdakiler ile birlikte gelir:
 
-* [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir. Daha fazla bilgi için bu belgedeki [Kestrel vs. HTTP.sys](#korh) bölümüne bakın.
+* [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır. Kestrel, en iyi performans ve bellek kullanımını sağlar, ancak HTTP.sys gelişmiş özelliklerden bazılarına sahip değildir. Daha fazla bilgi için sonraki bölümde [Kestrel vs. HTTP.sys](#korh) bölümüne bakın.
 * IIS HTTP sunucusu, IIS için bir [işlem içi sunucusudur](#hosting-models) .
 * [HTTP.sys sunucusu](xref:fundamentals/servers/httpsys) , [HTTP.sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
 
